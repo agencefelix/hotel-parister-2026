@@ -11,6 +11,18 @@ export function refreshTinymce() {
         if (tinymceEditor) {
             try {
                 tinymceEditor.save();
+                /** Close all popups/menus */
+                tinymceEditor.execCommand('mceCloseAllPopups');
+                /** Force to close toolbar overflow by clicking the button if it's open */
+                document.querySelectorAll('.tox-tbtn--opened, .tox-tbtn--enabled[aria-expanded="true"]').forEach(function (button) {
+                    button.click();
+                });
+                /** Handle other open popups/menus that might not be closed by the command */
+                document.querySelectorAll('.tox-menu, .tox-popover, .tox-dialog-wrap, .tox-toolbar__overflow').forEach(function (el) {
+                    el.style.display = 'none';
+                });
+                tinymceEditor.focus();
+                tinymceEditor.nodeChanged();
             } catch (error) {
                 console.log(error);
             }
@@ -156,16 +168,35 @@ export function tinymcePlugin() {
                     content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default'),
                     font_css: fontsCss,
                     font_family_formats: pluginsData.dataset.fontsFormatEditor,
-                    font_size_formats: "8px 10px 12px 14px 16px 17px 18px 22px 26px 32px 36px 48px 60px 72px 96px",
+                    font_size_formats: "8px 10px 12px 14px 16px 17px 18px 22px 26px 36px 48px 60px 72px 96px",
                     color_cols: 4,
                     color_map: colors,
                     content_style: "body { background-color: #292929; color: #adb5bd;} body .sr-only {display: none;}",
                     setup: (tinymceEl) => {
 
                         const runAccessibility = () => accessibilityFields(tinymceEl, editor);
+                        const closePopups = () => {
+                            try {
+                                tinymceEl.execCommand('mceCloseAllPopups');
+                                /** Force close toolbar overflow by clicking the button if it's open */
+                                document.querySelectorAll('.tox-tbtn--opened, .tox-tbtn--enabled[aria-expanded="true"]').forEach(function (button) {
+                                    button.click();
+                                });
+                                /** Handle other open popups/menus that might not be closed by the command */
+                                document.querySelectorAll('.tox-menu, .tox-popover, .tox-dialog-wrap, .tox-toolbar__overflow').forEach(function (el) {
+                                    el.style.display = 'none';
+                                });
+                                tinymceEl.nodeChanged();
+                            } catch (e) {}
+                        };
+
                         tinymceEl.on('input', runAccessibility);       // pour la frappe
                         tinymceEl.on('NodeChange', runAccessibility);  // pour les modifications structurelles
-                        tinymceEl.on('SetContent', runAccessibility);  // lors du chargement initial (collage HTML, chargement AJAX)
+                        tinymceEl.on('SetContent', () => {
+                            runAccessibility();
+                            closePopups();
+                        });  // lors du chargement initial (collage HTML, chargement AJAX)
+                        tinymceEl.on('CloseWindow', closePopups);
                         tinymceEl.on('init', runAccessibility);        // déclenche à l’ouverture
                         tinymceEl.on('LoadContent', runAccessibility); // Bonus : appel initial après le rendu
 

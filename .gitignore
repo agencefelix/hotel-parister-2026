@@ -1,6 +1,9 @@
 .idea/
 .idea/workspace.xml
+
 .claude/
+CLAUDE.md
+
 /nbproject/
 /.env
 /.env.local

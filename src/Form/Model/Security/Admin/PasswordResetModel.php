@@ -20,10 +20,17 @@ class PasswordResetModel
         'message' => 'Le mot de passe doit comporter au moins 8 caractères, contenir au moins un chiffre, une majuscule et une minuscule.',
         'pattern' => '/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}/',
     ])]
-    public ?string $plainPassword = null;
+    protected ?string $plainPassword = null;
 
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
     }
 }

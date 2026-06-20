@@ -1,8 +1,8 @@
 .idea/
 .idea/workspace.xml
 
-.claude/
-!.claude/figma
+.claude/*
+!.claude/figma/
 CLAUDE.md
 
 /nbproject/

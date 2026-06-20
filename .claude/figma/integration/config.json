@@ -1,0 +1,22 @@
+{
+    "_note": "MODÈLE VIDE. Config globale du site, alignée sur bin/data/config/default.yaml. _source : 'figma' (maquette) ou 'prod' (site existant). null = à compléter. Couleurs EXCLUSIVEMENT depuis Figma ; jamais croiser figma/prod.",
+    "prod_url": "https://www.hotelparister.com",
+    "company_name": null,
+    "company_display_name": null,
+    "collection": null,
+    "locale": null,
+    "locales_others": [],
+    "domains": { "_source": "prod (hreflang)" },
+    "apis": { "_source": "prod (HTML)", "<locale>": { "google": { "ua": null, "tag_manager": null } } },
+    "colors": {
+        "_source": "figma — fills SOLID (mapping sémantique à confirmer)",
+        "white": null, "primary": null, "secondary": null, "light": null, "dark": null,
+        "_palette_detectee": {}
+    },
+    "social_networks": { "_source": "prod", "<locale>": { "facebook": null, "instagram": null, "linkedin": null, "tiktok": null, "youtube": null } },
+    "phones": { "_source": "figma + prod", "<locale>": { "0": { "number": null, "tag_number": null, "type": null, "zones": [] } } },
+    "emails": { "_source": "figma + prod", "<locale>": { "0": { "email": null, "zones": [] } } },
+    "addresses": { "_source": "figma + prod", "<locale>": { "0": { "name": null, "latitude": null, "longitude": null, "address": null, "zipcode": null, "city": null, "region": null, "department": null, "country": null, "zones": [], "googleMapUrl": null, "googleMapDirectionUrl": null } } },
+    "legals": { "_source": "prod (mentions légales)", "<locale>": { "companyName": null, "companyAddress": null, "capital": null, "vatNumber": null, "siretNumber": null, "companyRepresentativeName": null, "managerName": null, "managerEmail": null, "hostName": null, "hostAddress": null, "protectionOfficerName": null, "protectionOfficerEmail": null, "protectionOfficerAddress": null, "links": {} } },
+    "_non_derivable": []
+}

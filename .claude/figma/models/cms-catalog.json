@@ -1,0 +1,99 @@
+{
+    "_note": "CATALOGUE DE RÉFÉRENCE (données réelles du CMS, extraites de la base : cms_layout_block_type, cms_layout_action, cms_core_module). Sert à savoir quoi est disponible pour construire une page. Ne pas confondre avec les modèles vides (config/prod-urls/seo/page/layout). Vérifié le 2026-06-19 — re-vérifier en base si le socle CMS évolue.",
+    "mechanisms": {
+        "A_bloc_atomique": "Un Block référence un BlockType par son slug (ex. addBlock(col,'title')). Aucun BlockType n'est créé à l'intégration : ils existent tous.",
+        "B_module_metier": "Bloc générique 'core-action' + une Action (*-view) + une entité module instanciée. Patron : PageFixtures::addHomeLayout(). On crée l'entité module (Slider, Form...), jamais un BlockType."
+    },
+    "page_buildable": {
+        "_note": "Ce qu'une Page (Layout\\Page) peut utiliser — cf. LayoutFixtures::getConfiguration() (blocks: content+global ; modules via core-action).",
+        "blockType_categories": ["content", "global"],
+        "host_block_for_modules": "core-action",
+        "modules_roles": ["ROLE_CONTACT", "ROLE_SITE_MAP", "ROLE_PAGE", "...tous les modules actifs du site (dev: defaults+others)"]
+    },
+    "block_types": {
+        "_note": "Par catégorie. Pour une Page : seules 'content' + 'global' sont posables directement ; 'core-action' héberge les modules ; 'form-*' servent au constructeur de formulaire ; 'layout*' sont réservés aux listings/fiches (Newscast/Catalog/Product/Portfolio), PAS à une Page.",
+        "content": ["blockquote", "card", "collapse", "modal", "title-header", "video", "widget"],
+        "global": ["alert", "counter", "icon", "link", "media", "separator", "social-networks", "text", "title", "zones-navigation"],
+        "core": ["core-action"],
+        "action": ["action"],
+        "form": ["form-checkbox", "form-choice-entity", "form-choice-type", "form-country", "form-date", "form-datetime", "form-email", "form-emails", "form-file", "form-gdpr", "form-hidden", "form-hour", "form-integer", "form-language", "form-phone", "form-submit", "form-text", "form-textarea", "form-url", "form-zip-code"],
+        "layout": ["layout-associated-entities", "layout-back-button", "layout-body", "layout-category", "layout-contact", "layout-gallery", "layout-image", "layout-intro", "layout-link", "layout-published-date", "layout-share", "layout-slider", "layout-title", "layout-title-header", "layout-video"],
+        "layout-catalog": ["layout-catalog-associated-products", "layout-catalog-features", "layout-catalog-lots-table"],
+        "layout-map": ["layout-map"]
+    },
+    "actions": {
+        "_note": "Slugs d'Action posables via un bloc 'core-action' (mécanisme B). Une Action référence une entité module instanciée.",
+        "list": ["agenda-view", "catalog-cart", "catalog-index", "catalog-teaser", "catalog-teaser-categories", "contact-information-view", "faq-teaser", "faq-view", "form-calendar-view", "form-step", "form-success", "form-view", "gallery-index", "gallery-teaser", "gallery-view", "information-view", "map-view", "menu-view", "newscast-index", "newscast-teaser", "newsletter-form", "pages-navigation-view", "portfolio-index", "portfolio-teaser", "recruitment-index", "search-result-view", "search-view", "secure-page-dashboard", "sitemap-view", "slider-view", "tab-view", "table-view", "timeline-view"]
+    },
+    "modules": {
+        "_note": "Modules du CMS (entité App\\Entity\\Core\\Module). 'role' = rôle d'activation par site. Un module est utilisable sur une page s'il est actif (cf. WebsiteFixtures DEFAULTS_MODULES vs OTHERS_MODULES).",
+        "list": [
+            { "slug": "agenda", "role": "ROLE_AGENDA" },
+            { "slug": "catalog", "role": "ROLE_CATALOG" },
+            { "slug": "contact-information", "role": "ROLE_CONTACT" },
+            { "slug": "css", "role": "ROLE_INTERNAL" },
+            { "slug": "customs-actions", "role": "ROLE_CUSTOMS_ACTIONS" },
+            { "slug": "edit", "role": "ROLE_EDIT" },
+            { "slug": "faq", "role": "ROLE_FAQ" },
+            { "slug": "form", "role": "ROLE_FORM" },
+            { "slug": "form-calendar", "role": "ROLE_FORM_CALENDAR" },
+            { "slug": "gallery", "role": "ROLE_GALLERY" },
+            { "slug": "gdpr", "role": "ROLE_INTERNAL" },
+            { "slug": "google-analytics", "role": "ROLE_GOOGLE_ANALYTICS" },
+            { "slug": "information", "role": "ROLE_INFORMATION" },
+            { "slug": "map", "role": "ROLE_MAP" },
+            { "slug": "medias", "role": "ROLE_MEDIA" },
+            { "slug": "navigation", "role": "ROLE_NAVIGATION" },
+            { "slug": "newscast", "role": "ROLE_NEWSCAST" },
+            { "slug": "newsletter", "role": "ROLE_NEWSLETTER" },
+            { "slug": "pages", "role": "ROLE_PAGE" },
+            { "slug": "pages-navigation", "role": "ROLE_PAGE" },
+            { "slug": "portfolio", "role": "ROLE_PORTFOLIO" },
+            { "slug": "recruitment", "role": "ROLE_RECRUITMENT" },
+            { "slug": "search", "role": "ROLE_SEARCH_ENGINE" },
+            { "slug": "secure-module", "role": "ROLE_SECURE_MODULE" },
+            { "slug": "secure-page", "role": "ROLE_SECURE_PAGE" },
+            { "slug": "seo", "role": "ROLE_SEO" },
+            { "slug": "sitemap", "role": "ROLE_SITE_MAP" },
+            { "slug": "slider", "role": "ROLE_SLIDER" },
+            { "slug": "steps-form", "role": "ROLE_STEP_FORM" },
+            { "slug": "tab", "role": "ROLE_TAB" },
+            { "slug": "table", "role": "ROLE_TABLE" },
+            { "slug": "timeline", "role": "ROLE_TIMELINE" },
+            { "slug": "translation", "role": "ROLE_TRANSLATION" },
+            { "slug": "user", "role": "ROLE_USERS" }
+        ]
+    },
+    "structural_entities": {
+        "_note": "Non des BlockType : la structure de page.",
+        "page": "App\\Entity\\Layout\\Page (+ Layout\\Layout)",
+        "zone": "App\\Entity\\Layout\\Zone (setFullSize, paddings, background)",
+        "col": "App\\Entity\\Layout\\Col (setSize 1-12, grille Bootstrap)"
+    },
+    "figma_tag_mapping": {
+        "_note": "Correspondance tag Figma -> mécanique CMS. Référence complète et à jour : .claude/figma/mapping-blocktypes.md (la convention en ligne prime).",
+        "[title]": "blocType 'title' (global)",
+        "[intro]": "blocType 'title-header' (content)",
+        "[text]": "blocType 'text' (global)",
+        "[image]": "blocType 'media' (global)",
+        "[video]": "blocType 'video' (content)",
+        "[blockquote]": "blocType 'blockquote' (content)",
+        "[card]": "blocType 'card' (content)",
+        "[modal]": "blocType 'modal' (content)",
+        "[icon]": "blocType 'icon' (global)",
+        "[btn]/[cta]": "blocType 'link' (global)",
+        "[separator]": "blocType 'separator' (global)",
+        "[counter]": "blocType 'counter' (global)",
+        "[alert]": "blocType 'alert' (global)",
+        "[slider]": "core-action + action 'slider-view' + Module\\Slider\\Slider",
+        "[gallery]": "core-action + action 'gallery-view' + module Gallery",
+        "[catalog]": "core-action + action 'catalog-index' + Module\\Catalog",
+        "[newscast]": "core-action + action 'newscast-index'|'newscast-teaser' + Module\\Newscast",
+        "[portfolio]": "core-action + action 'portfolio-index' + Module\\Portfolio",
+        "[form]/[contact]": "core-action + action 'form-view' + Module\\Form\\Form",
+        "[tab]": "core-action + action 'tab-view' + module Tab",
+        "[faq]": "core-action + action 'faq-view' (module FAQ) OU blocType 'collapse' (à arbitrer)",
+        "[newsletter]": "core-action + action 'newsletter-form' + Module\\Newsletter (layout, à activer)",
+        "[social-wall]": "blocType 'social-networks' (global) OU config social_networks. ⚠️ Pas de module 'social-wall'/ROLE_SOCIAL_WALL en base ici — un feed dynamique serait du dev spécifique (layout, ≠ footer)"
+    }
+}

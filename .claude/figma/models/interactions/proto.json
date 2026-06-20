@@ -1,0 +1,33 @@
+{
+    "_note": "MODÈLE VIDE. Cartographie des interactions du prototype Figma (lues via API REST : champ 'interactions' des nœuds). Donnée de design (comportements à reproduire). Limite connue : destinationId d'un OVERLAY souvent null en REST (inférer la cible).",
+    "rootNode": null,
+    "totals": {
+        "noeuds_avec_interactions": 0,
+        "triggers": {},
+        "actions": {},
+        "transitions": {}
+    },
+    "nodes": [
+        {
+            "id": null,
+            "element": null,
+            "type": null,
+            "context": null,
+            "interactions": [
+                {
+                    "trigger": "ON_CLICK | ON_HOVER | MOUSE_ENTER | MOUSE_LEAVE | AFTER_TIMEOUT | ON_PRESS | ON_DRAG",
+                    "actions": [
+                        {
+                            "action": "NODE | URL | BACK | CLOSE",
+                            "navigation": "NAVIGATE | OVERLAY | SWAP | SCROLL_TO | CHANGE_TO",
+                            "destination": null,
+                            "destinationId": null,
+                            "url": null,
+                            "transition": { "type": "SMART_ANIMATE | DISSOLVE | MOVE_IN | PUSH | SLIDE_IN", "duration_s": null, "easing": null, "direction": null }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

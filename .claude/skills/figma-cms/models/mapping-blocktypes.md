@@ -91,7 +91,7 @@ Mapper la variante de la convention sur `setTemplate()` et laisser faire :
 
 > **Dry-run** : le parser extrait déjà les **images de slides** (nœuds à fill `IMAGE`)
 > dans `block.media` (`{figmaNodeId, image, imageRef, width}`) et les rend dans
-> `.claude/figma/integration/media/<slug>/`. **Résolution** : scale calculé par média pour viser
+> `.claude/figma-cms/integration/media/<slug>/`. **Résolution** : scale calculé par média pour viser
 > ~3840px de large pour une image pleine largeur (retina ≤1920px sinon), **sans jamais
 > dépasser 3840px** (plafond dur, arrondi vers le bas, réduit aussi les nœuds plus larges).
 > **Format** : WebP **lossless** (`IMG_WEBP_LOSSLESS`) — compression sans perte de qualité.

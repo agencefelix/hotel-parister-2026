@@ -2,7 +2,9 @@
 .idea/workspace.xml
 
 .claude/*
-!.claude/figma/
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/figma-cms/
 CLAUDE.md
 
 /nbproject/

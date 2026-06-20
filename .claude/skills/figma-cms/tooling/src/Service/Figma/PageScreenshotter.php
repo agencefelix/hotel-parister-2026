@@ -10,8 +10,8 @@ use Symfony\Contracts\HttpClient\Exception\ExceptionInterface as HttpExceptionIn
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
- * Renders the full Figma page once, then crops one screenshot per zone band
- * so each deduced band can be visually identified. Read-only (no DB write).
+ * Renders the full Figma page once, then crops one screenshot per zone band so each deduced
+ * band can be visually identified, plus the media carried by blocks. Read-only (no DB write).
  *
  * @author Sébastien FOURNIER <sebastien@agence-felix.fr>
  */
@@ -19,6 +19,15 @@ final class PageScreenshotter
 {
     /** Target render width (px) — scale is derived from the page width. */
     private const float TARGET_WIDTH = 900.0;
+
+    /** Full-screen / full-width hero media: rendered at least this wide (px). */
+    private const float FULLSCREEN_WIDTH = 3840.0;
+
+    /** Other (non full-width) media: retina width cap (px) — web-sane, target < 1 Mo. */
+    private const float CONTENT_MAX_WIDTH = 2048.0;
+
+    /** JPEG quality for web export (visually lossless, keeps files reasonable). */
+    private const int JPEG_QUALITY = 82;
 
     public function __construct(
         private readonly FigmaApiClientInterface $figma,
@@ -28,9 +37,8 @@ final class PageScreenshotter
 
     /**
      * Writes, under $baseDir:
-     *  - one PNG per content zone into `<baseDir>/<slug>/` (clamped to the content
-     *    region, so layout bands like the footer are NOT included);
-     *  - one PNG per excluded layout element (nav, footer…) into `<baseDir>/layout/`.
+     *  - one PNG per content zone into `<baseDir>/<slug>/` (clamped to the content region) ;
+     *  - one image per excluded layout element (nav, footer…) into `<baseDir>/layout/`.
      *
      * @return list<string> written file paths
      */
@@ -42,9 +50,8 @@ final class PageScreenshotter
 
         $baseDir = rtrim($baseDir, '/\\');
         $written = $this->captureZones($fileKey, $nodeId, $page, $baseDir.'/'.$page->slug);
-        $written = array_merge($written, $this->captureLayout($fileKey, $page, $baseDir.'/layout'));
 
-        return $written;
+        return array_merge($written, $this->captureLayout($fileKey, $page, $baseDir.'/layout'));
     }
 
     /**
@@ -53,6 +60,12 @@ final class PageScreenshotter
     private function captureZones(string $fileKey, string $nodeId, ParsedPage $page, string $dir): array
     {
         $this->ensureDir($dir);
+
+        // Nettoyer les anciennes captures de bandes de CETTE page (évite les orphelines
+        // quand le nombre de zones diminue, ex. après auto-exclusion d'éléments de layout).
+        foreach (glob($dir.'/section-*.png') ?: [] as $stale) {
+            @unlink($stale);
+        }
 
         $scale = max(0.1, min(1.0, self::TARGET_WIDTH / max($page->figmaWidth, 1.0)));
         $src = $this->decode($this->renderFullPage($fileKey, $nodeId, $scale));
@@ -91,19 +104,15 @@ final class PageScreenshotter
     }
 
     /**
-     * Renders the actual content media carried by blocks (slider slides, media…)
-     * into $mediaDir. These are content assets (future CMS Media), not band screenshots.
+     * Renders the content media carried by blocks (slider slides, media…) into $mediaDir.
+     * Group ids by (format, scale): one Figma /images call per bucket. The native asset is
+     * downloaded then re-encoded web-optimised (JPG q82 / PNG / SVG as-is) — the CMS derives WebP.
      *
      * @return list<string> written file paths
      */
     public function captureMedia(string $fileKey, ParsedPage $page, string $mediaDir): array
     {
-        if (!\function_exists('imagecreatefromstring')) {
-            throw new FigmaApiException('Extension GD requise pour générer les médias.');
-        }
-
-        // Collect media and group ids by the render scale needed to reach a correct width.
-        $byScale = [];
+        $buckets = [];
         $names = [];
         $fullWidthThreshold = $page->figmaWidth * 0.92;
         foreach ($page->zones as $zone) {
@@ -115,9 +124,11 @@ final class PageScreenshotter
                         }
                         $id = (string) $media['figmaNodeId'];
                         $names[$id] = (string) $media['image'];
+                        $format = (string) ($media['format'] ?? 'jpg');
+                        // SVG is vector (no scale); raster gets a retina-grade scale.
+                        $scale = $format === 'svg' ? 1.0 : $this->mediaScale((int) ($media['width'] ?? 0), $fullWidthThreshold);
                         // String key: a float array key would be truncated to int by PHP.
-                        $scaleKey = (string) $this->mediaScale((int) ($media['width'] ?? 0), $fullWidthThreshold);
-                        $byScale[$scaleKey][$id] = true;
+                        $buckets[$format.'@'.$scale][$id] = true;
                     }
                 }
             }
@@ -130,17 +141,16 @@ final class PageScreenshotter
         $this->ensureDir($mediaDir);
 
         $written = [];
-        foreach ($byScale as $scaleKey => $idSet) {
+        foreach ($buckets as $bucket => $idSet) {
+            [$format, $scale] = explode('@', $bucket, 2);
             $ids = array_keys($idSet);
-            $images = $this->figma->getImages($fileKey, $ids, 'png', (float) $scaleKey);
+            $images = $this->figma->getImages($fileKey, $ids, $format, (float) $scale);
             foreach ($ids as $id) {
                 $url = $images[$id] ?? null;
                 if (!is_string($url) || $url === '') {
                     continue;
                 }
-                // Lossless WebP: smaller than PNG, no quality loss.
-                $img = $this->decode($this->download($url));
-                imagewebp($img, rtrim($mediaDir, '/\\').'/'.$names[$id], IMG_WEBP_LOSSLESS);
+                $this->writeWebMedia($this->download($url), rtrim($mediaDir, '/\\').'/'.$names[$id], $format);
                 $written[] = $names[$id];
             }
         }
@@ -148,13 +158,39 @@ final class PageScreenshotter
         return $written;
     }
 
-    /** Hard cap: a rendered media must never exceed this width (px). */
-    private const float MAX_MEDIA_WIDTH = 3840.0;
+    /**
+     * Writes a media web-optimised (target < 1 Mo, no WebP — the CMS derives that):
+     * SVG saved as-is (vector); JPG/PNG re-encoded via GD (progressive JPEG q82,
+     * PNG compressed with preserved alpha).
+     */
+    private function writeWebMedia(string $binary, string $path, string $format): void
+    {
+        if ($format === 'svg' || !\function_exists('imagecreatefromstring')) {
+            file_put_contents($path, $binary);
+
+            return;
+        }
+
+        $img = imagecreatefromstring($binary);
+        if ($img === false) {
+            file_put_contents($path, $binary);
+
+            return;
+        }
+
+        if ($format === 'png') {
+            imagesavealpha($img, true);
+            imagepng($img, $path, 9);
+        } else {
+            imageinterlace($img, true); // progressive JPEG
+            imagejpeg($img, $path, self::JPEG_QUALITY);
+        }
+        imagedestroy($img);
+    }
 
     /**
-     * Render scale to reach a correct asset width: ~3840px for full-width media,
-     * 2× (retina) capped at 1920px otherwise. Never exceeds MAX_MEDIA_WIDTH, and
-     * downscales nodes already wider than the cap. Bounded by Figma's max scale of 4.
+     * Render scale to reach a correct asset width: up to FULLSCREEN_WIDTH for full-width media,
+     * 2× (retina) capped at CONTENT_MAX_WIDTH otherwise. Downscales oversized nodes. Bounded by 4.
      */
     private function mediaScale(int $nodeWidth, float $fullWidthThreshold): float
     {
@@ -162,8 +198,8 @@ final class PageScreenshotter
             return 2.0;
         }
 
-        $target = $nodeWidth >= $fullWidthThreshold ? self::MAX_MEDIA_WIDTH : min(1920.0, $nodeWidth * 2.0);
-        $target = min($target, self::MAX_MEDIA_WIDTH);
+        // Full-screen heroes must be ≥ 3840px wide; other media stay retina-capped (web-sane).
+        $target = $nodeWidth >= $fullWidthThreshold ? self::FULLSCREEN_WIDTH : min(self::CONTENT_MAX_WIDTH, $nodeWidth * 2.0);
 
         // Floor (not round) so width*scale never overshoots the target; allow <1 to shrink oversized nodes.
         $scale = max(0.01, min(4.0, $target / $nodeWidth));

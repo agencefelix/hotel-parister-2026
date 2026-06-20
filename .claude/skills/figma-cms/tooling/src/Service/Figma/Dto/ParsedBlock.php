@@ -23,6 +23,10 @@ final readonly class ParsedBlock
         public ?string $moduleEntity = null,
         public ?string $note = null,
         public array $media = [],
+        public array $variants = [],
+        public ?string $id = null,
+        public ?string $moduleTemplate = null,
+        public ?string $text = null,
     ) {
     }
 }

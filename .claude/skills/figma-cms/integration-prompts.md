@@ -11,21 +11,23 @@ Cette convention fait la **correspondance entre le nommage des calques/composant
 de la maquette Figma et la mécanique du CMS** (Symfony 7.4 SFCMS 7). Elle doit
 être appliquée pour chaque import Figma → CMS.
 
-> **Générique vs projet.** Ce dossier `.claude/figma/` ne contient que des règles
-> **génériques, réutilisables sur tout projet Figma → CMS** (`integration-prompts.md`,
-> `mapping-blocktypes.md`) et les gabarits (`models/`). Toute **spécificité d'un
-> projet** va dans le sous-dossier **`.claude/figma/integration/`**. Ne jamais mêler
-> du spécifique projet aux fichiers génériques.
+> **Générique (le skill) vs projet.** Le **skill** `.claude/skills/figma-cms/` contient tout le
+> **générique réutilisable** : `SKILL.md`, `integration-prompts.md` (ce playbook) et `models/`
+> (gabarits + `mapping-blocktypes.md` + `cms-catalog.json` + `portability-risks.md`). Tout le
+> **spécifique d'un projet** va dans **`.claude/figma-cms/integration/`**. Ne jamais mêler les deux.
 
 > **Arborescence (où va quoi) :**
-> - `.claude/figma/` (générique, réutilisable) : `integration-prompts.md`, `mapping-blocktypes.md`, `models/` (gabarits + `cms-catalog.json` + `portability-risks.md`).
-> - `.claude/figma/integration/` = **le projet** (tout le spécifique) : la spec projet `<nom-du-projet>.md`, `config.json`, `prod-urls.json`, `seo.json`, et les dossiers `pages/`, `layout/`, `screenshots/`, `media/`, `interactions/`.
+> - `.claude/skills/figma-cms/` (générique, réutilisable) : `SKILL.md`, `integration-prompts.md`,
+>   `models/` (gabarits + `mapping-blocktypes.md` + `cms-catalog.json` + `portability-risks.md`).
+> - `.claude/figma-cms/integration/` = **le projet** (tout le spécifique) : la spec projet
+>   `<nom-du-projet>.md`, `config.json`, `prod-urls.json`, `seo.json`, et les dossiers
+>   `pages/`, `layout/`, `screenshots/`, `media/`, `interactions/`.
 >
-> Au démarrage, **bootstrapper `integration/` en copiant les gabarits de `models/`**
-> (comme un nouveau projet), puis remplir. Dans la suite de ce document, tout chemin
-> relatif (`config.json`, `prod-urls.json`, `seo.json`, `pages/`, `layout/`,
-> `screenshots/`, `media/`, `interactions/`) désigne **toujours** son emplacement
-> sous `.claude/figma/integration/`.
+> Au démarrage, **bootstrapper `.claude/figma-cms/integration/` en copiant les gabarits depuis
+> `.claude/skills/figma-cms/models/`** (comme un nouveau projet), puis remplir. Dans la suite de ce
+> document, tout chemin relatif (`config.json`, `prod-urls.json`, `seo.json`, `pages/`, `layout/`,
+> `screenshots/`, `media/`, `interactions/`) désigne **toujours** son emplacement sous
+> `.claude/figma-cms/integration/`.
 
 > ⚠️ **La convention évolue.** Le site est la **seule source de vérité** et peut
 > être mis à jour à tout moment. À **chaque** intégration Figma, **re-consulter
@@ -35,7 +37,7 @@ de la maquette Figma et la mécanique du CMS** (Symfony 7.4 SFCMS 7). Elle doit
 
 ## Procédure complète de reproduction (playbook — à suivre intégralement)
 
-> **But.** Repartir d'un projet où **seul `.claude/figma/` subsiste** (le reste du code a été
+> **But.** Repartir d'un projet où **seul `.claude/figma-cms/` subsiste** (le reste du code a été
 > réinitialisé, `integration/` vidé) et **tout refaire à l'identique**. Suivre les phases dans
 > l'ordre ; chaque phase renvoie à sa section détaillée. **Ne rien committer sans demande.**
 
@@ -53,8 +55,10 @@ de la maquette Figma et la mécanique du CMS** (Symfony 7.4 SFCMS 7). Elle doit
   **import média multilingue**.
 - `.env` : `FIGMA_TOKEN` (scope `file_content:read`) + `FIGMA_FILE_KEY`.
 
-**Phase 1 — Kickoff** (§ « deux URLs » + « Connexion ») : demander **URL prod** + **URL proto** ;
-bootstrapper `integration/` depuis `models/`.
+**Phase 1 — Kickoff** (§ « deux URLs » + « Connexion ») : **NE RIEN SUPPOSER**. **Demander** à
+l'utilisateur l'**URL de prod** + l'**URL du prototype** (inconnues à froid). Fichier Figma =
+`FIGMA_FILE_KEY` (`.env`). **Découvrir les pages** en scannant les `[page|…]` du fichier (jamais
+des node-ids présupposés). Bootstrapper `integration/` depuis `models/`.
 
 **Phase 2 — Dry-run par page** (§ capture / déduction / interactions / captures synchronisées) :
 pour **chaque `[page|…]`** → `figma:parse-page` (=> `pages/<slug>.json`, `screenshots/<slug>/`,
@@ -96,6 +100,15 @@ BlockTypes **`layout-*`**), `DefaultMediasFixtures`. Puis `doctrine:fixtures:loa
 
 ## Au démarrage d'un projet : deux URLs à demander (OBLIGATOIRE)
 
+> 🛑 **NE RIEN SUPPOSER (départ à froid).** Un agent qui démarre dans une nouvelle session
+> ne connaît **ni** l'URL de prod, **ni** le prototype, **ni** les node-ids des pages.
+> **Interdiction de présupposer** ces valeurs (elles ne se devinent pas, ne pas réutiliser
+> une mémoire d'une autre session). Seules sources légitimes :
+> - **Fichier Figma** = `FIGMA_FILE_KEY` (+ `FIGMA_TOKEN`) dans `.env` — la seule chose configurée.
+> - **Pages à intégrer** = **découvertes** en scannant le fichier pour les calques taggés
+>   **`[page|…]`** (cf. « ne parser QUE les `[page|…]` »). Jamais des node-ids supposés.
+> - **URL de prod** et **URL du prototype** = **inconnues → À DEMANDER à l'utilisateur** (ci-dessous).
+
 À la **première intégration** d'une maquette (ou dès que l'info manque), **demander
 impérativement à l'utilisateur deux URLs** :
 
@@ -107,8 +120,8 @@ impérativement à l'utilisateur deux URLs** :
    ne peut pas cartographier les comportements (cf. « Lire les interactions du
    prototype »). Conserver le node-id de départ du proto.
 
-Ne pas démarrer l'interprétation fine sans ces deux URLs (ou sans avoir acté leur
-absence avec l'utilisateur).
+**Ne jamais démarrer** l'interprétation sans ces deux URLs **fournies par l'utilisateur**
+(ou sans avoir acté explicitement leur absence avec lui). Découvrir les pages via `[page|…]`.
 
 > **Présentation (console).** Poser ces deux questions **en évidence sur fond bleu**
 > dans la console. La sortie Markdown ne gère pas les fonds : utiliser un `printf`
@@ -140,7 +153,7 @@ sont nécessaires, la capture vient en premier pour l'interprétation.
 
 **Captures par bande, rangées par page (obligatoire au parsing d'une page).**
 Lors du dry-run d'une page, générer **une capture par zone/bande** et les ranger
-dans un **sous-dossier par page** : `.claude/figma/integration/screenshots/<slug-page>/`
+dans un **sous-dossier par page** : `.claude/figma-cms/integration/screenshots/<slug-page>/`
 (ex. `screenshots/home/section-home-1.png`). Chaque zone du JSON porte une
 propriété `screenshot` pointant vers son image. Objectif : identifier
 visuellement chaque bande et pouvoir **corriger le JSON à la main** en connaissance
@@ -156,7 +169,7 @@ Les éléments de layout (`[nav]`, `[footer]`, et tout élément commun à chaqu
 ne doivent **pas** apparaître dans les captures de bandes de page : borner le
 découpage à la **zone de contenu** (exclure la région verticale du footer/nav).
 Ces éléments de layout ont leurs **propres captures** dans un dossier commun
-`.claude/figma/integration/screenshots/layout/` (ex. `layout/nav.png`, `layout/footer.png`),
+`.claude/figma-cms/integration/screenshots/layout/` (ex. `layout/nav.png`, `layout/footer.png`),
 puisqu'ils sont intégrés une seule fois et partagés par toutes les pages.
 
 ## Corréler les calques, le contenu et le contexte (pas seulement les captures)
@@ -239,7 +252,7 @@ ou mal rangés :
 ## Éléments de layout : descripteurs JSON dédiés
 
 Chaque élément de layout partagé (nav, footer, et tout élément commun à toutes les
-pages) a son **descripteur JSON** dans `.claude/figma/integration/layout/` (ex. `nav.json`,
+pages) a son **descripteur JSON** dans `.claude/figma-cms/integration/layout/` (ex. `nav.json`,
 `footer.json`). Ce fichier est la **source déclarative** : il porte le mapping CMS,
 les **node-ids Figma** et les **captures** (un élément peut avoir plusieurs états —
 ex. nav **fermée** + **ouverte**), ainsi que le contenu (liens, CTA, contact…).
@@ -281,7 +294,7 @@ Sources, par origine (voir la « séparation stricte des sources » ci-dessous) 
 - **Vraiment non dérivables → `null`** : `favicons`, `fonts`, `googleMapUrl`,
   horaires, et données société absentes des mentions légales (DPO, gérant, hébergeur…).
 
-Artefact : `.claude/figma/integration/config.json` (mêmes clés que `default.yaml`, éditable).
+Artefact : `.claude/figma-cms/integration/config.json` (mêmes clés que `default.yaml`, éditable).
 **Contraintes** : chaque section porte un `_source` (`figma` | `prod`) ; les
 **couleurs viennent EXCLUSIVEMENT de Figma** (jamais de la prod) ; `prod_url` par
 défaut = `"URL PROD"` ; les mappings sémantiques de couleurs (primary/secondary…)
@@ -336,7 +349,7 @@ et/ou les sitemaps multiples du `robots.txt`. Pour **chaque langue**, récupére
 sitemap et ses URLs. Renseigner `locale` + `locales_others` dans `config.json`
 (et `domains` par langue).
 
-Stocker le tout dans `.claude/figma/integration/prod-urls.json`, **groupé par langue** :
+Stocker le tout dans `.claude/figma-cms/integration/prod-urls.json`, **groupé par langue** :
 `{default_locale, locales:[...], total, by_language:{<lang>:{domain, sitemap, count, urls:[{url,path}]}}}`.
 Utilité : mapper les pages, cibler les liens de menu vers de vraies URLs, préparer
 les redirections, gérer le multilingue. Donnée texte/config — pas du design.
@@ -346,7 +359,7 @@ les redirections, gérer le multilingue. Donnée texte/config — pas du design.
 Pour **toutes** les URLs trouvées (toutes langues), crawler chaque page et extraire
 son **SEO** : `title`, meta `description`, `keywords`, `robots`, `canonical`,
 Open Graph (`og:title` / `og:description` / `og:image`), `h1`. Stocker dans
-`.claude/figma/integration/seo.json`, groupé par langue
+`.claude/figma-cms/integration/seo.json`, groupé par langue
 (`by_language:{<lang>:{domain, count, pages:[{url, path, seo:{...}}]}}`).
 Signaler les **manques SEO** rencontrés (page sans `title`, sans `description`…) :
 c'est utile pour la reprise/refonte. Donnée texte/config — pas du design.

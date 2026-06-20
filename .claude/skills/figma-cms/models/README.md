@@ -6,7 +6,7 @@ Figma → CMS — **les prochains projets comme celui-ci**.
 
 ## Usage
 
-Au démarrage d'un projet, **copier** ces modèles dans **`.claude/figma/integration/`**
+Au démarrage d'un projet, **copier** ces modèles dans **`.claude/figma-cms/integration/`**
 (qui représente le projet : `config.json`, `prod-urls.json`, `seo.json`, la spec
 `<nom-du-projet>.md`, et les dossiers `pages/`, `layout/`, `screenshots/`, `media/`,
 `interactions/`), puis remplir les valeurs. Ne jamais modifier les fichiers de ce
@@ -14,7 +14,7 @@ dossier `figma/models/` avec des données réelles : ce sont des **gabarits** qu
 doivent rester vides.
 
 > Les **règles** d'intégration (génériques) restent dans
-> `.claude/figma/integration-prompts.md` et `mapping-blocktypes.md`. Ici on ne
+> `.claude/skills/figma-cms/integration-prompts.md` et `mapping-blocktypes.md`. Ici on ne
 > stocke que des **structures de fichiers** vides.
 
 ## Contenu

@@ -43,6 +43,7 @@ final class PageTreeExporter
             'screenshot' => $zone->screenshot,
             'deduced' => $zone->deduced,
             'fullSize' => $zone->fullSize,
+            'colToRight' => $zone->colToRight,
             'background' => $zone->background,
             'cols' => array_map($this->colToArray(...), $zone->cols),
         ];
@@ -72,8 +73,41 @@ final class PageTreeExporter
             'blockTypeSlug' => $block->blockTypeSlug,
             'moduleAction' => $block->moduleAction,
             'moduleEntity' => $block->moduleEntity,
+            'moduleTemplate' => $block->moduleTemplate,
+            'id' => $block->id,
+            'variants' => $block->variants !== [] ? $block->variants : null,
+            'text' => $block->text,
+            'cms' => $this->blockCms($block),
             'note' => $block->note,
             'media' => $block->media !== [] ? $block->media : null,
         ], static fn ($v) => $v !== null);
+    }
+
+    /**
+     * Explicit CMS mapping: the PageFixtures::addBlock() call this block translates to
+     * (atom = BlockType slug ; module = core-action + Action + module entity).
+     *
+     * @return array<string, string>|null
+     */
+    private function blockCms(ParsedBlock $block): ?array
+    {
+        if ($block->kind === 'atom' && $block->blockTypeSlug !== null) {
+            return [
+                'entity' => 'App\\Entity\\Layout\\Block',
+                'blockType' => $block->blockTypeSlug,
+                'fixture' => sprintf("addBlock(\$col, '%s')", $block->blockTypeSlug),
+            ];
+        }
+
+        if ($block->kind === 'module' && $block->moduleAction !== null) {
+            return array_filter([
+                'entity' => 'App\\Entity\\Layout\\Block + '.(string) $block->moduleEntity,
+                'action' => $block->moduleAction,
+                'template' => $block->moduleTemplate,
+                'fixture' => sprintf("addBlock(\$col, 'core-action', '%s', \$entity->getId())", $block->moduleAction),
+            ], static fn ($v) => $v !== null);
+        }
+
+        return null;
     }
 }

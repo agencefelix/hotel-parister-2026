@@ -71,7 +71,7 @@
         "col": "App\\Entity\\Layout\\Col (setSize 1-12, grille Bootstrap)"
     },
     "figma_tag_mapping": {
-        "_note": "Correspondance tag Figma -> mécanique CMS. Référence complète et à jour : .claude/figma/mapping-blocktypes.md (la convention en ligne prime).",
+        "_note": "Correspondance tag Figma -> mécanique CMS. Référence complète et à jour : .claude/skills/figma-cms/models/mapping-blocktypes.md (la convention en ligne prime).",
         "[title]": "blocType 'title' (global)",
         "[intro]": "blocType 'title-header' (content)",
         "[text]": "blocType 'text' (global)",

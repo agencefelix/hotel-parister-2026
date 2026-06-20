@@ -5,7 +5,7 @@
 Avant d'intégrer une maquette ou un prompt provenant de Figma, **consulter
 systématiquement la convention de nommage de référence** :
 
-👉 https://figma-doc.agence-felix.fr/
+👉 https://figma-doc.agence-felix.fr/ 
 
 Cette convention fait la **correspondance entre le nommage des calques/composants
 de la maquette Figma et la mécanique du CMS** (Symfony 7.4 SFCMS 7). Elle doit
@@ -32,6 +32,67 @@ de la maquette Figma et la mécanique du CMS** (Symfony 7.4 SFCMS 7). Elle doit
 > la page en ligne** (ne jamais se fier au seul rappel ci-dessous, qui peut être
 > obsolète). En cas d'écart entre le site et ce fichier : **le site prime**, et
 > mettre à jour ce rappel en conséquence.
+
+## Procédure complète de reproduction (playbook — à suivre intégralement)
+
+> **But.** Repartir d'un projet où **seul `.claude/figma/` subsiste** (le reste du code a été
+> réinitialisé, `integration/` vidé) et **tout refaire à l'identique**. Suivre les phases dans
+> l'ordre ; chaque phase renvoie à sa section détaillée. **Ne rien committer sans demande.**
+
+**Phase 0 — Outillage Figma→CMS (dry-run).** S'assurer que l'outillage existe ; le **recréer** s'il a été réinitialisé :
+- Services `src/Service/Figma/` : `FigmaApiClient`(+`FigmaApiClientInterface`), `ConventionMapper`,
+  `PageParser`, `PageScreenshotter`, `LayoutScreenshotter`, `PageTreeExporter`,
+  `Dto/Parsed{Page,Zone,Col,Block}`, `Exception/FigmaApiException`.
+- Commandes `src/Command/Figma/` : `figma:parse-page <node-id>` (arbre + `pages/<slug>.json` +
+  captures de bandes + médias) ; `figma:capture-layout` (captures depuis `layout/*.json`).
+- **Comportements à (ré)implémenter** = TOUTES les règles de ce doc : grille **Bootstrap 12** (6/6),
+  **image plein écran = 1 zone**, **colToRight** (teaser débordant), **slider `id:` + `[slide-N|id]`**
+  + forme abrégée + suggestion de faute, **CTA/title(h1–h6)/text/image auto**, **normalisation texte**
+  (casse phrase), champ **`cms`** par bloc, **auto-exclusion layout** (footer/newsletter/socialwall),
+  **export médias** jpg/png/svg + hero **≥3840px** / autres **<1 Mo** + **noms selon le visuel**,
+  **import média multilingue**.
+- `.env` : `FIGMA_TOKEN` (scope `file_content:read`) + `FIGMA_FILE_KEY`.
+
+**Phase 1 — Kickoff** (§ « deux URLs » + « Connexion ») : demander **URL prod** + **URL proto** ;
+bootstrapper `integration/` depuis `models/`.
+
+**Phase 2 — Dry-run par page** (§ capture / déduction / interactions / captures synchronisées) :
+pour **chaque `[page|…]`** → `figma:parse-page` (=> `pages/<slug>.json`, `screenshots/<slug>/`,
+`media/<slug>/`) ; `figma:capture-layout` (=> `screenshots/layout/`) ; interactions proto =>
+`interactions/`. **Toutes** les pages doivent avoir leurs captures.
+
+**Phase 3 — Config, URLs, SEO** (§ « Configuration globale ») : crawler la prod → `config.json`
+(couleurs **Figma**, reste **prod**, lat/long via **Nominatim**), `prod-urls.json`, `seo.json`
+(home par locale mini). **Reporter** dans **`bin/data/config/default.yaml`** (identité, locales,
+domaines, GTM, couleurs, favicons, réseaux, tél, emails, adresses géocodées, légal). Ne pas
+toucher aux emails `# REQUIRED`.
+
+**Phase 4 — Assets de marque** (§ pipeline fixtures, point 2) dans **`assets/medias/images/default/`** :
+logo **SVG**, favicons (mark sur **`primary`**), **share** (visuel + logo), **email-logo en PNG**
+(+ changer l'extension dans `DefaultMediasFixtures`), **preloader** (mark), **placeholder** pastel
+de `primary` (remplacer dans `default`/`front/default`/`vendor`).
+
+**Phase 5 — Polices** (§ « Polices & variables SCSS ») : récupérer **toutes** les polices (audit
+familles+graisses), intégrer **en local** (`assets/lib/fonts/`), `@font-face`
+(`assets/scss/front/default/fonts.scss`), variables (`assets/scss/front/default/variables.scss` :
+couleurs + `$theme-colors` + `$default-bootstrap-colors` + `$font-*`), **chemin stable**
+(`copyFiles` dans `webpack.config.js`), **preload** dans `templates/front/default/base.html.twig`,
+**métriques `font-fallback` recalculées** pour la nouvelle police.
+
+**Phase 6 — Base de données** (§ pipeline fixtures, point 0) : `.env.local` (`DB_NAME` = nom projet
+en `_`) ; si absente : `doctrine:database:create` + `doctrine:schema:update --force`.
+
+**Phase 7 — Fixtures (zéro dev)** (§ « Génération des fixtures ») dans `src/Service/DataFixtures/` :
+`WebsiteFixtures` (pages `[page|]` + activation modules), `PageFixtures` (layouts depuis
+`pages/*.json`, `importMedia()` multilingue, `addSlider()`), `MenuFixtures` (auto depuis pages +
+`nav.json`/`footer.json`), `CatalogFixtures`/`NewscastFixtures` (**produits/actus depuis la prod** :
+contenu, images, **caractéristiques**, **FAQ**, SEO **multilingue** ; **layout = catalogue/catégorie**,
+BlockTypes **`layout-*`**), `DefaultMediasFixtures`. Puis `doctrine:fixtures:load`.
+
+**Phase 8 — Traductions** (§ pipeline fixtures, point 7) : par bloc dans `pages/*.json` + `seo.json`,
+**toutes les locales**.
+
+---
 
 ## Au démarrage d'un projet : deux URLs à demander (OBLIGATOIRE)
 
@@ -86,6 +147,10 @@ visuellement chaque bande et pouvoir **corriger le JSON à la main** en connaiss
 de cause. La page est rendue une fois puis découpée par la géométrie des bandes
 (fonctionne aussi pour les zones déduites, qui ne sont pas des nœuds Figma).
 
+**Pour CHAQUE page taggée `[page|…]`** (pas seulement la home), générer ses captures de bandes
+dans `screenshots/<slug>/` — l'utilisateur doit pouvoir **revoir visuellement chaque page**
+(ex. `pages/product-view.json` ⇒ `screenshots/product-view/`). Ne jamais livrer une page sans ses captures.
+
 **Ne jamais inclure dans une capture de bande un élément identifié autrement.**
 Les éléments de layout (`[nav]`, `[footer]`, et tout élément commun à chaque page)
 ne doivent **pas** apparaître dans les captures de bandes de page : borner le
@@ -93,6 +158,21 @@ découpage à la **zone de contenu** (exclure la région verticale du footer/nav
 Ces éléments de layout ont leurs **propres captures** dans un dossier commun
 `.claude/figma/integration/screenshots/layout/` (ex. `layout/nav.png`, `layout/footer.png`),
 puisqu'ils sont intégrés une seule fois et partagés par toutes les pages.
+
+## Corréler les calques, le contenu et le contexte (pas seulement les captures)
+
+**Règle clé.** Une capture ne suffit pas à décider d'un bloc : toujours **croiser**
+(1) la **géométrie**, (2) le **nom du calque**, (3) le **contenu texte réel**
+(`characters`), et (4) le **contexte projet** (cf. contextualisation « produit »).
+Exemples :
+- un calque nommé `CTA`/`bouton` → bloc `link`, même sans flèche visible ;
+- un texte contenant le **mot-clé produit** du projet (ex. « chambre » pour un hôtel,
+  « formation », « véhicule »…) signale une section/teaser de ce produit ;
+- deux colonnes « 6/6 » à la géométrie peuvent être, au contenu, un **intro + média**
+  (titre + texte + CTA d'un côté, image de l'autre) — le nommer pour ce qu'il est.
+
+Surfacer le **texte** et le **rapprochement CMS** dans l'arbre (`pages/<slug>.json`)
+permet cette corrélation sans dépendre des seules images.
 
 ## Heuristiques d'interprétation visuelle (atomes)
 
@@ -195,14 +275,30 @@ Sources, par origine (voir la « séparation stricte des sources » ci-dessous) 
 - **Depuis la prod** (texte/config, voir la section crawl) : `domains`, `apis`
   (GTM/GA), URLs réelles des `social_networks`, `legals`, et complément
   `phones`/`emails`/`addresses`.
-- **Vraiment non dérivables → `null`** : `favicons`, `fonts`, lat/long,
-  `googleMapUrl`, horaires, et données société absentes des mentions légales.
+- **Coordonnées géo (lat/long)** : **géocoder l'adresse** via l'API **OpenStreetMap /
+  Nominatim** (`https://nominatim.openstreetmap.org/search?street=…&city=…&postalcode=…&country=…&format=json`,
+  avec un `User-Agent` identifiant l'agence). Pas besoin de les saisir à la main.
+- **Vraiment non dérivables → `null`** : `favicons`, `fonts`, `googleMapUrl`,
+  horaires, et données société absentes des mentions légales (DPO, gérant, hébergeur…).
 
 Artefact : `.claude/figma/integration/config.json` (mêmes clés que `default.yaml`, éditable).
 **Contraintes** : chaque section porte un `_source` (`figma` | `prod`) ; les
 **couleurs viennent EXCLUSIVEMENT de Figma** (jamais de la prod) ; `prod_url` par
 défaut = `"URL PROD"` ; les mappings sémantiques de couleurs (primary/secondary…)
 restent **à confirmer** manuellement (la maquette donne les hex, pas leur rôle).
+
+### Reporter la config dans les fixtures (objectif : zéro dev d'injection)
+
+Une fois `config.json` validé, **mettre à jour `bin/data/config/default.yaml`**
+(entrée des fixtures de config) pour que `doctrine:fixtures:load` reconstruise le
+site **sans dev supplémentaire** : `company_name`, `locale`/`locales_others`,
+`domains`, `apis` (GTM), `colors` (mapping validé), `favicons` (sur la couleur
+primaire), `social_networks`, `phones`, `emails`, `addresses` (avec lat/long
+géocodés), `legals`.
+- **Ne pas toucher** aux entrées emails marquées `# REQUIRED` (`support`,
+  `no-reply`) : ce sont des emails système gérés par l'agence.
+- **Domaine local** (`*.local`) : laisser un placeholder à ajuster au vhost ;
+  domaines prod listés à `false` (activés selon l'environnement).
 
 > **OBLIGATOIRE — Au moment de générer le fichier de config propre au projet,
 > demander à l'utilisateur l'URL du site de prod existant.** Par défaut, le champ
@@ -222,6 +318,12 @@ restent **à confirmer** manuellement (la maquette donne les hex, pas leur rôle
 
 Ne jamais croiser les deux : un hex de couleur vient de Figma ; un ID GTM vient de
 la prod. Jamais l'inverse.
+
+### Obligation : si `prod_url` est renseigné, alimenter prod-urls.json ET seo.json
+
+**Dès qu'une URL de prod est connue**, `prod-urls.json` **et** `seo.json` **doivent** être
+alimentés (au moins le SEO de la **home par locale**) — sinon le process est **incomplet**.
+Ne pas les laisser à l'état de gabarit vide quand `config.json.prod_url` est rempli.
 
 ### Récupérer toutes les URLs de prod (au crawl)
 
@@ -248,6 +350,125 @@ Open Graph (`og:title` / `og:description` / `og:image`), `h1`. Stocker dans
 (`by_language:{<lang>:{domain, count, pages:[{url, path, seo:{...}}]}}`).
 Signaler les **manques SEO** rencontrés (page sans `title`, sans `description`…) :
 c'est utile pour la reprise/refonte. Donnée texte/config — pas du design.
+
+## Génération des fixtures (objectif : zéro dev d'injection)
+
+Le livrable final n'est pas que le dry-run : **modifier EFFECTIVEMENT les fixtures du projet**
+(écrire le code dans `src/(Service/)DataFixtures/`, pas seulement documenter) pour que
+`php bin/console doctrine:fixtures:load` reconstruise le site, sans dev. ⚠️ Tant que
+`PageFixtures`, `MenuFixtures`, `NewscastFixtures`, `CatalogFixtures`… ne sont pas modifiées,
+le chantier n'est **pas** fait. Cibles :
+
+0. **Base de données** → `.env.local` : renseigner la connexion (`DB_HOST`, `DB_USER`, `DB_PASSWORD`,
+   `DB_PORT`, `DB_VERSION`) et **`DB_NAME` = nom du projet avec des `_`** (ex. projet `hotel-parister-2026`
+   → `DB_NAME=hotel_parister_2026`). **Si la base n'existe pas**, la créer puis monter le schéma :
+   ```
+   php bin/console doctrine:database:create
+   php bin/console doctrine:schema:update --force
+   ```
+   (puis `doctrine:fixtures:load` une fois les fixtures prêtes).
+1. **Config** → `bin/data/config/default.yaml` (cf. section config + Nominatim ci-dessus).
+2. **Médias par défaut / logos / favicons / partage** → `DefaultMediasFixtures` + dossier
+   `assets/medias/images/default/` : remplacer les fichiers par défaut du CMS (catégories
+   `logo`, `footer`, `email`, `admin`, `favicon*`, `share`, `title-header`, `social-network`…)
+   par ceux du projet. **Logo en SVG** (extrait de la maquette, souvent dans la nav). **Générer**
+   les favicons (toutes tailles, à partir du **mark** du logo sur un fond de la **couleur `primary`**
+   du projet) et l'**image de partage** (1200×630) = **un visuel clé + le logo incrusté**
+   (toujours mettre le logo sur le share).
+   - **`email-logo` en PNG** (les clients mail ne rendent pas le SVG) : générer `email-logo.png`
+     et **modifier l'extension dans `DefaultMediasFixtures`** (`email-logo.svg` → `email-logo.png`).
+   - **`preloader`** : reprendre le **mark** du logo (SVG), affiché pendant le chargement.
+   - Logo blanc → favicons/preloader sur fond de marque ; `footer-logo` = lockup (footer sombre).
+   - **Privilégier la couleur `primary`** pour les fonds des éléments de marque (favicons, splash…).
+   - **`placeholder.jpg`** : recolorer le placeholder gris du CMS dans les **tons pastel de la
+     couleur `primary`** du projet, puis **scanner tout le projet et remplacer chaque
+     `placeholder.jpg`** (dossiers `assets/medias/images/{default,front/default,vendor}` ; laisser
+     l'`admin/`). Garder le motif (image + loupe) et les dimensions (3840×2160).
+3. **Pages + blocs** → `PageFixtures` : créer Page → Zones → Cols → Blocs **depuis
+   `pages/<slug>.json`** (chaque bloc porte déjà son `cms`/`addBlock()`). **Médias = les images
+   RÉCUPÉRÉES** (`media/<slug>/*` importées en entités `Media`), **jamais** un média par défaut
+   (`title-header`/placeholder) : importer chaque visuel et le rattacher au bloc/slide correspondant.
+   **Import multilingue obligatoire** : via `UploadedFileFixtures::uploadedFile()` (depuis le chemin
+   disque récupéré), puis **un `MediaIntl` par locale** (`getAllLocales()`) ; pour un slider, **une
+   `SliderMediaRelation` par locale** et par slide. Implémenté : `PageFixtures::importMedia()` / `addSlider()`.
+   **Ne parser/générer QUE les nœuds taggés `[page|…]`** (pas les variantes/mobile en tant que
+   pages distinctes). Le slug vient de la variante (`[page|product-view]` → `product-view`).
+   - **Maquette sans modèle `[page|cms]`** : si la maquette ne fournit pas de gabarit de page CMS
+     générique, en **créer un dans le style de la maquette** (zones/blocs/typo/couleurs observés) et
+     l'appliquer aux pages correspondantes (les items de nav qui n'ont pas d'écran dédié dans Figma).
+   - **Récupération du contenu réel depuis la prod** : pour **chaque page générée** dans les fixtures,
+     tenter la **correspondance avec une URL de prod** (`prod-urls.json`). Si match → **récupérer et
+     intégrer le contenu réel** : textes, **images**, **FAQ**, etc. (dans toutes les langues, cf. `seo.json`
+     / traductions). Pas de contenu factice quand le réel existe.
+3bis. **Menus** → `MenuFixtures` : créer les `Menu` (`main`, `footer`) et leurs `Link`/`LinkIntl`
+   **depuis `layout/nav.json` et `layout/footer.json`** (`content.menu`, `ctas`, `languages`,
+   hiérarchie via `children`). Capturer aussi l'état **`[nav|mobile]`** (menu mobile) → `screenshots/layout/nav-mobile.png`.
+4. **Produits / actualités** → `CatalogFixtures` / `NewscastFixtures` : alimenter l'entité
+   « produit » du projet (contextualisée) et les actus depuis les pages listing/fiche.
+   **Si le module catalogue est actif (`ROLE_CATALOG`), aller sur le site de prod récupérer
+   les PRODUITS réels** (ici les chambres) — titre, description, prix/infos, **images** — et les
+   injecter dans `CatalogFixtures` (idem actus → `NewscastFixtures` depuis la prod). Pas de données démo.
+   - **Faire matcher les contenus avec la NOUVELLE maquette** (structure/blocs de la fiche produit Figma),
+     pas une simple recopie de l'ancien site.
+   - **Récupérer le SEO dans TOUTES les langues** (title/description/og par locale, via les domaines/hreflang).
+   - **Récupérer les images** des produits (haute déf, mêmes règles d'export/optimisation que les médias).
+   - **Récupérer les CARACTÉRISTIQUES** du produit (pour une chambre : superficie, lits/capacité, vue,
+     équipements, services…) et les intégrer en champs/attributs du produit (toutes langues).
+4ter. **FAQ depuis la prod** : si le site de prod comporte une **FAQ** (questions/réponses),
+   la **réintégrer** — activer `ROLE_FAQ` et alimenter le module FAQ (ou un bloc `collapse`) avec
+   les paires question/réponse réelles, dans toutes les langues. Plus largement : tout **contenu de
+   module détecté sur la prod** (FAQ, agenda, témoignages…) est à récupérer et à recâbler sur le module idoine.
+5. **Activation des modules** → `WebsiteFixtures` : déplacer les `ROLE_*` nécessaires de
+   `OTHERS_MODULES` vers `DEFAULTS_MODULES` **en fonction des blocs/modules réellement utilisés**
+   (ex. un slider → `ROLE_SLIDER` déjà actif ; un catalogue → `ROLE_CATALOG` ; une newsletter →
+   `ROLE_NEWSLETTER` ; un mur social → vérifier qu'un module existe avant de l'activer).
+6. **SEO par locale** → `SeoFixtures` (ou le SEO de la page) : si une **URL de prod** est
+   disponible, récupérer et injecter **au moins le SEO de la home pour chaque locale**
+   (title, meta description, og…), crawlé sur le domaine de chaque langue.
+7. **Traductions** → **dans le JSON de la page** (`pages/<slug>.json`), **par bloc** : chaque bloc
+   porte son texte `fr` + ses traductions par locale (ex. `"translations": { "en": …, "es": …, "zh": … }`),
+   pour **le titre ET tout autre contenu** (titres, textes, CTA, slides ; le SEO va dans `seo.json`).
+   Les fixtures **consomment** ce JSON (Intl des entités) — elles ne traduisent pas elles-mêmes.
+   Source : contenu réel de prod par langue s'il existe ; sinon traduire le fr.
+
+Règle : **ne jamais inventer** un slug/role/entité — toujours le vérifier dans les fixtures
+réelles (`BlockTypeFixtures`, `ActionFixtures`, `WebsiteFixtures`, `DefaultMediasFixtures`,
+`SeoFixtures`, `TranslationsFixtures`).
+
+## Polices & variables SCSS (front)
+
+**Vérifier TOUTES les polices de la maquette** (sur **tous** les écrans, pas que la home) :
+scanner les styles de texte Figma → recenser **chaque famille ET chaque graisse/style** réellement
+utilisées (typiquement : une police de **corps** en plusieurs graisses + une **cursive décorative**
+pour les titres + une police **secondaire**). **Intégrer TOUTES ces familles**, pas seulement la
+principale. **Signaler les écarts** : une graisse présente dans la maquette mais absente des
+webfonts de prod doit être sourcée (licence) ou mappée sur la plus proche.
+
+**Récupérer les polices du projet** (depuis le CSS de prod : règles `@font-face` / `font-family`,
+ou à défaut les styles de texte Figma) et **les intégrer EN LOCAL** (jamais de CDN externe) :
+- **Fichiers de police** (woff2/woff…) → `assets/lib/fonts/`.
+- **Déclarations `@font-face`** → `assets/scss/front/default/fonts.scss` (pointant vers `assets/lib/fonts/`).
+- **Ajuster les variables SCSS** → `assets/scss/front/default/variables.scss` :
+  - **couleurs** : reporter le mapping validé (primary/secondary/light/dark…), aligné sur `config.json`/`default.yaml`, et **alimenter le map `$theme-colors`** (ajouter les couleurs de sections projet, ex. `navy`/`teal`, + les ajouter à `$default-bootstrap-colors` pour générer `bg-*`/`text-*`) ;
+  - **polices** : variables de familles (`$font-…`) pointant sur les polices intégrées.
+- **Polices de secours anti-CLS (obligatoire)** : les `@font-face` `font-fallback` /
+  `font-fallback-android` de `variables.scss` (avec `size-adjust`, `ascent-override`,
+  `descent-override`, `line-gap-override`, sous `@if not $enable-medias-queries`) sont des
+  **métriques propres à la police**. Par défaut elles sont calées sur Roboto → il faut les
+  **recalculer pour la nouvelle police de corps** du projet, sinon le fallback induit du CLS.
+  **Installer capsize** puis calculer les métriques à partir du `.woff2` de la police :
+  ```
+  npm install --no-save @capsizecss/unpack @capsizecss/core @capsizecss/metrics
+  ```
+  Script Node (depuis la **racine du projet**, pour résoudre les modules) : `fromFile(woff2)` →
+  métriques de la police ; `createFontStack([police, arial])` et `([police, roboto])` →
+  les `@font-face` de secours avec `size-adjust`/`*-override` à reporter dans `variables.scss`.
+  Garder `local('Arial')` (desktop) / `local('Roboto')` (android) comme repli système.
+- **Précharger les graisses critiques** (above-the-fold) dans `templates/front/default/base.html.twig`
+  (`<link rel="preload" as="font" type="font/woff2" crossorigin>` + `nonce` CSP). Pour que le preload
+  soit efficace, l'URL doit **correspondre exactement** à celle du `@font-face` : copier les polices
+  vers un **chemin stable** (Webpack `copyFiles` → `fonts/…`, sans hash) et y pointer `@font-face` + preload.
+  Limiter les graisses/styles aux besoins réels.
 
 ## Cas particulier : nav & footer (intégrés une seule fois)
 
@@ -284,6 +505,17 @@ de menu/overlay correspondent à des actions `NODE`/`OVERLAY` vers une autre fra
 les traiter comme **états** d'un même élément, pas comme des éléments distincts.
 
 ## Éléments de layout récurrents (PAS des sections de page)
+
+> 🛑 **POINT CRITIQUE — à appliquer sur CHAQUE page, pas seulement la home.**
+> Le **footer**, la **newsletter** et le **mur social** (et toute barre/élément répété en bas
+> de page) sont du **LAYOUT**. Ils **ne doivent JAMAIS** apparaître :
+> - ni comme **zones/cols/blocs** d'une page (`pages/<slug>.json`) ;
+> - ni dans les **captures de bandes** d'une page (`screenshots/<slug>/`).
+> Ils sont intégrés **une seule fois** (descripteurs `layout/*.json` + leurs propres captures
+> `screenshots/layout/`). **Cas avéré** : `product-view` — bande 4 = newsletter + mur social,
+> bande 5 = footer, qui ont **fui** dans les captures de la fiche produit (à exclure).
+> Quand ces éléments **ne sont pas taggés** dans la maquette, les détecter (heuristiques ci-dessous),
+> **recaler le bas de la zone de contenu au-dessus d'eux**, et **inviter le créa à les tagger**.
 
 Certains éléments, bien que présents dans la maquette (souvent **en bas de page**),
 appartiennent au **layout de base** partagé : les intégrer **une seule fois**, comme

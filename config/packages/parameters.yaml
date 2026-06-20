@@ -2,6 +2,8 @@ parameters:
     protocol: '%env(APP_PROTOCOL)%'
     env(SECURE_SCHEME): '%env(APP_PROTOCOL)%'
     security_token: '%env(SECURITY_TOKEN)%'
+    figma_token: '%env(default::FIGMA_TOKEN)%'
+    figma_file_key: '%env(default::FIGMA_FILE_KEY)%'
     prefix: '%env(DATABASE_PREFIX)%'
     locale: '%env(APP_LOCALE)%'
     projectDir: '%kernel.project_dir%'

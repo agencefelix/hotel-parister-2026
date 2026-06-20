@@ -2,6 +2,7 @@
 .idea/workspace.xml
 
 .claude/
+!.claude/figma
 CLAUDE.md
 
 /nbproject/

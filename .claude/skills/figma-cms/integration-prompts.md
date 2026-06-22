@@ -656,7 +656,10 @@ peut **écraser** la nouvelle intégration (règles à forte spécificité, sél
 node .claude/skills/figma-cms/tooling/css-baseline.mjs --out .claude/skills/figma-cms/integration/css-baseline.md
 ```
 → liste les overriders potentiels (`!important` sur props sensibles, sélecteurs `h1-h6/p/a/body/:root/*`,
-larges `[class*=]`) avec **fichier:ligne + sélecteur + propriété**. **Le consulter avant d'écrire du CSS**.
+larges `[class*=]`) avec **fichier:ligne + sélecteur + propriété**, en **séparant les overriders TOUJOURS
+ACTIFS** (à traiter) **de ceux CONDITIONNÉS** par une classe d'état sur body/html (mode accessibilité,
+thème `[data-bs-theme]`…) — **inactifs par défaut**, donc hors-sujet sauf si ce mode est posé.
+**Le consulter avant d'écrire du CSS**.
 
 **Vigilance écrasement (à chaque bande)** : après build, **vérifier que le CSS intégré GAGNE** réellement
 (rien de natif ne le surclasse). Stratégie, dans l'ordre :

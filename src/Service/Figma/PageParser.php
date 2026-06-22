@@ -52,11 +52,20 @@ final class PageParser
     private array $slidesBySlider = [];
 
     /**
-     * Page font scale: body size (most frequent) + larger sizes ranked into heading levels.
+     * Page font scale: body/paragraph size + larger sizes ranked into heading levels + the
+     * dominant (body) font family. Reset on each parse().
      *
-     * @var array{body: float, levels: array<string, int>}
+     * @var array{body: float, levels: array<string, int>, bodyFamily: ?string}
      */
-    private array $fontScale = ['body' => 0.0, 'levels' => []];
+    private array $fontScale = ['body' => 0.0, 'levels' => [], 'bodyFamily' => null];
+
+    /**
+     * Named text styles of the file (styleId => human name, e.g. "H2", "Sous-titre H3", "p/16"),
+     * the authoritative source for classifying a TEXT as heading vs body. Reset on each parse().
+     *
+     * @var array<string, string>
+     */
+    private array $namedStyles = [];
 
     public function parse(string $fileKey, string $nodeId): ParsedPage
     {
@@ -66,6 +75,9 @@ final class PageParser
         if (!is_array($doc)) {
             throw new FigmaApiException(sprintf('Nœud "%s" introuvable dans le fichier Figma.', $nodeId));
         }
+
+        // Named text styles (H1…Hn, Sous-titre, p/16…) — authoritative for heading vs body.
+        $this->namedStyles = $this->indexStyles($nodes['nodes'][$nodeId]['styles'] ?? []);
 
         $warnings = [];
         $token = $this->mapper->extract($doc['name'] ?? '');
@@ -1281,17 +1293,99 @@ final class PageParser
         // Style relevé du node Figma : porté sur le bloc (et donc dans le JSON) pour être appliqué
         // fidèlement — une taille hors-échelle n'est plus perdue, elle reste lisible sur le bloc.
         $style = $this->textStyle($el);
+
+        [$slug, $variants, $note] = $this->classifyText($el);
+
+        return new ParsedBlock($name, 'atom', blockTypeSlug: $slug, note: $note, variants: $variants, text: $text, style: $style);
+    }
+
+    /**
+     * Classifies a TEXT node as a heading (`title` h1…h6), a subtitle (`title-header`), a quote
+     * (`blockquote`) or plain `text`, combining three signals in order of authority :
+     *  1. the Figma NAMED text style (H2 / Sous-titre H3 / Citation / p-16) — authoritative ;
+     *  2. a DISPLAY font (≠ the page's dominant body family, e.g. a script font) → heading ;
+     *  3. the size relative to the body/paragraph size (above body = heading, ranked into levels).
+     *
+     * @param array<string, mixed> $el
+     *
+     * @return array{0: string, 1: list<string>, 2: ?string} [BlockType slug, variants, note]
+     */
+    private function classifyText(array $el): array
+    {
+        $named = $this->namedTextStyle($el);
+        if ($named !== null) {
+            if (preg_match('/sous[\s-]?titre|subtitle|surtitre|eyebrow/i', $named) === 1) {
+                return ['title-header', [], sprintf('sous-titre (style nommé « %s »)', $named)];
+            }
+            if (preg_match('/cita[ti]?on|quote|verbatim/i', $named) === 1) {
+                return ['blockquote', [], sprintf('citation (style nommé « %s »)', $named)];
+            }
+            if (preg_match('/h\s*([1-6])|titre|heading|display/i', $named, $m) === 1) {
+                $level = isset($m[1]) && $m[1] !== '' ? (int) $m[1] : 2;
+
+                return ['title', ['h'.$level], sprintf('titre h%d (style nommé « %s »)', $level, $named)];
+            }
+            if (preg_match('~^p[\s/._-]|paragraph|body|texte|corps|legal|caption~i', $named) === 1) {
+                return ['text', [], sprintf('texte (style nommé « %s »)', $named)];
+            }
+        }
+
         $fontSize = isset($el['style']['fontSize']) && is_numeric($el['style']['fontSize'])
             ? (string) round((float) $el['style']['fontSize'], 1)
             : null;
 
+        // Police d'affichage (≠ police de corps dominante) = titre, quelle que soit la taille.
+        $family = isset($el['style']['fontFamily']) ? (string) $el['style']['fontFamily'] : null;
+        $bodyFamily = $this->fontScale['bodyFamily'] ?? null;
+        if ($family !== null && $bodyFamily !== null && $family !== $bodyFamily) {
+            $level = $fontSize !== null ? ($this->fontScale['levels'][$fontSize] ?? 2) : 2;
+
+            return ['title', ['h'.$level], sprintf('titre h%d déduit (police d\'affichage « %s »)', $level, $family)];
+        }
+
+        // Taille au-dessus du corps (paragraphe) = titre ; sinon texte.
         if ($fontSize !== null && isset($this->fontScale['levels'][$fontSize])) {
             $level = $this->fontScale['levels'][$fontSize];
 
-            return new ParsedBlock($name, 'atom', blockTypeSlug: 'title', note: sprintf('titre h%d déduit (%s px)', $level, $fontSize), variants: ['h'.$level], text: $text, style: $style);
+            return ['title', ['h'.$level], sprintf('titre h%d déduit (%s px)', $level, $fontSize)];
         }
 
-        return new ParsedBlock($name, 'atom', blockTypeSlug: 'text', note: 'texte déduit', text: $text, style: $style);
+        return ['text', [], 'texte déduit'];
+    }
+
+    /**
+     * Human name of a TEXT node's bound named style (e.g. "Sous-titre H3"), or null when the
+     * node carries no named text style.
+     *
+     * @param array<string, mixed> $el
+     */
+    private function namedTextStyle(array $el): ?string
+    {
+        $id = $el['styles']['text'] ?? null;
+        if (!is_string($id) || $id === '') {
+            return null;
+        }
+
+        return $this->namedStyles[$id] ?? null;
+    }
+
+    /**
+     * Indexes the file's style dictionary (from the /nodes response) as styleId => human name.
+     *
+     * @param array<string, mixed> $styles
+     *
+     * @return array<string, string>
+     */
+    private function indexStyles(array $styles): array
+    {
+        $out = [];
+        foreach ($styles as $id => $meta) {
+            if (is_array($meta) && isset($meta['name']) && is_string($meta['name'])) {
+                $out[(string) $id] = $meta['name'];
+            }
+        }
+
+        return $out;
     }
 
     /**
@@ -1564,18 +1658,35 @@ final class PageParser
     }
 
     /**
-     * Builds the page font scale: body size (most frequent) + larger sizes ranked into heading levels.
+     * Builds the page font scale used to classify untagged TEXT as heading vs body.
+     *
+     * The body/paragraph size is read from PARAGRAPH runs (multi-word texts in the dominant
+     * font family) rather than from the most frequent size overall — otherwise short labels
+     * and buttons (often the single most frequent size) get mistaken for the body, and every
+     * paragraph one notch larger is wrongly promoted to a heading. Sizes strictly above the
+     * body are ranked into heading levels h1…h6.
      *
      * @param list<array<string, mixed>> $content
      *
-     * @return array{body: float, levels: array<string, int>}
+     * @return array{body: float, levels: array<string, int>, bodyFamily: ?string}
      */
     private function computeFontScale(array $content): array
     {
         $sizes = [];
-        $walk = function (array $node) use (&$walk, &$sizes): void {
+        $paragraphSizes = [];
+        $families = [];
+        $walk = function (array $node) use (&$walk, &$sizes, &$paragraphSizes, &$families): void {
             if (($node['type'] ?? '') === 'TEXT' && isset($node['style']['fontSize']) && is_numeric($node['style']['fontSize'])) {
-                $sizes[] = (string) round((float) $node['style']['fontSize'], 1);
+                $size = (string) round((float) $node['style']['fontSize'], 1);
+                $sizes[] = $size;
+                $family = isset($node['style']['fontFamily']) ? (string) $node['style']['fontFamily'] : null;
+                if ($family !== null) {
+                    $families[] = $family;
+                }
+                // Paragraph run = a sentence-like text (≥ 4 words) — the real body copy.
+                if ($this->wordCount((string) ($node['characters'] ?? '')) >= 4) {
+                    $paragraphSizes[] = ['size' => $size, 'family' => $family];
+                }
             }
             foreach ($node['children'] ?? [] as $child) {
                 $walk($child);
@@ -1586,12 +1697,32 @@ final class PageParser
         }
 
         if ($sizes === []) {
-            return ['body' => 0.0, 'levels' => []];
+            return ['body' => 0.0, 'levels' => [], 'bodyFamily' => null];
         }
 
-        $freq = array_count_values($sizes);
-        arsort($freq);
-        $body = (float) array_key_first($freq);
+        // Dominant (body) family = the most frequent family across all text.
+        $bodyFamily = null;
+        if ($families !== []) {
+            $famFreq = array_count_values($families);
+            arsort($famFreq);
+            $bodyFamily = (string) array_key_first($famFreq);
+        }
+
+        // Body size = most frequent paragraph size in the dominant family; fall back to the most
+        // frequent paragraph size, then to the most frequent size overall.
+        $bodyCandidates = array_values(array_map(
+            static fn (array $p): string => $p['size'],
+            array_filter($paragraphSizes, static fn (array $p): bool => $bodyFamily === null || $p['family'] === $bodyFamily)
+        ));
+        if ($bodyCandidates === []) {
+            $bodyCandidates = array_map(static fn (array $p): string => $p['size'], $paragraphSizes);
+        }
+        if ($bodyCandidates === []) {
+            $bodyCandidates = $sizes;
+        }
+        $bodyFreq = array_count_values($bodyCandidates);
+        arsort($bodyFreq);
+        $body = (float) array_key_first($bodyFreq);
 
         $distinct = [];
         foreach (array_unique($sizes) as $s) {
@@ -1606,7 +1737,7 @@ final class PageParser
             $levels[(string) round($size, 1)] = min(6, $i + 1);
         }
 
-        return ['body' => $body, 'levels' => $levels];
+        return ['body' => $body, 'levels' => $levels, 'bodyFamily' => $bodyFamily];
     }
 
     /**

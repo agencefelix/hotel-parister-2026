@@ -20,6 +20,7 @@ allowed-tools:
   - "Bash(php bin/console fos:js-routing:dump*)"
   - "Bash(rm -rf src/Service/Figma src/Command/Figma)"
   - "Bash(rm -f .claude/skills/figma-cms/integration/media/*)"
+  - "Bash(node .claude/skills/figma-cms/tooling/*.mjs *)"
   - "WebFetch(domain:figma-doc.agence-felix.fr)"
 ---
 
@@ -35,10 +36,13 @@ fidèle, en autonomie. Règles **impératives** (détail dans `integration-promp
    `fontSize`, `fontWeight`, `letterSpacing`, `lineHeightPx`, `textCase`, **marges/paddings**. Outils :
    `tooling/figma-tokens.py` + `tooling/figma-export-tokens.py` → `integration/figma-styles.md` (résumé)
    + `integration/figma-tokens.<page>.json` (exhaustif). Les **consulter avant de styler**.
-2. **VÉRIFIER sur Chrome, en MESURANT** (pas « à l'œil ») : `tooling/capture.mjs` pour les captures,
-   `getComputedStyle` (élément + `::before`/`::after`, états repos/scroll/hover/ouvert via **vraies
-   interactions** : `mouse.wheel`/`click`/`mouse.move`), contraintes numériques (hauteurs, fit 100dvh),
-   **comparaison ZOOMÉE bande par bande** avec l'export maquette. Itérer jusqu'à conformité.
+2. **VÉRIFIER sur Chrome, en MESURANT** (pas « à l'œil ») : **GATE styles automatique**
+   `tooling/verify-styles.mjs <url> integration/figma-tokens.<page>.json` qui mesure `getComputedStyle`
+   et **échoue (exit 1)** si `font-size`/`font-weight`/`letter-spacing`/`line-height`/`text-transform`/
+   `color` divergent des tokens — **relancer par largeur** (`--width`) pour le responsive. Compléter avec
+   `tooling/capture.mjs` (captures, états repos/scroll/hover/ouvert via **vraies interactions**
+   `mouse.wheel`/`click`/`mouse.move`), `getComputedStyle` manuel des `::before`/`::after`, contraintes
+   numériques (hauteurs, fit 100dvh), **comparaison ZOOMÉE bande par bande**. Itérer **jusqu'à GATE au vert**.
 3. **NE JAMAIS surestimer ni annoncer « fidèle » sans preuve** : un % ne s'annonce qu'**après**
    re-vérification élément par élément, captures à l'appui. En cas de doute, annoncer plus bas.
 4. **Éléments de LAYOUT (nav, footer, newsletter, socialwall…) : RÉÉCRIRE le CSS proprement** (ne pas

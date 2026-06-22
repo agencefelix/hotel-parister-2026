@@ -15,14 +15,23 @@
 4. **[ ] Build** — `yarn build` (exit 0) ; regen si fixtures touchées.
 5. **[ ] Capture Chrome** — `tooling/capture.mjs` ; états **repos / scroll / hover / ouvert** via vraies
    interactions (`mouse.wheel`, `click`, `mouse.move`). ⟶ artefact : la/les PNG.
-6. **[ ] MESURE des computed styles** — `getComputedStyle` de l'élément ET `::before`/`::after`,
-   comparer aux tokens (couleur, taille, poids, géométrie). ⟶ artefact : les valeurs mesurées citées.
+6. **[ ] GATE styles AUTOMATIQUE (BLOQUANT)** — lancer la boucle fermée qui **mesure le rendu
+   (`getComputedStyle`) et le confronte aux tokens Figma**, puis **échoue (exit 1)** en cas d'écart :
+   ```
+   node .claude/skills/figma-cms/tooling/verify-styles.mjs <url> .claude/skills/figma-cms/integration/figma-tokens.<page>.json [--width 1440]
+   ```
+   Vérifie `font-size`, `font-weight`, `letter-spacing`, `line-height`, `text-transform`, `color`
+   (appariement par texte ; `--map <map.json>` pour forcer un sélecteur ; `--out report.json`).
+   ⟶ artefact : la sortie du script. **La case n'est cochée que si `GATE STYLES : OK` (exit 0).**
+   Compléter par `getComputedStyle` manuel sur `::before`/`::after` (non couverts par le script).
 7. **[ ] Contraintes numériques** — vérifier les exigences chiffrées (ex. nav ≤ 10dvh, mega-menu
    `scrollHeight ≤ innerHeight`, logo `centerX == innerWidth/2`). ⟶ artefact : les nombres.
 8. **[ ] Comparaison ZOOMÉE côte à côte** maquette ↔ rendu (crop + `-resize 2x`), bande par bande.
    Lister chaque écart restant (structure, couleur, taille, poids, casse, marge, overlay, alignement).
-9. **[ ] Itérer** jusqu'à ≤ 5 % d'écart. Sinon, annoncer le **% réel conservateur** + ce qui manque.
-10. **[ ] Responsive** — refaire 5→9 à plusieurs largeurs (≥320, 375, 768, 992, 1440…).
+9. **[ ] Itérer** jusqu'à ce que le **GATE styles sorte 0** ET ≤ 5 % d'écart visuel. Sinon, corriger le
+   SCSS/les fixtures et relancer (build → gate → compara). Ne jamais annoncer « fait » gate au rouge.
+10. **[ ] Responsive** — refaire 5→9 à plusieurs largeurs (≥320, 375, 768, 992, 1440…), en **relançant
+   le GATE styles par largeur** (`--width 375`, `--width 768`…) puisque les tailles sont responsive (RFS).
 
 ## ⚠️ Sur un élément, VÉRIFIER TOUT (pas un échantillon)
 Quand on contrôle un élément (nav, footer, bande…), **mesurer TOUS ses sous-éléments et TOUS ses états**,

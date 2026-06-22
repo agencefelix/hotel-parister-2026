@@ -493,9 +493,6 @@ final class PageParser
         $variants = $token['variants'] ?? [];
         $semantic = ('section' === $type || in_array('section', $variants, true)) ? 'section' : null;
 
-        // Honour the explicit [zone|fullwidth] / [section|fullwidth] modifier (full-bleed band).
-        $fullSize = in_array('fullwidth', $variants, true);
-
         $children = $node['children'] ?? [];
         $taggedCols = array_values(array_filter($children, fn (array $c) => $this->tokenType($c) === 'col'));
 
@@ -508,6 +505,12 @@ final class PageParser
         $bb = $this->bbox($node);
         $threshold = $pageWidth * self::FULL_WIDTH_RATIO;
         $candidates = $this->backgroundCandidates([$node], $threshold);
+
+        // Full-bleed (bord à bord) : tag explicite [zone|fullwidth] OU déduction — la bande a un fond
+        // PROPRE pleine largeur (couleur ≠ fond de page, dégradé, ou image hero plein écran). Sans ça,
+        // hero et bandes cinématiques étaient rendus boxés (la maquette ne tague pas `fullwidth`).
+        $fullSize = in_array('fullwidth', $variants, true)
+            || $this->hasOwnFullWidthBackground($candidates, $bb['y'], $bb['y'] + $bb['h'], $pageBackground);
 
         return new ParsedZone(
             label: $this->cleanName($node['name'] ?? 'zone'),
@@ -576,6 +579,30 @@ final class PageParser
         }
 
         return $out;
+    }
+
+    /**
+     * Whether the band has its OWN full-width background (≠ page) → full-bleed band (bord à bord) :
+     * un fond plein largeur couleur distincte du fond de page, un dégradé, ou une image hero.
+     *
+     * @param list<array{y: float, h: float, kind: string, value: ?string}> $candidates
+     */
+    private function hasOwnFullWidthBackground(array $candidates, float $top, float $bottom, ?string $pageBackground): bool
+    {
+        $center = ($top + $bottom) / 2.0;
+        foreach ($candidates as $c) {
+            if ($c['y'] > $center || $center > $c['y'] + $c['h']) {
+                continue;
+            }
+            if ('image' === $c['kind'] || 'gradient' === $c['kind']) {
+                return true;
+            }
+            if ('solid' === $c['kind'] && $c['value'] !== null && $c['value'] !== $pageBackground) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

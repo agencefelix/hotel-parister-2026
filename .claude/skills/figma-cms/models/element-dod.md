@@ -26,6 +26,17 @@
    pour forcer un sélecteur ; `--tol-box` / `--no-box` ; `--out report.json`.
    ⟶ artefact : la sortie du script. **La case n'est cochée que si `GATE STYLES : OK` (exit 0).**
    Compléter par `getComputedStyle` manuel sur `::before`/`::after` (non couverts par le script).
+6bis. **[ ] GATE LAYOUT AUTOMATIQUE (BLOQUANT) — la COMPOSITION, pas le style :**
+   ```
+   node .claude/skills/figma-cms/tooling/verify-layout.mjs <url> .claude/skills/figma-cms/integration/figma-tokens.<page>.json [--map zones.json] [--width 1440]
+   ```
+   Compare la **géométrie rendue** aux **bboxes Figma** : **full-bleed** (un élément pleine largeur en
+   maquette DOIT l'être au rendu — capte « hero/bande boxé »), **largeur relative**, **ordre vertical**.
+   Cibler les **bandes/images** via `--map` (`#zone-<customId>`…) pour un vrai contrôle de composition
+   (l'ancrage par texte seul ne suffit pas). **La case n'est cochée que si `GATE LAYOUT : OK`.**
+   > ⚠️ **« Fait » exige les DEUX gates au vert** (styles ET layout) + la comparaison visuelle. La
+   > fidélité des tokens NE prouve PAS que la mise en page est bonne (cf. cas home : tokens ~OK mais
+   > composition fausse). Ne jamais annoncer « done » sur le seul GATE styles.
 7. **[ ] Contraintes numériques** — vérifier les exigences chiffrées (ex. nav ≤ 10dvh, mega-menu
    `scrollHeight ≤ innerHeight`, logo `centerX == innerWidth/2`). ⟶ artefact : les nombres.
 8. **[ ] Comparaison ZOOMÉE côte à côte** maquette ↔ rendu (crop + `-resize 2x`), bande par bande.

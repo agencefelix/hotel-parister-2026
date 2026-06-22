@@ -46,6 +46,10 @@ fidèle, en autonomie. Règles **impératives** (détail dans `integration-promp
    `tooling/capture.mjs` (captures, états repos/scroll/hover/ouvert via **vraies interactions**
    `mouse.wheel`/`click`/`mouse.move`), `getComputedStyle` manuel des `::before`/`::after`, contraintes
    numériques (hauteurs, fit 100dvh), **comparaison ZOOMÉE bande par bande**. Itérer **jusqu'à GATE au vert**.
+   **+ GATE LAYOUT** `tooling/verify-layout.mjs` (géométrie rendue vs bboxes Figma : **full-bleed**,
+   largeur relative, ordre vertical) — la **composition**, que le GATE styles ne voit pas. ⚠️ **« Fait »
+   exige les DEUX gates au vert** (styles ET layout) : la fidélité des tokens NE prouve PAS que la mise
+   en page est correcte (cas home : tokens ~OK mais composition fausse).
 3. **NE JAMAIS surestimer ni annoncer « fidèle » sans preuve** : un % ne s'annonce qu'**après**
    re-vérification élément par élément, captures à l'appui. En cas de doute, annoncer plus bas.
 4. **Éléments de LAYOUT (nav, footer, newsletter, socialwall…) : RÉÉCRIRE le CSS proprement** (ne pas

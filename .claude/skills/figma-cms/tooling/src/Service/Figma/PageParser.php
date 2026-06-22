@@ -1302,6 +1302,7 @@ final class PageParser
         $leaves = [];
         $this->textLeaves($node, $leaves);
 
+        // 1. CTA explicite (lexique) retirés (tous), un gardé comme label.
         $cta = null;
         $rest = [];
         foreach ($leaves as $leaf) {
@@ -1311,42 +1312,71 @@ final class PageParser
             }
             $rest[] = $leaf;
         }
-
         if ($rest === []) {
             return ['title' => null, 'introduction' => null, 'targetLabel' => $cta, 'style' => []];
         }
 
-        if (count($rest) === 1) {
-            return ['title' => $this->normalizeText($rest[0]['chars']), 'introduction' => null, 'targetLabel' => $cta, 'style' => $this->textStyle($rest[0]['node'])];
+        // 2. Méta (libellés purement numériques : prix « 120 € », « 17 m² », unités) écartés du titre.
+        $isMeta = static fn (string $c): bool => preg_match('/^[\s\d.,:€$£%°\/x×+-]+$/u', trim($c)) === 1;
+        $content = array_values(array_filter($rest, static fn (array $l) => !$isMeta($l['chars'])));
+        if ($content === []) {
+            $content = $rest;
         }
 
-        $minSize = min(array_map(static fn (array $l) => $l['size'], $rest));
-        $titleLeaves = array_values(array_filter($rest, static fn (array $l) => $l['size'] > $minSize));
-        $introLeaves = array_values(array_filter($rest, static fn (array $l) => $l['size'] <= $minSize));
+        if (count($content) === 1) {
+            return ['title' => $this->normalizeText($content[0]['chars']), 'introduction' => null, 'targetLabel' => $cta, 'style' => $this->textStyle($content[0]['node'])];
+        }
 
-        if ($titleLeaves === []) { // toutes tailles égales → 1re ligne = titre, reste = intro
-            usort($rest, static fn (array $a, array $b) => $a['y'] <=> $b['y']);
-            $titleLeaves = [array_shift($rest)];
-            $introLeaves = $rest;
+        // 3. CTA implicite : si AUCUN libellé du lexique ET au moins 3 tiers de taille distincts,
+        // le plus petit tier (s'il est court) est le CTA — sinon il polluerait l'intro/le titre.
+        // (≥3 tiers garantit qu'un titre + une intro subsistent ; à 2 tiers le plus petit = intro.)
+        $distinct = array_values(array_unique(array_map(static fn (array $l) => $l['size'], $content)));
+        if ($cta === null && count($distinct) >= 3) {
+            $min = min($distinct);
+            $smallestTier = array_values(array_filter($content, static fn (array $l) => $l['size'] === $min));
+            usort($smallestTier, static fn (array $a, array $b) => $b['y'] <=> $a['y']);
+            $short = $smallestTier[0] ?? null;
+            if ($short !== null && $this->wordCount($short['chars']) <= 3) {
+                $cta = $this->normalizeText($short['chars']);
+                $content = array_values(array_filter($content, static fn (array $l) => $l !== $short));
+            }
+        }
+
+        // 4. Seuil titre/intro PAR CARD : la plus petite taille restante = intro, au-dessus = titre.
+        $minSize = min(array_map(static fn (array $l) => $l['size'], $content));
+        $titleLeaves = array_values(array_filter($content, static fn (array $l) => $l['size'] > $minSize));
+        $introLeaves = array_values(array_filter($content, static fn (array $l) => $l['size'] <= $minSize));
+
+        // Titre vide (toutes tailles égales) → la 1re ligne (par position) devient le titre.
+        if ($titleLeaves === []) {
+            usort($content, static fn (array $a, array $b) => $a['y'] <=> $b['y']);
+            $titleLeaves = [array_shift($content)];
+            $introLeaves = $content;
         }
 
         usort($titleLeaves, static fn (array $a, array $b) => $a['y'] <=> $b['y']);
         usort($introLeaves, static fn (array $a, array $b) => $a['y'] <=> $b['y']);
 
         $join = fn (array $ls) => $this->normalizeText(implode(' ', array_map(static fn (array $l) => $l['chars'], $ls)));
-        $primary = $titleLeaves[0];
+        $primary = $titleLeaves[0] ?? null;
         foreach ($titleLeaves as $l) {
-            if ($l['size'] > $primary['size']) {
+            if ($primary === null || $l['size'] > $primary['size']) {
                 $primary = $l;
             }
         }
 
         return [
-            'title' => $join($titleLeaves),
+            'title' => $titleLeaves === [] ? null : $join($titleLeaves),
             'introduction' => $introLeaves === [] ? null : $join($introLeaves),
             'targetLabel' => $cta,
-            'style' => $this->textStyle($primary['node']),
+            'style' => $primary !== null ? $this->textStyle($primary['node']) : [],
         ];
+    }
+
+    /** Nombre de mots (après normalisation accents) — pour distinguer un CTA court d'un texte long. */
+    private function wordCount(string $s): int
+    {
+        return str_word_count(strtr(mb_strtolower($s), ['à' => 'a', 'é' => 'e', 'è' => 'e', 'ê' => 'e', 'î' => 'i', 'ô' => 'o', 'û' => 'u', 'ç' => 'c', '’' => "'"]));
     }
 
     /**
@@ -1360,9 +1390,18 @@ final class PageParser
      */
     private function collectCards(array $node): array
     {
+        $children = $node['children'] ?? [];
+        // W4 : cards regroupées sous un (ou des) wrapper(s) non significatif(s) → descendre pour ne
+        // pas fusionner toutes les cards en une seule. On descend tant qu'il n'y a qu'UN enfant et
+        // que cet enfant est un conteneur de cards (≥2 enfants majoritairement conteneurs).
+        $guard = 0;
+        while (count($children) === 1 && $this->isCardWrapper($children[0]) && $guard++ < 5) {
+            $children = $children[0]['children'] ?? [];
+        }
+
         $cards = [];
         $pos = 0;
-        foreach ($node['children'] ?? [] as $child) {
+        foreach ($children as $child) {
             $images = $this->collectImages($child);
             $text = $this->cardText($child);
             if ($images === [] && $text['title'] === null) {
@@ -1383,6 +1422,28 @@ final class PageParser
         }
 
         return $cards;
+    }
+
+    /**
+     * Un nœud qui n'est qu'un WRAPPER de cards (≥ 2 enfants majoritairement conteneurs) : à traverser
+     * pour atteindre les vraies cards. Une card isolée (enfants = textes/images feuilles) renvoie false.
+     *
+     * @param array<string, mixed> $node
+     */
+    private function isCardWrapper(array $node): bool
+    {
+        $kids = $node['children'] ?? [];
+        if (count($kids) < 2) {
+            return false;
+        }
+        $containers = 0;
+        foreach ($kids as $k) {
+            if (($k['children'] ?? []) !== []) {
+                ++$containers;
+            }
+        }
+
+        return $containers >= count($kids) / 2;
     }
 
     /**

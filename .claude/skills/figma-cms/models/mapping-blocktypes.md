@@ -58,8 +58,11 @@ Les espacements (Zone / Col / Block) **ne sont JAMAIS des px CSS** : ce sont des
   - la valeur **change par breakpoint** (ex. `lg` y : 120px xxl, 90px lg, 45px md, 30px sm, 1rem xs) ;
   - `0` et `sm` x s'appuient sur les **gouttières** (`--bs-gutter-*-margin`).
 - **Conséquence intégration** : relever l'espacement en dev mode Figma puis choisir le **NIVEAU dont le
-  px (au breakpoint + axe visés) approche la maquette** — ne pas écrire `margin: 73px`. Si aucun niveau
-  ne colle (valeur hors-échelle), prendre le plus proche (cf. typo : `reconcile-typography`).
+  px (au breakpoint + axe visés) approche la maquette** — ne pas écrire `margin: 73px`.
+- **Outil** : `node tooling/reconcile-margins.mjs integration/figma-tokens.<page>.json` mappe chaque
+  padding/gap d'auto-layout au **niveau le plus proche** (par axe) et **propose le token** à poser
+  (`pt-md`, `pe-sm`, `mb-xs`…) ; signale les valeurs **orphelines** (hors-échelle, à arbitrer). Parallèle
+  de `reconcile-typography`. Référence = breakpoint desktop (`--bp`, défaut `xxl`).
 - **Vérification** (`tooling/verify-styles.mjs`) : compare le **px rendu** au **px Figma** ; comme le rendu
   est **quantifié sur l'échelle** et **responsive**, relancer **par breakpoint** (`--width`) et lire un écart
   comme « mauvais niveau choisi » **ou** « valeur Figma hors-échelle ».

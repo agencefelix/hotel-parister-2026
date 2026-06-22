@@ -759,6 +759,10 @@ la marge voulue en SCSS, ou ajuster via l'utilitaire. Vérifier l'espacement ré
 ### Configurer `variables.scss` (tailles de titres, couleurs par fond `$elements`, boutons)
 Beaucoup de réglages globaux passent par `assets/scss/front/default/variables.scss` — **les configurer
 là plutôt que de surcharger bande par bande** :
+- **AVANT de styler — réconcilier les échelles** : marges/paddings via
+  `node .claude/skills/figma-cms/tooling/reconcile-margins.mjs integration/figma-tokens.<page>.json`
+  (propose le token `pt-md`/`pe-sm`/`mb-xs`… par axe + signale les orphelins ; ne JAMAIS poser de px en
+  dur — cf. `models/mapping-blocktypes.md` § Marges). Puis la typo (ci-dessous).
 - **AVANT de styler — réconcilier l'échelle typo** : lancer
   `node .claude/skills/figma-cms/tooling/reconcile-typography.mjs integration/figma-tokens.<page>.json`.
   Il confronte les `fontSize` de la page à l'échelle du projet (`$font-size-h1..h6`, base, `.fz-*`…) et

@@ -97,13 +97,16 @@ console.log(`  y (top/bottom) : ${levelsStr('y')}`);
 console.log(`  x (left/right) : ${levelsStr('x')}`);
 console.log(`Conteneurs à espacement : ${containers.length}  |  tolérance ${TOL}px\n`);
 
+const TUNABLE = ['lg', 'xl', 'xxl']; // grandes marges décoratives, ajustables par projet dans variables.scss
 let orphans = 0;
+let tunableOrphans = 0;
 const rows = [];
 for (const c of containers) {
   const lines = c.spacings.map((s) => {
     const n = nearest(s.axis, s.px);
     const orphan = n.d > TOL;
     if (orphan) orphans++;
+    if (orphan && TUNABLE.includes(n.lvl)) tunableOrphans++;
     return { ...s, level: n.lvl, levelPx: n.lpx, delta: n.d, orphan, token: `${s.what}-${n.lvl}` };
   });
   rows.push({ id: c.id, label: c.label, lines });
@@ -121,6 +124,9 @@ for (const c of containers) {
 const total = rows.reduce((a, r) => a + r.lines.length, 0);
 console.log(`\n${C.dim}──────────${C.reset}`);
 console.log(`Espacements : ${total - orphans}/${total} alignés sur l'échelle  |  orphelins : ${orphans}`);
+if (tunableOrphans > 0) {
+  console.log(`${C.yellow}↳ ${tunableOrphans} orphelin(s) dans la plage HAUTE (lg/xl/xxl)${C.reset} : ne pas hésiter à revoir ces niveaux dans variables.scss ($margins) pour caler l'échelle sur la maquette (garder xs/sm/md stables).`);
+}
 if (OUT) {
   fs.writeFileSync(OUT, JSON.stringify({ scss: SCSS, bp: BP, tol: TOL, scale, rows }, null, 2));
   console.log(`Rapport : ${OUT}`);

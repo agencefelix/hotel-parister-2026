@@ -63,6 +63,12 @@ Les espacements (Zone / Col / Block) **ne sont JAMAIS des px CSS** : ce sont des
   padding/gap d'auto-layout au **niveau le plus proche** (par axe) et **propose le token** à poser
   (`pt-md`, `pe-sm`, `mb-xs`…) ; signale les valeurs **orphelines** (hors-échelle, à arbitrer). Parallèle
   de `reconcile-typography`. Référence = breakpoint desktop (`--bp`, défaut `xxl`).
+- **Échelle haute AJUSTABLE par projet** : les niveaux `lg`/`xl`/`xxl` sont les **grandes marges
+  décoratives**, propres à chaque maquette — **ne pas hésiter à les revoir dans `variables.scss`
+  (`$margins`) si nécessaire** (plage souvent grossière : md=45 → lg=90 → xl=160 → xxl=250). Si
+  `reconcile-margins` signale un orphelin dont le niveau le plus proche est `lg`/`xl`/`xxl`, **préférer
+  caler l'échelle sur la maquette** plutôt que forcer un niveau approximatif. Garder `xs`/`sm`/`md`
+  **stables** (petites marges fréquentes, partagées entre projets/gouttières).
 - **Vérification** (`tooling/verify-styles.mjs`) : **scale-aware** — le px Figma attendu est **snappé au
   niveau d'échelle le plus proche** (le rendu CMS étant quantifié), donc un écart signale un **vrai**
   problème de rendu (mauvais niveau posé), pas une valeur Figma hors-échelle. Responsive → relancer

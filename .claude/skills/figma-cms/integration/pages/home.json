@@ -350,6 +350,14 @@
                                 "h6"
                             ],
                             "text": "Chambres 45",
+                            "style": {
+                                "fontSize": 24,
+                                "fontWeight": 700,
+                                "fontFamily": "Museo Sans",
+                                "lineHeight": 24,
+                                "textCase": "UPPER",
+                                "color": "#8fb3b1"
+                            },
                             "cms": {
                                 "entity": "App\\Entity\\Layout\\Block",
                                 "blockType": "title",
@@ -644,6 +652,15 @@
                                 "h6"
                             ],
                             "text": "Pour vos Séminaires, réunions, évenements",
+                            "style": {
+                                "fontSize": 16,
+                                "fontWeight": 700,
+                                "fontFamily": "Museo Sans",
+                                "letterSpacing": 6.4,
+                                "lineHeight": 19.2,
+                                "textCase": "UPPER",
+                                "color": "#f4f0f1"
+                            },
                             "cms": {
                                 "entity": "App\\Entity\\Layout\\Block",
                                 "blockType": "title",
@@ -715,6 +732,13 @@
                                 "h4"
                             ],
                             "text": "Rencontres",
+                            "style": {
+                                "fontSize": 96,
+                                "fontWeight": 400,
+                                "fontFamily": "August Script Bold free",
+                                "lineHeight": 101,
+                                "color": "#b48608"
+                            },
                             "cms": {
                                 "entity": "App\\Entity\\Layout\\Block",
                                 "blockType": "title",
@@ -730,6 +754,15 @@
                                 "h6"
                             ],
                             "text": "Art &",
+                            "style": {
+                                "fontSize": 32,
+                                "fontWeight": 700,
+                                "fontFamily": "Museo Sans",
+                                "letterSpacing": 12.8,
+                                "lineHeight": 38.4,
+                                "textCase": "UPPER",
+                                "color": "#b48608"
+                            },
                             "cms": {
                                 "entity": "App\\Entity\\Layout\\Block",
                                 "blockType": "title",
@@ -745,6 +778,13 @@
                                 "h6"
                             ],
                             "text": "Expositions, vernissages, cercles littéraires…Le Parister cultive un esprit vivant et ouvert, où se croisent création, idées et moments partagés.",
+                            "style": {
+                                "fontSize": 16,
+                                "fontWeight": 400,
+                                "fontFamily": "Museo Sans",
+                                "lineHeight": 20,
+                                "color": "#b48608"
+                            },
                             "cms": {
                                 "entity": "App\\Entity\\Layout\\Block",
                                 "blockType": "title",
@@ -852,6 +892,14 @@
                                 "h6"
                             ],
                             "text": "Derniers événements",
+                            "style": {
+                                "fontSize": 24,
+                                "fontWeight": 700,
+                                "fontFamily": "Museo Sans",
+                                "lineHeight": 24,
+                                "textCase": "UPPER",
+                                "color": "#b48608"
+                            },
                             "cms": {
                                 "entity": "App\\Entity\\Layout\\Block",
                                 "blockType": "title",

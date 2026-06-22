@@ -78,6 +78,7 @@ final class PageTreeExporter
             'id' => $block->id,
             'variants' => $block->variants !== [] ? $block->variants : null,
             'text' => $block->text,
+            'style' => $block->style !== [] ? $block->style : null,
             'cms' => $this->blockCms($block),
             'note' => $block->note,
             'media' => $block->media !== [] ? $block->media : null,

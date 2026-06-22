@@ -1150,6 +1150,9 @@ final class PageParser
 
         $name = $this->cleanName($el['name'] ?? 'texte');
         $text = isset($el['characters']) ? $this->normalizeText(trim((string) $el['characters'])) : null;
+        // Style relevé du node Figma : porté sur le bloc (et donc dans le JSON) pour être appliqué
+        // fidèlement — une taille hors-échelle n'est plus perdue, elle reste lisible sur le bloc.
+        $style = $this->textStyle($el);
         $fontSize = isset($el['style']['fontSize']) && is_numeric($el['style']['fontSize'])
             ? (string) round((float) $el['style']['fontSize'], 1)
             : null;
@@ -1157,10 +1160,78 @@ final class PageParser
         if ($fontSize !== null && isset($this->fontScale['levels'][$fontSize])) {
             $level = $this->fontScale['levels'][$fontSize];
 
-            return new ParsedBlock($name, 'atom', blockTypeSlug: 'title', note: sprintf('titre h%d déduit (%s px)', $level, $fontSize), variants: ['h'.$level], text: $text);
+            return new ParsedBlock($name, 'atom', blockTypeSlug: 'title', note: sprintf('titre h%d déduit (%s px)', $level, $fontSize), variants: ['h'.$level], text: $text, style: $style);
         }
 
-        return new ParsedBlock($name, 'atom', blockTypeSlug: 'text', note: 'texte déduit', text: $text);
+        return new ParsedBlock($name, 'atom', blockTypeSlug: 'text', note: 'texte déduit', text: $text, style: $style);
+    }
+
+    /**
+     * Relève le style texte d'un node Figma TEXT (taille/poids/famille/tracking/interligne/casse/
+     * couleur) pour le porter sur le bloc — l'intégrateur dispose ainsi des valeurs exactes inline,
+     * et le GATE styles (`tooling/verify-styles.mjs`) peut les confronter au rendu.
+     *
+     * @param array<string, mixed> $el
+     *
+     * @return array<string, mixed>
+     */
+    private function textStyle(array $el): array
+    {
+        $s = $el['style'] ?? null;
+        if (!is_array($s)) {
+            return [];
+        }
+
+        $style = [];
+        if (isset($s['fontSize']) && is_numeric($s['fontSize'])) {
+            $style['fontSize'] = round((float) $s['fontSize'], 1);
+        }
+        if (isset($s['fontWeight']) && is_numeric($s['fontWeight'])) {
+            $style['fontWeight'] = (int) $s['fontWeight'];
+        }
+        if (!empty($s['fontFamily'])) {
+            $style['fontFamily'] = (string) $s['fontFamily'];
+        }
+        if (isset($s['letterSpacing']) && is_numeric($s['letterSpacing']) && abs((float) $s['letterSpacing']) > 0.001) {
+            $style['letterSpacing'] = round((float) $s['letterSpacing'], 2);
+        }
+        if (isset($s['lineHeightPx']) && is_numeric($s['lineHeightPx'])) {
+            $style['lineHeight'] = round((float) $s['lineHeightPx'], 1);
+        }
+        if (!empty($s['textCase']) && 'ORIGINAL' !== $s['textCase']) {
+            $style['textCase'] = (string) $s['textCase'];
+        }
+        $color = $this->textColor($el);
+        if ($color !== null) {
+            $style['color'] = $color;
+        }
+
+        return $style;
+    }
+
+    /**
+     * Couleur du texte (premier fill SOLID visible) d'un node TEXT, en hex.
+     *
+     * @param array<string, mixed> $el
+     */
+    private function textColor(array $el): ?string
+    {
+        foreach ($el['fills'] ?? [] as $fill) {
+            if (($fill['visible'] ?? true) === false || ($fill['type'] ?? '') !== 'SOLID') {
+                continue;
+            }
+            $color = $fill['color'] ?? null;
+            if (!is_array($color)) {
+                continue;
+            }
+            $r = (int) round(((float) ($color['r'] ?? 0.0)) * 255);
+            $g = (int) round(((float) ($color['g'] ?? 0.0)) * 255);
+            $b = (int) round(((float) ($color['b'] ?? 0.0)) * 255);
+
+            return sprintf('#%02x%02x%02x', $r, $g, $b);
+        }
+
+        return null;
     }
 
     /**

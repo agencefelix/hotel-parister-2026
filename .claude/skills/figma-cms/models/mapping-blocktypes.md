@@ -63,9 +63,10 @@ Les espacements (Zone / Col / Block) **ne sont JAMAIS des px CSS** : ce sont des
   padding/gap d'auto-layout au **niveau le plus proche** (par axe) et **propose le token** à poser
   (`pt-md`, `pe-sm`, `mb-xs`…) ; signale les valeurs **orphelines** (hors-échelle, à arbitrer). Parallèle
   de `reconcile-typography`. Référence = breakpoint desktop (`--bp`, défaut `xxl`).
-- **Vérification** (`tooling/verify-styles.mjs`) : compare le **px rendu** au **px Figma** ; comme le rendu
-  est **quantifié sur l'échelle** et **responsive**, relancer **par breakpoint** (`--width`) et lire un écart
-  comme « mauvais niveau choisi » **ou** « valeur Figma hors-échelle ».
+- **Vérification** (`tooling/verify-styles.mjs`) : **scale-aware** — le px Figma attendu est **snappé au
+  niveau d'échelle le plus proche** (le rendu CMS étant quantifié), donc un écart signale un **vrai**
+  problème de rendu (mauvais niveau posé), pas une valeur Figma hors-échelle. Responsive → relancer
+  **par breakpoint** (`--width` + `--bp`). `--no-scale` pour comparer au px brut.
 
 ## A — Blocs atomiques (catégories `content` + `global` — seules dispo pour une Page)
 

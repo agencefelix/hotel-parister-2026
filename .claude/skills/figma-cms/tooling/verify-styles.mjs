@@ -9,7 +9,9 @@
  * Vérifie : pour les TEXT — font-size/weight/letter-spacing/line-height/text-transform/color ;
  * pour les CONTENEURS auto-layout (FRAME à padding/gap non nul) — padding top/right/bottom/left
  * et `gap` (espacement entre enfants, mesuré géométriquement). Seuls les paddings ATTENDUS non nuls
- * sont vérifiés (un pad=0 Figma ≠ absence de padding CMS : gouttières Bootstrap).
+ * sont vérifiés (un pad=0 Figma ≠ absence de padding CMS : gouttières Bootstrap). SCALE-AWARE : le
+ * px Figma attendu est snappé au niveau de l'échelle `$margins` le plus proche (le rendu CMS étant
+ * quantifié) — évite les faux échecs sur une valeur Figma hors-échelle. `--no-scale` pour désactiver.
  *
  * Options :
  *   --map <map.json>       mapping explicite { "<nodeId>": "<sélecteur CSS>" } (prime sur le texte)
@@ -18,6 +20,9 @@
  *   --tol-color <n>        tolérance couleur par canal 0-255 (défaut 10)
  *   --tol-box <n>          tolérance padding de conteneur en px (défaut 2)
  *   --no-box               désactive la vérification des paddings (TEXT uniquement)
+ *   --scss <chemin>        variables.scss pour l'échelle de marges (défaut assets/scss/front/default/variables.scss)
+ *   --bp <clé>             breakpoint de réf de l'échelle (défaut "xxl" = desktop) — aligner avec --width
+ *   --no-scale             compare le padding/gap au px Figma BRUT (désactive le snap sur l'échelle)
  *   --width <n>            largeur viewport (défaut 1440) — relancer par breakpoint pour le responsive
  *   --strict-unmatched     échoue aussi si un token texte n'a AUCUN élément correspondant
  *   --only <substr>        ne vérifie que les tokens dont le texte contient <substr> (debug)
@@ -36,7 +41,7 @@ const args = process.argv.slice(2);
 const URL = args[0];
 const TOKENS_PATH = args[1];
 if (!URL || !TOKENS_PATH) {
-  console.error('Usage: node verify-styles.mjs <url> <figma-tokens.json> [--map m.json] [--tol-px 1] [--tol-lh 2] [--tol-color 10] [--tol-box 2] [--no-box] [--width 1440] [--strict-unmatched] [--only txt] [--out r.json]');
+  console.error('Usage: node verify-styles.mjs <url> <figma-tokens.json> [--map m.json] [--tol-px 1] [--tol-lh 2] [--tol-color 10] [--tol-box 2] [--no-box] [--scss v.scss] [--bp xxl] [--no-scale] [--width 1440] [--strict-unmatched] [--only txt] [--out r.json]');
   process.exit(2);
 }
 const opt = (name, def) => {
@@ -50,6 +55,9 @@ const TOL_LH = parseFloat(opt('--tol-lh', '2'));
 const TOL_COLOR = parseInt(opt('--tol-color', '10'), 10);
 const TOL_BOX = parseFloat(opt('--tol-box', '2'));
 const NO_BOX = flag('--no-box');
+const SCALE_SCSS = opt('--scss', 'assets/scss/front/default/variables.scss');
+const SCALE_BP = opt('--bp', 'xxl');
+const NO_SCALE = flag('--no-scale');
 const WIDTH = parseInt(opt('--width', '1440'), 10);
 const STRICT_UNMATCHED = flag('--strict-unmatched');
 const ONLY = opt('--only', null);
@@ -105,6 +113,31 @@ if (!NO_BOX) {
   }
   boxes = [...byText.values()];
 }
+
+// Échelle de marges (optionnelle) : rend la gate « scale-aware ». Le rendu CMS est QUANTIFIÉ sur
+// l'échelle $margins (niveaux), donc on snappe le px Figma attendu au niveau le plus proche (par axe)
+// avant comparaison — sinon une valeur Figma hors-échelle (ex. 80→niveau 90) ferait un faux échec.
+let scale = null;
+if (!NO_SCALE && !NO_BOX && fs.existsSync(SCALE_SCSS)) {
+  try {
+    const scss = fs.readFileSync(SCALE_SCSS, 'utf8');
+    const toPx = (v, u) => u === 'rem' ? parseFloat(v) * 16 : parseFloat(v);
+    const parseInner = (s) => {
+      const map = { 0: 0 };
+      for (const m of (s || '').matchAll(/'([a-z0-9]+)'\s*:\s*([\d.]+)(px|rem)/g)) map[m[1]] = toPx(m[2], m[3]);
+      return Object.values(map);
+    };
+    const block = scss.match(new RegExp(`'${SCALE_BP}'\\s*:\\s*\\(\\s*'x'\\s*:\\s*\\(([^)]*)\\)\\s*,\\s*'y'\\s*:\\s*\\(([^)]*)\\)`));
+    if (block) scale = { x: parseInner(block[1]), y: parseInner(block[2]) };
+  } catch { /* échelle indisponible → comparaison px brute */ }
+}
+// Snappe une valeur au niveau d'échelle le plus proche sur l'axe (ou la renvoie telle quelle).
+const snap = (axis, value) => {
+  if (!scale || !scale[axis]) return value;
+  let best = value, bestD = Infinity;
+  for (const lvl of scale[axis]) { const d = Math.abs(lvl - value); if (d < bestD) { bestD = d; best = lvl; } }
+  return best;
+};
 
 const browser = await puppeteer.launch({
   executablePath: CHROME,
@@ -272,15 +305,20 @@ for (const r of result.boxRows) {
     continue;
   }
   const checks = [];
+  // Attendu = px Figma SNAPPÉ au niveau d'échelle le plus proche (scale-aware) ; sinon px brut.
+  const fmtExp = (snapped, rawv) => snapped === rawv ? snapped + 'px' : `${snapped}px (≈Figma ${rawv})`;
+  const sideAxis = { top: 'y', bottom: 'y', left: 'x', right: 'x' };
   // Ne vérifier QUE les paddings attendus non nuls (un pad=0 côté Figma ne signifie pas absence de
   // padding côté CMS — gouttières Bootstrap → trop de faux positifs).
   for (const side of ['top', 'right', 'bottom', 'left']) {
     if (bx.pads[side] > 0) {
-      checks.push({ prop: 'padding-' + side, ok: near(bx.pads[side], r.pad[side], TOL_BOX), exp: bx.pads[side] + 'px', got: r.pad[side] + 'px' });
+      const exp = snap(sideAxis[side], bx.pads[side]);
+      checks.push({ prop: 'padding-' + side, ok: near(exp, r.pad[side], TOL_BOX), exp: fmtExp(exp, bx.pads[side]), got: r.pad[side] + 'px' });
     }
   }
   if (bx.gap > 0 && r.gap != null) {
-    checks.push({ prop: 'gap', ok: near(bx.gap, r.gap, TOL_BOX), exp: bx.gap + 'px', got: r.gap + 'px' });
+    const exp = snap(bx.mode === 'HORIZONTAL' ? 'x' : 'y', bx.gap);
+    checks.push({ prop: 'gap', ok: near(exp, r.gap, TOL_BOX), exp: fmtExp(exp, bx.gap), got: r.gap + 'px' });
   }
   if (checks.length === 0) {
     boxRows.push({ id: r.id, name: bx.name, text: bx.text.slice(0, 40), matched: true, how: r.how, checks, skipped: true });

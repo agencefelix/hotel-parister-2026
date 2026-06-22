@@ -8,7 +8,7 @@
  * et liste ce qu'il y a à reproduire (trigger → transition + durée + easing, source → cible).
  *
  * Usage (depuis la RACINE du projet) :
- *   node .claude/skills/figma-cms/tooling/prototype-interactions.mjs [--node 542:1592] [--file dump.json] [--out r.md] [--top 40]
+ *   node .claude/skills/figma-cms/tooling/prototype-interactions.mjs [--node 123:456] [--file dump.json] [--out r.md] [--top 40]
  *   - sans --file : fetch l'API (FIGMA_FILE_KEY/FIGMA_TOKEN du .env) ; --node limite à une page.
  *   - --file : lit un dump JSON déjà récupéré (offline / test).
  */

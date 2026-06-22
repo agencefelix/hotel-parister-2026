@@ -753,6 +753,12 @@ la marge voulue en SCSS, ou ajuster via l'utilitaire. Vérifier l'espacement ré
 ### Configurer `variables.scss` (tailles de titres, couleurs par fond `$elements`, boutons)
 Beaucoup de réglages globaux passent par `assets/scss/front/default/variables.scss` — **les configurer
 là plutôt que de surcharger bande par bande** :
+- **AVANT de styler — réconcilier l'échelle typo** : lancer
+  `node .claude/skills/figma-cms/tooling/reconcile-typography.mjs integration/figma-tokens.<page>.json`.
+  Il confronte les `fontSize` de la page à l'échelle du projet (`$font-size-h1..h6`, base, `.fz-*`…) et
+  **liste les tailles ORPHELINES** (aucun slot → snap silencieux sur 16px). Pour chaque orpheline
+  récurrente, **ajouter une entrée à `$font-sizes-app`** (→ classe `.fz-*`) ou une variable dédiée,
+  AVANT d'intégrer — sinon la taille sera perdue. (Les tailles « géantes » décoratives = cas one-off.)
 - **Tailles des titres** (`h1`–`h6` / échelle de titres) calées sur les `fontSize` relevés en dev mode.
 - **Couleur des différents éléments PAR COULEUR DE FOND** via la map **`$elements`** : définir, pour
   chaque fond (`bg-primary`, `bg-navy`, `bg-teal`, `bg-light`…), la couleur de `title`/`sub-title`/`text`/

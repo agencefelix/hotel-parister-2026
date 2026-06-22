@@ -35,7 +35,9 @@ fidèle, en autonomie. Règles **impératives** (détail dans `integration-promp
 1. **RELEVER les vraies valeurs en dev mode Figma, jamais approximer** : couleurs (`fills`→hex),
    `fontSize`, `fontWeight`, `letterSpacing`, `lineHeightPx`, `textCase`, **marges/paddings**. Outils :
    `tooling/figma-tokens.py` + `tooling/figma-export-tokens.py` → `integration/figma-styles.md` (résumé)
-   + `integration/figma-tokens.<page>.json` (exhaustif). Les **consulter avant de styler**.
+   + `integration/figma-tokens.<page>.json` (exhaustif). Les **consulter avant de styler**. Puis
+   `tooling/reconcile-typography.mjs integration/figma-tokens.<page>.json` pour **caler l'échelle SCSS**
+   (tailles orphelines → ajouter une `.fz-*`/variable AVANT d'intégrer, sinon snap silencieux sur 16px).
 2. **VÉRIFIER sur Chrome, en MESURANT** (pas « à l'œil ») : **GATE styles automatique**
    `tooling/verify-styles.mjs <url> integration/figma-tokens.<page>.json` qui mesure `getComputedStyle`
    et **échoue (exit 1)** si `font-size`/`font-weight`/`letter-spacing`/`line-height`/`text-transform`/

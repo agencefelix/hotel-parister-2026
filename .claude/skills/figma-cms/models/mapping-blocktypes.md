@@ -30,6 +30,8 @@ module, l'objet créé est l'**entité module** (Slider, Form, etc.), pas un Blo
 |---|---|---|
 | `[page]` | `Layout\Page` (+ `Layout\Layout`) | |
 | `[zone]` | `Layout\Zone` | `setFullSize()`, paddings |
+| `[section]` / `[zone\|section]` | `Layout\Zone` | **= une ZONE** rendue en `<section>` (champ `semantic: "section"` dans le JSON). 1 calque `[section]` = 1 zone (jamais un bloc/colonne). |
+| `[section\|N]` | `Layout\Zone` | **Ordre forcé** : le numéro fixe la position de la zone (`[section\|1]`, `[section\|2]`…). Sans numéro → ordre d'apparition dans Figma. Implémenté : `PageParser::zonePosition()` + tri stable. |
 | `[col]` | `Layout\Col` | `setSize()` = colonnes Bootstrap (1-12) |
 
 ## A — Blocs atomiques (catégories `content` + `global` — seules dispo pour une Page)
@@ -59,8 +61,36 @@ module, l'objet créé est l'**entité module** (Slider, Form, etc.), pas un Blo
 |---|---|---|
 | `[slider]` | `slider-view` | `Module\Slider\Slider` (+ `SliderMediaRelation`) |
 | `[gallery]` | `gallery-view` | Module Gallery |
-| `[catalog]` | `catalog-index` | `Module\Catalog` |
-| `[newscast]` | `newscast-index` (ou `newscast-teaser`) | `Module\Newscast` |
+| `[catalog]` / `[catalog\|index]` | `catalog-index` | `Module\Catalog` (grille/liste produits) |
+| `[newscast]` / `[newscast\|index]` | `newscast-index` | `Module\Newscast` (liste actus) |
+
+### Teasers (aperçu/carrousel d'un autre module)
+
+Un teaser se reconnaît au jeton **`*-teaser`**, où qu'il soit placé. Le parser route sur ce jeton
+**avant** le mapping `[slider]`/`[catalog]`/`[newscast]` générique (sinon un teaser retomberait en
+slider ou en index). Implémenté : `ConventionMapper::resolveTeaser()`.
+
+**Forme canonique** (à utiliser en maquette) : `[<domaine>|teaser|<layout>]` où `<layout>` =
+`slider|splide` (carrousel Splide) **ou** `list` (liste). Le 3ᵉ segment décide :
+
+| Préfixe canonique | Action slug | `template` | Entité module |
+|---|---|---|---|
+| `[catalog\|teaser\|slider\|splide]` | `catalog-teaser` | `slider` | `Module\Catalog\Teaser` |
+| `[catalog\|teaser\|list]` | `catalog-teaser` | `list` | `Module\Catalog\Teaser` |
+| `[newscast\|teaser\|slider\|splide]` | `newscast-teaser` | `slider` | `Module\Newscast\Teaser` |
+| `[newscast\|teaser\|list]` | `newscast-teaser` | `list` | `Module\Newscast\Teaser` |
+
+> **Résolution du template** (`ConventionMapper::teaserTemplate()`) : `slider`/`splide` → `slider`
+> (`splide` = la lib qui propulse le carrousel), `list` → `list` ; `list` l'emporte si les deux
+> apparaissent. Le `template` est exposé via `ParsedBlock::moduleTemplate`.
+>
+> **Le 4ᵉ segment `splide` est optionnel — c'est le défaut** : `[catalog|teaser|slider]` ≡
+> `[catalog|teaser|slider|splide]` → template `slider` (idem newscast). Autrement dit, un teaser en
+> `slider` est **par défaut un carrousel Splide**. N'utiliser `list` que pour forcer la liste.
+>
+> **Formes héritées encore acceptées** (tolérance, non recommandées) : `[catalog|teaser]`,
+> `[teaser|catalog-teaser]`, `[teaser|catalog]`, `[catalog-teaser]` (idem newscast, + `[slider|newscast-teaser]`).
+> `[teaser]` seul (sans domaine) est **ambigu** → bloc `unknown` avec note invitant à préciser.
 | `[portfolio]` | `portfolio-index` | `Module\Portfolio` |
 | `[form]` / `[contact]` | `form-view` | `Module\Form\Form` |
 | `[tab]` | `tab-view` | Module Tab |

@@ -50,7 +50,16 @@ final class ConventionMapper
         'map' => ['map-view', 'App\\Entity\\Module\\Map\\Map'],
     ];
 
-    private const array STRUCTURAL = ['page', 'zone', 'col'];
+    /**
+     * Teaser modules (a carousel/preview of another module's items): the *-teaser token
+     * => [Action slug, Teaser entity]. Distinct from the `-index` listing modules above.
+     */
+    private const array TEASERS = [
+        'catalog-teaser' => ['catalog-teaser', 'App\\Entity\\Module\\Catalog\\Teaser'],
+        'newscast-teaser' => ['newscast-teaser', 'App\\Entity\\Module\\Newscast\\Teaser'],
+    ];
+
+    private const array STRUCTURAL = ['page', 'zone', 'section', 'col'];
     private const array EXCLUDED = ['nav', 'footer', 'newsletter', 'socialwall'];
 
     /** Slider variant => Slider::template (drives prePersist). Other variants are modifiers/id. */
@@ -60,6 +69,18 @@ final class ConventionMapper
         'banner' => 'banner',
         'home' => 'main-home',
         'two-columns' => 'two-columns',
+    ];
+
+    /**
+     * Teaser layout variant => BaseTeaser::template. The canonical form is
+     * `[catalog|teaser|slider|splide]` (a Splide-powered slider) or `[catalog|teaser|list]`
+     * (a plain list); `list` stands in for `slider` at the layout position. `splide` is the
+     * carousel library that drives the `slider` template, so both resolve to `slider`.
+     */
+    private const array TEASER_TEMPLATES = [
+        'slider' => 'slider',
+        'splide' => 'slider',
+        'list' => 'list',
     ];
 
     /**
@@ -107,6 +128,8 @@ final class ConventionMapper
     {
         return isset(self::ATOMS[$type])
             || isset(self::MODULES[$type])
+            || isset(self::TEASERS[$type])
+            || 'teaser' === $type
             || $this->isStructural($type)
             || $this->isExcluded($type);
     }
@@ -114,6 +137,18 @@ final class ConventionMapper
     public function isStructural(string $type): bool
     {
         return in_array($type, self::STRUCTURAL, true);
+    }
+
+    /**
+     * Whether a tag introduces a CMS zone (full-width band).
+     *
+     * Per the naming convention, both `[zone]` and `[section]` map 1:1 to a CMS zone
+     * (`addZone()`); `[section]` (or the `section` variant of `[zone]`) additionally
+     * asks for the zone to be rendered as a semantic `<section>`.
+     */
+    public function isZoneTag(string $type): bool
+    {
+        return 'zone' === $type || 'section' === $type;
     }
 
     public function isExcluded(string $type): bool
@@ -130,6 +165,17 @@ final class ConventionMapper
     {
         $id = $this->extractId($variants);
 
+        // Teaser modules: detected by the *-teaser token wherever it sits — works for
+        // [teaser|catalog-teaser], [slider|newscast-teaser], [catalog-teaser] and the
+        // [teaser|catalog] / [teaser|newscast] shorthand. Runs first so a teaser never
+        // collapses into a generic [slider].
+        if (($teaser = $this->resolveTeaser($type, $variants)) !== null) {
+            [$action, $entity] = $teaser;
+            $template = $this->teaserTemplate($variants);
+
+            return new ParsedBlock($figmaName, 'module', moduleAction: $action, moduleEntity: $entity, variants: $variants, id: $id, moduleTemplate: $template);
+        }
+
         if (isset(self::ATOMS[$type])) {
             return new ParsedBlock($figmaName, 'atom', blockTypeSlug: self::ATOMS[$type], variants: $variants, id: $id);
         }
@@ -142,6 +188,11 @@ final class ConventionMapper
             return new ParsedBlock($figmaName, 'module', moduleAction: $action, moduleEntity: $entity, note: $note, variants: $variants, id: $id, moduleTemplate: $template);
         }
 
+        // Bare [teaser] without a kind: ask which teaser it is.
+        if ('teaser' === $type) {
+            return new ParsedBlock($figmaName, 'unknown', note: 'préfixe [teaser] ambigu — préciser [teaser|catalog-teaser] ou [teaser|newscast-teaser]', variants: $variants, id: $id);
+        }
+
         $note = sprintf('préfixe [%s] non mappé', $type);
         // Suggest a correction on the type, or on its hyphen-head (e.g. `silder-home-1` → `slider`).
         $head = str_contains($type, '-') ? explode('-', $type, 2)[0] : $type;
@@ -152,6 +203,45 @@ final class ConventionMapper
         }
 
         return new ParsedBlock($figmaName, 'unknown', note: $note, variants: $variants, id: $id);
+    }
+
+    /**
+     * Resolves a teaser module from a tag's type + variants, accepting every documented form:
+     *  - `[catalog|teaser]` / `[newscast|teaser]` — domain head + `teaser` variant ;
+     *  - `[teaser|catalog-teaser]` / `[slider|newscast-teaser]` — explicit `*-teaser` token ;
+     *  - `[catalog-teaser]` direct ; `[teaser|catalog]` / `[teaser|newscast]` shorthand.
+     *
+     * Runs before the generic [slider]/[catalog]/[newscast] mapping so a teaser never
+     * collapses into a plain slider or a listing index.
+     *
+     * @param list<string> $variants
+     *
+     * @return array{0: string, 1: string}|null [Action slug, Teaser entity]
+     */
+    private function resolveTeaser(string $type, array $variants): ?array
+    {
+        // Domain head + `teaser` variant: [catalog|teaser], [newscast|teaser].
+        if (in_array('teaser', $variants, true) && isset(self::TEASERS[$type.'-teaser'])) {
+            return self::TEASERS[$type.'-teaser'];
+        }
+
+        // Explicit `*-teaser` token anywhere: [teaser|catalog-teaser], [slider|newscast-teaser], [catalog-teaser].
+        foreach (array_merge([$type], $variants) as $token) {
+            if (isset(self::TEASERS[$token])) {
+                return self::TEASERS[$token];
+            }
+        }
+
+        // Shorthand under a [teaser] head: [teaser|catalog], [teaser|newscast].
+        if ('teaser' === $type) {
+            foreach ($variants as $token) {
+                if (isset(self::TEASERS[$token.'-teaser'])) {
+                    return self::TEASERS[$token.'-teaser'];
+                }
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -205,12 +295,35 @@ final class ConventionMapper
     }
 
     /**
+     * Resolves a teaser layout variant to its BaseTeaser::template, if any.
+     *
+     * Canonical forms: `[catalog|teaser|slider|splide]` → `slider`, `[catalog|teaser|list]` → `list`
+     * (idem newscast). `list` takes precedence over the slider layout when both are present.
+     *
+     * @param list<string> $variants
+     */
+    private function teaserTemplate(array $variants): ?string
+    {
+        if (in_array('list', $variants, true)) {
+            return self::TEASER_TEMPLATES['list'];
+        }
+
+        foreach ($variants as $v) {
+            if (isset(self::TEASER_TEMPLATES[$v])) {
+                return self::TEASER_TEMPLATES[$v];
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Suggests the closest known type for an unknown prefix (e.g. `silder` → `slider`),
      * to surface a typo without silently accepting it.
      */
     private function closestType(string $type): ?string
     {
-        $known = array_merge(array_keys(self::ATOMS), array_keys(self::MODULES), self::STRUCTURAL, self::EXCLUDED, ['slide']);
+        $known = array_merge(array_keys(self::ATOMS), array_keys(self::MODULES), array_keys(self::TEASERS), self::STRUCTURAL, self::EXCLUDED, ['teaser', 'slide']);
         $best = null;
         $bestDistance = \PHP_INT_MAX;
 

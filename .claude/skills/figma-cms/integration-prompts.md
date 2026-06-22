@@ -162,6 +162,17 @@ pour **chaque `[page|…]`** → `figma:parse-page` (=> `pages/<slug>.json`, `sc
 `media/<slug>/`) ; `figma:capture-layout` (=> `screenshots/layout/`) ; interactions proto =>
 `interactions/`. **Toutes** les pages doivent avoir leurs captures.
 
+**Phase 2bis — GATE validation des screenshots (BLOQUANT, avant toute intégration).** Une fois le
+dry-run d'une page produit, **demander à l'utilisateur de vérifier et valider les screenshots** de
+cette page **avant** d'attaquer l'intégration (fixtures + front). Message exact à poser :
+> **« Veuillez vérifier et valider les screenshots pour continuer l'intégration. »**
+- **Validation PAR PAGE** (`screenshots/<slug>/`) : on n'intègre **que** les pages validées.
+- **Pas de validation = pas d'intégration** : tant que les screenshots d'une page ne sont pas
+  validés, ne pas générer ses fixtures ni son front. Ex. `[page|home]` validée mais `[page|cms]`
+  non validée → on intègre la home, on ne touche pas à `cms`.
+- Indiquer à l'utilisateur **où regarder** (dossier `screenshots/<slug>/` + liste des bandes) et
+  **attendre sa réponse** avant d'enchaîner sur les phases 3→8.
+
 **Phase 3 — Config, URLs, SEO** (§ « Configuration globale ») : crawler la prod → `config.json`
 (couleurs **Figma**, reste **prod**, lat/long via **Nominatim**), `prod-urls.json`, `seo.json`
 (home par locale mini). **Reporter** dans **`bin/data/config/default.yaml`** (identité, locales,

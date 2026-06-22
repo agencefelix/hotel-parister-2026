@@ -42,6 +42,7 @@ final class PageTreeExporter
             'label' => $zone->label,
             'screenshot' => $zone->screenshot,
             'deduced' => $zone->deduced,
+            'semantic' => $zone->semantic,
             'fullSize' => $zone->fullSize,
             'colToRight' => $zone->colToRight,
             'background' => $zone->background,

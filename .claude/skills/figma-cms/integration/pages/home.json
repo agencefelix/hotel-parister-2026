@@ -2,14 +2,15 @@
     "page": {
         "slug": "home",
         "adminName": "Home",
-        "zonesDeduced": true
+        "zonesDeduced": false
     },
     "zones": [
         {
-            "label": "bande 1 (déduite)",
+            "label": "[section|1]",
             "screenshot": "section-home-1.png",
-            "deduced": true,
-            "fullSize": true,
+            "deduced": false,
+            "semantic": "section",
+            "fullSize": false,
             "colToRight": false,
             "background": null,
             "cols": [
@@ -62,10 +63,39 @@
             ]
         },
         {
-            "label": "bande 2 (déduite)",
+            "label": "[section|2]",
             "screenshot": "section-home-2.png",
-            "deduced": true,
-            "fullSize": true,
+            "deduced": false,
+            "semantic": "section",
+            "fullSize": false,
+            "colToRight": false,
+            "background": "#b48608",
+            "cols": [
+                {
+                    "size": 12,
+                    "deduced": true,
+                    "untaggedCount": 0,
+                    "blocks": [
+                        {
+                            "figmaName": "[alert]",
+                            "kind": "atom",
+                            "blockTypeSlug": "alert",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "alert",
+                                "fixture": "addBlock($col, 'alert')"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "[section|3]",
+            "screenshot": "section-home-3.png",
+            "deduced": false,
+            "semantic": "section",
+            "fullSize": false,
             "colToRight": false,
             "background": "#f4f0f1",
             "cols": [
@@ -125,10 +155,11 @@
             ]
         },
         {
-            "label": "bande 3 (déduite)",
-            "screenshot": "section-home-3.png",
-            "deduced": true,
-            "fullSize": true,
+            "label": "[section|4]",
+            "screenshot": "section-home-4.png",
+            "deduced": false,
+            "semantic": "section",
+            "fullSize": false,
             "colToRight": false,
             "background": null,
             "cols": [
@@ -138,23 +169,24 @@
                     "untaggedCount": 0,
                     "blocks": [
                         {
-                            "figmaName": "[slider|id:home-1]",
+                            "figmaName": "[slider|bootstrap]",
                             "kind": "module",
                             "moduleAction": "slider-view",
                             "moduleEntity": "App\\Entity\\Module\\Slider\\Slider",
-                            "id": "home-1",
+                            "moduleTemplate": "bootstrap",
                             "variants": [
-                                "id:home-1"
+                                "bootstrap"
                             ],
                             "cms": {
                                 "entity": "App\\Entity\\Layout\\Block + App\\Entity\\Module\\Slider\\Slider",
                                 "action": "slider-view",
+                                "template": "bootstrap",
                                 "fixture": "addBlock($col, 'core-action', 'slider-view', $entity->getId())"
                             },
                             "media": [
                                 {
                                     "figmaNodeId": "I542:1649;234:418",
-                                    "image": "parister-13-5.jpg",
+                                    "image": "media-I542-1649;234-418.jpg",
                                     "imageRef": "b0bb43c7ae05567705bdc940c1a0dc185b6153ef",
                                     "width": 1461,
                                     "format": "jpg"
@@ -168,21 +200,6 @@
                     "deduced": true,
                     "untaggedCount": 0,
                     "blocks": [
-                        {
-                            "figmaName": "Intimiste, contemporain et chaleureux",
-                            "kind": "atom",
-                            "blockTypeSlug": "title",
-                            "variants": [
-                                "h6"
-                            ],
-                            "text": "Intimiste, contemporain et chaleureux",
-                            "cms": {
-                                "entity": "App\\Entity\\Layout\\Block",
-                                "blockType": "title",
-                                "fixture": "addBlock($col, 'title')"
-                            },
-                            "note": "titre h6 déduit (16 px)"
-                        },
                         {
                             "figmaName": "CTA",
                             "kind": "atom",
@@ -200,69 +217,21 @@
             ]
         },
         {
-            "label": "bande 4 (déduite)",
-            "screenshot": "section-home-4.png",
-            "deduced": true,
-            "fullSize": true,
+            "label": "[section|5]",
+            "screenshot": "section-home-5.png",
+            "deduced": false,
+            "semantic": "section",
+            "fullSize": false,
             "colToRight": false,
             "background": "#001e56",
             "cols": [
                 {
-                    "size": 6,
+                    "size": 12,
                     "deduced": true,
                     "untaggedCount": 1,
                     "blocks": [
                         {
-                            "figmaName": "Chambres 45",
-                            "kind": "atom",
-                            "blockTypeSlug": "title",
-                            "variants": [
-                                "h6"
-                            ],
-                            "text": "Chambres 45",
-                            "cms": {
-                                "entity": "App\\Entity\\Layout\\Block",
-                                "blockType": "title",
-                                "fixture": "addBlock($col, 'title')"
-                            },
-                            "note": "titre h6 déduit (24 px)"
-                        },
-                        {
-                            "figmaName": "Chambres, suites, offres et disponibilités.Lorem ipsum dolor sit amet del cironcstum del doloros del ametis. tés.Lorem ipsum dolor sit amet del cironcstum del doloros del ametis.",
-                            "kind": "atom",
-                            "blockTypeSlug": "title",
-                            "variants": [
-                                "h6"
-                            ],
-                            "text": "Chambres, suites, offres et disponibilités.Lorem ipsum dolor sit amet del cironcstum del doloros del ametis. tés.Lorem ipsum dolor sit amet del cironcstum del doloros del ametis.",
-                            "cms": {
-                                "entity": "App\\Entity\\Layout\\Block",
-                                "blockType": "title",
-                                "fixture": "addBlock($col, 'title')"
-                            },
-                            "note": "titre h6 déduit (16 px)"
-                        },
-                        {
-                            "figmaName": "CTA",
-                            "kind": "atom",
-                            "blockTypeSlug": "link",
-                            "text": "Découvrir les chambres",
-                            "cms": {
-                                "entity": "App\\Entity\\Layout\\Block",
-                                "blockType": "link",
-                                "fixture": "addBlock($col, 'link')"
-                            },
-                            "note": "CTA déduit (nom de calque)"
-                        }
-                    ]
-                },
-                {
-                    "size": 6,
-                    "deduced": true,
-                    "untaggedCount": 0,
-                    "blocks": [
-                        {
-                            "figmaName": "IMG_2829 1",
+                            "figmaName": "group",
                             "kind": "atom",
                             "blockTypeSlug": "media",
                             "cms": {
@@ -285,18 +254,109 @@
             ]
         },
         {
-            "label": "bande 5 (déduite)",
-            "screenshot": "section-home-5.png",
-            "deduced": true,
-            "fullSize": true,
+            "label": "[section|6]",
+            "screenshot": "section-home-6.png",
+            "deduced": false,
+            "semantic": "section",
+            "fullSize": false,
             "colToRight": false,
-            "background": "#001e56",
+            "background": "#f4f0f1",
             "cols": [
                 {
-                    "size": 6,
+                    "size": 12,
                     "deduced": true,
                     "untaggedCount": 0,
                     "blocks": [
+                        {
+                            "figmaName": "[catalog|teaser|slider]",
+                            "kind": "module",
+                            "moduleAction": "catalog-teaser",
+                            "moduleEntity": "App\\Entity\\Module\\Catalog\\Teaser",
+                            "moduleTemplate": "slider",
+                            "variants": [
+                                "teaser",
+                                "slider"
+                            ],
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block + App\\Entity\\Module\\Catalog\\Teaser",
+                                "action": "catalog-teaser",
+                                "template": "slider",
+                                "fixture": "addBlock($col, 'core-action', 'catalog-teaser', $entity->getId())"
+                            },
+                            "media": [
+                                {
+                                    "figmaNodeId": "I542:1602;410:4684",
+                                    "image": "chambre-suite-sdb-6.png",
+                                    "imageRef": "3d7edc5410a5786b6c8af2bbd94fadc610c918b8",
+                                    "width": 400,
+                                    "format": "png"
+                                },
+                                {
+                                    "figmaNodeId": "I542:1603;410:4684",
+                                    "image": "chambre-suite-sdb-6.png",
+                                    "imageRef": "3d7edc5410a5786b6c8af2bbd94fadc610c918b8",
+                                    "width": 400,
+                                    "format": "png"
+                                },
+                                {
+                                    "figmaNodeId": "I542:1604;410:4684",
+                                    "image": "chambre-suite-sdb-6.png",
+                                    "imageRef": "bd31a3c58f3845832f165e86fe114c3db7d9b2e7",
+                                    "width": 400,
+                                    "format": "png"
+                                },
+                                {
+                                    "figmaNodeId": "I542:1605;410:4684",
+                                    "image": "chambre-suite-sdb-6.png",
+                                    "imageRef": "6490d3667e80c74b85606b1e42081de799cf2c6d",
+                                    "width": 400,
+                                    "format": "png"
+                                },
+                                {
+                                    "figmaNodeId": "I542:1606;410:4684",
+                                    "image": "chambre-suite-sdb-6.png",
+                                    "imageRef": "be5d1f337d390f74dd211cefda5b0e3a47a5ed06",
+                                    "width": 400,
+                                    "format": "png"
+                                },
+                                {
+                                    "figmaNodeId": "I542:1607;410:4684",
+                                    "image": "chambre-suite-sdb-6.png",
+                                    "imageRef": "f12c1bea380890b10b323184a79c16d66c7c2da3",
+                                    "width": 400,
+                                    "format": "png"
+                                },
+                                {
+                                    "figmaNodeId": "I542:1608;410:4684",
+                                    "image": "chambre-suite-sdb-6.png",
+                                    "imageRef": "abd56fce351bfc93d9f884e9933992ac7c3120b3",
+                                    "width": 400,
+                                    "format": "png"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "size": 8,
+                    "deduced": true,
+                    "untaggedCount": 0,
+                    "blocks": [
+                        {
+                            "figmaName": "Chambres 45",
+                            "kind": "atom",
+                            "blockTypeSlug": "title",
+                            "variants": [
+                                "h6"
+                            ],
+                            "text": "Chambres 45",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "title",
+                                "fixture": "addBlock($col, 'title')"
+                            },
+                            "note": "titre h6 déduit (24 px)"
+                        },
                         {
                             "figmaName": "CTA Box",
                             "kind": "atom",
@@ -311,7 +371,7 @@
                     ]
                 },
                 {
-                    "size": 6,
+                    "size": 4,
                     "deduced": true,
                     "untaggedCount": 0,
                     "blocks": [
@@ -331,20 +391,40 @@
             ]
         },
         {
-            "label": "bande 6 (déduite)",
-            "screenshot": "section-home-6.png",
-            "deduced": true,
-            "fullSize": true,
+            "label": "[section|7]",
+            "screenshot": "section-home-7.png",
+            "deduced": false,
+            "semantic": "section",
+            "fullSize": false,
             "colToRight": false,
             "background": "#f4f0f1",
             "cols": [
                 {
-                    "size": 12,
+                    "size": 6,
+                    "deduced": true,
+                    "untaggedCount": 1,
+                    "blocks": [
+                        {
+                            "figmaName": "CTA",
+                            "kind": "atom",
+                            "blockTypeSlug": "link",
+                            "text": "Voir le menu",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "link",
+                                "fixture": "addBlock($col, 'link')"
+                            },
+                            "note": "CTA déduit (nom de calque)"
+                        }
+                    ]
+                },
+                {
+                    "size": 6,
                     "deduced": true,
                     "untaggedCount": 0,
                     "blocks": [
                         {
-                            "figmaName": "Frame 43",
+                            "figmaName": "Frame 42",
                             "kind": "atom",
                             "blockTypeSlug": "media",
                             "cms": {
@@ -361,7 +441,25 @@
                                     "format": "jpg"
                                 }
                             ]
-                        },
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "[section|8]",
+            "screenshot": "section-home-8.png",
+            "deduced": false,
+            "semantic": "section",
+            "fullSize": false,
+            "colToRight": false,
+            "background": "#f4f0f1",
+            "cols": [
+                {
+                    "size": 6,
+                    "deduced": true,
+                    "untaggedCount": 0,
+                    "blocks": [
                         {
                             "figmaName": "IMG_2829 4",
                             "kind": "atom",
@@ -380,22 +478,14 @@
                                     "format": "jpg"
                                 }
                             ]
-                        },
-                        {
-                            "figmaName": "Chambres 12",
-                            "kind": "atom",
-                            "blockTypeSlug": "title",
-                            "variants": [
-                                "h6"
-                            ],
-                            "text": "Chambres 12",
-                            "cms": {
-                                "entity": "App\\Entity\\Layout\\Block",
-                                "blockType": "title",
-                                "fixture": "addBlock($col, 'title')"
-                            },
-                            "note": "titre h6 déduit (24 px)"
-                        },
+                        }
+                    ]
+                },
+                {
+                    "size": 6,
+                    "deduced": true,
+                    "untaggedCount": 0,
+                    "blocks": [
                         {
                             "figmaName": "IMG_2829 3",
                             "kind": "atom",
@@ -420,12 +510,13 @@
             ]
         },
         {
-            "label": "bande 7 (déduite)",
-            "screenshot": "section-home-7.png",
-            "deduced": true,
-            "fullSize": true,
+            "label": "[section|9]",
+            "screenshot": "section-home-9.png",
+            "deduced": false,
+            "semantic": "section",
+            "fullSize": false,
             "colToRight": false,
-            "background": "#8fb3b1",
+            "background": "#f4f0f1",
             "cols": [
                 {
                     "size": 6,
@@ -462,12 +553,13 @@
             ]
         },
         {
-            "label": "bande 8 (déduite)",
-            "screenshot": "section-home-8.png",
-            "deduced": true,
-            "fullSize": true,
+            "label": "[section|10]",
+            "screenshot": "section-home-10.png",
+            "deduced": false,
+            "semantic": "section",
+            "fullSize": false,
             "colToRight": true,
-            "background": "#8fb3b1",
+            "background": "#f4f0f1",
             "cols": [
                 {
                     "size": 12,
@@ -475,7 +567,7 @@
                     "untaggedCount": 0,
                     "blocks": [
                         {
-                            "figmaName": "Carrousel déduit (débordant à droite)",
+                            "figmaName": "[slider|splide]",
                             "kind": "module",
                             "moduleAction": "slider-view",
                             "moduleEntity": "App\\Entity\\Module\\Slider\\Slider",
@@ -489,7 +581,6 @@
                                 "template": "splide",
                                 "fixture": "addBlock($col, 'core-action', 'slider-view', $entity->getId())"
                             },
-                            "note": "Slider|splide déduit (zone croppée à droite, ni teaser actu ni teaser produit) — paddingRight pe-0",
                             "media": [
                                 {
                                     "figmaNodeId": "I542:1783;410:4684",
@@ -522,14 +613,21 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "size": 12,
+                    "deduced": true,
+                    "untaggedCount": 1,
+                    "blocks": []
                 }
             ]
         },
         {
-            "label": "bande 9 (déduite)",
-            "screenshot": "section-home-9.png",
-            "deduced": true,
-            "fullSize": true,
+            "label": "[section|11]",
+            "screenshot": "section-home-11.png",
+            "deduced": false,
+            "semantic": "section",
+            "fullSize": false,
             "colToRight": false,
             "background": null,
             "cols": [
@@ -539,32 +637,41 @@
                     "untaggedCount": 0,
                     "blocks": [
                         {
-                            "figmaName": "Group 55",
+                            "figmaName": "pour vos Séminaires, réunions, évenements",
                             "kind": "atom",
-                            "blockTypeSlug": "media",
+                            "blockTypeSlug": "title",
+                            "variants": [
+                                "h6"
+                            ],
+                            "text": "Pour vos Séminaires, réunions, évenements",
                             "cms": {
                                 "entity": "App\\Entity\\Layout\\Block",
-                                "blockType": "media",
-                                "fixture": "addBlock($col, 'media')"
+                                "blockType": "title",
+                                "fixture": "addBlock($col, 'title')"
                             },
-                            "media": [
-                                {
-                                    "figmaNodeId": "542:1636",
-                                    "image": "parister-13-4.jpg",
-                                    "imageRef": "a3a7d25a24a03bd6e307d55b3f7552e6ddada086",
-                                    "width": 1440,
-                                    "format": "jpg"
-                                }
-                            ]
+                            "note": "titre h6 déduit (16 px)"
+                        },
+                        {
+                            "figmaName": "CTA",
+                            "kind": "atom",
+                            "blockTypeSlug": "link",
+                            "text": "Organiser un évènement",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "link",
+                                "fixture": "addBlock($col, 'link')"
+                            },
+                            "note": "CTA déduit (nom de calque)"
                         }
                     ]
                 }
             ]
         },
         {
-            "label": "bande 10 (déduite)",
-            "screenshot": "section-home-10.png",
-            "deduced": true,
+            "label": "[section|12]",
+            "screenshot": "section-home-12.png",
+            "deduced": false,
+            "semantic": "section",
             "fullSize": false,
             "colToRight": false,
             "background": "#f4f0f1",
@@ -592,21 +699,6 @@
                                     "format": "jpg"
                                 }
                             ]
-                        },
-                        {
-                            "figmaName": "derniers événements",
-                            "kind": "atom",
-                            "blockTypeSlug": "title",
-                            "variants": [
-                                "h6"
-                            ],
-                            "text": "Derniers événements",
-                            "cms": {
-                                "entity": "App\\Entity\\Layout\\Block",
-                                "blockType": "title",
-                                "fixture": "addBlock($col, 'title')"
-                            },
-                            "note": "titre h6 déduit (24 px)"
                         }
                     ]
                 },
@@ -677,9 +769,10 @@
             ]
         },
         {
-            "label": "bande 11 (déduite, teaser croppé à droite)",
-            "screenshot": "section-home-11.png",
-            "deduced": true,
+            "label": "[section|13]",
+            "screenshot": "section-home-13.png",
+            "deduced": false,
+            "semantic": "section",
             "fullSize": false,
             "colToRight": true,
             "background": "#f4f0f1",
@@ -690,21 +783,22 @@
                     "untaggedCount": 0,
                     "blocks": [
                         {
-                            "figmaName": "Carrousel déduit (débordant à droite)",
+                            "figmaName": "[newscast|teaser|slider|splide]",
                             "kind": "module",
-                            "moduleAction": "slider-view",
-                            "moduleEntity": "App\\Entity\\Module\\Slider\\Slider",
-                            "moduleTemplate": "splide",
+                            "moduleAction": "newscast-teaser",
+                            "moduleEntity": "App\\Entity\\Module\\Newscast\\Teaser",
+                            "moduleTemplate": "slider",
                             "variants": [
+                                "teaser",
+                                "slider",
                                 "splide"
                             ],
                             "cms": {
-                                "entity": "App\\Entity\\Layout\\Block + App\\Entity\\Module\\Slider\\Slider",
-                                "action": "slider-view",
-                                "template": "splide",
-                                "fixture": "addBlock($col, 'core-action', 'slider-view', $entity->getId())"
+                                "entity": "App\\Entity\\Layout\\Block + App\\Entity\\Module\\Newscast\\Teaser",
+                                "action": "newscast-teaser",
+                                "template": "slider",
+                                "fixture": "addBlock($col, 'core-action', 'newscast-teaser', $entity->getId())"
                             },
-                            "note": "Slider|splide déduit (zone croppée à droite, ni teaser actu ni teaser produit) — paddingRight pe-0",
                             "media": [
                                 {
                                     "figmaNodeId": "I542:1623;30:878",
@@ -728,14 +822,14 @@
                                     "format": "jpg"
                                 },
                                 {
-                                    "figmaNodeId": "I542:1626;30:878",
+                                    "figmaNodeId": "I542:1627;30:878",
                                     "image": "three-boys-huang-xiaoliang-1.jpg",
                                     "imageRef": "ea1282c21963b43b67ee51f249790b435b62e1ac",
                                     "width": 290,
                                     "format": "jpg"
                                 },
                                 {
-                                    "figmaNodeId": "I542:1627;30:878",
+                                    "figmaNodeId": "I542:1626;30:878",
                                     "image": "three-boys-huang-xiaoliang-1.jpg",
                                     "imageRef": "ea1282c21963b43b67ee51f249790b435b62e1ac",
                                     "width": 290,
@@ -744,18 +838,37 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "size": 12,
+                    "deduced": true,
+                    "untaggedCount": 1,
+                    "blocks": [
+                        {
+                            "figmaName": "derniers événements",
+                            "kind": "atom",
+                            "blockTypeSlug": "title",
+                            "variants": [
+                                "h6"
+                            ],
+                            "text": "Derniers événements",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "title",
+                                "fixture": "addBlock($col, 'title')"
+                            },
+                            "note": "titre h6 déduit (24 px)"
+                        }
+                    ]
                 }
             ]
         }
     ],
     "excluded": [
         "[socialwall] [socialwall]",
+        "[newsletter] [newsletter]",
         "[footer] [footer]",
-        "[nav] [nav]",
-        "[auto:newsletter] newsletter"
+        "[nav] [nav]"
     ],
-    "warnings": [
-        "Éléments de layout détectés et exclus de la page (non taggés) : newsletter. À tagger dans la maquette pour fiabiliser.",
-        "Aucun tag [zone] : zones déduites de la géométrie (fonds pleine largeur). Compte indicatif."
-    ]
+    "warnings": []
 }

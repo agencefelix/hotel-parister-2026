@@ -1,0 +1,37 @@
+{
+  "skill_name": "figma-cms",
+  "evals": [
+    {
+      "id": 0,
+      "name": "kickoff-no-info",
+      "prompt": "Je veux intégrer la maquette Figma de la page d'accueil dans le CMS du projet. Lance le process d'intégration Figma → CMS.",
+      "expected_output": "L'agent pose D'ABORD les 3 questions de lancement (URL de prod, URL du proto Figma, copier-coller des prompts/maquette) et s'arrête tant qu'il n'a pas de réponse. Il mentionne qu'il découvrira les pages via les calques [page|…] (FIGMA_FILE_KEY dans .env) et qu'il consultera la convention de nommage en ligne. Il n'invente NI URL de prod, NI node-ids, NI structure.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 1,
+      "name": "kickoff-figma-url",
+      "prompt": "Intègre cette maquette : https://www.figma.com/design/abc123XYZ/Parister?node-id=542-1600 — parse la page et prépare les fixtures.",
+      "expected_output": "Malgré l'URL et le node-id fournis, l'agent applique le contrat : il pose les 3 questions (prod, proto, prompts) avant d'agir, découvre les pages via [page|…] depuis FIGMA_FILE_KEY (ne se fie PAS au node-id collé comme point de départ), prévoit de fetch la doc de nommage en ligne, et ne suppose ni la prod ni la structure.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 2,
+      "name": "fixtures-phrasing",
+      "prompt": "Génère les fixtures depuis Figma pour reconstruire le site sans dev.",
+      "expected_output": "L'agent reconnaît le process complet : il pose les 3 questions de lancement, puis décrit/suit les phases du playbook (Phase 0 installer l'outillage depuis le skill, dry-run par page, config, fixtures pages/menus/produits, traductions). Il ne produit pas de fixtures factices sans dry-run préalable et ne saute pas l'installation de l'outillage.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 3,
+      "name": "parser-dryrun",
+      "prompt": "Le fichier Figma est déjà configuré dans .env (FIGMA_FILE_KEY/FIGMA_TOKEN). Sans me poser de question et sans toucher à la base ni au build, fais UNIQUEMENT le dry-run de la page home : découvre le calque [page|…] de la home, lance figma:parse-page, et montre-moi l'arbre CMS produit (zones / colonnes / blocs).",
+      "expected_output": "L'agent installe l'outillage depuis le skill si nécessaire (cp -r .claude/skills/figma-cms/tooling/src/. src/), exécute figma:parse-page sur la home découverte via [page|…], et produit un arbre CMS : un pages/home.json avec une liste de zones (1 [section] Figma = 1 zone), des colonnes (grille Bootstrap 12), des blocs portant chacun un champ cms, plus des captures de bandes et des médias exportés. Il n'écrit rien en base et ne lance pas de build.",
+      "files": [],
+      "assertions": []
+    }
+  ]
+}

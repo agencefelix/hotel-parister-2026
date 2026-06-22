@@ -102,8 +102,23 @@ final class PageParser
         $rootFill = $this->nodeFill($doc);
         $pageBackground = ($rootFill !== null && $rootFill['kind'] === 'solid') ? $rootFill['value'] : null;
 
-        $taggedZones = array_values(array_filter($content, fn (array $c) => $this->tokenType($c) === 'zone'));
+        // A zone is introduced by [zone] OR [section] (both = one CMS zone, 1:1 with the band).
+        // Descend through untagged wrapper frames/groups so nested [section]/[zone] tags
+        // (e.g. grouped under a "Group sections" frame) are surfaced — not only top-level ones.
+        $taggedZones = $this->collectZoneNodes($content);
         $zonesDeduced = $taggedZones === [];
+
+        // Explicit ordering: [section|N] forces the slot; sections without a number keep
+        // their document order (the number defaults to the document index). Stable sort
+        // so equal keys never shuffle.
+        if (!$zonesDeduced) {
+            $indexed = [];
+            foreach ($taggedZones as $i => $node) {
+                $indexed[] = ['node' => $node, 'pos' => $this->zonePosition($node, $i), 'i' => $i];
+            }
+            usort($indexed, static fn (array $a, array $b): int => [$a['pos'], $a['i']] <=> [$b['pos'], $b['i']]);
+            $taggedZones = array_map(static fn (array $e): array => $e['node'], $indexed);
+        }
 
         if (!$zonesDeduced) {
             $zones = [];
@@ -472,6 +487,15 @@ final class PageParser
      */
     private function buildZone(array $node, float $pageWidth, string $slug, int $position, ?string $pageBackground = null): ParsedZone
     {
+        // Semantic <section> when tagged [section] or [zone|section].
+        $token = $this->mapper->extract($node['name'] ?? '');
+        $type = $token['type'] ?? '';
+        $variants = $token['variants'] ?? [];
+        $semantic = ('section' === $type || in_array('section', $variants, true)) ? 'section' : null;
+
+        // Honour the explicit [zone|fullwidth] / [section|fullwidth] modifier (full-bleed band).
+        $fullSize = in_array('fullwidth', $variants, true);
+
         $children = $node['children'] ?? [];
         $taggedCols = array_values(array_filter($children, fn (array $c) => $this->tokenType($c) === 'col'));
 
@@ -489,12 +513,13 @@ final class PageParser
             label: $this->cleanName($node['name'] ?? 'zone'),
             cols: array_values($cols),
             deduced: false,
-            fullSize: false,
+            fullSize: $fullSize,
             background: $this->backgroundForRange($candidates, $bb['y'], $bb['y'] + $bb['h'], $pageBackground),
             figmaTop: $bb['y'],
             figmaHeight: $bb['h'],
             screenshot: $this->screenshotName($slug, $position),
             colToRight: $this->overflowsRight($children, $pageWidth),
+            semantic: $semantic,
         );
     }
 
@@ -1215,6 +1240,76 @@ final class PageParser
     private function tokenType(array $node): ?string
     {
         return $this->mapper->extract($node['name'] ?? '')['type'] ?? null;
+    }
+
+    /**
+     * Collects zone-tagged nodes ([zone]/[section]) from a node list, descending through
+     * UNTAGGED wrapper containers (groups/frames merely used to organise the canvas) so a
+     * `[section]` nested one or more levels deep is still discovered. A tagged zone is taken
+     * as-is and NOT descended into (its inner sections are its own content). Order is preserved.
+     *
+     * @param list<array<string, mixed>> $nodes
+     *
+     * @return list<array<string, mixed>>
+     */
+    private function collectZoneNodes(array $nodes): array
+    {
+        $out = [];
+        foreach ($nodes as $node) {
+            $type = $this->tokenType($node);
+            if ($type !== null && $this->mapper->isZoneTag($type)) {
+                $out[] = $node;
+                continue;
+            }
+
+            $children = $node['children'] ?? [];
+            if ($children !== [] && $this->containsZoneTag($children)) {
+                foreach ($this->collectZoneNodes($children) as $nested) {
+                    $out[] = $nested;
+                }
+            }
+        }
+
+        return $out;
+    }
+
+    /**
+     * Whether any node in the (sub)tree carries a [zone]/[section] tag — used to decide
+     * whether an untagged wrapper is worth descending into.
+     *
+     * @param list<array<string, mixed>> $nodes
+     */
+    private function containsZoneTag(array $nodes): bool
+    {
+        foreach ($nodes as $node) {
+            $type = $this->tokenType($node);
+            if ($type !== null && $this->mapper->isZoneTag($type)) {
+                return true;
+            }
+            if ($this->containsZoneTag($node['children'] ?? [])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Sort position of a zone/section: the first bare numeric variant (`[section|2]` → 2),
+     * else the document index (so untagged-position sections keep their natural order).
+     *
+     * @param array<string, mixed> $node
+     */
+    private function zonePosition(array $node, int $documentIndex): int
+    {
+        $variants = $this->mapper->extract($node['name'] ?? '')['variants'] ?? [];
+        foreach ($variants as $v) {
+            if (preg_match('/^\d+$/', $v) === 1) {
+                return (int) $v;
+            }
+        }
+
+        return $documentIndex;
     }
 
     /**

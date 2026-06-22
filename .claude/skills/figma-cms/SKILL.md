@@ -8,6 +8,7 @@ description: >-
   Figma vers ce CMS, de générer les pages/fixtures depuis Figma, ou d'exécuter le process
   d'intégration Figma → CMS. Déclencheurs : « intègre la maquette Figma », « parse la page Figma »,
   « génère les fixtures depuis Figma », « process complet Figma », une URL figma.com/design ou /proto.
+disable-model-invocation: true
 allowed-tools:
   - "Bash(cp -r .claude/skills/figma-cms/tooling/src/. src/)"
   - "Bash(php -l *)"
@@ -79,6 +80,25 @@ Les présenter clairement (les 3 ensemble). Ne **rien présupposer** (ni prod, n
 node-ids) ; le fichier Figma vient de `FIGMA_FILE_KEY` (`.env`) et les pages se **découvrent**
 via les calques `[page|…]`. N'enchaîner sur le playbook qu'une fois les 3 réponses obtenues
 (ou leur absence actée avec l'utilisateur).
+
+## 🚧 GATE — VALIDATION DES SCREENSHOTS avant toute intégration (BLOQUANT)
+
+Une fois le dry-run d'une page terminé (parse → `pages/<slug>.json` + captures de bandes dans
+`screenshots/<slug>/`), **NE PAS attaquer l'intégration** (fixtures + front) tant que l'utilisateur
+n'a pas **vérifié et validé les screenshots** de cette page. Demander explicitement, mot pour mot :
+
+> **« Veuillez vérifier et valider les screenshots pour continuer l'intégration. »**
+
+Règles **impératives** :
+- **Validation PAR PAGE.** Chaque page taggée `[page|…]` se valide indépendamment via ses captures
+  `screenshots/<slug>/`. On n'intègre **que** les pages dont les screenshots sont **validés**.
+- **Pas de validation = pas d'intégration.** Si les screenshots d'une page ne sont **pas** validés
+  (ou non encore revus), **ne pas aller plus loin sur cette page** : ni fixtures, ni front. On reste
+  bloqué sur cette page jusqu'à validation.
+- Exemple : si `[page|home]` est validée mais `[page|cms]` ne l'est pas → on intègre la home,
+  **on ne touche pas** à la page `cms`.
+- Présenter clairement à l'utilisateur **où regarder** (le dossier `screenshots/<slug>/` et la liste
+  des bandes) pour qu'il puisse valider en connaissance de cause. Attendre sa réponse avant d'enchaîner.
 
 ## Nomenclature de nommage = doc EN LIGNE (à charger À CHAQUE FOIS)
 

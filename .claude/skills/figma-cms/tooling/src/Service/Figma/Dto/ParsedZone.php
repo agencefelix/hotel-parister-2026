@@ -24,6 +24,7 @@ final readonly class ParsedZone
         public float $figmaHeight = 0.0,
         public ?string $screenshot = null,
         public bool $colToRight = false,
+        public ?string $semantic = null,
     ) {
     }
 }

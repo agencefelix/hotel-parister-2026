@@ -40,7 +40,7 @@ URL=$(curl -s $H "https://api.figma.com/v1/images/$KEY?ids=NODE_ID&format=png&sc
 curl -s "$URL" -o image.png
 ```
 - `scale=2|3|4` pour la netteté (logos, icônes). `format=jpg` pour les photos.
-- **Node instance** (id avec `;`, ex. `I542:1602;410:4684`) : **URL-encoder** les ids
+- **Node instance** (id avec `;`, ex. `I123:456;789:1011`) : **URL-encoder** les ids
   (`python -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$IDS"`).
 - Le rendu d'un node = l'élément **rogné à son cadre** (utile pour façade, logo, photo de carte).
 - Variante COULEUR selon le fond (ex. logo clair pour fond foncé) → exporter le node de la version voulue.

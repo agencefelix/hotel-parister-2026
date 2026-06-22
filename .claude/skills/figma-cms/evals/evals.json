@@ -12,7 +12,7 @@
     {
       "id": 1,
       "name": "kickoff-figma-url",
-      "prompt": "Intègre cette maquette : https://www.figma.com/design/abc123XYZ/Parister?node-id=542-1600 — parse la page et prépare les fixtures.",
+      "prompt": "Intègre cette maquette : https://www.figma.com/design/abc123XYZ/MaMaquette?node-id=123-456 — parse la page et prépare les fixtures.",
       "expected_output": "Malgré l'URL et le node-id fournis, l'agent applique le contrat : il pose les 3 questions (prod, proto, prompts) avant d'agir, découvre les pages via [page|…] depuis FIGMA_FILE_KEY (ne se fie PAS au node-id collé comme point de départ), prévoit de fetch la doc de nommage en ligne, et ne suppose ni la prod ni la structure.",
       "files": [],
       "assertions": []

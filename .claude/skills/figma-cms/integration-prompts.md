@@ -1345,6 +1345,13 @@ Règles :
   le contexte créa (doublons). Les `layout/*.json` doivent donc pointer les node-ids de la home ou des
   frames isolés, pas ceux d'une page intérieure. Une variante isolée (`[nav|mobile]`) est la **source
   privilégiée** pour cet état précis.
+- **États de la nav principale** : `[nav|close]` (barre **fermée**, repos) — **le plus souvent posée sur
+  `[page|home]`** (la barre au repos visible sur la home) ; `[nav|open]` (**méga-menu ouvert**) et
+  `[nav|mobile]` (menu mobile) — sur des **frames isolés dédiés**. Renseigner les `figmaNodeId` de
+  `nav.json` en conséquence. ⚠️ Si la barre fermée est **transparente sur le hero**, sa capture depuis la
+  home ressort **blanche** → préférer un frame isolé `[nav|close]`, ou capturer en contexte de page
+  (cf. caveat transparence ci-dessous). Un état non tagué peut aussi être atteint via une **interaction
+  proto** (`actions[].destinationId`).
 - **Capture (`figma:capture-layout`)** : les `layout/*.json` sont des **modèles vides** (`figmaNodeId: null`) ;
   les **renseigner** avec les node-ids relevés (home ou frames isolés) AVANT de lancer la capture, sinon
   rien n'est produit. Puis `php bin/console figma:capture-layout` écrit dans `screenshots/layout/`.

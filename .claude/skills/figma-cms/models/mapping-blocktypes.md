@@ -173,7 +173,7 @@ Sans balisage explicite, le parser déduit — toujours « indicatif », à fige
 - **Grille Bootstrap 12** : les colonnes d'une ligne se partagent 12 unités (gouttières =
   padding interne, non comptées). 2 colonnes égales → **6/6**, 3 → **4/4/4** ; la ligne somme à 12.
 - **Image plein écran = une zone** : un fond IMAGE pleine largeur est auto-contenu (frontière
-  en haut ET en bas). Les **filigranes TEXT** pleine largeur (« parister », « workspaces ») ne
+  en haut ET en bas). Les **filigranes TEXT** pleine largeur (gros mots d'ambiance décoratifs) ne
   créent **pas** de frontière de bande.
 - **Teaser qui déborde à droite** (élément > largeur de page) → zone **`colToRight`**
   (`Zone::setColToRight(true)`).

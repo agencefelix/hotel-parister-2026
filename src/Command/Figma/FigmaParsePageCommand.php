@@ -40,7 +40,7 @@ final class FigmaParsePageCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('node-id', InputArgument::REQUIRED, 'Node-id Figma de la page (ex. 542:1592 ou 542-1592)')
+            ->addArgument('node-id', InputArgument::REQUIRED, 'Node-id Figma de la page (ex. 123:456 ou 123-456)')
             ->addOption('file-key', null, InputOption::VALUE_REQUIRED, 'Clé du fichier Figma', $this->figmaFileKey)
             ->addOption('output-dir', null, InputOption::VALUE_REQUIRED, 'Dossier de sortie des JSON', $this->projectDir.'/.claude/skills/figma-cms/integration/pages')
             ->addOption('screenshot-dir', null, InputOption::VALUE_REQUIRED, 'Dossier des captures par bande', $this->projectDir.'/.claude/skills/figma-cms/integration/screenshots')

@@ -12,9 +12,11 @@
         "fixedOnScroll": null,
         "links": "App\\Entity\\Module\\Menu\\Link (+ LinkIntl) — hiérarchie via level/parent"
     },
+    "_states": "Deux états de la nav principale : [nav|close] (barre fermée, repos) le plus souvent sur [page|home] ; [nav|open] (méga-menu ouvert) et [nav|mobile] (mobile) sur frames isolés dédiés. Renseigner figmaNodeId en conséquence. Si la barre fermée est transparente sur le hero, sa capture depuis la home ressort blanche → préférer un frame isolé [nav|close].",
     "captures": [
-        { "label": "closed", "figmaNodeId": null, "screenshot": "nav-closed.png", "note": null },
-        { "label": "open", "figmaNodeId": null, "screenshot": "nav-open.png", "note": null }
+        { "label": "close", "figmaNodeId": null, "screenshot": "nav.png", "note": "[nav|close] (barre fermée) — souvent sur [page|home]" },
+        { "label": "open", "figmaNodeId": null, "screenshot": "nav-open.png", "note": "frame [nav|open] (méga-menu ouvert)" },
+        { "label": "mobile", "figmaNodeId": null, "screenshot": "nav-mobile.png", "note": "frame [nav|mobile]" }
     ],
     "content": { "logo": null, "menu": [], "ctas": [], "languages": [], "contact": {} },
     "notes": []

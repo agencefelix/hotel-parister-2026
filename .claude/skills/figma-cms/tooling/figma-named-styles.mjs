@@ -20,6 +20,7 @@ const opt = (n, d) => { const i = args.indexOf(n); return i !== -1 && args[i + 1
 const FILE = opt('--file', null);
 const NODE = opt('--node', null);
 const OUT = opt('--out', null);
+const JSON_OUT = opt('--json', null); // sortie machine (consommée par reconcile-typography/margins)
 
 function envVal(key) {
   for (const f of ['.env.local', '.env']) {
@@ -116,3 +117,12 @@ log(`($font-size-h2/h3…) sur les styles « Hn » ; les « Sous-titre Hn » = p
 log(`(classe dédiée). Ces NOMS expliquent les « orphelins » de reconcile-typography (54px = Sous-titre H3).`);
 
 if (OUT) { fs.writeFileSync(OUT, '# Styles nommés Figma (design system)\n\n```\n' + lines.join('\n') + '\n```\n'); console.log(`\nRapport : ${OUT}`); }
+
+if (JSON_OUT) {
+  const machine = {
+    fills: fills.map(([id, v]) => ({ name: v.name, slug: slug(v.name), hex: valFill[id] || null, used: useF[id] || 0 })),
+    textStyles: texts.map(([id, v]) => ({ name: v.name, ...(valText[id] || {}), used: useT[id] || 0 })),
+  };
+  fs.writeFileSync(JSON_OUT, JSON.stringify(machine, null, 2));
+  console.log(`JSON : ${JSON_OUT}`);
+}

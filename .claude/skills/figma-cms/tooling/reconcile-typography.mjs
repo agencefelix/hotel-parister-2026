@@ -12,8 +12,11 @@
  *
  * Options :
  *   --scss <chemin>   variables.scss (défaut assets/scss/front/default/variables.scss)
+ *   --named <m.json>  JSON de `figma-named-styles.mjs --json` : ANNOTE chaque taille de son STYLE
+ *                     NOMMÉ (ex. 54px ← « Sous-titre H3 ») et requalifie les orphelins nommés en
+ *                     « style nommé hors échelle » (intentionnel → classe dédiée), pas en bruit.
  *   --tol <px>        tolérance d'appariement en px (défaut 1.5)
- *   --strict          sort en code 1 s'il reste des tailles orphelines
+ *   --strict          sort en code 1 s'il reste des orphelines ANONYMES (les styles nommés sont OK)
  *   --out <r.json>    écrit le rapport
  *
  * Advisory par défaut (exit 0) : c'est un rapport d'aide à l'intégration, pas une gate de rendu
@@ -24,7 +27,7 @@ import fs from 'node:fs';
 const args = process.argv.slice(2);
 const TOKENS = args[0];
 if (!TOKENS) {
-  console.error('Usage: node reconcile-typography.mjs <figma-tokens.json> [--scss variables.scss] [--tol 1.5] [--strict] [--out r.json]');
+  console.error('Usage: node reconcile-typography.mjs <figma-tokens.json> [--scss variables.scss] [--named named.json] [--tol 1.5] [--strict] [--out r.json]');
   process.exit(2);
 }
 const opt = (n, d) => { const i = args.indexOf(n); return i !== -1 && args[i + 1] ? args[i + 1] : d; };
@@ -33,6 +36,24 @@ const SCSS = opt('--scss', 'assets/scss/front/default/variables.scss');
 const TOL = parseFloat(opt('--tol', '1.5'));
 const STRICT = flag('--strict');
 const OUT = opt('--out', null);
+const NAMED = opt('--named', null); // JSON de figma-named-styles --json : annote chaque taille de son STYLE NOMMÉ
+
+// Map taille → noms de styles texte (depuis figma-named-styles).
+const sizeNames = new Map();
+if (NAMED) {
+  const nd = JSON.parse(fs.readFileSync(NAMED, 'utf8'));
+  for (const t of nd.textStyles || []) {
+    if (typeof t.size !== 'number') continue;
+    const s = Math.round(t.size * 10) / 10;
+    if (!sizeNames.has(s)) sizeNames.set(s, []);
+    sizeNames.get(s).push(t.name);
+  }
+}
+const namesFor = (size) => {
+  let best = null;
+  for (const [s, names] of sizeNames) { const d = Math.abs(s - size); if (d <= 0.6 && (best === null || d < best.d)) best = { names, d }; }
+  return best ? best.names : [];
+};
 
 // --- 1. Échelle SCSS du projet ---
 const scss = fs.readFileSync(SCSS, 'utf8');
@@ -93,18 +114,22 @@ const nearest = (size) => {
 const rows = figmaList.map((f) => {
   const n = nearest(f.size);
   const ok = n && n.delta <= TOL;
-  return { size: f.size, count: f.count, sample: f.sample, slot: ok ? n.slot : null, delta: n ? n.delta : null, orphan: !ok };
+  return { size: f.size, count: f.count, sample: f.sample, slot: ok ? n.slot : null, delta: n ? n.delta : null, orphan: !ok, named: namesFor(f.size) };
 });
 
 // --- 4. Rapport ---
-const C = { red: '\x1b[31m', green: '\x1b[32m', yellow: '\x1b[33m', dim: '\x1b[2m', reset: '\x1b[0m' };
+const C = { red: '\x1b[31m', green: '\x1b[32m', yellow: '\x1b[33m', cyan: '\x1b[36m', dim: '\x1b[2m', reset: '\x1b[0m' };
 console.log(`\nÉchelle SCSS (${SCSS}) : ${slotList.map((s) => s.size + 'px').join(', ')}`);
-console.log(`Tailles Figma sur la page : ${figmaList.length}  |  tolérance ${TOL}px\n`);
+console.log(`Tailles Figma sur la page : ${figmaList.length}  |  tolérance ${TOL}px${NAMED ? '  |  styles nommés : ' + sizeNames.size + ' tailles' : '  (sans --named : pas d\'annotation de style)'}\n`);
 
 for (const r of rows) {
+  const tag = r.named.length ? `  ${C.cyan}← « ${r.named.join(' / ')} »${C.reset}` : '';
   const head = `${String(r.size).padStart(5)}px  ×${String(r.count).padEnd(3)}  «${r.sample}»`;
   if (!r.orphan) {
-    console.log(`${C.green}✓${C.reset} ${head}  → ${r.slot.labels.join(' / ')}${r.delta > 0 ? `  ${C.dim}(Δ${r.delta.toFixed(1)}px)${C.reset}` : ''}`);
+    console.log(`${C.green}✓${C.reset} ${head}  → ${r.slot.labels.join(' / ')}${r.delta > 0 ? `  ${C.dim}(Δ${r.delta.toFixed(1)}px)${C.reset}` : ''}${tag}`);
+  } else if (r.named.length) {
+    // Orpheline MAIS = style nommé du design system → intentionnel : lui dédier une variable/classe.
+    console.log(`${C.cyan}◆ STYLE NOMMÉ${C.reset} ${head}  ${C.cyan}« ${r.named.join(' / ')} »${C.reset} ${C.dim}— hors échelle SCSS → variable/classe dédiée (intentionnel, pas du bruit)${C.reset}`);
   } else {
     const closest = nearest(r.size);
     console.log(`${C.red}✗ ORPHELINE${C.reset} ${head}  ${C.yellow}aucun slot (≤${TOL}px)${C.reset} ${C.dim}— plus proche : ${closest.slot.size}px (${closest.slot.labels.join('/')}, Δ${closest.delta.toFixed(1)}px)${C.reset}`);
@@ -112,13 +137,22 @@ for (const r of rows) {
 }
 
 const orphans = rows.filter((r) => r.orphan);
+const namedOrphans = orphans.filter((r) => r.named.length);   // hors échelle MAIS style nommé (intentionnel)
+const anonOrphans = orphans.filter((r) => !r.named.length);   // hors échelle ET sans nom (vrai à arbitrer)
+const slugify = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 console.log(`\n${C.dim}──────────${C.reset}`);
-console.log(`Mappées : ${rows.length - orphans.length}/${rows.length}  |  orphelines : ${orphans.length}`);
-if (orphans.length) {
-  console.log(`${C.yellow}À AJOUTER dans variables.scss${C.reset} (sinon snap silencieux sur la base) :`);
-  for (const o of orphans) {
+console.log(`Mappées échelle : ${rows.length - orphans.length}/${rows.length}  |  styles nommés hors échelle : ${namedOrphans.length}  |  orphelines anonymes : ${anonOrphans.length}`);
+if (namedOrphans.length) {
+  console.log(`${C.cyan}STYLES NOMMÉS hors échelle → classe/variable DÉDIÉE (reprendre le nom Figma)${C.reset} :`);
+  for (const o of namedOrphans) {
+    console.log(`  • ${o.size}px « ${o.named.join(' / ')} » → ex. \`.fz-${slugify(o.named[0])}\` { @include rfs(${o.size}px); } (ou $font-size-${slugify(o.named[0])}).`);
+  }
+}
+if (anonOrphans.length) {
+  console.log(`${C.yellow}ORPHELINES anonymes (pas de style nommé) — à arbitrer/ajouter${C.reset} :`);
+  for (const o of anonOrphans) {
     const code = String(Math.round(o.size)).replace('.', '-');
-    console.log(`  • ${o.size}px (×${o.count}, «${o.sample}») → ajouter une entrée \`'${code}': ('rfs': true, 'size': ${o.size}px, …)\` dans \$font-sizes-app (classe .fz-${code}) ou une variable dédiée.`);
+    console.log(`  • ${o.size}px (×${o.count}, «${o.sample}») → \`'${code}': ('rfs': true, 'size': ${o.size}px, …)\` dans \$font-sizes-app (.fz-${code}) ou variable dédiée.`);
   }
 }
 
@@ -127,8 +161,8 @@ if (OUT) {
   console.log(`Rapport : ${OUT}`);
 }
 
-if (STRICT && orphans.length) {
-  console.log(`${C.red}RECONCILIATION TYPO : ${orphans.length} taille(s) orpheline(s)${C.reset}`);
+if (STRICT && anonOrphans.length) {
+  console.log(`${C.red}RECONCILIATION TYPO : ${anonOrphans.length} orpheline(s) anonyme(s)${C.reset} (les styles nommés hors échelle sont OK : leur donner une classe dédiée)`);
   process.exit(1);
 }
 console.log(`${C.green}Reconciliation typo : OK${C.reset}`);

@@ -789,6 +789,9 @@ là plutôt que de surcharger bande par bande** :
   typo nommée** (`H1-H4`, `Sous-titre Hn` script, variantes Mobile, avec tracking/lh/casse). C'est la
   **référence** : caler `$font-size-h*` / la palette dessus ; `reconcile-typography` ne sert plus que pour
   les **textes NON stylés** (et explique les « orphelins » = styles nommés type `Sous-titre H3 = 54px`).
+  Enchaîner : `figma-named-styles.mjs --json named.json` puis `reconcile-typography.mjs … --named named.json`
+  → chaque taille est **annotée de son style nommé** et les « orphelins » qui sont des styles nommés
+  (ex. `54px = Sous-titre H3`, `14px = H4`) sont requalifiés en **classe dédiée** (≠ vrais orphelins anonymes).
 - **AVANT de styler — réconcilier les échelles** : marges/paddings via
   `node .claude/skills/figma-cms/tooling/reconcile-margins.mjs integration/figma-tokens.<page>.json`
   (propose le token `pt-md`/`pe-sm`/`mb-xs`… par axe + signale les orphelins ; ne JAMAIS poser de px en

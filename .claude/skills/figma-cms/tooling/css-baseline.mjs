@@ -57,6 +57,8 @@ function scan(file) {
   const raw = stripComments(fs.readFileSync(file, 'utf8'));
   const findings = { important: [], element: [], broad: [] };
   const stack = [];
+  const suppLevel = []; // par niveau : ce { ouvre-t-il un contexte qui N'ÉMET PAS de CSS « actif » ?
+  let suppress = 0;     // > 0 = on est dans un corps de @mixin/@function, un %placeholder, ou un @media non-écran
   let buf = '';
   let line = 1;
   const selPath = () => stack.join(' ').replace(/\s+/g, ' ').trim();
@@ -66,17 +68,31 @@ function scan(file) {
     if (ch === '{') {
       const sel = buf.trim();
       buf = '';
-      if (sel.startsWith('@')) { stack.push(''); continue; } // at-rule (media…) : pas un sélecteur
-      stack.push(sel);
-      if (ELEMENT.test(sel)) findings.element.push({ sel: selPath(), line, file });
-      if (BROAD.test(sel)) findings.broad.push({ sel: selPath(), line, file });
+      let supp = false;
+      if (sel.startsWith('@')) {
+        stack.push('');
+        const at = sel.toLowerCase();
+        // corps de mixin/function : n'émet qu'à l'@include ; @media print/speech : n'affecte pas l'écran.
+        if (/^@(mixin|function|keyframes|font-face)\b/.test(at)) supp = true;
+        else if (/^@media\b/.test(at) && /\b(print|speech)\b/.test(at) && !/\bscreen\b/.test(at)) supp = true;
+      } else {
+        stack.push(sel);
+        if (/(^|[\s,>+~])%[\w-]/.test(sel)) supp = true; // %placeholder : n'émet aucun CSS sans @extend
+        if (suppress === 0 && !supp) {
+          if (ELEMENT.test(sel)) findings.element.push({ sel: selPath(), line, file });
+          if (BROAD.test(sel)) findings.broad.push({ sel: selPath(), line, file });
+        }
+      }
+      suppLevel.push(supp);
+      if (supp) suppress++;
     } else if (ch === '}') {
+      if (suppLevel.pop()) suppress--;
       stack.pop();
       buf = '';
     } else if (ch === ';') {
       const decl = buf.trim(); buf = '';
       const prop = decl.split(':', 1)[0].trim().toLowerCase();
-      if (RISKY.test(prop) && /!\s*important/i.test(decl)) {
+      if (suppress === 0 && RISKY.test(prop) && /!\s*important/i.test(decl)) {
         findings.important.push({ sel: selPath(), line, file, prop });
       }
     } else {

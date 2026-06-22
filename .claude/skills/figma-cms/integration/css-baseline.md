@@ -4,7 +4,7 @@
 
 Cartographie CSS natif — assets/scss/front/default  (350 fichiers .scss)
 Overriders TOUJOURS ACTIFS (props typo/espacement/fond) :
-  !important : 281   |   sélecteurs d'élément/globaux : 382   |   [class*=] : 4
+  !important : 242   |   sélecteurs d'élément/globaux : 347   |   [class*=] : 3
   (+ 27 conditionnés par une classe d'état body/html — inactifs par défaut, cf. fin)
 
 ### 1. !important ACTIF sur propriété sensible (gagne quelle que soit la spécificité) — top 60
@@ -68,7 +68,7 @@ Overriders TOUJOURS ACTIFS (props typo/espacement/fond) :
   assets/scss/front/default/components/form/_form.scss:576  color  { #gdpr-job * }
   assets/scss/front/default/components/form/_form.scss:602  color  { .bg-primary #gdpr-job * }
   assets/scss/front/default/components/form/_form.scss:631  color  { .form-select:not(.selected), .form-floating > .form-control::placeholder, .form-floating > .form-control-plaintext::placeholder, .form-floating > .input-group > .form-control::placeholder }
-  … +221 autres
+  … +182 autres
 
 ### 2. Sélecteurs d'ÉLÉMENT / globaux ACTIFS (h1-h6, p, a, body, :root, *…) — top 60
   assets/scss/front/default/components/blocks/_blockquote.scss:16  { blockquote }
@@ -131,10 +131,9 @@ Overriders TOUJOURS ACTIFS (props typo/espacement/fond) :
   assets/scss/front/default/components/form/_form.scss:354  { .form-check *:not(.form-check) }
   assets/scss/front/default/components/form/_form.scss:390  { html body form .form-field-none }
   assets/scss/front/default/components/form/_form.scss:541  { .img-drop-wrap .drop-preview, .drop-preview picture, .drop-preview img }
-  … +322 autres
+  … +287 autres
 
 ### 3. Sélecteurs larges [class*=] ACTIFS
-  assets/scss/front/default/components/_animate.scss:114  { .animate__animated[class*='Out'] }
   assets/scss/front/default/components/_button.scss:91  { .btn:not(.basic):not(.btn-blur) &:not(.btn-gradient):not([class*="btn-outline-"]) }
   assets/scss/front/default/vendor-desktop.scss:52  { body .btn.btn[class*="btn-outline-"] }
   assets/scss/front/default/vendor-mobile.scss:51  { body .btn.btn[class*="btn-outline-"] }

@@ -25,7 +25,7 @@ const opt = (n, d) => { const i = args.indexOf(n); return i !== -1 && args[i + 1
 const OUT = opt('--out', null);
 const TOP = parseInt(opt('--top', '50'), 10);
 
-const RISKY = /^(font-size|font-weight|line-height|letter-spacing|color|text-transform|text-align|margin|margin-top|margin-right|margin-bottom|margin-left|padding|padding-top|padding-right|padding-bottom|padding-left|background|background-color|gap|row-gap|column-gap)$/;
+const RISKY = /^(font|font-size|font-weight|line-height|letter-spacing|color|text-transform|text-align|margin|margin-top|margin-right|margin-bottom|margin-left|padding|padding-top|padding-right|padding-bottom|padding-left|background|background-color|gap|row-gap|column-gap)$/;
 const ELEMENT = /(^|\s|,|>|\+|~)(html|body|h[1-6]|p|a|ul|ol|li|img|button|figure|figcaption|span|strong|em|small|blockquote|table|tr|td|input|textarea|label|:root|\*)(\s|,|>|\+|~|:|$)/i;
 const BROAD = /\[class\*=/;
 // Règle CONDITIONNÉE : ne s'applique que si une classe/attribut d'ÉTAT est posé sur body/html/:root
@@ -70,7 +70,7 @@ function scan(file) {
     } else if (ch === ';') {
       const decl = buf.trim(); buf = '';
       const prop = decl.split(':', 1)[0].trim().toLowerCase();
-      if (RISKY.test(prop) && /!important/i.test(decl)) {
+      if (RISKY.test(prop) && /!\s*important/i.test(decl)) {
         findings.important.push({ sel: selPath(), line, file, prop });
       }
     } else {

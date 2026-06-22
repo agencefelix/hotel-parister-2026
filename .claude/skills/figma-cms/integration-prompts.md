@@ -1408,6 +1408,13 @@ en données** via l'API REST (`/v1/files/:key/nodes?ids=<id>&depth=N`, scope
 On peut donc reconstruire le graphe d'interactions, mais **pas** « jouer » le
 prototype en vidéo.
 
+> ⚙️ **OUTIL (à lancer en 1er — sinon les animations sont RATÉES)** :
+> `node .claude/skills/figma-cms/tooling/prototype-interactions.mjs [--node <page>] --out integration/interactions.md`
+> Il parcourt le fichier, extrait toutes les `interactions` et les **déduplique en RECETTES**
+> (`trigger | transition | easing | durée`, ex. `ON_HOVER | SMART_ANIMATE | GENTLE | 1000ms ×53`) avec un
+> exemple source→cible. Sans cet outil, les centaines d'`interactions` (composants instanciés) noient
+> l'info et les animations passent à la trappe. **Chaque recette = une animation à reproduire UNE fois.**
+
 Champs exploitables par interaction :
 - **`trigger.type`** : `ON_CLICK`, `ON_HOVER`, `MOUSE_ENTER`/`MOUSE_LEAVE`,
   `ON_PRESS`, `AFTER_TIMEOUT`, `ON_DRAG`… → quel geste déclenche quoi.

@@ -6,6 +6,16 @@
  * Usage (depuis la RACINE du projet, où puppeteer-core est installé) :
  *   node .claude/skills/figma-cms/tooling/verify-styles.mjs <url> <figma-tokens.<page>.json> [options]
  *
+ * SÉPARATION CONTENU vs STYLE (3 buckets) — un mur de rouge n'est pas exploitable si une partie
+ * vient de ce que le rendu n'a pas la même COPIE que la maquette. Chaque token est classé :
+ *   - FIABLE  : texte UNIQUE dans les tokens ET 1 seul élément DOM correspondant → DÉCISIF (ses
+ *               écarts de style font échouer le gate) ;
+ *   - AMBIGU  : texte en double (plusieurs tokens ou candidats DOM) → mesuré mais NON décisif
+ *               (un « Découvrir » répété s'apparie au hasard) — informatif, fiabiliser via --map ;
+ *   - CONTENU : texte maquette ABSENT du rendu (non apparié) → signal de CONTENU, pas de style ;
+ *               n'échoue le gate qu'avec --strict-unmatched.
+ * Seuls les écarts sur éléments FIABLES font échouer le gate.
+ *
  * Vérifie : pour les TEXT — font-size/weight/letter-spacing/line-height/text-transform/color ;
  * pour les CONTENEURS auto-layout (FRAME à padding/gap non nul) — padding top/right/bottom/left
  * et `gap` (espacement entre enfants, mesuré géométriquement). Seuls les paddings ATTENDUS non nuls
@@ -82,6 +92,12 @@ if (tokens.length === 0) {
   process.exit(2);
 }
 
+// Fréquence du texte (normalisé) parmi les tokens : un texte porté par >1 token est AMBIGU
+// (un « Découvrir » répété s'apparie au hasard à un DOM) → mesuré mais non décisif pour le gate.
+const normKey = (s) => (s || '').replace(/\s+/g, ' ').trim().toLowerCase();
+const tokTextFreq = new Map();
+for (const t of tokens) tokTextFreq.set(normKey(t.characters), (tokTextFreq.get(normKey(t.characters)) || 0) + 1);
+
 // Conteneurs (auto-layout) à padding NON NUL → vérification des paddings rendus.
 // Le conteneur n'a pas d'identité texte → on la reconstruit par CONTENANCE GÉOMÉTRIQUE :
 // les TEXT dont le centre tombe dans la bbox du conteneur (coords relatives au même root).
@@ -113,6 +129,9 @@ if (!NO_BOX) {
   }
   boxes = [...byText.values()];
 }
+// Fréquence du texte de conteneur (pour la même règle d'ambiguïté côté paddings).
+const boxTextFreq = new Map();
+for (const b of boxes) boxTextFreq.set(normKey(b.text), (boxTextFreq.get(normKey(b.text)) || 0) + 1);
 
 // Échelle de marges (optionnelle) : rend la gate « scale-aware ». Le rendu CMS est QUANTIFIÉ sur
 // l'échelle $margins (niveaux), donc on snappe le px Figma attendu au niveau le plus proche (par axe)
@@ -224,18 +243,20 @@ const result = await page.evaluate((tokens, boxes, selectorMap) => {
   const textRows = tokens.map((tk) => {
     let el = null;
     let how = null;
-    if (selectorMap[tk.id]) { el = document.querySelector(selectorMap[tk.id]); how = 'map'; }
-    if (!el) { const k = norm(tk.characters); const c = byOwn.get(k); if (c && c.length) { el = c[0]; how = 'own-text'; } }
-    if (!el) { const k = norm(tk.characters); const c = byFull.get(k); if (c && c.length) { el = c[c.length - 1]; how = 'full-text'; } }
-    return { id: tk.id, text: tk.characters.replace(/\s+/g, ' ').trim().slice(0, 40), matched: !!el, how, m: el ? measure(el) : null };
+    let cands = 0;
+    if (selectorMap[tk.id]) { el = document.querySelector(selectorMap[tk.id]); how = 'map'; cands = el ? 1 : 0; }
+    if (!el) { const k = norm(tk.characters); const c = byOwn.get(k); if (c && c.length) { el = c[0]; how = 'own-text'; cands = c.length; } }
+    if (!el) { const k = norm(tk.characters); const c = byFull.get(k); if (c && c.length) { el = c[c.length - 1]; how = 'full-text'; cands = c.length; } }
+    return { id: tk.id, text: tk.characters.replace(/\s+/g, ' ').trim().slice(0, 40), matched: !!el, how, cands, m: el ? measure(el) : null };
   });
   const boxRows = boxes.map((bx) => {
     let el = null;
     let how = null;
-    if (selectorMap[bx.id]) { el = document.querySelector(selectorMap[bx.id]); how = 'map'; }
-    if (!el) { const c = byFull.get(norm(bx.text)); if (c && c.length) { el = c[0]; how = 'full-text'; } }
-    if (!el) { const c = byCompact.get(norm(bx.text).replace(/\s/g, '')); if (c && c.length) { el = c[0]; how = 'compact'; } }
-    return { id: bx.id, matched: !!el, how, pad: el ? measurePad(el) : null, gap: el ? measureGap(el, bx.mode) : null };
+    let cands = 0;
+    if (selectorMap[bx.id]) { el = document.querySelector(selectorMap[bx.id]); how = 'map'; cands = el ? 1 : 0; }
+    if (!el) { const c = byFull.get(norm(bx.text)); if (c && c.length) { el = c[0]; how = 'full-text'; cands = c.length; } }
+    if (!el) { const c = byCompact.get(norm(bx.text).replace(/\s/g, '')); if (c && c.length) { el = c[0]; how = 'compact'; cands = c.length; } }
+    return { id: bx.id, matched: !!el, how, cands, pad: el ? measurePad(el) : null, gap: el ? measureGap(el, bx.mode) : null };
   });
   return { textRows, boxRows };
 }, tokens, boxes, selectorMap);
@@ -255,15 +276,19 @@ const colorNear = (a, b) => {
 };
 
 const rows = [];
-let fails = 0;
-let unmatched = 0;
+let fails = 0;          // écarts sur éléments FIABLES (décisifs pour le gate)
+let unmatched = 0;      // CONTENU : texte maquette absent du rendu
+let ambig = 0;          // AMBIGU : texte en double (mesuré, non décisif)
+let ambigFails = 0;     // écarts parmi les ambigus (informatif)
 for (const r of measured) {
   const tk = tokById.get(r.id);
   if (!r.matched) {
     unmatched++;
-    rows.push({ id: r.id, text: r.text, matched: false, checks: [] });
+    rows.push({ id: r.id, text: r.text, matched: false, bucket: 'content', checks: [] });
     continue;
   }
+  // Ambigu si le texte est porté par plusieurs tokens OU a plusieurs candidats DOM (sauf --map).
+  const isAmbiguous = r.how !== 'map' && ((tokTextFreq.get(normKey(tk.characters)) || 1) > 1 || r.cands > 1);
   const checks = [];
   const push = (prop, ok, exp, got) => checks.push({ prop, ok, exp, got });
 
@@ -288,22 +313,30 @@ for (const r of measured) {
   }
 
   const rowFail = checks.some((c) => !c.ok);
-  if (rowFail) fails++;
-  rows.push({ id: r.id, text: r.text, matched: true, how: r.how, checks });
+  if (isAmbiguous) {
+    ambig++;
+    if (rowFail) ambigFails++;
+  } else if (rowFail) {
+    fails++;
+  }
+  rows.push({ id: r.id, text: r.text, matched: true, how: r.how, bucket: isAmbiguous ? 'ambiguous' : 'reliable', checks });
 }
 
 // ---- Comparaison paddings (conteneurs auto-layout) ----
 const boxById = new Map(boxes.map((b) => [b.id, b]));
 const boxRows = [];
-let boxFails = 0;
-let boxUnmatched = 0;
+let boxFails = 0;       // écarts paddings FIABLES (décisifs)
+let boxUnmatched = 0;   // CONTENU
+let boxAmbig = 0;       // AMBIGU
+let boxAmbigFails = 0;
 for (const r of result.boxRows) {
   const bx = boxById.get(r.id);
   if (!r.matched) {
     boxUnmatched++;
-    boxRows.push({ id: r.id, name: bx.name, text: bx.text.slice(0, 40), matched: false, checks: [] });
+    boxRows.push({ id: r.id, name: bx.name, text: bx.text.slice(0, 40), matched: false, bucket: 'content', checks: [] });
     continue;
   }
+  const isAmbiguousBox = r.how !== 'map' && ((boxTextFreq.get(normKey(bx.text)) || 1) > 1 || r.cands > 1);
   const checks = [];
   // Attendu = px Figma SNAPPÉ au niveau d'échelle le plus proche (scale-aware) ; sinon px brut.
   const fmtExp = (snapped, rawv) => snapped === rawv ? snapped + 'px' : `${snapped}px (≈Figma ${rawv})`;
@@ -324,64 +357,75 @@ for (const r of result.boxRows) {
     boxRows.push({ id: r.id, name: bx.name, text: bx.text.slice(0, 40), matched: true, how: r.how, checks, skipped: true });
     continue;
   }
-  if (checks.some((c) => !c.ok)) boxFails++;
-  boxRows.push({ id: r.id, name: bx.name, text: bx.text.slice(0, 40), matched: true, how: r.how, checks });
+  const boxFail = checks.some((c) => !c.ok);
+  if (isAmbiguousBox) {
+    boxAmbig++;
+    if (boxFail) boxAmbigFails++;
+  } else if (boxFail) {
+    boxFails++;
+  }
+  boxRows.push({ id: r.id, name: bx.name, text: bx.text.slice(0, 40), matched: true, how: r.how, bucket: isAmbiguousBox ? 'ambiguous' : 'reliable', checks });
 }
 
-// ---- Rapport ----
-const C = { red: '\x1b[31m', green: '\x1b[32m', yellow: '\x1b[33m', dim: '\x1b[2m', reset: '\x1b[0m' };
+// ---- Rapport (3 buckets : STYLE fiable / CONTENU / AMBIGU) ----
+// On sépare ce qui est DÉCISIF (style des éléments fiables — texte unique, 1 seul match) de ce qui
+// vient d'un CONTENU différent (token non apparié = la copie du rendu ≠ maquette) et des doublons
+// AMBIGUS (texte répété, apparié au hasard) — pour un signal exploitable plutôt qu'un mur de rouge.
+const C = { red: '\x1b[31m', green: '\x1b[32m', yellow: '\x1b[33m', cyan: '\x1b[36m', dim: '\x1b[2m', reset: '\x1b[0m' };
+const reliableRows = rows.filter((r) => r.bucket === 'reliable');
+const ambigRows = rows.filter((r) => r.bucket === 'ambiguous');
+const contentRows = rows.filter((r) => r.bucket === 'content');
 console.log(`\nVérification styles — ${URL}  (viewport ${WIDTH}px)`);
-console.log(`Tokens TEXT vérifiés : ${rows.length}  |  appariés : ${rows.length - unmatched}  |  non appariés : ${unmatched}\n`);
+console.log(`Tokens TEXT : ${rows.length}  |  fiables : ${reliableRows.length}  |  ambigus : ${ambig}  |  non appariés (contenu) : ${unmatched}`);
 
-for (const row of rows) {
-  if (!row.matched) {
-    console.log(`${C.yellow}∅ NON APPARIÉ${C.reset}  «${row.text}»  ${C.dim}(${row.id})${C.reset}`);
-    continue;
-  }
+console.log(`\n${C.cyan}── STYLE (éléments fiables — texte unique, 1 seul match) ──${C.reset}`);
+for (const row of reliableRows) {
   const bad = row.checks.filter((c) => !c.ok);
-  if (bad.length === 0) {
-    console.log(`${C.green}✓${C.reset} «${row.text}»  ${C.dim}${row.how}${C.reset}`);
-  } else {
-    console.log(`${C.red}✗ «${row.text}»${C.reset}  ${C.dim}${row.how} (${row.id})${C.reset}`);
+  if (bad.length === 0) { console.log(`${C.green}✓${C.reset} «${row.text}»  ${C.dim}${row.how}${C.reset}`); continue; }
+  console.log(`${C.red}✗ «${row.text}»${C.reset}  ${C.dim}${row.how} (${row.id})${C.reset}`);
+  for (const c of bad) console.log(`    ${C.red}${c.prop}${C.reset} : attendu ${c.exp}, rendu ${c.got}`);
+}
+
+const reliableBoxes = boxRows.filter((r) => r.bucket === 'reliable' && !r.skipped);
+if (reliableBoxes.length) {
+  console.log(`\n${C.dim}Paddings de conteneurs (fiables) :${C.reset}`);
+  for (const row of reliableBoxes) {
+    const bad = row.checks.filter((c) => !c.ok);
+    if (bad.length === 0) { console.log(`${C.green}✓${C.reset} [box] «${row.text}»  ${C.dim}${row.how}${C.reset}`); continue; }
+    console.log(`${C.red}✗ [box] «${row.text}»${C.reset}`);
     for (const c of bad) console.log(`    ${C.red}${c.prop}${C.reset} : attendu ${c.exp}, rendu ${c.got}`);
   }
 }
 
-if (boxRows.length) {
-  console.log(`\n${C.dim}Paddings de conteneurs (auto-layout) :${C.reset}`);
-  for (const row of boxRows) {
-    if (row.skipped) continue;
-    if (!row.matched) {
-      console.log(`${C.yellow}∅ NON APPARIÉ${C.reset} [box] «${row.text}»`);
-      continue;
-    }
-    const bad = row.checks.filter((c) => !c.ok);
-    if (bad.length === 0) {
-      console.log(`${C.green}✓${C.reset} [box] «${row.text}»  ${C.dim}${row.how}${C.reset}`);
-    } else {
-      console.log(`${C.red}✗ [box] «${row.text}»${C.reset}`);
-      for (const c of bad) console.log(`    ${C.red}${c.prop}${C.reset} : attendu ${c.exp}, rendu ${c.got}`);
-    }
-  }
+console.log(`\n${C.cyan}── CONTENU (texte maquette absent du rendu) ──${C.reset}`);
+console.log(`${C.yellow}${unmatched}${C.reset} token(s) non apparié(s)${STRICT_UNMATCHED ? '' : ` ${C.dim}(n'échoue pas le gate sauf --strict-unmatched)${C.reset}`}`);
+if (contentRows.length) console.log(`${C.dim}   ex. ${contentRows.slice(0, 6).map((r) => '«' + r.text.slice(0, 26) + '»').join(', ')}${contentRows.length > 6 ? '…' : ''}${C.reset}`);
+
+if (ambig || boxAmbig) {
+  console.log(`\n${C.cyan}── AMBIGU (texte en double — informatif, non décisif) ──${C.reset}`);
+  console.log(`${C.dim}${ambig} texte(s) (${ambigFails} hors tolérance), ${boxAmbig} conteneur(s) (${boxAmbigFails} hors tolérance) — fiabiliser via --map si besoin${C.reset}`);
 }
 
-const matchedCount = rows.length - unmatched;
-const boxMatched = boxRows.length - boxUnmatched;
 console.log(`\n${C.dim}──────────${C.reset}`);
-console.log(`Textes conformes : ${matchedCount - fails}/${matchedCount} (écart ${fails}, non appariés ${unmatched})`);
-if (boxRows.length) {
-  console.log(`Paddings conformes : ${boxMatched - boxFails}/${boxMatched} (écart ${boxFails}, non appariés ${boxUnmatched})`);
-}
+console.log(`STYLE fiable : ${reliableRows.length - fails}/${reliableRows.length} conformes (${fails} écart${reliableBoxes.length ? `, paddings ${reliableBoxes.length - boxFails}/${reliableBoxes.length}` : ''})  |  CONTENU : ${unmatched} non appariés  |  AMBIGU : ${ambig + boxAmbig}`);
 
 if (OUT) {
-  fs.writeFileSync(OUT, JSON.stringify({ url: URL, width: WIDTH, total: rows.length, matched: matchedCount, fails, unmatched, rows, boxes: boxRows, boxFails, boxUnmatched }, null, 2));
+  fs.writeFileSync(OUT, JSON.stringify({
+    url: URL, width: WIDTH, total: rows.length,
+    style: { reliable: reliableRows.length, fails, boxReliable: reliableBoxes.length, boxFails },
+    content: { unmatched, boxUnmatched },
+    ambiguous: { texts: ambig, textFails: ambigFails, boxes: boxAmbig, boxFails: boxAmbigFails },
+    rows, boxes: boxRows,
+  }, null, 2));
   console.log(`Rapport : ${OUT}`);
 }
 
+// Le gate n'échoue QUE sur des écarts DÉCISIFS (éléments fiables). Les ambigus n'échouent jamais ;
+// le contenu non apparié n'échoue qu'avec --strict-unmatched.
 const failed = fails > 0 || boxFails > 0 || (STRICT_UNMATCHED && (unmatched > 0 || boxUnmatched > 0));
 if (failed) {
-  console.log(`${C.red}GATE STYLES : ÉCHEC${C.reset} (${fails} texte(s), ${boxFails} padding(s)${STRICT_UNMATCHED ? `, ${unmatched + boxUnmatched} non apparié(s)` : ''})`);
+  console.log(`${C.red}GATE STYLES : ÉCHEC${C.reset} (style fiable : ${fails} texte(s), ${boxFails} padding(s)${STRICT_UNMATCHED ? ` ; contenu : ${unmatched + boxUnmatched} non appariés` : ''})`);
   process.exit(1);
 }
-console.log(`${C.green}GATE STYLES : OK${C.reset}`);
+console.log(`${C.green}GATE STYLES : OK${C.reset}${unmatched ? ` ${C.dim}(${unmatched} non appariés ignorés — contenu)${C.reset}` : ''}`);
 process.exit(0);

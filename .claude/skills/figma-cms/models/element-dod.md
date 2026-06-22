@@ -37,6 +37,12 @@
    > ⚠️ **« Fait » exige les DEUX gates au vert** (styles ET layout) + la comparaison visuelle. La
    > fidélité des tokens NE prouve PAS que la mise en page est bonne (cf. cas home : tokens ~OK mais
    > composition fausse). Ne jamais annoncer « done » sur le seul GATE styles.
+   > 📊 **Lire les 3 buckets** (les deux gates) : seuls **STYLE fiable** (verify-styles) et
+   > **COMPOSITION** (verify-layout) sont DÉCISIFS et font échouer le gate ; **CONTENU** (token non
+   > apparié = la copie du rendu ≠ maquette) et **AMBIGU** (texte en double, apparié au hasard) sont
+   > **diagnostiques, non bloquants**. Un gros bucket CONTENU = corriger les fixtures/la copie (pas le
+   > style) ; AMBIGU élevé = fiabiliser l'appariement via `--map`. Forcer le contenu bloquant avec
+   > `--strict-unmatched`.
 7. **[ ] Contraintes numériques** — vérifier les exigences chiffrées (ex. nav ≤ 10dvh, mega-menu
    `scrollHeight ≤ innerHeight`, logo `centerX == innerWidth/2`). ⟶ artefact : les nombres.
 8. **[ ] Comparaison ZOOMÉE côte à côte** maquette ↔ rendu (crop + `-resize 2x`), bande par bande.

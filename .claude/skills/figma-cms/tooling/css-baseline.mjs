@@ -15,6 +15,12 @@
  *   2. sélecteurs d'ÉLÉMENT / globaux (h1-h6, p, a, ul, li, body, :root, *, …) → s'appliquent partout ;
  *   3. sélecteurs LARGES `[class*=…]` → ratissent de nombreuses classes.
  * Pour chacun : sélecteur (chemin imbriqué) + fichier:ligne + propriété.
+ *
+ * LIMITE CONNUE (recall) : ne détecte PAS les overriders forts par seule SPÉCIFICITÉ sans `!important`
+ * (longue chaîne de classes, sélecteur `#id`). Justification : une chaîne de classes est battable par
+ * l'id-scoping imposé au skill (un #id bat les classes), et `verify-styles.mjs` détecte tout écrasement
+ * au RUNTIME (computed ≠ token). Les `!important` (y compris « ! important » espacé) et le raccourci
+ * `font` SONT couverts.
  */
 import fs from 'node:fs';
 import path from 'node:path';

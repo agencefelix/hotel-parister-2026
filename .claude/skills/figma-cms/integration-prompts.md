@@ -792,6 +792,11 @@ là plutôt que de surcharger bande par bande** :
   Enchaîner : `figma-named-styles.mjs --json named.json` puis `reconcile-typography.mjs … --named named.json`
   → chaque taille est **annotée de son style nommé** et les « orphelins » qui sont des styles nommés
   (ex. `54px = Sous-titre H3`, `14px = H4`) sont requalifiés en **classe dédiée** (≠ vrais orphelins anonymes).
+- **AVANT de styler — réconcilier les COULEURS** :
+  `node .claude/skills/figma-cms/tooling/reconcile-colors.mjs integration/figma-tokens.<page>.json --named named.json`
+  confronte les hex de la page à la **palette nommée** ET aux **variables SCSS existantes** → indique
+  pour chaque couleur le `$slug` nommé + la **variable SCSS déjà définie** à réutiliser (ex. Gold→`$primary`,
+  Bleu→`$secondary`), ce qu'il faut **ajouter**, et les couleurs **anonymes** (one-off / asset à vérifier).
 - **AVANT de styler — réconcilier les échelles** : marges/paddings via
   `node .claude/skills/figma-cms/tooling/reconcile-margins.mjs integration/figma-tokens.<page>.json`
   (propose le token `pt-md`/`pe-sm`/`mb-xs`… par axe + signale les orphelins ; ne JAMAIS poser de px en

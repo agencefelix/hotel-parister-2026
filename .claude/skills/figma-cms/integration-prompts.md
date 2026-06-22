@@ -648,6 +648,26 @@ sections se fait **exclusivement** dans :
 - **CSS/SCSS** : `assets/scss/front/`
 - **JS** : `assets/js/front/`
 
+### 🗺️ Cartographier le CSS natif AVANT de styler (surtout la 1ʳᵉ intégration) — BLOQUANT
+Le projet pré-existant embarque **beaucoup de modules natifs** dont le SCSS (`assets/scss/front/default`)
+peut **écraser** la nouvelle intégration (règles à forte spécificité, sélecteurs d'élément, **`!important`**).
+**Avant de styler**, en prendre connaissance :
+```
+node .claude/skills/figma-cms/tooling/css-baseline.mjs --out .claude/skills/figma-cms/integration/css-baseline.md
+```
+→ liste les overriders potentiels (`!important` sur props sensibles, sélecteurs `h1-h6/p/a/body/:root/*`,
+larges `[class*=]`) avec **fichier:ligne + sélecteur + propriété**. **Le consulter avant d'écrire du CSS**.
+
+**Vigilance écrasement (à chaque bande)** : après build, **vérifier que le CSS intégré GAGNE** réellement
+(rien de natif ne le surclasse). Stratégie, dans l'ordre :
+1. **Scoper par l'`#id` du composant** (le `customId` → `id`, cf. ci-dessous) : un `#home-hero .title`
+   (1,1,1) **bat** les classes natives **sans `!important`**.
+2. **Réécrire proprement** le CSS d'un composant de layout plutôt qu'empiler des overrides.
+3. Si un override **ne prend pas** : inspecter le **CSS compilé** pour trouver la **règle gagnante**
+   (spécificité/ordre/`!important`) et la battre proprement.
+4. `verify-styles.mjs` **échoue si le rendu est écrasé** (computed ≠ token) → c'est le filet runtime ;
+   `css-baseline.md` est le filet **proactif**.
+
 ### Fichiers de templates LAYOUT (où intégrer)
 - **Menu principal** : `templates/front/default/actions/menu/main.html.twig`
 - **Menu footer** : `templates/front/default/actions/menu/footer.html.twig`

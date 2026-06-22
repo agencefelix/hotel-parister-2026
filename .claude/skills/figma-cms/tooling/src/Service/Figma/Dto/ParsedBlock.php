@@ -13,7 +13,7 @@ final readonly class ParsedBlock
 {
     /**
      * @param 'atom'|'module'|'unknown'                                       $kind
-     * @param list<array{figmaNodeId: string, image: string, imageRef: string, width: int}> $media images carried by the block (slider slides, media…)
+     * @param list<array{figmaNodeId: string, image: ?string, imageRef: string, width: int, format?: string, position?: int, title?: string, introduction?: string, targetLabel?: string, style?: array<string,mixed>}> $media médias/cards du bloc (slides de slider, cards de teaser…) — image ET texte structuré (titre/intro/CTA + style) quand présent
      * @param array{fontSize?: float, fontWeight?: int, fontFamily?: string, letterSpacing?: float, lineHeight?: float, textCase?: string, color?: string} $style text style relevé du node Figma (taille/poids/tracking/interligne/casse/couleur), pour appliquer fidèlement à l'intégration
      */
     public function __construct(

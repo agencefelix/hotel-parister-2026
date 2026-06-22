@@ -28,16 +28,7 @@
                                 "entity": "App\\Entity\\Layout\\Block + App\\Entity\\Module\\Slider\\Slider",
                                 "action": "slider-view",
                                 "fixture": "addBlock($col, 'core-action', 'slider-view', $entity->getId())"
-                            },
-                            "media": [
-                                {
-                                    "figmaNodeId": "542:1793",
-                                    "image": "media-542-1793.jpg",
-                                    "imageRef": "1b3d4781ebdbe060036e357e5c7d916d0fd3a114",
-                                    "width": 1440,
-                                    "format": "jpg"
-                                }
-                            ]
+                            }
                         }
                     ]
                 },
@@ -125,28 +116,72 @@
                                     "image": "media-I542-1643;106-668.jpg",
                                     "imageRef": "36885e37fbcaa3433701f1ac9ef90d53378b2ba4",
                                     "width": 510,
-                                    "format": "jpg"
+                                    "format": "jpg",
+                                    "position": 1,
+                                    "title": "Séjourner à l hôtel",
+                                    "introduction": "Des espaces pensés pour se réunir, présenter et célébrer.",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#b48608"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1644;106:668",
                                     "image": "media-I542-1644;106-668.jpg",
                                     "imageRef": "d9e140575765df93e07ae2983dda44197a83c3ba",
                                     "width": 510,
-                                    "format": "jpg"
+                                    "format": "jpg",
+                                    "position": 2,
+                                    "title": "Boire et manger au restaurant",
+                                    "introduction": "Une adresse vivante pour boire un verre, déjeuner ou prolonger la soirée.",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#b48608"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1645;106:668",
                                     "image": "media-I542-1645;106-668.jpg",
                                     "imageRef": "377dcce7c93edbdc84fe82299bf06116a6a48f77",
                                     "width": 510,
-                                    "format": "jpg"
+                                    "format": "jpg",
+                                    "position": 3,
+                                    "title": "Se détendre au spa",
+                                    "introduction": "Un espace dédié au bien-être, à l’écart du rythme de la ville.",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#b48608"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1646;106:668",
                                     "image": "media-I542-1646;106-668.jpg",
                                     "imageRef": "a3a7d25a24a03bd6e307d55b3f7552e6ddada086",
                                     "width": 510,
-                                    "format": "jpg"
+                                    "format": "jpg",
+                                    "position": 4,
+                                    "title": "Louer une salle",
+                                    "introduction": "Des espaces raffinés pour réunir, présenter, célébrer.",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#b48608"
+                                    }
                                 }
                             ]
                         }
@@ -189,7 +224,8 @@
                                     "image": "media-I542-1649;234-418.jpg",
                                     "imageRef": "b0bb43c7ae05567705bdc940c1a0dc185b6153ef",
                                     "width": 1461,
-                                    "format": "jpg"
+                                    "format": "jpg",
+                                    "position": 1
                                 }
                             ]
                         }
@@ -289,49 +325,126 @@
                                     "image": "chambre-suite-sdb-6.png",
                                     "imageRef": "3d7edc5410a5786b6c8af2bbd94fadc610c918b8",
                                     "width": 400,
-                                    "format": "png"
+                                    "format": "png",
+                                    "position": 1,
+                                    "title": "Chambre supérieure",
+                                    "introduction": "Intime et élégante",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#f4f0f1"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1603;410:4684",
                                     "image": "chambre-suite-sdb-6.png",
                                     "imageRef": "3d7edc5410a5786b6c8af2bbd94fadc610c918b8",
                                     "width": 400,
-                                    "format": "png"
+                                    "format": "png",
+                                    "position": 2,
+                                    "title": "Juinior suite",
+                                    "introduction": "Intime et élégante",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#f4f0f1"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1604;410:4684",
                                     "image": "chambre-suite-sdb-6.png",
                                     "imageRef": "bd31a3c58f3845832f165e86fe114c3db7d9b2e7",
                                     "width": 400,
-                                    "format": "png"
+                                    "format": "png",
+                                    "position": 3,
+                                    "title": "Junior suite terrasse",
+                                    "introduction": "Espace ouvert sur Paris",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#f4f0f1"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1605;410:4684",
                                     "image": "chambre-suite-sdb-6.png",
                                     "imageRef": "6490d3667e80c74b85606b1e42081de799cf2c6d",
                                     "width": 400,
-                                    "format": "png"
+                                    "format": "png",
+                                    "position": 4,
+                                    "title": "Deluxe terrasse",
+                                    "introduction": "Ouverte sur l’extérieur",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#f4f0f1"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1606;410:4684",
                                     "image": "chambre-suite-sdb-6.png",
                                     "imageRef": "be5d1f337d390f74dd211cefda5b0e3a47a5ed06",
                                     "width": 400,
-                                    "format": "png"
+                                    "format": "png",
+                                    "position": 5,
+                                    "title": "Suite duplex",
+                                    "introduction": "Sur deux niveaux, en toute intimité",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#f4f0f1"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1607;410:4684",
                                     "image": "chambre-suite-sdb-6.png",
                                     "imageRef": "f12c1bea380890b10b323184a79c16d66c7c2da3",
                                     "width": 400,
-                                    "format": "png"
+                                    "format": "png",
+                                    "position": 6,
+                                    "title": "Chambre deluxe",
+                                    "introduction": "Plus d’espace, plus de confort",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#f4f0f1"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1608;410:4684",
                                     "image": "chambre-suite-sdb-6.png",
                                     "imageRef": "abd56fce351bfc93d9f884e9933992ac7c3120b3",
                                     "width": 400,
-                                    "format": "png"
+                                    "format": "png",
+                                    "position": 7,
+                                    "title": "Suite parister",
+                                    "introduction": "La signature de la maison",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#f4f0f1"
+                                    }
                                 }
                             ]
                         }
@@ -595,28 +708,72 @@
                                     "image": "chambre-suite-sdb-6.png",
                                     "imageRef": "7661a0ce20d338a0f845f6eb26c823b93ffdd239",
                                     "width": 400,
-                                    "format": "png"
+                                    "format": "png",
+                                    "position": 1,
+                                    "title": "Les soins & massages",
+                                    "introduction": "Intime et élégante",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#f4f0f1"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1784;410:4684",
                                     "image": "chambre-suite-sdb-6.png",
                                     "imageRef": "80b0391b1e228c4ad013eeb63ff4cb57106871e0",
                                     "width": 400,
-                                    "format": "png"
+                                    "format": "png",
+                                    "position": 2,
+                                    "title": "La piscine chauffée",
+                                    "introduction": "Intime et élégante",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#f4f0f1"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1785;410:4684",
                                     "image": "chambre-suite-sdb-6.png",
                                     "imageRef": "ab88ece7e24f8dae4176e3d7f70b086803e78599",
                                     "width": 400,
-                                    "format": "png"
+                                    "format": "png",
+                                    "position": 3,
+                                    "title": "La salle de sport",
+                                    "introduction": "Intime et élégante",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#f4f0f1"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1786;410:4684",
                                     "image": "chambre-suite-sdb-6.png",
                                     "imageRef": "377dcce7c93edbdc84fe82299bf06116a6a48f77",
                                     "width": 400,
-                                    "format": "png"
+                                    "format": "png",
+                                    "position": 4,
+                                    "title": "Le couloir de nage",
+                                    "introduction": "Intime et élégante",
+                                    "targetLabel": "Découvrir",
+                                    "style": {
+                                        "fontSize": 54,
+                                        "fontWeight": 400,
+                                        "fontFamily": "August Script Bold free",
+                                        "lineHeight": 101,
+                                        "color": "#f4f0f1"
+                                    }
                                 }
                             ]
                         }
@@ -845,35 +1002,90 @@
                                     "image": "three-boys-huang-xiaoliang-1.jpg",
                                     "imageRef": "3689da711a48c0f4dab848cdc19efd07a2f60dca",
                                     "width": 290,
-                                    "format": "jpg"
+                                    "format": "jpg",
+                                    "position": 1,
+                                    "title": "L’exposition de Huang Xiaoliang",
+                                    "style": {
+                                        "fontSize": 14,
+                                        "fontWeight": 700,
+                                        "fontFamily": "Museo Sans",
+                                        "letterSpacing": 2.8,
+                                        "lineHeight": 16.8,
+                                        "textCase": "UPPER",
+                                        "color": "#b48608"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1624;30:878",
                                     "image": "three-boys-huang-xiaoliang-1.jpg",
                                     "imageRef": "3689da711a48c0f4dab848cdc19efd07a2f60dca",
                                     "width": 290,
-                                    "format": "jpg"
+                                    "format": "jpg",
+                                    "position": 2,
+                                    "title": "L’exposition de Huang Xiaoliang",
+                                    "style": {
+                                        "fontSize": 14,
+                                        "fontWeight": 700,
+                                        "fontFamily": "Museo Sans",
+                                        "letterSpacing": 2.8,
+                                        "lineHeight": 16.8,
+                                        "textCase": "UPPER",
+                                        "color": "#b48608"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1625;30:878",
                                     "image": "three-boys-huang-xiaoliang-1.jpg",
                                     "imageRef": "1eddbf66f99b77faa1fe9417fc9ba45fb13e12d0",
                                     "width": 290,
-                                    "format": "jpg"
+                                    "format": "jpg",
+                                    "position": 3,
+                                    "title": "L’exposition de \u2028Capucine Néouze",
+                                    "style": {
+                                        "fontSize": 14,
+                                        "fontWeight": 700,
+                                        "fontFamily": "Museo Sans",
+                                        "letterSpacing": 2.8,
+                                        "lineHeight": 16.8,
+                                        "textCase": "UPPER",
+                                        "color": "#b48608"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1627;30:878",
                                     "image": "three-boys-huang-xiaoliang-1.jpg",
                                     "imageRef": "ea1282c21963b43b67ee51f249790b435b62e1ac",
                                     "width": 290,
-                                    "format": "jpg"
+                                    "format": "jpg",
+                                    "position": 4,
+                                    "title": "Morning Wellness Club\nYoga avec Clarisse Douat",
+                                    "style": {
+                                        "fontSize": 14,
+                                        "fontWeight": 700,
+                                        "fontFamily": "Museo Sans",
+                                        "letterSpacing": 2.8,
+                                        "lineHeight": 16.8,
+                                        "textCase": "UPPER",
+                                        "color": "#b48608"
+                                    }
                                 },
                                 {
                                     "figmaNodeId": "I542:1626;30:878",
                                     "image": "three-boys-huang-xiaoliang-1.jpg",
                                     "imageRef": "ea1282c21963b43b67ee51f249790b435b62e1ac",
                                     "width": 290,
-                                    "format": "jpg"
+                                    "format": "jpg",
+                                    "position": 5,
+                                    "title": "Morning Wellness Club\nYoga avec Clarisse Douat",
+                                    "style": {
+                                        "fontSize": 14,
+                                        "fontWeight": 700,
+                                        "fontFamily": "Museo Sans",
+                                        "letterSpacing": 2.8,
+                                        "lineHeight": 16.8,
+                                        "textCase": "UPPER",
+                                        "color": "#b48608"
+                                    }
                                 }
                             ]
                         }
@@ -916,7 +1128,7 @@
         "[socialwall] [socialwall]",
         "[newsletter] [newsletter]",
         "[footer] [footer]",
-        "[nav] [nav]"
+        "[nav] [nav|close]"
     ],
     "warnings": []
 }

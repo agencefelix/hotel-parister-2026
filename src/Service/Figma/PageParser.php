@@ -915,10 +915,12 @@ final class PageParser
         if ($token !== null && !$this->mapper->isStructural($token['type']) && !$this->mapper->isExcluded($token['type'])) {
             $block = $this->mapper->toBlock($this->cleanName($node['name'] ?? '?'), $token['type'], $token['variants']);
 
-            // Media: slides linked by id (separate nodes) take precedence; else images within the node.
+            // Media: slides linked by id (separate nodes) take precedence ; else, pour un module à
+            // cards (slider/teaser) on collecte image + texte PAR card ; sinon images à plat.
+            $isCardModule = $block->moduleAction === 'slider-view' || str_ends_with((string) $block->moduleAction, '-teaser');
             $media = ($block->id !== null && isset($this->slidesBySlider[$block->id]))
                 ? $this->slidesForId($block->id)
-                : $this->collectImages($node);
+                : ($isCardModule ? $this->collectCards($node) : $this->collectImages($node));
 
             if ($media !== []) {
                 $block = new ParsedBlock(
@@ -965,14 +967,19 @@ final class PageParser
                     $first = $image[0];
                     $pos = $this->mapper->extractPosition($token['variants']);
                     $ext = $first['format'] ?? 'jpg';
-                    $slides[$sliderId][] = [
+                    $text = $this->cardText($node);
+                    $slides[$sliderId][] = array_filter([
                         'position' => $pos,
                         'figmaNodeId' => $first['figmaNodeId'],
                         'image' => 'slide-'.$this->slugify($sliderId).'-'.$pos.'.'.$ext,
                         'imageRef' => $first['imageRef'],
                         'width' => $first['width'],
                         'format' => $ext,
-                    ];
+                        'title' => $text['title'],
+                        'introduction' => $text['introduction'],
+                        'targetLabel' => $text['targetLabel'],
+                        'style' => $text['style'] !== [] ? $text['style'] : null,
+                    ], static fn ($v) => $v !== null);
                 }
             }
             foreach ($node['children'] ?? [] as $child) {
@@ -1012,13 +1019,17 @@ final class PageParser
         $slides = $this->slidesBySlider[$id] ?? [];
         usort($slides, static fn (array $a, array $b) => $a['position'] <=> $b['position']);
 
-        return array_map(static fn (array $s) => [
+        return array_map(static fn (array $s) => array_filter([
             'figmaNodeId' => $s['figmaNodeId'],
             'image' => $s['image'],
             'imageRef' => $s['imageRef'],
             'width' => $s['width'],
             'format' => $s['format'] ?? 'jpg',
-        ], $slides);
+            'title' => $s['title'] ?? null,
+            'introduction' => $s['introduction'] ?? null,
+            'targetLabel' => $s['targetLabel'] ?? null,
+            'style' => ($s['style'] ?? []) !== [] ? $s['style'] : null,
+        ], static fn ($v) => $v !== null), $slides);
     }
 
     /**
@@ -1232,6 +1243,146 @@ final class PageParser
         }
 
         return null;
+    }
+
+    /** Libellés d'appel à l'action (normalisés, sans accent) pour repérer un CTA dans une card. */
+    private const array CTA_LABELS = [
+        'decouvrir', 'decouvrez', 'en savoir plus', 'en savoir', 'reserver', 'reservez', 'je reserve',
+        'voir', 'voir plus', 'voir le menu', 'contact', 'contactez', 'telecharger', 'reserver une table',
+    ];
+
+    /**
+     * Collecte les TEXT feuilles d'un sous-arbre (slide/card) avec taille, position et nœud source.
+     *
+     * @param array<string, mixed>                                                            $node
+     * @param list<array{chars: string, size: float, y: float, node: array<string, mixed>}> $out
+     */
+    private function textLeaves(array $node, array &$out): void
+    {
+        foreach ($node['children'] ?? [] as $c) {
+            if (($c['type'] ?? '') === 'TEXT') {
+                $t = trim((string) ($c['characters'] ?? ''));
+                if ($t !== '') {
+                    $out[] = ['chars' => $t, 'size' => (float) ($c['style']['fontSize'] ?? 0.0), 'y' => (float) ($c['absoluteBoundingBox']['y'] ?? 0.0), 'node' => $c];
+                }
+            }
+            $this->textLeaves($c, $out);
+        }
+    }
+
+    /** Un libellé court figurant au lexique CTA (insensible casse/accents). */
+    private function isCtaLabel(string $chars): bool
+    {
+        $n = strtr(mb_strtolower(trim($chars)), ['à' => 'a', 'â' => 'a', 'ä' => 'a', 'é' => 'e', 'è' => 'e', 'ê' => 'e', 'ë' => 'e', 'î' => 'i', 'ï' => 'i', 'ô' => 'o', 'ö' => 'o', 'û' => 'u', 'ü' => 'u', 'ç' => 'c', '’' => "'"]);
+        $n = preg_replace('/\s+/', ' ', $n);
+        if (str_word_count($n) > 4) {
+            return false;
+        }
+        foreach (self::CTA_LABELS as $l) {
+            if ($n === $l || str_starts_with($n, $l)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Texte structuré d'une slide/card : titre / introduction / libellé CTA + style du titre,
+     * classé par rang de taille de police + position (logique validée par POC sur la home).
+     * Les lignes de plus grande taille forment le titre (motif 2 lignes), la taille mini = intro,
+     * les libellés du lexique CTA sont retirés (un seul gardé comme targetLabel).
+     *
+     * @param array<string, mixed> $node
+     *
+     * @return array{title: ?string, introduction: ?string, targetLabel: ?string, style: array<string, mixed>}
+     */
+    private function cardText(array $node): array
+    {
+        $leaves = [];
+        $this->textLeaves($node, $leaves);
+
+        $cta = null;
+        $rest = [];
+        foreach ($leaves as $leaf) {
+            if ($this->isCtaLabel($leaf['chars'])) {
+                $cta ??= $this->normalizeText($leaf['chars']);
+                continue;
+            }
+            $rest[] = $leaf;
+        }
+
+        if ($rest === []) {
+            return ['title' => null, 'introduction' => null, 'targetLabel' => $cta, 'style' => []];
+        }
+
+        if (count($rest) === 1) {
+            return ['title' => $this->normalizeText($rest[0]['chars']), 'introduction' => null, 'targetLabel' => $cta, 'style' => $this->textStyle($rest[0]['node'])];
+        }
+
+        $minSize = min(array_map(static fn (array $l) => $l['size'], $rest));
+        $titleLeaves = array_values(array_filter($rest, static fn (array $l) => $l['size'] > $minSize));
+        $introLeaves = array_values(array_filter($rest, static fn (array $l) => $l['size'] <= $minSize));
+
+        if ($titleLeaves === []) { // toutes tailles égales → 1re ligne = titre, reste = intro
+            usort($rest, static fn (array $a, array $b) => $a['y'] <=> $b['y']);
+            $titleLeaves = [array_shift($rest)];
+            $introLeaves = $rest;
+        }
+
+        usort($titleLeaves, static fn (array $a, array $b) => $a['y'] <=> $b['y']);
+        usort($introLeaves, static fn (array $a, array $b) => $a['y'] <=> $b['y']);
+
+        $join = fn (array $ls) => $this->normalizeText(implode(' ', array_map(static fn (array $l) => $l['chars'], $ls)));
+        $primary = $titleLeaves[0];
+        foreach ($titleLeaves as $l) {
+            if ($l['size'] > $primary['size']) {
+                $primary = $l;
+            }
+        }
+
+        return [
+            'title' => $join($titleLeaves),
+            'introduction' => $introLeaves === [] ? null : $join($introLeaves),
+            'targetLabel' => $cta,
+            'style' => $this->textStyle($primary['node']),
+        ];
+    }
+
+    /**
+     * Médias par card d'un module (slider/teaser) : chaque enfant direct = une card portant
+     * son image (1er IMAGE du sous-arbre) + son texte structuré. Les enfants sans image ni
+     * titre (flèches, contrôles) sont ignorés.
+     *
+     * @param array<string, mixed> $node
+     *
+     * @return list<array<string, mixed>>
+     */
+    private function collectCards(array $node): array
+    {
+        $cards = [];
+        $pos = 0;
+        foreach ($node['children'] ?? [] as $child) {
+            $images = $this->collectImages($child);
+            $text = $this->cardText($child);
+            if ($images === [] && $text['title'] === null) {
+                continue;
+            }
+            ++$pos;
+            $entry = $images[0] ?? ['figmaNodeId' => (string) ($child['id'] ?? ''), 'image' => null, 'imageRef' => '', 'width' => 0, 'format' => 'jpg'];
+            $entry['position'] = $pos;
+            foreach (['title', 'introduction', 'targetLabel'] as $k) {
+                if ($text[$k] !== null) {
+                    $entry[$k] = $text[$k];
+                }
+            }
+            if ($text['style'] !== []) {
+                $entry['style'] = $text['style'];
+            }
+            $cards[] = $entry;
+        }
+
+        return $cards;
     }
 
     /**

@@ -1044,6 +1044,10 @@ final class PageParser
         if ($token !== null && !$this->mapper->isStructural($token['type']) && !$this->mapper->isExcluded($token['type'])) {
             $block = $this->mapper->toBlock($this->cleanName($node['name'] ?? '?'), $token['type'], $token['variants']);
 
+            // Text-bearing atoms (alert/title/text/blockquote/link…) carry the layer's copy.
+            // Sans ça un [alert]/[title] enveloppant un TEXT produisait un bloc VIDE (copie perdue).
+            $block = $this->withTextContent($block, $node);
+
             // Media: slides linked by id (separate nodes) take precedence ; else, pour un module à
             // cards (slider/teaser) on collecte image + texte PAR card ; sinon images à plat.
             $isCardModule = $block->moduleAction === 'slider-view' || str_ends_with((string) $block->moduleAction, '-teaser');
@@ -1075,6 +1079,78 @@ final class PageParser
         }
 
         return $blocks;
+    }
+
+    /** Atom slugs whose content IS text: they must carry the layer's copy (else the block is empty). */
+    private const array TEXT_BEARING = ['title', 'title-header', 'text', 'blockquote', 'alert', 'link', 'counter'];
+
+    /**
+     * Populates a text-bearing atom block with the layer's copy + the primary text node's style.
+     * A `link` keeps only its first text (the label) ; other atoms take the whole subtree's text.
+     * Leaves modules and non-text atoms untouched.
+     *
+     * @param array<string, mixed> $node
+     */
+    private function withTextContent(ParsedBlock $block, array $node): ParsedBlock
+    {
+        if ('atom' !== $block->kind
+            || $block->blockTypeSlug === null
+            || !in_array($block->blockTypeSlug, self::TEXT_BEARING, true)
+            || ($block->text !== null && $block->text !== '')) {
+            return $block;
+        }
+
+        $text = 'link' === $block->blockTypeSlug
+            ? $this->firstText($node)
+            : $this->normalizeText($this->allText($node));
+        if ($text === null || $text === '') {
+            return $block;
+        }
+
+        $style = $block->style;
+        if ($style === []) {
+            $primary = $this->firstTextNode($node);
+            if ($primary !== null) {
+                $style = $this->textStyle($primary);
+            }
+        }
+
+        return new ParsedBlock(
+            figmaName: $block->figmaName,
+            kind: $block->kind,
+            blockTypeSlug: $block->blockTypeSlug,
+            moduleAction: $block->moduleAction,
+            moduleEntity: $block->moduleEntity,
+            note: $block->note,
+            media: $block->media,
+            variants: $block->variants,
+            id: $block->id,
+            moduleTemplate: $block->moduleTemplate,
+            text: $text,
+            style: $style,
+        );
+    }
+
+    /**
+     * First TEXT node found in a subtree (depth-first), to read its style; null if none.
+     *
+     * @param array<string, mixed> $node
+     *
+     * @return array<string, mixed>|null
+     */
+    private function firstTextNode(array $node): ?array
+    {
+        if (($node['type'] ?? '') === 'TEXT') {
+            return $node;
+        }
+        foreach ($node['children'] ?? [] as $child) {
+            $found = $this->firstTextNode($child);
+            if ($found !== null) {
+                return $found;
+            }
+        }
+
+        return null;
     }
 
     /**

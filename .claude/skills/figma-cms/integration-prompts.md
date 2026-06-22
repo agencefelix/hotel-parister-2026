@@ -782,6 +782,11 @@ la marge voulue en SCSS, ou ajuster via l'utilitaire. Vérifier l'espacement ré
 ### Configurer `variables.scss` (tailles de titres, couleurs par fond `$elements`, boutons)
 Beaucoup de réglages globaux passent par `assets/scss/front/default/variables.scss` — **les configurer
 là plutôt que de surcharger bande par bande** :
+- **RÉCAP UNIFIÉ (1 commande)** : `node .claude/skills/figma-cms/tooling/design-system.mjs --tokens
+  integration/figma-tokens.<page>.json [--node <page>] --out integration/design-system.md` — orchestre
+  les 3 outils ci-dessous en **un seul rapport** « design system → SCSS » (palette + échelle typo nommées,
+  couleurs → vars SCSS existantes, typo → échelle). À lancer en premier pour la vue d'ensemble ; les
+  outils unitaires ci-dessous restent utiles pour le détail.
 - **AVANT de styler — relever le DESIGN SYSTEM nommé (source de vérité)** :
   `node .claude/skills/figma-cms/tooling/figma-named-styles.mjs [--node <page>]`. Si la maquette
   utilise des **styles nommés** (dictionnaire `styles` du fichier, via `file_content:read` — aucun

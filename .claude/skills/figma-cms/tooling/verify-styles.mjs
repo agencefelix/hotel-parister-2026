@@ -7,7 +7,9 @@
  *   node .claude/skills/figma-cms/tooling/verify-styles.mjs <url> <figma-tokens.<page>.json> [options]
  *
  * Vérifie : pour les TEXT — font-size/weight/letter-spacing/line-height/text-transform/color ;
- * pour les CONTENEURS auto-layout (FRAME à padding non nul) — padding top/right/bottom/left.
+ * pour les CONTENEURS auto-layout (FRAME à padding/gap non nul) — padding top/right/bottom/left
+ * et `gap` (espacement entre enfants, mesuré géométriquement). Seuls les paddings ATTENDUS non nuls
+ * sont vérifiés (un pad=0 Figma ≠ absence de padding CMS : gouttières Bootstrap).
  *
  * Options :
  *   --map <map.json>       mapping explicite { "<nodeId>": "<sélecteur CSS>" } (prime sur le texte)
@@ -82,7 +84,8 @@ if (!NO_BOX) {
     const L = n.layout;
     if (!L || typeof n.x !== 'number' || typeof n.w !== 'number') continue;
     const pads = { top: L.padTop || 0, right: L.padRight || 0, bottom: L.padBottom || 0, left: L.padLeft || 0 };
-    if (!pads.top && !pads.right && !pads.bottom && !pads.left) continue; // rien à vérifier
+    const gap = L.gap || 0;
+    if (!pads.top && !pads.right && !pads.bottom && !pads.left && !gap) continue; // rien à vérifier
     const inside = allTexts.filter((t) => {
       const cx = t.x + (t.w || 0) / 2, cy = t.y + (t.h || 0) / 2;
       return cx >= n.x && cx <= n.x + n.w && cy >= n.y && cy <= n.y + n.h;
@@ -91,7 +94,7 @@ if (!NO_BOX) {
     inside.sort((a, b) => a.y - b.y);
     const text = inside.map((t) => t.characters).join(' ').replace(/\s+/g, ' ').trim();
     if (text.replace(/\s+/g, '').length < 3) continue;
-    boxes.push({ id: n.id, name: (n.name || '').slice(0, 24), pads, text, area: n.w * (n.h || 0) });
+    boxes.push({ id: n.id, name: (n.name || '').slice(0, 24), pads, gap, mode: L.mode || 'VERTICAL', text, area: n.w * (n.h || 0) });
   }
   // Dédupe par texte : en cas de conteneurs imbriqués au même texte, garder le plus GRAND
   // (conteneur extérieur = celui dont le CMS pilote le padding : zone/col/bloc).
@@ -167,6 +170,23 @@ const result = await page.evaluate((tokens, boxes, selectorMap) => {
     const cs = getComputedStyle(el);
     return { top: parseFloat(cs.paddingTop) || 0, right: parseFloat(cs.paddingRight) || 0, bottom: parseFloat(cs.paddingBottom) || 0, left: parseFloat(cs.paddingLeft) || 0 };
   };
+  // Gap GÉOMÉTRIQUE entre enfants consécutifs (médiane) : robuste quel que soit le moyen
+  // (CSS gap, marges, gouttières). Descend dans un wrapper unique (track de carrousel…).
+  const measureGap = (el, mode) => {
+    let kids = Array.from(el.children);
+    let guard = 0;
+    while (kids.length === 1 && kids[0].children.length > 1 && guard++ < 3) kids = Array.from(kids[0].children);
+    const rects = kids.map((k) => k.getBoundingClientRect()).filter((r) => r.width > 0 && r.height > 0);
+    if (rects.length < 2) return null;
+    const horizontal = mode === 'HORIZONTAL';
+    rects.sort((a, b) => horizontal ? a.left - b.left : a.top - b.top);
+    const gaps = [];
+    for (let i = 1; i < rects.length; i++) {
+      gaps.push(Math.max(0, Math.round(horizontal ? rects[i].left - rects[i - 1].right : rects[i].top - rects[i - 1].bottom)));
+    }
+    gaps.sort((a, b) => a - b);
+    return gaps[Math.floor(gaps.length / 2)];
+  };
 
   const textRows = tokens.map((tk) => {
     let el = null;
@@ -182,7 +202,7 @@ const result = await page.evaluate((tokens, boxes, selectorMap) => {
     if (selectorMap[bx.id]) { el = document.querySelector(selectorMap[bx.id]); how = 'map'; }
     if (!el) { const c = byFull.get(norm(bx.text)); if (c && c.length) { el = c[0]; how = 'full-text'; } }
     if (!el) { const c = byCompact.get(norm(bx.text).replace(/\s/g, '')); if (c && c.length) { el = c[0]; how = 'compact'; } }
-    return { id: bx.id, matched: !!el, how, pad: el ? measurePad(el) : null };
+    return { id: bx.id, matched: !!el, how, pad: el ? measurePad(el) : null, gap: el ? measureGap(el, bx.mode) : null };
   });
   return { textRows, boxRows };
 }, tokens, boxes, selectorMap);
@@ -252,8 +272,19 @@ for (const r of result.boxRows) {
     continue;
   }
   const checks = [];
+  // Ne vérifier QUE les paddings attendus non nuls (un pad=0 côté Figma ne signifie pas absence de
+  // padding côté CMS — gouttières Bootstrap → trop de faux positifs).
   for (const side of ['top', 'right', 'bottom', 'left']) {
-    checks.push({ prop: 'padding-' + side, ok: near(bx.pads[side], r.pad[side], TOL_BOX), exp: bx.pads[side] + 'px', got: r.pad[side] + 'px' });
+    if (bx.pads[side] > 0) {
+      checks.push({ prop: 'padding-' + side, ok: near(bx.pads[side], r.pad[side], TOL_BOX), exp: bx.pads[side] + 'px', got: r.pad[side] + 'px' });
+    }
+  }
+  if (bx.gap > 0 && r.gap != null) {
+    checks.push({ prop: 'gap', ok: near(bx.gap, r.gap, TOL_BOX), exp: bx.gap + 'px', got: r.gap + 'px' });
+  }
+  if (checks.length === 0) {
+    boxRows.push({ id: r.id, name: bx.name, text: bx.text.slice(0, 40), matched: true, how: r.how, checks, skipped: true });
+    continue;
   }
   if (checks.some((c) => !c.ok)) boxFails++;
   boxRows.push({ id: r.id, name: bx.name, text: bx.text.slice(0, 40), matched: true, how: r.how, checks });
@@ -281,6 +312,7 @@ for (const row of rows) {
 if (boxRows.length) {
   console.log(`\n${C.dim}Paddings de conteneurs (auto-layout) :${C.reset}`);
   for (const row of boxRows) {
+    if (row.skipped) continue;
     if (!row.matched) {
       console.log(`${C.yellow}∅ NON APPARIÉ${C.reset} [box] «${row.text}»`);
       continue;

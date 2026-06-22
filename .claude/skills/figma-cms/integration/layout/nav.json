@@ -13,8 +13,8 @@
         "links": "App\\Entity\\Module\\Menu\\Link (+ LinkIntl) — hiérarchie via level/parent"
     },
     "captures": [
-        { "label": "closed", "figmaNodeId": null, "screenshot": "nav-closed.png", "note": null },
-        { "label": "open", "figmaNodeId": null, "screenshot": "nav-open.png", "note": null }
+        { "label": "desktop", "figmaNodeId": "386:1793", "screenshot": "nav.png", "note": "composant isolé [nav] (l'instance home est transparente sur le hero → blanche)" },
+        { "label": "mobile", "figmaNodeId": "501:3911", "screenshot": "nav-mobile.png", "note": "frame isolé [nav|mobile]" }
     ],
     "content": { "logo": null, "menu": [], "ctas": [], "languages": [], "contact": {} },
     "notes": []

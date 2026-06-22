@@ -1345,6 +1345,17 @@ Règles :
   le contexte créa (doublons). Les `layout/*.json` doivent donc pointer les node-ids de la home ou des
   frames isolés, pas ceux d'une page intérieure. Une variante isolée (`[nav|mobile]`) est la **source
   privilégiée** pour cet état précis.
+- **Capture (`figma:capture-layout`)** : les `layout/*.json` sont des **modèles vides** (`figmaNodeId: null`) ;
+  les **renseigner** avec les node-ids relevés (home ou frames isolés) AVANT de lancer la capture, sinon
+  rien n'est produit. Puis `php bin/console figma:capture-layout` écrit dans `screenshots/layout/`.
+  - ⚠️ **Caveat transparence** : un élément **transparent par-dessus le hero** (cas typique de la nav
+    desktop : logo/liens **blancs** sur fond transparent) **rend BLANC** s'il est capturé depuis son
+    instance sur `[page|home]`. Le capturer alors depuis le **composant/frame isolé** (`[nav]` master,
+    `[nav|mobile]`) qui a son propre contexte/fond. Toujours **vérifier visuellement** chaque capture
+    (une PNG quasi vide / < ~10 Ko = signal d'alerte).
+  - **Nettoyer les orphelins** : `screenshots/layout/` ne doit contenir QUE les sorties déclarées par les
+    descripteurs (supprimer les captures d'un ancien run au nommage différent, ex. `socialwall.png` vs
+    `social-wall.png`).
 - **Exclus de la génération par page** : lors du parsing d'un `[page…]`, ignorer les sous-arbres `[nav]` et `[footer]` — ne créer ni Zone, ni Col, ni Block pour eux **au niveau de la page**.
 - Pour chaque page, ne générer que le **contenu propre à la page**, situé entre la nav et le footer.
 - Conséquence : si la nav/le footer existent déjà dans le layout de base, ne pas les recréer ; sinon, les créer **une fois** puis les réutiliser sur toutes les pages.

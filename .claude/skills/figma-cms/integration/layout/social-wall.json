@@ -11,7 +11,7 @@
         "moduleWarning": "Vérifier en base : selon le projet/version SFCMS, il peut N'EXISTER AUCUN module dédié au mur social (cas Parister : ROLE_SOCIAL_WALL référencé sans Module). Ne pas activer un module inexistant ; un feed dynamique = dev spécifique."
     },
     "captures": [
-        { "label": "tiles", "figmaNodeId": null, "screenshot": "social-wall.png", "note": null }
+        { "label": "tiles", "figmaNodeId": "630:1531", "screenshot": "social-wall.png", "note": "mur social sur [page|home]" }
     ],
     "detectionCues": ["Instagram", "Facebook", "Youtube"],
     "content": { "cta": null, "tiles": null },

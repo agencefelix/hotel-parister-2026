@@ -13,7 +13,7 @@
         "action": "newsletter-form"
     },
     "captures": [
-        { "label": "block", "figmaNodeId": null, "screenshot": "newsletter.png", "note": null }
+        { "label": "block", "figmaNodeId": "542:1664", "screenshot": "newsletter.png", "note": "newsletter sur [page|home]" }
     ],
     "content": { "title": null, "field": null, "submit": null, "consent": null },
     "notes": []

@@ -13,7 +13,7 @@
         "links": "App\\Entity\\Module\\Menu\\Link (+ LinkIntl)"
     },
     "captures": [
-        { "label": "default", "figmaNodeId": null, "screenshot": "footer.png", "note": null }
+        { "label": "default", "figmaNodeId": "542:1676", "screenshot": "footer.png", "note": "footer sur [page|home]" }
     ],
     "content": { "menu": [], "logo": null, "contact": {}, "social": [], "legal": [] },
     "notes": []

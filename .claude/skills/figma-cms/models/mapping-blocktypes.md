@@ -100,6 +100,25 @@ slider ou en index). Implémenté : `ConventionMapper::resolveTeaser()`.
 > `timeline-view`, `table-view`, `recruitment-index`, `search-result-view`,
 > `sitemap-view`, `information-view`, `menu-view`, `pages-navigation-view`…
 
+### Texte des slides/cards (dry-run) → champs de fixtures
+
+Le parser extrait le **texte structuré** de chaque slide/card dans `ParsedBlock.media[]`
+(`{title, introduction, targetLabel, style}`, via `PageParser::cardText()`). Où le **router** à
+l'intégration dépend du type de module :
+
+| Module | Chaque `media[]` (card/slide) alimente | Champs |
+|---|---|---|
+| `slider-view` (`[slider]`) | une **`SliderMediaRelation` + son intl** (le slider porte son contenu) | `intl.title` ← `title` ; `intl.introduction` ← `introduction` ; `intl.body` ; `intl.targetLabel` ← `targetLabel` ; `intl.targetLink` (URL via interaction proto) ; + `setMedia()` (image de la card) |
+| `catalog-teaser` / `newscast-teaser` | un **item d'entité** (`Module\Catalog\Product` / `Module\Newscast\Newscast`), **PAS** le bloc teaser | `ProductIntl`/`NewscastIntl` : `title` ← `title`, `introduction` ← `introduction`, `body` ; + `XxxMediaRelation->setMain(true)` (sinon card `no-media`) |
+
+> ⚠️ **Distinction clé** : un **slider** porte son contenu sur sa relation média (slide) ; un **teaser**
+> n'a pas de contenu propre par card — il **affiche les items** d'un module (produits/actus). Donc le
+> texte des cards d'un teaser **seed les fixtures d'items** (Catalog/Newscast), jamais le bloc teaser.
+> Le `targetLabel` (CTA, ex. « Découvrir ») est en général **un libellé générique du template**, pas
+> un champ par item — ne le reporter que s'il varie réellement par card.
+> La sélection des items affichés par un teaser (récents, `nbrItems`, `promoteFirst`, catégorie) est une
+> **config du teaser**, indépendante du texte extrait.
+
 ## Détail module : Slider (`[slider]`)
 
 Patron : `PageFixtures::addHomeLayout()`. Entité `Module\Slider\Slider` +

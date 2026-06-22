@@ -506,11 +506,15 @@ final class PageParser
         $threshold = $pageWidth * self::FULL_WIDTH_RATIO;
         $candidates = $this->backgroundCandidates([$node], $threshold);
 
-        // Full-bleed (bord à bord) : tag explicite [zone|fullwidth] OU déduction — la bande a un fond
-        // PROPRE pleine largeur (couleur ≠ fond de page, dégradé, ou image hero plein écran). Sans ça,
-        // hero et bandes cinématiques étaient rendus boxés (la maquette ne tague pas `fullwidth`).
+        // Full-bleed (bord à bord), 3 voies :
+        //  1. tag explicite [zone|fullwidth] (autorité : force/garantit le bord à bord) ;
+        //  2. la bande a un fond PROPRE pleine largeur (couleur ≠ page, dégradé, ou image hero) ;
+        //  3. bande cinématique : un module slider/média OCCUPE la bande et AUCUN titre/intro/texte
+        //     n'est posé sur son fond (cf. isCinematicMediaBand) — un carrousel bord à bord sans
+        //     fond solide propre (l'image vit dans les slides) serait sinon rendu boxé.
         $fullSize = in_array('fullwidth', $variants, true)
-            || $this->hasOwnFullWidthBackground($candidates, $bb['y'], $bb['y'] + $bb['h'], $pageBackground);
+            || $this->hasOwnFullWidthBackground($candidates, $bb['y'], $bb['y'] + $bb['h'], $pageBackground)
+            || $this->isCinematicMediaBand($cols);
 
         return new ParsedZone(
             label: $this->cleanName($node['name'] ?? 'zone'),
@@ -603,6 +607,37 @@ final class PageParser
         }
 
         return false;
+    }
+
+    /**
+     * Bande cinématique full-bleed : la bande est OCCUPÉE par un module slider/média (carrousel,
+     * galerie, image) et ne porte AUCUN titre/intro/texte sur son fond — seuls le module et ses
+     * contrôles de navigation (liens/flèches) sont présents.
+     *
+     * Pourquoi ce critère : la pure géométrie ne suffit pas à distinguer un carrousel cinématique
+     * bord à bord d'un teaser de contenu (mêmes slides, même débordement). Le signal fiable est
+     * sémantique : un titre de section posé sur le fond marque une bande de CONTENU (boxée, sur le
+     * fond de page) ; une bande qui n'est QUE le module est une bande MÉDIA (bord à bord). Le tag
+     * [zone|fullwidth] reste l'autorité explicite quand cette déduction ne convient pas.
+     *
+     * @param list<ParsedCol> $cols
+     */
+    private function isCinematicMediaBand(array $cols): bool
+    {
+        $hasMedia = false;
+        foreach ($cols as $col) {
+            foreach ($col->blocks as $b) {
+                // Un titre/intro/texte autonome sur le fond = bande de contenu → jamais cinématique.
+                if (in_array($b->blockTypeSlug, ['title', 'title-header', 'text', 'blockquote'], true)) {
+                    return false;
+                }
+                if ('module' === $b->kind || 'media' === $b->blockTypeSlug) {
+                    $hasMedia = true;
+                }
+            }
+        }
+
+        return $hasMedia;
     }
 
     /**
@@ -885,9 +920,17 @@ final class PageParser
      */
     private function emitBlocks(array $el, array &$blocks, int &$untagged): void
     {
-        $found = $this->collectTaggedBlocks($el);
-        if ($found !== []) {
-            array_push($blocks, ...$found);
+        // Un nœud qui porte SON PROPRE tag de contenu/module = un bloc, collecté en entier et NON
+        // traversé (ses textes internes sont le contenu du bloc). On ne court-circuite que sur le tag
+        // du nœud lui-même : un wrapper NON taggé qui ne fait que CONTENIR un module taggé doit quand
+        // même émettre ses voisins non taggés (ex. un titre de hero à côté d'un [slider]) au lieu
+        // d'être réduit au seul module — sinon ce texte est perdu.
+        $token = $this->mapper->extract($el['name'] ?? '');
+        if ($token !== null
+            && 'slide' !== $token['type']
+            && !$this->mapper->isStructural($token['type'])
+            && !$this->mapper->isExcluded($token['type'])) {
+            array_push($blocks, ...$this->collectTaggedBlocks($el));
 
             return;
         }

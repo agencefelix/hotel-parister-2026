@@ -357,6 +357,16 @@ stacking si overlay) ; `alert` → `blocks/alert/…` (+ JS `#website-alert`).
 **Teasers :** `catalog-teaser` → `actions/catalog/teaser/{slider,slider-multi}.html.twig` ;
 `newscast-teaser` → `actions/newscast/teaser/slider.html.twig`.
 
+**🃏 Cartes des index & teasers (actus / produits) — MACROS DÉDIÉES :** les cartes vivent dans
+`templates/front/default/include/macros/card.html.twig` (macros `standard`, `eventCard`…), importées par
+les index/teasers (`actions/catalog/…`, `actions/newscast/…`). Chaque type de carte de la maquette doit
+avoir un **template bien distinct** : **ne pas tout faire passer par `standard`** — **créer une nouvelle
+macro** (`{% macro maCarte(vars) %}…{% endmacro %}`) dès que le rendu diffère, et l'appeler depuis le
+template d'index/teaser concerné.
+- **Produits** : si deux jeux de cartes ont des **styles différents**, c'est presque toujours qu'ils
+  relèvent de **catalogues différents** → faire **une macro par catalogue** (router selon le catalogue
+  de l'item) plutôt qu'un `{% if %}` fourre-tout. Idem actus si plusieurs présentations coexistent.
+
 **⚠️ Piège média des cartes/teasers (`ViewModel.mainMedia`) :** les cartes (`macros/card.html.twig`)
 affichent l'image via `intl.mainMedia`, alimentée par `MediasModel.main` = la **relation média flaggée
 `main`**. Dans les fixtures de modules (produits, actus…), `XxxMediaRelation` **doit appeler

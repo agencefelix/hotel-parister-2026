@@ -21,7 +21,9 @@
    node .claude/skills/figma-cms/tooling/verify-styles.mjs <url> .claude/skills/figma-cms/integration/figma-tokens.<page>.json [--width 1440]
    ```
    Vérifie `font-size`, `font-weight`, `letter-spacing`, `line-height`, `text-transform`, `color`
-   (appariement par texte ; `--map <map.json>` pour forcer un sélecteur ; `--out report.json`).
+   (TEXT) **et les `padding` des conteneurs auto-layout** (FRAME à padding non nul, appariés via leurs
+   textes contenus) — appariement par texte ; `--map <map.json>` pour forcer un sélecteur ;
+   `--tol-box` / `--no-box` pour les paddings ; `--out report.json`.
    ⟶ artefact : la sortie du script. **La case n'est cochée que si `GATE STYLES : OK` (exit 0).**
    Compléter par `getComputedStyle` manuel sur `::before`/`::after` (non couverts par le script).
 7. **[ ] Contraintes numériques** — vérifier les exigences chiffrées (ex. nav ≤ 10dvh, mega-menu

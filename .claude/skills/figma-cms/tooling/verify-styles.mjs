@@ -6,18 +6,24 @@
  * Usage (depuis la RACINE du projet, où puppeteer-core est installé) :
  *   node .claude/skills/figma-cms/tooling/verify-styles.mjs <url> <figma-tokens.<page>.json> [options]
  *
+ * Vérifie : pour les TEXT — font-size/weight/letter-spacing/line-height/text-transform/color ;
+ * pour les CONTENEURS auto-layout (FRAME à padding non nul) — padding top/right/bottom/left.
+ *
  * Options :
  *   --map <map.json>       mapping explicite { "<nodeId>": "<sélecteur CSS>" } (prime sur le texte)
  *   --tol-px <n>           tolérance fontSize / letterSpacing en px (défaut 1)
  *   --tol-lh <n>           tolérance line-height en px (défaut 2)
  *   --tol-color <n>        tolérance couleur par canal 0-255 (défaut 10)
+ *   --tol-box <n>          tolérance padding de conteneur en px (défaut 2)
+ *   --no-box               désactive la vérification des paddings (TEXT uniquement)
  *   --width <n>            largeur viewport (défaut 1440) — relancer par breakpoint pour le responsive
  *   --strict-unmatched     échoue aussi si un token texte n'a AUCUN élément correspondant
  *   --only <substr>        ne vérifie que les tokens dont le texte contient <substr> (debug)
  *   --out <report.json>    écrit le rapport détaillé
  *
- * Appariement : par défaut, chaque token TEXT est relié à l'élément DOM dont le texte
- * (normalisé : espaces compactés, casse ignorée) correspond. `--map` force un sélecteur.
+ * Appariement : chaque token TEXT est relié à l'élément DOM dont le texte (normalisé) correspond.
+ * Un CONTENEUR (pas d'identité texte) est relié via le texte de ses TEXT contenus géométriquement
+ * (puis match DOM insensible aux espaces). `--map` force un sélecteur dans les deux cas.
  *
  * Prérequis : Chrome installé ; puppeteer-core dans node_modules du projet.
  */
@@ -28,7 +34,7 @@ const args = process.argv.slice(2);
 const URL = args[0];
 const TOKENS_PATH = args[1];
 if (!URL || !TOKENS_PATH) {
-  console.error('Usage: node verify-styles.mjs <url> <figma-tokens.json> [--map m.json] [--tol-px 1] [--tol-lh 2] [--tol-color 10] [--width 1440] [--strict-unmatched] [--only txt] [--out r.json]');
+  console.error('Usage: node verify-styles.mjs <url> <figma-tokens.json> [--map m.json] [--tol-px 1] [--tol-lh 2] [--tol-color 10] [--tol-box 2] [--no-box] [--width 1440] [--strict-unmatched] [--only txt] [--out r.json]');
   process.exit(2);
 }
 const opt = (name, def) => {
@@ -40,6 +46,8 @@ const flag = (name) => args.includes(name);
 const TOL_PX = parseFloat(opt('--tol-px', '1'));
 const TOL_LH = parseFloat(opt('--tol-lh', '2'));
 const TOL_COLOR = parseInt(opt('--tol-color', '10'), 10);
+const TOL_BOX = parseFloat(opt('--tol-box', '2'));
+const NO_BOX = flag('--no-box');
 const WIDTH = parseInt(opt('--width', '1440'), 10);
 const STRICT_UNMATCHED = flag('--strict-unmatched');
 const ONLY = opt('--only', null);
@@ -64,6 +72,37 @@ if (tokens.length === 0) {
   process.exit(2);
 }
 
+// Conteneurs (auto-layout) à padding NON NUL → vérification des paddings rendus.
+// Le conteneur n'a pas d'identité texte → on la reconstruit par CONTENANCE GÉOMÉTRIQUE :
+// les TEXT dont le centre tombe dans la bbox du conteneur (coords relatives au même root).
+const allTexts = items.filter((n) => n.type === 'TEXT' && typeof n.characters === 'string' && n.characters.trim() !== '' && typeof n.x === 'number');
+let boxes = [];
+if (!NO_BOX) {
+  for (const n of items) {
+    const L = n.layout;
+    if (!L || typeof n.x !== 'number' || typeof n.w !== 'number') continue;
+    const pads = { top: L.padTop || 0, right: L.padRight || 0, bottom: L.padBottom || 0, left: L.padLeft || 0 };
+    if (!pads.top && !pads.right && !pads.bottom && !pads.left) continue; // rien à vérifier
+    const inside = allTexts.filter((t) => {
+      const cx = t.x + (t.w || 0) / 2, cy = t.y + (t.h || 0) / 2;
+      return cx >= n.x && cx <= n.x + n.w && cy >= n.y && cy <= n.y + n.h;
+    });
+    if (inside.length === 0) continue;
+    inside.sort((a, b) => a.y - b.y);
+    const text = inside.map((t) => t.characters).join(' ').replace(/\s+/g, ' ').trim();
+    if (text.replace(/\s+/g, '').length < 3) continue;
+    boxes.push({ id: n.id, name: (n.name || '').slice(0, 24), pads, text, area: n.w * (n.h || 0) });
+  }
+  // Dédupe par texte : en cas de conteneurs imbriqués au même texte, garder le plus GRAND
+  // (conteneur extérieur = celui dont le CMS pilote le padding : zone/col/bloc).
+  const byText = new Map();
+  for (const b of boxes) {
+    const k = b.text.toLowerCase();
+    if (!byText.has(k) || b.area > byText.get(k).area) byText.set(k, b);
+  }
+  boxes = [...byText.values()];
+}
+
 const browser = await puppeteer.launch({
   executablePath: CHROME,
   headless: 'new',
@@ -82,7 +121,7 @@ await page.evaluate(() => window.scrollTo(0, 0));
 await sleep(400);
 
 // Mesure dans le contexte de la page : apparie chaque token à un élément et relève ses computed styles.
-const measured = await page.evaluate((tokens, selectorMap) => {
+const result = await page.evaluate((tokens, boxes, selectorMap) => {
   const norm = (s) => (s || '').replace(/\s+/g, ' ').trim().toLowerCase();
   const rgbToHex = (rgb) => {
     const m = (rgb || '').match(/rgba?\(([^)]+)\)/);
@@ -100,12 +139,16 @@ const measured = await page.evaluate((tokens, selectorMap) => {
   const all = Array.from(document.querySelectorAll('body *'));
   const byOwn = new Map();
   const byFull = new Map();
+  const byCompact = new Map(); // texte sous-arbre sans espaces : le textContent DOM ne met pas
+                               // d'espace entre éléments frères → robustifie le match des conteneurs
   for (const el of all) {
     if (!el.offsetParent && el.tagName !== 'BODY') { /* gardé quand même : peut être visible via position */ }
     const o = norm(ownText(el));
     if (o.length >= 2) { (byOwn.get(o) || byOwn.set(o, []).get(o)).push(el); }
     const f = norm(el.textContent);
     if (f.length >= 2) { (byFull.get(f) || byFull.set(f, []).get(f)).push(el); }
+    const fc = f.replace(/\s/g, '');
+    if (fc.length >= 2) { (byCompact.get(fc) || byCompact.set(fc, []).get(fc)).push(el); }
   }
 
   const measure = (el) => {
@@ -120,8 +163,12 @@ const measured = await page.evaluate((tokens, selectorMap) => {
       tag: el.tagName.toLowerCase(),
     };
   };
+  const measurePad = (el) => {
+    const cs = getComputedStyle(el);
+    return { top: parseFloat(cs.paddingTop) || 0, right: parseFloat(cs.paddingRight) || 0, bottom: parseFloat(cs.paddingBottom) || 0, left: parseFloat(cs.paddingLeft) || 0 };
+  };
 
-  return tokens.map((tk) => {
+  const textRows = tokens.map((tk) => {
     let el = null;
     let how = null;
     if (selectorMap[tk.id]) { el = document.querySelector(selectorMap[tk.id]); how = 'map'; }
@@ -129,9 +176,19 @@ const measured = await page.evaluate((tokens, selectorMap) => {
     if (!el) { const k = norm(tk.characters); const c = byFull.get(k); if (c && c.length) { el = c[c.length - 1]; how = 'full-text'; } }
     return { id: tk.id, text: tk.characters.replace(/\s+/g, ' ').trim().slice(0, 40), matched: !!el, how, m: el ? measure(el) : null };
   });
-}, tokens, selectorMap);
+  const boxRows = boxes.map((bx) => {
+    let el = null;
+    let how = null;
+    if (selectorMap[bx.id]) { el = document.querySelector(selectorMap[bx.id]); how = 'map'; }
+    if (!el) { const c = byFull.get(norm(bx.text)); if (c && c.length) { el = c[0]; how = 'full-text'; } }
+    if (!el) { const c = byCompact.get(norm(bx.text).replace(/\s/g, '')); if (c && c.length) { el = c[0]; how = 'compact'; } }
+    return { id: bx.id, matched: !!el, how, pad: el ? measurePad(el) : null };
+  });
+  return { textRows, boxRows };
+}, tokens, boxes, selectorMap);
 
 await browser.close();
+const measured = result.textRows;
 
 // ---- Comparaison token ↔ mesure ----
 const txtCaseToTransform = { UPPER: 'uppercase', LOWER: 'lowercase', TITLE: 'capitalize' };
@@ -182,6 +239,26 @@ for (const r of measured) {
   rows.push({ id: r.id, text: r.text, matched: true, how: r.how, checks });
 }
 
+// ---- Comparaison paddings (conteneurs auto-layout) ----
+const boxById = new Map(boxes.map((b) => [b.id, b]));
+const boxRows = [];
+let boxFails = 0;
+let boxUnmatched = 0;
+for (const r of result.boxRows) {
+  const bx = boxById.get(r.id);
+  if (!r.matched) {
+    boxUnmatched++;
+    boxRows.push({ id: r.id, name: bx.name, text: bx.text.slice(0, 40), matched: false, checks: [] });
+    continue;
+  }
+  const checks = [];
+  for (const side of ['top', 'right', 'bottom', 'left']) {
+    checks.push({ prop: 'padding-' + side, ok: near(bx.pads[side], r.pad[side], TOL_BOX), exp: bx.pads[side] + 'px', got: r.pad[side] + 'px' });
+  }
+  if (checks.some((c) => !c.ok)) boxFails++;
+  boxRows.push({ id: r.id, name: bx.name, text: bx.text.slice(0, 40), matched: true, how: r.how, checks });
+}
+
 // ---- Rapport ----
 const C = { red: '\x1b[31m', green: '\x1b[32m', yellow: '\x1b[33m', dim: '\x1b[2m', reset: '\x1b[0m' };
 console.log(`\nVérification styles — ${URL}  (viewport ${WIDTH}px)`);
@@ -201,18 +278,39 @@ for (const row of rows) {
   }
 }
 
+if (boxRows.length) {
+  console.log(`\n${C.dim}Paddings de conteneurs (auto-layout) :${C.reset}`);
+  for (const row of boxRows) {
+    if (!row.matched) {
+      console.log(`${C.yellow}∅ NON APPARIÉ${C.reset} [box] «${row.text}»`);
+      continue;
+    }
+    const bad = row.checks.filter((c) => !c.ok);
+    if (bad.length === 0) {
+      console.log(`${C.green}✓${C.reset} [box] «${row.text}»  ${C.dim}${row.how}${C.reset}`);
+    } else {
+      console.log(`${C.red}✗ [box] «${row.text}»${C.reset}`);
+      for (const c of bad) console.log(`    ${C.red}${c.prop}${C.reset} : attendu ${c.exp}, rendu ${c.got}`);
+    }
+  }
+}
+
 const matchedCount = rows.length - unmatched;
+const boxMatched = boxRows.length - boxUnmatched;
 console.log(`\n${C.dim}──────────${C.reset}`);
-console.log(`Appariés conformes : ${matchedCount - fails}/${matchedCount}  |  en écart : ${fails}  |  non appariés : ${unmatched}`);
+console.log(`Textes conformes : ${matchedCount - fails}/${matchedCount} (écart ${fails}, non appariés ${unmatched})`);
+if (boxRows.length) {
+  console.log(`Paddings conformes : ${boxMatched - boxFails}/${boxMatched} (écart ${boxFails}, non appariés ${boxUnmatched})`);
+}
 
 if (OUT) {
-  fs.writeFileSync(OUT, JSON.stringify({ url: URL, width: WIDTH, total: rows.length, matched: matchedCount, fails, unmatched, rows }, null, 2));
+  fs.writeFileSync(OUT, JSON.stringify({ url: URL, width: WIDTH, total: rows.length, matched: matchedCount, fails, unmatched, rows, boxes: boxRows, boxFails, boxUnmatched }, null, 2));
   console.log(`Rapport : ${OUT}`);
 }
 
-const failed = fails > 0 || (STRICT_UNMATCHED && unmatched > 0);
+const failed = fails > 0 || boxFails > 0 || (STRICT_UNMATCHED && (unmatched > 0 || boxUnmatched > 0));
 if (failed) {
-  console.log(`${C.red}GATE STYLES : ÉCHEC${C.reset} (${fails} écart(s)${STRICT_UNMATCHED ? `, ${unmatched} non apparié(s)` : ''})`);
+  console.log(`${C.red}GATE STYLES : ÉCHEC${C.reset} (${fails} texte(s), ${boxFails} padding(s)${STRICT_UNMATCHED ? `, ${unmatched + boxUnmatched} non apparié(s)` : ''})`);
   process.exit(1);
 }
 console.log(`${C.green}GATE STYLES : OK${C.reset}`);

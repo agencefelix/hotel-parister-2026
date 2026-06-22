@@ -41,7 +41,8 @@ fidèle, en autonomie. Règles **impératives** (détail dans `integration-promp
 2. **VÉRIFIER sur Chrome, en MESURANT** (pas « à l'œil ») : **GATE styles automatique**
    `tooling/verify-styles.mjs <url> integration/figma-tokens.<page>.json` qui mesure `getComputedStyle`
    et **échoue (exit 1)** si `font-size`/`font-weight`/`letter-spacing`/`line-height`/`text-transform`/
-   `color` divergent des tokens — **relancer par largeur** (`--width`) pour le responsive. Compléter avec
+   `color` (TEXT) **ou les `padding` des conteneurs** divergent des tokens — **relancer par largeur**
+   (`--width`) pour le responsive. Compléter avec
    `tooling/capture.mjs` (captures, états repos/scroll/hover/ouvert via **vraies interactions**
    `mouse.wheel`/`click`/`mouse.move`), `getComputedStyle` manuel des `::before`/`::after`, contraintes
    numériques (hauteurs, fit 100dvh), **comparaison ZOOMÉE bande par bande**. Itérer **jusqu'à GATE au vert**.

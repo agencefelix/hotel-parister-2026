@@ -875,44 +875,91 @@ final class PageParser
      *
      * @param list<array<string, mixed>> $elements
      */
+    /**
+     * Émet les blocs d'un élément de contenu (non taggé) en DESCENDANT dans les wrappers (GROUP/FRAME/
+     * INSTANCE) — sinon un titre/intro emballé dans un groupe, ou voisin d'une image, est perdu.
+     * Ordre : modules taggés > CTA (par nom) > TEXT (titre/texte) > image propre > descente récursive.
+     *
+     * @param array<string, mixed> $el
+     * @param list<ParsedBlock>    $blocks
+     */
+    private function emitBlocks(array $el, array &$blocks, int &$untagged): void
+    {
+        $found = $this->collectTaggedBlocks($el);
+        if ($found !== []) {
+            array_push($blocks, ...$found);
+
+            return;
+        }
+        if (!$this->isSignificant($el) || $this->isSlide($el)) {
+            return;
+        }
+
+        // CTA par nom de calque → link (on NE descend PAS : les textes internes sont le libellé).
+        if (preg_match('/\b(cta|bouton|button|btn)\b/i', (string) ($el['name'] ?? ''))) {
+            $blocks[] = new ParsedBlock($this->cleanName($el['name'] ?? 'cta'), 'atom', blockTypeSlug: 'link', note: 'CTA déduit (nom de calque)', text: $this->firstText($el));
+
+            return;
+        }
+
+        // Nœud TEXT → titre (h1…h6 par rang de taille) ou texte.
+        if (($el['type'] ?? '') === 'TEXT') {
+            $tb = $this->textBlock($el);
+            if ($tb !== null) {
+                $blocks[] = $tb;
+            }
+
+            return;
+        }
+
+        // Image PROPRE de ce nœud (fill IMAGE direct) → media.
+        $img = $this->ownImageEntry($el);
+        if ($img !== null) {
+            $blocks[] = new ParsedBlock($this->cleanName($el['name'] ?? 'image'), 'atom', blockTypeSlug: 'media', media: [$img]);
+
+            return;
+        }
+
+        // Wrapper (GROUP/FRAME/INSTANCE) → DESCENDRE pour récupérer titre/intro/image/CTA imbriqués.
+        if (($el['children'] ?? []) !== []) {
+            foreach ($el['children'] as $child) {
+                $this->emitBlocks($child, $blocks, $untagged);
+            }
+
+            return;
+        }
+
+        ++$untagged;
+    }
+
+    /**
+     * Entrée média de l'image PROPRE d'un nœud (premier fill IMAGE direct, non récursif), ou null.
+     *
+     * @param array<string, mixed> $node
+     *
+     * @return array{figmaNodeId: string, image: string, imageRef: string, width: int, format: string}|null
+     */
+    private function ownImageEntry(array $node): ?array
+    {
+        foreach ($node['fills'] ?? [] as $fill) {
+            if (($fill['type'] ?? '') === 'IMAGE') {
+                $id = (string) ($node['id'] ?? '');
+                $format = $this->mediaFormat($node);
+
+                return ['figmaNodeId' => $id, 'image' => $this->mediaName($node, $id, $format), 'imageRef' => (string) ($fill['imageRef'] ?? ''), 'width' => (int) round($this->bbox($node)['w']), 'format' => $format];
+            }
+        }
+
+        return null;
+    }
+
     private function buildColFromElements(array $elements, float $pageWidth, bool $deduced, ?int $size = null): ParsedCol
     {
         $blocks = [];
         $untagged = 0;
 
         foreach ($elements as $el) {
-            $found = $this->collectTaggedBlocks($el);
-            if ($found !== []) {
-                array_push($blocks, ...$found);
-                continue;
-            }
-            if (!$this->isSignificant($el) || $this->isSlide($el)) {
-                continue;
-            }
-
-            // A layer named like a button/CTA → link block (BlockType `link`).
-            if (preg_match('/\b(cta|bouton|button|btn)\b/i', (string) ($el['name'] ?? ''))) {
-                $blocks[] = new ParsedBlock($this->cleanName($el['name'] ?? 'cta'), 'atom', blockTypeSlug: 'link', note: 'CTA déduit (nom de calque)', text: $this->firstText($el));
-                continue;
-            }
-
-            // Any remaining (untagged) image maps to an [image] block (BlockType `media`).
-            $media = $this->collectImages($el);
-            if ($media !== []) {
-                foreach ($media as $m) {
-                    $blocks[] = new ParsedBlock($this->cleanName($el['name'] ?? 'image'), 'atom', blockTypeSlug: 'media', media: [$m]);
-                }
-                continue;
-            }
-
-            // Untagged text: a title (h1…h6 by font-size rank) or a plain text block.
-            $textBlock = $this->textBlock($el);
-            if ($textBlock !== null) {
-                $blocks[] = $textBlock;
-                continue;
-            }
-
-            ++$untagged;
+            $this->emitBlocks($el, $blocks, $untagged);
         }
 
         return new ParsedCol(

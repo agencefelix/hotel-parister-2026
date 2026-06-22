@@ -1,0 +1,3912 @@
+{
+  "url": "http://hotel-parister-2026.local/",
+  "width": 1440,
+  "total": 125,
+  "style": {
+    "reliable": 41,
+    "fails": 27,
+    "boxReliable": 0,
+    "boxFails": 0
+  },
+  "content": {
+    "unmatched": 48,
+    "boxUnmatched": 19
+  },
+  "ambiguous": {
+    "texts": 36,
+    "textFails": 33,
+    "boxes": 3,
+    "boxFails": 2
+  },
+  "rows": [
+    {
+      "id": "542:1597",
+      "text": "Votre parenthèse",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "32px",
+          "got": "32px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "12.8px",
+          "got": "12.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "38px",
+          "got": "38.4px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#8fb3b1",
+          "got": "#8fb3b1"
+        }
+      ]
+    },
+    {
+      "id": "542:1598",
+      "text": "parisienne",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "96px",
+          "got": "96px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "86.4px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#8fb3b1",
+          "got": "#8fb3b1"
+        }
+      ]
+    },
+    {
+      "id": "542:1599",
+      "text": "Chambres, suites, offres et disponibilit",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1779;410:4612",
+      "text": "Découvrir les chambres",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#8fb3b1",
+          "got": "#8fb3b1"
+        }
+      ]
+    },
+    {
+      "id": "I542:1779;410:4614",
+      "text": "Réserver",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "3.5px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#8fb3b1",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "542:1614",
+      "text": "Les Passerelles",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "32px",
+          "got": "24px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": false,
+          "exp": "12.8px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "38px",
+          "got": "28.9999px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#00561b",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "542:1615",
+      "text": "Un espace dédié au lâcher-prise, à l’éca",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1616",
+      "text": "restaurant & bar",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "96px",
+          "got": "96px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "86.4px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#00561b",
+          "got": "#00561b"
+        }
+      ]
+    },
+    {
+      "id": "I542:1617;410:4612",
+      "text": "Voir le menu",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#00561b",
+          "got": "#00561b"
+        }
+      ]
+    },
+    {
+      "id": "I542:1617;410:4614",
+      "text": "Réserver",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "3.5px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#00561b",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "I542:1626;30:882",
+      "text": "Morning Wellness Club Yoga avec Clarisse",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1623;30:882",
+      "text": "l’exposition de Huang Xiaoliang",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1624;30:882",
+      "text": "l’exposition de Huang Xiaoliang",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1625;30:882",
+      "text": "l’exposition de Capucine Néouze",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1627;30:882",
+      "text": "Morning Wellness Club Yoga avec Clarisse",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1628",
+      "text": "derniers événements",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "24px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": false,
+          "exp": "0px",
+          "got": "9.6px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "24px",
+          "got": "28.8px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#b48608",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "542:1637",
+      "text": "workspaces",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "416.7285461425781px",
+          "got": "416px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "316px",
+          "got": "416px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#ffffff",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "I542:1638;410:4612",
+      "text": "Organiser un évènement",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1638;410:4614",
+      "text": "découvrir les espaces",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1639",
+      "text": "pour vos Séminaires, réunions, évenement",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1602;410:4686;410:4672",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1602;410:4688",
+      "text": "Chambre",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1602;410:4689",
+      "text": "supérieure",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1602;410:4690",
+      "text": "Intime et élégante",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1603;410:4686;410:4672",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1603;410:4688",
+      "text": "Juinior",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1603;410:4689",
+      "text": "suite",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1603;410:4690",
+      "text": "Intime et élégante",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1604;410:4686;410:4672",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1604;410:4688",
+      "text": "Junior",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1604;410:4689",
+      "text": "suite terrasse",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1604;410:4690",
+      "text": "Espace ouvert sur Paris",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1605;410:4686;410:4672",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1605;410:4688",
+      "text": "Deluxe",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1605;410:4689",
+      "text": "terrasse",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1605;410:4690",
+      "text": "Ouverte sur l’extérieur",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1606;410:4686;410:4672",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1606;410:4688",
+      "text": "Suite",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1606;410:4689",
+      "text": "duplex",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1606;410:4690",
+      "text": "Sur deux niveaux, en toute intimité",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1607;410:4686;410:4672",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1607;410:4688",
+      "text": "Chambre",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1607;410:4689",
+      "text": "deluxe",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1607;410:4690",
+      "text": "Plus d’espace, plus de confort",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1608;410:4686;410:4672",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1608;410:4688",
+      "text": "suite",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1608;410:4689",
+      "text": "parister",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "54px",
+          "got": "16px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "400",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "24px"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "I542:1608;410:4690",
+      "text": "La signature de la maison",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1640",
+      "text": "Chambres 45",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1643;106:658",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#141414",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1643;91:159",
+      "text": "Des espaces pensés pour se réunir, prése",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "16px",
+          "got": "16px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "300",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "20px",
+          "got": "24px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#141414",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "I542:1643;91:160;15:380",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#141414",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1643;91:498",
+      "text": "Séjourner",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#141414",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "I542:1643;91:499",
+      "text": "à l hôtel",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1644;106:658",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#141414",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1644;91:159",
+      "text": "Une adresse vivante pour boire un verre,",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "16px",
+          "got": "16px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "300",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "20px",
+          "got": "24px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#141414",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "I542:1644;91:160;15:380",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#141414",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1644;91:498",
+      "text": "Boire et manger",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#141414",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "I542:1644;91:499",
+      "text": "au restaurant",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "54px",
+          "got": "54px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "48.6px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#b48608",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1645;106:658",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#141414",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1645;91:159",
+      "text": "Un espace dédié au bien-être, à l’écart ",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1645;91:160;15:380",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#141414",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1645;91:498",
+      "text": "Se détendre",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#141414",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "I542:1645;91:499",
+      "text": "au spa",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "54px",
+          "got": "54px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "48.6px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#b48608",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1646;106:658",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#141414",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1646;91:159",
+      "text": "Des espaces raffinés pour réunir, présen",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "16px",
+          "got": "16px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "300",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "20px",
+          "got": "24px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#141414",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "I542:1646;91:160;15:380",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#141414",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1646;91:498",
+      "text": "Louer",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#141414",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "I542:1646;91:499",
+      "text": "une salle",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "54px",
+          "got": "54px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "48.6px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#b48608",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "542:1650",
+      "text": "parister",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "528.2483520507812px",
+          "got": "16px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "400",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "400px",
+          "got": "24px"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#ffffff",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "542:1651",
+      "text": "Intimiste, contemporain et chaleureux",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "16px",
+          "got": "30px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": false,
+          "exp": "6.4px",
+          "got": "12px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "19px",
+          "got": "30px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "542:1629",
+      "text": "parister",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "528.2483520507812px",
+          "got": "16px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "400",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "400px",
+          "got": "24px"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#b48608",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "I542:1816;410:4672",
+      "text": "Suivez-nous sur insta",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#b48608",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "542:1665",
+      "text": "Rejoignez notre",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "32px",
+          "got": "32px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "12.8px",
+          "got": "12.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "38px",
+          "got": "32px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#b48608",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "542:1667",
+      "text": "Envoyer",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "17px",
+          "got": "20px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#b48608",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "542:1668",
+      "text": "votre e-mail",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "14px",
+          "got": "16px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "700",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "17px",
+          "got": "35px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": false,
+          "exp": "uppercase",
+          "got": "none"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#b48608",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "542:1672",
+      "text": "J’accepte que la société Parister exploi",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1674",
+      "text": "newsletter",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "96px",
+          "got": "96px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "96px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#b48608",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "542:1631",
+      "text": "Spa, bien-être &",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "32px",
+          "got": "32px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "12.8px",
+          "got": "12.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "38px",
+          "got": "38.4px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#001e56",
+          "got": "#001e56"
+        }
+      ]
+    },
+    {
+      "id": "542:1632",
+      "text": "Un espace dédié au lâcher-prise, à l’éca",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1633;410:4612",
+      "text": "Découvrir le spa",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#001e56",
+          "got": "#001e56"
+        }
+      ]
+    },
+    {
+      "id": "I542:1633;410:4614",
+      "text": "Réserver un soin",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#001e56",
+          "got": "#001e56"
+        }
+      ]
+    },
+    {
+      "id": "542:1634",
+      "text": "sport",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "96px",
+          "got": "96px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "86.4px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#001e56",
+          "got": "#001e56"
+        }
+      ]
+    },
+    {
+      "id": "542:1692",
+      "text": "19 Rue Saulnier, 75009 Paris +33 (0) 1 8",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1707",
+      "text": "Un hôtel by",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "12px",
+          "got": "12px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "4.800000000000001px",
+          "got": "4.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "542:1740",
+      "text": "partenaire officiel 2026",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "12px",
+          "got": "12px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "4.800000000000001px",
+          "got": "4.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "14px",
+          "got": "18px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
+    },
+    {
+      "id": "542:1771",
+      "text": "copyright 2026 Mentions légales Gestion ",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1772",
+      "text": "Agence Félix",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "12px",
+          "got": "12px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "1.2000000000000002px",
+          "got": "1.2px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "20px",
+          "got": "18px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
+    },
+    {
+      "id": "542:1773",
+      "text": "chambres & suites restaurant & bar à coc",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1775",
+      "text": "4,7/5",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "26px",
+          "got": "26px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "31px",
+          "got": "26px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
+    },
+    {
+      "id": "542:1776",
+      "text": "Excellent",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "600",
+          "got": "600"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "17px",
+          "got": "14px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
+    },
+    {
+      "id": "542:1777",
+      "text": "1678 avis",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "300",
+          "got": "300"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "17px",
+          "got": "14px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
+    },
+    {
+      "id": "542:1619",
+      "text": "Expositions, vernissages, cercles littér",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1620",
+      "text": "rencontres",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "96px",
+          "got": "96px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "86.4px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#b48608",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1780;410:4612",
+      "text": "Découvrir nos événements",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#b48608",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1780;410:4614",
+      "text": "Blog",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "700",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "3.5px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#b48608",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "542:1618",
+      "text": "Art &",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "32px",
+          "got": "32px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "12.8px",
+          "got": "12.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "38px",
+          "got": "38.4px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#b48608",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1781;410:4672",
+      "text": "Découvrir l’hôtel",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1783;410:4686;410:4672",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1783;410:4688",
+      "text": "les soins &",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1783;410:4689",
+      "text": "massages",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1783;410:4690",
+      "text": "Intime et élégante",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1784;410:4686;410:4672",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1784;410:4688",
+      "text": "La piscine",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "700",
+          "got": "600"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#ffffff",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "I542:1784;410:4689",
+      "text": "chauffée",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "54px",
+          "got": "34px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "30.6px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
+    },
+    {
+      "id": "I542:1784;410:4690",
+      "text": "Intime et élégante",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1785;410:4686;410:4672",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1785;410:4688",
+      "text": "La salle",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "700",
+          "got": "600"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#ffffff",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "I542:1785;410:4689",
+      "text": "de sport",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "54px",
+          "got": "34px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "30.6px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
+    },
+    {
+      "id": "I542:1785;410:4690",
+      "text": "Intime et élégante",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1786;410:4686;410:4672",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "I542:1786;410:4688",
+      "text": "Le couloir",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "700",
+          "got": "600"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "24px",
+          "got": "23px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#ffffff",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "I542:1786;410:4689",
+      "text": "de nage",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "54px",
+          "got": "34px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "30.6px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
+    },
+    {
+      "id": "I542:1786;410:4690",
+      "text": "Intime et élégante",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1791",
+      "text": "Chambres 12",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1792;42:1669",
+      "text": "Menu",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "3.5px",
+          "got": "3.5px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#141414",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "I542:1792;42:1671",
+      "text": "Réserver",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "3.5px",
+          "got": "3.5px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#141414",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "I542:1792;42:1678",
+      "text": "Bons cadeaux",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "3.5px",
+          "got": "3.5px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#141414",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "542:1796",
+      "text": "Parister",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "133.2244873046875px",
+          "got": "16px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "400",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "24px"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#ffffff",
+          "got": "#141414"
+        }
+      ]
+    },
+    {
+      "id": "542:1797",
+      "text": "boutique hôtel & spa",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "38.40999984741211px",
+          "got": "38px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "15.363999938964845px",
+          "got": "15.2px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "46px",
+          "got": "30px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "542:1800",
+      "text": "un boutique hôtel 5 étoiles au cœur de P",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1815;42:1986",
+      "text": "Réserver",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "3.5px",
+          "got": "3.5px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#ffffff",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "I542:1815;42:1993",
+      "text": "Bons cadeaux",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "3.5px",
+          "got": "3.5px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#ffffff",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "I542:1815;55:3077",
+      "text": "Menu",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "3.5px",
+          "got": "3.5px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "17.0001px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#ffffff",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "I542:1817;410:4672",
+      "text": "réservez un séjour",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "16px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#ffffff"
+        }
+      ]
+    }
+  ],
+  "boxes": [
+    {
+      "id": "542:1779",
+      "name": "CTA",
+      "text": "Découvrir les chambres Réserver",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1617",
+      "name": "CTA",
+      "text": "Voir le menu Réserver",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1638",
+      "name": "CTA",
+      "text": "Organiser un évènement découvrir les esp",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1601",
+      "name": "Group",
+      "text": "Chambre supérieure Juinior suite Junior ",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1602;410:4686",
+      "name": "CTA",
+      "text": "Découvrir",
+      "matched": true,
+      "how": "full-text",
+      "checks": [],
+      "skipped": true
+    },
+    {
+      "id": "I542:1602;410:4687",
+      "name": "Frame 33",
+      "text": "Chambre supérieure",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1603;410:4687",
+      "name": "Frame 33",
+      "text": "Juinior suite",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1604;410:4687",
+      "name": "Frame 33",
+      "text": "Junior suite terrasse",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1605;410:4687",
+      "name": "Frame 33",
+      "text": "Deluxe terrasse",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1606;410:4687",
+      "name": "Frame 33",
+      "text": "Suite duplex",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1607;410:4687",
+      "name": "Frame 33",
+      "text": "Chambre deluxe",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1608;410:4687",
+      "name": "Frame 33",
+      "text": "suite parister",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1816",
+      "name": "CTA",
+      "text": "Suivez-nous sur insta",
+      "matched": true,
+      "how": "full-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "gap",
+          "ok": false,
+          "exp": "16px (≈Figma 20)",
+          "got": "48px"
+        }
+      ]
+    },
+    {
+      "id": "542:1633",
+      "name": "CTA",
+      "text": "Découvrir le spa Réserver un soin",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1780",
+      "name": "CTA",
+      "text": "Découvrir nos événements Blog",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1781",
+      "name": "CTA",
+      "text": "Découvrir l’hôtel",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1782",
+      "name": "[section]",
+      "text": "les soins & massages La piscine chauffée",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1783;410:4687",
+      "name": "Frame 33",
+      "text": "les soins & massages",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1784;410:4687",
+      "name": "Frame 33",
+      "text": "La piscine chauffée",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1785;410:4687",
+      "name": "Frame 33",
+      "text": "La salle de sport",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1786;410:4687",
+      "name": "Frame 33",
+      "text": "Le couloir de nage",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1792;42:1663",
+      "name": "Frame 46",
+      "text": "Menu",
+      "matched": true,
+      "how": "full-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "gap",
+          "ok": true,
+          "exp": "10px (≈Figma 12)",
+          "got": "8px"
+        }
+      ]
+    },
+    {
+      "id": "I542:1792;42:1670",
+      "name": "Frame 47",
+      "text": "Réserver Bons cadeaux",
+      "matched": true,
+      "how": "full-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "gap",
+          "ok": false,
+          "exp": "10px (≈Figma 12)",
+          "got": "16px"
+        }
+      ]
+    },
+    {
+      "id": "542:1817",
+      "name": "CTA",
+      "text": "réservez un séjour",
+      "matched": true,
+      "how": "full-text",
+      "checks": [],
+      "skipped": true
+    }
+  ]
+}

@@ -1,0 +1,1476 @@
+{
+  "url": "http://hotel-parister-2026.local/",
+  "width": 1440,
+  "pageW": 3780,
+  "pageH": 11866,
+  "renderedW": 1440,
+  "renderedH": 11556,
+  "composition": {
+    "widthFails": 26,
+    "orderDisplaced": 7,
+    "anchors": 41,
+    "orderThreshold": 4
+  },
+  "content": {
+    "unmatched": 48,
+    "items": [
+      {
+        "id": "542:1599",
+        "label": "Chambres, suites, offres e"
+      },
+      {
+        "id": "542:1615",
+        "label": "Un espace dédié au lâcher-"
+      },
+      {
+        "id": "I542:1626;30:882",
+        "label": "Morning Wellness Club Yoga"
+      },
+      {
+        "id": "I542:1623;30:882",
+        "label": "l’exposition de Huang Xiao"
+      },
+      {
+        "id": "I542:1624;30:882",
+        "label": "l’exposition de Huang Xiao"
+      },
+      {
+        "id": "I542:1625;30:882",
+        "label": "l’exposition de Capucine N"
+      },
+      {
+        "id": "I542:1627;30:882",
+        "label": "Morning Wellness Club Yoga"
+      },
+      {
+        "id": "I542:1638;410:4612",
+        "label": "Organiser un évènement"
+      },
+      {
+        "id": "I542:1638;410:4614",
+        "label": "découvrir les espaces"
+      },
+      {
+        "id": "542:1639",
+        "label": "pour vos Séminaires, réuni"
+      },
+      {
+        "id": "I542:1602;410:4688",
+        "label": "Chambre"
+      },
+      {
+        "id": "I542:1602;410:4689",
+        "label": "supérieure"
+      },
+      {
+        "id": "I542:1602;410:4690",
+        "label": "Intime et élégante"
+      },
+      {
+        "id": "I542:1603;410:4688",
+        "label": "Juinior"
+      },
+      {
+        "id": "I542:1603;410:4689",
+        "label": "suite"
+      },
+      {
+        "id": "I542:1603;410:4690",
+        "label": "Intime et élégante"
+      },
+      {
+        "id": "I542:1604;410:4688",
+        "label": "Junior"
+      },
+      {
+        "id": "I542:1604;410:4689",
+        "label": "suite terrasse"
+      },
+      {
+        "id": "I542:1604;410:4690",
+        "label": "Espace ouvert sur Paris"
+      },
+      {
+        "id": "I542:1605;410:4688",
+        "label": "Deluxe"
+      },
+      {
+        "id": "I542:1605;410:4689",
+        "label": "terrasse"
+      },
+      {
+        "id": "I542:1605;410:4690",
+        "label": "Ouverte sur l’extérieur"
+      },
+      {
+        "id": "I542:1606;410:4688",
+        "label": "Suite"
+      },
+      {
+        "id": "I542:1606;410:4689",
+        "label": "duplex"
+      },
+      {
+        "id": "I542:1606;410:4690",
+        "label": "Sur deux niveaux, en toute"
+      },
+      {
+        "id": "I542:1607;410:4688",
+        "label": "Chambre"
+      },
+      {
+        "id": "I542:1607;410:4689",
+        "label": "deluxe"
+      },
+      {
+        "id": "I542:1607;410:4690",
+        "label": "Plus d’espace, plus de con"
+      },
+      {
+        "id": "I542:1608;410:4688",
+        "label": "suite"
+      },
+      {
+        "id": "I542:1608;410:4690",
+        "label": "La signature de la maison"
+      },
+      {
+        "id": "542:1640",
+        "label": "Chambres 45"
+      },
+      {
+        "id": "I542:1643;91:499",
+        "label": "à l hôtel"
+      },
+      {
+        "id": "I542:1645;91:159",
+        "label": "Un espace dédié au bien-êt"
+      },
+      {
+        "id": "542:1672",
+        "label": "J’accepte que la société P"
+      },
+      {
+        "id": "542:1632",
+        "label": "Un espace dédié au lâcher-"
+      },
+      {
+        "id": "542:1692",
+        "label": "19 Rue Saulnier, 75009 Par"
+      },
+      {
+        "id": "542:1771",
+        "label": "copyright 2026 Mentions lé"
+      },
+      {
+        "id": "542:1773",
+        "label": "chambres & suites restaura"
+      },
+      {
+        "id": "542:1619",
+        "label": "Expositions, vernissages, "
+      },
+      {
+        "id": "I542:1781;410:4672",
+        "label": "Découvrir l’hôtel"
+      },
+      {
+        "id": "I542:1783;410:4688",
+        "label": "les soins &"
+      },
+      {
+        "id": "I542:1783;410:4689",
+        "label": "massages"
+      },
+      {
+        "id": "I542:1783;410:4690",
+        "label": "Intime et élégante"
+      },
+      {
+        "id": "I542:1784;410:4690",
+        "label": "Intime et élégante"
+      },
+      {
+        "id": "I542:1785;410:4690",
+        "label": "Intime et élégante"
+      },
+      {
+        "id": "I542:1786;410:4690",
+        "label": "Intime et élégante"
+      },
+      {
+        "id": "542:1791",
+        "label": "Chambres 12"
+      },
+      {
+        "id": "542:1800",
+        "label": "un boutique hôtel 5 étoile"
+      }
+    ]
+  },
+  "ambiguous": {
+    "count": 36
+  },
+  "rows": [
+    {
+      "id": "542:1597",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 2763.4375,
+        "left": 72,
+        "w": 636,
+        "h": 38.390625
+      }
+    },
+    {
+      "id": "542:1598",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 2809.828125,
+        "left": 72,
+        "w": 636,
+        "h": 86.390625
+      }
+    },
+    {
+      "id": "542:1599",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1779;410:4612",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 3060.234375,
+        "left": 72,
+        "w": 249.359375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1779;410:4614",
+      "matched": true,
+      "how": "own",
+      "cands": 4,
+      "rect": {
+        "top": 79.5,
+        "left": 1113.0625,
+        "w": 96.46875,
+        "h": 17
+      }
+    },
+    {
+      "id": "542:1614",
+      "matched": true,
+      "how": "own",
+      "cands": 2,
+      "rect": {
+        "top": 6,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    {
+      "id": "542:1615",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "542:1616",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 3784.96875,
+        "left": 72,
+        "w": 636,
+        "h": 86.390625
+      }
+    },
+    {
+      "id": "I542:1617;410:4612",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 4012.984375,
+        "left": 218.859375,
+        "w": 99.125,
+        "h": 34
+      }
+    },
+    {
+      "id": "I542:1617;410:4614",
+      "matched": true,
+      "how": "own",
+      "cands": 4,
+      "rect": {
+        "top": 79.5,
+        "left": 1113.0625,
+        "w": 96.46875,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1626;30:882",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1623;30:882",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1624;30:882",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1625;30:882",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1627;30:882",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "542:1628",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 8930.84375,
+        "left": 84,
+        "w": 1344,
+        "h": 28.796875
+      }
+    },
+    {
+      "id": "542:1637",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 7155.015625,
+        "left": 0,
+        "w": 1440,
+        "h": 688
+      }
+    },
+    {
+      "id": "I542:1638;410:4612",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1638;410:4614",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "542:1639",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1602;410:4686;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1602;410:4688",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1602;410:4689",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1602;410:4690",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1603;410:4686;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1603;410:4688",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1603;410:4689",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1603;410:4690",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1604;410:4686;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1604;410:4688",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1604;410:4689",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1604;410:4690",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1605;410:4686;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1605;410:4688",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1605;410:4689",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1605;410:4690",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1606;410:4686;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1606;410:4688",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1606;410:4689",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1606;410:4690",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1607;410:4686;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1607;410:4688",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1607;410:4689",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1607;410:4690",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1608;410:4686;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1608;410:4688",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1608;410:4689",
+      "matched": true,
+      "how": "own",
+      "cands": 5,
+      "rect": {
+        "top": 6,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    {
+      "id": "I542:1608;410:4690",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "542:1640",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1643;106:658",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1643;91:159",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 1134.734375,
+        "left": 84,
+        "w": 327,
+        "h": 48
+      }
+    },
+    {
+      "id": "I542:1643;91:160;15:380",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1643;91:498",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 1043.140625,
+        "left": 84,
+        "w": 327,
+        "h": 23
+      }
+    },
+    {
+      "id": "I542:1643;91:499",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1644;106:658",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1644;91:159",
+      "matched": true,
+      "how": "own",
+      "cands": 2,
+      "rect": {
+        "top": 1134.734375,
+        "left": 411,
+        "w": 327,
+        "h": 48
+      }
+    },
+    {
+      "id": "I542:1644;91:160;15:380",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1644;91:498",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 1043.140625,
+        "left": 411,
+        "w": 327,
+        "h": 23
+      }
+    },
+    {
+      "id": "I542:1644;91:499",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 1070.140625,
+        "left": 411,
+        "w": 327,
+        "h": 48.59375
+      }
+    },
+    {
+      "id": "I542:1645;106:658",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1645;91:159",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1645;91:160;15:380",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1645;91:498",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 1043.140625,
+        "left": 738,
+        "w": 327,
+        "h": 23
+      }
+    },
+    {
+      "id": "I542:1645;91:499",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 1070.140625,
+        "left": 738,
+        "w": 327,
+        "h": 48.59375
+      }
+    },
+    {
+      "id": "I542:1646;106:658",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1646;91:159",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 1134.734375,
+        "left": 1065,
+        "w": 327,
+        "h": 48
+      }
+    },
+    {
+      "id": "I542:1646;91:160;15:380",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1646;91:498",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 1043.140625,
+        "left": 1065,
+        "w": 327,
+        "h": 23
+      }
+    },
+    {
+      "id": "I542:1646;91:499",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 1070.140625,
+        "left": 1065,
+        "w": 327,
+        "h": 48.59375
+      }
+    },
+    {
+      "id": "542:1650",
+      "matched": true,
+      "how": "own",
+      "cands": 5,
+      "rect": {
+        "top": 6,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    {
+      "id": "542:1651",
+      "matched": true,
+      "how": "own",
+      "cands": 3,
+      "rect": {
+        "top": 1915.046875,
+        "left": 762.421875,
+        "w": 585.5,
+        "h": 90
+      }
+    },
+    {
+      "id": "542:1629",
+      "matched": true,
+      "how": "own",
+      "cands": 5,
+      "rect": {
+        "top": 6,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    {
+      "id": "I542:1816;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 10699.671875,
+        "left": 607.125,
+        "w": 225.75,
+        "h": 17
+      }
+    },
+    {
+      "id": "542:1665",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 9765.0625,
+        "left": 0,
+        "w": 1440,
+        "h": 32
+      }
+    },
+    {
+      "id": "542:1667",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 9930.875,
+        "left": 1057.84375,
+        "w": 84.15625,
+        "h": 16
+      }
+    },
+    {
+      "id": "542:1668",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 9912.875,
+        "left": 291,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "542:1672",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "542:1674",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 9777.875,
+        "left": 0,
+        "w": 1440,
+        "h": 96
+      }
+    },
+    {
+      "id": "542:1631",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 5831.703125,
+        "left": 72,
+        "w": 636,
+        "h": 38.390625
+      }
+    },
+    {
+      "id": "542:1632",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1633;410:4612",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 6135.5,
+        "left": 72,
+        "w": 173.890625,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1633;410:4614",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 6128.5,
+        "left": 301.890625,
+        "w": 143.09375,
+        "h": 34
+      }
+    },
+    {
+      "id": "542:1634",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 5878.09375,
+        "left": 72,
+        "w": 636,
+        "h": 86.390625
+      }
+    },
+    {
+      "id": "542:1692",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "542:1707",
+      "matched": true,
+      "how": "own",
+      "cands": 2,
+      "rect": {
+        "top": 6,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    {
+      "id": "542:1740",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 11338.984375,
+        "left": 447,
+        "w": 375,
+        "h": 18
+      }
+    },
+    {
+      "id": "542:1771",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "542:1772",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 11477.984375,
+        "left": 1295.46875,
+        "w": 96.53125,
+        "h": 14
+      }
+    },
+    {
+      "id": "542:1773",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "542:1775",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 10842.671875,
+        "left": 1245.125,
+        "w": 61.890625,
+        "h": 26
+      }
+    },
+    {
+      "id": "542:1776",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 10841.671875,
+        "left": 1315.015625,
+        "w": 76.984375,
+        "h": 14
+      }
+    },
+    {
+      "id": "542:1777",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 10855.671875,
+        "left": 1315.015625,
+        "w": 76.984375,
+        "h": 14
+      }
+    },
+    {
+      "id": "542:1619",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "542:1620",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 8007.046875,
+        "left": 732,
+        "w": 636,
+        "h": 86.390625
+      }
+    },
+    {
+      "id": "I542:1780;410:4612",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 8257.453125,
+        "left": 732,
+        "w": 276.484375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1780;410:4614",
+      "matched": true,
+      "how": "own",
+      "cands": 2,
+      "rect": {
+        "top": 6,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    {
+      "id": "542:1618",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 7960.65625,
+        "left": 732,
+        "w": 636,
+        "h": 38.390625
+      }
+    },
+    {
+      "id": "I542:1781;410:4672",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1783;410:4686;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1783;410:4688",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1783;410:4689",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1783;410:4690",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1784;410:4686;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1784;410:4688",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 6940,
+        "left": 564,
+        "w": 121.359375,
+        "h": 23
+      }
+    },
+    {
+      "id": "I542:1784;410:4689",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 6987,
+        "left": 564,
+        "w": 121.359375,
+        "h": 30.59375
+      }
+    },
+    {
+      "id": "I542:1784;410:4690",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1785;410:4686;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1785;410:4688",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 6940,
+        "left": 1032,
+        "w": 118.609375,
+        "h": 23
+      }
+    },
+    {
+      "id": "I542:1785;410:4689",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 6987,
+        "left": 1032,
+        "w": 118.609375,
+        "h": 30.59375
+      }
+    },
+    {
+      "id": "I542:1785;410:4690",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1786;410:4686;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 15,
+      "rect": {
+        "top": 1525.109375,
+        "left": 194.03125,
+        "w": 106.9375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1786;410:4688",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 6940,
+        "left": 1500,
+        "w": 136.296875,
+        "h": 23
+      }
+    },
+    {
+      "id": "I542:1786;410:4689",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 6987,
+        "left": 1500,
+        "w": 136.296875,
+        "h": 30.59375
+      }
+    },
+    {
+      "id": "I542:1786;410:4690",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "542:1791",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1792;42:1669",
+      "matched": true,
+      "how": "own",
+      "cands": 2,
+      "rect": {
+        "top": 79.5,
+        "left": 82,
+        "w": 55.234375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1792;42:1671",
+      "matched": true,
+      "how": "own",
+      "cands": 4,
+      "rect": {
+        "top": 79.5,
+        "left": 1113.0625,
+        "w": 96.46875,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1792;42:1678",
+      "matched": true,
+      "how": "own",
+      "cands": 3,
+      "rect": {
+        "top": 79.5,
+        "left": 1242.53125,
+        "w": 149.46875,
+        "h": 17
+      }
+    },
+    {
+      "id": "542:1796",
+      "matched": true,
+      "how": "own",
+      "cands": 5,
+      "rect": {
+        "top": 6,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    {
+      "id": "542:1797",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 344.796875,
+        "left": 345.296875,
+        "w": 749.40625,
+        "h": 30
+      }
+    },
+    {
+      "id": "542:1800",
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null
+    },
+    {
+      "id": "I542:1815;42:1986",
+      "matched": true,
+      "how": "own",
+      "cands": 4,
+      "rect": {
+        "top": 79.5,
+        "left": 1113.0625,
+        "w": 96.46875,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1815;42:1993",
+      "matched": true,
+      "how": "own",
+      "cands": 3,
+      "rect": {
+        "top": 79.5,
+        "left": 1242.53125,
+        "w": 149.46875,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1815;55:3077",
+      "matched": true,
+      "how": "own",
+      "cands": 2,
+      "rect": {
+        "top": 79.5,
+        "left": 82,
+        "w": 55.234375,
+        "h": 17
+      }
+    },
+    {
+      "id": "I542:1817;410:4672",
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 539.1875,
+        "left": 619.859375,
+        "w": 200.28125,
+        "h": 16
+      }
+    }
+  ]
+}

@@ -259,8 +259,10 @@ Les pages/teasers `product-*` / `catalog` désignent l'**entité phare du projet
   La catégorie `layout` (21-35) est réservée aux listings/fiches
   (Newscast Category, Catalog, Product, Portfolio) — cf. `LayoutFixtures::getConfiguration()`.
   Une Page n'a accès qu'aux catégories `content` + `global` + modules.
-- `[nav]` / `[footer]` : layout de base, intégrés **une seule fois**, exclus de la
-  génération par page (cf. `integration-prompts.md`).
+- `[nav]` / `[footer]` / `[newsletter]` / `[socialwall]` : layout de base, intégrés **une seule fois**,
+  exclus de la génération par page. **Source unique** : les récupérer **uniquement** depuis `[page|home]`
+  ou depuis des **frames isolés dédiés** (`[nav]`, `[nav|mobile]`, `[footer]`…) — jamais ré-extraits
+  d'une autre `[page|…]` (cf. `integration-prompts.md` § « Cas particulier : nav & footer »).
 
 ## Du BlockType / Action au HTML (Twig) puis au CSS (SCSS)
 

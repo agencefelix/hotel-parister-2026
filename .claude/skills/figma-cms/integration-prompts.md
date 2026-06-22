@@ -1336,6 +1336,15 @@ fois**, pas à chaque page.
 
 Règles :
 - **Intégration unique** : la nav et le footer sont générés **une seule fois**, dans le **layout de base partagé** (et non dans le contenu d'une page).
+- **🎯 SOURCE UNIQUE — où les récupérer** : ne relever/capturer les éléments de layout (`[nav]`,
+  `[footer]`, `[newsletter]`, `[socialwall]`…) **QUE** depuis :
+  1. la page de référence **`[page|home]`** (qui porte le layout complet), **OU**
+  2. des **frames isolés dédiés** posés hors page, nommés directement `[nav]`, `[nav|mobile]`,
+     `[footer]`, `[newsletter]`, `[socialwall]`… (et leurs variantes d'état).
+  **Ne JAMAIS les ré-extraire depuis les autres `[page|…]`** : sur ces pages ils ne sont là que pour
+  le contexte créa (doublons). Les `layout/*.json` doivent donc pointer les node-ids de la home ou des
+  frames isolés, pas ceux d'une page intérieure. Une variante isolée (`[nav|mobile]`) est la **source
+  privilégiée** pour cet état précis.
 - **Exclus de la génération par page** : lors du parsing d'un `[page…]`, ignorer les sous-arbres `[nav]` et `[footer]` — ne créer ni Zone, ni Col, ni Block pour eux **au niveau de la page**.
 - Pour chaque page, ne générer que le **contenu propre à la page**, situé entre la nav et le footer.
 - Conséquence : si la nav/le footer existent déjà dans le layout de base, ne pas les recréer ; sinon, les créer **une fois** puis les réutiliser sur toutes les pages.

@@ -42,6 +42,28 @@ module, l'objet créé est l'**entité module** (Slider, Form, etc.), pas un Blo
 > `Zone::colToEnd` (qui poussent les colonnes dans la ZONE) : ici c'est l'alignement DU CONTENU
 > **dans** la colonne.
 
+## Marges & paddings — ÉCHELLE SÉMANTIQUE (jamais de px en dur)
+
+Les espacements (Zone / Col / Block) **ne sont JAMAIS des px CSS** : ce sont des **niveaux** d'une
+échelle responsive, posés par les **propriétés d'entité** (`MarginType` : `marginTop/Right/Bottom/Left`
++ `paddingTop/Right/Bottom/Left`, **chacune × 4 écrans** — base / `…MiniPc` / `…Tablet` / `…Mobile`).
+
+- **Valeur = token de classe** : `{m|p}{t|b|s|e}-{niveau}` avec niveau ∈ `0, xs, sm, md, lg, xl, xxl`.
+  - `m`=margin, `p`=padding ; `t`=top, `b`=bottom, `s`=start/left, `e`=end/right (logique Bootstrap).
+  - Marges **négatives** (débordement/chevauchement voulu) : suffixe `-neg` (ex. `mt-lg-neg`). Padding : pas de négatif.
+  - Ex. fixtures : `setMarginBottom('mb-md')`, `setPaddingRight('pe-0')`, `setPaddingTop('pt-0')`.
+- **Le px derrière un niveau est RESPONSIVE et dépend de l'AXE** — défini une fois dans
+  `assets/scss/front/default/variables.scss` (`$margins`, `$marginsScreens`) + `utilities/_mixin-margin*.scss` :
+  - **x ≠ y** pour un même niveau (ex. au plus grand écran : `md` x≈120px, `md` y≈90px) ;
+  - la valeur **change par breakpoint** (ex. `lg` y : 120px xxl, 90px lg, 45px md, 30px sm, 1rem xs) ;
+  - `0` et `sm` x s'appuient sur les **gouttières** (`--bs-gutter-*-margin`).
+- **Conséquence intégration** : relever l'espacement en dev mode Figma puis choisir le **NIVEAU dont le
+  px (au breakpoint + axe visés) approche la maquette** — ne pas écrire `margin: 73px`. Si aucun niveau
+  ne colle (valeur hors-échelle), prendre le plus proche (cf. typo : `reconcile-typography`).
+- **Vérification** (`tooling/verify-styles.mjs`) : compare le **px rendu** au **px Figma** ; comme le rendu
+  est **quantifié sur l'échelle** et **responsive**, relancer **par breakpoint** (`--width`) et lire un écart
+  comme « mauvais niveau choisi » **ou** « valeur Figma hors-échelle ».
+
 ## A — Blocs atomiques (catégories `content` + `global` — seules dispo pour une Page)
 
 | Préfixe | slug BlockType | Catégorie |

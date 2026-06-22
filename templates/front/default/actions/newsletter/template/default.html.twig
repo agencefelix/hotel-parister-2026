@@ -39,6 +39,11 @@
                         {% endfor %}
                     </div>
                     <div class="col-12">
+                        <div class="newsletter-consent form-check mt-3">
+                            {{ form_widget(form.consent, {attr: {class: 'form-check-input'}}) }}
+                            {{ form_label(form.consent, null, {label_attr: {class: 'form-check-label text-white'}}) }}
+                            {{ form_errors(form.consent) }}
+                        </div>
                         {% if intro|striptags|length > 0 %}
                             <p class="introduction text-white m-0 mt-4 text-center">{{ intro|unescape|raw|nl2br }}</p>
                         {% endif %}

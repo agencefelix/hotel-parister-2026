@@ -95,3 +95,126 @@
         }
     }
 }
+/* ===================== NEWSLETTER — bande maquette (claire, or) =====================
+   Mise en forme relevée de la maquette (déplacée depuis layout/_socialwall.scss). */
+.newsletter-form-container {
+    position: relative;
+
+    // Filigrane « parister » (script, or très clair) derrière le contenu — relevé maquette (528px).
+    &::before {
+        content: "parister";
+        position: absolute;
+        left: 50%;
+        top: 42%;
+        transform: translate(-50%, -50%);
+        font-family: $font-script;
+        color: rgba($primary, .07);
+        line-height: 1;
+        pointer-events: none;
+        z-index: 0;
+        white-space: nowrap;
+
+        @include mediaQuery(min-lg) { font-size: rem(360px); }
+        @include mediaQuery(max-md) { font-size: rem(180px); }
+    }
+
+    > * { position: relative; z-index: 1; }
+
+    .newsletter-heading {
+        margin-bottom: 2.5rem;
+    }
+
+    // Kicker : 32px / 700 / 0.4em / UPPER / or (token Figma).
+    .newsletter-kicker {
+        color: $primary;
+        font-size: rem(32px);
+        font-weight: $font-weight-bold;
+        letter-spacing: .4em;
+        text-transform: uppercase;
+        line-height: 1;
+
+        @include mediaQuery(max-md) {
+            font-size: rem(22px);
+            letter-spacing: .2em;
+        }
+    }
+
+    // Script : 96px / 400 / or (token Figma) ; léger chevauchement sur le kicker.
+    .newsletter-title {
+        font-family: $font-script;
+        font-weight: $font-weight-normal;
+        color: $primary;
+        font-size: rem(96px);
+        line-height: 1;
+        margin-top: -.2em;
+
+        @include mediaQuery(max-md) {
+            font-size: rem(56px);
+        }
+    }
+
+    .newsletter-fields-wrap {
+        border-bottom: 1px solid rgba($primary, .5);
+        padding-bottom: .5rem;
+    }
+
+    .newsletter-email .form-control,
+    .newsletter-email input {
+        width: 100%;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        color: $primary;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        font-size: rem(13px);
+        padding: .5rem 0;
+        box-shadow: none;
+
+        &::placeholder { color: rgba($primary, .7); text-transform: uppercase; opacity: 1; }
+        &:focus { outline: none; box-shadow: none; }
+    }
+
+    .newsletter-sep {
+        display: inline-block;
+        width: 1px;
+        align-self: stretch;
+        min-height: 24px;
+        background-color: rgba($primary, .5);
+        margin: 0 1.5rem;
+    }
+
+    // ENVOYER : 14px / 700 / 0.2em / UPPER / OR (token Figma) — forcé (sinon hérite du navy).
+    .newsletter-submit {
+        background: transparent !important;
+        border: 0;
+        color: $primary !important;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        letter-spacing: .2em;
+        font-size: rem(14px);
+        white-space: nowrap;
+        transition: opacity .2s ease;
+
+        * { color: $primary !important; }
+        &:hover, &:focus { opacity: .7; }
+    }
+
+    .newsletter-consent {
+        gap: .75rem;
+    }
+
+    .newsletter-consent-check {
+        width: 16px;
+        height: 16px;
+        margin-top: 2px;
+        background-color: $primary;
+    }
+
+    .newsletter-consent-text {
+        color: $primary;
+        font-size: rem(13px);
+        line-height: 1.5;
+        text-align: left;
+    }
+}

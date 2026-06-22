@@ -120,7 +120,6 @@ class GdprFixtures
             $group->setCreatedBy($this->user);
 
             $this->entityManager->persist($group);
-            $this->entityManager->flush();
 
             ++$position;
 
@@ -146,7 +145,6 @@ class GdprFixtures
                 if ($media instanceof MediaEntities\Media) {
                     $media->setFolder($this->mediaFolder);
                     $this->entityManager->persist($media);
-                    $this->entityManager->flush();
                 }
             }
 

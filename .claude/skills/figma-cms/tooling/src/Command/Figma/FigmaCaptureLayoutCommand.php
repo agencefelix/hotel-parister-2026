@@ -14,7 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * (Re)generates screenshots of shared layout elements (nav, footer…) declared in
- * `.claude/figma-cms/integration/layout/*.json`. READ-ONLY — performs NO database write.
+ * `.claude/skills/figma-cms/integration/layout/*.json`. READ-ONLY — performs NO database write.
  *
  * Declarative wiring: each layout JSON lists its captures ({figmaNodeId, screenshot}).
  *
@@ -35,8 +35,8 @@ final class FigmaCaptureLayoutCommand extends Command
     {
         $this
             ->addOption('file-key', null, InputOption::VALUE_REQUIRED, 'Clé du fichier Figma', $this->figmaFileKey)
-            ->addOption('layout-dir', null, InputOption::VALUE_REQUIRED, 'Dossier des JSON de layout', $this->projectDir.'/.claude/figma-cms/integration/layout')
-            ->addOption('output-dir', null, InputOption::VALUE_REQUIRED, 'Dossier des captures', $this->projectDir.'/.claude/figma-cms/integration/screenshots/layout');
+            ->addOption('layout-dir', null, InputOption::VALUE_REQUIRED, 'Dossier des JSON de layout', $this->projectDir.'/.claude/skills/figma-cms/integration/layout')
+            ->addOption('output-dir', null, InputOption::VALUE_REQUIRED, 'Dossier des captures', $this->projectDir.'/.claude/skills/figma-cms/integration/screenshots/layout');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

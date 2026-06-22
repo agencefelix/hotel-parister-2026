@@ -1,0 +1,19 @@
+{
+    "_note": "MODÈLE VIDE. Mur social = élément de LAYOUT AUTONOME (≠ footer, ≠ section de page). Détection : Instagram / Facebook / Youtube. Captures dans integration/screenshots/layout/.",
+    "element": "social-wall",
+    "label": null,
+    "sharedAcrossPages": true,
+    "detectedFrom": null,
+    "cms": {
+        "mode": "blockType | config",
+        "blockType": { "slug": "social-networks", "category": "global", "note": "blocType existant, posable sur une page (mécanisme A)." },
+        "configFallback": "Liens/handles simples : config social_networks du site.",
+        "moduleWarning": "Vérifier en base : selon le projet/version SFCMS, il peut N'EXISTER AUCUN module dédié au mur social (cas Parister : ROLE_SOCIAL_WALL référencé sans Module). Ne pas activer un module inexistant ; un feed dynamique = dev spécifique."
+    },
+    "captures": [
+        { "label": "tiles", "figmaNodeId": null, "screenshot": "social-wall.png", "note": null }
+    ],
+    "detectionCues": ["Instagram", "Facebook", "Youtube"],
+    "content": { "cta": null, "tiles": null },
+    "notes": []
+}

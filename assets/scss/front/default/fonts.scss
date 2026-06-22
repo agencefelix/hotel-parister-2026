@@ -12,6 +12,53 @@
 $fontFamily: 'Roboto', sans-serif; /** Keep to admin font plugin */
 @import "../../../lib/fonts/google-roboto";
 
+/* ------------------------------------------------------------------------------------------
+   Polices du projet — intégrées EN LOCAL (jamais de CDN externe).
+   Chemin stable (copyFiles webpack) : /build/front/default/fonts/parister/
+   - Museo Sans : police de corps + titres (récupérée du CSS de prod, /fonts/Museo).
+   - Parister Script : accent cursif décoratif ("Parister", "parisienne", "rencontres"…).
+     ⚠ La maquette utilise "August Script Bold free" (non disponible sur la prod) :
+     à licencier puis déposer en script.woff2. En attendant, substitut OFL proche (Yellowtail).
+------------------------------------------------------------------------------------------ */
+
+$museo-path: '/build/front/default/fonts/parister';
+
+@font-face {
+    font-family: 'Museo Sans';
+    src: url('#{$museo-path}/museosans-300.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Museo Sans';
+    src: url('#{$museo-path}/museosans-500.woff2') format('woff2');
+    font-weight: 400 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Museo Sans';
+    src: url('#{$museo-path}/museosans-700.woff2') format('woff2');
+    font-weight: 600 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Museo Sans';
+    src: url('#{$museo-path}/museosans-900.woff2') format('woff2');
+    font-weight: 800 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Parister Script';
+    src: url('#{$museo-path}/august-script.ttf') format('truetype');
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 /*! purgecss start ignore */
 @import "../../../lib/fonts/icomoon";
 /*! purgecss end ignore */

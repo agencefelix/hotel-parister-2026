@@ -1,0 +1,35 @@
+{
+    "_note": "MODÈLE VIDE. Architecture CMS d'une page (Page → Zones → Cols → Blocs/Modules), produite en dry-run par PageParser. zonesDeduced=true si pas de tags [zone]. background = fond qui COUVRE la bande (hors TEXT/LINE) : #rrggbb / #rrggbbaa, 'gradient(linear #a,#b)', repli sur le fond de page, ou null si fond image. Toujours croiser avec la capture.",
+    "page": { "slug": null, "adminName": null, "zonesDeduced": null },
+    "zones": [
+        {
+            "label": null,
+            "screenshot": null,
+            "deduced": null,
+            "fullSize": null,
+            "background": null,
+            "cols": [
+                {
+                    "size": 12,
+                    "deduced": null,
+                    "untaggedCount": 0,
+                    "blocks": [
+                        {
+                            "figmaName": null,
+                            "kind": "blockType | module",
+                            "blockTypeSlug": null,
+                            "moduleAction": null,
+                            "moduleEntity": null,
+                            "note": null,
+                            "media": [
+                                { "figmaNodeId": null, "image": null, "imageRef": null, "width": null }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "excluded": [],
+    "warnings": []
+}

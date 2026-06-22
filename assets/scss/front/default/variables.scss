@@ -64,10 +64,10 @@ $enable-animate-css-animations: (
 
 /*-- c - Modules --*/
 
-$enable-newsletter: false !default;
+$enable-newsletter: true !default;
 $enable-basic-nav: true !default;
 $enable-lateral-nav: false !default;
-$enable-locales-switcher: false !default;
+$enable-locales-switcher: true !default;
 $enable-faq: false !default;
 $enable-timeline: false !default;
 $enable-search-modal: false !default;
@@ -98,28 +98,38 @@ $gray-900: #212529 !default;
 
 $white: #fff !default;
 $black: #000 !default;
-$primary: #540b01 !default;
-$secondary: #68312c !default;
-$success: #5d7808 !default;
-$info: #0081ac !default;
+/* Couleurs issues EXCLUSIVEMENT de la maquette Figma (fills SOLID). */
+$primary: #b48608 !default;   /* or signature (footer, accents, script) */
+$secondary: #001e56 !default; /* navy des sections "chambres" */
+$navy: #001e56 !default;
+$teal: #8fb3b1 !default;       /* sage/teal des sections "spa & bien-être" */
+$brown: #402624 !default;      /* brun profond (accents) */
+$beige: #f4f0f1 !default;      /* rosé/écru des fonds neutres */
+$success: #00561b !default;
+$info: #8fb3b1 !default;
 $warning: #f0ad4e !default;
 $danger: #a82835 !default;
 $danger-light: #ee9da5 !default;
-$light: $gray-300 !default;
-$dark: $gray-900 !default;
+$light: #f4f0f1 !default;
+$dark: #141414 !default;
 $focus-color: #ff9800 !default;
 
 $body-bg: $gray-100 !default;
 $body-color: $dark !default;
 $bullet-list-color: $primary !default;
 
-$default-bootstrap-colors: 'primary', 'secondary', 'success', 'info', 'warning', 'danger', 'light', 'dark', 'white';
+$default-bootstrap-colors: 'primary', 'secondary', 'success', 'info', 'warning', 'danger', 'light', 'dark', 'white', 'navy', 'teal', 'brown', 'beige';
 $btn-colors: 'primary', 'secondary';
 $hover-colors: 'primary', 'secondary';
 $theme-colors: (
     'primary': $primary,
     'secondary': $secondary,
+    'navy': $navy,
+    'teal': $teal,
+    'brown': $brown,
+    'beige': $beige,
     'success': $success,
+    'info': $info,
     'danger': $danger,
     'light': $light,
     'dark': $dark,
@@ -173,35 +183,38 @@ $container-fluid-side-limit: 'xl';
 /** @tool: To adjust font https://screenspan.net/fallback */
 /** @doc: To find font adjust https://support.envoke.com/en/articles/5760547-fallback-font-rules */
 
+/* Métriques recalculées pour Museo Sans via capsize (@capsizecss) — anti-CLS. */
 @if not $enable-medias-queries {
     @font-face {
         font-family: font-fallback;
         src: local('Arial');
-        size-adjust: 60.85099821%;
-        ascent-override: 164.3358416%;
-        descent-override: 57.51754455%;
-        line-gap-override: 16.43358416%;
+        size-adjust: 105.3097%;
+        ascent-override: 84.7111%;
+        descent-override: 21.7921%;
+        line-gap-override: 0%;
         font-display: swap;
     }
     @font-face {
         font-family: font-fallback-android;
         src: local('Roboto');
-        size-adjust: 55.5193474%;
-        ascent-override: 180.1173909%;
-        descent-override: 63.04108683%;
-        line-gap-override: 18.01173909%;
+        size-adjust: 104.2716%;
+        ascent-override: 85.5544%;
+        descent-override: 22.0091%;
+        line-gap-override: 0%;
         font-display: swap;
     }
 }
 
-$font-primary: 'Roboto', system-ui, -apple-system, font-fallback, font-fallback-android, sans-serif !default;
-$font-light: 'Roboto', system-ui, -apple-system, font-fallback, font-fallback-android, sans-serif !default;
-$font-secondary: 'Roboto', system-ui, -apple-system, font-fallback, font-fallback-android, sans-serif !default;
+$font-primary: 'Museo Sans', system-ui, -apple-system, font-fallback, font-fallback-android, sans-serif !default;
+$font-light: 'Museo Sans', system-ui, -apple-system, font-fallback, font-fallback-android, sans-serif !default;
+$font-secondary: 'Museo Sans', system-ui, -apple-system, font-fallback, font-fallback-android, sans-serif !default;
+$font-script: 'Parister Script', 'Museo Sans', cursive !default;
 $font-title: $font-primary !default;
 $theme-fonts: (
     'primary': ('font-family': $font-primary, 'line-height': 1),
     'light': ('font-family': $font-light, 'line-height': 1),
     'secondary': ('font-family': $font-secondary, 'line-height': 1),
+    'script': ('font-family': $font-script, 'line-height': 1),
 ) !default;
 
 $fonts-weights: (100, 200, 300, 400, 500, 600, 700, 800, 900) !default;

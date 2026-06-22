@@ -49,6 +49,7 @@ class SecurityController extends FrontController
         'en' => '/personal-space/identification/{view}',
         'es' => '/espacio-personal/identificacion/{view}',
         'it' => '/spazio-personale/identificazione/{view}',
+        'zh' => '/zh/spazio-personale/identificazione/{view}',
     ], name: 'security_front_forms', defaults: ['view' => null], methods: 'GET|POST', schemes: '%protocol%')]
     public function forms(Request $request, ?string $view = null): RedirectResponse|Response
     {
@@ -83,6 +84,7 @@ class SecurityController extends FrontController
         'en' => '/personal-space/login/{view}',
         'es' => '/espacio-personal/accesso/{view}',
         'it' => '/spazio-personale/accesso/{view}',
+        'zh' => '/zh/spazio-personale/accesso/{view}',
     ], name: 'security_front_login', defaults: ['view' => null], methods: 'GET|POST', schemes: '%protocol%')]
     public function login(
         Request $request,
@@ -132,6 +134,7 @@ class SecurityController extends FrontController
         'en' => '/personal-space/sign-up/{view}',
         'es' => '/espacio-personal/inscribirse/{view}',
         'it' => '/spazio-personale/registro/{view}',
+        'zh' => '/zh/spazio-personale/registro/{view}',
     ], name: 'security_front_register', defaults: ['category' => null, 'view' => null], methods: 'GET|POST', schemes: '%protocol%')]
     public function register(
         Request $request,
@@ -193,6 +196,7 @@ class SecurityController extends FrontController
         'en' => '/personal-space/confirmation-registration',
         'es' => '/espacio-personal/confirmacion-registro',
         'it' => '/spazio-personale/conferma-registrazione',
+        'zh' => '/zh/spazio-personale/conferma-registrazione',
     ], name: 'security_front_success_registration', methods: 'GET|POST', schemes: '%protocol%')]
     public function registerSuccess(): JsonResponse|Response
     {
@@ -211,6 +215,7 @@ class SecurityController extends FrontController
         'en' => '/personal-space/front/security/auto-login/{token}/{user}',
         'es' => '/espacio-personal/front/security/auto-login/{token}/{user}',
         'it' => '/spazio-personale/front/security/auto-login/{token}/{user}',
+        'zh' => '/zh/spazio-personale/front/security/auto-login/{token}/{user}',
     ], name: 'security_front_auto_login', defaults: ['user' => null], methods: 'GET', schemes: '%protocol%')]
     public function autoLogin(
         Request $request,
@@ -250,6 +255,7 @@ class SecurityController extends FrontController
         'en' => '/personal-space/resend-email/confirmation',
         'es' => '/espacio-personal/reenviar-correo-electronico/confirmacion',
         'it' => '/spazio-personale/restituisci-email/conferma',
+        'zh' => '/zh/spazio-personale/restituisci-email/conferma',
     ], name: 'security_front_resend_email', methods: 'GET', schemes: '%protocol%')]
     public function resendConfirmEmail(Request $request, RegisterManager $registerManager): RedirectResponse
     {
@@ -285,6 +291,7 @@ class SecurityController extends FrontController
         'en' => '/email/confirmation/my-personal-space/{token}/{status}',
         'es' => '/email/confirmacion/mi-espacio-personal/{token}/{status}',
         'it' => '/email/conferma/mio-spazio-personale/{token}/{status}',
+        'zh' => '/zh/email/conferma/mio-spazio-personale/{token}/{status}',
     ], name: 'security_front_confirmation', defaults: ['status' => null], methods: 'GET', schemes: '%protocol%', priority: 1)]
     public function confirmation(string $token, UserFrontRepository $userFrontRepository, RegisterManager $registerManager, ?string $status = null): RedirectResponse|Response
     {
@@ -315,6 +322,7 @@ class SecurityController extends FrontController
         'en' => '/personal-space/clear-user-request/{token}',
         'es' => '/espacio-personal/clear-user-request/{token}',
         'it' => '/spazio-personale/clear-user-request/{token}',
+        'zh' => '/zh/spazio-personale/clear-user-request/{token}',
     ], name: 'security_front_clear_user_request', methods: 'GET', schemes: '%protocol%', priority: 1)]
     public function clearUserRequest(string $token): Response
     {
@@ -342,6 +350,7 @@ class SecurityController extends FrontController
         'en' => '/personal-space/confirm-user-request/{token}',
         'es' => '/espacio-personal/confirm-user-request/{token}',
         'it' => '/spazio-personale/confirm-user-request/{token}',
+        'zh' => '/zh/spazio-personale/confirm-user-request/{token}',
     ], name: 'security_front_confirm_user_request', methods: 'GET', schemes: '%protocol%', priority: 1)]
     public function confirmUserRequest(ProfileManager $manager, string $token): Response
     {
@@ -369,6 +378,7 @@ class SecurityController extends FrontController
         'en' => '/personal-space/clear-remove-user-request',
         'es' => '/espacio-personal/clear-remove-user-request',
         'it' => '/spazio-personale/clear-remove-user-request',
+        'zh' => '/zh/spazio-personale/clear-remove-user-request',
     ], name: 'security_front_clear_user_remove_request', methods: 'GET', schemes: '%protocol%', priority: 1)]
     public function clearRemoveUserRequest(): Response
     {
@@ -399,6 +409,7 @@ class SecurityController extends FrontController
         'en' => '/personal-space/remove-user',
         'es' => '/espacio-personal/remove-user',
         'it' => '/spazio-personale/remove-user',
+        'zh' => '/zh/spazio-personale/remove-user',
     ], name: 'security_front_user_remove', methods: 'GET', schemes: '%protocol%', priority: 1)]
     public function removeUser(): Response
     {

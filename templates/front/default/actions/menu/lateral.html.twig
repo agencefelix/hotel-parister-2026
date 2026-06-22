@@ -221,11 +221,14 @@
                             microDataActive: microDataActive,
                         } only %}
                     {% endif %}
-                    {% if contactPageUrl %}
-                        <a href="{{ path('front_index', {url: contactPageUrl}) }}" class="track-link-contact-form contact-link d-none d-lg-flex justify-content-lg-center align-content-lg-center btn btn-primary ms-lg-4 me-lg-5">
-                            {{ "Nous contacter"|trans|raw }}<i class="icon-circle ms-4"></i>
-                        </a>
-                    {% endif %}
+                    {# CTAs maquette Parister : RÉSERVER + BONS CADEAUX #}
+                    <a href="{{ path('front_index', {url: 'chambres-suites'}) }}" class="nav-cta nav-cta-reserver text-uppercase d-none d-md-inline-flex align-items-center" data-toggle="preloader">
+                        {{ "Réserver"|trans|raw }}
+                    </a>
+                    <span class="nav-cta-sep d-none d-md-inline-block mx-2" aria-hidden="true"></span>
+                    <a href="{{ path('front_index', {url: 'bons-cadeaux'}) }}" class="nav-cta nav-cta-gift text-uppercase d-none d-md-inline-flex align-items-center" data-toggle="preloader">
+                        {{ "Bons cadeaux"|trans|raw }}
+                    </a>
                     {% if multiLingues %}
                         {{ render_esi(path('front_locales_switcher', {class: ''|url_encode, classname: currentClassname|url_encode, entityId: currentEntityId} )) }}
                     {% endif %}

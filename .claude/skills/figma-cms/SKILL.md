@@ -8,9 +8,63 @@ description: >-
   Figma vers ce CMS, de générer les pages/fixtures depuis Figma, ou d'exécuter le process
   d'intégration Figma → CMS. Déclencheurs : « intègre la maquette Figma », « parse la page Figma »,
   « génère les fixtures depuis Figma », « process complet Figma », une URL figma.com/design ou /proto.
+allowed-tools:
+  - "Bash(cp -r .claude/skills/figma-cms/tooling/src/. src/)"
+  - "Bash(php -l *)"
+  - "Bash(php bin/console figma:parse-page *)"
+  - "Bash(php bin/console figma:capture-layout *)"
+  - "Bash(php bin/console cache:clear*)"
+  - "Bash(php bin/console doctrine:*)"
+  - "Bash(php bin/console dbal:run-sql *)"
+  - "Bash(php bin/console fos:js-routing:dump*)"
+  - "Bash(rm -rf src/Service/Figma src/Command/Figma)"
+  - "Bash(rm -f .claude/skills/figma-cms/integration/media/*)"
+  - "WebFetch(domain:figma-doc.agence-felix.fr)"
 ---
 
 # Intégration Figma → CMS (SFCMS 7)
+
+## 🎯 CONTRAT QUALITÉ (non négociable — lire EN PREMIER)
+
+L'objectif est un rendu **ISO maquette ≥ 95 %**, **dès le premier jet**, **sans que l'utilisateur ait
+à corriger**. Il fournit déjà tout (prompts, captures, node Figma, prod) : à moi d'en tirer un rendu
+fidèle, en autonomie. Règles **impératives** (détail dans `integration-prompts.md`) :
+
+1. **RELEVER les vraies valeurs en dev mode Figma, jamais approximer** : couleurs (`fills`→hex),
+   `fontSize`, `fontWeight`, `letterSpacing`, `lineHeightPx`, `textCase`, **marges/paddings**. Outils :
+   `tooling/figma-tokens.py` + `tooling/figma-export-tokens.py` → `integration/figma-styles.md` (résumé)
+   + `integration/figma-tokens.<page>.json` (exhaustif). Les **consulter avant de styler**.
+2. **VÉRIFIER sur Chrome, en MESURANT** (pas « à l'œil ») : `tooling/capture.mjs` pour les captures,
+   `getComputedStyle` (élément + `::before`/`::after`, états repos/scroll/hover/ouvert via **vraies
+   interactions** : `mouse.wheel`/`click`/`mouse.move`), contraintes numériques (hauteurs, fit 100dvh),
+   **comparaison ZOOMÉE bande par bande** avec l'export maquette. Itérer jusqu'à conformité.
+3. **NE JAMAIS surestimer ni annoncer « fidèle » sans preuve** : un % ne s'annonce qu'**après**
+   re-vérification élément par élément, captures à l'appui. En cas de doute, annoncer plus bas.
+4. **Éléments de LAYOUT (nav, footer, newsletter, socialwall…) : RÉÉCRIRE le CSS proprement** (ne pas
+   empiler des overrides `!important` sur le CSS de base → conflits) ; supprimer le code mort
+   (`@if($flag:false)`). **Un composant = SON fichier** (`_navigation.scss`, `_footer.scss`,
+   `form/_newsletter.scss`…), jamais de CSS d'un composant dans le fichier d'un autre.
+5. **AUTONOMIE** : exécuter la boucle (tokens → intégration → build → capture Chrome → mesure → itère)
+   **systématiquement, sans qu'on le demande**, pour chaque page ET chaque élément (desktop + mobile).
+6. **Boutons** : via `$buttons` (`variables.scss`) + `_button.scss`/`_mixin-button.scss` ; ne pas
+   préfixer `btn` dans les fixtures (le template l'ajoute). **`[section]` Figma = une ZONE CMS (1:1)**.
+
+> Le **maître mot est RIGUEUR**. Mesurer, prouver, ne rien laisser au hasard, enrichir le playbook
+> (`integration-prompts.md`) au fil des découvertes (en restant générique, sans référence projet).
+
+### ✅ CHECKLIST BLOQUANTE par élément — `models/element-dod.md` (À EXÉCUTER)
+Pour CHAQUE élément (bande, nav, footer, bouton, carte… desktop ET mobile), **dérouler la Definition
+of Done** de `.claude/skills/figma-cms/models/element-dod.md` : tokens relevés → intégration → build →
+**capture Chrome + mesure computed styles + contraintes chiffrées + comparaison zoomée** → itérer.
+**Aucun élément n'est « fait » sans ces artefacts.** C'est le garde-fou qui empêche d'approximer, de
+juger sur vignette, d'empiler des overrides et de surestimer — les erreurs qui ont coûté des heures.
+
+> 🚧 **GATE — AVANT tout rapport ou toute question** : la DoD doit être **entièrement déroulée** pour
+> l'élément concerné, **comparaison côte à côte + diff incluse** (`tooling/compare.sh <maquette> <rendu>
+> <out>` → `-side.png` + `-diff.png`, à MÊME largeur). **Faire cette compara SYSTÉMATIQUEMENT** quand elle
+> est utile, sans qu'on le demande. Ne pas répondre/rapporter « conforme » ni poser de question avant.
+> Et **croire la MESURE (`getComputedStyle`) plutôt que l'œil sur une image rétrécie** (le downscale fait
+> paraître l'or sombre, etc.).
 
 ## 🛑 AU LANCEMENT — poser CES 3 questions D'ABORD (avant toute autre action)
 
@@ -70,7 +124,7 @@ L'outillage Figma→CMS (parser + commandes) est **conservé À JOUR dans le ski
 ## Déroulé (cf. playbook pour le détail)
 
 0. **Installer l'outillage depuis le skill** (`cp -r .claude/skills/figma-cms/tooling/src/. src/`) → commandes `figma:parse-page` / `figma:capture-layout` dispo. Vérifier `php -l` + un parse à blanc.
-1. Kickoff : demander prod + proto ; bootstrapper `.claude/figma-cms/integration/` depuis `models/`.
+1. Kickoff : demander prod + proto ; bootstrapper `.claude/skills/figma-cms/integration/` depuis `models/`.
 2. Dry-run par page `[page|…]` (arbre + captures de bandes + médias + interactions proto).
 3. Config/URLs/SEO depuis la prod → `config.json` (+ géocodage Nominatim) → `bin/data/config/default.yaml`.
 4. Assets de marque (logo, favicons sur `primary`, share+logo, email-logo PNG, preloader, placeholder pastel).

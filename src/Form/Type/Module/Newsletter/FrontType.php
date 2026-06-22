@@ -42,15 +42,11 @@ class FrontType extends AbstractType
         $recaptcha->add($builder, $options['form_data']);
 
         $constraints = $campaign->isInternalRegistration() ? [
-            new Assert\NotBlank([
-                'message' => $this->translator->trans('Vous devez renseigner votre e-mail.', [], 'front_form'),
-            ]),
+            new Assert\NotBlank(message: $this->translator->trans('Vous devez renseigner votre e-mail.', [], 'front_form')),
             new Assert\Email(),
             new UniqEmailCampaign(),
         ] : [
-            new Assert\NotBlank([
-                'message' => $this->translator->trans('Vous devez renseigner votre e-mail.', [], 'front_form'),
-            ]),
+            new Assert\NotBlank(message: $this->translator->trans('Vous devez renseigner votre e-mail.', [], 'front_form')),
             new Assert\Email(),
         ];
 
@@ -62,6 +58,14 @@ class FrontType extends AbstractType
                 'autocomplete' => 'off',
             ],
             'constraints' => $constraints,
+        ]);
+
+        $builder->add('consent', Type\CheckboxType::class, [
+            'label' => $this->translator->trans("J'accepte que mes données soient utilisées pour me recontacter dans le cadre de cette demande.", [], 'front_form'),
+            'required' => true,
+            'constraints' => [
+                new Assert\IsTrue(message: $this->translator->trans('Vous devez accepter cette condition.', [], 'front_form')),
+            ],
         ]);
     }
 

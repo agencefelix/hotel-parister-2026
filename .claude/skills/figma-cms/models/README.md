@@ -6,7 +6,7 @@ Figma → CMS — **les prochains projets comme celui-ci**.
 
 ## Usage
 
-Au démarrage d'un projet, **copier** ces modèles dans **`.claude/figma-cms/integration/`**
+Au démarrage d'un projet, **copier** ces modèles dans **`.claude/skills/figma-cms/integration/`**
 (qui représente le projet : `config.json`, `prod-urls.json`, `seo.json`, la spec
 `<nom-du-projet>.md`, et les dossiers `pages/`, `layout/`, `screenshots/`, `media/`,
 `interactions/`), puis remplir les valeurs. Ne jamais modifier les fichiers de ce

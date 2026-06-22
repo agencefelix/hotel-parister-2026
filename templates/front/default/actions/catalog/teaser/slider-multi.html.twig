@@ -67,11 +67,13 @@
                         <li class="splide__slide{% if entities|length == 1 %} ms-3{% endif %}">
                             {{ macroCard.standard({
                                 entity: post,
+                                media: post.mainMedia is defined and post.mainMedia ? post.mainMedia : (post.intl.mainMedia is defined ? post.intl.mainMedia : null),
                                 titleForce: 3,
                                 thumbConfiguration: thumbConfiguration,
                                 thumbPlaceholder: true,
                                 displayThumbnail: true,
                                 showLink: true,
+                                showLinkLabel: post.intl.linkLabel is defined and post.intl.linkLabel ? post.intl.linkLabel : 'Découvrir'|trans,
                                 colSize: 4,
                                 webmaster: {
                                     title: "Éditer le produit"|trans([], 'front_webmaster'),

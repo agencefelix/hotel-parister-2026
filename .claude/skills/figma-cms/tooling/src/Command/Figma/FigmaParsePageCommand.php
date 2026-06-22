@@ -20,7 +20,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * Dry-run: parses a Figma page node into a CMS architecture tree.
  *
  * READ-ONLY — prints the tree and writes a JSON artifact per page under
- * `.claude/figma-cms/integration/pages/<slug>.json`. Performs NO database write.
+ * `.claude/skills/figma-cms/integration/pages/<slug>.json`. Performs NO database write.
  *
  * @author Sébastien FOURNIER <sebastien@agence-felix.fr>
  */
@@ -42,8 +42,8 @@ final class FigmaParsePageCommand extends Command
         $this
             ->addArgument('node-id', InputArgument::REQUIRED, 'Node-id Figma de la page (ex. 542:1592 ou 542-1592)')
             ->addOption('file-key', null, InputOption::VALUE_REQUIRED, 'Clé du fichier Figma', $this->figmaFileKey)
-            ->addOption('output-dir', null, InputOption::VALUE_REQUIRED, 'Dossier de sortie des JSON', $this->projectDir.'/.claude/figma-cms/integration/pages')
-            ->addOption('screenshot-dir', null, InputOption::VALUE_REQUIRED, 'Dossier des captures par bande', $this->projectDir.'/.claude/figma-cms/integration/screenshots')
+            ->addOption('output-dir', null, InputOption::VALUE_REQUIRED, 'Dossier de sortie des JSON', $this->projectDir.'/.claude/skills/figma-cms/integration/pages')
+            ->addOption('screenshot-dir', null, InputOption::VALUE_REQUIRED, 'Dossier des captures par bande', $this->projectDir.'/.claude/skills/figma-cms/integration/screenshots')
             ->addOption('no-screenshots', null, InputOption::VALUE_NONE, 'Ne pas générer les captures de bandes');
     }
 
@@ -96,7 +96,7 @@ final class FigmaParsePageCommand extends Command
             $files = $this->screenshotter->capture($fileKey, $nodeId, $page, $baseDir);
             $io->note(sprintf('%d capture(s) écrite(s) (bandes %s/ + layout/) sous %s', count($files), $page->slug, $baseDir));
 
-            $mediaDir = $this->projectDir.'/.claude/figma-cms/integration/media/'.$page->slug;
+            $mediaDir = $this->projectDir.'/.claude/skills/figma-cms/integration/media/'.$page->slug;
             $media = $this->screenshotter->captureMedia($fileKey, $page, $mediaDir);
             if ($media !== []) {
                 $io->note(sprintf('%d média(s) de contenu écrit(s) dans %s', count($media), $mediaDir));

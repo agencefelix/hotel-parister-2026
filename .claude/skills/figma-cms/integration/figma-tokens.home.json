@@ -1,0 +1,9894 @@
+{
+ "node": "542:1592",
+ "count": 562,
+ "items": [
+  {
+   "id": "542:1592",
+   "name": "[page|home]",
+   "type": "FRAME",
+   "x": 0,
+   "y": 0,
+   "w": 1440,
+   "h": 11866,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "614:1480",
+   "name": "[section]",
+   "type": "GROUP",
+   "x": 0,
+   "y": 4081,
+   "w": 1440,
+   "h": 1728
+  },
+  {
+   "id": "542:1594",
+   "name": "Rectangle 31",
+   "type": "RECTANGLE",
+   "x": 0,
+   "y": 4081,
+   "w": 1440,
+   "h": 1728,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "634:1541",
+   "name": "[section]",
+   "type": "GROUP",
+   "x": 0,
+   "y": 2559,
+   "w": 1440,
+   "h": 1522
+  },
+  {
+   "id": "542:1593",
+   "name": "Rectangle 30",
+   "type": "RECTANGLE",
+   "x": 0,
+   "y": 2559,
+   "w": 1440,
+   "h": 1522,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1596",
+   "name": "Group 38",
+   "type": "GROUP",
+   "x": 80,
+   "y": 2799,
+   "w": 620,
+   "h": 123
+  },
+  {
+   "id": "542:1597",
+   "name": "Votre parenthèse",
+   "type": "TEXT",
+   "x": 80,
+   "y": 2799,
+   "w": 607,
+   "h": 76,
+   "fontSize": 32.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 12.8,
+   "lineHeightPx": 38.400001525878906,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Votre\nparenthèse",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#8fb3b1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1598",
+   "name": "parisienne",
+   "type": "TEXT",
+   "x": 80,
+   "y": 2824,
+   "w": 620,
+   "h": 98,
+   "fontSize": 96.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "parisienne",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#8fb3b1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "614:1486",
+   "name": "group",
+   "type": "GROUP",
+   "x": 190,
+   "y": 2639,
+   "w": 1167,
+   "h": 744
+  },
+  {
+   "id": "542:1599",
+   "name": "Chambres, suites, offres et disponibilités.Lorem ipsum dolor sit amet del cironcstum del doloros del ametis. tés.Lorem ipsum dolor sit amet del cironcstum del doloros del ametis.",
+   "type": "TEXT",
+   "x": 190,
+   "y": 2978,
+   "w": 401,
+   "h": 80,
+   "fontSize": 16.0,
+   "fontWeight": 400,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 20.0,
+   "textAlign": "LEFT",
+   "characters": "Chambres, suites, offres et disponibilités.Lorem ipsum dolor sit amet del cironcstum del doloros del ametis. tés.Lorem ipsum dolor sit amet del cironcstum del doloros del ametis. ",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#8fb3b1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1600",
+   "name": "IMG_2829 1",
+   "type": "RECTANGLE",
+   "x": 740,
+   "y": 2639,
+   "w": 617,
+   "h": 744,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "cc55c453b0271453a19f16a0b9a7a36d37b546a8"
+    }
+   ]
+  },
+  {
+   "id": "542:1779",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 203,
+   "y": 3170,
+   "w": 375,
+   "h": 50,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1779;410:4647",
+   "name": "Frame 89",
+   "type": "FRAME",
+   "x": 203,
+   "y": 3170,
+   "w": 375,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1779;410:4610",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 227,
+   "y": 3170,
+   "w": 327,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#8fb3b1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1779;410:4611",
+   "name": "Frame 88",
+   "type": "FRAME",
+   "x": 203,
+   "y": 3190,
+   "w": 375,
+   "h": 10,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 16.0
+   }
+  },
+  {
+   "id": "I542:1779;410:4612",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 203,
+   "y": 3190,
+   "w": 252,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir les chambres",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#8fb3b1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1779;410:4613",
+   "name": "Line 19",
+   "type": "LINE",
+   "x": 471,
+   "y": 3190,
+   "w": 0,
+   "h": 10,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#8fb3b1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1779;410:4614",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 487,
+   "y": 3190,
+   "w": 91,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Réserver",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#8fb3b1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1779;410:4658",
+   "name": "Frame 90",
+   "type": "FRAME",
+   "x": 203,
+   "y": 3220,
+   "w": 375,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1779;410:4615",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 227,
+   "y": 3220,
+   "w": 327,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#8fb3b1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "614:1479",
+   "name": "Group 137",
+   "type": "GROUP",
+   "x": 80,
+   "y": 4081,
+   "w": 1280,
+   "h": 1772
+  },
+  {
+   "id": "542:1610",
+   "name": "Frame 43",
+   "type": "FRAME",
+   "x": 80,
+   "y": 4081,
+   "w": 1280,
+   "h": 1142
+  },
+  {
+   "id": "542:1611",
+   "name": "Frame 42",
+   "type": "FRAME",
+   "x": 728,
+   "y": 4081,
+   "w": 632,
+   "h": 732
+  },
+  {
+   "id": "542:1612",
+   "name": "IMG_2829 2",
+   "type": "RECTANGLE",
+   "x": 743,
+   "y": 4161,
+   "w": 617,
+   "h": 744,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "682ea3d9f072bb83eaab6d395a0cbdf0cba0e663"
+    }
+   ]
+  },
+  {
+   "id": "542:1613",
+   "name": "Group 52",
+   "type": "GROUP",
+   "x": 80,
+   "y": 4321,
+   "w": 620,
+   "h": 268
+  },
+  {
+   "id": "542:1614",
+   "name": "Les Passerelles",
+   "type": "TEXT",
+   "x": 80,
+   "y": 4321,
+   "w": 620,
+   "h": 38,
+   "fontSize": 32.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 12.8,
+   "lineHeightPx": 38.400001525878906,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Les Passerelles",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#00561b",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1615",
+   "name": "Un espace dédié au lâcher-prise, à l’écart du rythme parisien. Piscine, soins, fitness : tout est pensé pour se détendre, se ressourcer et retrouver l’équilibre, dans une atmosphère calme et élégante.",
+   "type": "TEXT",
+   "x": 190,
+   "y": 4489,
+   "w": 400,
+   "h": 100,
+   "fontSize": 16.0,
+   "fontWeight": 400,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 20.0,
+   "textAlign": "LEFT",
+   "characters": "Un espace dédié au lâcher-prise, à l’écart du rythme parisien. Piscine, soins, fitness : tout est pensé pour se détendre, se ressourcer et retrouver l’équilibre, dans une atmosphère calme et élégante.",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#00561b",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1616",
+   "name": "restaurant & bar",
+   "type": "TEXT",
+   "x": 80,
+   "y": 4335,
+   "w": 620,
+   "h": 98,
+   "fontSize": 96.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "restaurant & bar",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#00561b",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1617",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 263,
+   "y": 4701,
+   "w": 254,
+   "h": 50,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1617;410:4647",
+   "name": "Frame 89",
+   "type": "FRAME",
+   "x": 263,
+   "y": 4701,
+   "w": 254,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1617;410:4610",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 287,
+   "y": 4701,
+   "w": 206,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#00561b",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1617;410:4611",
+   "name": "Frame 88",
+   "type": "FRAME",
+   "x": 263,
+   "y": 4721,
+   "w": 254,
+   "h": 10,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 16.0
+   }
+  },
+  {
+   "id": "I542:1617;410:4612",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 263,
+   "y": 4721,
+   "w": 131,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Voir le menu",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#00561b",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1617;410:4613",
+   "name": "Line 19",
+   "type": "LINE",
+   "x": 410,
+   "y": 4721,
+   "w": 0,
+   "h": 10,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#00561b",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1617;410:4614",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 426,
+   "y": 4721,
+   "w": 91,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Réserver",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#00561b",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1617;410:4658",
+   "name": "Frame 90",
+   "type": "FRAME",
+   "x": 263,
+   "y": 4751,
+   "w": 254,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1617;410:4615",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 287,
+   "y": 4751,
+   "w": 206,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#00561b",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1621",
+   "name": "IMG_2829 4",
+   "type": "RECTANGLE",
+   "x": 80,
+   "y": 4966,
+   "w": 510,
+   "h": 737,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "11077b6b6cb2b9e6425bc3a7440f0e0848e1879f"
+    }
+   ]
+  },
+  {
+   "id": "542:1622",
+   "name": "IMG_2829 3",
+   "type": "RECTANGLE",
+   "x": 740,
+   "y": 5417,
+   "w": 510,
+   "h": 436,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "cd4d0f91731508beab24aea6727dd1aed0e5e7db"
+    }
+   ]
+  },
+  {
+   "id": "542:1626",
+   "name": "Component 12",
+   "type": "INSTANCE",
+   "x": 959,
+   "y": 9272,
+   "w": 290,
+   "h": 447,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1626;30:882",
+   "name": "l’exposition de Huang Xiaoliang",
+   "type": "TEXT",
+   "x": 959,
+   "y": 9683,
+   "w": 290,
+   "h": 34,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Morning Wellness Club\nYoga avec Clarisse Douat",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1626;30:878",
+   "name": "Three-Boys-Huang-Xiaoliang 1",
+   "type": "RECTANGLE",
+   "x": 959,
+   "y": 9272,
+   "w": 290,
+   "h": 371,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "ea1282c21963b43b67ee51f249790b435b62e1ac"
+    }
+   ]
+  },
+  {
+   "id": "614:1490",
+   "name": "[section]",
+   "type": "GROUP",
+   "x": 80,
+   "y": 9208,
+   "w": 1609,
+   "h": 511
+  },
+  {
+   "id": "614:1491",
+   "name": "[slidler|splide]",
+   "type": "GROUP",
+   "x": 80,
+   "y": 9272,
+   "w": 1609,
+   "h": 447
+  },
+  {
+   "id": "542:1623",
+   "name": "Component 10",
+   "type": "INSTANCE",
+   "x": 80,
+   "y": 9272,
+   "w": 290,
+   "h": 447,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1623;30:882",
+   "name": "l’exposition de Huang Xiaoliang",
+   "type": "TEXT",
+   "x": 80,
+   "y": 9683,
+   "w": 290,
+   "h": 34,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "l’exposition de Huang Xiaoliang",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1623;30:878",
+   "name": "Three-Boys-Huang-Xiaoliang 1",
+   "type": "RECTANGLE",
+   "x": 80,
+   "y": 9272,
+   "w": 290,
+   "h": 371,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "3689da711a48c0f4dab848cdc19efd07a2f60dca"
+    }
+   ]
+  },
+  {
+   "id": "542:1624",
+   "name": "Component 17",
+   "type": "INSTANCE",
+   "x": 1399,
+   "y": 9272,
+   "w": 290,
+   "h": 447,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1624;30:882",
+   "name": "l’exposition de Huang Xiaoliang",
+   "type": "TEXT",
+   "x": 1399,
+   "y": 9683,
+   "w": 290,
+   "h": 34,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "l’exposition de Huang Xiaoliang",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1624;30:878",
+   "name": "Three-Boys-Huang-Xiaoliang 1",
+   "type": "RECTANGLE",
+   "x": 1399,
+   "y": 9272,
+   "w": 290,
+   "h": 371,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "3689da711a48c0f4dab848cdc19efd07a2f60dca"
+    }
+   ]
+  },
+  {
+   "id": "542:1625",
+   "name": "Component 11",
+   "type": "INSTANCE",
+   "x": 520,
+   "y": 9272,
+   "w": 290,
+   "h": 447,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1625;30:882",
+   "name": "l’exposition de Huang Xiaoliang",
+   "type": "TEXT",
+   "x": 520,
+   "y": 9683,
+   "w": 290,
+   "h": 34,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "l’exposition de  Capucine Néouze",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1625;30:878",
+   "name": "Three-Boys-Huang-Xiaoliang 1",
+   "type": "RECTANGLE",
+   "x": 520,
+   "y": 9272,
+   "w": 290,
+   "h": 371,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "1eddbf66f99b77faa1fe9417fc9ba45fb13e12d0"
+    }
+   ]
+  },
+  {
+   "id": "542:1627",
+   "name": "Component 16",
+   "type": "INSTANCE",
+   "x": 959,
+   "y": 9272,
+   "w": 290,
+   "h": 447,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1627;30:882",
+   "name": "l’exposition de Huang Xiaoliang",
+   "type": "TEXT",
+   "x": 959,
+   "y": 9683,
+   "w": 290,
+   "h": 34,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Morning Wellness Club\nYoga avec Clarisse Douat",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1627;30:878",
+   "name": "Three-Boys-Huang-Xiaoliang 1",
+   "type": "RECTANGLE",
+   "x": 959,
+   "y": 9272,
+   "w": 290,
+   "h": 371,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "ea1282c21963b43b67ee51f249790b435b62e1ac"
+    }
+   ]
+  },
+  {
+   "id": "542:1628",
+   "name": "derniers événements",
+   "type": "TEXT",
+   "x": 80,
+   "y": 9208,
+   "w": 286,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "derniers événements",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1635",
+   "name": "[section]",
+   "type": "GROUP",
+   "x": 0,
+   "y": 7465,
+   "w": 1440,
+   "h": 829
+  },
+  {
+   "id": "542:1636",
+   "name": "Parister-13 4",
+   "type": "RECTANGLE",
+   "x": 0,
+   "y": 7465,
+   "w": 1440,
+   "h": 829,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "a3a7d25a24a03bd6e307d55b3f7552e6ddada086"
+    },
+    {
+     "type": "SOLID",
+     "hex": "#000000",
+     "opacity": 0.45
+    }
+   ]
+  },
+  {
+   "id": "542:1637",
+   "name": "workspaces",
+   "type": "TEXT",
+   "x": 2,
+   "y": 7546,
+   "w": 1438,
+   "h": 428,
+   "opacity": 0.20000000298023224,
+   "fontSize": 416.7285461425781,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 315.9298095703125,
+   "textAlign": "CENTER",
+   "characters": "workspaces",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1638",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 461,
+   "y": 8164,
+   "w": 519,
+   "h": 50,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1638;410:4647",
+   "name": "Frame 89",
+   "type": "FRAME",
+   "x": 461,
+   "y": 8164,
+   "w": 519,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1638;410:4610",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 485,
+   "y": 8164,
+   "w": 471,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1638;410:4611",
+   "name": "Frame 88",
+   "type": "FRAME",
+   "x": 461,
+   "y": 8184,
+   "w": 519,
+   "h": 10,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 16.0
+   }
+  },
+  {
+   "id": "I542:1638;410:4612",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 461,
+   "y": 8184,
+   "w": 255,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Organiser un évènement",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1638;410:4613",
+   "name": "Line 19",
+   "type": "LINE",
+   "x": 732,
+   "y": 8184,
+   "w": 0,
+   "h": 10,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1638;410:4614",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 748,
+   "y": 8184,
+   "w": 232,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "découvrir les espaces",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1638;410:4658",
+   "name": "Frame 90",
+   "type": "FRAME",
+   "x": 461,
+   "y": 8214,
+   "w": 519,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1638;410:4615",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 485,
+   "y": 8214,
+   "w": 471,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1639",
+   "name": "pour vos Séminaires, réunions, évenements",
+   "type": "TEXT",
+   "x": 396,
+   "y": 7870,
+   "w": 648,
+   "h": 19,
+   "fontSize": 16.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 6.4,
+   "lineHeightPx": 19.200000762939453,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "pour vos Séminaires, réunions, évenements",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "effects": [
+    {
+     "type": "DROP_SHADOW",
+     "hex": "#000000",
+     "x": 0.0,
+     "y": 4.0,
+     "blur": 44.0,
+     "spread": null
+    }
+   ]
+  },
+  {
+   "id": "634:1540",
+   "name": "[section]",
+   "type": "GROUP",
+   "x": 80,
+   "y": 3446,
+   "w": 1360,
+   "h": 555
+  },
+  {
+   "id": "542:1601",
+   "name": "Group",
+   "type": "FRAME",
+   "x": 80,
+   "y": 3490,
+   "w": 1360,
+   "h": 511,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 150.0
+   }
+  },
+  {
+   "id": "631:1534",
+   "name": "[teaser|product]",
+   "type": "GROUP",
+   "x": 80,
+   "y": 3490,
+   "w": 3700,
+   "h": 511
+  },
+  {
+   "id": "542:1602",
+   "name": "Component 8",
+   "type": "INSTANCE",
+   "x": 80,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1602;410:4684",
+   "name": "Chambre Suite - sdb 6",
+   "type": "VECTOR",
+   "x": 80,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "3d7edc5410a5786b6c8af2bbd94fadc610c918b8"
+    }
+   ]
+  },
+  {
+   "id": "I542:1602;410:4685",
+   "name": "Rectangle 28",
+   "type": "RECTANGLE",
+   "x": 80,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "opacity": 0.6000000238418579,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#402624",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1602;410:4686",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 227,
+   "y": 3911,
+   "w": 107,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1602;410:4686;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 227,
+   "y": 3911,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1602;410:4686;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 251,
+   "y": 3911,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1602;410:4686;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 227,
+   "y": 3931,
+   "w": 107,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1602;410:4686;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 227,
+   "y": 3961,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1602;410:4686;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 251,
+   "y": 3961,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1602;410:4687",
+   "name": "Frame 33",
+   "type": "FRAME",
+   "x": 158,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": -24.0
+   }
+  },
+  {
+   "id": "I542:1602;410:4688",
+   "name": "Chambre",
+   "type": "TEXT",
+   "x": 158,
+   "y": 3554,
+   "w": 245,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Chambre",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1602;410:4689",
+   "name": "supérieure",
+   "type": "TEXT",
+   "x": 158,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "supérieure",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1602;410:4690",
+   "name": "Intime et élégante",
+   "type": "TEXT",
+   "x": 158,
+   "y": 3641,
+   "w": 245,
+   "h": 19,
+   "fontSize": 16.0,
+   "fontWeight": 300,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 19.200000762939453,
+   "textAlign": "CENTER",
+   "characters": "Intime et élégante",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1603",
+   "name": "Component 9",
+   "type": "INSTANCE",
+   "x": 630,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1603;410:4684",
+   "name": "Chambre Suite - sdb 6",
+   "type": "VECTOR",
+   "x": 630,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "3d7edc5410a5786b6c8af2bbd94fadc610c918b8"
+    }
+   ]
+  },
+  {
+   "id": "I542:1603;410:4685",
+   "name": "Rectangle 28",
+   "type": "RECTANGLE",
+   "x": 630,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "opacity": 0.6000000238418579,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#402624",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1603;410:4686",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 777,
+   "y": 3911,
+   "w": 107,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1603;410:4686;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 777,
+   "y": 3911,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1603;410:4686;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 801,
+   "y": 3911,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1603;410:4686;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 777,
+   "y": 3931,
+   "w": 107,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1603;410:4686;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 777,
+   "y": 3961,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1603;410:4686;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 801,
+   "y": 3961,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1603;410:4687",
+   "name": "Frame 33",
+   "type": "FRAME",
+   "x": 708,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": -24.0
+   }
+  },
+  {
+   "id": "I542:1603;410:4688",
+   "name": "Chambre",
+   "type": "TEXT",
+   "x": 708,
+   "y": 3554,
+   "w": 245,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Juinior",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1603;410:4689",
+   "name": "supérieure",
+   "type": "TEXT",
+   "x": 708,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "suite",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1603;410:4690",
+   "name": "Intime et élégante",
+   "type": "TEXT",
+   "x": 708,
+   "y": 3641,
+   "w": 245,
+   "h": 19,
+   "fontSize": 16.0,
+   "fontWeight": 300,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 19.200000762939453,
+   "textAlign": "CENTER",
+   "characters": "Intime et élégante",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1604",
+   "name": "Component 5",
+   "type": "INSTANCE",
+   "x": 1180,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1604;410:4684",
+   "name": "Chambre Suite - sdb 6",
+   "type": "VECTOR",
+   "x": 1180,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "bd31a3c58f3845832f165e86fe114c3db7d9b2e7"
+    }
+   ]
+  },
+  {
+   "id": "I542:1604;410:4685",
+   "name": "Rectangle 28",
+   "type": "RECTANGLE",
+   "x": 1180,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "opacity": 0.4000000059604645,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1604;410:4686",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 1327,
+   "y": 3911,
+   "w": 107,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1604;410:4686;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 1327,
+   "y": 3911,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1604;410:4686;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 1351,
+   "y": 3911,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1604;410:4686;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 1327,
+   "y": 3931,
+   "w": 107,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1604;410:4686;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 1327,
+   "y": 3961,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1604;410:4686;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 1351,
+   "y": 3961,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1604;410:4687",
+   "name": "Frame 33",
+   "type": "FRAME",
+   "x": 1258,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": -24.0
+   }
+  },
+  {
+   "id": "I542:1604;410:4688",
+   "name": "Chambre",
+   "type": "TEXT",
+   "x": 1258,
+   "y": 3554,
+   "w": 245,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Junior",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1604;410:4689",
+   "name": "supérieure",
+   "type": "TEXT",
+   "x": 1258,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "suite terrasse",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1604;410:4690",
+   "name": "Intime et élégante",
+   "type": "TEXT",
+   "x": 1258,
+   "y": 3641,
+   "w": 245,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 400,
+   "fontFamily": "Inter",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 16.94318199157715,
+   "textAlign": "CENTER",
+   "characters": "Espace ouvert sur Paris",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1605",
+   "name": "Component 3",
+   "type": "INSTANCE",
+   "x": 1730,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1605;410:4684",
+   "name": "Chambre Suite - sdb 6",
+   "type": "VECTOR",
+   "x": 1730,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "6490d3667e80c74b85606b1e42081de799cf2c6d"
+    }
+   ]
+  },
+  {
+   "id": "I542:1605;410:4685",
+   "name": "Rectangle 28",
+   "type": "RECTANGLE",
+   "x": 1730,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "opacity": 0.6000000238418579,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#402624",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1605;410:4686",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 1877,
+   "y": 3911,
+   "w": 107,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1605;410:4686;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 1877,
+   "y": 3911,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1605;410:4686;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 1901,
+   "y": 3911,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1605;410:4686;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 1877,
+   "y": 3931,
+   "w": 107,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1605;410:4686;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 1877,
+   "y": 3961,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1605;410:4686;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 1901,
+   "y": 3961,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1605;410:4687",
+   "name": "Frame 33",
+   "type": "FRAME",
+   "x": 1808,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": -24.0
+   }
+  },
+  {
+   "id": "I542:1605;410:4688",
+   "name": "zefzef",
+   "type": "TEXT",
+   "x": 1808,
+   "y": 3554,
+   "w": 245,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Deluxe",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1605;410:4689",
+   "name": "supérieure",
+   "type": "TEXT",
+   "x": 1808,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "terrasse",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1605;410:4690",
+   "name": "Intime et élégante",
+   "type": "TEXT",
+   "x": 1808,
+   "y": 3641,
+   "w": 245,
+   "h": 19,
+   "fontSize": 16.0,
+   "fontWeight": 300,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 19.200000762939453,
+   "textAlign": "CENTER",
+   "characters": "Ouverte sur l’extérieur",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1606",
+   "name": "Component 6",
+   "type": "INSTANCE",
+   "x": 2280,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1606;410:4684",
+   "name": "Chambre Suite - sdb 6",
+   "type": "VECTOR",
+   "x": 2280,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "be5d1f337d390f74dd211cefda5b0e3a47a5ed06"
+    }
+   ]
+  },
+  {
+   "id": "I542:1606;410:4685",
+   "name": "Rectangle 28",
+   "type": "RECTANGLE",
+   "x": 2280,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "opacity": 0.4000000059604645,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1606;410:4686",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 2427,
+   "y": 3911,
+   "w": 107,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1606;410:4686;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 2427,
+   "y": 3911,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1606;410:4686;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 2451,
+   "y": 3911,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1606;410:4686;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 2427,
+   "y": 3931,
+   "w": 107,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1606;410:4686;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 2427,
+   "y": 3961,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1606;410:4686;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 2451,
+   "y": 3961,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1606;410:4687",
+   "name": "Frame 33",
+   "type": "FRAME",
+   "x": 2358,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": -24.0
+   }
+  },
+  {
+   "id": "I542:1606;410:4688",
+   "name": "Chambre",
+   "type": "TEXT",
+   "x": 2358,
+   "y": 3554,
+   "w": 245,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Suite",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1606;410:4689",
+   "name": "supérieure",
+   "type": "TEXT",
+   "x": 2358,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "duplex",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1606;410:4690",
+   "name": "Intime et élégante",
+   "type": "TEXT",
+   "x": 2358,
+   "y": 3641,
+   "w": 245,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 400,
+   "fontFamily": "Inter",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 16.94318199157715,
+   "textAlign": "CENTER",
+   "characters": "Sur deux niveaux, en toute intimité",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1607",
+   "name": "Component 2",
+   "type": "INSTANCE",
+   "x": 2830,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1607;410:4684",
+   "name": "Chambre Suite - sdb 6",
+   "type": "VECTOR",
+   "x": 2830,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "f12c1bea380890b10b323184a79c16d66c7c2da3"
+    }
+   ]
+  },
+  {
+   "id": "I542:1607;410:4685",
+   "name": "Rectangle 28",
+   "type": "RECTANGLE",
+   "x": 2830,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "opacity": 0.6000000238418579,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#402624",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1607;410:4686",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 2977,
+   "y": 3911,
+   "w": 107,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1607;410:4686;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 2977,
+   "y": 3911,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1607;410:4686;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 3001,
+   "y": 3911,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1607;410:4686;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 2977,
+   "y": 3931,
+   "w": 107,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1607;410:4686;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 2977,
+   "y": 3961,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1607;410:4686;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 3001,
+   "y": 3961,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1607;410:4687",
+   "name": "Frame 33",
+   "type": "FRAME",
+   "x": 2908,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": -24.0
+   }
+  },
+  {
+   "id": "I542:1607;410:4688",
+   "name": "Chambre",
+   "type": "TEXT",
+   "x": 2908,
+   "y": 3554,
+   "w": 245,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Chambre",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1607;410:4689",
+   "name": "supérieure",
+   "type": "TEXT",
+   "x": 2908,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "deluxe",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1607;410:4690",
+   "name": "Intime et élégante",
+   "type": "TEXT",
+   "x": 2908,
+   "y": 3641,
+   "w": 245,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 400,
+   "fontFamily": "Inter",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 16.94318199157715,
+   "textAlign": "CENTER",
+   "characters": "Plus d’espace, plus de confort",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1608",
+   "name": "Component 7",
+   "type": "INSTANCE",
+   "x": 3380,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1608;410:4684",
+   "name": "Chambre Suite - sdb 6",
+   "type": "VECTOR",
+   "x": 3380,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "abd56fce351bfc93d9f884e9933992ac7c3120b3"
+    }
+   ]
+  },
+  {
+   "id": "I542:1608;410:4685",
+   "name": "Rectangle 28",
+   "type": "RECTANGLE",
+   "x": 3380,
+   "y": 3490,
+   "w": 400,
+   "h": 511,
+   "opacity": 0.4000000059604645,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1608;410:4686",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 3527,
+   "y": 3911,
+   "w": 107,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1608;410:4686;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 3527,
+   "y": 3911,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1608;410:4686;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 3551,
+   "y": 3911,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1608;410:4686;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 3527,
+   "y": 3931,
+   "w": 107,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1608;410:4686;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 3527,
+   "y": 3961,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1608;410:4686;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 3551,
+   "y": 3961,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1608;410:4687",
+   "name": "Frame 33",
+   "type": "FRAME",
+   "x": 3458,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": -24.0
+   }
+  },
+  {
+   "id": "I542:1608;410:4688",
+   "name": "Chambre",
+   "type": "TEXT",
+   "x": 3458,
+   "y": 3554,
+   "w": 245,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "suite",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1608;410:4689",
+   "name": "supérieure",
+   "type": "TEXT",
+   "x": 3458,
+   "y": 3554,
+   "w": 245,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "parister",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1608;410:4690",
+   "name": "Intime et élégante",
+   "type": "TEXT",
+   "x": 3458,
+   "y": 3641,
+   "w": 245,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 400,
+   "fontFamily": "Inter",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 16.94318199157715,
+   "textAlign": "CENTER",
+   "characters": "La signature de la maison",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1640",
+   "name": "Chambres 45",
+   "type": "TEXT",
+   "x": 80,
+   "y": 3446,
+   "w": 158,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Chambres 45",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#8fb3b1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1641",
+   "name": "[section]",
+   "type": "FRAME",
+   "x": 80,
+   "y": 894,
+   "w": 1361,
+   "h": 836
+  },
+  {
+   "id": "542:1642",
+   "name": "[slider|splide]",
+   "type": "FRAME",
+   "x": 80,
+   "y": 894,
+   "w": 2200,
+   "h": 836,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 0
+   }
+  },
+  {
+   "id": "542:1643",
+   "name": "Group 83",
+   "type": "INSTANCE",
+   "x": 80,
+   "y": 894,
+   "w": 550,
+   "h": 836
+  },
+  {
+   "id": "I542:1643;106:658",
+   "name": "Découvrir",
+   "type": "TEXT",
+   "x": 258,
+   "y": 1681,
+   "w": 115,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1643;91:159",
+   "name": "Des chambres et suites pensées comme un refuge élégant au cœur de Paris.",
+   "type": "TEXT",
+   "x": 128,
+   "y": 1114,
+   "w": 352,
+   "h": 40,
+   "fontSize": 16.0,
+   "fontWeight": 300,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 20.0,
+   "textAlign": "LEFT",
+   "characters": "Des espaces pensés pour se réunir, présenter et célébrer.",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1643;91:160",
+   "name": "CTA Label",
+   "type": "INSTANCE",
+   "x": 132,
+   "y": 1176,
+   "w": 115,
+   "h": 17,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1643;91:160;15:380",
+   "name": "Réserver un séjour",
+   "type": "TEXT",
+   "x": 180,
+   "y": 1176,
+   "w": 107,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1643;106:668",
+   "name": "Rectangle 38",
+   "type": "RECTANGLE",
+   "x": 80,
+   "y": 1193,
+   "w": 510,
+   "h": 456,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "36885e37fbcaa3433701f1ac9ef90d53378b2ba4"
+    }
+   ]
+  },
+  {
+   "id": "I542:1643;91:495",
+   "name": "Line 14",
+   "type": "LINE",
+   "x": 80,
+   "y": 894,
+   "w": 0,
+   "h": 836,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1643;91:497",
+   "name": "Group 72",
+   "type": "GROUP",
+   "x": 201,
+   "y": 989,
+   "w": 310,
+   "h": 60
+  },
+  {
+   "id": "I542:1643;91:498",
+   "name": "Séjourner",
+   "type": "TEXT",
+   "x": 201,
+   "y": 989,
+   "w": 310,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Séjourner",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1643;91:499",
+   "name": "à l hôtel",
+   "type": "TEXT",
+   "x": 201,
+   "y": 994,
+   "w": 310,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "à l hôtel",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1644",
+   "name": "Group 80",
+   "type": "INSTANCE",
+   "x": 630,
+   "y": 894,
+   "w": 550,
+   "h": 836
+  },
+  {
+   "id": "I542:1644;106:658",
+   "name": "Découvrir",
+   "type": "TEXT",
+   "x": 808,
+   "y": 1681,
+   "w": 115,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1644;91:159",
+   "name": "Des chambres et suites pensées comme un refuge élégant au cœur de Paris.",
+   "type": "TEXT",
+   "x": 678,
+   "y": 1114,
+   "w": 352,
+   "h": 40,
+   "fontSize": 16.0,
+   "fontWeight": 300,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 20.0,
+   "textAlign": "LEFT",
+   "characters": "Une adresse vivante pour boire un verre, déjeuner ou prolonger la soirée.",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1644;91:160",
+   "name": "CTA Label",
+   "type": "INSTANCE",
+   "x": 682,
+   "y": 1176,
+   "w": 115,
+   "h": 17,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1644;91:160;15:380",
+   "name": "Réserver un séjour",
+   "type": "TEXT",
+   "x": 730,
+   "y": 1176,
+   "w": 107,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1644;106:668",
+   "name": "Rectangle 38",
+   "type": "RECTANGLE",
+   "x": 630,
+   "y": 1193,
+   "w": 510,
+   "h": 456,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "d9e140575765df93e07ae2983dda44197a83c3ba"
+    }
+   ]
+  },
+  {
+   "id": "I542:1644;91:495",
+   "name": "Line 14",
+   "type": "LINE",
+   "x": 630,
+   "y": 894,
+   "w": 0,
+   "h": 836,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1644;91:497",
+   "name": "Group 72",
+   "type": "GROUP",
+   "x": 751,
+   "y": 989,
+   "w": 310,
+   "h": 60
+  },
+  {
+   "id": "I542:1644;91:498",
+   "name": "Séjourner",
+   "type": "TEXT",
+   "x": 751,
+   "y": 989,
+   "w": 310,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Boire et manger",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1644;91:499",
+   "name": "à l hôtel",
+   "type": "TEXT",
+   "x": 751,
+   "y": 994,
+   "w": 310,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "au restaurant",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1645",
+   "name": "Group 81",
+   "type": "INSTANCE",
+   "x": 1180,
+   "y": 894,
+   "w": 550,
+   "h": 836
+  },
+  {
+   "id": "I542:1645;106:658",
+   "name": "Découvrir",
+   "type": "TEXT",
+   "x": 1358,
+   "y": 1681,
+   "w": 115,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1645;91:159",
+   "name": "Des chambres et suites pensées comme un refuge élégant au cœur de Paris.",
+   "type": "TEXT",
+   "x": 1228,
+   "y": 1114,
+   "w": 352,
+   "h": 40,
+   "fontSize": 16.0,
+   "fontWeight": 300,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 20.0,
+   "textAlign": "LEFT",
+   "characters": "Un espace dédié au bien-être, à l’écart du rythme de la ville.",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1645;91:160",
+   "name": "CTA Label",
+   "type": "INSTANCE",
+   "x": 1232,
+   "y": 1176,
+   "w": 115,
+   "h": 17,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1645;91:160;15:380",
+   "name": "Réserver un séjour",
+   "type": "TEXT",
+   "x": 1280,
+   "y": 1176,
+   "w": 107,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1645;106:668",
+   "name": "Rectangle 38",
+   "type": "RECTANGLE",
+   "x": 1180,
+   "y": 1193,
+   "w": 510,
+   "h": 456,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "377dcce7c93edbdc84fe82299bf06116a6a48f77"
+    }
+   ]
+  },
+  {
+   "id": "I542:1645;91:495",
+   "name": "Line 14",
+   "type": "LINE",
+   "x": 1180,
+   "y": 894,
+   "w": 0,
+   "h": 836,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1645;91:497",
+   "name": "Group 72",
+   "type": "GROUP",
+   "x": 1301,
+   "y": 989,
+   "w": 310,
+   "h": 60
+  },
+  {
+   "id": "I542:1645;91:498",
+   "name": "Séjourner",
+   "type": "TEXT",
+   "x": 1301,
+   "y": 989,
+   "w": 310,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Se détendre",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1645;91:499",
+   "name": "à l hôtel",
+   "type": "TEXT",
+   "x": 1301,
+   "y": 994,
+   "w": 310,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "au spa",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1646",
+   "name": "Group 82",
+   "type": "INSTANCE",
+   "x": 1730,
+   "y": 894,
+   "w": 550,
+   "h": 836
+  },
+  {
+   "id": "I542:1646;106:658",
+   "name": "Découvrir",
+   "type": "TEXT",
+   "x": 1908,
+   "y": 1681,
+   "w": 115,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1646;91:159",
+   "name": "Des chambres et suites pensées comme un refuge élégant au cœur de Paris.",
+   "type": "TEXT",
+   "x": 1778,
+   "y": 1114,
+   "w": 352,
+   "h": 40,
+   "fontSize": 16.0,
+   "fontWeight": 300,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 20.0,
+   "textAlign": "LEFT",
+   "characters": "Des espaces raffinés pour réunir, présenter, célébrer.",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1646;91:160",
+   "name": "CTA Label",
+   "type": "INSTANCE",
+   "x": 1782,
+   "y": 1176,
+   "w": 115,
+   "h": 17,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1646;91:160;15:380",
+   "name": "Réserver un séjour",
+   "type": "TEXT",
+   "x": 1830,
+   "y": 1176,
+   "w": 107,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1646;106:668",
+   "name": "Rectangle 38",
+   "type": "RECTANGLE",
+   "x": 1730,
+   "y": 1193,
+   "w": 510,
+   "h": 456,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "a3a7d25a24a03bd6e307d55b3f7552e6ddada086"
+    }
+   ]
+  },
+  {
+   "id": "I542:1646;91:495",
+   "name": "Line 14",
+   "type": "LINE",
+   "x": 1730,
+   "y": 894,
+   "w": 0,
+   "h": 836,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1646;91:497",
+   "name": "Group 72",
+   "type": "GROUP",
+   "x": 1851,
+   "y": 989,
+   "w": 310,
+   "h": 60
+  },
+  {
+   "id": "I542:1646;91:498",
+   "name": "Séjourner",
+   "type": "TEXT",
+   "x": 1851,
+   "y": 989,
+   "w": 310,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Louer",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1646;91:499",
+   "name": "à l hôtel",
+   "type": "TEXT",
+   "x": 1851,
+   "y": 994,
+   "w": 310,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "une salle",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1647",
+   "name": "Line 14",
+   "type": "LINE",
+   "x": 2280,
+   "y": 894,
+   "w": 0,
+   "h": 836,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1648",
+   "name": "Component 15",
+   "type": "INSTANCE",
+   "x": 0,
+   "y": 1731,
+   "w": 1441,
+   "h": 829,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1648;106:781",
+   "name": "Frame 62",
+   "type": "FRAME",
+   "x": 0,
+   "y": 1731,
+   "w": 1441,
+   "h": 829
+  },
+  {
+   "id": "I542:1648;106:766",
+   "name": "Frame 59",
+   "type": "FRAME",
+   "x": 0,
+   "y": 1731,
+   "w": 1441,
+   "h": 829
+  },
+  {
+   "id": "I542:1648;106:694",
+   "name": "Parister-13 5",
+   "type": "RECTANGLE",
+   "x": 0,
+   "y": 1731,
+   "w": 1441,
+   "h": 829,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "1b3d4781ebdbe060036e357e5c7d916d0fd3a114"
+    },
+    {
+     "type": "SOLID",
+     "hex": "#000000",
+     "opacity": 0.25
+    }
+   ]
+  },
+  {
+   "id": "I542:1648;106:770",
+   "name": "Frame 60",
+   "type": "FRAME",
+   "x": 1441,
+   "y": 1731,
+   "w": 1440,
+   "h": 829
+  },
+  {
+   "id": "I542:1648;106:702",
+   "name": "IMG_2832 1",
+   "type": "RECTANGLE",
+   "x": 1441,
+   "y": 1731,
+   "w": 1440,
+   "h": 829,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "5a78c874508d310fe0d96b9fd72f9fd783727cfb"
+    }
+   ]
+  },
+  {
+   "id": "634:1537",
+   "name": "[section]",
+   "type": "GROUP",
+   "x": 0,
+   "y": 1730,
+   "w": 1441,
+   "h": 830
+  },
+  {
+   "id": "542:1649",
+   "name": "[slider|bootsrap]",
+   "type": "INSTANCE",
+   "x": 0,
+   "y": 1730,
+   "w": 1441,
+   "h": 830,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1649;234:418",
+   "name": "[slider|id:home-1]",
+   "type": "RECTANGLE",
+   "x": 0,
+   "y": 1730,
+   "w": 1461,
+   "h": 829,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "b0bb43c7ae05567705bdc940c1a0dc185b6153ef"
+    },
+    {
+     "type": "SOLID",
+     "hex": "#000000",
+     "opacity": 0.25
+    }
+   ]
+  },
+  {
+   "id": "542:1650",
+   "name": "parister",
+   "type": "TEXT",
+   "x": 36,
+   "y": 1761,
+   "w": 1368,
+   "h": 542,
+   "opacity": 0.20000000298023224,
+   "fontSize": 528.2483520507812,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 400.4750671386719,
+   "textAlign": "CENTER",
+   "characters": "parister",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1651",
+   "name": "Intimiste, contemporain et chaleureux",
+   "type": "TEXT",
+   "x": 426,
+   "y": 2136,
+   "w": 589,
+   "h": 19,
+   "fontSize": 16.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 6.4,
+   "lineHeightPx": 19.200000762939453,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Intimiste, contemporain et chaleureux",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "effects": [
+    {
+     "type": "DROP_SHADOW",
+     "hex": "#000000",
+     "x": 0.0,
+     "y": 4.0,
+     "blur": 44.0,
+     "spread": null
+    }
+   ]
+  },
+  {
+   "id": "542:1652",
+   "name": "Line 24",
+   "type": "LINE",
+   "x": 0,
+   "y": 1731,
+   "w": 1440,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1653",
+   "name": "CTA Box",
+   "type": "INSTANCE",
+   "x": 80,
+   "y": 3705,
+   "w": 80,
+   "h": 80,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 0.5
+    }
+   ],
+   "effects": [
+    {
+     "type": "BACKGROUND_BLUR",
+     "hex": null,
+     "x": null,
+     "y": null,
+     "blur": 50.0,
+     "spread": null
+    }
+   ],
+   "cornerRadius": 4.0,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 32.0,
+    "padRight": 32.0,
+    "padBottom": 32.0,
+    "padLeft": 32.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1653;145:3598",
+   "name": "ICONS / FLÈCHE DROITE",
+   "type": "INSTANCE",
+   "x": 112,
+   "y": 3737,
+   "w": 16,
+   "h": 16
+  },
+  {
+   "id": "I542:1653;145:3598;145:3597",
+   "name": "Vector 1",
+   "type": "VECTOR",
+   "x": 118,
+   "y": 3739,
+   "w": 4,
+   "h": 12,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 2.0
+  },
+  {
+   "id": "542:1654",
+   "name": "CTA Box",
+   "type": "INSTANCE",
+   "x": 1280,
+   "y": 3705,
+   "w": 80,
+   "h": 80,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 0.5
+    }
+   ],
+   "effects": [
+    {
+     "type": "BACKGROUND_BLUR",
+     "hex": null,
+     "x": null,
+     "y": null,
+     "blur": 50.0,
+     "spread": null
+    }
+   ],
+   "cornerRadius": 4.0,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 32.0,
+    "padRight": 32.0,
+    "padBottom": 32.0,
+    "padLeft": 32.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1654;145:3598",
+   "name": "ICONS / FLÈCHE DROITE",
+   "type": "INSTANCE",
+   "x": 1312,
+   "y": 3737,
+   "w": 16,
+   "h": 16
+  },
+  {
+   "id": "I542:1654;145:3598;145:3597",
+   "name": "Vector 1",
+   "type": "VECTOR",
+   "x": 1318,
+   "y": 3739,
+   "w": 4,
+   "h": 12,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 2.0
+  },
+  {
+   "id": "542:1655",
+   "name": "Group 113",
+   "type": "GROUP",
+   "x": 0,
+   "y": 1388,
+   "w": 1440,
+   "h": 80,
+   "cornerRadius": 4.0
+  },
+  {
+   "id": "542:1656",
+   "name": "CTA Box",
+   "type": "INSTANCE",
+   "x": 0,
+   "y": 1388,
+   "w": 80,
+   "h": 80,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 0.5
+    }
+   ],
+   "effects": [
+    {
+     "type": "BACKGROUND_BLUR",
+     "hex": null,
+     "x": null,
+     "y": null,
+     "blur": 50.0,
+     "spread": null
+    }
+   ],
+   "cornerRadius": 4.0,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 32.0,
+    "padRight": 32.0,
+    "padBottom": 32.0,
+    "padLeft": 32.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1656;145:3598",
+   "name": "ICONS / FLÈCHE DROITE",
+   "type": "INSTANCE",
+   "x": 32,
+   "y": 1420,
+   "w": 16,
+   "h": 16
+  },
+  {
+   "id": "I542:1656;145:3598;145:3597",
+   "name": "Vector 1",
+   "type": "VECTOR",
+   "x": 38,
+   "y": 1422,
+   "w": 4,
+   "h": 12,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 2.0
+  },
+  {
+   "id": "542:1657",
+   "name": "CTA Box",
+   "type": "INSTANCE",
+   "x": 1360,
+   "y": 1388,
+   "w": 80,
+   "h": 80,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 0.5
+    }
+   ],
+   "effects": [
+    {
+     "type": "BACKGROUND_BLUR",
+     "hex": null,
+     "x": null,
+     "y": null,
+     "blur": 50.0,
+     "spread": null
+    }
+   ],
+   "cornerRadius": 4.0,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 32.0,
+    "padRight": 32.0,
+    "padBottom": 32.0,
+    "padLeft": 32.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1657;145:3598",
+   "name": "ICONS / FLÈCHE DROITE",
+   "type": "INSTANCE",
+   "x": 1392,
+   "y": 1420,
+   "w": 16,
+   "h": 16
+  },
+  {
+   "id": "I542:1657;145:3598;145:3597",
+   "name": "Vector 1",
+   "type": "VECTOR",
+   "x": 1398,
+   "y": 1422,
+   "w": 4,
+   "h": 12,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 2.0
+  },
+  {
+   "id": "542:1658",
+   "name": "Group 112",
+   "type": "GROUP",
+   "x": 80,
+   "y": 9410,
+   "w": 1280,
+   "h": 80,
+   "cornerRadius": 4.0
+  },
+  {
+   "id": "542:1659",
+   "name": "CTA Box",
+   "type": "INSTANCE",
+   "x": 80,
+   "y": 9410,
+   "w": 80,
+   "h": 80,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 0.5
+    }
+   ],
+   "effects": [
+    {
+     "type": "BACKGROUND_BLUR",
+     "hex": null,
+     "x": null,
+     "y": null,
+     "blur": 50.0,
+     "spread": null
+    }
+   ],
+   "cornerRadius": 4.0,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 32.0,
+    "padRight": 32.0,
+    "padBottom": 32.0,
+    "padLeft": 32.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1659;145:3598",
+   "name": "ICONS / FLÈCHE DROITE",
+   "type": "INSTANCE",
+   "x": 112,
+   "y": 9442,
+   "w": 16,
+   "h": 16
+  },
+  {
+   "id": "I542:1659;145:3598;145:3597",
+   "name": "Vector 1",
+   "type": "VECTOR",
+   "x": 118,
+   "y": 9444,
+   "w": 4,
+   "h": 12,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 2.0
+  },
+  {
+   "id": "542:1660",
+   "name": "CTA Box",
+   "type": "INSTANCE",
+   "x": 1280,
+   "y": 9410,
+   "w": 80,
+   "h": 80,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 0.5
+    }
+   ],
+   "effects": [
+    {
+     "type": "BACKGROUND_BLUR",
+     "hex": null,
+     "x": null,
+     "y": null,
+     "blur": 50.0,
+     "spread": null
+    }
+   ],
+   "cornerRadius": 4.0,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 32.0,
+    "padRight": 32.0,
+    "padBottom": 32.0,
+    "padLeft": 32.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1660;145:3598",
+   "name": "ICONS / FLÈCHE DROITE",
+   "type": "INSTANCE",
+   "x": 1312,
+   "y": 9442,
+   "w": 16,
+   "h": 16
+  },
+  {
+   "id": "I542:1660;145:3598;145:3597",
+   "name": "Vector 1",
+   "type": "VECTOR",
+   "x": 1318,
+   "y": 9444,
+   "w": 4,
+   "h": 12,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 2.0
+  },
+  {
+   "id": "630:1531",
+   "name": "[socialwall]",
+   "type": "GROUP",
+   "x": 80,
+   "y": 10051,
+   "w": 1411,
+   "h": 799
+  },
+  {
+   "id": "542:1629",
+   "name": "parister",
+   "type": "TEXT",
+   "x": 123,
+   "y": 10051,
+   "w": 1368,
+   "h": 542,
+   "opacity": 0.20000000298023224,
+   "fontSize": 528.2483520507812,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 400.4750671386719,
+   "textAlign": "CENTER",
+   "characters": "parister",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "577:1371",
+   "name": "Group",
+   "type": "GROUP",
+   "x": 80,
+   "y": 10322,
+   "w": 1280,
+   "h": 528
+  },
+  {
+   "id": "542:1816",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 606,
+   "y": 10800,
+   "w": 229,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1816;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 606,
+   "y": 10800,
+   "w": 229,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1816;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 630,
+   "y": 10800,
+   "w": 181,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1816;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 606,
+   "y": 10820,
+   "w": 229,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Suivez-nous sur insta",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1816;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 606,
+   "y": 10850,
+   "w": 229,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1816;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 630,
+   "y": 10850,
+   "w": 181,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1661",
+   "name": "Rectangle 42",
+   "type": "RECTANGLE",
+   "x": 80,
+   "y": 10322,
+   "w": 290,
+   "h": 371,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "2bf52c5a9052a12aaef1637f242742c3d9209b7f"
+    }
+   ]
+  },
+  {
+   "id": "542:1662",
+   "name": "Rectangle 43",
+   "type": "RECTANGLE",
+   "x": 575,
+   "y": 10322,
+   "w": 290,
+   "h": 371,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "1219fe33e4b960b9dca8abf657185070643c785f"
+    }
+   ]
+  },
+  {
+   "id": "542:1663",
+   "name": "Rectangle 44",
+   "type": "RECTANGLE",
+   "x": 1070,
+   "y": 10322,
+   "w": 290,
+   "h": 371,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "ce1a63a71fa43dfb23e94af8a584864bf3581c23"
+    }
+   ]
+  },
+  {
+   "id": "542:1664",
+   "name": "[newsletter]",
+   "type": "GROUP",
+   "x": 410,
+   "y": 9963,
+   "w": 621,
+   "h": 258
+  },
+  {
+   "id": "542:1665",
+   "name": "Rejoignez notre",
+   "type": "TEXT",
+   "x": 410,
+   "y": 9971,
+   "w": 620,
+   "h": 38,
+   "fontSize": 32.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 12.8,
+   "lineHeightPx": 38.400001525878906,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Rejoignez notre",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1666",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 412,
+   "y": 10173,
+   "w": 619,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1667",
+   "name": "Envoyer",
+   "type": "TEXT",
+   "x": 876,
+   "y": 10140,
+   "w": 84,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Envoyer",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1668",
+   "name": "votre e-mail",
+   "type": "TEXT",
+   "x": 410,
+   "y": 10140,
+   "w": 100,
+   "h": 17,
+   "opacity": 0.4000000059604645,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "votre e-mail",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1669",
+   "name": "Line 19",
+   "type": "LINE",
+   "x": 802,
+   "y": 10140,
+   "w": 0,
+   "h": 17,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1670",
+   "name": "Line 57",
+   "type": "LINE",
+   "x": 410,
+   "y": 10140,
+   "w": 0,
+   "h": 17,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1671",
+   "name": "Group 28",
+   "type": "GROUP",
+   "x": 410,
+   "y": 10185,
+   "w": 620,
+   "h": 36
+  },
+  {
+   "id": "542:1672",
+   "name": "J’accepte que la société Parister exploite les informations collectées dans ce formulaire dans le cadre de ma demande de contact et de la relation commerciale qui pourrait en découler. *",
+   "type": "TEXT",
+   "x": 446,
+   "y": 10185,
+   "w": 584,
+   "h": 36,
+   "fontSize": 13.0,
+   "fontWeight": 400,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 18.0,
+   "textAlign": "LEFT",
+   "characters": "J’accepte que la société Parister exploite les informations collectées dans ce formulaire dans le cadre de ma demande de contact et de la relation commerciale qui pourrait en découler. *",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1673",
+   "name": "Rectangle 11",
+   "type": "RECTANGLE",
+   "x": 410,
+   "y": 10189,
+   "w": 16,
+   "h": 16,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1674",
+   "name": "newsletter",
+   "type": "TEXT",
+   "x": 410,
+   "y": 9963,
+   "w": 620,
+   "h": 98,
+   "fontSize": 96.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "newsletter",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "614:1487",
+   "name": "Group",
+   "type": "GROUP",
+   "x": 0,
+   "y": 5933,
+   "w": 1440,
+   "h": 1532
+  },
+  {
+   "id": "542:1595",
+   "name": "Rectangle 32",
+   "type": "RECTANGLE",
+   "x": 0,
+   "y": 5933,
+   "w": 1440,
+   "h": 1532,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#8fb3b1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "634:1538",
+   "name": "[section]",
+   "type": "GROUP",
+   "x": 80,
+   "y": 6013,
+   "w": 1280,
+   "h": 641
+  },
+  {
+   "id": "542:1630",
+   "name": "Group 53",
+   "type": "GROUP",
+   "x": 80,
+   "y": 6173,
+   "w": 620,
+   "h": 417
+  },
+  {
+   "id": "542:1631",
+   "name": "Spa, bien-être &",
+   "type": "TEXT",
+   "x": 123,
+   "y": 6173,
+   "w": 536,
+   "h": 38,
+   "fontSize": 32.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 12.8,
+   "lineHeightPx": 38.400001525878906,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Spa, bien-être &",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1632",
+   "name": "Un espace dédié au lâcher-prise, à l’écart du rythme parisien. Piscine, soins, fitness : tout est pensé pour se détendre, se ressourcer et retrouver l’équilibre, dans une atmosphère calme et élégante.",
+   "type": "TEXT",
+   "x": 190,
+   "y": 6328,
+   "w": 400,
+   "h": 100,
+   "fontSize": 16.0,
+   "fontWeight": 400,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 20.0,
+   "textAlign": "LEFT",
+   "characters": "Un espace dédié au lâcher-prise, à l’écart du rythme parisien. Piscine, soins, fitness : tout est pensé pour se détendre, se ressourcer et retrouver l’équilibre, dans une atmosphère calme et élégante.",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1633",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 199,
+   "y": 6540,
+   "w": 383,
+   "h": 50,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1633;410:4647",
+   "name": "Frame 89",
+   "type": "FRAME",
+   "x": 199,
+   "y": 6540,
+   "w": 383,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1633;410:4610",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 223,
+   "y": 6540,
+   "w": 335,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1633;410:4611",
+   "name": "Frame 88",
+   "type": "FRAME",
+   "x": 199,
+   "y": 6560,
+   "w": 383,
+   "h": 10,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 16.0
+   }
+  },
+  {
+   "id": "I542:1633;410:4612",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 199,
+   "y": 6560,
+   "w": 175,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir le spa",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1633;410:4613",
+   "name": "Line 19",
+   "type": "LINE",
+   "x": 390,
+   "y": 6560,
+   "w": 0,
+   "h": 10,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1633;410:4614",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 406,
+   "y": 6560,
+   "w": 176,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Réserver un soin",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1633;410:4658",
+   "name": "Frame 90",
+   "type": "FRAME",
+   "x": 199,
+   "y": 6590,
+   "w": 383,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1633;410:4615",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 223,
+   "y": 6590,
+   "w": 335,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1634",
+   "name": "sport",
+   "type": "TEXT",
+   "x": 80,
+   "y": 6174,
+   "w": 620,
+   "h": 98,
+   "fontSize": 96.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "sport",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1675",
+   "name": "IMG_2829 5",
+   "type": "RECTANGLE",
+   "x": 808,
+   "y": 6013,
+   "w": 552,
+   "h": 641,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "377dcce7c93edbdc84fe82299bf06116a6a48f77"
+    }
+   ]
+  },
+  {
+   "id": "542:1676",
+   "name": "[footer]",
+   "type": "GROUP",
+   "x": 0,
+   "y": 10982,
+   "w": 1440,
+   "h": 884
+  },
+  {
+   "id": "542:1677",
+   "name": "Rectangle 33",
+   "type": "RECTANGLE",
+   "x": 0,
+   "y": 10982,
+   "w": 1440,
+   "h": 884,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1678",
+   "name": "Frame 37",
+   "type": "FRAME",
+   "x": 80,
+   "y": 11038,
+   "w": 117,
+   "h": 24,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 7.0
+   }
+  },
+  {
+   "id": "542:1679",
+   "name": "c",
+   "type": "VECTOR",
+   "x": 80,
+   "y": 11038,
+   "w": 24,
+   "h": 24,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1680",
+   "name": "Subtract",
+   "type": "BOOLEAN_OPERATION",
+   "x": 111,
+   "y": 11038,
+   "w": 24,
+   "h": 24,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1681",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 111,
+   "y": 11038,
+   "w": 24,
+   "h": 24,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1682",
+   "name": "Union",
+   "type": "BOOLEAN_OPERATION",
+   "x": 116,
+   "y": 11043,
+   "w": 15,
+   "h": 14,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1683",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 116,
+   "y": 11043,
+   "w": 15,
+   "h": 14,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1684",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 120,
+   "y": 11047,
+   "w": 7,
+   "h": 7,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1685",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 126,
+   "y": 11045,
+   "w": 2,
+   "h": 2,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1686",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 142,
+   "y": 11038,
+   "w": 24,
+   "h": 24,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1687",
+   "name": "Group",
+   "type": "GROUP",
+   "x": 173,
+   "y": 11038,
+   "w": 24,
+   "h": 24
+  },
+  {
+   "id": "542:1688",
+   "name": "Subtract",
+   "type": "BOOLEAN_OPERATION",
+   "x": 173,
+   "y": 11038,
+   "w": 24,
+   "h": 24,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1689",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 173,
+   "y": 11038,
+   "w": 24,
+   "h": 24,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#383d38",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1690",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 179,
+   "y": 11044,
+   "w": 11,
+   "h": 13,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1691",
+   "name": "IMG_2829 9",
+   "type": "RECTANGLE",
+   "x": 850,
+   "y": 11118,
+   "w": 590,
+   "h": 488,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "35fc46fef735dbd91816034e53dfeb7983f2f6e7"
+    },
+    {
+     "type": "SOLID",
+     "hex": "#000000",
+     "opacity": 0.46
+    }
+   ]
+  },
+  {
+   "id": "542:1692",
+   "name": "19 Rue Saulnier, 75009 Paris +33 (0) 1 80 50 91 91 bonjour@hotelparister.com",
+   "type": "TEXT",
+   "x": 850,
+   "y": 11687,
+   "w": 590,
+   "h": 60,
+   "fontSize": 12.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 4.800000000000001,
+   "lineHeightPx": 20.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "19 Rue Saulnier, 75009 Paris\n+33 (0) 1 80 50 91 91\nbonjour@hotelparister.com",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1693",
+   "name": "Frame 38",
+   "type": "FRAME",
+   "x": 1087,
+   "y": 11800,
+   "w": 117,
+   "h": 24,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 7.0
+   }
+  },
+  {
+   "id": "542:1694",
+   "name": "c",
+   "type": "VECTOR",
+   "x": 1087,
+   "y": 11800,
+   "w": 24,
+   "h": 24,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1695",
+   "name": "Group 49",
+   "type": "GROUP",
+   "x": 1118,
+   "y": 11800,
+   "w": 24,
+   "h": 24
+  },
+  {
+   "id": "542:1696",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 1118,
+   "y": 11800,
+   "w": 24,
+   "h": 24,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1697",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 1124,
+   "y": 11806,
+   "w": 11,
+   "h": 11,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1698",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 1136,
+   "y": 11804,
+   "w": 2,
+   "h": 2,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1699",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 1149,
+   "y": 11800,
+   "w": 24,
+   "h": 24,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1700",
+   "name": "Group",
+   "type": "GROUP",
+   "x": 1180,
+   "y": 11800,
+   "w": 24,
+   "h": 24
+  },
+  {
+   "id": "542:1701",
+   "name": "Subtract",
+   "type": "BOOLEAN_OPERATION",
+   "x": 1180,
+   "y": 11800,
+   "w": 24,
+   "h": 24,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1702",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 1180,
+   "y": 11800,
+   "w": 24,
+   "h": 24,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#383d38",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1703",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 1186,
+   "y": 11805,
+   "w": 11,
+   "h": 13,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1704",
+   "name": "Line 22",
+   "type": "LINE",
+   "x": 0,
+   "y": 11118,
+   "w": 1440,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1705",
+   "name": "Line 23",
+   "type": "LINE",
+   "x": 0,
+   "y": 11808,
+   "w": 1440,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1706",
+   "name": "Group 46",
+   "type": "GROUP",
+   "x": 78,
+   "y": 11595,
+   "w": 270,
+   "h": 133
+  },
+  {
+   "id": "542:1707",
+   "name": "Un hôtel by",
+   "type": "TEXT",
+   "x": 78,
+   "y": 11595,
+   "w": 270,
+   "h": 53,
+   "fontSize": 12.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 4.800000000000001,
+   "lineHeightPx": 14.40000057220459,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Un hôtel by",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1708",
+   "name": "image 12",
+   "type": "FRAME",
+   "x": 141,
+   "y": 11632,
+   "w": 144,
+   "h": 96,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1709",
+   "name": "Clip path group",
+   "type": "GROUP",
+   "x": 141,
+   "y": 11632,
+   "w": 144,
+   "h": 96
+  },
+  {
+   "id": "542:1710",
+   "name": "clip0_3634_623",
+   "type": "GROUP",
+   "x": 141,
+   "y": 11632,
+   "w": 144,
+   "h": 96
+  },
+  {
+   "id": "542:1711",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 141,
+   "y": 11632,
+   "w": 144,
+   "h": 96,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#000000",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1712",
+   "name": "Group",
+   "type": "GROUP",
+   "x": 141,
+   "y": 11641,
+   "w": 144,
+   "h": 87
+  },
+  {
+   "id": "542:1713",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 141,
+   "y": 11690,
+   "w": 16,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1714",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 156,
+   "y": 11690,
+   "w": 14,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1715",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 176,
+   "y": 11690,
+   "w": 14,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1716",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 195,
+   "y": 11690,
+   "w": 13,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1717",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 213,
+   "y": 11690,
+   "w": 15,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1718",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 232,
+   "y": 11690,
+   "w": 16,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1719",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 254,
+   "y": 11690,
+   "w": 12,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1720",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 272,
+   "y": 11690,
+   "w": 12,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1721",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 161,
+   "y": 11721,
+   "w": 5,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1722",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 168,
+   "y": 11721,
+   "w": 7,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1723",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 176,
+   "y": 11721,
+   "w": 5,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1724",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 182,
+   "y": 11721,
+   "w": 4,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1725",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 189,
+   "y": 11721,
+   "w": 3,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1726",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 194,
+   "y": 11721,
+   "w": 5,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1727",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 203,
+   "y": 11721,
+   "w": 6,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1728",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 210,
+   "y": 11721,
+   "w": 7,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1729",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 218,
+   "y": 11721,
+   "w": 3,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1730",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 224,
+   "y": 11721,
+   "w": 3,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1731",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 229,
+   "y": 11721,
+   "w": 4,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1732",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 235,
+   "y": 11721,
+   "w": 6,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1733",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 242,
+   "y": 11721,
+   "w": 5,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1734",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 248,
+   "y": 11721,
+   "w": 1,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1735",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 251,
+   "y": 11721,
+   "w": 7,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1736",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 259,
+   "y": 11721,
+   "w": 5,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1737",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 200,
+   "y": 11650,
+   "w": 12,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1738",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 192,
+   "y": 11641,
+   "w": 39,
+   "h": 39,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1739",
+   "name": "Group 105",
+   "type": "GROUP",
+   "x": 503,
+   "y": 11588,
+   "w": 270,
+   "h": 139
+  },
+  {
+   "id": "542:1740",
+   "name": "partenaire  officiel 2026",
+   "type": "TEXT",
+   "x": 503,
+   "y": 11588,
+   "w": 270,
+   "h": 53,
+   "fontSize": 12.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 4.800000000000001,
+   "lineHeightPx": 14.40000057220459,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "partenaire  officiel\n2026",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1741",
+   "name": "Calque_1",
+   "type": "FRAME",
+   "x": 595,
+   "y": 11641,
+   "w": 86,
+   "h": 86,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1742",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 613,
+   "y": 11697,
+   "w": 4,
+   "h": 4,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1743",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 621,
+   "y": 11692,
+   "w": 2,
+   "h": 2,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1744",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 595,
+   "y": 11641,
+   "w": 86,
+   "h": 86,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1745",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 626,
+   "y": 11671,
+   "w": 3,
+   "h": 8,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1746",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 615,
+   "y": 11673,
+   "w": 3,
+   "h": 4,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1747",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 639,
+   "y": 11673,
+   "w": 3,
+   "h": 4,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1748",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 637,
+   "y": 11692,
+   "w": 6,
+   "h": 6,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1749",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 656,
+   "y": 11694,
+   "w": 2,
+   "h": 2,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1750",
+   "name": "Calque_1",
+   "type": "FRAME",
+   "x": 683,
+   "y": 11000,
+   "w": 75,
+   "h": 101,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1751",
+   "name": "Group",
+   "type": "GROUP",
+   "x": 709,
+   "y": 11000,
+   "w": 49,
+   "h": 64
+  },
+  {
+   "id": "542:1752",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 713,
+   "y": 11001,
+   "w": 1,
+   "h": 63,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1753",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 717,
+   "y": 11001,
+   "w": 1,
+   "h": 63,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1754",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 722,
+   "y": 11001,
+   "w": 1,
+   "h": 63,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1755",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 726,
+   "y": 11001,
+   "w": 1,
+   "h": 63,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1756",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 709,
+   "y": 11001,
+   "w": 1,
+   "h": 63,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1757",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 731,
+   "y": 11000,
+   "w": 27,
+   "h": 39,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1758",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 713,
+   "y": 11077,
+   "w": 1,
+   "h": 12,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1759",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 724,
+   "y": 11077,
+   "w": 9,
+   "h": 12,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1760",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 736,
+   "y": 11077,
+   "w": 7,
+   "h": 12,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1761",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 701,
+   "y": 11093,
+   "w": 6,
+   "h": 8,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1762",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 709,
+   "y": 11093,
+   "w": 8,
+   "h": 8,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1763",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 717,
+   "y": 11093,
+   "w": 6,
+   "h": 8,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1764",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 724,
+   "y": 11093,
+   "w": 4,
+   "h": 8,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1765",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 731,
+   "y": 11093,
+   "w": 4,
+   "h": 8,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1766",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 745,
+   "y": 11077,
+   "w": 8,
+   "h": 12,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1767",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 683,
+   "y": 11077,
+   "w": 7,
+   "h": 12,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1768",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 691,
+   "y": 11077,
+   "w": 10,
+   "h": 12,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1769",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 703,
+   "y": 11077,
+   "w": 8,
+   "h": 12,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1770",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 716,
+   "y": 11076,
+   "w": 7,
+   "h": 12,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1771",
+   "name": "copyright 2026 Mentions légales Gestion des cookies",
+   "type": "TEXT",
+   "x": 36,
+   "y": 11829,
+   "w": 434,
+   "h": 20,
+   "fontSize": 12.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 1.2000000000000002,
+   "lineHeightPx": 20.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "copyright 2026  Mentions légales  Gestion des cookies",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1772",
+   "name": "Agence Félix",
+   "type": "TEXT",
+   "x": 1269,
+   "y": 11829,
+   "w": 98,
+   "h": 20,
+   "fontSize": 12.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 1.2000000000000002,
+   "lineHeightPx": 20.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Agence Félix",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1773",
+   "name": "chambres & suites restaurant & bar à cocktails spa & bien-être séminaires & réunions Galerie photo Presse réservation",
+   "type": "TEXT",
+   "x": 0,
+   "y": 11222,
+   "w": 850,
+   "h": 256,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 32.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "chambres & suites\nrestaurant & bar à cocktails\nspa & bien-être\nséminaires & réunions\nGalerie photo\nPresse\n\nréservation",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1774",
+   "name": "Group 45",
+   "type": "GROUP",
+   "x": 1244,
+   "y": 11037,
+   "w": 156,
+   "h": 31
+  },
+  {
+   "id": "542:1775",
+   "name": "4,7/5",
+   "type": "TEXT",
+   "x": 1244,
+   "y": 11037,
+   "w": 65,
+   "h": 31,
+   "fontSize": 26.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 31.200000762939453,
+   "textAlign": "CENTER",
+   "characters": "4,7/5",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1776",
+   "name": "Excellent",
+   "type": "TEXT",
+   "x": 1322,
+   "y": 11037,
+   "w": 78,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 600,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 16.80000114440918,
+   "textAlign": "CENTER",
+   "characters": "Excellent",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1777",
+   "name": "1678 avis",
+   "type": "TEXT",
+   "x": 1322,
+   "y": 11050,
+   "w": 75,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 300,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 16.80000114440918,
+   "textAlign": "CENTER",
+   "characters": "1678 avis",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1778",
+   "name": "Line 75",
+   "type": "LINE",
+   "x": 850,
+   "y": 11118,
+   "w": 0,
+   "h": 690,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "614:1489",
+   "name": "[section]",
+   "type": "GROUP",
+   "x": 80,
+   "y": 8384,
+   "w": 1279,
+   "h": 744
+  },
+  {
+   "id": "542:1609",
+   "name": "IMG_2829 8",
+   "type": "RECTANGLE",
+   "x": 80,
+   "y": 8384,
+   "w": 617,
+   "h": 744,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "6d98f8026429129d9aa309141737a26901f95b15"
+    }
+   ]
+  },
+  {
+   "id": "542:1619",
+   "name": "Expositions, vernissages, cercles littéraires…Le Parister cultive un esprit vivant et ouvert, où se croisent création, idées et moments partagés.",
+   "type": "TEXT",
+   "x": 849,
+   "y": 8698,
+   "w": 400,
+   "h": 60,
+   "fontSize": 16.0,
+   "fontWeight": 400,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 20.0,
+   "textAlign": "LEFT",
+   "characters": "Expositions, vernissages, cercles littéraires…Le Parister cultive un esprit vivant et ouvert, où se croisent création, idées et moments partagés.",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1620",
+   "name": "rencontres",
+   "type": "TEXT",
+   "x": 739,
+   "y": 8544,
+   "w": 620,
+   "h": 98,
+   "fontSize": 96.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "rencontres",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1780",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 870,
+   "y": 8870,
+   "w": 359,
+   "h": 50,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1780;410:4647",
+   "name": "Frame 89",
+   "type": "FRAME",
+   "x": 870,
+   "y": 8870,
+   "w": 359,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1780;410:4610",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 894,
+   "y": 8870,
+   "w": 311,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1780;410:4611",
+   "name": "Frame 88",
+   "type": "FRAME",
+   "x": 870,
+   "y": 8890,
+   "w": 359,
+   "h": 10,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 16.0
+   }
+  },
+  {
+   "id": "I542:1780;410:4612",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 870,
+   "y": 8890,
+   "w": 279,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir nos événements",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1780;410:4613",
+   "name": "Line 19",
+   "type": "LINE",
+   "x": 1165,
+   "y": 8890,
+   "w": 0,
+   "h": 10,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1780;410:4614",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 1181,
+   "y": 8890,
+   "w": 48,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Blog",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1780;410:4658",
+   "name": "Frame 90",
+   "type": "FRAME",
+   "x": 870,
+   "y": 8920,
+   "w": 359,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1780;410:4615",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 894,
+   "y": 8920,
+   "w": 311,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1618",
+   "name": "Art &",
+   "type": "TEXT",
+   "x": 823,
+   "y": 8553,
+   "w": 454,
+   "h": 38,
+   "fontSize": 32.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 12.8,
+   "lineHeightPx": 38.400001525878906,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Art &",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1781",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 626,
+   "y": 2430,
+   "w": 190,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1781;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 626,
+   "y": 2430,
+   "w": 190,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1781;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 650,
+   "y": 2430,
+   "w": 142,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1781;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 626,
+   "y": 2450,
+   "w": 190,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir l’hôtel",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1781;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 626,
+   "y": 2480,
+   "w": 190,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1781;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 650,
+   "y": 2480,
+   "w": 142,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "634:1539",
+   "name": "[section]",
+   "type": "GROUP",
+   "x": 80,
+   "y": 6804,
+   "w": 2050,
+   "h": 511
+  },
+  {
+   "id": "542:1782",
+   "name": "[section]",
+   "type": "FRAME",
+   "x": 80,
+   "y": 6804,
+   "w": 2050,
+   "h": 511,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 150.0
+   }
+  },
+  {
+   "id": "614:1488",
+   "name": "[slider|splide]",
+   "type": "GROUP",
+   "x": 80,
+   "y": 6804,
+   "w": 2050,
+   "h": 511
+  },
+  {
+   "id": "542:1783",
+   "name": "Component 8",
+   "type": "INSTANCE",
+   "x": 80,
+   "y": 6804,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1783;410:4684",
+   "name": "Chambre Suite - sdb 6",
+   "type": "VECTOR",
+   "x": 80,
+   "y": 6804,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "7661a0ce20d338a0f845f6eb26c823b93ffdd239"
+    }
+   ]
+  },
+  {
+   "id": "I542:1783;410:4685",
+   "name": "Rectangle 28",
+   "type": "RECTANGLE",
+   "x": 80,
+   "y": 6804,
+   "w": 400,
+   "h": 511,
+   "opacity": 0.6000000238418579,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#402624",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1783;410:4686",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 227,
+   "y": 7225,
+   "w": 107,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1783;410:4686;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 227,
+   "y": 7225,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1783;410:4686;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 251,
+   "y": 7225,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1783;410:4686;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 227,
+   "y": 7245,
+   "w": 107,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1783;410:4686;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 227,
+   "y": 7275,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1783;410:4686;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 251,
+   "y": 7275,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1783;410:4687",
+   "name": "Frame 33",
+   "type": "FRAME",
+   "x": 158,
+   "y": 6868,
+   "w": 245,
+   "h": 55,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": -24.0
+   }
+  },
+  {
+   "id": "I542:1783;410:4688",
+   "name": "Chambre",
+   "type": "TEXT",
+   "x": 158,
+   "y": 6868,
+   "w": 245,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "les soins &",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1783;410:4689",
+   "name": "supérieure",
+   "type": "TEXT",
+   "x": 158,
+   "y": 6868,
+   "w": 245,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "massages",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1783;410:4690",
+   "name": "Intime et élégante",
+   "type": "TEXT",
+   "x": 158,
+   "y": 6955,
+   "w": 245,
+   "h": 19,
+   "fontSize": 16.0,
+   "fontWeight": 300,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 19.200000762939453,
+   "textAlign": "CENTER",
+   "characters": "Intime et élégante",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1784",
+   "name": "Component 16",
+   "type": "INSTANCE",
+   "x": 630,
+   "y": 6804,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1784;410:4684",
+   "name": "Chambre Suite - sdb 6",
+   "type": "VECTOR",
+   "x": 630,
+   "y": 6804,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "80b0391b1e228c4ad013eeb63ff4cb57106871e0"
+    }
+   ]
+  },
+  {
+   "id": "I542:1784;410:4685",
+   "name": "Rectangle 28",
+   "type": "RECTANGLE",
+   "x": 630,
+   "y": 6804,
+   "w": 400,
+   "h": 511,
+   "opacity": 0.6000000238418579,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#402624",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1784;410:4686",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 777,
+   "y": 7225,
+   "w": 107,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1784;410:4686;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 777,
+   "y": 7225,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1784;410:4686;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 801,
+   "y": 7225,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1784;410:4686;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 777,
+   "y": 7245,
+   "w": 107,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1784;410:4686;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 777,
+   "y": 7275,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1784;410:4686;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 801,
+   "y": 7275,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1784;410:4687",
+   "name": "Frame 33",
+   "type": "FRAME",
+   "x": 708,
+   "y": 6868,
+   "w": 245,
+   "h": 55,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": -24.0
+   }
+  },
+  {
+   "id": "I542:1784;410:4688",
+   "name": "Chambre",
+   "type": "TEXT",
+   "x": 708,
+   "y": 6868,
+   "w": 245,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "La piscine",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1784;410:4689",
+   "name": "supérieure",
+   "type": "TEXT",
+   "x": 708,
+   "y": 6868,
+   "w": 245,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "chauffée",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1784;410:4690",
+   "name": "Intime et élégante",
+   "type": "TEXT",
+   "x": 708,
+   "y": 6955,
+   "w": 245,
+   "h": 19,
+   "fontSize": 16.0,
+   "fontWeight": 300,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 19.200000762939453,
+   "textAlign": "CENTER",
+   "characters": "Intime et élégante",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1785",
+   "name": "Component 17",
+   "type": "INSTANCE",
+   "x": 1180,
+   "y": 6804,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1785;410:4684",
+   "name": "Chambre Suite - sdb 6",
+   "type": "VECTOR",
+   "x": 1180,
+   "y": 6804,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "ab88ece7e24f8dae4176e3d7f70b086803e78599"
+    }
+   ]
+  },
+  {
+   "id": "I542:1785;410:4685",
+   "name": "Rectangle 28",
+   "type": "RECTANGLE",
+   "x": 1180,
+   "y": 6804,
+   "w": 400,
+   "h": 511,
+   "opacity": 0.6000000238418579,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#402624",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1785;410:4686",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 1327,
+   "y": 7225,
+   "w": 107,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1785;410:4686;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 1327,
+   "y": 7225,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1785;410:4686;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 1351,
+   "y": 7225,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1785;410:4686;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 1327,
+   "y": 7245,
+   "w": 107,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1785;410:4686;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 1327,
+   "y": 7275,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1785;410:4686;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 1351,
+   "y": 7275,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1785;410:4687",
+   "name": "Frame 33",
+   "type": "FRAME",
+   "x": 1258,
+   "y": 6868,
+   "w": 245,
+   "h": 55,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": -24.0
+   }
+  },
+  {
+   "id": "I542:1785;410:4688",
+   "name": "Chambre",
+   "type": "TEXT",
+   "x": 1258,
+   "y": 6868,
+   "w": 245,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "La salle",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1785;410:4689",
+   "name": "supérieure",
+   "type": "TEXT",
+   "x": 1258,
+   "y": 6868,
+   "w": 245,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "de sport",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1785;410:4690",
+   "name": "Intime et élégante",
+   "type": "TEXT",
+   "x": 1258,
+   "y": 6955,
+   "w": 245,
+   "h": 19,
+   "fontSize": 16.0,
+   "fontWeight": 300,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 19.200000762939453,
+   "textAlign": "CENTER",
+   "characters": "Intime et élégante",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1786",
+   "name": "Component 18",
+   "type": "INSTANCE",
+   "x": 1730,
+   "y": 6804,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1786;410:4684",
+   "name": "Chambre Suite - sdb 6",
+   "type": "VECTOR",
+   "x": 1730,
+   "y": 6804,
+   "w": 400,
+   "h": 511,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "377dcce7c93edbdc84fe82299bf06116a6a48f77"
+    }
+   ]
+  },
+  {
+   "id": "I542:1786;410:4685",
+   "name": "Rectangle 28",
+   "type": "RECTANGLE",
+   "x": 1730,
+   "y": 6804,
+   "w": 400,
+   "h": 511,
+   "opacity": 0.6000000238418579,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#402624",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1786;410:4686",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 1877,
+   "y": 7225,
+   "w": 107,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1786;410:4686;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 1877,
+   "y": 7225,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1786;410:4686;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 1901,
+   "y": 7225,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1786;410:4686;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 1877,
+   "y": 7245,
+   "w": 107,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "Découvrir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1786;410:4686;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 1877,
+   "y": 7275,
+   "w": 107,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1786;410:4686;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 1901,
+   "y": 7275,
+   "w": 59,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1786;410:4687",
+   "name": "Frame 33",
+   "type": "FRAME",
+   "x": 1808,
+   "y": 6868,
+   "w": 245,
+   "h": 55,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": -24.0
+   }
+  },
+  {
+   "id": "I542:1786;410:4688",
+   "name": "Chambre",
+   "type": "TEXT",
+   "x": 1808,
+   "y": 6868,
+   "w": 245,
+   "h": 24,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Le couloir",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1786;410:4689",
+   "name": "supérieure",
+   "type": "TEXT",
+   "x": 1808,
+   "y": 6868,
+   "w": 245,
+   "h": 55,
+   "fontSize": 54.0,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "de nage",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1786;410:4690",
+   "name": "Intime et élégante",
+   "type": "TEXT",
+   "x": 1808,
+   "y": 6955,
+   "w": 245,
+   "h": 19,
+   "fontSize": 16.0,
+   "fontWeight": 300,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 19.200000762939453,
+   "textAlign": "CENTER",
+   "characters": "Intime et élégante",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1787",
+   "name": "Group 109",
+   "type": "GROUP",
+   "x": 80,
+   "y": 7019,
+   "w": 1280,
+   "h": 80,
+   "cornerRadius": 4.0
+  },
+  {
+   "id": "542:1788",
+   "name": "CTA Box",
+   "type": "INSTANCE",
+   "x": 80,
+   "y": 7019,
+   "w": 80,
+   "h": 80,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 0.5
+    }
+   ],
+   "effects": [
+    {
+     "type": "BACKGROUND_BLUR",
+     "hex": null,
+     "x": null,
+     "y": null,
+     "blur": 50.0,
+     "spread": null
+    }
+   ],
+   "cornerRadius": 4.0,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 32.0,
+    "padRight": 32.0,
+    "padBottom": 32.0,
+    "padLeft": 32.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1788;145:3598",
+   "name": "ICONS / FLÈCHE DROITE",
+   "type": "INSTANCE",
+   "x": 112,
+   "y": 7051,
+   "w": 16,
+   "h": 16
+  },
+  {
+   "id": "I542:1788;145:3598;145:3597",
+   "name": "Vector 1",
+   "type": "VECTOR",
+   "x": 118,
+   "y": 7053,
+   "w": 4,
+   "h": 12,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 2.0
+  },
+  {
+   "id": "542:1789",
+   "name": "CTA Box",
+   "type": "INSTANCE",
+   "x": 1280,
+   "y": 7019,
+   "w": 80,
+   "h": 80,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 0.5
+    }
+   ],
+   "effects": [
+    {
+     "type": "BACKGROUND_BLUR",
+     "hex": null,
+     "x": null,
+     "y": null,
+     "blur": 50.0,
+     "spread": null
+    }
+   ],
+   "cornerRadius": 4.0,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 32.0,
+    "padRight": 32.0,
+    "padBottom": 32.0,
+    "padLeft": 32.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1789;145:3598",
+   "name": "ICONS / FLÈCHE DROITE",
+   "type": "INSTANCE",
+   "x": 1312,
+   "y": 7051,
+   "w": 16,
+   "h": 16
+  },
+  {
+   "id": "I542:1789;145:3598;145:3597",
+   "name": "Vector 1",
+   "type": "VECTOR",
+   "x": 1318,
+   "y": 7053,
+   "w": 4,
+   "h": 12,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#001e56",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 2.0
+  },
+  {
+   "id": "542:1790",
+   "name": "Rectangle 41",
+   "type": "RECTANGLE",
+   "x": 0,
+   "y": 824,
+   "w": 1440,
+   "h": 70,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1791",
+   "name": "Chambres 12",
+   "type": "TEXT",
+   "x": 80,
+   "y": 4325,
+   "w": 71,
+   "h": 72,
+   "fontSize": 24.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 24.0,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Chambres 12",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#8fb3b1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1792",
+   "name": "Sticky Menu",
+   "type": "INSTANCE",
+   "x": 0,
+   "y": 846,
+   "w": 1440,
+   "h": 48
+  },
+  {
+   "id": "I542:1792;42:1661",
+   "name": "Rectangle 34",
+   "type": "RECTANGLE",
+   "x": 0,
+   "y": 846,
+   "w": 1440,
+   "h": 48,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1792;42:1662",
+   "name": "Frame 48",
+   "type": "FRAME",
+   "x": 40,
+   "y": 858,
+   "w": 1360,
+   "h": 25
+  },
+  {
+   "id": "I542:1792;42:1663",
+   "name": "Frame 46",
+   "type": "FRAME",
+   "x": 40,
+   "y": 858,
+   "w": 105,
+   "h": 24,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 12.0
+   }
+  },
+  {
+   "id": "I542:1792;42:1664",
+   "name": "Frame 27",
+   "type": "FRAME",
+   "x": 40,
+   "y": 858,
+   "w": 24,
+   "h": 24
+  },
+  {
+   "id": "I542:1792;42:1665",
+   "name": "Group 17",
+   "type": "GROUP",
+   "x": 40,
+   "y": 865,
+   "w": 24,
+   "h": 11
+  },
+  {
+   "id": "I542:1792;42:1666",
+   "name": "Rectangle 22",
+   "type": "RECTANGLE",
+   "x": 40,
+   "y": 865,
+   "w": 24,
+   "h": 1,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1667",
+   "name": "Rectangle 23",
+   "type": "RECTANGLE",
+   "x": 40,
+   "y": 870,
+   "w": 24,
+   "h": 1,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1668",
+   "name": "Rectangle 24",
+   "type": "RECTANGLE",
+   "x": 40,
+   "y": 875,
+   "w": 24,
+   "h": 1,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1669",
+   "name": "Menu",
+   "type": "TEXT",
+   "x": 76,
+   "y": 862,
+   "w": 69,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 3.5,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Menu",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1670",
+   "name": "Frame 47",
+   "type": "FRAME",
+   "x": 1115,
+   "y": 862,
+   "w": 285,
+   "h": 17,
+   "layout": {
+    "mode": "HORIZONTAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 12.0
+   }
+  },
+  {
+   "id": "I542:1792;42:1671",
+   "name": "Réserver",
+   "type": "TEXT",
+   "x": 1115,
+   "y": 862,
+   "w": 96,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 3.5,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Réserver",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1672",
+   "name": "Frame 32",
+   "type": "FRAME",
+   "x": 1223,
+   "y": 862,
+   "w": 16,
+   "h": 17
+  },
+  {
+   "id": "I542:1792;42:1673",
+   "name": "Line 1",
+   "type": "LINE",
+   "x": 1223,
+   "y": 861,
+   "w": 0,
+   "h": 18,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1792;42:1674",
+   "name": "Line 2",
+   "type": "LINE",
+   "x": 1227,
+   "y": 861,
+   "w": 0,
+   "h": 18,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1792;42:1675",
+   "name": "Line 3",
+   "type": "LINE",
+   "x": 1231,
+   "y": 861,
+   "w": 0,
+   "h": 18,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1792;42:1676",
+   "name": "Line 4",
+   "type": "LINE",
+   "x": 1235,
+   "y": 861,
+   "w": 0,
+   "h": 18,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1792;42:1677",
+   "name": "Line 5",
+   "type": "LINE",
+   "x": 1239,
+   "y": 861,
+   "w": 0,
+   "h": 18,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1792;42:1678",
+   "name": "Bons cadeaux",
+   "type": "TEXT",
+   "x": 1251,
+   "y": 862,
+   "w": 149,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 3.5,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Bons cadeaux",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1679",
+   "name": "Group 66",
+   "type": "GROUP",
+   "x": 656,
+   "y": 862,
+   "w": 121,
+   "h": 21
+  },
+  {
+   "id": "I542:1792;42:1680",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 708,
+   "y": 862,
+   "w": 1,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1681",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 728,
+   "y": 862,
+   "w": 16,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1682",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 747,
+   "y": 862,
+   "w": 12,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1683",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 764,
+   "y": 862,
+   "w": 13,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1684",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 656,
+   "y": 862,
+   "w": 13,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1685",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 670,
+   "y": 862,
+   "w": 16,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1686",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 690,
+   "y": 862,
+   "w": 13,
+   "h": 20,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1792;42:1687",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 714,
+   "y": 862,
+   "w": 12,
+   "h": 21,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1794",
+   "name": "Rectangle 25",
+   "type": "RECTANGLE",
+   "x": 0,
+   "y": 0,
+   "w": 1440,
+   "h": 222,
+   "fills": [
+    {
+     "type": "GRADIENT_LINEAR",
+     "stops": [
+      "#402624",
+      "#402624"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "542:1795",
+   "name": "Line 7",
+   "type": "LINE",
+   "x": 0,
+   "y": 824,
+   "w": 1440,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#141414",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "573:1421",
+   "name": "[section]",
+   "type": "GROUP",
+   "x": 0,
+   "y": 0,
+   "w": 1440,
+   "h": 824
+  },
+  {
+   "id": "542:1793",
+   "name": "[slider]",
+   "type": "RECTANGLE",
+   "x": 0,
+   "y": 0,
+   "w": 1440,
+   "h": 824,
+   "fills": [
+    {
+     "type": "IMAGE",
+     "imageRef": "1b3d4781ebdbe060036e357e5c7d916d0fd3a114"
+    },
+    {
+     "type": "SOLID",
+     "hex": "#000000",
+     "opacity": 0.2
+    }
+   ]
+  },
+  {
+   "id": "542:1796",
+   "name": "Parister",
+   "type": "TEXT",
+   "x": 241,
+   "y": 398,
+   "w": 958,
+   "h": 137,
+   "fontSize": 133.2244873046875,
+   "fontWeight": 400,
+   "fontFamily": "August Script Bold free",
+   "letterSpacing": 0.0,
+   "lineHeightPx": 101.0,
+   "textAlign": "CENTER",
+   "characters": "Parister",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1797",
+   "name": "boutique hôtel & spa",
+   "type": "TEXT",
+   "x": 241,
+   "y": 364,
+   "w": 958,
+   "h": 46,
+   "fontSize": 38.40999984741211,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 15.363999938964845,
+   "lineHeightPx": 46.092002868652344,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "boutique hôtel & spa",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1798",
+   "name": "[section]",
+   "type": "GROUP",
+   "x": 0,
+   "y": 825,
+   "w": 1440,
+   "h": 69
+  },
+  {
+   "id": "623:1515",
+   "name": "[alert]",
+   "type": "GROUP",
+   "x": 0,
+   "y": 825,
+   "w": 1440,
+   "h": 69
+  },
+  {
+   "id": "542:1799",
+   "name": "Rectangle 35",
+   "type": "RECTANGLE",
+   "x": 0,
+   "y": 825,
+   "w": 1440,
+   "h": 69,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1800",
+   "name": "un boutique hôtel 5 étoiles au cœur de Paris, où lifestyle, culture & art se rencontrent",
+   "type": "TEXT",
+   "x": 80,
+   "y": 851,
+   "w": 1280,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 5.6000000000000005,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "un boutique hôtel 5 étoiles au cœur de Paris, où lifestyle, culture & art se rencontrent",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1801",
+   "name": "Group 25",
+   "type": "GROUP",
+   "x": 0,
+   "y": 825,
+   "w": 1440,
+   "h": 69
+  },
+  {
+   "id": "542:1802",
+   "name": "Line 14",
+   "type": "LINE",
+   "x": 0,
+   "y": 894,
+   "w": 1440,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#b48608",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "542:1803",
+   "name": "Group 23",
+   "type": "GROUP",
+   "x": 1379,
+   "y": 825,
+   "w": 21,
+   "h": 69
+  },
+  {
+   "id": "542:1804",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 1384,
+   "y": 825,
+   "w": 1,
+   "h": 69,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1805",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 1389,
+   "y": 825,
+   "w": 1,
+   "h": 69,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1806",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 1394,
+   "y": 825,
+   "w": 1,
+   "h": 69,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1807",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 1399,
+   "y": 825,
+   "w": 1,
+   "h": 69,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1808",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 1379,
+   "y": 825,
+   "w": 1,
+   "h": 69,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1809",
+   "name": "Group 24",
+   "type": "GROUP",
+   "x": 40,
+   "y": 825,
+   "w": 21,
+   "h": 69
+  },
+  {
+   "id": "542:1810",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 45,
+   "y": 825,
+   "w": 1,
+   "h": 69,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1811",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 50,
+   "y": 825,
+   "w": 1,
+   "h": 69,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1812",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 55,
+   "y": 825,
+   "w": 1,
+   "h": 69,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1813",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 60,
+   "y": 825,
+   "w": 1,
+   "h": 69,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1814",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 40,
+   "y": 825,
+   "w": 1,
+   "h": 69,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1815",
+   "name": "[nav]",
+   "type": "INSTANCE",
+   "x": 40,
+   "y": 19,
+   "w": 1360,
+   "h": 123
+  },
+  {
+   "id": "I542:1815;42:1986",
+   "name": "Réserver",
+   "type": "TEXT",
+   "x": 1115,
+   "y": 44,
+   "w": 96,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 3.5,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Réserver",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:1987",
+   "name": "Frame 32",
+   "type": "FRAME",
+   "x": 1223,
+   "y": 44,
+   "w": 16,
+   "h": 17
+  },
+  {
+   "id": "I542:1815;42:1988",
+   "name": "Line 1",
+   "type": "LINE",
+   "x": 1223,
+   "y": 43,
+   "w": 0,
+   "h": 18,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1815;42:1989",
+   "name": "Line 2",
+   "type": "LINE",
+   "x": 1227,
+   "y": 43,
+   "w": 0,
+   "h": 18,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1815;42:1990",
+   "name": "Line 3",
+   "type": "LINE",
+   "x": 1231,
+   "y": 43,
+   "w": 0,
+   "h": 18,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1815;42:1991",
+   "name": "Line 4",
+   "type": "LINE",
+   "x": 1235,
+   "y": 43,
+   "w": 0,
+   "h": 18,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1815;42:1992",
+   "name": "Line 5",
+   "type": "LINE",
+   "x": 1239,
+   "y": 43,
+   "w": 0,
+   "h": 18,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1815;42:1993",
+   "name": "Bons cadeaux",
+   "type": "TEXT",
+   "x": 1251,
+   "y": 44,
+   "w": 149,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 3.5,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Bons cadeaux",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:1997",
+   "name": "Calque_1",
+   "type": "FRAME",
+   "x": 674,
+   "y": 19,
+   "w": 91,
+   "h": 123,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:1998",
+   "name": "Group",
+   "type": "GROUP",
+   "x": 705,
+   "y": 19,
+   "w": 60,
+   "h": 78
+  },
+  {
+   "id": "I542:1815;42:1999",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 710,
+   "y": 20,
+   "w": 1,
+   "h": 77,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2000",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 716,
+   "y": 20,
+   "w": 1,
+   "h": 77,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2001",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 721,
+   "y": 20,
+   "w": 1,
+   "h": 77,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2002",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 726,
+   "y": 20,
+   "w": 1,
+   "h": 77,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2003",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 705,
+   "y": 20,
+   "w": 1,
+   "h": 77,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2004",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 732,
+   "y": 19,
+   "w": 32,
+   "h": 48,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2005",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 710,
+   "y": 112,
+   "w": 1,
+   "h": 14,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2006",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 724,
+   "y": 112,
+   "w": 11,
+   "h": 14,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2007",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 738,
+   "y": 112,
+   "w": 8,
+   "h": 14,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2008",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 696,
+   "y": 133,
+   "w": 7,
+   "h": 9,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2009",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 705,
+   "y": 133,
+   "w": 9,
+   "h": 9,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2010",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 715,
+   "y": 133,
+   "w": 7,
+   "h": 9,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2011",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 724,
+   "y": 133,
+   "w": 5,
+   "h": 9,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2012",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 732,
+   "y": 133,
+   "w": 5,
+   "h": 9,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2013",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 750,
+   "y": 112,
+   "w": 9,
+   "h": 14,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2014",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 674,
+   "y": 112,
+   "w": 9,
+   "h": 14,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2015",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 684,
+   "y": 112,
+   "w": 12,
+   "h": 14,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2016",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 698,
+   "y": 112,
+   "w": 9,
+   "h": 14,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;42:2017",
+   "name": "Vector",
+   "type": "VECTOR",
+   "x": 715,
+   "y": 112,
+   "w": 8,
+   "h": 15,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;145:3558",
+   "name": "Group 107",
+   "type": "GROUP",
+   "x": 40,
+   "y": 40,
+   "w": 105,
+   "h": 24
+  },
+  {
+   "id": "I542:1815;55:3077",
+   "name": "Menu",
+   "type": "TEXT",
+   "x": 76,
+   "y": 44,
+   "w": 69,
+   "h": 17,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 3.5,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "CENTER",
+   "characters": "Menu",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;55:3078",
+   "name": "Frame 27",
+   "type": "FRAME",
+   "x": 40,
+   "y": 40,
+   "w": 24,
+   "h": 24
+  },
+  {
+   "id": "I542:1815;55:3079",
+   "name": "Group 17",
+   "type": "GROUP",
+   "x": 40,
+   "y": 47,
+   "w": 24,
+   "h": 11
+  },
+  {
+   "id": "I542:1815;55:3080",
+   "name": "Rectangle 22",
+   "type": "RECTANGLE",
+   "x": 40,
+   "y": 47,
+   "w": 24,
+   "h": 1,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;55:3081",
+   "name": "Rectangle 23",
+   "type": "RECTANGLE",
+   "x": 40,
+   "y": 52,
+   "w": 24,
+   "h": 1,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1815;55:3082",
+   "name": "Rectangle 24",
+   "type": "RECTANGLE",
+   "x": 40,
+   "y": 57,
+   "w": 24,
+   "h": 1,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "542:1817",
+   "name": "CTA",
+   "type": "INSTANCE",
+   "x": 619,
+   "y": 694,
+   "w": 202,
+   "h": 50,
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#ffffff",
+     "opacity": 1.0
+    }
+   ],
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 0,
+    "padBottom": 0,
+    "padLeft": 0,
+    "gap": 20.0
+   }
+  },
+  {
+   "id": "I542:1817;410:4674",
+   "name": "Frame 91",
+   "type": "FRAME",
+   "x": 619,
+   "y": 694,
+   "w": 202,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1817;410:4671",
+   "name": "Line 17",
+   "type": "LINE",
+   "x": 643,
+   "y": 694,
+   "w": 154,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  },
+  {
+   "id": "I542:1817;410:4672",
+   "name": "Lorem",
+   "type": "TEXT",
+   "x": 619,
+   "y": 714,
+   "w": 202,
+   "h": 10,
+   "fontSize": 14.0,
+   "fontWeight": 700,
+   "fontFamily": "Museo Sans",
+   "letterSpacing": 2.8000000000000003,
+   "lineHeightPx": 16.80000114440918,
+   "textCase": "UPPER",
+   "textAlign": "LEFT",
+   "characters": "réservez un séjour",
+   "fills": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ]
+  },
+  {
+   "id": "I542:1817;410:4675",
+   "name": "Frame 92",
+   "type": "FRAME",
+   "x": 619,
+   "y": 744,
+   "w": 202,
+   "h": 0,
+   "layout": {
+    "mode": "VERTICAL",
+    "padTop": 0,
+    "padRight": 24.0,
+    "padBottom": 0,
+    "padLeft": 24.0,
+    "gap": 10.0
+   }
+  },
+  {
+   "id": "I542:1817;410:4673",
+   "name": "Line 18",
+   "type": "LINE",
+   "x": 643,
+   "y": 744,
+   "w": 154,
+   "h": 0,
+   "strokes": [
+    {
+     "type": "SOLID",
+     "hex": "#f4f0f1",
+     "opacity": 1.0
+    }
+   ],
+   "strokeWeight": 1.0
+  }
+ ]
+}

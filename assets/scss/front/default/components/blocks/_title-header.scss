@@ -100,4 +100,39 @@
             background: url("data:image/svg+xml;charset=utf-8,%3Csvg width='auto' height='100%25' preserveAspectRatio='none' version='1.1' viewBox='0 0 17.5 658' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cstyle%3E .st0 { fill: url(%23shadow-y); } %3C/style%3E%3ClinearGradient id='shadow-y' x1='-320.2' y1='330.7' x2='337.8' y2='330.7' gradientTransform='translate(0 659.7) scale(1 -1)' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23#{str-slice(#{$primary}, 2)}'/%3E%3Cstop offset='1' stop-color='%23#{str-slice(#{$primary}, 2)}' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='transparent'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg%3E%3Crect class='st0' x='-320.2' y='320.2' width='658' height='17.5' transform='translate(-320.3 337.7) rotate(-90)'/%3E%3C/g%3E%3C/svg%3E");
         }
     }
+
+    /* Hero page produit (maquette) : image plein cadre, titre script centré */
+    .product-hero-wrap .title-header-block {
+        align-items: center !important;
+        min-height: 70dvh;
+
+        @include mediaQuery(min-lg) {
+            min-height: 80dvh;
+        }
+
+        // dégradé sombre (lisibilité) au lieu du dégradé or
+        &:after {
+            background: linear-gradient(to bottom, rgba($dark, .25) 0%, rgba($dark, 0) 28%, rgba($dark, 0) 55%, rgba($dark, .55) 100%) !important;
+        }
+
+        .title {
+            font-family: $font-script;
+            color: $white;
+            text-transform: none;
+            line-height: 1;
+            font-size: rem(72px);
+
+            @include mediaQuery(max-md) {
+                font-size: rem(46px);
+            }
+        }
+
+        .sub-title {
+            color: $white !important;
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            font-size: rem(13px);
+            margin-top: 1.25rem;
+        }
+    }
 }

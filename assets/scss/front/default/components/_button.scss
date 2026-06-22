@@ -86,7 +86,9 @@
 
         @media (prefers-reduced-motion: no-preference) {
 
-            &:not(.btn-gradient) {
+            // Remplissage ::before (fond animé) — EXCLU pour les boutons OUTLINE,
+            // qui utilisent ::before/::after pour leurs 2 filets (cf. vendor-*.scss).
+            &:not(.btn-gradient):not([class*="btn-outline-"]) {
 
                 &:before {
                     position: absolute;
@@ -177,3 +179,5 @@
         background: rgba(120, 130, 95, .42);
     }
 }
+/* Le style OUTLINE « 2 filets » est défini APRÈS le @each du mixin
+   (cf. vendor-desktop.scss / vendor-mobile.scss) pour gagner l'ordre de cascade. */

@@ -50,6 +50,12 @@ class Email extends BaseInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     protected ?\DateTimeInterface $acceptDate = null;
 
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $consent = false;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    protected ?\DateTimeInterface $consentDate = null;
+
     #[ORM\ManyToOne(targetEntity: Campaign::class, inversedBy: 'emails')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Campaign $campaign = null;
@@ -58,6 +64,10 @@ class Email extends BaseInterface
     public function prePersist(): void
     {
         $this->tokenDate = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+
+        if ($this->consent && null === $this->consentDate) {
+            $this->consentDate = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        }
 
         parent::prePersist();
     }
@@ -135,6 +145,29 @@ class Email extends BaseInterface
     public function getAcceptDate(): ?\DateTimeInterface
     {
         return $this->acceptDate;
+    }
+
+    public function isConsent(): ?bool
+    {
+        return $this->consent;
+    }
+
+    public function setConsent(bool $consent): static
+    {
+        $this->consent = $consent;
+
+        return $this;
+    }
+
+    public function setConsentDate(?\DateTimeInterface $consentDate): static
+    {
+        $this->consentDate = $consentDate;
+        return $this;
+    }
+
+    public function getConsentDate(): ?\DateTimeInterface
+    {
+        return $this->consentDate;
     }
 
     public function getCampaign(): ?Campaign

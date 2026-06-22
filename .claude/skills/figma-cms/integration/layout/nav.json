@@ -1,0 +1,21 @@
+{
+    "_note": "MODÈLE VIDE. Descripteur layout nav (intégré une seule fois, exclu de la génération par page). Captures dans integration/screenshots/layout/ (basename).",
+    "element": "nav",
+    "label": null,
+    "sharedAcrossPages": true,
+    "cms": {
+        "entity": "App\\Entity\\Module\\Menu\\Menu",
+        "slug": "main",
+        "template": "main",
+        "main": true,
+        "footer": false,
+        "fixedOnScroll": null,
+        "links": "App\\Entity\\Module\\Menu\\Link (+ LinkIntl) — hiérarchie via level/parent"
+    },
+    "captures": [
+        { "label": "closed", "figmaNodeId": null, "screenshot": "nav-closed.png", "note": null },
+        { "label": "open", "figmaNodeId": null, "screenshot": "nav-open.png", "note": null }
+    ],
+    "content": { "logo": null, "menu": [], "ctas": [], "languages": [], "contact": {} },
+    "notes": []
+}

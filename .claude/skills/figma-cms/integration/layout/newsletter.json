@@ -1,0 +1,20 @@
+{
+    "_note": "MODÈLE VIDE. Newsletter = élément de LAYOUT (pas une section de page, pas le footer). Activer le module newsletter (ne pas recréer un formulaire en blocs). Captures dans integration/screenshots/layout/.",
+    "element": "newsletter",
+    "label": null,
+    "sharedAcrossPages": true,
+    "detectedFrom": null,
+    "cms": {
+        "mode": "module",
+        "module": { "entity": "App\\Entity\\Core\\Module", "slug": "newsletter", "role": "ROLE_NEWSLETTER", "active": true },
+        "moduleStatusNote": "ROLE_NEWSLETTER souvent dans OTHERS_MODULES (non actif par défaut) : le passer en module actif.",
+        "campaign": { "entity": "App\\Entity\\Module\\Newsletter\\Campaign", "slug": "main", "fixture": "NewsletterFixtures::add()" },
+        "front": { "formType": "App\\Form\\Type\\Module\\Newsletter\\FrontType", "manager": "App\\Form\\Manager\\Front\\NewsletterManager" },
+        "action": "newsletter-form"
+    },
+    "captures": [
+        { "label": "block", "figmaNodeId": null, "screenshot": "newsletter.png", "note": null }
+    ],
+    "content": { "title": null, "field": null, "submit": null, "consent": null },
+    "notes": []
+}

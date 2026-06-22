@@ -5,15 +5,23 @@
 {% if blockType == 'layout-title-header' and entity.intl.title %}
 
     {% set displayMainMedia = false %}
-    {% include 'front/'~websiteTemplate~'/blocks/title-header/default.html.twig' with {
-        block: entity,
-        intlMedia: displayMainMedia ? intlMainMedia : null,
-        titleForce: 1,
-        fullSize: true,
-        page: page,
-        pageTitle: entity.intl.title,
-        template: websiteTemplate,
-        thumbConfiguration: thumbConfigurationHeader} %}
+    {% set heroMedia = entity.mainMediaInHeader and entity.headerMedia ? entity.headerMedia : (entity.medias is not empty ? entity.medias|first : null) %}
+    {% set heroTagline = entity.intl.headerSubTitle is defined and entity.intl.headerSubTitle ? entity.intl.headerSubTitle
+        : (entity.category and entity.category.intl.title ? entity.category.intl.title : null) %}
+    <div class="product-hero-wrap">
+        {% include 'front/'~websiteTemplate~'/blocks/title-header/default.html.twig' with {
+            block: entity,
+            customMedia: heroMedia,
+            subTitle: heroTagline,
+            styleClass: 'text-center',
+            intlMedia: displayMainMedia ? intlMainMedia : null,
+            titleForce: 1,
+            fullSize: true,
+            page: page,
+            pageTitle: entity.intl.title,
+            template: websiteTemplate,
+            thumbConfiguration: thumbConfigurationHeader} %}
+    </div>
 
 {% elseif blockType == 'layout-title' and entity.intl.title %}
 

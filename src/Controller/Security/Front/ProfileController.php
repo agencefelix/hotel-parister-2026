@@ -37,6 +37,7 @@ class ProfileController extends FrontController
         'en' => '/my-personal-space/my-profile',
         'es' => '/mi-espacio-personal/mi-perfil',
         'it' => '/mio-spazio-personale/il-mio-profilo',
+        'zh' => '/zh/mio-spazio-personale/il-mio-profilo',
     ], name: 'security_front_profile', methods: 'GET', schemes: '%protocol%', priority: 1)]
     public function show(Request $request, ProfileManager $manager): Response
     {
@@ -66,6 +67,7 @@ class ProfileController extends FrontController
         'en' => '/my-personal-space/my-profile/edit',
         'es' => '/mi-espacio-personal/mi-perfil/edicion',
         'it' => '/mio-spazio-personale/il-mio-profilo/la-modifica',
+        'zh' => '/zh/mio-spazio-personale/il-mio-profilo/la-modifica',
     ], name: 'security_front_profile_edit', methods: 'GET|POST', schemes: '%protocol%', priority: 1)]
     public function edit(Request $request, ProfileManager $manager): JsonResponse|Response
     {
@@ -121,6 +123,7 @@ class ProfileController extends FrontController
         'en' => '/my-personal-space/my-profile/remove-request',
         'es' => '/mi-espacio-personal/mi-perfil/remove-request',
         'it' => '/mio-spazio-personale/il-mio-profilo/remove-request',
+        'zh' => '/zh/mio-spazio-personale/il-mio-profilo/remove-request',
     ], name: 'security_front_profile_remove_request', methods: 'GET', schemes: '%protocol%', priority: 1)]
     public function removeRequest(ProfileManager $manager): JsonResponse|Response
     {
@@ -143,6 +146,7 @@ class ProfileController extends FrontController
         'en' => '/my-personal-space/my-profile/remove/{token}',
         'es' => '/mi-espacio-personal/mi-perfil/remove/{token}',
         'it' => '/mio-spazio-personale/il-mio-profilo/remove/{token}',
+        'zh' => '/zh/mio-spazio-personale/il-mio-profilo/remove/{token}',
     ], name: 'security_front_user_remove_request', methods: 'GET', schemes: '%protocol%', priority: 1)]
     public function remove(Request $request, string $token): JsonResponse|Response
     {

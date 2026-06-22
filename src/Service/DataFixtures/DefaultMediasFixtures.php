@@ -127,7 +127,7 @@ class DefaultMediasFixtures
             'share' => (object) ['category' => 'share', 'filename' => 'share.jpg', 'doc' => false],
             'preloader' => (object) ['category' => 'preloader', 'filename' => 'preloader.svg', 'doc' => false],
             'footer' => (object) ['category' => 'footer', 'filename' => 'footer-logo.svg', 'doc' => false],
-            'email' => (object) ['category' => 'email', 'filename' => 'email-logo.svg', 'doc' => false],
+            'email' => (object) ['category' => 'email', 'filename' => 'email-logo.png', 'doc' => false],
             'admin' => (object) ['category' => 'admin', 'filename' => 'admin-logo.svg', 'doc' => false],
             'title-header' => (object) ['category' => 'title-header', 'filename' => 'title-header.jpg', 'doc' => false],
             'placeholder' => (object) ['category' => 'placeholder', 'filename' => 'placeholder.jpg', 'doc' => false],

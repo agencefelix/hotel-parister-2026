@@ -53,3 +53,662 @@ $enable-breadcrumb: false;
         object-fit: cover;
     }
 }
+
+/*-----------------------------------
+   4 ) Hero plein écran (slider home-hero)
+-----------------------------------*/
+
+.carousel-home-hero {
+    position: relative;
+
+    .carousel-item {
+        // Le wrapper d'image porte z-index:10 (loader) : on le ramène sous le voile/légende.
+        .img-loader-wrap {
+            z-index: 1;
+        }
+
+        img {
+            width: 100%;
+            height: 100dvh;
+            object-fit: cover;
+        }
+        // Voile maquette : noir plat à 20% (token Figma #000 / 0.2), pas un gradient sombre.
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: rgba($black, .2);
+            pointer-events: none;
+        }
+    }
+
+    .carousel-caption {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: $white;
+        z-index: 3;
+        padding: 0 rem(20px);
+        text-shadow: 0 1px rem(24px) rgba($black, .35);
+    }
+
+    // Kicker « BOUTIQUE HÔTEL & SPA » : 38px / 700 / 0.4em / UPPER (token Figma).
+    .caption-title {
+        text-transform: uppercase;
+        letter-spacing: .4em;
+        font-weight: $font-weight-bold;
+
+        @include mediaQuery(min-lg) {
+            font-size: rem(38px);
+        }
+        @include mediaQuery(max-md) {
+            font-size: rem(24px);
+            letter-spacing: .3em;
+        }
+    }
+
+    // "Parister" en cursive décorative (≈133px token) — CHEVAUCHE le titre du dessus.
+    .introduction {
+        font-family: $font-script;
+        text-transform: none;
+        letter-spacing: 0;
+        line-height: 1;
+
+        // Neutralise le `mt-3` du template (1rem !important) et impose le chevauchement.
+        @include mediaQuery(min-lg) {
+            font-size: rem(128px);
+            margin-top: rem(-10px) !important;
+        }
+        @include mediaQuery(max-md) {
+            font-size: rem(72px);
+            margin-top: rem(-6px) !important;
+        }
+    }
+
+    .body {
+        max-width: rem(620px);
+        margin-inline: auto;
+    }
+
+    // CTA « Réservez un séjour » : le style « 2 filets » outline est GLOBAL (vendor-desktop.scss).
+    // Typographie du libellé (token : 14px / 700 / 0.2em / UPPER). #id pour battre la
+    // règle globale "body .btn.btn[class*=btn-outline-]" (0,3,1) qui imposait 16px/600.
+    #zone-home-hero & .btn.btn-outline-white,
+    .btn.btn-outline-white {
+        text-transform: uppercase;
+        letter-spacing: .2em;
+        font-size: rem(14px) !important;
+        font-weight: $font-weight-bold !important;
+        padding-top: rem(16px);
+        padding-bottom: rem(16px);
+    }
+
+    // Titre + script : blanc garanti.
+    .caption-title,
+    .introduction {
+        color: $white !important;
+    }
+
+    .carousel-control-prev, .carousel-control-next {
+        z-index: 3;
+    }
+}
+
+// Kicker hero : #id pour battre ".carousel-inner .carousel-caption .caption-title" (0,3,0 → 30px).
+#zone-home-hero .caption-title {
+    @include mediaQuery(min-lg) { font-size: rem(38px); }
+    @include mediaQuery(max-md) { font-size: rem(24px); }
+}
+
+/*-----------------------------------
+   4bis ) Bande parenthèse (image plein écran, overlay script)
+-----------------------------------*/
+
+// Getaway = slider BOOTSTRAP plein écran (caption en overlay).
+.slider-container-home-getaway {
+    position: relative;
+
+    .carousel-item {
+        position: relative;
+
+        .inner {
+            display: block !important;
+            position: relative;
+        }
+
+        .img-loader-wrap {
+            z-index: 1;
+        }
+
+        img {
+            width: 100%;
+            height: 80dvh;
+            object-fit: cover;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: rgba($black, .35);
+            pointer-events: none;
+        }
+    }
+
+    // Caption (bootstrap = position-relative) → overlay centré.
+    .carousel-caption {
+        position: absolute !important;
+        inset: 0;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: $white;
+        z-index: 3;
+        padding: 0 rem(20px);
+    }
+
+    .carousel-caption .content {
+        order: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    // Kicker (petite ligne en capitales) — le titre.
+    .caption-title {
+        order: 2;
+        text-transform: uppercase;
+        letter-spacing: .4em;
+        font-weight: $font-weight-bold;
+        font-size: rem(16px);
+        margin: 0 !important;
+    }
+
+    // Grand script « Parister » en filigrane.
+    .introduction {
+        font-family: $font-script;
+        font-weight: $font-weight-normal;
+        text-transform: none;
+        letter-spacing: 0;
+        line-height: 1;
+        margin: 0 !important;
+        opacity: .9;
+
+        @include mediaQuery(min-lg) {
+            font-size: rem(160px);
+        }
+        @include mediaQuery(max-md) {
+            font-size: rem(80px);
+        }
+    }
+
+    // Flèches + indicateurs visibles sur l'image.
+    .controls, .carousel-indicators {
+        position: relative;
+        z-index: 4;
+    }
+}
+
+// Workspaces : bande image plein écran (main-home), overlay script.
+.carousel-home-workspaces {
+    position: relative;
+
+    .carousel-item {
+        .img-loader-wrap {
+            z-index: 1;
+        }
+
+        img {
+            width: 100%;
+            height: 80dvh;
+            object-fit: cover;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: rgba($black, .3);
+            pointer-events: none;
+        }
+    }
+
+    .carousel-caption {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: $white;
+        z-index: 3;
+        padding: 0 rem(20px);
+    }
+
+    .caption-title {
+        order: 2;
+        text-transform: uppercase;
+        letter-spacing: .25em;
+        font-weight: $font-weight-normal;
+        font-size: rem(15px);
+    }
+
+    .introduction {
+        order: 1;
+        font-family: $font-script;
+        text-transform: none;
+        letter-spacing: 0;
+        line-height: 1;
+        opacity: .85;
+
+        @include mediaQuery(min-lg) {
+            font-size: rem(96px);
+        }
+        @include mediaQuery(max-md) {
+            font-size: rem(56px);
+        }
+    }
+}
+
+// Workspaces : filigrane « workspaces » très large + texte/CTA en bas (maquette).
+.carousel-home-workspaces {
+
+    .carousel-caption {
+        justify-content: flex-end;
+        align-items: flex-start;
+        text-align: left;
+        padding: 0 rem(40px) rem(56px);
+    }
+
+    .introduction {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: .25;
+        white-space: nowrap;
+
+        @include mediaQuery(min-lg) {
+            font-size: rem(260px);
+        }
+        @include mediaQuery(max-md) {
+            font-size: rem(110px);
+        }
+    }
+
+    .caption-title {
+        order: 1;
+        letter-spacing: .4em;
+        font-size: rem(16px);
+    }
+
+    .content .mt-4 {
+        margin-top: rem(16px) !important;
+    }
+}
+
+/*-----------------------------------
+   4ter ) Bandeau alerte (haut de page)
+-----------------------------------*/
+
+#zone-home-alert {
+
+    .alert {
+        background: transparent;
+        border: 0;
+        margin: 0;
+        justify-content: center;
+        align-items: center;
+        color: $white;
+
+        .icon {
+            display: none !important;
+        }
+
+        .message {
+            padding-top: rem(11px) !important;
+            padding-bottom: rem(11px) !important;
+        }
+
+        .inner {
+            font-size: rem(13px);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: $white;
+        }
+    }
+}
+
+/*-----------------------------------
+   5 ) Sous-titres cursifs + contraste sections
+-----------------------------------*/
+
+// ===== Système typographique (relevé en dev mode Figma) =====
+
+// Scripts cursifs (poids 400) : sous-titres de bande, accents hero/univers.
+.sub-title,
+.carousel-home-hero .introduction,
+.slider-container-home-universe .introduction {
+    font-family: $font-script;
+    font-weight: $font-weight-normal;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.05;
+}
+
+// Titre d'INTRO de bande (bloc `title`) : 32px / 700 / 0.4em / UPPER (Figma).
+// (les cartes de slider ont leur propre style ci-dessous ; hero/getaway = .caption-title).
+.layout-block-type-title .title {
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+    letter-spacing: .4em;
+    font-size: rem(32px);
+    line-height: 1.2;
+}
+
+// Sous-titre script de bande : 96px (Figma).
+.layout-block-type-title .sub-title {
+    font-size: rem(96px);
+    line-height: .9;
+    margin-top: rem(2px);
+}
+
+// Texte courant : 16px / 400 (Figma).
+.layout-block-type-text .body,
+.layout-block-type-text p {
+    font-weight: $font-weight-normal;
+    font-size: rem(16px);
+    line-height: 1.4;
+}
+
+// CTA texte (non-bouton) : 14px / 700 / 0.2em / UPPER (Figma).
+.layout-zone .layout-block-type-link a:not(.btn),
+.slider-link {
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+    letter-spacing: .2em;
+    font-size: rem(14px);
+}
+
+// ===== Couleurs par section (relevé Figma — scopé aux blocs d'intro, pas aux cartes des sliders) =====
+
+@mixin section-text-color($c) {
+    .layout-block-type-title .title,
+    .layout-block-type-title .sub-title,
+    .layout-block-type-text .body,
+    .layout-block-type-text p {
+        color: $c;
+    }
+}
+
+// Couleur des CTA texte par bande — préfixe #body-page (2 ids) pour battre la règle
+// générique "#body-page .bg-light .link-block a.link { color:$primary !important }".
+@mixin section-link-color($c) {
+    .layout-block-type-link a:not(.btn),
+    .layout-block-type-link a:not(.btn) span {
+        color: $c !important;
+    }
+}
+
+// Chambres : fond navy → texte & accents TEAL.
+#zone-home-rooms { @include section-text-color($teal); }
+// Spa : fond teal → texte NAVY.
+#zone-home-spa { @include section-text-color($navy); }
+// Passerelles (restaurant) : fond clair → texte VERT signature.
+#zone-home-restaurant { @include section-text-color($success); }
+// Art & rencontres : fond clair → texte OR.
+#zone-home-art { @include section-text-color($primary); }
+
+// Couleur des CTA (2 ids pour battre la règle générique bg-light → or).
+#body-page #zone-home-rooms { @include section-link-color($teal); }
+#body-page #zone-home-spa { @include section-link-color($navy); }
+#body-page #zone-home-restaurant { @include section-link-color($success); }
+#body-page #zone-home-art { @include section-link-color($primary); }
+
+// Texte vertical-centré face à l'image (maquette) — bandes à 2 colonnes texte/image.
+#zone-home-rooms .row,
+#zone-home-spa .row { align-items: center; }
+
+// Ratios d'image figés sur les slots maquette (recale les hauteurs de bande,
+// les vrais visuels ayant des ratios variés). object-fit:cover → recadrage propre.
+#zone-home-rooms,
+#zone-home-spa,
+#zone-home-art,
+#zone-home-restaurant {
+    .media-block img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+    }
+}
+#zone-home-rooms .media-block img,
+#zone-home-art .media-block img { aspect-ratio: 617 / 744; }
+#zone-home-spa .media-block img { aspect-ratio: 552 / 641; }
+// Grille restaurant 2×2 : plat (haut-droite), cocktail (bas-gauche), dessert (bas-droite).
+#zone-home-restaurant .layout-col:nth-child(2) .media-block img { aspect-ratio: 617 / 744; }
+#zone-home-restaurant .layout-col:nth-child(3) .media-block img { aspect-ratio: 510 / 737; }
+#zone-home-restaurant .layout-col:nth-child(4) .media-block img { aspect-ratio: 510 / 436; }
+
+// Les 2 CTA texte des bandes intro sont alignés EN LIGNE (maquette), espacés.
+#body-page #zone-home-rooms,
+#body-page #zone-home-restaurant,
+#body-page #zone-home-spa,
+#body-page #zone-home-art {
+
+    .layout-block-type-link {
+        display: inline-block !important;
+        width: auto !important;
+        vertical-align: middle;
+    }
+
+    .layout-block-type-link + .layout-block-type-link {
+        margin-left: rem(32px);
+    }
+}
+// Événements (teaser) : titre OR, 24px (token maquette, vs échelle globale 32px).
+#zone-home-events .layout-block-type-title .title {
+    color: $primary;
+    font-size: rem(24px);
+}
+
+// Cartes actualités (teaser newscast) — maquette : titre 14/700 UPPER, ls 2.8px, OR.
+// Lien « En savoir » en capitales OR. (scopé home events, n'impacte pas les autres pages)
+#zone-home-events {
+
+    .newscast-teaser .card {
+
+        .title,
+        .title-link {
+            text-transform: uppercase;
+            font-size: rem(14px);
+            // !important nécessaire : surcharge l'utilitaire .fw-600 (lui-même !important).
+            font-weight: $font-weight-bold !important;
+            letter-spacing: .2em;
+            line-height: 1.4;
+            color: $primary;
+        }
+
+        .title-link { text-decoration: none; }
+
+        // Lien « En savoir » : capitales, or.
+        .card-footer .link,
+        .card-footer .link span {
+            text-transform: uppercase;
+            letter-spacing: .14em;
+            font-size: rem(12px);
+            color: $primary;
+        }
+    }
+}
+
+// Cartes teaser d'univers (slider splide) - card dédiée (card-universe.html.twig).
+// Maquette : titre + sous-titre script AU-DESSUS de l'image, centrés.
+.slider-container-home-universe {
+
+    .card-universe {
+        display: flex;
+        flex-direction: column;
+    }
+
+    // Titre de carte : 24px / 700 / ls 0 / UPPER / #141414 (Figma).
+    .title {
+        order: 1;
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+        letter-spacing: 0;
+        font-size: rem(24px);
+        line-height: 1;
+        color: $dark;
+        margin-bottom: rem(4px);
+    }
+
+    // Sous-titre script (à l'hôtel / au restaurant / au spa) : 54px / 400 / or (Figma).
+    .introduction {
+        order: 2;
+        font-family: $font-script;
+        font-weight: $font-weight-normal;
+        color: $primary;
+        text-transform: none;
+        font-size: rem(54px);
+        line-height: .9;
+        margin: 0 0 rem(16px);
+    }
+
+    // Maquette : descriptif AU-DESSUS de l'image (order 3), image ensuite (order 4).
+    .body {
+        order: 3;
+        font-size: rem(14px);
+        line-height: 1.5;
+        margin: 0 0 rem(20px);
+    }
+
+    .card-universe-media {
+        order: 4;
+
+        img {
+            width: 100%;
+            aspect-ratio: 510 / 456;
+            object-fit: cover;
+        }
+    }
+
+    .slider-link, .link {
+        order: 5;
+        letter-spacing: .12em;
+        font-size: rem(12px);
+        margin-top: rem(14px);
+    }
+}
+
+// Cartes du slider services Spa (splide) — titre + script EN OVERLAY bas d'image (Figma).
+.slider-container-home-spa-services {
+
+    .splide__slide > .content {
+        position: relative;
+    }
+
+    // Bloc texte interne → superposé en bas de l'image.
+    .splide__slide > .content > .content {
+        position: absolute;
+        inset: auto 0 0 0;
+        margin: 0 !important;
+        padding: rem(20px) rem(24px) !important;
+        background: linear-gradient(180deg, transparent 0%, rgba($black, .65) 100%);
+    }
+
+    .title {
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+        letter-spacing: 0;
+        font-size: rem(22px);
+        line-height: 1;
+        color: $white;
+    }
+
+    .introduction {
+        font-family: $font-script;
+        font-weight: $font-weight-normal;
+        text-transform: none;
+        letter-spacing: 0;
+        font-size: rem(34px);
+        line-height: .9;
+        color: $light;
+    }
+
+    .slider-link {
+        color: $white;
+    }
+}
+// Cartes produits (chambres) — titre + CTA en OVERLAY bas d'image (maquette).
+#zone-home-rooms-products {
+
+    .card-block {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .img-loader-wrap {
+        z-index: 1;
+    }
+
+    .card-header img {
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+    }
+
+    .card-block::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background: linear-gradient(180deg, transparent 45%, rgba($black, .7) 100%);
+        pointer-events: none;
+    }
+
+    .card-body,
+    .card-footer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: 3;
+        padding-left: rem(24px) !important;
+        padding-right: rem(24px) !important;
+    }
+
+    .card-body {
+        bottom: rem(54px);
+    }
+
+    .card-footer {
+        bottom: rem(20px);
+        margin-top: 0 !important;
+    }
+
+    .title,
+    .text-block,
+    .link-block,
+    .link-block a {
+        color: $white;
+    }
+
+    .title {
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+        letter-spacing: 0;
+        font-size: rem(22px);
+        line-height: 1;
+    }
+}

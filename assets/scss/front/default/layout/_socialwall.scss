@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+/* -----------------------------------------------------------------
+    Layout : Social wall (bande noire) — conforme maquette.
+    (Le CSS de la newsletter vit dans components/form/_newsletter.scss.)
+------------------------------------------------------------------ */
+
+.socialwall {
+
+    .socialwall-grid {
+        gap: 1rem;
+    }
+
+    .socialwall-link {
+        flex: 0 0 30%;
+        max-width: 30%;
+        overflow: hidden;
+        display: block;
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 290 / 371;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        &:hover img { transform: scale(1.05); }
+
+        @include mediaQuery(max-md) {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .socialwall-follow {
+        display: inline-block;
+        color: $primary;
+        text-decoration: none;
+        letter-spacing: .25em;
+        font-size: rem(13px);
+        font-weight: $font-weight-bold;
+        transition: opacity .2s ease-in-out;
+
+        &:hover, &:focus { opacity: .7; }
+    }
+}

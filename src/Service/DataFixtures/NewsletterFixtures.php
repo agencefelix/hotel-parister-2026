@@ -56,7 +56,6 @@ class NewsletterFixtures
         $intl = new CampaignIntl();
         $intl->setWebsite($website);
         $intl->setLocale($website->getConfiguration()->getLocale());
-        $intl->setIntroduction("J'accepte que mes données soient utilisées pour me recontacter dans le cadre de cette demande.");
         $intl->setBody($confirmation);
 
         $campaign->addIntl($intl);

@@ -1,0 +1,85 @@
+{
+  "default_locale": "fr",
+  "by_language": {
+    "fr": {
+      "domain": "https://www.hotelparister.com",
+      "count": 1,
+      "pages": [
+        {
+          "url": "https://www.hotelparister.com/",
+          "path": "/",
+          "seo": {
+            "title": "Hôtel Parister &amp; Spa- Hôtel 5 étoiles à Paris 9ème arrondissement",
+            "description": "Découvrez le charme incomparable de l&#039;Hôtel Parister &amp; Spa, idéalement situé dans le 9ème arrondissement de Paris, à proximité de l&#039;Opéra. Réservez votre chambre ou suite 5 étoiles dès maintenant.",
+            "keywords": null,
+            "robots": "index",
+            "og:title": "Hôtel Parister &amp; Spa- Hôtel 5 étoiles à Paris 9ème arrondissement",
+            "og:description": "Découvrez le charme incomparable de l&#039;Hôtel Parister &amp; Spa, idéalement situé dans le 9ème arrondissement de Paris, à proximité de l&#039;Opéra. Réservez votre chambre ou suite 5 étoiles dès maintenant.",
+            "og:image": null,
+            "h1": "Hôtel de luxe 5 étoiles à Paris"
+          }
+        }
+      ]
+    },
+    "en": {
+      "domain": "https://www.paristerhotel.com",
+      "count": 1,
+      "pages": [
+        {
+          "url": "https://www.paristerhotel.com/",
+          "path": "/",
+          "seo": {
+            "title": "Hotel Parister &amp; Spa - 5-star hotel in Paris, 9th arrondissement",
+            "description": "Discover the incomparable charm of Hotel Parister &amp; Spa, ideally located in the 9th arrondissement of Paris, close to the Opera. Book your 5-star room or suite now.",
+            "keywords": null,
+            "robots": "index",
+            "og:title": "Hotel Parister &amp; Spa - 5-star hotel in Paris, 9th arrondissement",
+            "og:description": "Discover the incomparable charm of Hotel Parister &amp; Spa, ideally located in the 9th arrondissement of Paris, close to the Opera. Book your 5-star room or suite now.",
+            "og:image": null,
+            "h1": "A 5-star luxury hotel in Paris"
+          }
+        }
+      ]
+    },
+    "es": {
+      "domain": "https://es.hotelparister.com",
+      "count": 1,
+      "pages": [
+        {
+          "url": "https://es.hotelparister.com/",
+          "path": "/",
+          "seo": {
+            "title": "El hotel Parister en París, distrito 9",
+            "description": "En el corazón del distrito 9 le recibe el hotel Parister para proponerle una estancia llena de encanto, en un lugar tan vivo como insólito.",
+            "keywords": null,
+            "robots": "index",
+            "og:title": "El hotel Parister en París, distrito 9",
+            "og:description": "En el corazón del distrito 9 le recibe el hotel Parister para proponerle una estancia llena de encanto, en un lugar tan vivo como insólito.",
+            "og:image": null,
+            "h1": "El punto de encuentro de los nuevos epicúreos"
+          }
+        }
+      ]
+    },
+    "zh": {
+      "domain": "https://cn.hotelparister.com",
+      "count": 1,
+      "pages": [
+        {
+          "url": "https://cn.hotelparister.com/",
+          "path": "/",
+          "seo": {
+            "title": "巴黎第9区的Parister酒店",
+            "description": "Parister酒店位于巴黎第9区的中心地带，风格独特而又充满活力，为您提供魅力非凡的住宿体验。",
+            "keywords": null,
+            "robots": "index",
+            "og:title": "巴黎第9区的Parister酒店",
+            "og:description": "Parister酒店位于巴黎第9区的中心地带，风格独特而又充满活力，为您提供魅力非凡的住宿体验。",
+            "og:image": null,
+            "h1": "新享乐主义者的乐园"
+          }
+        }
+      ]
+    }
+  }
+}

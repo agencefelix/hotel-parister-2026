@@ -121,6 +121,9 @@
 
         <!-- Fonts -->
         <link href="{{ asset('build/front/'~websiteTemplate~'/front-'~websiteTemplate~'-fonts.css', webpack) }}" rel="preload" as="style" class="preload-css" nonce="{{ csp_nonce() }}">
+        {# Polices essentielles above-the-fold (Museo Sans corps + titres) - chemin stable = url() des @font-face #}
+        <link rel="preload" as="font" type="font/woff2" href="{{ asset('build/front/'~websiteTemplate~'/fonts/parister/museosans-500.woff2') }}" crossorigin nonce="{{ csp_nonce() }}">
+        <link rel="preload" as="font" type="font/woff2" href="{{ asset('build/front/'~websiteTemplate~'/fonts/parister/museosans-700.woff2') }}" crossorigin nonce="{{ csp_nonce() }}">
 
         <!-- Stylesheets -->
         {{ encore_entry_link_tags('front-'~websiteTemplate~'-vendor-mobile', null, webpack, {media: 'screen and (max-width: 575px)', nonce: csp_nonce()}) }}
@@ -224,6 +227,10 @@
 
             {% if 'newsletter'|moduleActive(configuration) and not onlyBody %}
                 {{ render_esi(path('front_newsletter_view', {filter: 'main', website: website.id} )) }}
+            {% endif %}
+
+            {% if not onlyBody %}
+                {% include 'front/'~websiteTemplate~'/include/socialwall.html.twig' with {website: website} only %}
             {% endif %}
 
             {% if not onlyBody %}

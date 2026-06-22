@@ -8,18 +8,149 @@
 
 #footer {
 
+    // Texte footer = crème maquette (#f4f0f1), pas blanc pur.
+    // L'ID #footer (1,x,1) bat la règle thème ".bg-primary strong/span/small" (0,3,1) → pas de !important.
+    color: $light;
+
+    strong, span, small, p, i, time,
+    .h1, .h2, .h3, .h4, .h5, .h6 { color: $light; }
+
+    .text-white,
+    a.text-white { color: $light !important; }
+
     .socials-list {
 
         i {
 
-            font-size: 40px;
-            transition: color .5s ease-in-out;
+            font-size: rem(20px);
+            color: $light;
+            transition: color .3s ease-in-out;
 
             &:hover {
-                color: $primary;
-                transition: color .5s ease-in-out;
+                color: $secondary;
+                transition: color .3s ease-in-out;
             }
         }
+    }
+
+    /* Menu central */
+    .footer-nav {
+
+        .footer-link {
+            font-size: rem(24px);
+            font-weight: 700;
+            letter-spacing: 0;
+            line-height: 1.5;
+            transition: color .2s ease-in-out;
+
+            &:hover { color: $secondary; }
+        }
+
+        .footer-reservation {
+            color: $light;
+            font-size: rem(24px);
+            font-weight: 700;
+            letter-spacing: 0;
+            text-decoration: none;
+            transition: color .2s ease-in-out;
+
+            &:hover { color: $secondary; }
+        }
+    }
+
+    .footer-media img { object-fit: cover; }
+
+    .footer-logo {
+        width: auto;
+        height: rem(80px);
+        max-width: 100%;
+    }
+
+    /* Note d'avis */
+    .footer-rating {
+
+        .footer-rating-score {
+            font-size: rem(26px);
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .footer-rating-meta {
+            text-align: left;
+        }
+
+        .footer-rating-label {
+            font-size: rem(14px);
+            font-weight: 600;
+            letter-spacing: 0;
+        }
+
+        .footer-rating-count {
+            font-size: rem(14px);
+            font-weight: 300;
+            letter-spacing: 0;
+        }
+    }
+
+    /* Contact */
+    .footer-contact {
+        font-size: rem(12px);
+        font-weight: 700;
+        letter-spacing: .4em;
+        line-height: calc(20 / 12);
+
+        a { color: $light; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    }
+
+    /* Partenaires */
+    .footer-partners {
+
+        .footer-partner-label {
+            font-size: rem(12px);
+            font-weight: 700;
+            letter-spacing: .4em;
+        }
+
+        .footer-partner-name {
+            font-size: rem(16px);
+            letter-spacing: .15em;
+        }
+
+        .footer-partner-logo {
+            width: auto;
+            height: rem(58px);
+            max-width: 100%;
+        }
+
+        .footer-partner-logo-paris {
+            height: rem(66px);
+        }
+    }
+
+    /* Barre légale */
+    .footer-legals {
+        border-top: 1px solid rgba($light, .25);
+
+        small, a {
+            font-size: rem(12px);
+            font-weight: 700;
+            letter-spacing: .1em;
+        }
+
+        a { transition: color .2s ease-in-out; }
+        a:hover { color: $secondary; }
+
+        .open-gdpr-modal { cursor: pointer; }
+    }
+
+    .footer-agency {
+        font-size: rem(12px);
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-decoration: none;
+
+        &:hover { color: $secondary; }
     }
 
     //.phone-link-wrap, .email-link-wrap {

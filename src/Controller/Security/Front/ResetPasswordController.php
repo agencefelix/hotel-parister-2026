@@ -34,6 +34,7 @@ class ResetPasswordController extends FrontController
         'en' => '/personal-space/password-change',
         'es' => '/espacio-personal/cambio-de-contrasena',
         'it' => '/spazio-personale/cambio-password',
+        'zh' => '/zh/spazio-personale/cambio-password',
     ], name: 'security_front_password_request', methods: 'GET|POST', schemes: '%protocol%')]
     public function request(Request $request, ResetPasswordManager $manager, BaseAuthenticator $baseAuthenticator): JsonResponse|Response
     {
@@ -74,6 +75,7 @@ class ResetPasswordController extends FrontController
         'en' => '/personal-space/password-change/e-mail/{token}',
         'es' => '/espacio-personal/cambio-de-contrasena/e-mail/{token}',
         'it' => '/spazio-personale/cambio-password/correo-electronico/{token}',
+        'zh' => '/zh/spazio-personale/cambio-password/correo-electronico/{token}',
     ], name: 'security_front_password_request_email', methods: 'GET|POST', schemes: '%protocol%')]
     public function sendBackEmail(
         ConfirmPasswordManager $confirmPasswordManager,
@@ -110,6 +112,7 @@ class ResetPasswordController extends FrontController
         'en' => '/personal-space/password/reset/{token}',
         'es' => '/espacio-personal/contrasena/reajustar/{token}',
         'it' => '/spazio-personale/password/reset/{token}',
+        'zh' => '/zh/spazio-personale/password/reset/{token}',
     ], name: 'security_front_password_confirm', methods: 'GET|POST', schemes: '%protocol%')]
     public function confirm(
         Request $request,

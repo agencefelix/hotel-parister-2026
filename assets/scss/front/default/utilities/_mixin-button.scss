@@ -273,13 +273,8 @@
 
                 @if map-has-key($config, 'bg-outline-hover') {
 
-                    @if index($screens, 'desktop') {
-                        @include mediaQuery(min-lg) {
-                            &:not(.basic)::before {
-                                background-color: map-get($config, 'bg-outline-hover') !important;
-                            }
-                        }
-                    }
+                    // Remplissage ::before au hover désactivé pour les OUTLINE (ils utilisent ::before/::after
+                    // pour les 2 filets, cf. override outline dans vendor-desktop/mobile.scss).
 
                     @if index($screens, 'mobile') or index($screens, 'tablet') or index($screens, 'all') {
                         @include mediaQuery(max-lg) {

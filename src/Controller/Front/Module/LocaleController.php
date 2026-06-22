@@ -25,10 +25,11 @@ use Symfony\Component\Routing\Attribute\Route;
 class LocaleController extends FrontController
 {
     private const bool MULTI_WEBSITES = false;
-    private const bool DISPLAY_FLAGS = true;
+    // Parister : switcher en toutes lettres inline (FRANÇAIS ENGLISH), conforme à la maquette.
+    private const bool DISPLAY_FLAGS = false;
     private const bool DISPLAY_CURRENT_FLAG = true;
-    private const bool DISPLAY_INLINE = false;
-    private const bool DISPLAY_FULL_NAME = false;
+    private const bool DISPLAY_INLINE = true;
+    private const bool DISPLAY_FULL_NAME = true;
 
     /**
      * Locale switcher View.

@@ -5,16 +5,21 @@
 
 {% if entity.intl.title %}
     {% set displayMainMedia = false %}
-    {% include 'front/'~websiteTemplate~'/blocks/title-header/default.html.twig' with {
-        styleClass: 'text-center',
-        block: entity,
-        customMedia: entity.mainMediaInHeader ? entity.headerMedia : null,
-        fullSize: true,
-        page: page,
-        pageTitle: entity.intl.title,
-        template: websiteTemplate,
-        thumbConfiguration: thumbConfigurationHeader
-    } %}
+    {% set heroMedia = entity.mainMediaInHeader and entity.headerMedia ? entity.headerMedia : (entity.medias is not empty ? entity.medias|first : null) %}
+    {% set heroTagline = entity.intl.headerSubTitle is defined and entity.intl.headerSubTitle ? entity.intl.headerSubTitle : (entity.category and entity.category.intl.title ? entity.category.intl.title : null) %}
+    <div class="product-hero-wrap">
+        {% include 'front/'~websiteTemplate~'/blocks/title-header/default.html.twig' with {
+            styleClass: 'text-center',
+            block: entity,
+            customMedia: heroMedia,
+            subTitle: heroTagline,
+            fullSize: true,
+            page: page,
+            pageTitle: entity.intl.title,
+            template: websiteTemplate,
+            thumbConfiguration: thumbConfigurationHeader
+        } %}
+    </div>
 {% endif %}
 
 <div id="product-view" class="container pt-5 pb-5">

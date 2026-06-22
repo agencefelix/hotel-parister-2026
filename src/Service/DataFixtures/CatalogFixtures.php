@@ -31,6 +31,45 @@ use Symfony\Component\Finder\Finder;
 class CatalogFixtures
 {
     private const int LIMIT = 15;
+    /**
+     * Caractéristiques réelles d'une chambre d'hôtel (source : maquette Figma product-view
+     * + prod hotelparister.com/chambres-suites, section « Services »). Feature => valeurs possibles.
+     */
+    private const array FEATURES = [
+        'Superficie' => ['17 m²', '20 m²', '22 m²', '28 m²', '30 m²', '40 m²', '52 m²'],
+        'Capacité' => ['1 à 2 personnes', '2 à 3 personnes', '3 à 4 personnes'],
+        'Vue' => ['Sur cour', 'Sur rue calme', 'Sur les toits de Paris'],
+        'Terrasse' => ['Avec terrasse privative', 'Sans terrasse'],
+        'Équipements' => ['Wi-Fi gratuit', 'Climatisation', 'Minibar', 'Coffre-fort', 'TV écran plat', 'Machine à café', 'Peignoirs & chaussons', 'Sèche-cheveux'],
+        'Services inclus' => ['Accès hammam', 'Accès salle de sport', 'Accès piscine', 'Petit-déjeuner', 'Room service 24h/24'],
+    ];
+    /** Équipements communs à toutes les chambres. */
+    private const array COMMON_EQUIPMENTS = ['Wi-Fi gratuit', 'Climatisation', 'Minibar', 'Coffre-fort', 'TV écran plat', 'Machine à café', 'Peignoirs & chaussons', 'Sèche-cheveux'];
+
+    /** Nom du catalogue selon le CONTEXTE du projet (ici : un hôtel → les chambres). */
+    private const string CATALOG_NAME = 'Chambres & Suites';
+    /** Tous les slugs (identifiants) générés sont en ANGLAIS ; les codes URL suivent la prod. */
+    private const string LISTING_SLUG = 'rooms';
+    /** Slugs anglais des features (la convention impose des slugs EN). */
+    private const array FEATURE_SLUGS = [
+        'Superficie' => 'surface',
+        'Capacité' => 'capacity',
+        'Vue' => 'view',
+        'Terrasse' => 'terrace',
+        'Équipements' => 'equipment',
+        'Services inclus' => 'included-services',
+    ];
+
+    /** Chambres & suites réelles du Parister (source : prod hotelparister.com/chambres-suites). Slugs EN. */
+    private const array ROOMS = [
+        ['title' => 'Chambre Supérieure', 'slug' => 'superior-room', 'surface' => '17 m²', 'capacite' => '1 à 2 personnes', 'vue' => 'Sur cour', 'terrasse' => false, 'services' => ['Accès hammam', 'Accès salle de sport'], 'intro' => 'Idéale pour une personne ou un couple à Paris. Accès hammam et salle de sport inclus.'],
+        ['title' => 'Chambre Deluxe', 'slug' => 'deluxe-room', 'surface' => '20 m²', 'capacite' => '1 à 2 personnes', 'vue' => 'Sur rue calme', 'terrasse' => false, 'services' => ['Accès hammam', 'Accès salle de sport'], 'intro' => 'Plus d\'espace et de lumière, dans une atmosphère intimiste et contemporaine.'],
+        ['title' => 'Chambre Deluxe avec terrasse', 'slug' => 'deluxe-room-terrace', 'surface' => '22 m²', 'capacite' => '1 à 2 personnes', 'vue' => 'Sur les toits de Paris', 'terrasse' => true, 'services' => ['Accès hammam', 'Accès salle de sport'], 'intro' => 'Une chambre Deluxe prolongée d\'une terrasse privative sur les toits de Paris.'],
+        ['title' => 'Junior Suite', 'slug' => 'junior-suite', 'surface' => '28 m²', 'capacite' => '2 à 3 personnes', 'vue' => 'Sur cour', 'terrasse' => false, 'services' => ['Accès hammam', 'Accès salle de sport', 'Accès piscine'], 'intro' => 'Un coin salon distinct pour profiter pleinement de votre séjour parisien.'],
+        ['title' => 'Junior Suite Terrasse', 'slug' => 'junior-suite-terrace', 'surface' => '30 m²', 'capacite' => '2 à 3 personnes', 'vue' => 'Sur les toits de Paris', 'terrasse' => true, 'services' => ['Accès hammam', 'Accès salle de sport', 'Accès piscine'], 'intro' => 'Le confort d\'une Junior Suite avec une terrasse privative.'],
+        ['title' => 'Suite Duplex', 'slug' => 'duplex-suite', 'surface' => '40 m²', 'capacite' => '3 à 4 personnes', 'vue' => 'Sur les toits de Paris', 'terrasse' => false, 'services' => ['Accès hammam', 'Accès salle de sport', 'Accès piscine', 'Petit-déjeuner', 'Room service 24h/24'], 'intro' => 'Deux niveaux pour un séjour d\'exception au cœur du 9ᵉ arrondissement.'],
+        ['title' => 'Suite Parister', 'slug' => 'parister-suite', 'surface' => '52 m²', 'capacite' => '3 à 4 personnes', 'vue' => 'Sur les toits de Paris', 'terrasse' => true, 'services' => ['Accès hammam', 'Accès salle de sport', 'Accès piscine', 'Petit-déjeuner', 'Room service 24h/24'], 'intro' => 'La plus grande suite de l\'hôtel : l\'expérience Parister dans sa forme la plus aboutie.'],
+    ];
     private Generator $faker;
     private Website $website;
     private ?User $user;
@@ -42,6 +81,7 @@ class CatalogFixtures
     public function __construct(
         private readonly CoreLocatorInterface $coreLocator,
         private readonly LayoutGeneratorService $layoutGenerator,
+        private readonly UploadedFileFixtures $uploadedFileFixtures,
     ) {
     }
 
@@ -69,45 +109,56 @@ class CatalogFixtures
             foreach ($finder->in($iconsDirname) as $file) {
                 $icons[] = $file->getFilename();
             }
-            for ($i = 1; $i <= 5; ++$i) {
-                $title = trim($this->faker->text(15), '.');
+            $featurePosition = 0;
+            foreach (self::FEATURES as $featureName => $values) {
+                ++$featurePosition;
                 $feature = new CatalogEntities\Feature();
-                $feature->setAdminName($title);
-                $feature->setSlug(Urlizer::urlize($title));
+                $feature->setAdminName($featureName);
+                $feature->setSlug(self::FEATURE_SLUGS[$featureName] ?? Urlizer::urlize($featureName));
                 $feature->setWebsite($website);
-                $feature->setPosition($i);
+                $feature->setPosition($featurePosition);
                 $feature->setCreatedBy($this->user);
                 $feature->setCreatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
-                $this->generateIntl($title, $feature);
-                $this->generateMediaRelation($feature);
-                for ($j = 1; $j <= 30; ++$j) {
-                    $icon = $icons[array_rand($icons)];
-                    $title = trim($this->faker->text(15), '.');
+                $this->generateIntl($featureName, $feature);
+                // Pas de media-relation sur une caractéristique (ex. « 17 m² ») : inutile et coûteux.
+                $valuePosition = 0;
+                foreach ($values as $label) {
+                    ++$valuePosition;
                     $featureValue = new CatalogEntities\FeatureValue();
-                    $featureValue->setAdminName($title);
-                    $featureValue->setSlug(Urlizer::urlize($title));
+                    $featureValue->setAdminName($label);
+                    $featureValue->setSlug((self::FEATURE_SLUGS[$featureName] ?? Urlizer::urlize($featureName)).'-'.$valuePosition);
                     $featureValue->setWebsite($website);
-                    $featureValue->setPosition($j);
-                    $featureValue->setIconClass('/medias/icons/light/'.$icon);
+                    $featureValue->setPosition($valuePosition);
+                    if ($icons) {
+                        $featureValue->setIconClass('/medias/icons/light/'.$icons[($featurePosition + $valuePosition) % count($icons)]);
+                    }
                     $featureValue->setCreatedBy($this->user);
                     $featureValue->setCreatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
                     $feature->addValue($featureValue);
-                    $this->generateIntl($title, $featureValue);
-                    $this->generateMediaRelation($featureValue);
+                    $this->generateIntl($label, $featureValue);
                     $this->coreLocator->em()->persist($featureValue);
                 }
                 $this->coreLocator->em()->persist($feature);
-                $this->coreLocator->em()->flush();
             }
+            $this->coreLocator->em()->flush(); // un seul flush pour tout le bloc features
             $this->coreLocator->em()->flush();
         }
 
-        $features = $this->coreLocator->em()->getRepository(CatalogEntities\FeatureValue::class)->findAll();
+        /* Index des valeurs réelles par [feature][label] pour l'affectation par chambre. */
+        $valueIndex = [];
+        foreach ($this->coreLocator->em()->getRepository(CatalogEntities\FeatureValue::class)->findAll() as $value) {
+            $featureName = $value->getCatalogfeature()?->getAdminName();
+            if ($featureName) {
+                $valueIndex[$featureName][$value->getAdminName()] = $value;
+            }
+        }
         $catalog = $this->generateCatalog();
         $this->generateTeaser($catalog);
 
-        for ($i = 1; $i <= self::LIMIT; ++$i) {
-            $title = trim($this->faker->text(30), '.');
+        $i = 0;
+        foreach (self::ROOMS as $room) {
+            ++$i;
+            $title = $room['title'];
             $product = new CatalogEntities\Product();
             $product->setAdminName($title);
             $product->setPublicationStart(new \DateTime(sprintf('-%d days', rand(1, 100))));
@@ -116,21 +167,27 @@ class CatalogFixtures
             $product->setPosition($i);
             $product->setCreatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
             $product->setCreatedBy($this->user);
-            $this->generateIntl($title, $product);
-            $this->generateMediaRelation($product);
-            $this->generateUrl($product);
-            $valuesKeys = array_rand($features, 45);
-            foreach ($valuesKeys as $key => $valuesKey) {
-                $value = $features[$valuesKey];
-                $valueProduct = new CatalogEntities\FeatureValueProduct();
-                $valueProduct->setValue($value);
-                $valueProduct->setFeature($value->getCatalogfeature());
-                $valueProduct->setProduct($product);
-                $valueProduct->setCreatedBy($this->user);
-                $valueProduct->setPosition($key + 1);
-                $valueProduct->setFeaturePosition($key + 1);
-                $valueProduct->setCreatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
-                $product->addValue($valueProduct);
+            $this->generateIntl($title, $product, $room['intro'], '<p>'.$room['intro'].'</p><p>Superficie : '.$room['surface'].'.</p>');
+            $this->generateMediaRelation($product, 'room-'.$i.'.jpg');
+            $this->generateUrl($product, $room['slug']);
+            $position = 0;
+            foreach ($this->roomFeatureValues($room) as $featureName => $labels) {
+                foreach ($labels as $label) {
+                    $value = $valueIndex[$featureName][$label] ?? null;
+                    if (!$value instanceof CatalogEntities\FeatureValue) {
+                        continue;
+                    }
+                    ++$position;
+                    $valueProduct = new CatalogEntities\FeatureValueProduct();
+                    $valueProduct->setValue($value);
+                    $valueProduct->setFeature($value->getCatalogfeature());
+                    $valueProduct->setProduct($product);
+                    $valueProduct->setCreatedBy($this->user);
+                    $valueProduct->setPosition($position);
+                    $valueProduct->setFeaturePosition($position);
+                    $valueProduct->setCreatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
+                    $product->addValue($valueProduct);
+                }
             }
 
             ProductModel::fromEntity($product, $this->coreLocator);
@@ -141,12 +198,29 @@ class CatalogFixtures
     }
 
     /**
+     * Caractéristiques réelles affectées à une chambre (feature => valeurs).
+     *
+     * @return array<string, string[]>
+     */
+    private function roomFeatureValues(array $room): array
+    {
+        return [
+            'Superficie' => [$room['surface']],
+            'Capacité' => [$room['capacite']],
+            'Vue' => [$room['vue']],
+            'Terrasse' => [$room['terrasse'] ? 'Avec terrasse privative' : 'Sans terrasse'],
+            'Équipements' => self::COMMON_EQUIPMENTS,
+            'Services inclus' => $room['services'],
+        ];
+    }
+
+    /**
      * Generate Category.
      */
     private function generateCatalog(): CatalogEntities\Catalog
     {
         $catalog = new CatalogEntities\Catalog();
-        $catalog->setAdminName('Principal');
+        $catalog->setAdminName(self::CATALOG_NAME);
         $catalog->setWebsite($this->website);
         $catalog->setCreatedBy($this->user);
         $this->coreLocator->em()->persist($catalog);
@@ -163,9 +237,9 @@ class CatalogFixtures
     {
         $listing = new CatalogEntities\Listing();
         $listing->addCatalog($catalog);
-        $listing->setAdminName('Principal');
+        $listing->setAdminName(self::CATALOG_NAME);
         $listing->setWebsite($this->website);
-        $listing->setSlug('main');
+        $listing->setSlug(self::LISTING_SLUG);
         $listing->setCreatedBy($this->user);
         $this->coreLocator->em()->persist($listing);
     }
@@ -173,15 +247,15 @@ class CatalogFixtures
     /**
      * Generate intl.
      */
-    private function generateIntl(string $title, mixed $entity): void
+    private function generateIntl(string $title, mixed $entity, ?string $introduction = null, ?string $body = null): void
     {
         $intlClassname = $this->coreLocator->metadata($entity, 'intls')->targetEntity;
         $intl = new $intlClassname();
         $intl->setLocale($this->locale);
         $intl->setTitle($title);
         $intl->setWebsite($this->website);
-        $intl->setIntroduction($this->faker->text(150));
-        $intl->setBody($this->faker->text(600));
+        $intl->setIntroduction($introduction ?? $this->faker->text(150));
+        $intl->setBody($body ?? $this->faker->text(600));
         $intl->setCreatedBy($this->user);
         $this->coreLocator->em()->persist($intl);
         $entity->addIntl($intl);
@@ -190,27 +264,47 @@ class CatalogFixtures
     /**
      * Generate MediaRelation.
      */
-    private function generateMediaRelation(mixed $entity): void
+    private function generateMediaRelation(mixed $entity, ?string $imageFilename = null): void
     {
-        $media = $this->coreLocator->em()->getRepository(MediaEntities\Media::class)->findOneBy([
-            'website' => $this->website,
-            'category' => 'share',
-        ]);
+        // Vraie image produit extraite de la maquette (sinon fallback média 'share').
+        $media = null;
+        if ($imageFilename) {
+            $path = $this->coreLocator->projectDir().'/.claude/skills/figma-cms/integration/media/home/'.$imageFilename;
+            $path = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+            if (is_file($path)) {
+                $media = $this->uploadedFileFixtures->uploadedFile($this->website, $path, $this->locale, null, null, null, $this->user);
+                if ($media instanceof MediaEntities\Media) {
+                    foreach ($media->getIntls() as $mediaIntl) {
+                        $mediaIntl->setTitle('');
+                    }
+                }
+            }
+        }
+        if (!$media instanceof MediaEntities\Media) {
+            $media = $this->coreLocator->em()->getRepository(MediaEntities\Media::class)->findOneBy([
+                'website' => $this->website,
+                'category' => 'share',
+            ]);
+        }
 
         $mediaClassname = $this->coreLocator->metadata($entity, 'mediaRelations')->targetEntity;
         $mediaRelation = new $mediaClassname();
         $mediaRelation->setLocale($this->locale);
         $mediaRelation->setMedia($media);
+        $mediaRelation->setMain(true); // média principal → alimente ViewModel.mainMedia (cartes/teaser).
+        $mediaRelation->setPopup(false);
+        $mediaRelation->setDownloadable(false);
         $entity->addMediaRelation($mediaRelation);
     }
 
     /**
      * Generate Url.
      */
-    private function generateUrl(CatalogEntities\Product $product): void
+    private function generateUrl(CatalogEntities\Product $product, ?string $code = null): void
     {
         $url = new Url();
-        $url->setCode(Urlizer::urlize($product->getAdminName()));
+        // Code URL = slug ANGLAIS de la chambre (pas d'URL prod dédiée par chambre).
+        $url->setCode($code ?? Urlizer::urlize($product->getAdminName()));
         $url->setLocale($this->locale);
         $url->setOnline(true);
         $url->setWebsite($this->website);

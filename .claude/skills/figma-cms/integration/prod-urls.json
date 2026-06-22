@@ -1,0 +1,352 @@
+{
+  "default_locale": "fr",
+  "locales": [
+    "fr",
+    "en",
+    "es",
+    "zh"
+  ],
+  "total": 78,
+  "by_language": {
+    "fr": {
+      "domain": "https://www.hotelparister.com",
+      "sitemap": "https://www.hotelparister.com/direct/core/sitemap-xml",
+      "count": 54,
+      "urls": [
+        {
+          "url": "https://www.hotelparister.com/",
+          "path": "/"
+        },
+        {
+          "url": "https://www.hotelparister.com/chambres-suites",
+          "path": "/chambres-suites"
+        },
+        {
+          "url": "https://www.hotelparister.com/restaurant-bar-a-cocktail",
+          "path": "/restaurant-bar-a-cocktail"
+        },
+        {
+          "url": "https://www.hotelparister.com/sport-bien-etre",
+          "path": "/sport-bien-etre"
+        },
+        {
+          "url": "https://www.hotelparister.com/salle-de-reunion-evenementiel",
+          "path": "/salle-de-reunion-evenementiel"
+        },
+        {
+          "url": "https://www.hotelparister.com/la-vie-au-parister",
+          "path": "/la-vie-au-parister"
+        },
+        {
+          "url": "https://www.hotelparister.com/hotel-paris-concert-celine-dion-accor-arena",
+          "path": "/hotel-paris-concert-celine-dion-accor-arena"
+        },
+        {
+          "url": "https://www.hotelparister.com/exposition-distance-kevin-desca",
+          "path": "/exposition-distance-kevin-desca"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire",
+          "path": "/parenthese-litteraire"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-caroline-munoz",
+          "path": "/parenthese-litteraire-avec-caroline-munoz"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-attica-guedj",
+          "path": "/parenthese-litteraire-avec-attica-guedj"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-philippe-gaudin",
+          "path": "/parenthese-litteraire-avec-philippe-gaudin"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-gabrielle-lazure",
+          "path": "/parenthese-litteraire-avec-gabrielle-lazure"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-francoise-d-origny",
+          "path": "/parenthese-litteraire-avec-francoise-d-origny"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-nicole-bacharan-et-dominique-simonnet",
+          "path": "/parenthese-litteraire-avec-nicole-bacharan-et-dominique-simonnet"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-irene-frain",
+          "path": "/parenthese-litteraire-avec-irene-frain"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-marc-menant",
+          "path": "/parenthese-litteraire-avec-marc-menant"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-remi-huppert",
+          "path": "/parenthese-litteraire-avec-remi-huppert"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-anny-duperey",
+          "path": "/parenthese-litteraire-avec-anny-duperey"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-francis-huster-et-callune-kippeurt",
+          "path": "/parenthese-litteraire-avec-francis-huster-et-callune-kippeurt"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-fabienne-thibeault",
+          "path": "/parenthese-litteraire-avec-fabienne-thibeault"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-veronique-dabadie",
+          "path": "/parenthese-litteraire-avec-veronique-dabadie"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-francois-guillaume-lorrain",
+          "path": "/parenthese-litteraire-avec-francois-guillaume-lorrain"
+        },
+        {
+          "url": "https://www.hotelparister.com/parenthese-litteraire-avec-gael-tchakaloff",
+          "path": "/parenthese-litteraire-avec-gael-tchakaloff"
+        },
+        {
+          "url": "https://www.hotelparister.com/morning-wellness-club-cours-de-yoga-a-l-hotel-parister-avec-clarisse-douat",
+          "path": "/morning-wellness-club-cours-de-yoga-a-l-hotel-parister-avec-clarisse-douat"
+        },
+        {
+          "url": "https://www.hotelparister.com/mwc-4-2-et-3-novembre-2025",
+          "path": "/mwc-4-2-et-3-novembre-2025"
+        },
+        {
+          "url": "https://www.hotelparister.com/mwc-2-26-et-27-octobre-2025",
+          "path": "/mwc-2-26-et-27-octobre-2025"
+        },
+        {
+          "url": "https://www.hotelparister.com/mwc-2-5-et-6-octobre-2025",
+          "path": "/mwc-2-5-et-6-octobre-2025"
+        },
+        {
+          "url": "https://www.hotelparister.com/mwc-1-7-et-8-septembre-2025-copy-81",
+          "path": "/mwc-1-7-et-8-septembre-2025-copy-81"
+        },
+        {
+          "url": "https://www.hotelparister.com/all-about-love-par-qin-han",
+          "path": "/all-about-love-par-qin-han"
+        },
+        {
+          "url": "https://www.hotelparister.com/une-piscine-confidentielle-au-coeur-de-paris",
+          "path": "/une-piscine-confidentielle-au-coeur-de-paris"
+        },
+        {
+          "url": "https://www.hotelparister.com/connectes-par-yue-lingjun-et-romain-ventura",
+          "path": "/connectes-par-yue-lingjun-et-romain-ventura"
+        },
+        {
+          "url": "https://www.hotelparister.com/exposition-anne-gaelle-gillet",
+          "path": "/exposition-anne-gaelle-gillet"
+        },
+        {
+          "url": "https://www.hotelparister.com/exposition-auriol",
+          "path": "/exposition-auriol"
+        },
+        {
+          "url": "https://www.hotelparister.com/elementsbis-yang-yi",
+          "path": "/elementsbis-yang-yi"
+        },
+        {
+          "url": "https://www.hotelparister.com/exposition-les-italiens-par-sergio-marcelli",
+          "path": "/exposition-les-italiens-par-sergio-marcelli"
+        },
+        {
+          "url": "https://www.hotelparister.com/exposition-de-huang-xiaoliang",
+          "path": "/exposition-de-huang-xiaoliang"
+        },
+        {
+          "url": "https://www.hotelparister.com/exposition-de-capucine-neouze",
+          "path": "/exposition-de-capucine-neouze"
+        },
+        {
+          "url": "https://www.hotelparister.com/saint-valentin-au-parister",
+          "path": "/saint-valentin-au-parister"
+        },
+        {
+          "url": "https://www.hotelparister.com/une-raclette-comme-a-la-montagne-en-plein-paris",
+          "path": "/une-raclette-comme-a-la-montagne-en-plein-paris"
+        },
+        {
+          "url": "https://www.hotelparister.com/flash-info-apicole",
+          "path": "/flash-info-apicole"
+        },
+        {
+          "url": "https://www.hotelparister.com/1-2-3-plongez",
+          "path": "/1-2-3-plongez"
+        },
+        {
+          "url": "https://www.hotelparister.com/ou-dormir-a-paris-a-la-rentree",
+          "path": "/ou-dormir-a-paris-a-la-rentree"
+        },
+        {
+          "url": "https://www.hotelparister.com/l-art-contemporain-s-invite-a-l-hotel-parister",
+          "path": "/l-art-contemporain-s-invite-a-l-hotel-parister"
+        },
+        {
+          "url": "https://www.hotelparister.com/concert-de-jazz-a-l-hotel-parister",
+          "path": "/concert-de-jazz-a-l-hotel-parister"
+        },
+        {
+          "url": "https://www.hotelparister.com/paris-cocktail-week",
+          "path": "/paris-cocktail-week"
+        },
+        {
+          "url": "https://www.hotelparister.com/a-voir-a-faire-lors-de-votre-sejour",
+          "path": "/a-voir-a-faire-lors-de-votre-sejour"
+        },
+        {
+          "url": "https://www.hotelparister.com/quartier",
+          "path": "/quartier"
+        },
+        {
+          "url": "https://www.hotelparister.com/galerie-photos",
+          "path": "/galerie-photos"
+        },
+        {
+          "url": "https://www.hotelparister.com/presse",
+          "path": "/presse"
+        },
+        {
+          "url": "https://www.hotelparister.com/presse-2018",
+          "path": "/presse-2018"
+        },
+        {
+          "url": "https://www.hotelparister.com/acces-et-contact",
+          "path": "/acces-et-contact"
+        },
+        {
+          "url": "https://www.hotelparister.com/visites-virtuelles",
+          "path": "/visites-virtuelles"
+        },
+        {
+          "url": "https://www.hotelparister.com/bons-cadeaux",
+          "path": "/bons-cadeaux"
+        }
+      ]
+    },
+    "en": {
+      "domain": "https://www.paristerhotel.com",
+      "sitemap": "https://www.paristerhotel.com/direct/core/sitemap-xml",
+      "count": 12,
+      "urls": [
+        {
+          "url": "https://www.paristerhotel.com/",
+          "path": "/"
+        },
+        {
+          "url": "https://www.paristerhotel.com/rooms-suites",
+          "path": "/rooms-suites"
+        },
+        {
+          "url": "https://www.paristerhotel.com/food-and-cocktails-bar",
+          "path": "/food-and-cocktails-bar"
+        },
+        {
+          "url": "https://www.paristerhotel.com/wellbeing",
+          "path": "/wellbeing"
+        },
+        {
+          "url": "https://www.paristerhotel.com/meet-at-parister",
+          "path": "/meet-at-parister"
+        },
+        {
+          "url": "https://www.paristerhotel.com/what-s-happening",
+          "path": "/what-s-happening"
+        },
+        {
+          "url": "https://www.paristerhotel.com/living-and-exploring",
+          "path": "/living-and-exploring"
+        },
+        {
+          "url": "https://www.paristerhotel.com/photo-gallery",
+          "path": "/photo-gallery"
+        },
+        {
+          "url": "https://www.paristerhotel.com/news",
+          "path": "/news"
+        },
+        {
+          "url": "https://www.paristerhotel.com/actualite",
+          "path": "/actualite"
+        },
+        {
+          "url": "https://www.paristerhotel.com/press",
+          "path": "/press"
+        },
+        {
+          "url": "https://www.paristerhotel.com/access-and-contact",
+          "path": "/access-and-contact"
+        }
+      ]
+    },
+    "es": {
+      "domain": "https://es.hotelparister.com",
+      "sitemap": "https://es.hotelparister.com/direct/core/sitemap-xml",
+      "count": 6,
+      "urls": [
+        {
+          "url": "https://es.hotelparister.com/",
+          "path": "/"
+        },
+        {
+          "url": "https://es.hotelparister.com/dormir-y-sonar",
+          "path": "/dormir-y-sonar"
+        },
+        {
+          "url": "https://es.hotelparister.com/beber-y-comer",
+          "path": "/beber-y-comer"
+        },
+        {
+          "url": "https://es.hotelparister.com/nadar-y-hacer-deporte",
+          "path": "/nadar-y-hacer-deporte"
+        },
+        {
+          "url": "https://es.hotelparister.com/vivir-y-explorer",
+          "path": "/vivir-y-explorer"
+        },
+        {
+          "url": "https://es.hotelparister.com/galeria",
+          "path": "/galeria"
+        }
+      ]
+    },
+    "zh": {
+      "domain": "https://cn.hotelparister.com",
+      "sitemap": "https://cn.hotelparister.com/direct/core/sitemap-xml",
+      "count": 6,
+      "urls": [
+        {
+          "url": "https://cn.hotelparister.com/",
+          "path": "/"
+        },
+        {
+          "url": "https://cn.hotelparister.com/dormir-et-rever",
+          "path": "/dormir-et-rever"
+        },
+        {
+          "url": "https://cn.hotelparister.com/boire-et-manger",
+          "path": "/boire-et-manger"
+        },
+        {
+          "url": "https://cn.hotelparister.com/nager-et-bouger",
+          "path": "/nager-et-bouger"
+        },
+        {
+          "url": "https://cn.hotelparister.com/vivre-et-explorer",
+          "path": "/vivre-et-explorer"
+        },
+        {
+          "url": "https://cn.hotelparister.com/galerie-photos",
+          "path": "/galerie-photos"
+        }
+      ]
+    }
+  }
+}

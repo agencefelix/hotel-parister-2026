@@ -1,0 +1,44 @@
+{% trans_default_domain 'front_default' %}
+
+{#
+    Card spécifique des « univers » de la home (slider home-universe).
+    Maquette : titre + sous-titre script AU-DESSUS de l'image, centrés,
+    puis image, description et lien DÉCOUVRIR en capitales.
+    Sélectionnée par condition sur l'id (slug) du slider dans splide.html.twig.
+#}
+
+<div class="card-universe text-center">
+    {% if media.intl.title %}
+        <h{{ media.intl.titleForce }} class="title">{{ media.intl.title|raw }}</h{{ media.intl.titleForce }}>
+    {% endif %}
+    {% if media.intl.introduction %}
+        <p class="introduction">{{ media.intl.introduction|raw|nl2br }}</p>
+    {% endif %}
+
+    {# Maquette : descriptif AU-DESSUS de l'image. #}
+    {% if media.intl.body %}
+        <div class="body">{{ media.intl.body|raw }}</div>
+    {% endif %}
+
+    <div class="card-universe-media">
+        {{ media|file(thumbConfiguration, {
+            class: '',
+            disableLink: true,
+            notInBox: true,
+            maxWidth: fileSizes.width is defined ? fileSizes.width : null,
+            maxHeight: fileSizes.height is defined ? fileSizes.height : null,
+            popupGallery: false,
+            fullPopup: false,
+            colSize: colSize is defined ? colSize : null
+        }) }}
+    </div>
+
+    {% if media.intl.link %}
+        {% include 'front/'~websiteTemplate~'/blocks/link/default.html.twig' with {
+            block: media,
+            intl: media.intl,
+            linkLabel: media.intl.linkLabel ? media.intl.linkLabel : 'Découvrir'|trans,
+            style: 'mt-3 slider-link text-uppercase',
+        } only %}
+    {% endif %}
+</div>

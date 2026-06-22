@@ -1,0 +1,89 @@
+{
+  "company_name": "Hôtel Parister",
+  "prod_url": "https://www.hotelparister.com",
+  "locale": "fr",
+  "locales_others": ["en", "es", "zh"],
+
+  "domains": {
+    "_source": "prod",
+    "fr": "www.hotelparister.com",
+    "en": "www.paristerhotel.com",
+    "es": "es.hotelparister.com",
+    "zh": "cn.hotelparister.com"
+  },
+
+  "apis": {
+    "_source": "prod",
+    "google_tag_manager": "GTM-PR9R52V"
+  },
+
+  "colors": {
+    "_source": "figma",
+    "_note": "Mapping sémantique à confirmer. Hex relevés sur les fills SOLID de la maquette.",
+    "primary": "#b48608",
+    "secondary": "#001e56",
+    "teal": "#8fb3b1",
+    "light": "#f4f0f1",
+    "dark": "#141414",
+    "brown": "#402624",
+    "success": "#00561b",
+    "white": "#ffffff"
+  },
+
+  "favicons": {
+    "_source": "figma",
+    "_note": "Générés à partir du mark du logo sur fond primary.",
+    "background": "#b48608"
+  },
+
+  "social_networks": {
+    "_source": "prod",
+    "facebook": "https://www.facebook.com/HOTEL-Parister-",
+    "instagram": "https://www.instagram.com/Hotel_parister",
+    "linkedin": "https://www.linkedin.com/company/hotel-parister/",
+    "tiktok": "https://www.tiktok.com/@hotelparister"
+  },
+
+  "phones": {
+    "_source": "figma+prod",
+    "0": { "number": "+33 (0)1 80 50 91 91", "tag_number": "+33180509191", "type": "office" }
+  },
+
+  "emails": {
+    "_source": "figma+prod",
+    "0": { "email": "bonjour@hotelparister.com" }
+  },
+
+  "addresses": {
+    "_source": "figma (footer) + Nominatim (lat/long)",
+    "0": {
+      "name": "Hôtel Parister",
+      "address": "19 rue Saulnier",
+      "zipcode": "75009",
+      "city": "Paris",
+      "region": "Île-de-France",
+      "department": "Paris",
+      "country": "FR",
+      "latitude": "48.8753155",
+      "longitude": "2.3443779"
+    }
+  },
+
+  "legals": {
+    "_source": "prod (mentions-legales)",
+    "companyName": "FORSTYLE HOTELS COLLECTION",
+    "companyAddress": "19 rue Saulnier, 75009 Paris",
+    "capital": "2 000 000,00 €",
+    "vatNumber": "FR82810709113",
+    "siretNumber": null,
+    "hostName": null,
+    "protectionOfficerName": null
+  },
+
+  "fonts": {
+    "_source": "figma + prod CSS",
+    "body": "Museo Sans (300, 500, 700, 900)",
+    "script": "August Script Bold Free (décoratif) - police réelle fournie et intégrée en local (august-script.ttf)",
+    "_note": "Museo Sans récupéré depuis le CSS de prod (/fonts/Museo)."
+  }
+}

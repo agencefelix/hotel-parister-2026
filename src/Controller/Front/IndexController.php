@@ -55,6 +55,7 @@ class IndexController extends FrontController
         'en' => '/my-personal-space/{url}',
         'es' => '/mi-espacio-personal/{url}',
         'it' => '/mio-spazio-personale/{url}',
+        'zh' => '/zh/mio-spazio-personale/{url}',
     ], name: 'front_index_security', methods: 'GET', schemes: '%protocol%')]
     #[Cache(expires: 'tomorrow', public: true)]
     public function view(

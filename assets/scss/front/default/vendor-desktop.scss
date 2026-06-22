@@ -46,3 +46,47 @@ $screens: 'mini-pc', 'desktop';
 @each $suffix, $config in $buttons {
     @include button($suffix, $config, $screens);
 }
+
+/* Boutons OUTLINE (toutes couleurs) = style « 2 filets » haut+bas, sans bordure pleine,
+   sans fond au hover, sans padding gauche/droite. Placé APRÈS le @each pour gagner l'ordre. */
+body .btn.btn[class*="btn-outline-"] {
+    position: relative;
+    border: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    background: transparent !important;
+    background-image: none !important;
+    overflow: visible;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        left: 40px;
+        right: 40px;
+        height: 1px;
+        background: currentColor !important;
+        background-image: none !important;
+        transition: left .35s ease, right .35s ease;
+        opacity: 1;
+        pointer-events: none;
+    }
+
+    &::before { top: 0; }
+    &::after { bottom: 0; }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+        background: transparent !important;
+        background-image: none !important;
+
+        &::before,
+        &::after {
+            left: 0;
+            right: 0;
+            background: currentColor !important;
+        }
+    }
+}

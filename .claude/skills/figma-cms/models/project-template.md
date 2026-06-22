@@ -5,7 +5,7 @@
 > placeholders. Ce fichier ne doit contenir QUE le **spécifique projet** : les règles
 > génériques restent dans `integration-prompts.md` et `mapping-blocktypes.md`. Les
 > artefacts (pages, layout, screenshots, media, interactions) vont sous
-> `.claude/figma-cms/integration/`.
+> `.claude/skills/figma-cms/integration/`.
 
 ## URLs à demander au démarrage (OBLIGATOIRE)
 

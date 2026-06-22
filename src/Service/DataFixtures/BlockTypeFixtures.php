@@ -24,7 +24,6 @@ class BlockTypeFixtures
 {
     private const array DISABLED = [
         'action',
-        'alert',
         'blockquote',
         'card',
         'collapse',

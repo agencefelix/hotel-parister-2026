@@ -35,6 +35,8 @@ function safeList() {
         /address/, /container/, /body/, /description/, /introduction/, /sr-only/,
         /datepicker-/, /days/, /days-/, /dow/, /selected/, /autofill/, /focus/, /choices__/, /splide_/,
         /overflow-initial/, /parallax-window/, /full-screen/, /mobile-first/, /full-size/, /aos/, /lax/, /as-newscast-teaser/, /animation/, /aspect-ratio/, /large-file-container/, /fa-spin/, /shadow-box/, /shadow-left/, /shadow-right/,
+        // Nav lateral (overlay ☰ permanent) : classes ajoutées dynamiquement en Twig, à préserver.
+        /not-expanded/, /main-submenu/, /submenu/, /socials-list/, /nav-cta/, /nav-toggler/,
     ];
     return {
         standard: patterns
@@ -147,7 +149,7 @@ vendor.optimization.splitChunks = splitChunks;
 vendor.optimization.minimize = minimize;
 vendor.resolve.extensions.push('json');
 if (vendor.optimization && vendor.optimization.minimizer) {
-    vendor.optimization.minimizer.push(new CssMinimizerPlugin());
+    vendor.optimization.minimizer.push(new CssMinimizerPlugin({ minimizerOptions: { preset: ['default', { svgo: false }] } }));
 }
 
 /** 2 - front */
@@ -190,6 +192,16 @@ Encore.setOutputPath('public/build/front/default')
         from: './assets/medias/movies',
         to: 'movies/[path][name].[hash:8].[ext]'
     })
+    // Polices vers un chemin STABLE (sans hash) pour que le preload de base.html.twig
+    // corresponde exactement aux url() des @font-face.
+    .copyFiles({
+        from: './assets/lib/fonts/parister',
+        to: 'fonts/parister/[path][name].[ext]'
+    })
+    // css-loader ne doit PAS tenter de résoudre les url() absolues /build des polices stables.
+    .configureCssLoader((options) => {
+        options.url = { filter: (url) => !url.includes('/fonts/parister/') };
+    })
     .configureBabel(function (babelConfig) {
         babelConfig.presets.push('@babel/preset-flow');
     }, {})
@@ -228,8 +240,8 @@ Encore.setOutputPath('public/build/front/default')
         paths: glob.sync(
             `${path.join(__dirname, 'templates')}/{front/default,core,components,gdpr}/**/*.html.twig`, {nodir: true}
         ),
-        safelist: safeList,
-        blocklist: blockList,
+        safelist: safeList(),
+        blocklist: blockList(),
     }))
     .disableSingleRuntimeChunk()
     .enableSassLoader();
@@ -257,7 +269,7 @@ front_default.optimization.splitChunks = splitChunks;
 front_default.optimization.minimize = minimize;
 front_default.resolve.extensions.push('json');
 if (front_default.optimization && front_default.optimization.minimizer) {
-    front_default.optimization.minimizer.push(new CssMinimizerPlugin());
+    front_default.optimization.minimizer.push(new CssMinimizerPlugin({ minimizerOptions: { preset: ['default', { svgo: false }] } }));
 }
 
 /** 3 - gdpr */
@@ -334,7 +346,7 @@ gdpr.optimization.splitChunks = splitChunks;
 gdpr.optimization.minimize = minimize;
 gdpr.resolve.extensions.push('json');
 if (gdpr.optimization && gdpr.optimization.minimizer) {
-    gdpr.optimization.minimizer.push(new CssMinimizerPlugin());
+    gdpr.optimization.minimizer.push(new CssMinimizerPlugin({ minimizerOptions: { preset: ['default', { svgo: false }] } }));
 }
 
 /** 4 - admin */
@@ -437,7 +449,7 @@ admin.optimization.splitChunks = splitChunks;
 admin.optimization.minimize = minimize;
 admin.resolve.extensions.push('json');
 if (admin.optimization && admin.optimization.minimizer) {
-    admin.optimization.minimizer.push(new CssMinimizerPlugin());
+    admin.optimization.minimizer.push(new CssMinimizerPlugin({ minimizerOptions: { preset: ['default', { svgo: false }] } }));
 }
 
 /** 5 - security */
@@ -511,7 +523,7 @@ security.optimization.splitChunks = splitChunks;
 security.optimization.minimize = minimize;
 security.resolve.extensions.push('json');
 if (security.optimization && security.optimization.minimizer) {
-    security.optimization.minimizer.push(new CssMinimizerPlugin());
+    security.optimization.minimizer.push(new CssMinimizerPlugin({ minimizerOptions: { preset: ['default', { svgo: false }] } }));
 }
 
 /** 6 - module.exports */

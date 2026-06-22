@@ -1,7 +1,12 @@
 {% trans_default_domain 'front_default' %}
 
 {% if not form.isRendered() %}
-    <div class="content">
+    <div class="content newsletter-content">
+        <div class="newsletter-heading text-center">
+            <span class="newsletter-kicker d-block text-uppercase">{{ "Rejoignez notre"|trans }}</span>
+            <span class="newsletter-title d-block" aria-hidden="true">{{ "newsletter"|trans }}</span>
+            <h2 class="visually-hidden">{{ "Rejoignez notre newsletter"|trans }}</h2>
+        </div>
         {{ form_start(form, {attr: {
             id: "newsletter-form-"~campaign.id,
             class: campaign.recaptcha ? 'security newsletter-form' : 'newsletter-form',
@@ -11,20 +16,16 @@
         }}) }}
             {% include 'front/'~websiteTemplate~'/include/recaptcha-fields.html.twig' with {entity: campaign} %}
             <div class="container">
-                <div class="row">
-                    <label class="col-lg-4 col-xl-3 my-auto pt-0 pb-2 pb-lg-0 col-form-label text-center text-md-center text-lg-start text-uppercase form-control-label required" for="front_newsletter_email">
-                        <span class="label-name text-white">{{ "S'inscrire à la newsletter"|trans }}</span>
-                    </label>
-                    <div class="refer-group col-lg-8 col-xl-9">
-                        <div id="newsletter-fields" class="row">
-                            <div class="col-md-8 p-md-0">{{ form_widget(form.email) }}</div>
-                            <div class="btn-container col-md-4 mt-3 mt-md-0 ps-md-0">
-                                <button aria-label="{{ "Je m'inscris"|trans|raw }}" class="newsletter-submit newsletter-track w-100 btn btn-white ps-2 pe-2">
-                                    {{ 'fas sign-in-alt'|icon(17, 17) }}
-                                    <span class="spinner-border d-none" role="status"></span>
-                                    <span class="ms-2">{{ "Je m'inscris"|trans }}</span>
-                                </button>
-                            </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10 col-xl-8">
+                        <label class="visually-hidden" for="front_newsletter_email">{{ "Votre e-mail"|trans }}</label>
+                        <div id="newsletter-fields" class="newsletter-fields-wrap d-flex align-items-center">
+                            <div class="newsletter-email flex-grow-1">{{ form_widget(form.email) }}</div>
+                            <span class="newsletter-sep" aria-hidden="true"></span>
+                            <button aria-label="{{ "Envoyer"|trans|raw }}" class="newsletter-submit newsletter-track text-uppercase fw-600">
+                                <span class="newsletter-submit-label">{{ "Envoyer"|trans }}</span>
+                                <span class="spinner-border d-none" role="status"></span>
+                            </button>
                         </div>
                         {{ form_errors(form.email) }}
                         {% for type, flashes in app.session.flashbag.all %}
@@ -36,10 +37,13 @@
                                 </span>
                             {% endfor %}
                         {% endfor %}
-                    </div>
-                    <div class="col-12">
+                        <div class="newsletter-consent form-check d-flex align-items-start mt-4">
+                            {{ form_widget(form.consent, {attr: {class: 'newsletter-consent-check form-check-input flex-shrink-0'}}) }}
+                            {{ form_label(form.consent, null, {label_attr: {class: 'newsletter-consent-text form-check-label'}}) }}
+                            {{ form_errors(form.consent) }}
+                        </div>
                         {% if intro|striptags|length > 0 %}
-                            <p class="introduction text-white m-0 mt-4 text-center">{{ intro|unescape|raw|nl2br }}</p>
+                            <p class="newsletter-intro mt-3 mb-0">{{ intro|unescape|raw|nl2br }}</p>
                         {% endif %}
                     </div>
                 </div>

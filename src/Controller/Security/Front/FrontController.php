@@ -24,6 +24,7 @@ class FrontController extends \App\Controller\Front\FrontController
         'en' => '/my-personal-space/dashboard',
         'es' => '/mi-espacio-personal/tablero-de-mandos',
         'it' => '/mio-spazio-personale/cruscotto',
+        'zh' => '/geren-kongjian/yibiaopan',
     ], name: 'security_front_dashboard', methods: 'GET', schemes: '%protocol%', priority: 1)]
     public function dashboardView(): Response
     {

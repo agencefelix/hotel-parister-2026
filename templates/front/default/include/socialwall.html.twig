@@ -1,0 +1,26 @@
+{% trans_default_domain 'front_default' %}
+
+{# Socialwall Parister : bande noire, 3 visuels Instagram portrait espacés + invitation à suivre. #}
+{% set instaUrl = '#' %}
+{% for name, infos in website.networks %}
+    {% if name|lower == 'instagram' and infos.link %}
+        {% set instaUrl = infos.link %}
+    {% endif %}
+{% endfor %}
+
+<section id="socialwall" class="socialwall bg-light py-5" aria-label="{{ "Mur social Instagram"|trans|striptags }}">
+    <div class="container-fluid px-3 px-lg-5">
+        <div class="socialwall-grid d-flex justify-content-between flex-wrap">
+            {% for img in ['insta-1', 'insta-2', 'insta-3'] %}
+                <a class="socialwall-link" href="{{ instaUrl }}"{% if instaUrl != '#' %} target="_blank" rel="noopener noreferrer"{% endif %} aria-label="Instagram - {{ "nouvelle fenêtre"|trans|striptags }}">
+                    <img src="{{ asset('medias/'~img~'.jpg') }}" alt="" class="w-100 object-fit-cover" loading="lazy" width="290" height="371">
+                </a>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5">
+            <a class="socialwall-follow text-uppercase" href="{{ instaUrl }}"{% if instaUrl != '#' %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                {{ "Suivez-nous sur insta"|trans|raw }}
+            </a>
+        </div>
+    </div>
+</section>

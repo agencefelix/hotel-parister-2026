@@ -91,7 +91,7 @@ Mapper la variante de la convention sur `setTemplate()` et laisser faire :
 
 > **Dry-run** : le parser extrait déjà les **images de slides** (nœuds à fill `IMAGE`)
 > dans `block.media` (`{figmaNodeId, image, imageRef, width}`) et les rend dans
-> `.claude/figma-cms/integration/media/<slug>/`. **Résolution** : scale calculé par média pour viser
+> `.claude/skills/figma-cms/integration/media/<slug>/`. **Résolution** : scale calculé par média pour viser
 > ~3840px de large pour une image pleine largeur (retina ≤1920px sinon), **sans jamais
 > dépasser 3840px** (plafond dur, arrondi vers le bas, réduit aussi les nœuds plus larges).
 > **Format** : WebP **lossless** (`IMG_WEBP_LOSSLESS`) — compression sans perte de qualité.
@@ -147,6 +147,19 @@ Sans balisage explicite, le parser déduit — toujours « indicatif », à fige
   créent **pas** de frontière de bande.
 - **Teaser qui déborde à droite** (élément > largeur de page) → zone **`colToRight`**
   (`Zone::setColToRight(true)`).
+- **Zone croppée à droite = `slider|splide` (sauf teaser actu/produit).** Une bande dont un élément est
+  **coupé sur le bord droit** (rangée de cards qui déborde, flèches de carrousel précédent/suivant) est,
+  par convention, un **carrousel `slider|splide`** — **à moins** qu'elle ne soit déjà un **teaser
+  d'actualités** (`newscast-teaser`) ou un **teaser de produits** (`catalog-teaser`). Implémenté :
+  `PageParser::buildZoneFromElements()` remplace les colonnes déduites par un bloc module
+  `core-action` / `slider-view` (template **splide**) portant les images des cards comme slides,
+  dès que `colToRight` est vrai et qu'aucun module n'est déjà présent. **Le TITRE de la section
+  (s'il existe) est conservé dans la MÊME zone**, au-dessus du carrousel.
+- **Suite d'images se terminant par un élément croppé → zone DÉDIÉE.** Qu'il s'agisse d'un carrousel
+  `slider|splide` OU d'un **teaser** (`newscast-teaser`, `catalog-teaser`), dès qu'une rangée d'images
+  alignées **se termine par un élément coupé** à droite : tout va dans **une zone dédiée** (avec son
+  **titre** s'il y en a un), `Zone::setColToRight(true)`, et **`padding-right = 0` appliqué sur la ZONE,
+  la COL et le BLOC** (`setPaddingRight('pe-0')` aux trois niveaux).
 - **Images non balisées** → blocs `[image]` (BlockType `media`).
 - **CTA détecté par nom de calque** : un calque dont le nom contient `cta`/`bouton`/`btn`/`button`
   → bloc `[link]` (BlockType `link`) ; le libellé = premier texte trouvé dans le sous-arbre.
@@ -218,3 +231,43 @@ Les pages/teasers `product-*` / `catalog` désignent l'**entité phare du projet
   Une Page n'a accès qu'aux catégories `content` + `global` + modules.
 - `[nav]` / `[footer]` : layout de base, intégrés **une seule fois**, exclus de la
   génération par page (cf. `integration-prompts.md`).
+
+## Du BlockType / Action au HTML (Twig) puis au CSS (SCSS)
+
+> Carte « **où agir pour modifier un rendu** » — à **enrichir au fil des intégrations** avec chaque
+> relation découverte. Chaîne : **BlockType → (Action) → template Twig → classes HTML → cible SCSS.**
+
+**Chaîne générale :**
+1. **BlockType** (slug dans la fixture : `title`, `text`, `link`, `media`, `core-action`…). Les blocs
+   « riches » passent par une **action** (`core-action` + `actionSlug` : `slider-view`, `catalog-teaser`,
+   `newscast-teaser`, `map-view`, `form-view`…).
+2. **Action** → template sous `templates/front/default/actions/<domaine>/…` ; reçoit l'entité liée
+   (Slider, Teaser…) et choisit un **sous-template**.
+3. **HTML** : le sous-template produit le markup + des **classes dérivées d'un id d'entité**
+   (`slider-container-<slug>`, `carousel-<slug>`, `zone-<customId>`…).
+4. **CSS** : styler via ces classes dans le SCSS de page/composant
+   (`assets/scss/front/default/templates/<page>.scss` ou `components/`).
+
+**Atomes → templates :** bloc `title`/`text`/`link` → `blocks/{title,text,link}/default.html.twig` ;
+bloc `media` → filtre `|file` (figure/picture, wrapper `.img-loader-wrap` en `z-index:10` — penser au
+stacking si overlay) ; `alert` → `blocks/alert/…` (+ JS `#website-alert`).
+
+**Exemple détaillé — Slider (`core-action` / `slider-view`) :**
+- `addBlock($col, 'core-action', 'slider-view', $slider->getId())` → rend `actions/slider/view.html.twig`.
+- `view.html.twig` choisit le template **par `slider.template`** (`splide`, `main-home`, `two-columns`…)
+  **ou par `slider.slug`** : si `actions/slider/template/<slug>.html.twig` existe, il **prime**
+  (template 100 % custom pour ce slider).
+- Pour customiser **seulement la card** d'un slider donné sans dupliquer la mécanique du carrousel :
+  dans le sous-template (ex. `splide.html.twig`), **condition sur l'id du slider**
+  (`{% if slider.slug == 'home-universe' %}`) → include d'une **card dédiée**
+  (`template/include/card-<x>.html.twig`). Classes exposées : `slider-container-<slug>`,
+  `carousel-<slug>` / `splide-container` → cibles SCSS.
+
+**Teasers :** `catalog-teaser` → `actions/catalog/teaser/{slider,slider-multi}.html.twig` ;
+`newscast-teaser` → `actions/newscast/teaser/slider.html.twig`.
+
+**⚠️ Piège média des cartes/teasers (`ViewModel.mainMedia`) :** les cartes (`macros/card.html.twig`)
+affichent l'image via `intl.mainMedia`, alimentée par `MediasModel.main` = la **relation média flaggée
+`main`**. Dans les fixtures de modules (produits, actus…), `XxxMediaRelation` **doit appeler
+`->setMain(true)`** sinon `mainMedia` est **null** → carte rendue `no-media` (image absente). Toujours
+marquer la relation principale `setMain(true)` (en plus de `setMedia`/`setLocale`).

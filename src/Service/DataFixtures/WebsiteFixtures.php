@@ -41,25 +41,26 @@ class WebsiteFixtures
         'ROLE_NAVIGATION',
         'ROLE_FORM',
         'ROLE_USERS',
+        // Modules requis par la maquette Parister :
+        'ROLE_CATALOG',     // chambres & suites (catalogue produits)
+        'ROLE_GALLERY',     // galerie photos
+        'ROLE_MAP',         // carte d'accès
+        'ROLE_CONTACT',     // accès & contact
+        'ROLE_NEWSLETTER',  // inscription newsletter (bloc layout)
+        'ROLE_FAQ',         // questions fréquentes
     ];
     private const array OTHERS_MODULES = [
-        'ROLE_CATALOG',
         'ROLE_SECURE_PAGE',
         'ROLE_STEP_FORM',
-        'ROLE_GALLERY',
         'ROLE_TABLE',
-        'ROLE_MAP',
         'ROLE_SITE_MAP',
         'ROLE_SOCIAL_WALL',
         'ROLE_TAB',
         'ROLE_SEARCH_ENGINE',
-        'ROLE_CONTACT',
         'ROLE_AGENDA',
         'ROLE_PORTFOLIO',
         'ROLE_FORM_CALENDAR',
-        'ROLE_NEWSLETTER',
         'ROLE_TIMELINE',
-        'ROLE_FAQ',
         'ROLE_RECRUITMENT',
     ];
 
@@ -164,16 +165,25 @@ class WebsiteFixtures
      */
     private function getPagesParams(): array
     {
+        // Pages de la maquette Parister (le menu principal/footer se déduit de 'menus').
+        // CONVENTION : 'reference' = slug interne en ANGLAIS ; 'url' = code URL public = chemin de PROD
+        // (continuité SEO). Si 'url' absent, le code est dérivé du slug anglais.
         return [
-            ['name' => 'Accueil', 'asIndex' => true, 'reference' => 'home', 'menus' => [], 'template' => 'home', 'urlAsIndex' => true, 'deletable' => true],
-            ['name' => 'Actualités', 'asIndex' => false, 'reference' => 'news', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true, 'disable' => !in_array('ROLE_NEWSCAST', self::DEFAULTS_MODULES)],
-            ['name' => 'Nos produits', 'asIndex' => false, 'reference' => 'products', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true, 'disable' => !in_array('ROLE_CATALOG', self::DEFAULTS_MODULES)],
-            ['name' => 'Écrivez-nous', 'asIndex' => false, 'reference' => 'contact', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
-            ['name' => 'Plan de site', 'asIndex' => false, 'reference' => 'sitemap', 'menus' => ['footer'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
-            ['name' => 'Mentions légales', 'asIndex' => false, 'reference' => 'legals', 'menus' => ['footer'], 'template' => 'legacy', 'urlAsIndex' => false, 'deletable' => true],
-            ['name' => 'Politique relative aux cookies', 'asIndex' => false, 'reference' => 'cookies', 'menus' => ['footer'], 'template' => 'legacy', 'urlAsIndex' => false, 'deletable' => true],
-            ['name' => 'Components', 'asIndex' => false, 'reference' => 'components', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => false, 'deletable' => true],
-            ['name' => 'Erreurs', 'asIndex' => false, 'reference' => 'error', 'menus' => [], 'template' => 'error', 'urlAsIndex' => false, 'deletable' => false],
+            ['name' => 'Accueil', 'asIndex' => true, 'reference' => 'home', 'url' => '', 'menus' => [], 'template' => 'home', 'urlAsIndex' => true, 'deletable' => true],
+            ['name' => 'Chambres & Suites', 'asIndex' => false, 'reference' => 'products', 'url' => 'chambres-suites', 'menus' => ['main', 'footer'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true, 'disable' => !in_array('ROLE_CATALOG', self::DEFAULTS_MODULES)],
+            ['name' => 'Restaurant & Bar à cocktails', 'asIndex' => false, 'reference' => 'restaurant', 'url' => 'restaurant-bar-a-cocktail', 'menus' => ['main', 'footer'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
+            ['name' => 'Spa, Bien-être & Sport', 'asIndex' => false, 'reference' => 'spa', 'url' => 'sport-bien-etre', 'menus' => ['main', 'footer'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
+            ['name' => 'Séminaires & Réunions', 'asIndex' => false, 'reference' => 'meetings', 'url' => 'salle-de-reunion-evenementiel', 'menus' => ['main', 'footer'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
+            ['name' => 'La vie au Parister', 'asIndex' => false, 'reference' => 'news', 'url' => 'la-vie-au-parister', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true, 'disable' => !in_array('ROLE_NEWSCAST', self::DEFAULTS_MODULES)],
+            ['name' => 'Galerie photos', 'asIndex' => false, 'reference' => 'gallery', 'url' => 'galerie-photos', 'menus' => ['main', 'footer'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
+            ['name' => 'Presse', 'asIndex' => false, 'reference' => 'press', 'url' => 'presse', 'menus' => ['main', 'footer'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
+            ['name' => 'Accès & Contact', 'asIndex' => false, 'reference' => 'contact', 'url' => 'acces-et-contact', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
+            ['name' => 'Bons cadeaux', 'asIndex' => false, 'reference' => 'gift-cards', 'url' => 'bons-cadeaux', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
+            // Pages légales : hors menu (rendues dans la barre basse du footer), restent des pages accessibles.
+            ['name' => 'Plan de site', 'asIndex' => false, 'reference' => 'sitemap', 'url' => 'plan-du-site', 'menus' => [], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
+            ['name' => 'Mentions légales', 'asIndex' => false, 'reference' => 'legals', 'url' => 'mentions-legales', 'menus' => [], 'template' => 'legacy', 'urlAsIndex' => false, 'deletable' => true],
+            ['name' => 'Politique relative aux cookies', 'asIndex' => false, 'reference' => 'cookies', 'url' => 'politique-cookies', 'menus' => [], 'template' => 'legacy', 'urlAsIndex' => false, 'deletable' => true],
+            ['name' => 'Erreurs', 'asIndex' => false, 'reference' => 'error', 'url' => 'erreur', 'menus' => [], 'template' => 'error', 'urlAsIndex' => false, 'deletable' => false],
         ];
     }
 }

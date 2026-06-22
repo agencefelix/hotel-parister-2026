@@ -88,7 +88,11 @@ class ThumbnailFixtures
     private function addThumbs(): void
     {
         $teaser = $this->entityManager->getRepository(NewscastEntities\Teaser::class)->findOneBy(['website' => $this->website]);
-        $slider = $this->entityManager->getRepository(Slider::class)->findOneBy(['website' => $this->website]);
+        $heroSlider = $this->entityManager->getRepository(Slider::class)->findOneBy(['website' => $this->website, 'slug' => 'home-hero']);
+        $getawaySlider = $this->entityManager->getRepository(Slider::class)->findOneBy(['website' => $this->website, 'slug' => 'home-getaway']);
+        $workspacesSlider = $this->entityManager->getRepository(Slider::class)->findOneBy(['website' => $this->website, 'slug' => 'home-workspaces']);
+        $universeSlider = $this->entityManager->getRepository(Slider::class)->findOneBy(['website' => $this->website, 'slug' => 'home-universe']);
+        $spaSlider = $this->entityManager->getRepository(Slider::class)->findOneBy(['website' => $this->website, 'slug' => 'home-spa-services']);
         $headerTitle = $this->entityManager->getRepository(LayoutEntities\BlockType::class)->findOneBy(['slug' => 'title-header']);
         $this->addConfig('Thumbnail 443 x 300', 443, 300, 'Liste des actualités', NewscastEntities\Newscast::class, 'index');
         $this->addConfig('Thumbnail 468 x Infinite', 468, null, 'Actualité mise en avant index', NewscastEntities\Newscast::class, 'index', 'first-newscast-index');
@@ -97,10 +101,35 @@ class ThumbnailFixtures
             $this->addConfig('Thumbnail 664 x 492', 664, 492, "Teaser d'actualités accueil", NewscastEntities\Newscast::class, 'teaser', $teaser->getId());
         }
         $this->addConfig('Thumbnail 456 x 300', 456, 300, 'Fiche actualité', NewscastEntities\Newscast::class, 'view');
-        if ($slider instanceof Slider) {
-            $this->addConfig('Thumbnail 960 x 500', 960, 500, 'Carousel accueil', Slider::class, 'view', $slider->getId(), 'desktop', true);
-            $this->addConfig('Thumbnail 810 x 550', 810, 550, 'Carousel accueil', Slider::class, 'view', $slider->getId(), 'tablet', true);
-            $this->addConfig('Thumbnail 412 x 325', 412, 325, 'Carousel accueil', Slider::class, 'view', $slider->getId(), 'mobile', true);
+        // Hero plein écran (100vh) : grands formats paysage/portrait, hauteur fixe pour le cover.
+        if ($heroSlider instanceof Slider) {
+            $this->addConfig('Thumbnail 1920 x 1080', 1920, 1080, 'Hero accueil', Slider::class, 'view', $heroSlider->getId(), 'desktop', true);
+            $this->addConfig('Thumbnail 1280 x 1200', 1280, 1200, 'Hero accueil', Slider::class, 'view', $heroSlider->getId(), 'tablet', true);
+            $this->addConfig('Thumbnail 768 x 1024', 768, 1024, 'Hero accueil', Slider::class, 'view', $heroSlider->getId(), 'mobile', true);
+        }
+        // Bande parenthèse (image plein écran, overlay).
+        if ($getawaySlider instanceof Slider) {
+            $this->addConfig('Thumbnail 1920 x 900', 1920, 900, 'Bande parenthèse accueil', Slider::class, 'view', $getawaySlider->getId(), 'desktop', true);
+            $this->addConfig('Thumbnail 1280 x 760', 1280, 760, 'Bande parenthèse accueil', Slider::class, 'view', $getawaySlider->getId(), 'tablet', true);
+            $this->addConfig('Thumbnail 768 x 620', 768, 620, 'Bande parenthèse accueil', Slider::class, 'view', $getawaySlider->getId(), 'mobile', true);
+        }
+        // Bande workspaces (image plein écran, overlay).
+        if ($workspacesSlider instanceof Slider) {
+            $this->addConfig('Thumbnail 1920 x 900', 1920, 900, 'Bande workspaces accueil', Slider::class, 'view', $workspacesSlider->getId(), 'desktop', true);
+            $this->addConfig('Thumbnail 1280 x 760', 1280, 760, 'Bande workspaces accueil', Slider::class, 'view', $workspacesSlider->getId(), 'tablet', true);
+            $this->addConfig('Thumbnail 768 x 620', 768, 620, 'Bande workspaces accueil', Slider::class, 'view', $workspacesSlider->getId(), 'mobile', true);
+        }
+        // Cartes univers (aspect 510/456 dans le SCSS).
+        if ($universeSlider instanceof Slider) {
+            $this->addConfig('Thumbnail 510 x 456', 510, 456, 'Cartes univers accueil', Slider::class, 'view', $universeSlider->getId(), 'desktop', true);
+            $this->addConfig('Thumbnail 483 x 432', 483, 432, 'Cartes univers accueil', Slider::class, 'view', $universeSlider->getId(), 'tablet', true);
+            $this->addConfig('Thumbnail 456 x 408', 456, 408, 'Cartes univers accueil', Slider::class, 'view', $universeSlider->getId(), 'mobile', true);
+        }
+        // Cartes services spa (4 cartes portrait).
+        if ($spaSlider instanceof Slider) {
+            $this->addConfig('Thumbnail 420 x 520', 420, 520, 'Cartes spa accueil', Slider::class, 'view', $spaSlider->getId(), 'desktop', true);
+            $this->addConfig('Thumbnail 380 x 470', 380, 470, 'Cartes spa accueil', Slider::class, 'view', $spaSlider->getId(), 'tablet', true);
+            $this->addConfig('Thumbnail 456 x 520', 456, 520, 'Cartes spa accueil', Slider::class, 'view', $spaSlider->getId(), 'mobile', true);
         }
         $this->addConfig('Thumbnail 1920 x 300', 1920, 300, 'Block entête', LayoutEntities\Block::class, 'block', $headerTitle);
         $this->addConfig('Thumbnail 991 x 300', 991, 300, 'Block entête', LayoutEntities\Block::class, 'block', $headerTitle, 'tablet');

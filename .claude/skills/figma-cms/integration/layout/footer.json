@@ -1,0 +1,20 @@
+{
+    "_note": "MODÈLE VIDE. Descripteur layout footer (intégré une seule fois). 'social' = simples icônes/liens de config (≠ module mur social).",
+    "element": "footer",
+    "label": null,
+    "sharedAcrossPages": true,
+    "cms": {
+        "entity": "App\\Entity\\Module\\Menu\\Menu",
+        "slug": "footer",
+        "template": "footer",
+        "main": false,
+        "footer": true,
+        "alignment": null,
+        "links": "App\\Entity\\Module\\Menu\\Link (+ LinkIntl)"
+    },
+    "captures": [
+        { "label": "default", "figmaNodeId": null, "screenshot": "footer.png", "note": null }
+    ],
+    "content": { "menu": [], "logo": null, "contact": {}, "social": [], "legal": [] },
+    "notes": []
+}

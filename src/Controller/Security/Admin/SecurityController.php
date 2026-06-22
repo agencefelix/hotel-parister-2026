@@ -41,6 +41,8 @@ class SecurityController extends FrontController
     #[Route([
         'fr' => '/login',
         'en' => '/login',
+        'es' => '/login',
+        'zh' => '/login',
     ], name: 'security_login', methods: 'GET|POST', priority: 300)]
     public function login(Request $request, AuthenticationUtils $authenticationUtils, WebsiteRepository $websiteRepository): Response
     {

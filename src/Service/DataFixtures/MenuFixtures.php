@@ -30,6 +30,37 @@ class MenuFixtures
     private int $position = 1;
 
     /**
+     * Mega-menu principal Parister : colonnes (titre de groupe) + enfants.
+     * Enfant = ['ref' => slugInterne, 'title' => libellé] (page CMS) ou
+     *          ['title' => libellé, 'link' => url] (lien externe/placeholder, page absente).
+     * Libellés et structure conformes à la maquette (node 386:1793).
+     *
+     * @var array<int, array{title: string, children: array<int, array<string, string>>}>
+     */
+    private const MAIN_GROUPS = [
+        ['title' => 'Hôtel', 'children' => [
+            ['ref' => 'products', 'title' => 'Chambres & Suite'],
+            ['ref' => 'spa', 'title' => 'Sport & bien-être'],
+            ['ref' => 'meetings', 'title' => 'Salle de réunion & événementiel'],
+            ['ref' => 'contact', 'title' => 'Accès et contact'],
+        ]],
+        ['title' => 'Les passerelles', 'children' => [
+            ['ref' => 'restaurant', 'title' => 'Restaurant & bar à cocktails'],
+        ]],
+        ['title' => 'Utiles', 'children' => [
+            ['ref' => 'gallery', 'title' => 'Galerie'],
+            ['title' => 'Visites virtuelles', 'link' => '#'],
+            ['title' => 'Carrière', 'link' => '#'],
+            ['title' => 'Forstyle hotels collection', 'link' => '#'],
+        ]],
+        ['title' => 'Actualités', 'children' => [
+            ['ref' => 'news', 'title' => 'La vie au Parister'],
+            ['ref' => 'press', 'title' => 'Presse'],
+            ['title' => 'Blog', 'link' => '#'],
+        ]],
+    ];
+
+    /**
      * MenuFixtures constructor.
      */
     public function __construct(private readonly EntityManagerInterface $entityManager)
@@ -129,6 +160,7 @@ class MenuFixtures
     {
         $isMain = 'main' === $slug;
         $isFooter = 'footer' === $slug;
+        // Nav principale = template "main" (mega-menu overlay Parister) ; footer = "footer".
         $template = str_contains($slug, 'footer') ? 'footer' : $slug;
 
         $menu = new MenuEntities\Menu();
@@ -136,6 +168,10 @@ class MenuFixtures
         $menu->setSlug($slug);
         $menu->setTemplate($template);
         $menu->setMain($isMain);
+        // Nav principale Parister : overlay ☰ permanent (hamburger à tous les breakpoints).
+        if ($isMain) {
+            $menu->setExpand('xxxl');
+        }
         $menu->setFooter($isFooter);
         $menu->setWebsite($website);
         $menu->setFixedOnScroll($isMain);
@@ -146,8 +182,86 @@ class MenuFixtures
         }
 
         $this->entityManager->persist($menu);
-        $this->addLinks($menu);
+        if ($isMain) {
+            $this->addMainGroups($menu);
+        } else {
+            $this->addLinks($menu);
+        }
         ++$this->position;
+    }
+
+    /**
+     * Construit le mega-menu principal en colonnes (parent = titre de groupe, enfants = pages).
+     */
+    private function addMainGroups(MenuEntities\Menu $menu): void
+    {
+        $position = 1;
+
+        foreach (self::MAIN_GROUPS as $group) {
+            $parent = new MenuEntities\Link();
+            $parent->setAdminName($group['title']);
+            $parent->setMenu($menu);
+            $parent->setLocale($this->locale);
+            $parent->setLevel(1);
+            $parent->setPosition($position);
+
+            $parentIntl = new MenuEntities\LinkIntl();
+            $parentIntl->setTitle($group['title']);
+            $parentIntl->setLocale($this->locale);
+            $parentIntl->setLink($parent);
+            $parentIntl->setCreatedBy($this->user);
+            $parentIntl->setWebsite($menu->getWebsite());
+
+            $parent->setIntl($parentIntl);
+            $parent->setCreatedBy($this->user);
+
+            $this->entityManager->persist($parent);
+            $this->entityManager->persist($parentIntl);
+
+            $childPosition = 1;
+            foreach ($group['children'] as $childData) {
+                $reference = $childData['ref'] ?? null;
+                /** @var Page|null $page */
+                $page = $reference ? ($this->pages[$reference] ?? null) : null;
+
+                // Enfant page CMS absente : on conserve le lien (placeholder) pour respecter la maquette.
+                if ($reference && !$page && !isset($childData['link'])) {
+                    continue;
+                }
+
+                $title = $childData['title'] ?? ($page ? $page->getAdminName() : '');
+
+                $child = new MenuEntities\Link();
+                $child->setAdminName($title);
+                $child->setMenu($menu);
+                $child->setLocale($this->locale);
+                $child->setLevel(2);
+                $child->setParent($parent);
+                $child->setPosition($childPosition);
+
+                $childIntl = new MenuEntities\LinkIntl();
+                if ($page) {
+                    $childIntl->setTargetPage($page);
+                } elseif (isset($childData['link'])) {
+                    $childIntl->setTargetLink($childData['link']);
+                }
+                $childIntl->setTitle($title);
+                $childIntl->setLocale($this->locale);
+                $childIntl->setLink($child);
+                $childIntl->setCreatedBy($this->user);
+                $childIntl->setWebsite($menu->getWebsite());
+
+                $child->setIntl($childIntl);
+                $child->setCreatedBy($this->user);
+
+                $this->entityManager->persist($child);
+                $this->entityManager->persist($childIntl);
+
+                ++$childPosition;
+            }
+
+            ++$position;
+        }
     }
 
     /**

@@ -1,0 +1,257 @@
+{
+    "page": {
+        "slug": "product-view",
+        "adminName": "Product-view",
+        "zonesDeduced": true
+    },
+    "zones": [
+        {
+            "label": "bande 1 (déduite)",
+            "screenshot": "section-product-view-1.png",
+            "deduced": true,
+            "fullSize": true,
+            "colToRight": false,
+            "background": null,
+            "cols": [
+                {
+                    "size": 12,
+                    "deduced": true,
+                    "untaggedCount": 0,
+                    "blocks": [
+                        {
+                            "figmaName": "Intime en taille mais généreuse dans les détails",
+                            "kind": "atom",
+                            "blockTypeSlug": "text",
+                            "text": "Intime en taille mais généreuse dans les détails",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "text",
+                                "fixture": "addBlock($col, 'text')"
+                            },
+                            "note": "texte déduit"
+                        },
+                        {
+                            "figmaName": "supérieure",
+                            "kind": "atom",
+                            "blockTypeSlug": "title",
+                            "variants": [
+                                "h1"
+                            ],
+                            "text": "Supérieure",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "title",
+                                "fixture": "addBlock($col, 'title')"
+                            },
+                            "note": "titre h1 déduit (133.2 px)"
+                        },
+                        {
+                            "figmaName": "chambre",
+                            "kind": "atom",
+                            "blockTypeSlug": "title",
+                            "variants": [
+                                "h4"
+                            ],
+                            "text": "Chambre",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "title",
+                                "fixture": "addBlock($col, 'title')"
+                            },
+                            "note": "titre h4 déduit (38.4 px)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "bande 2 (déduite)",
+            "screenshot": "section-product-view-2.png",
+            "deduced": true,
+            "fullSize": true,
+            "colToRight": false,
+            "background": "#f4f0f1",
+            "cols": [
+                {
+                    "size": 11,
+                    "deduced": true,
+                    "untaggedCount": 1,
+                    "blocks": [
+                        {
+                            "figmaName": "CTA Box",
+                            "kind": "atom",
+                            "blockTypeSlug": "link",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "link",
+                                "fixture": "addBlock($col, 'link')"
+                            },
+                            "note": "CTA déduit (nom de calque)"
+                        },
+                        {
+                            "figmaName": "2fd2b42f-a486-49f3-956c-b876daa8e9dd 1",
+                            "kind": "atom",
+                            "blockTypeSlug": "media",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "media",
+                                "fixture": "addBlock($col, 'media')"
+                            },
+                            "media": [
+                                {
+                                    "figmaNodeId": "516:2302",
+                                    "image": "2fd2b42f-a486-49f3-956c-b876daa8e9dd-1.jpg",
+                                    "imageRef": "2735e6b001ea6debbb169559030d66b2b591cdee",
+                                    "width": 690,
+                                    "format": "jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "figmaName": "1 / 4",
+                            "kind": "atom",
+                            "blockTypeSlug": "text",
+                            "text": "1 / 4",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "text",
+                                "fixture": "addBlock($col, 'text')"
+                            },
+                            "note": "texte déduit"
+                        },
+                        {
+                            "figmaName": "les autres chambres",
+                            "kind": "atom",
+                            "blockTypeSlug": "title",
+                            "variants": [
+                                "h5"
+                            ],
+                            "text": "Les autres chambres",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "title",
+                                "fixture": "addBlock($col, 'title')"
+                            },
+                            "note": "titre h5 déduit (32 px)"
+                        },
+                        {
+                            "figmaName": "parister",
+                            "kind": "atom",
+                            "blockTypeSlug": "title",
+                            "variants": [
+                                "h2"
+                            ],
+                            "text": "Parister",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "title",
+                                "fixture": "addBlock($col, 'title')"
+                            },
+                            "note": "titre h2 déduit (96 px)"
+                        },
+                        {
+                            "figmaName": "CTA Box",
+                            "kind": "atom",
+                            "blockTypeSlug": "link",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "link",
+                                "fixture": "addBlock($col, 'link')"
+                            },
+                            "note": "CTA déduit (nom de calque)"
+                        },
+                        {
+                            "figmaName": "Idéale pour une personne ou un couple à Paris. \u2028Accès hammam et salle de sport inclus.",
+                            "kind": "atom",
+                            "blockTypeSlug": "title",
+                            "variants": [
+                                "h6"
+                            ],
+                            "text": "Idéale pour une personne ou un couple à Paris. \u2028Accès hammam et salle de sport inclus.",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "title",
+                                "fixture": "addBlock($col, 'title')"
+                            },
+                            "note": "titre h6 déduit (16 px)"
+                        },
+                        {
+                            "figmaName": "Chambre",
+                            "kind": "atom",
+                            "blockTypeSlug": "title",
+                            "variants": [
+                                "h6"
+                            ],
+                            "text": "Chambre",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "title",
+                                "fixture": "addBlock($col, 'title')"
+                            },
+                            "note": "titre h6 déduit (24 px)"
+                        },
+                        {
+                            "figmaName": "supérieure",
+                            "kind": "atom",
+                            "blockTypeSlug": "title",
+                            "variants": [
+                                "h3"
+                            ],
+                            "text": "Supérieure",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "title",
+                                "fixture": "addBlock($col, 'title')"
+                            },
+                            "note": "titre h3 déduit (54 px)"
+                        },
+                        {
+                            "figmaName": "17 m².",
+                            "kind": "atom",
+                            "blockTypeSlug": "text",
+                            "text": "17 m².",
+                            "cms": {
+                                "entity": "App\\Entity\\Layout\\Block",
+                                "blockType": "text",
+                                "fixture": "addBlock($col, 'text')"
+                            },
+                            "note": "texte déduit"
+                        }
+                    ]
+                },
+                {
+                    "size": 1,
+                    "deduced": true,
+                    "untaggedCount": 0,
+                    "blocks": []
+                }
+            ]
+        },
+        {
+            "label": "bande 3 (déduite)",
+            "screenshot": "section-product-view-3.png",
+            "deduced": true,
+            "fullSize": true,
+            "colToRight": false,
+            "background": "#f4f0f1",
+            "cols": [
+                {
+                    "size": 12,
+                    "deduced": true,
+                    "untaggedCount": 1,
+                    "blocks": []
+                }
+            ]
+        }
+    ],
+    "excluded": [
+        "[newsletter] [newsletter]",
+        "[newsletter] [newsletter]",
+        "[auto:newsletter] newsletter",
+        "[auto:footer] Group 50"
+    ],
+    "warnings": [
+        "Éléments de layout détectés et exclus de la page (non taggés) : newsletter, footer. À tagger dans la maquette pour fiabiliser.",
+        "Aucun tag [zone] : zones déduites de la géométrie (fonds pleine largeur). Compte indicatif."
+    ]
+}

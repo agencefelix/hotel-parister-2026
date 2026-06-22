@@ -782,6 +782,13 @@ la marge voulue en SCSS, ou ajuster via l'utilitaire. Vérifier l'espacement ré
 ### Configurer `variables.scss` (tailles de titres, couleurs par fond `$elements`, boutons)
 Beaucoup de réglages globaux passent par `assets/scss/front/default/variables.scss` — **les configurer
 là plutôt que de surcharger bande par bande** :
+- **AVANT de styler — relever le DESIGN SYSTEM nommé (source de vérité)** :
+  `node .claude/skills/figma-cms/tooling/figma-named-styles.mjs [--node <page>]`. Si la maquette
+  utilise des **styles nommés** (dictionnaire `styles` du fichier, via `file_content:read` — aucun
+  scope de plus), il en sort la **palette** (→ `$creme`, `$gold`… dans `variables.scss`) et l'**échelle
+  typo nommée** (`H1-H4`, `Sous-titre Hn` script, variantes Mobile, avec tracking/lh/casse). C'est la
+  **référence** : caler `$font-size-h*` / la palette dessus ; `reconcile-typography` ne sert plus que pour
+  les **textes NON stylés** (et explique les « orphelins » = styles nommés type `Sous-titre H3 = 54px`).
 - **AVANT de styler — réconcilier les échelles** : marges/paddings via
   `node .claude/skills/figma-cms/tooling/reconcile-margins.mjs integration/figma-tokens.<page>.json`
   (propose le token `pt-md`/`pe-sm`/`mb-xs`… par axe + signale les orphelins ; ne JAMAIS poser de px en

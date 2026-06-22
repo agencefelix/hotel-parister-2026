@@ -32,7 +32,15 @@ module, l'objet créé est l'**entité module** (Slider, Form, etc.), pas un Blo
 | `[zone]` | `Layout\Zone` | `setFullSize()`, paddings |
 | `[section]` / `[zone\|section]` | `Layout\Zone` | **= une ZONE** rendue en `<section>` (champ `semantic: "section"` dans le JSON). 1 calque `[section]` = 1 zone (jamais un bloc/colonne). |
 | `[section\|N]` | `Layout\Zone` | **Ordre forcé** : le numéro fixe la position de la zone (`[section\|1]`, `[section\|2]`…). Sans numéro → ordre d'apparition dans Figma. Implémenté : `PageParser::zonePosition()` + tri stable. |
-| `[col]` | `Layout\Col` | `setSize()` = colonnes Bootstrap (1-12) |
+| `[col]` | `Layout\Col` | `setSize()` = colonnes Bootstrap (1-12). **Alignement = propriétés d'entité, JAMAIS du CSS sur la colonne** : contenu/texte **centré verticalement** → `Col::setVerticalAlign(true)` ; contenu **aligné en fin** (bas/droite selon le contexte) → `Col::setEndAlign(true)`. (hérités de `BaseConfiguration`, défaut `false`). |
+
+> **Alignement d'une colonne (`Col`) — règle impérative** : quand une colonne (ou le texte qu'elle
+> contient) est **centrée verticalement**, **ne pas écrire de CSS** sur la colonne → poser
+> `Col::setVerticalAlign(true)`. De même pour un contenu **aligné en fin** → `Col::setEndAlign(true)`.
+> En Figma, ces cas correspondent à un auto-layout vertical dont l'alignement principal est
+> `CENTER` (→ verticalAlign) ou `MAX`/fin (→ endAlign). Ne pas confondre avec `Zone::colToRight` /
+> `Zone::colToEnd` (qui poussent les colonnes dans la ZONE) : ici c'est l'alignement DU CONTENU
+> **dans** la colonne.
 
 ## A — Blocs atomiques (catégories `content` + `global` — seules dispo pour une Page)
 

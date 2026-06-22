@@ -91,6 +91,12 @@ La page se découpe **Page → Zones → Colonnes → Blocs**. Le nommage fait f
   carrousel/teaser aligné à droite et débordant. Vaut pour tout slider de cartes en bord droit
   (univers, produits, services, événements…), pas seulement un cas précis.
 - Modificateurs **cumulables** : `[zone|section|bg:dark|text:white]`.
+- ⚠️ **Alignement du CONTENU d'une colonne = propriété d'entité, JAMAIS du CSS sur la colonne** :
+  une colonne (ou son texte) **centrée verticalement** ⇒ `Col::setVerticalAlign(true)` ; un contenu
+  **aligné en fin** (bas/droite) ⇒ `Col::setEndAlign(true)` (hérités de `BaseConfiguration`, défaut
+  `false`). En Figma : auto-layout vertical à alignement principal `CENTER` (→ verticalAlign) ou
+  `MAX`/fin (→ endAlign). À ne pas confondre avec `Zone::colToRight`/`colToEnd` (position des colonnes
+  DANS la zone) : ici c'est l'alignement du contenu **dans** la colonne.
 - **Re-fetcher la doc en ligne à chaque intégration** (elle évolue — ex. passage de `section` à `[zone|section]`).
 
 > **`[section]` = une ZONE** rendue en `<section>` (jamais un simple bloc/colonne) — cf. table ci-dessus.

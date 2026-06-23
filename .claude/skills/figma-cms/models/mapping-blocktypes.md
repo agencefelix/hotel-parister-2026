@@ -196,6 +196,16 @@ Mapper la variante de la convention sur `setTemplate()` et laisser faire :
 > Ne PAS poser à la main les ~10 champs déjà gérés par `prePersist`.
 > Ne régler explicitement que ce que la maquette impose et qui n'est pas couvert.
 >
+> **Flèches / puces (`setControl` / `setIndicators`) — 2 règles impératives** :
+> - **`splide` (carrousel de cards)** → **flèches OBLIGATOIRES** `setControl(true)` (les cards débordent,
+>   il faut naviguer) ; puces inutiles → `setIndicators(false)` (progress bar du template).
+> - **slider plein écran cinématique** (`main-home`/`banner`/`bootstrap` hero, auto-défilant) →
+>   `setControl(false)` + `setIndicators(false)` (la maquette n'en montre pas). Cf. playbook § Contrôles.
+>
+> **Hauteur d'une bande full-bleed** = **aspect-ratio de la maquette** (`zone.figmaWidth / zone.figmaHeight`),
+> PAS une hauteur en `dvh`/px fixe : la bande garde sa proportion du laptop au 1920. Ex. Figma 1440×830 →
+> `aspect-ratio: 1440 / 830` sur l'image/conteneur. (Le parser expose `figmaWidth`/`figmaHeight` par zone.)
+>
 > **Largeurs de référence (RÈGLE GÉNÉRALE des calculs)** : les créateurs maquettent en **réso laptop**
 > (largeur de page Figma ~1440, parfois 1280/1366) ; le rendu web vise **~1920** dans un container
 > Bootstrap (`container` / `container-fluid` / `container-fluid-right`). Comme le contenu **scale** dans

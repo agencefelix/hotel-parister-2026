@@ -735,15 +735,20 @@ en `titleForce = 2`+ (`<h2>`…). Un seul `<h1>` par page (SEO/accessibilité).
   voulu, ex. `colToRight`, image qui déborde) où la marge (négative) est alors légitime.
 - Vertical : marges (`mt-*`/`mb-*`) ou paddings selon le besoin, toujours via les propriétés.
 
-### Contrôles de slider (flèches / indicateurs) — activation entité + accessibilité
-- L'affichage des **flèches** et **indicateurs** est **administrable via l'entité `Slider`**
-  (`setControl(bool)`, `setIndicators(bool)`) → activer/désactiver selon la maquette.
-- **Sliders plein écran (hero, bandes fullscreen)** : si la maquette ne montre **ni flèches ni
-  indicateurs**, les **retirer visuellement** (via les flags entité / CSS).
-- ⚠️ **ACCESSIBILITÉ — toujours garder les flèches de contrôle dans le DOM**, même absentes de la
-  maquette : navigation clavier / lecteurs d'écran. Si elles ne doivent pas se voir, les rendre
-  **discrètes/visuellement masquées** (`sr-only`/opacité) **sans les supprimer du DOM** ni casser
-  leur focus. Ne jamais retirer purement le contrôle clavier d'un carrousel.
+### Contrôles de slider (flèches / indicateurs) — RÈGLES par type
+L'affichage des **flèches** et **puces** est administrable via l'entité `Slider` (`setControl(bool)` =
+flèches, `setIndicators(bool)` = puces). Deux règles **impératives** :
+
+1. **`splide` (carrousel de cards : teaser, services…) → flèches OBLIGATOIRES** : `setControl(true)`.
+   Un splide n'affiche qu'une partie des cards (les autres débordent) → il FAUT pouvoir naviguer.
+   Les puces sont généralement inutiles (le template splide a une barre de progression) → `setIndicators(false)`.
+2. **Slider plein écran / cinématique (hero, bandes fullscreen `main-home`/`banner`/`bootstrap` hero)
+   qui AUTO-DÉFILE → ni flèches ni puces** : `setControl(false)` + `setIndicators(false)`. La maquette
+   ne les montre pas ; la bande tourne seule (`autoplay`).
+
+⚠️ **ACCESSIBILITÉ** : pour un splide (flèches visibles), garder les flèches **focusables dans le DOM**
+(clavier / lecteurs d'écran). Pour un hero cinématique en `setControl(false)`, l'auto-défilement +
+le swipe couvrent la navigation ; ne pas réintroduire de flèches visibles contre la maquette.
 
 ### Slider template `main-home` = le HERO
 Le template de slider **`main-home`** correspond en pratique au **HERO** de la page (grande bannière

@@ -8,6 +8,9 @@
 CLAUDE.md
 
 /nbproject/
+# Fichiers de scratch ne doivent jamais traîner à la racine (utiliser le dossier scratchpad de session)
+/scratch_*.json
+/scratch_figma_file.json
 /.env
 /.env.local
 /.env.preprod

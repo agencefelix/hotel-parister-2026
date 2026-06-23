@@ -45,6 +45,9 @@ module, l'objet créé est l'**entité module** (Slider, Form, etc.), pas un Blo
 > simples GROUP sans flag auto-layout) et l'expose dans `home.json` : `cols[].verticalAlign` /
 > `cols[].endAlign`. **L'intégrateur lit ces champs et pose `Col::setVerticalAlign(true)` /
 > `Col::setEndAlign(true)` — jamais de CSS `align-items`/`align-self` sur la colonne.**
+> Rendu (front `include/zone.html.twig`) : `verticalAlign` → wrap `col-12 p-0 my-auto` (centre),
+> `endAlign` → wrap `col-12 p-0 mt-auto` (pousse en bas). La col étant `display:flex`, ces marges auto
+> alignent le contenu sans CSS. (NB : `endAlign` n'était pas câblé à l'origine — désormais oui.)
 > Ne pas confondre avec `Zone::colToRight` /
 > `Zone::colToEnd` (qui poussent les colonnes dans la ZONE) : ici c'est l'alignement DU CONTENU
 > **dans** la colonne.

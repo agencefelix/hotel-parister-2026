@@ -256,6 +256,9 @@ final class PageParser
             $parts[] = (string) $node['characters'];
         }
         foreach ($node['children'] ?? [] as $child) {
+            if (!$this->isVisible($child)) {
+                continue;
+            }
             $parts[] = $this->allText($child);
         }
 
@@ -1144,6 +1147,9 @@ final class PageParser
             return $node;
         }
         foreach ($node['children'] ?? [] as $child) {
+            if (!$this->isVisible($child)) {
+                continue;
+            }
             $found = $this->firstTextNode($child);
             if ($found !== null) {
                 return $found;
@@ -1262,6 +1268,9 @@ final class PageParser
             }
         }
         foreach ($node['children'] ?? [] as $child) {
+            if (!$this->isVisible($child)) {
+                continue; // image d'une variante masquée → ne pas l'exporter
+            }
             array_push($media, ...$this->collectImages($child));
         }
 
@@ -1319,6 +1328,9 @@ final class PageParser
             }
         }
         foreach ($node['children'] ?? [] as $child) {
+            if (!$this->isVisible($child)) {
+                continue;
+            }
             $found = $this->firstText($child);
             if ($found !== null) {
                 return $found;
@@ -1541,16 +1553,19 @@ final class PageParser
     /**
      * Collecte les TEXT feuilles d'un sous-arbre (slide/card) avec taille, position et nœud source.
      *
-     * @param array<string, mixed>                                                            $node
-     * @param list<array{chars: string, size: float, y: float, node: array<string, mixed>}> $out
+     * @param array<string, mixed>                                                                            $node
+     * @param list<array{chars: string, size: float, y: float, family: string, node: array<string, mixed>}> $out
      */
     private function textLeaves(array $node, array &$out): void
     {
         foreach ($node['children'] ?? [] as $c) {
+            if (!$this->isVisible($c)) {
+                continue; // calque masqué (variante de composant) → ne pas faire baver son texte
+            }
             if (($c['type'] ?? '') === 'TEXT') {
                 $t = trim((string) ($c['characters'] ?? ''));
                 if ($t !== '') {
-                    $out[] = ['chars' => $t, 'size' => (float) ($c['style']['fontSize'] ?? 0.0), 'y' => (float) ($c['absoluteBoundingBox']['y'] ?? 0.0), 'node' => $c];
+                    $out[] = ['chars' => $t, 'size' => (float) ($c['style']['fontSize'] ?? 0.0), 'y' => (float) ($c['absoluteBoundingBox']['y'] ?? 0.0), 'family' => (string) ($c['style']['fontFamily'] ?? ''), 'node' => $c];
                 }
             }
             $this->textLeaves($c, $out);
@@ -1629,12 +1644,26 @@ final class PageParser
             }
         }
 
-        // 4. Seuil titre/intro PAR CARD : la plus petite taille restante = intro, au-dessus = titre.
-        $minSize = min(array_map(static fn (array $l) => $l['size'], $content));
-        $titleLeaves = array_values(array_filter($content, static fn (array $l) => $l['size'] > $minSize));
-        $introLeaves = array_values(array_filter($content, static fn (array $l) => $l['size'] <= $minSize));
+        // 4. Titre vs introduction. L'introduction est un PARAGRAPHE de CORPS (police de corps, taille
+        //    ≈ corps de page) ; une ligne en police d'AFFICHAGE (script) ou plus grande que le corps est
+        //    un TITRE. Sans ça, un titre en deux lignes « sans + fioriture script » (cartes spa : « les
+        //    soins » + script « massages », sans aucun paragraphe) voyait sa ligne script prise pour une
+        //    intro et stylée en corps (cf. classifyText #2b, même signal de police).
+        $body = (float) ($this->fontScale['body'] ?? 0.0);
+        $bodyFamily = $this->fontScale['bodyFamily'] ?? null;
+        $isDisplay = static fn (array $l): bool => $bodyFamily !== null && ($l['family'] ?? '') !== '' && $l['family'] !== $bodyFamily;
 
-        // Titre vide (toutes tailles égales) → la 1re ligne (par position) devient le titre.
+        if ($body > 0.0) {
+            $introLeaves = array_values(array_filter($content, static fn (array $l) => !$isDisplay($l) && $l['size'] <= $body * 1.25));
+            $titleLeaves = array_values(array_filter($content, static fn (array $l) => $isDisplay($l) || $l['size'] > $body * 1.25));
+        } else {
+            // Repli sans échelle connue (corps inconnu) : rang de taille — plus petite = intro.
+            $minSize = min(array_map(static fn (array $l) => $l['size'], $content));
+            $titleLeaves = array_values(array_filter($content, static fn (array $l) => $l['size'] > $minSize));
+            $introLeaves = array_values(array_filter($content, static fn (array $l) => $l['size'] <= $minSize));
+        }
+
+        // Titre vide (toutes lignes = corps/intro) → la 1re ligne (par position) devient le titre.
         if ($titleLeaves === []) {
             usort($content, static fn (array $a, array $b) => $a['y'] <=> $b['y']);
             $titleLeaves = [array_shift($content)];
@@ -1689,6 +1718,9 @@ final class PageParser
         $cards = [];
         $pos = 0;
         foreach ($children as $child) {
+            if (!$this->isVisible($child)) {
+                continue; // carte/variante masquée → ignorée
+            }
             $images = $this->collectImages($child);
             $text = $this->cardText($child);
             if ($images === [] && $text['title'] === null) {
@@ -1765,6 +1797,9 @@ final class PageParser
                 }
             }
             foreach ($node['children'] ?? [] as $child) {
+                if (!$this->isVisible($child)) {
+                    continue; // les variantes masquées ne doivent pas peser dans l'échelle typo
+                }
                 $walk($child);
             }
         };
@@ -1917,6 +1952,19 @@ final class PageParser
         }
 
         return $documentIndex;
+    }
+
+    /**
+     * Whether a node is rendered (not hidden in Figma). Hidden layers (`visible:false`) are the
+     * unselected states of component variants (ex. « Intime et élégante » répété, masqué) — les
+     * inclure ferait BAVER du texte/des images fantômes entre cartes. On les ignore partout où on
+     * collecte du contenu (texte, médias, échelle typo).
+     *
+     * @param array<string, mixed> $node
+     */
+    private function isVisible(array $node): bool
+    {
+        return ($node['visible'] ?? true) !== false;
     }
 
     /**

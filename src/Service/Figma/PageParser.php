@@ -1294,6 +1294,7 @@ final class PageParser
                         'width' => $first['width'],
                         'format' => $ext,
                         'title' => $text['title'],
+                        'subtitle' => $text['subtitle'],
                         'introduction' => $text['introduction'],
                         'targetLabel' => $text['targetLabel'],
                         'style' => $text['style'] !== [] ? $text['style'] : null,
@@ -1344,6 +1345,7 @@ final class PageParser
             'width' => $s['width'],
             'format' => $s['format'] ?? 'jpg',
             'title' => $s['title'] ?? null,
+            'subtitle' => $s['subtitle'] ?? null,
             'introduction' => $s['introduction'] ?? null,
             'targetLabel' => $s['targetLabel'] ?? null,
             'style' => ($s['style'] ?? []) !== [] ? $s['style'] : null,
@@ -1704,7 +1706,7 @@ final class PageParser
      *
      * @param array<string, mixed> $node
      *
-     * @return array{title: ?string, introduction: ?string, targetLabel: ?string, style: array<string, mixed>}
+     * @return array{title: ?string, subtitle: ?string, introduction: ?string, targetLabel: ?string, style: array<string, mixed>}
      */
     private function cardText(array $node): array
     {
@@ -1722,7 +1724,7 @@ final class PageParser
             $rest[] = $leaf;
         }
         if ($rest === []) {
-            return ['title' => null, 'introduction' => null, 'targetLabel' => $cta, 'style' => []];
+            return ['title' => null, 'subtitle' => null, 'introduction' => null, 'targetLabel' => $cta, 'style' => []];
         }
 
         // 2. Méta (libellés purement numériques : prix « 120 € », « 17 m² », unités) écartés du titre.
@@ -1733,7 +1735,7 @@ final class PageParser
         }
 
         if (count($content) === 1) {
-            return ['title' => $this->normalizeText($content[0]['chars']), 'introduction' => null, 'targetLabel' => $cta, 'style' => $this->textStyle($content[0]['node'])];
+            return ['title' => $this->normalizeText($content[0]['chars']), 'subtitle' => null, 'introduction' => null, 'targetLabel' => $cta, 'style' => $this->textStyle($content[0]['node'])];
         }
 
         // 3. CTA implicite : si AUCUN libellé du lexique ET au moins 3 tiers de taille distincts,
@@ -1760,29 +1762,40 @@ final class PageParser
         $bodyFamily = $this->fontScale['bodyFamily'] ?? null;
         $isDisplay = static fn (array $l): bool => $bodyFamily !== null && ($l['family'] ?? '') !== '' && $l['family'] !== $bodyFamily;
 
+        // Ligne en police d'AFFICHAGE (script) = SOUS-TITRE (fioriture du titre), jamais une intro.
+        // La card porte title + subTitle (BaseIntl), exactement comme le motif « les soins » (sans)
+        // + « massages » (script) : deux parties d'un même titre, stylées distinctement.
+        $subtitleLeaves = array_values(array_filter($content, $isDisplay));
+        $rest = array_values(array_filter($content, static fn (array $l) => !$isDisplay($l)));
+
         if ($body > 0.0) {
-            $introLeaves = array_values(array_filter($content, static fn (array $l) => !$isDisplay($l) && $l['size'] <= $body * 1.25));
-            $titleLeaves = array_values(array_filter($content, static fn (array $l) => $isDisplay($l) || $l['size'] > $body * 1.25));
-        } else {
+            $introLeaves = array_values(array_filter($rest, static fn (array $l) => $l['size'] <= $body * 1.25));
+            $titleLeaves = array_values(array_filter($rest, static fn (array $l) => $l['size'] > $body * 1.25));
+        } elseif ($rest !== []) {
             // Repli sans échelle connue (corps inconnu) : rang de taille — plus petite = intro.
-            $minSize = min(array_map(static fn (array $l) => $l['size'], $content));
-            $titleLeaves = array_values(array_filter($content, static fn (array $l) => $l['size'] > $minSize));
-            $introLeaves = array_values(array_filter($content, static fn (array $l) => $l['size'] <= $minSize));
+            $minSize = min(array_map(static fn (array $l) => $l['size'], $rest));
+            $titleLeaves = array_values(array_filter($rest, static fn (array $l) => $l['size'] > $minSize));
+            $introLeaves = array_values(array_filter($rest, static fn (array $l) => $l['size'] <= $minSize));
+        } else {
+            $titleLeaves = [];
+            $introLeaves = [];
         }
 
-        // Titre vide (toutes lignes = corps/intro) → la 1re ligne (par position) devient le titre.
-        if ($titleLeaves === []) {
+        // Aucun titre ET aucun sous-titre → la 1re ligne (par position) devient le titre.
+        if ($titleLeaves === [] && $subtitleLeaves === []) {
             usort($content, static fn (array $a, array $b) => $a['y'] <=> $b['y']);
             $titleLeaves = [array_shift($content)];
             $introLeaves = $content;
         }
 
         usort($titleLeaves, static fn (array $a, array $b) => $a['y'] <=> $b['y']);
+        usort($subtitleLeaves, static fn (array $a, array $b) => $a['y'] <=> $b['y']);
         usort($introLeaves, static fn (array $a, array $b) => $a['y'] <=> $b['y']);
 
         $join = fn (array $ls) => $this->normalizeText(implode(' ', array_map(static fn (array $l) => $l['chars'], $ls)));
-        $primary = $titleLeaves[0] ?? null;
-        foreach ($titleLeaves as $l) {
+        $primaryPool = $titleLeaves !== [] ? $titleLeaves : $subtitleLeaves;
+        $primary = $primaryPool[0] ?? null;
+        foreach ($primaryPool as $l) {
             if ($primary === null || $l['size'] > $primary['size']) {
                 $primary = $l;
             }
@@ -1790,6 +1803,7 @@ final class PageParser
 
         return [
             'title' => $titleLeaves === [] ? null : $join($titleLeaves),
+            'subtitle' => $subtitleLeaves === [] ? null : $join($subtitleLeaves),
             'introduction' => $introLeaves === [] ? null : $join($introLeaves),
             'targetLabel' => $cta,
             'style' => $primary !== null ? $this->textStyle($primary['node']) : [],
@@ -1830,13 +1844,13 @@ final class PageParser
             }
             $images = $this->collectImages($child);
             $text = $this->cardText($child);
-            if ($images === [] && $text['title'] === null) {
+            if ($images === [] && $text['title'] === null && $text['subtitle'] === null) {
                 continue;
             }
             ++$pos;
             $entry = $images[0] ?? ['figmaNodeId' => (string) ($child['id'] ?? ''), 'image' => null, 'imageRef' => '', 'width' => 0, 'format' => 'jpg'];
             $entry['position'] = $pos;
-            foreach (['title', 'introduction', 'targetLabel'] as $k) {
+            foreach (['title', 'subtitle', 'introduction', 'targetLabel'] as $k) {
                 if ($text[$k] !== null) {
                     $entry[$k] = $text[$k];
                 }

@@ -83,6 +83,7 @@ final class PageTreeExporter
             'style' => $block->style !== [] ? $block->style : null,
             'cms' => $this->blockCms($block),
             'note' => $block->note,
+            'itemsPerView' => $block->itemsPerView !== [] ? $block->itemsPerView : null,
             'media' => $block->media !== [] ? $block->media : null,
         ], static fn ($v) => $v !== null);
     }

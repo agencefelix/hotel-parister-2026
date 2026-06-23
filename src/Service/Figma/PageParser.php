@@ -67,6 +67,15 @@ final class PageParser
      */
     private array $namedStyles = [];
 
+    /** Page (desktop) width in px — reference viewport for deducing slides-per-view. Set on parse(). */
+    private float $pageWidth = 0.0;
+
+    /**
+     * Reference viewport widths (px) per CMS breakpoint, used to deduce how many carousel items are
+     * visible without overflowing. `desktop` is overridden by the actual page width on parse().
+     */
+    private const array VIEWPORT_WIDTHS = ['desktop' => 1440.0, 'miniPC' => 1200.0, 'tablet' => 768.0, 'mobile' => 375.0];
+
     public function parse(string $fileKey, string $nodeId): ParsedPage
     {
         $nodes = $this->figma->getFileNodes($fileKey, [$nodeId]);
@@ -89,6 +98,7 @@ final class PageParser
         $slug = $token['variants'][0] ?? $this->slugify($doc['name'] ?? 'page');
         $pageBox = $this->bbox($doc);
         $pageWidth = $pageBox['w'];
+        $this->pageWidth = $pageWidth;
         $pageBottom = $pageBox['y'] + $pageBox['h'];
         $children = $doc['children'] ?? [];
 
@@ -1093,6 +1103,35 @@ final class PageParser
     }
 
     /**
+     * Déduit le nombre d'items visibles par vue d'un carrousel, par breakpoint, à partir du PAS de
+     * slide (largeur de piste ÷ nb de slides) confronté à la largeur d'écran de chaque breakpoint.
+     * Empêche les slides de déborder (mauvais `data-items`). Borné à [1, nb de slides].
+     *
+     * Ex. piste 2050px / 4 slides = pas 512 ; 1440/512→2, 1200/512→2, 768/512→1, 375/512→1.
+     *
+     * @return array<string, int> {itemsPerSlide, itemsPerSlideMiniPC, itemsPerSlideTablet, itemsPerSlideMobile}
+     */
+    private function slidesPerView(float $trackWidth, int $count): array
+    {
+        if ($count <= 0 || $trackWidth <= 0.0) {
+            return [];
+        }
+        $pitch = $trackWidth / $count;
+        $viewports = self::VIEWPORT_WIDTHS;
+        if ($this->pageWidth > 0.0) {
+            $viewports['desktop'] = $this->pageWidth;
+        }
+        $per = static fn (float $w): int => max(1, min($count, (int) floor($w / $pitch)));
+
+        return [
+            'itemsPerSlide' => $per($viewports['desktop']),
+            'itemsPerSlideMiniPC' => $per($viewports['miniPC']),
+            'itemsPerSlideTablet' => $per($viewports['tablet']),
+            'itemsPerSlideMobile' => $per($viewports['mobile']),
+        ];
+    }
+
+    /**
      * Recursively collects mapped blocks from tagged descendants. Stops at structural/excluded tags.
      *
      * @param array<string, mixed> $node
@@ -1123,6 +1162,9 @@ final class PageParser
                 : ($isCardModule ? $this->collectCards($node) : $this->collectImages($node));
 
             if ($media !== []) {
+                // Items visibles par vue (carrousel) déduits du PAS de slide vs largeur d'écran :
+                // évite les slides qui débordent / le mauvais compte data-items.
+                $itemsPerView = $isCardModule ? $this->slidesPerView($this->bbox($node)['w'], count($media)) : [];
                 $block = new ParsedBlock(
                     figmaName: $block->figmaName,
                     kind: $block->kind,
@@ -1134,6 +1176,7 @@ final class PageParser
                     variants: $block->variants,
                     id: $block->id,
                     moduleTemplate: $block->moduleTemplate,
+                    itemsPerView: $itemsPerView,
                 );
             }
 

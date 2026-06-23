@@ -29,6 +29,14 @@ final readonly class ParsedBlock
         public ?string $moduleTemplate = null,
         public ?string $text = null,
         public array $style = [],
+        /**
+         * Nombre d'items visibles par vue d'un module à carrousel, déduit de la géométrie (pas de
+         * slide vs largeur d'écran) : {itemsPerSlide, itemsPerSlideMiniPC, itemsPerSlideTablet,
+         * itemsPerSlideMobile} → l'intégrateur les pose sur l'entité Slider (ou la vue teaser).
+         *
+         * @var array<string, int>
+         */
+        public array $itemsPerView = [],
     ) {
     }
 }

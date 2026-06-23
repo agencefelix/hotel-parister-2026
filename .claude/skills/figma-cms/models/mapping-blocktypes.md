@@ -184,6 +184,14 @@ Mapper la variante de la convention sur `setTemplate()` et laisser faire :
 
 > Ne PAS poser à la main les ~10 champs déjà gérés par `prePersist`.
 > Ne régler explicitement que ce que la maquette impose et qui n'est pas couvert.
+>
+> **`itemsPerSlide` DÉDUIT de la géométrie** : `prePersist` pose un défaut (4/3/2/1), mais le nombre
+> réel d'items visibles dépend de la **largeur de slide**. `PageParser` le déduit (pas de slide =
+> largeur de piste ÷ nb de slides, confronté à la largeur d'écran de chaque breakpoint) et l'expose
+> dans `home.json` : `blocks[].itemsPerView` = `{itemsPerSlide, itemsPerSlideMiniPC, itemsPerSlideTablet,
+> itemsPerSlideMobile}`. **L'intégrateur pose ces valeurs** sur l'entité `Slider`
+> (`setItemsPerSlide()`…) — ou sur les attributs `data-items*` de la vue teaser — pour que les slides
+> ne débordent pas. Ex. cards de 512px de pas : `2/2/1/1`.
 
 > **Dry-run** : le parser extrait déjà les **images de slides** (nœuds à fill `IMAGE`)
 > dans `block.media` (`{figmaNodeId, image, imageRef, width}`) et les rend dans

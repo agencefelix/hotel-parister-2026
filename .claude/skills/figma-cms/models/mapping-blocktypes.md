@@ -408,6 +408,9 @@ stacking si overlay) ; `alert` → `blocks/alert/…` (+ JS `#website-alert`).
   **⚠️ NE JAMAIS ajouter le markup d'une card spécifique directement dans le template slider PARTAGÉ**
   (il sert plusieurs sliders/cards) : toujours un include de card dédié + son style sur une classe
   réutilisable (`.card-<x>` dans `_card.scss`), jamais scopé à l'id du slider/zone.
+  **⚠️ Garder le test de slug DÉFENSIF** : `{% if slider.slug is defined and slider.slug == '...' %}` —
+  `splide.html.twig` est aussi inclus pour des sliders NON-entité (galeries catalogue, sliders de
+  layout) où `slider` est un mapping de config SANS `slug` ; sans `is defined`, Twig jette une erreur.
 
 **Teasers :** `catalog-teaser` → `actions/catalog/teaser/{slider,slider-multi}.html.twig` ;
 `newscast-teaser` → `actions/newscast/teaser/slider.html.twig`.

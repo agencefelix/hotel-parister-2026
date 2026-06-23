@@ -4,17 +4,17 @@
   "total": 125,
   "style": {
     "reliable": 41,
-    "fails": 27,
+    "fails": 0,
     "boxReliable": 0,
     "boxFails": 0
   },
   "content": {
-    "unmatched": 48,
-    "boxUnmatched": 19
+    "unmatched": 40,
+    "boxUnmatched": 14
   },
   "ambiguous": {
-    "texts": 36,
-    "textFails": 33,
+    "texts": 44,
+    "textFails": 39,
     "boxes": 3,
     "boxFails": 2
   },
@@ -91,9 +91,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "101px",
-          "got": "86.4px"
+          "got": "101px"
         },
         {
           "prop": "color",
@@ -279,9 +279,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "101px",
-          "got": "86.4px"
+          "got": "101px"
         },
         {
           "prop": "color",
@@ -437,15 +437,15 @@
         },
         {
           "prop": "letter-spacing",
-          "ok": false,
+          "ok": true,
           "exp": "0px",
-          "got": "9.6px"
+          "got": "0px"
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "24px",
-          "got": "28.8px"
+          "got": "24px"
         },
         {
           "prop": "text-transform",
@@ -488,9 +488,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "316px",
-          "got": "416px"
+          "got": "316.002px"
         },
         {
           "prop": "color",
@@ -569,16 +569,86 @@
     {
       "id": "I542:1602;410:4688",
       "text": "Chambre",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "24px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "24px",
+          "got": "24px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#ffffff",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1602;410:4689",
       "text": "supérieure",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "54px",
+          "got": "54px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "101px",
+          "got": "101px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1602;410:4690",
@@ -642,9 +712,41 @@
     {
       "id": "I542:1603;410:4689",
       "text": "suite",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "54px",
+          "got": "24px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "400",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "101px",
+          "got": "24px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1603;410:4690",
@@ -701,16 +803,86 @@
     {
       "id": "I542:1604;410:4688",
       "text": "Junior",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "24px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "24px",
+          "got": "24px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#ffffff",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1604;410:4689",
       "text": "suite terrasse",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "54px",
+          "got": "54px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "101px",
+          "got": "101px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1604;410:4690",
@@ -767,9 +939,47 @@
     {
       "id": "I542:1605;410:4688",
       "text": "Deluxe",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "24px",
+          "got": "54px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": false,
+          "exp": "700",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "24px",
+          "got": "101px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": false,
+          "exp": "uppercase",
+          "got": "none"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#ffffff",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1605;410:4689",
@@ -833,16 +1043,86 @@
     {
       "id": "I542:1606;410:4688",
       "text": "Suite",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "24px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "24px",
+          "got": "24px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#ffffff",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1606;410:4689",
       "text": "duplex",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "54px",
+          "got": "54px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "101px",
+          "got": "101px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1606;410:4690",
@@ -899,16 +1179,86 @@
     {
       "id": "I542:1607;410:4688",
       "text": "Chambre",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "24px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "24px",
+          "got": "24px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#ffffff",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1607;410:4689",
       "text": "deluxe",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "54px",
+          "got": "54px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "101px",
+          "got": "101px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1607;410:4690",
@@ -965,9 +1315,47 @@
     {
       "id": "I542:1608;410:4688",
       "text": "suite",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "24px",
+          "got": "24px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "24px",
+          "got": "24px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#ffffff",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1608;410:4689",
@@ -1082,9 +1470,9 @@
         },
         {
           "prop": "font-weight",
-          "ok": false,
+          "ok": true,
           "exp": "300",
-          "got": "400"
+          "got": "300"
         },
         {
           "prop": "letter-spacing",
@@ -1094,9 +1482,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "20px",
-          "got": "24px"
+          "got": "20px"
         },
         {
           "prop": "color",
@@ -1263,9 +1651,9 @@
         },
         {
           "prop": "font-weight",
-          "ok": false,
+          "ok": true,
           "exp": "300",
-          "got": "400"
+          "got": "300"
         },
         {
           "prop": "letter-spacing",
@@ -1275,9 +1663,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "20px",
-          "got": "24px"
+          "got": "20px"
         },
         {
           "prop": "color",
@@ -1404,9 +1792,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "101px",
-          "got": "48.6px"
+          "got": "101px"
         },
         {
           "prop": "color",
@@ -1585,9 +1973,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "101px",
-          "got": "48.6px"
+          "got": "101px"
         },
         {
           "prop": "color",
@@ -1657,9 +2045,9 @@
         },
         {
           "prop": "font-weight",
-          "ok": false,
+          "ok": true,
           "exp": "300",
-          "got": "400"
+          "got": "300"
         },
         {
           "prop": "letter-spacing",
@@ -1669,9 +2057,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "20px",
-          "got": "24px"
+          "got": "20px"
         },
         {
           "prop": "color",
@@ -1798,9 +2186,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "101px",
-          "got": "48.6px"
+          "got": "101px"
         },
         {
           "prop": "color",
@@ -2005,9 +2393,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "38px",
-          "got": "32px"
+          "got": "38px"
         },
         {
           "prop": "text-transform",
@@ -2050,9 +2438,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "17px",
-          "got": "20px"
+          "got": "17.0001px"
         },
         {
           "prop": "text-transform",
@@ -2077,15 +2465,15 @@
       "checks": [
         {
           "prop": "font-size",
-          "ok": false,
+          "ok": true,
           "exp": "14px",
-          "got": "16px"
+          "got": "14px"
         },
         {
           "prop": "font-weight",
-          "ok": false,
+          "ok": true,
           "exp": "700",
-          "got": "400"
+          "got": "700"
         },
         {
           "prop": "letter-spacing",
@@ -2095,21 +2483,21 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "17px",
-          "got": "35px"
+          "got": "17.0001px"
         },
         {
           "prop": "text-transform",
-          "ok": false,
+          "ok": true,
           "exp": "uppercase",
-          "got": "none"
+          "got": "uppercase"
         },
         {
           "prop": "color",
-          "ok": false,
+          "ok": true,
           "exp": "#b48608",
-          "got": "#141414"
+          "got": "#b48608"
         }
       ]
     },
@@ -2147,9 +2535,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "101px",
-          "got": "96px"
+          "got": "101px"
         },
         {
           "prop": "color",
@@ -2328,9 +2716,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "101px",
-          "got": "86.4px"
+          "got": "101px"
         },
         {
           "prop": "color",
@@ -2419,9 +2807,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "14px",
-          "got": "18px"
+          "got": "14px"
         },
         {
           "prop": "text-transform",
@@ -2523,9 +2911,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "31px",
-          "got": "26px"
+          "got": "31.0001px"
         },
         {
           "prop": "color",
@@ -2562,9 +2950,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "17px",
-          "got": "14px"
+          "got": "17.0001px"
         },
         {
           "prop": "color",
@@ -2601,9 +2989,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "17px",
-          "got": "14px"
+          "got": "17.0001px"
         },
         {
           "prop": "color",
@@ -2647,9 +3035,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "101px",
-          "got": "86.4px"
+          "got": "101px"
         },
         {
           "prop": "color",
@@ -2923,13 +3311,13 @@
           "prop": "font-size",
           "ok": true,
           "exp": "24px",
-          "got": "23px"
+          "got": "24px"
         },
         {
           "prop": "font-weight",
-          "ok": false,
+          "ok": true,
           "exp": "700",
-          "got": "600"
+          "got": "700"
         },
         {
           "prop": "letter-spacing",
@@ -2941,7 +3329,7 @@
           "prop": "line-height",
           "ok": true,
           "exp": "24px",
-          "got": "23px"
+          "got": "24px"
         },
         {
           "prop": "text-transform",
@@ -2960,41 +3348,9 @@
     {
       "id": "I542:1784;410:4689",
       "text": "chauffée",
-      "matched": true,
-      "how": "own-text",
-      "bucket": "reliable",
-      "checks": [
-        {
-          "prop": "font-size",
-          "ok": false,
-          "exp": "54px",
-          "got": "34px"
-        },
-        {
-          "prop": "font-weight",
-          "ok": true,
-          "exp": "400",
-          "got": "400"
-        },
-        {
-          "prop": "letter-spacing",
-          "ok": true,
-          "exp": "0px",
-          "got": "0px"
-        },
-        {
-          "prop": "line-height",
-          "ok": false,
-          "exp": "101px",
-          "got": "30.6px"
-        },
-        {
-          "prop": "color",
-          "ok": true,
-          "exp": "#f4f0f1",
-          "got": "#f4f0f1"
-        }
-      ]
+      "matched": false,
+      "bucket": "content",
+      "checks": []
     },
     {
       "id": "I542:1784;410:4690",
@@ -3059,13 +3415,13 @@
           "prop": "font-size",
           "ok": true,
           "exp": "24px",
-          "got": "23px"
+          "got": "24px"
         },
         {
           "prop": "font-weight",
-          "ok": false,
+          "ok": true,
           "exp": "700",
-          "got": "600"
+          "got": "700"
         },
         {
           "prop": "letter-spacing",
@@ -3077,7 +3433,7 @@
           "prop": "line-height",
           "ok": true,
           "exp": "24px",
-          "got": "23px"
+          "got": "24px"
         },
         {
           "prop": "text-transform",
@@ -3096,41 +3452,9 @@
     {
       "id": "I542:1785;410:4689",
       "text": "de sport",
-      "matched": true,
-      "how": "own-text",
-      "bucket": "reliable",
-      "checks": [
-        {
-          "prop": "font-size",
-          "ok": false,
-          "exp": "54px",
-          "got": "34px"
-        },
-        {
-          "prop": "font-weight",
-          "ok": true,
-          "exp": "400",
-          "got": "400"
-        },
-        {
-          "prop": "letter-spacing",
-          "ok": true,
-          "exp": "0px",
-          "got": "0px"
-        },
-        {
-          "prop": "line-height",
-          "ok": false,
-          "exp": "101px",
-          "got": "30.6px"
-        },
-        {
-          "prop": "color",
-          "ok": true,
-          "exp": "#f4f0f1",
-          "got": "#f4f0f1"
-        }
-      ]
+      "matched": false,
+      "bucket": "content",
+      "checks": []
     },
     {
       "id": "I542:1785;410:4690",
@@ -3195,13 +3519,13 @@
           "prop": "font-size",
           "ok": true,
           "exp": "24px",
-          "got": "23px"
+          "got": "24px"
         },
         {
           "prop": "font-weight",
-          "ok": false,
+          "ok": true,
           "exp": "700",
-          "got": "600"
+          "got": "700"
         },
         {
           "prop": "letter-spacing",
@@ -3213,7 +3537,7 @@
           "prop": "line-height",
           "ok": true,
           "exp": "24px",
-          "got": "23px"
+          "got": "24px"
         },
         {
           "prop": "text-transform",
@@ -3232,41 +3556,9 @@
     {
       "id": "I542:1786;410:4689",
       "text": "de nage",
-      "matched": true,
-      "how": "own-text",
-      "bucket": "reliable",
-      "checks": [
-        {
-          "prop": "font-size",
-          "ok": false,
-          "exp": "54px",
-          "got": "34px"
-        },
-        {
-          "prop": "font-weight",
-          "ok": true,
-          "exp": "400",
-          "got": "400"
-        },
-        {
-          "prop": "letter-spacing",
-          "ok": true,
-          "exp": "0px",
-          "got": "0px"
-        },
-        {
-          "prop": "line-height",
-          "ok": false,
-          "exp": "101px",
-          "got": "30.6px"
-        },
-        {
-          "prop": "color",
-          "ok": true,
-          "exp": "#f4f0f1",
-          "got": "#f4f0f1"
-        }
-      ]
+      "matched": false,
+      "bucket": "content",
+      "checks": []
     },
     {
       "id": "I542:1786;410:4690",
@@ -3483,9 +3775,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "46px",
-          "got": "30px"
+          "got": "45.521px"
         },
         {
           "prop": "text-transform",
@@ -3495,9 +3787,9 @@
         },
         {
           "prop": "color",
-          "ok": false,
+          "ok": true,
           "exp": "#f4f0f1",
-          "got": "#ffffff"
+          "got": "#f4f0f1"
         }
       ]
     },
@@ -3682,9 +3974,9 @@
         },
         {
           "prop": "color",
-          "ok": false,
+          "ok": true,
           "exp": "#f4f0f1",
-          "got": "#ffffff"
+          "got": "#f4f0f1"
         }
       ]
     }
@@ -3735,9 +4027,10 @@
       "id": "I542:1602;410:4687",
       "name": "Frame 33",
       "text": "Chambre supérieure",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "full-text",
+      "checks": [],
+      "skipped": true
     },
     {
       "id": "I542:1603;410:4687",
@@ -3751,9 +4044,10 @@
       "id": "I542:1604;410:4687",
       "name": "Frame 33",
       "text": "Junior suite terrasse",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "full-text",
+      "checks": [],
+      "skipped": true
     },
     {
       "id": "I542:1605;410:4687",
@@ -3767,25 +4061,28 @@
       "id": "I542:1606;410:4687",
       "name": "Frame 33",
       "text": "Suite duplex",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "full-text",
+      "checks": [],
+      "skipped": true
     },
     {
       "id": "I542:1607;410:4687",
       "name": "Frame 33",
       "text": "Chambre deluxe",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "full-text",
+      "checks": [],
+      "skipped": true
     },
     {
       "id": "I542:1608;410:4687",
       "name": "Frame 33",
       "text": "suite parister",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "full-text",
+      "checks": [],
+      "skipped": true
     },
     {
       "id": "542:1816",

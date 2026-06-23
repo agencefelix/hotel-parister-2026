@@ -214,6 +214,12 @@ Mapper la variante de la convention sur `setTemplate()` et laisser faire :
 > **la re-vérifier à chaque page/maquette**), PAS de 1920. Le résultat reste valable à 1920 car il est
 > ratio-relatif au design.
 >
+> **Alignement du contenu = `container`, pas `container-fluid`** : le contenu doit s'aligner sur la
+> gouttière du `container` (cohérence du bord gauche entre toutes les bandes). Seules les bandes
+> **full-bleed** (hero/cinématique) sont en `container-fluid`/`-fluid-right`. Un include qui hardcode
+> `container-fluid` pour du contenu (ex. socialwall, footer) DÉSALIGNE → utiliser `container`. Vérifier
+> aussi les vignettes après (largeur d'affichage ≠ selon container vs fluid).
+>
 > **`itemsPerSlide` DÉDUIT de la géométrie** : `prePersist` pose un défaut (4/3/2/1), mais le nombre
 > réel d'items visibles dépend de la **largeur de slide**. `PageParser` le déduit (pas de slide =
 > largeur de piste ÷ nb de slides, confronté à la largeur d'écran de chaque breakpoint) et l'expose

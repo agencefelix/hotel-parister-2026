@@ -87,7 +87,10 @@ await sleep(300);
 const measured = await page.evaluate((toks, MAP) => {
   const norm = (s) => (s || '').replace(/\s+/g, ' ').trim().toLowerCase();
   const ownText = (el) => { let t = ''; for (const n of el.childNodes) if (n.nodeType === 3) t += n.textContent; return t; };
-  const all = Array.from(document.querySelectorAll('body *'));
+  // Exclut les CLONES de carrousel (Splide duplique les slides pour la boucle → faux doublons qui
+  // corrompent l'ordre et gonflent l'ambigu) et les éléments masqués/clones aria.
+  const isClone = (el) => el.closest('.splide__slide--clone, [aria-hidden="true"], header, nav, [role="navigation"], .main-menu, .navbar') !== null;
+  const all = Array.from(document.querySelectorAll('body *')).filter((el) => !isClone(el));
   const byOwn = new Map(), byFull = new Map();
   for (const el of all) {
     const o = norm(ownText(el)); if (o.length >= 2) (byOwn.get(o) || byOwn.set(o, []).get(o)).push(el);

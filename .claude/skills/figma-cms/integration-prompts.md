@@ -745,6 +745,8 @@ flèches, `setIndicators(bool)` = puces). Deux règles **impératives** :
 2. **Slider plein écran / cinématique (hero, bandes fullscreen `main-home`/`banner`/`bootstrap` hero)
    qui AUTO-DÉFILE → ni flèches ni puces** : `setControl(false)` + `setIndicators(false)`. La maquette
    ne les montre pas ; la bande tourne seule (`autoplay`).
+   **+ `setPause(false)`** sur ces carousels SANS controls : sinon le pause-au-survol bloque le défilement
+   (l'utilisateur n'a aucun moyen de naviguer → la bande resterait figée au survol).
 
 ⚠️ **ACCESSIBILITÉ** : pour un splide (flèches visibles), garder les flèches **focusables dans le DOM**
 (clavier / lecteurs d'écran). Pour un hero cinématique en `setControl(false)`, l'auto-défilement +
@@ -846,6 +848,13 @@ là plutôt que de surcharger bande par bande** :
     teinte/taille relevée diffère, **scoper l'override par l'`#id` du composant** (`#footer strong,#footer span{color:$light;font-size:…}`) : l'ID (1,x,1) **bat** le sélecteur de classes (0,3,1) → **pas de `!important`**. Toujours **mesurer la couleur réelle** de ces nœuds (`getComputedStyle`), pas juste celle du conteneur.
 - **Boutons** : couleurs/variantes (`$theme-colors`, styles `btn-*`) selon la charte.
 Relever les valeurs dans `integration/figma-styles.md` puis les **reporter dans `variables.scss`**.
+
+> **⚠️ NOUVELLE COULEUR (teal, navy…) — la configurer PARTOUT** : un projet neuf n'a que les couleurs
+> Bootstrap (primary, secondary, success…). Une couleur ajoutée pour une section (ex. `teal`, `navy`)
+> doit être déclarée dans **(1)** `$colors` + `$default-bootstrap-colors` (génère `bg-*`/`text-*`/`btn-*`),
+> **(2)** chaque map **`colors-in-backgrounds`** (contraste auto du texte sur `.bg-<couleur>` — sinon le
+> texte ne s'inverse pas et on est forcé d'écrire du CSS explicite), **(3)** **`$buttons`** (sinon
+> `.btn-<couleur>` n'a aucune variante). Oublier (2)/(3) = texte illisible sur la bande + boutons cassés.
 
 **Où sont gérés les BOUTONS (fichiers CSS) :**
 - **Couleurs/variantes** (par nom : `primary`, `white`, `dark`…, pleins ET outline) → map **`$buttons`**

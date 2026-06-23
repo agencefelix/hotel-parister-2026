@@ -191,7 +191,9 @@ const result = await page.evaluate((tokens, boxes, selectorMap) => {
   };
 
   // Index des éléments par texte propre (le wrapper direct du texte) puis par texte de sous-arbre.
-  const all = Array.from(document.querySelectorAll('body *'));
+  // Exclut les CLONES de carrousel (Splide) et éléments aria-masqués (faux doublons → ambigu gonflé).
+  const isClone = (el) => el.closest('.splide__slide--clone, [aria-hidden="true"], header, nav, [role="navigation"], .main-menu, .navbar') !== null;
+  const all = Array.from(document.querySelectorAll('body *')).filter((el) => !isClone(el));
   const byOwn = new Map();
   const byFull = new Map();
   const byCompact = new Map(); // texte sous-arbre sans espaces : le textContent DOM ne met pas

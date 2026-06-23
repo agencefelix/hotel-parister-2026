@@ -38,7 +38,14 @@ module, l'objet créé est l'**entité module** (Slider, Form, etc.), pas un Blo
 > contient) est **centrée verticalement**, **ne pas écrire de CSS** sur la colonne → poser
 > `Col::setVerticalAlign(true)`. De même pour un contenu **aligné en fin** → `Col::setEndAlign(true)`.
 > En Figma, ces cas correspondent à un auto-layout vertical dont l'alignement principal est
-> `CENTER` (→ verticalAlign) ou `MAX`/fin (→ endAlign). Ne pas confondre avec `Zone::colToRight` /
+> `CENTER` (→ verticalAlign) ou `MAX`/fin (→ endAlign).
+>
+> **Émis automatiquement** : `PageParser` DÉDUIT l'alignement par géométrie (un contenu nettement plus
+> court que la bande et qui flotte = centré ; ancré en bas = fin — les `[section]` étant souvent de
+> simples GROUP sans flag auto-layout) et l'expose dans `home.json` : `cols[].verticalAlign` /
+> `cols[].endAlign`. **L'intégrateur lit ces champs et pose `Col::setVerticalAlign(true)` /
+> `Col::setEndAlign(true)` — jamais de CSS `align-items`/`align-self` sur la colonne.**
+> Ne pas confondre avec `Zone::colToRight` /
 > `Zone::colToEnd` (qui poussent les colonnes dans la ZONE) : ici c'est l'alignement DU CONTENU
 > **dans** la colonne.
 

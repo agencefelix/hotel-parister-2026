@@ -59,6 +59,8 @@ final class PageTreeExporter
             'size' => $col->size,
             'deduced' => $col->deduced,
             'untaggedCount' => $col->untaggedCount,
+            'verticalAlign' => $col->verticalAlign,
+            'endAlign' => $col->endAlign,
             'blocks' => array_map($this->blockToArray(...), $col->blocks),
         ];
     }

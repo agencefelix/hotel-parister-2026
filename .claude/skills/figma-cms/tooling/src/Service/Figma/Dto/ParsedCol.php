@@ -19,6 +19,10 @@ final readonly class ParsedCol
         public array $blocks,
         public bool $deduced,
         public int $untaggedCount = 0,
+        /** Contenu centré verticalement dans la bande → Col::setVerticalAlign(true) (JAMAIS de CSS). */
+        public bool $verticalAlign = false,
+        /** Contenu aligné en fin (bas) de la bande → Col::setEndAlign(true) (JAMAIS de CSS). */
+        public bool $endAlign = false,
     ) {
     }
 }

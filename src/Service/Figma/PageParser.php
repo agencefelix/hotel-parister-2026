@@ -511,13 +511,15 @@ final class PageParser
         $children = $node['children'] ?? [];
         $taggedCols = array_values(array_filter($children, fn (array $c) => $this->tokenType($c) === 'col'));
 
+        // Géométrie de bande (pour déduire l'alignement vertical du contenu des colonnes).
+        $bb = $this->bbox($node);
+
         if ($taggedCols !== []) {
-            $cols = array_map(fn (array $c) => $this->buildColFromElements(($c['children'] ?? []), $pageWidth, false), $taggedCols);
+            $cols = array_map(fn (array $c) => $this->buildColFromElements(($c['children'] ?? []), $pageWidth, false, null, $bb['y'], $bb['h']), $taggedCols);
         } else {
-            $cols = $this->deduceCols($children, $pageWidth);
+            $cols = $this->deduceCols($children, $pageWidth, $bb['y'], $bb['h']);
         }
 
-        $bb = $this->bbox($node);
         $threshold = $pageWidth * self::FULL_WIDTH_RATIO;
         $candidates = $this->backgroundCandidates([$node], $threshold);
 
@@ -748,7 +750,7 @@ final class PageParser
     private function buildZoneFromElements(string $label, array $elements, float $pageWidth, float $top, float $height, string $slug, int $position, ?string $background = null, bool $forceColToRight = false): ParsedZone
     {
         $colToRight = $forceColToRight || $this->overflowsRight($elements, $pageWidth);
-        $cols = array_values($this->deduceCols($elements, $pageWidth));
+        $cols = array_values($this->deduceCols($elements, $pageWidth, $top, $height));
 
         // Règle : une zone dont un élément est CROPPÉ À DROITE (rangée de cards qui déborde,
         // flèches de carrousel) qui n'est PAS déjà un teaser/module (actu/produit/slider tagué)
@@ -849,7 +851,7 @@ final class PageParser
      *
      * @return list<ParsedCol>
      */
-    private function deduceCols(array $elements, float $pageWidth): array
+    private function deduceCols(array $elements, float $pageWidth, ?float $bandTop = null, ?float $bandHeight = null): array
     {
         $threshold = $pageWidth * self::FULL_WIDTH_RATIO;
 
@@ -858,7 +860,7 @@ final class PageParser
         foreach ($elements as $el) {
             if ($this->bbox($el)['w'] >= $threshold) {
                 if ($this->collectTaggedBlocks($el) !== []) {
-                    $fullWidthCols[] = $this->buildColFromElements([$el], $pageWidth, true, 12);
+                    $fullWidthCols[] = $this->buildColFromElements([$el], $pageWidth, true, 12, $bandTop, $bandHeight);
                 }
                 continue;
             }
@@ -866,7 +868,7 @@ final class PageParser
         }
 
         if ($contentEls === []) {
-            return $fullWidthCols !== [] ? $fullWidthCols : [$this->buildColFromElements($elements, $pageWidth, true)];
+            return $fullWidthCols !== [] ? $fullWidthCols : [$this->buildColFromElements($elements, $pageWidth, true, null, $bandTop, $bandHeight)];
         }
 
         usort($contentEls, fn (array $a, array $b) => $this->bbox($a)['x'] <=> $this->bbox($b)['x']);
@@ -914,7 +916,7 @@ final class PageParser
 
         $cols = $fullWidthCols;
         foreach ($clusters as $i => $cluster) {
-            $cols[] = $this->buildColFromElements($cluster['els'], $pageWidth, true, $sizes[$i]);
+            $cols[] = $this->buildColFromElements($cluster['els'], $pageWidth, true, $sizes[$i], $bandTop, $bandHeight);
         }
 
         return $cols;
@@ -1011,7 +1013,7 @@ final class PageParser
         return null;
     }
 
-    private function buildColFromElements(array $elements, float $pageWidth, bool $deduced, ?int $size = null): ParsedCol
+    private function buildColFromElements(array $elements, float $pageWidth, bool $deduced, ?int $size = null, ?float $bandTop = null, ?float $bandHeight = null): ParsedCol
     {
         $blocks = [];
         $untagged = 0;
@@ -1020,12 +1022,74 @@ final class PageParser
             $this->emitBlocks($el, $blocks, $untagged);
         }
 
+        [$verticalAlign, $endAlign] = $this->colVerticalAlign($elements, $bandTop, $bandHeight);
+
         return new ParsedCol(
             size: $size ?? 12,
             blocks: $blocks,
             deduced: $deduced,
             untaggedCount: $untagged,
+            verticalAlign: $verticalAlign,
+            endAlign: $endAlign,
         );
+    }
+
+    /**
+     * Détecte l'alignement vertical du contenu d'une colonne DANS sa bande, par géométrie : un
+     * contenu nettement plus court que la bande et qui « flotte » (espaces haut ET bas) est centré
+     * verticalement ; ancré en bas = fin. Sert à poser Col::setVerticalAlign()/setEndAlign() —
+     * l'intention vit sur l'ENTITÉ Col, JAMAIS en CSS sur la colonne (cf. mapping-blocktypes.md).
+     *
+     * Les `[section]` étant souvent de simples GROUP (pas d'auto-layout → pas de counterAxisAlignItems),
+     * la déduction est géométrique. Garde-fous : on n'aligne que si le contenu remplit < 85 % de la
+     * hauteur de bande (sinon il la remplit, rien à aligner).
+     *
+     * @param list<array<string, mixed>> $elements
+     *
+     * @return array{0: bool, 1: bool} [verticalAlign, endAlign]
+     */
+    private function colVerticalAlign(array $elements, ?float $bandTop, ?float $bandHeight): array
+    {
+        if ($bandTop === null || $bandHeight === null || $bandHeight <= 0.0 || $elements === []) {
+            return [false, false];
+        }
+
+        $top = null;
+        $bottom = null;
+        foreach ($elements as $el) {
+            if (!$this->isVisible($el)) {
+                continue;
+            }
+            $bb = $this->bbox($el);
+            if ($bb['h'] <= 0.0) {
+                continue;
+            }
+            $top = $top === null ? $bb['y'] : min($top, $bb['y']);
+            $bottom = $bottom === null ? $bb['y'] + $bb['h'] : max($bottom, $bb['y'] + $bb['h']);
+        }
+        if ($top === null) {
+            return [false, false];
+        }
+
+        // Contenu qui remplit (presque) la bande → pas d'alignement à déduire (image/slider plein).
+        if ($bottom - $top > $bandHeight * 0.85) {
+            return [false, false];
+        }
+
+        $topGap = $top - $bandTop;
+        $botGap = ($bandTop + $bandHeight) - $bottom;
+        $slack = $bandHeight * 0.06;
+
+        // Espaces haut ET bas, sensiblement équilibrés → centré verticalement.
+        if ($topGap >= $slack && $botGap >= $slack && abs($topGap - $botGap) <= $bandHeight * 0.20) {
+            return [true, false];
+        }
+        // Collé en bas (gros espace en haut, ~rien en bas) → aligné en fin.
+        if ($topGap >= $bandHeight * 0.15 && $botGap <= $slack) {
+            return [false, true];
+        }
+
+        return [false, false];
     }
 
     /**

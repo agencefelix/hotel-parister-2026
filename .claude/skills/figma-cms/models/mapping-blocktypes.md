@@ -395,8 +395,10 @@ stacking si overlay) ; `alert` → `blocks/alert/…` (+ JS `#website-alert`).
 - Pour customiser **seulement la card** d'un slider donné sans dupliquer la mécanique du carrousel :
   dans le sous-template (ex. `splide.html.twig`), **condition sur l'id du slider**
   (`{% if slider.slug == 'home-universe' %}`) → include d'une **card dédiée**
-  (`template/include/card-<x>.html.twig`). Classes exposées : `slider-container-<slug>`,
-  `carousel-<slug>` / `splide-container` → cibles SCSS.
+  (`template/include/card-<x>.html.twig`, ex. `card-universe`, `card-spa`).
+  **⚠️ NE JAMAIS ajouter le markup d'une card spécifique directement dans le template slider PARTAGÉ**
+  (il sert plusieurs sliders/cards) : toujours un include de card dédié + son style sur une classe
+  réutilisable (`.card-<x>` dans `_card.scss`), jamais scopé à l'id du slider/zone.
 
 **Teasers :** `catalog-teaser` → `actions/catalog/teaser/{slider,slider-multi}.html.twig` ;
 `newscast-teaser` → `actions/newscast/teaser/slider.html.twig`.

@@ -900,8 +900,9 @@ définition et au bon ratio** (sinon image basse résolution étirée ou mal cad
 - Cibler l'entité concernée (ex. un slider précis **par son slug** : `findOneBy(['slug' => 'home-hero'])`)
   et **toujours déclarer les TROIS écrans** `desktop` + `tablet` + `mobile` (ne pas en oublier un,
   sinon l'écran manquant retombe sur un format inadapté). `fixedHeight = true` pour un rendu *cover*.
-- Aligner les dimensions sur le **rendu réel** (ex. hero 100vh → ~1920×1080 ; cartes en
-  `aspect-ratio: 510/456` → thumb 510×456).
+- **Dimensions = 2× la largeur d'AFFICHAGE rendue (retina)**, pas 1× : une carte affichée ~420px se
+  sert en thumb **840**px (sinon floue sur écran 2×, surtout au rendu 1920). Les héros plein écran sont
+  déjà servis larges (~1920). Garder le **ratio** de la maquette. Ex. carte 420×520 → **840×1040**.
 - `ThumbnailFixtures` est orchestré par `WebsiteFixtures` (locator `thumbnail`) : **régénérer la DB**
   après modification pour que les nouvelles `ThumbConfiguration` prennent effet.
 

@@ -48,6 +48,16 @@ module, l'objet créé est l'**entité module** (Slider, Form, etc.), pas un Blo
 > Ne pas confondre avec `Zone::colToRight` /
 > `Zone::colToEnd` (qui poussent les colonnes dans la ZONE) : ici c'est l'alignement DU CONTENU
 > **dans** la colonne.
+>
+> **Découpage en colonnes — bandes complexes** : le parser déduit les colonnes par regroupement
+> géométrique en X. Une bande **simple** (image | texte côte à côte) se découpe bien automatiquement.
+> Une bande **complexe** (frames larges qui se **chevauchent** en X, contenu décalé à l'intérieur,
+> superpositions) ne se découpe PAS de façon fiable par géométrie → la **tagger explicitement `[col]`**
+> en Figma (la convention prime sur la déduction). Ne pas empiler d'heuristiques fragiles.
+>
+> **Marge/espacement d'une colonne** = niveau d'échelle posé sur l'**entité** (`Col` `margin*`/`pad*`),
+> JAMAIS du CSS. Le niveau se déduit avec `tooling/reconcile-margins.mjs` (px → token `pt-md`/`pe-sm`…)
+> et se vérifie au rendu avec `verify-styles.mjs` (scale-aware). Cf. § « Marges & paddings ».
 
 ## Marges & paddings — ÉCHELLE SÉMANTIQUE (jamais de px en dur)
 

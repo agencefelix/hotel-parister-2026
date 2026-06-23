@@ -160,13 +160,14 @@ slider ou en index). Implémenté : `ConventionMapper::resolveTeaser()`.
 ### Texte des slides/cards (dry-run) → champs de fixtures
 
 Le parser extrait le **texte structuré** de chaque slide/card dans `ParsedBlock.media[]`
-(`{title, introduction, targetLabel, style}`, via `PageParser::cardText()`). Où le **router** à
-l'intégration dépend du type de module :
+(`{title, subtitle, introduction, targetLabel, style}`, via `PageParser::cardText()`). Le `subtitle`
+est la **ligne en police d'affichage (script)** = fioriture du titre (`BaseIntl::setSubTitle()`), à NE PAS
+confondre avec l'`introduction` (paragraphe de corps). Où le **router** à l'intégration dépend du type :
 
 | Module | Chaque `media[]` (card/slide) alimente | Champs |
 |---|---|---|
-| `slider-view` (`[slider]`) | une **`SliderMediaRelation` + son intl** (le slider porte son contenu) | `intl.title` ← `title` ; `intl.introduction` ← `introduction` ; `intl.body` ; `intl.targetLabel` ← `targetLabel` ; `intl.targetLink` (URL via interaction proto) ; + `setMedia()` (image de la card) |
-| `catalog-teaser` / `newscast-teaser` | un **item d'entité** (`Module\Catalog\Product` / `Module\Newscast\Newscast`), **PAS** le bloc teaser | `ProductIntl`/`NewscastIntl` : `title` ← `title`, `introduction` ← `introduction`, `body` ; + `XxxMediaRelation->setMain(true)` (sinon card `no-media`) |
+| `slider-view` (`[slider]`) | une **`SliderMediaRelation` + son intl** (le slider porte son contenu) | `intl.title` ← `title` ; **`intl.subTitle` ← `subtitle`** (script) ; `intl.introduction` ← `introduction` ; `intl.body` ; `intl.targetLabel` ← `targetLabel` ; `intl.targetLink` (URL via interaction proto) ; + `setMedia()` (image de la card) |
+| `catalog-teaser` / `newscast-teaser` | un **item d'entité** (`Module\Catalog\Product` / `Module\Newscast\Newscast`), **PAS** le bloc teaser | `ProductIntl`/`NewscastIntl` : `title` ← `title`, **`subTitle` ← `subtitle`**, `introduction` ← `introduction`, `body` ; + `XxxMediaRelation->setMain(true)` (sinon card `no-media`) |
 
 > ⚠️ **Distinction clé** : un **slider** porte son contenu sur sa relation média (slide) ; un **teaser**
 > n'a pas de contenu propre par card — il **affiche les items** d'un module (produits/actus). Donc le

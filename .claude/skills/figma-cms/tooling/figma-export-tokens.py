@@ -4,7 +4,7 @@ Export JSON COMPLET des tokens d'un node Figma (tous les sous-nodes, tous les st
 
 Usage (depuis la racine du projet) :
   python .claude/skills/figma-cms/tooling/figma-export-tokens.py <nodeId> <outFile.json> [depth]
-  ex: ... 542:1592 .claude/skills/figma-cms/integration/figma-tokens.home.json 12
+  ex: ... 123:456 .claude/skills/figma-cms/integration/figma-tokens.<page>.json 12
 
 Lit FIGMA_TOKEN / FIGMA_FILE_KEY depuis .env.local|.env. Pour CHAQUE node descendant, exporte :
 id, name, type, position/taille (x,y,w,h relatifs au node racine), fontSize, fontWeight,

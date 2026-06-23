@@ -661,11 +661,25 @@ ACTIFS** (à traiter) **de ceux CONDITIONNÉS** par une classe d'état sur body/
 thème `[data-bs-theme]`…) — **inactifs par défaut**, donc hors-sujet sauf si ce mode est posé.
 **Le consulter avant d'écrire du CSS**.
 
+**Styler par CLASSE réutilisable, PAS par `#id` de zone (RÈGLE)** : un composant (card, bouton, teaser,
+slider…) peut être réutilisé **sur n'importe quelle page**. Le styler via l'`#id` d'une zone de la home
+(`#zone-home-spa .card{…}`) le rend **inutilisable ailleurs**. Donc :
+- **Style d'un composant → sur SA classe** (`.card-event`, `.btn-ghost`, `.teaser-rooms`…), dans
+  `components/<composant>.scss`. Une **variante** de card = une **classe dédiée** (ou une macro dédiée,
+  cf. § macros), jamais un scope de zone.
+- **`#id` (customId) réservé** à un élément **unique et non réutilisable** (une bande de layout
+  précise : hero de la home, footer) OU, en **dernier recours**, pour gagner une bataille de
+  spécificité ponctuelle — jamais comme moyen normal de styler un fragment réutilisable.
+- Règle générale : **maximiser le réutilisable** (classes, variables, mixins, macros) ; le ciblage par
+  `#id` est l'exception, pas la norme.
+
 **Vigilance écrasement (à chaque bande)** : après build, **vérifier que le CSS intégré GAGNE** réellement
 (rien de natif ne le surclasse). Stratégie, dans l'ordre :
-1. **Scoper par l'`#id` du composant** (le `customId` → `id`, cf. ci-dessous) : un `#home-hero .title`
-   (1,1,1) **bat** les classes natives **sans `!important`**.
-2. **Réécrire proprement** le CSS d'un composant de layout plutôt qu'empiler des overrides.
+1. **Réécrire proprement** le CSS du composant **sur sa classe**, en réutilisant variables/mixins —
+   plutôt qu'empiler des overrides.
+2. Si une classe native **surclasse** : augmenter la spécificité **par la classe** (`.card.card-event`,
+   classe parente de composant) plutôt que par un `#id` de zone ; **id-scoping uniquement** si le
+   composant est réellement unique à cette page.
 3. Si un override **ne prend pas** : inspecter le **CSS compilé** pour trouver la **règle gagnante**
    (spécificité/ordre/`!important`) et la battre proprement.
 4. `verify-styles.mjs` **échoue si le rendu est écrasé** (computed ≠ token) → c'est le filet runtime ;
@@ -680,8 +694,11 @@ C'est dans **ces fichiers** qu'on réécrit le HTML du layout pour matcher la ma
 ### `customId` sur Zone / Col / Block (cibler chaque élément) — OBLIGATOIRE
 - À la génération des layouts, **affecter un `customId`** explicite et parlant sur chaque **Zone**,
   **Col** et **Block** notable : `$zone->setCustomId('home-hero')`, `$col->setCustomId(...)`,
-  `$block->setCustomId(...)`. Le `customId` est rendu en `id="…"` côté front → on peut **styler /
-  cibler chaque élément individuellement** (SCSS, JS, captures) et **travailler bande par bande**.
+  `$block->setCustomId(...)`. Le `customId` est rendu en `id="…"` côté front → on peut **cibler chaque
+  élément individuellement** (JS, captures, ancrage) et **travailler bande par bande**.
+  ⚠️ **Cibler ≠ styler un composant** : le `customId` sert à VISER un élément unique ; le **style d'un
+  composant réutilisable (card, bouton, teaser…) passe par SA CLASSE**, jamais par l'`#id` de zone
+  (cf. règle « styler par classe » ci-dessus) — sinon le composant n'est plus réutilisable ailleurs.
 - **Convention de nommage** : **en ANGLAIS**, **kebab-case avec des tirets `-`** (jamais d'espace,
   `_` ou `--`) : `<page>-<section>[-<element>]`, ex. `home-hero`, `home-rooms`, `home-rooms-slider`,
   `product-hero`, `footer-partners`.

@@ -54,8 +54,11 @@ tok, key = env('FIGMA_TOKEN'), env('FIGMA_FILE_KEY')
 url = 'https://api.figma.com/v1/files/%s/nodes?ids=%s&depth=%s&geometry=paths' % (key, node, depth)
 d = json.load(urllib.request.urlopen(urllib.request.Request(url, headers={'X-Figma-Token': tok})))
 root = d['nodes'][node]['document']
-FX = (root.get('absoluteBoundingBox') or {}).get('x', 0)
-FY = (root.get('absoluteBoundingBox') or {}).get('y', 0)
+_rbb = root.get('absoluteBoundingBox') or {}
+FX = _rbb.get('x', 0)
+FY = _rbb.get('y', 0)
+PAGE_W = round(_rbb.get('width', 0))
+PAGE_H = round(_rbb.get('height', 0))
 
 items = []
 def walk(n):
@@ -88,5 +91,5 @@ def walk(n):
     for c in n.get('children', []): walk(c)
 
 walk(root)
-json.dump({'node': node, 'count': len(items), 'items': items}, open(out_file, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+json.dump({'node': node, 'pageWidth': PAGE_W, 'pageHeight': PAGE_H, 'count': len(items), 'items': items}, open(out_file, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('exported %d nodes -> %s' % (len(items), out_file))

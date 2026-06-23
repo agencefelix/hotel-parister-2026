@@ -5,7 +5,11 @@
  * Pour chaque élément apparié (par texte, ou `--map`), compare la **bounding box rendue** à la
  * **bbox Figma** (tokens x/y/w/h relatifs à la page) :
  *   - FULL-BLEED : un élément ~pleine largeur en maquette DOIT l'être au rendu (capte « hero/bande boxé ») ;
- *   - LARGEUR relative : ratio largeur rendue/viewport ≈ largeur Figma/page (capte image trop petite/grande) ;
+ *   - LARGEUR relative : ratio largeur rendue/viewport ≈ largeur Figma/page (capte image trop petite/grande)
+ *     — UNIQUEMENT sur un match EXPLICITE `--map` (conteneur/image). La largeur d'un TEXT apparié par
+ *     contenu n'est PAS comparable (nœud block-level → largeur de COLONNE, pas des glyphes) : pour le
+ *     texte non mappé, seuls full-bleed + ordre comptent. Mapper les bandes/images via `--map` pour
+ *     un vrai contrôle de largeur ;
  *   - ORDRE vertical : l'ordre de haut en bas doit être préservé (capte bande déplacée/manquante).
  *
  * SÉPARATION CONTENU vs COMPOSITION (3 buckets) — un mur de rouge n'est pas exploitable si une
@@ -49,8 +53,19 @@ const normJs = (s) => (s || '').replace(/\s+/g, ' ').trim().toLowerCase();
 
 const raw = JSON.parse(fs.readFileSync(TOKENS, 'utf8'));
 const items = (raw.items || raw.nodes || raw).filter((n) => typeof n.x === 'number' && typeof n.w === 'number');
-const pageW = Math.max(...items.map((n) => n.x + n.w), 1);
-const pageH = Math.max(...items.map((n) => n.y + (n.h || 0)), 1);
+// Largeur de page : source de vérité = `pageWidth` du nœud page (figma-export-tokens). Une piste de
+// carrousel qui DÉBORDE ne doit JAMAIS être prise pour la largeur de page (sinon le seuil full-bleed
+// devient inatteignable et tous les relW faussent). Repli (vieux tokens sans pageWidth) : la largeur
+// la PLUS FRÉQUENTE parmi les nœuds larges (≥ 600px) — les bandes/fonds pleine largeur dominent.
+function fallbackPageWidth() {
+  const freq = new Map();
+  for (const n of items) { const w = Math.round(n.w); if (w >= 600) freq.set(w, (freq.get(w) || 0) + 1); }
+  let best = 0; let bestC = 0;
+  for (const [w, c] of freq) { if (c > bestC || (c === bestC && w < best)) { best = w; bestC = c; } }
+  return best || Math.max(...items.map((n) => n.x + n.w), 1);
+}
+const pageW = (typeof raw.pageWidth === 'number' && raw.pageWidth > 0) ? raw.pageWidth : fallbackPageWidth();
+const pageH = (typeof raw.pageHeight === 'number' && raw.pageHeight > 0) ? raw.pageHeight : Math.max(...items.map((n) => n.y + (n.h || 0)), 1);
 // Tokens TEXT exploitables (ancrage par texte) avec bbox.
 let toks = items.filter((n) => n.type === 'TEXT' && typeof n.characters === 'string' && n.characters.replace(/\s+/g, '').length >= 2)
   .map((n) => ({ id: n.id, text: n.characters, relW: n.w / pageW, relY: n.y / pageH, figmaW: n.w, fullbleed: n.w / pageW >= 0.92 }));
@@ -107,9 +122,17 @@ for (const r of measured.rows) {
   const label = tk.text.replace(/\s+/g, ' ').trim().slice(0, 26);
   if (!r.matched) { content.push({ id: r.id, label }); continue; }
   const renderedRelW = r.rect.w / measured.renderedW;
-  const check = tk.fullbleed
-    ? { k: 'full-bleed', ok: renderedRelW >= 0.92, exp: '≈pleine largeur', got: (renderedRelW * 100).toFixed(0) + '%' }
-    : { k: 'largeur', ok: Math.abs(renderedRelW - tk.relW) <= TOL_W, exp: (tk.relW * 100).toFixed(0) + '%', got: (renderedRelW * 100).toFixed(0) + '%' };
+  // La largeur RELATIVE d'un TEXT apparié par contenu n'est PAS comparable : un nœud texte rendu est
+  // block-level → il prend la largeur de sa COLONNE, pas celle de ses glyphes (bbox Figma serrée).
+  // On ne vérifie donc la largeur que pour : (a) le FULL-BLEED (un texte ~pleine page DOIT l'être) ;
+  // (b) un match EXPLICITE `--map` (sélecteur conteneur/image, où la largeur a un sens). Sinon le
+  // token sert seulement d'ancre d'ORDRE.
+  let check = null;
+  if (tk.fullbleed) {
+    check = { k: 'full-bleed', ok: renderedRelW >= 0.92, exp: '≈pleine largeur', got: (renderedRelW * 100).toFixed(0) + '%' };
+  } else if (r.how === 'map') {
+    check = { k: 'largeur', ok: Math.abs(renderedRelW - tk.relW) <= TOL_W, exp: (tk.relW * 100).toFixed(0) + '%', got: (renderedRelW * 100).toFixed(0) + '%' };
+  }
   const row = { id: r.id, label, figmaRelY: tk.relY, renderedTop: r.rect.top, renderedRelW, check, fullbleed: tk.fullbleed };
   // Ambigu = texte porté par plusieurs tokens OU plusieurs candidats DOM (sauf appariement --map explicite).
   if (r.how !== 'map' && ((tokFreq.get(normJs(tk.text)) || 1) > 1 || r.cands > 1)) ambiguous.push(row);
@@ -117,13 +140,17 @@ for (const r of measured.rows) {
 }
 
 // ── COMPOSITION (ancres fiables) : largeur/full-bleed ──
-log(`\n${C.cyan}── COMPOSITION (éléments fiables — texte unique, 1 seul match) ──${C.reset}`);
+log(`\n${C.cyan}── COMPOSITION (éléments fiables — full-bleed + largeur si --map ; texte = ancre d'ordre) ──${C.reset}`);
 let widthFails = 0;
+let widthChecked = 0;
 for (const r of reliable) {
+  if (r.check === null) { continue; } // largeur d'un texte non comparable → ancre d'ordre uniquement
+  ++widthChecked;
   if (r.check.ok) { log(`${C.green}✓${C.reset} «${r.label}» ${C.dim}(${r.fullbleed ? 'full-bleed' : 'largeur ' + (r.renderedRelW * 100).toFixed(0) + '%'})${C.reset}`); continue; }
   widthFails++;
   log(`${C.red}✗ «${r.label}»${C.reset}  ${r.check.k} : attendu ${r.check.exp}, rendu ${r.check.got}`);
 }
+log(`${C.dim}largeur/full-bleed vérifiés : ${widthChecked} (texte non mappé = largeur non vérifiable, cf. --map)${C.reset}`);
 
 // Ordre vertical : ancres FIABLES uniquement ; ancres déplacées = N − LIS (robuste aux doublons).
 // L'ordre rendu doit suivre l'ordre Figma ; on mesure la plus longue sous-suite déjà ordonnée.
@@ -143,7 +170,7 @@ if (content.length) log(`${C.dim}   ex. ${content.slice(0, 6).map((c) => '«' + 
 
 // ── AMBIGU (doublon, non décisif) ──
 if (ambiguous.length) {
-  const ambBad = ambiguous.filter((r) => !r.check.ok).length;
+  const ambBad = ambiguous.filter((r) => r.check && !r.check.ok).length;
   log(`\n${C.cyan}── AMBIGU (texte en double — informatif, non décisif) ──${C.reset}`);
   log(`${C.dim}${ambiguous.length} élément(s) ; ${ambBad} hors tolérance (à vérifier manuellement / via --map)${C.reset}`);
 }

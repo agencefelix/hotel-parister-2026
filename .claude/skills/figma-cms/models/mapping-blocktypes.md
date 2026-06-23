@@ -196,6 +196,14 @@ Mapper la variante de la convention sur `setTemplate()` et laisser faire :
 > Ne PAS poser à la main les ~10 champs déjà gérés par `prePersist`.
 > Ne régler explicitement que ce que la maquette impose et qui n'est pas couvert.
 >
+> **Largeurs de référence (RÈGLE GÉNÉRALE des calculs)** : les créateurs maquettent en **réso laptop**
+> (largeur de page Figma ~1440, parfois 1280/1366) ; le rendu web vise **~1920** dans un container
+> Bootstrap (`container` / `container-fluid` / `container-fluid-right`). Comme le contenu **scale** dans
+> le container, tout calcul de **compte/ratio** (items par vue, proportions) part de la **largeur de
+> page FIGMA détectée** (`pageWidth` du nœud page, exporté par `figma-export-tokens` ; jamais supposée —
+> **la re-vérifier à chaque page/maquette**), PAS de 1920. Le résultat reste valable à 1920 car il est
+> ratio-relatif au design.
+>
 > **`itemsPerSlide` DÉDUIT de la géométrie** : `prePersist` pose un défaut (4/3/2/1), mais le nombre
 > réel d'items visibles dépend de la **largeur de slide**. `PageParser` le déduit (pas de slide =
 > largeur de piste ÷ nb de slides, confronté à la largeur d'écran de chaque breakpoint) et l'expose

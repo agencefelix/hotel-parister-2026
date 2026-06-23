@@ -67,14 +67,19 @@ final class PageParser
      */
     private array $namedStyles = [];
 
-    /** Page (desktop) width in px — reference viewport for deducing slides-per-view. Set on parse(). */
+    /** Largeur de page Figma (px) — référence DESIGN (les créateurs maquettent en réso laptop, ~1440).
+     *  Détectée sur parse() (jamais supposée). Base de TOUS les calculs de ratios (ex. slides/vue). */
     private float $pageWidth = 0.0;
 
     /**
-     * Reference viewport widths (px) per CMS breakpoint, used to deduce how many carousel items are
-     * visible without overflowing. `desktop` is overridden by the actual page width on parse().
+     * Largeur de référence par breakpoint, en FRACTION de la largeur de page Figma.
+     *
+     * Le rendu web vise ~1920 dans un container Bootstrap (container / -fluid / -fluid-right), MAIS les
+     * slides scalent dans le container → le nombre d'items visibles est un RATIO du design, indépendant
+     * du viewport réel. On le calcule donc sur la largeur de page Figma (laptop) et non sur 1920. Les
+     * fractions ≈ largeurs de container Bootstrap relatives au xxl (desktop / xl-lg / md / sm).
      */
-    private const array VIEWPORT_WIDTHS = ['desktop' => 1440.0, 'miniPC' => 1200.0, 'tablet' => 768.0, 'mobile' => 375.0];
+    private const array VIEWPORT_FRACTIONS = ['desktop' => 1.0, 'miniPC' => 0.84, 'tablet' => 0.53, 'mobile' => 0.26];
 
     public function parse(string $fileKey, string $nodeId): ParsedPage
     {
@@ -1104,30 +1109,30 @@ final class PageParser
 
     /**
      * Déduit le nombre d'items visibles par vue d'un carrousel, par breakpoint, à partir du PAS de
-     * slide (largeur de piste ÷ nb de slides) confronté à la largeur d'écran de chaque breakpoint.
+     * slide (largeur de piste ÷ nb de slides) confronté à la largeur de page FIGMA (design laptop) ×
+     * fraction du breakpoint. Le rendu web vise ~1920 dans un container Bootstrap, mais les slides
+     * scalent → le compte est un RATIO du design, donc calculé sur la largeur de page Figma (détectée).
      * Empêche les slides de déborder (mauvais `data-items`). Borné à [1, nb de slides].
      *
-     * Ex. piste 2050px / 4 slides = pas 512 ; 1440/512→2, 1200/512→2, 768/512→1, 375/512→1.
+     * Ex. page Figma 1440, piste 2050 / 4 slides = pas 512 → desktop 1440/512→2, miniPC 1210/512→2,
+     * tablet 763/512→1, mobile 374/512→1.
      *
      * @return array<string, int> {itemsPerSlide, itemsPerSlideMiniPC, itemsPerSlideTablet, itemsPerSlideMobile}
      */
     private function slidesPerView(float $trackWidth, int $count): array
     {
-        if ($count <= 0 || $trackWidth <= 0.0) {
+        if ($count <= 0 || $trackWidth <= 0.0 || $this->pageWidth <= 0.0) {
             return [];
         }
         $pitch = $trackWidth / $count;
-        $viewports = self::VIEWPORT_WIDTHS;
-        if ($this->pageWidth > 0.0) {
-            $viewports['desktop'] = $this->pageWidth;
-        }
-        $per = static fn (float $w): int => max(1, min($count, (int) floor($w / $pitch)));
+        // Base = largeur de page Figma (design laptop) × fraction du breakpoint. Borné à [1, nb slides].
+        $per = fn (float $frac): int => max(1, min($count, (int) floor(($this->pageWidth * $frac) / $pitch)));
 
         return [
-            'itemsPerSlide' => $per($viewports['desktop']),
-            'itemsPerSlideMiniPC' => $per($viewports['miniPC']),
-            'itemsPerSlideTablet' => $per($viewports['tablet']),
-            'itemsPerSlideMobile' => $per($viewports['mobile']),
+            'itemsPerSlide' => $per(self::VIEWPORT_FRACTIONS['desktop']),
+            'itemsPerSlideMiniPC' => $per(self::VIEWPORT_FRACTIONS['miniPC']),
+            'itemsPerSlideTablet' => $per(self::VIEWPORT_FRACTIONS['tablet']),
+            'itemsPerSlideMobile' => $per(self::VIEWPORT_FRACTIONS['mobile']),
         ];
     }
 

@@ -411,6 +411,13 @@ stacking si overlay) ; `alert` → `blocks/alert/…` (+ JS `#website-alert`).
 
 **Teasers :** `catalog-teaser` → `actions/catalog/teaser/{slider,slider-multi}.html.twig` ;
 `newscast-teaser` → `actions/newscast/teaser/slider.html.twig`.
+- **Contenu des cartes teaser = `BaseTeaser::setFields([...])`** (PAS du CSS/template) : `image`, `title`,
+  `date`, `introduction`, `category`, `card-link` (lien « En savoir + » par carte), `index-link` (bouton
+  « voir tout »), `teaser-title`. Régler `fields` pour matcher la maquette — ex. cartes minimales
+  image + titre → `['image','title','index-link']` (sans `card-link`/`date`). Le ViewModel en dérive
+  `showImage`/`showTitle`/`showDate`… lus par le template partagé (donc pas besoin de le modifier).
+- **Ratio image de carte** = vignette dédiée dans `ThumbnailFixtures` (action `teaser`, par id de teaser) :
+  portrait/paysage selon la maquette, en 2× retina.
 
 **🃏 Cartes des index & teasers (actus / produits) — MACROS DÉDIÉES :** les cartes vivent dans
 `templates/front/default/include/macros/card.html.twig` (macros `standard`, `eventCard`…), importées par

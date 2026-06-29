@@ -153,11 +153,11 @@ class WebsiteRepository extends ServiceEntityRepository
     }
 
     /**
-     * Get default WebsiteModel.
+     * Get default WebsiteModel (or Website entity when $asObject is true).
      *
      * @throws MappingException|NonUniqueResultException|InvalidArgumentException|\ReflectionException
      */
-    public function findDefault(bool $asObject = false): ?WebsiteModel
+    public function findDefault(bool $asObject = false): Website|WebsiteModel|null
     {
         $website = $this->createQueryBuilder('w')
             ->leftJoin('w.configuration', 'c')

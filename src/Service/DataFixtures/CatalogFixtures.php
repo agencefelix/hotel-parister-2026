@@ -48,6 +48,12 @@ class CatalogFixtures
 
     /** Nom du catalogue selon le CONTEXTE du projet (ici : un hôtel → les chambres). */
     private const string CATALOG_NAME = 'Chambres & Suites';
+    /**
+     * Layout de catégorie (main-catalog) conservé mais NON appliqué : la fiche produit utilise le
+     * template dédié actions/catalog/view/chambres-suites.html.twig (haveLayout doit rester false).
+     * Passer à true pour réactiver le layout générique de catégorie.
+     */
+    private const bool USE_CATEGORY_LAYOUT = false;
     /** Tous les slugs (identifiants) générés sont en ANGLAIS ; les codes URL suivent la prod. */
     private const string LISTING_SLUG = 'rooms';
     /** Slugs anglais des features (la convention impose des slugs EN). */
@@ -225,7 +231,9 @@ class CatalogFixtures
         $catalog->setCreatedBy($this->user);
         $this->coreLocator->em()->persist($catalog);
         $this->addListing($catalog);
-        $this->generateLayout($catalog);
+        if (self::USE_CATEGORY_LAYOUT) {
+            $this->generateLayout($catalog);
+        }
 
         return $catalog;
     }

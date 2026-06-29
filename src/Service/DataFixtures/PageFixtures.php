@@ -398,6 +398,9 @@ class PageFixtures
         $slider->setWebsite($this->website);
         $slider->setSlug('home-hero');
         $slider->setTemplate('main-home');
+        $slider->setControl(false);    // hero plein écran cinématique → pas de flèches/puces (maquette)
+        $slider->setIndicators(false);
+        $slider->setPause(false);      // sans controls → ne pas stopper au survol
         $slider->setArrowColor('btn-white');
 
         $heroIntl = new MediaRelationIntl();
@@ -452,6 +455,8 @@ class PageFixtures
         $universSlider->setWebsite($this->website);
         $universSlider->setSlug('home-universe');
         $universSlider->setTemplate('splide');
+        $universSlider->setControl(true);     // splide (carrousel de cards) → flèches OBLIGATOIRES
+        $universSlider->setIndicators(false); // pas de puces (progress bar du template splide)
         $sliderPosition = 1;
         foreach ($teasers as $teaserData) {
             $intl = new MediaRelationIntl();
@@ -476,6 +481,12 @@ class PageFixtures
         $this->coreLocator->em()->persist($universSlider);
         if ($this->flush) {
             $this->coreLocator->em()->flush();
+            // prePersist (splide) force top-end + 4 items + progress → on repasse après flush :
+            // flèches latérales overlay, 3 cards (4e croppée), sans barre de progression (maquette).
+            $universSlider->setArrowAlignment('side-center');
+            $universSlider->setItemsPerSlide(3);
+            $universSlider->setProgress(false);
+            $this->coreLocator->em()->flush();
         }
         // Cards croppées à droite (carrousel) → zone colToRight + padding-right 0 (zone, col, bloc).
         $universZone = $this->addZone($layout, 3, customId: 'home-universe');
@@ -495,8 +506,9 @@ class PageFixtures
         $getawaySlider->setTemplate('bootstrap');
         $getawaySlider->setEffect('fade');
         $getawaySlider->setAutoplay(true);
-        $getawaySlider->setControl(true);
-        $getawaySlider->setIndicators(true);
+        $getawaySlider->setControl(false);    // hero cinématique plein écran (auto-rotate) → pas de flèches
+        $getawaySlider->setIndicators(false); // ni de puces (maquette)
+        $getawaySlider->setPause(false);      // sans controls → ne pas stopper au survol
         $getawaySlider->setArrowColor('btn-white');
         $getawaySlider->setArrowAlignment('bottom-end');
         $getawayImages = ['hero-parenthese-parisienne.jpg', 'evenement-art.jpg', 'spa-piscine.jpg'];
@@ -536,6 +548,7 @@ class PageFixtures
         $chambresZone = $this->addZone($layout, 5, customId: 'home-rooms');
         $chambresZone->setBackgroundColor('bg-navy');
         $textCol = $this->addCol($chambresZone, 1, 6);
+        $textCol->setVerticalAlign(true); // contenu centré verticalement (déduit par le parser) — pas de CSS
         $this->setContent($this->addBlock($textCol, 'title'), ['title' => 'Votre parenthèse', 'subTitle' => 'parisienne', 'titleForce' => 2]);
         $block = $this->setContent($this->addBlock($textCol, 'text', null, null, 2), ['body' => '<p>Chambres, suites, offres et disponibilités, intimistes et contemporaines, pour un séjour au cœur de Paris.</p>']);
         $block->setMarginBottom('mb-md');
@@ -565,8 +578,9 @@ class PageFixtures
            / cocktails (bas-gauche) + dessert (bas-droite). 3 images (toutes récupérées). */
         $restaurantZone = $this->addZone($layout, 7, customId: 'home-restaurant');
         $restaurantZone->setBackgroundColor('bg-light');
-        // 1) Texte (haut-gauche)
+        // 1) Texte (haut-gauche) : centré verticalement face au plat (maquette).
         $textCol = $this->addCol($restaurantZone, 1, 6);
+        $textCol->setVerticalAlign(true);
         $this->setContent($this->addBlock($textCol, 'title'), ['title' => 'Les passerelles', 'subTitle' => 'restaurant & bar', 'titleForce' => 2]);
         $block = $this->setContent($this->addBlock($textCol, 'text', null, null, 2), ['body' => '<p>Une adresse vivante pour boire un verre, déjeuner ou prolonger la soirée.</p>']);
         $block->setMarginBottom('mb-md');
@@ -574,15 +588,20 @@ class PageFixtures
         $this->setContent($this->addBlock($textCol, 'link', null, null, 4), ['linkLabel' => 'Voir le menu', 'linkStyle' => 'link text-uppercase', 'targetLink' => '/restaurant-bar-a-cocktail', 'newTab' => false]);
         // 2) Plat (haut-droite)
         $this->mediaBlock($this->addCol($restaurantZone, 2, 6), 'restaurant-plat.jpg');
-        // 3) Cocktails (bas-gauche)
-        $this->mediaBlock($this->addCol($restaurantZone, 3, 6), 'restaurant-cocktail.jpg');
-        // 4) Dessert (bas-droite)
-        $this->mediaBlock($this->addCol($restaurantZone, 4, 6), 'restaurant-dessert.jpg');
+        // 3) Cocktails (bas-gauche) : décalé vers le bas (maquette = rythme décalé).
+        $cocktailCol = $this->addCol($restaurantZone, 3, 6);
+        $cocktailCol->setMarginTop('mt-xl');
+        $this->mediaBlock($cocktailCol, 'restaurant-cocktail.jpg');
+        // 4) Dessert (bas-droite) : ancré en bas (maquette).
+        $dessertCol = $this->addCol($restaurantZone, 4, 6);
+        $dessertCol->setEndAlign(true);
+        $this->mediaBlock($dessertCol, 'restaurant-dessert.jpg');
 
         /* --- Zone 8 : Spa, bien-être & sport (teal) --- */
         $spaZone = $this->addZone($layout, 8, customId: 'home-spa');
         $spaZone->setBackgroundColor('bg-teal');
         $textCol = $this->addCol($spaZone, 1, 6);
+        $textCol->setVerticalAlign(true); // contenu centré verticalement (déduit par le parser) — pas de CSS
         $this->setContent($this->addBlock($textCol, 'title'), ['title' => 'Spa, Bien-être &', 'subTitle' => 'sport', 'titleForce' => 2]);
         $block = $this->setContent($this->addBlock($textCol, 'text', null, null, 2), ['body' => "<p>Un espace dédié au lâcher-prise. Piscine, soins, fitness : tout est pensé pour se détendre et retrouver l'équilibre.</p>"]);
         $block->setMarginBottom('mb-md');
@@ -602,12 +621,14 @@ class PageFixtures
         $spaSlider->setWebsite($this->website);
         $spaSlider->setSlug('home-spa-services');
         $spaSlider->setTemplate('splide');
+        $spaSlider->setControl(true);     // splide → flèches OBLIGATOIRES
+        $spaSlider->setIndicators(false); // pas de puces
         $spaPos = 1;
         foreach ($spaCards as $card) {
             $cardIntl = new MediaRelationIntl();
             $cardIntl->setLocale($this->locale);
             $cardIntl->setTitle($card['title']);
-            $cardIntl->setIntroduction($card['sub']);
+            $cardIntl->setSubTitle($card['sub']); // fioriture script = sous-titre (pas une introduction)
             $cardIntl->setTargetLink('/sport-bien-etre');
             $cardIntl->setTargetLabel('Découvrir');
             $cardIntl->setTargetStyle('link');
@@ -623,9 +644,13 @@ class PageFixtures
             ++$spaPos;
         }
         $this->coreLocator->em()->persist($spaSlider);
-        if ($this->flush) {
-            $this->coreLocator->em()->flush();
-        }
+        // Flush forcé pour que prePersist pose les défauts splide, PUIS override (prePersist écrase à la
+        // persistance) : 3 cards visibles (maquette), flèches latérales overlay, sans barre de progression.
+        $this->coreLocator->em()->flush();
+        $spaSlider->setItemsPerSlide(3)->setItemsPerSlideMiniPC(3)->setItemsPerSlideTablet(2)->setItemsPerSlideMobile(1);
+        $spaSlider->setArrowAlignment('side-center');
+        $spaSlider->setProgress(false);
+        $this->coreLocator->em()->flush();
         /* --- Zone 9 : Slider services spa ([slider|splide]) = SECTION dédiée (cartes débordant à droite) --- */
         $spaSliderZone = $this->addZone($layout, 9, true, true, 'home-spa-services');
         $spaSliderZone->setBackgroundColor('bg-teal');
@@ -642,6 +667,9 @@ class PageFixtures
         $workspacesSlider->setWebsite($this->website);
         $workspacesSlider->setSlug('home-workspaces');
         $workspacesSlider->setTemplate('main-home');
+        $workspacesSlider->setControl(false);    // bande plein écran cinématique → pas de flèches/puces
+        $workspacesSlider->setIndicators(false);
+        $workspacesSlider->setPause(false);      // sans controls → ne pas stopper au survol
         $workspacesSlider->setArrowColor('btn-white');
         $workspacesIntl = new MediaRelationIntl();
         $workspacesIntl->setLocale($this->locale);
@@ -678,6 +706,7 @@ class PageFixtures
         $artImageCol = $this->addCol($artZone, 1, 6);
         $this->mediaBlock($artImageCol, 'evenement-art.jpg');
         $artTextCol = $this->addCol($artZone, 2, 6);
+        $artTextCol->setVerticalAlign(true);   // col droite (texte) centrée verticalement face à l'image (maquette)
         $this->setContent($this->addBlock($artTextCol, 'title'), ['title' => 'Art &', 'subTitle' => 'rencontres', 'titleForce' => 2]);
         $block = $this->setContent($this->addBlock($artTextCol, 'text', null, null, 2), ['body' => '<p>Expositions, vernissages, cercles littéraires… Le Parister cultive un esprit vivant et ouvert, où se croisent création, idées et moments partagés.</p>']);
         $block->setMarginBottom('mb-md');
@@ -692,6 +721,7 @@ class PageFixtures
             $teaser->setItemsPerSlide(4);
             $teaser->setNbrItems(15);
             $teaser->setTemplate('slider');
+            $teaser->setFields(['image', 'title', 'index-link']); // maquette : cartes image + titre seuls (sans « En savoir + »)
             $teaserZone = $this->addZone($layout, 12, customId: 'home-events');
             $teaserZone->setBackgroundColor('bg-light');
             $teaserZone->setColToRight(true);

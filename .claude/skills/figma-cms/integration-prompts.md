@@ -1093,6 +1093,12 @@ après l'activation des modules (newsletter, switcher de langues, nav, etc.).
   indépendamment (réordonner/ajouter/retirer/renommer) sans dev. **Créer aussi les pages cibles** des
   entrées (déclarées dans `getPagesParams()`), et rattacher chaque entrée à sa page (`setTargetPage`) plutôt
   qu'un lien en dur.
+- ⚠️ **Barre basse (légale) = menu administrable `footer-legal` ; SEUL le Copyright reste en dur.**
+  Mentions légales, Politique relative aux cookies (et autres liens utiles) = entrées d'un menu
+  `footer-legal` (pages reliées via `setTargetPage`), itéré dans la barre basse. Le **Copyright** (année
+  dynamique) est le seul élément codé. **« Gestion des cookies »** (rouvre le consentement, JS) et le
+  **crédit agence** restent des éléments **spéciaux/conditionnels** du template (non-pages), pas des liens
+  en dur à remplacer. Ne PAS câbler Mentions légales / cookies en `path('front_index', …)`.
 - **Cookies (règle EXACTE)** :
   - le lien **« Gestion des cookies »** (rouvre le panneau de consentement) ne s'affiche **QUE si**
     `axeptioActive` (ou le gestionnaire de consentement actif) ;
@@ -1105,9 +1111,25 @@ après l'activation des modules (newsletter, switcher de langues, nav, etc.).
 > se rend via le filtre **`|file`**, pas via un `<img src="{{ asset('medias/…') }}">` brut.
 - **Emplacement source** : `assets/medias/images/front/default/` (pipeline Webpack `copyFiles`), pas
   `public/medias/` (réservé aux médias uploadés).
-- **Référence** : `asset('build/front/'~websiteTemplate~'/images/<nom>', webpack)|file({}, {width, height, alt, class})`.
+- **Référence** : `asset('build/front/'~websiteTemplate~'/images/<nom>', webpack)|file({}, {screensSizes, alt, class})`.
   ⚠️ Si l'include utilise `only` (ex. `footer.html.twig`), **passer `webpack`** (et `websiteTemplate`)
   dans le `with` de l'include — sinon `Variable "webpack" does not exist`.
+- ⚠️ **TOUTES les images `|file` du front : `screensSizes` par breakpoint, JAMAIS `width`/`height` figés.**
+  Le loader génère un `<picture>` responsive (vignettes adaptées + retina) à partir des dimensions
+  d'**affichage** par écran. Forme attendue (cf. `actions/menu/main.html.twig`) :
+  ```twig
+  |file({}, {
+      screensSizes: {
+          mobile:  {width: …, height: …},
+          tablet:  {width: …, height: …},
+          desktop: {width: …, height: …},
+      },
+      alt: …, class: …,
+  })
+  ```
+  Donner la **taille rendue à chaque breakpoint** en gardant le **ratio natif** de l'image (sur mobile/tablet
+  une image `w-100` est souvent plus large que sur desktop si elle passe en `col-12`). Un seul `width`/`height`
+  fixe = image sur/sous-dimensionnée selon l'écran + pas de retina → anti-pattern à corriger.
 - **`|file` enveloppe l'`img` dans `.img-loader-wrap` (inline-flex)** : la **classe** passe sur l'`img`
   (les sélecteurs `.mon-logo` continuent de matcher) mais l'**`id` n'est pas propagé**, et une image
   **pleine largeur** (`w-100`) doit recevoir un correctif SCSS sur le wrapper

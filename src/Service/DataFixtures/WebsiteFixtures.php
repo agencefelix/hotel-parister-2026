@@ -177,6 +177,10 @@ class WebsiteFixtures
             ['name' => 'La vie au Parister', 'asIndex' => false, 'reference' => 'news', 'url' => 'la-vie-au-parister', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true, 'disable' => !in_array('ROLE_NEWSCAST', self::DEFAULTS_MODULES)],
             ['name' => 'Galerie photos', 'asIndex' => false, 'reference' => 'gallery', 'url' => 'galerie-photos', 'menus' => ['main', 'footer'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
             ['name' => 'Presse', 'asIndex' => false, 'reference' => 'press', 'url' => 'presse', 'menus' => ['main', 'footer'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
+            // Pages des groupes de footer (cf. maquette node 697:2482) : créées et reliées aux menus footer administrables.
+            ['name' => 'Visites virtuelles', 'asIndex' => false, 'reference' => 'virtual-tours', 'url' => 'visites-virtuelles', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
+            ['name' => 'Carrière', 'asIndex' => false, 'reference' => 'careers', 'url' => 'carriere', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
+            ['name' => 'Blog', 'asIndex' => false, 'reference' => 'blog', 'url' => 'blog', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
             ['name' => 'Accès & Contact', 'asIndex' => false, 'reference' => 'contact', 'url' => 'acces-et-contact', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
             ['name' => 'Bons cadeaux', 'asIndex' => false, 'reference' => 'gift-cards', 'url' => 'bons-cadeaux', 'menus' => ['main'], 'template' => 'cms', 'urlAsIndex' => true, 'deletable' => true],
             // Pages légales : hors menu (rendues dans la barre basse du footer), restent des pages accessibles.

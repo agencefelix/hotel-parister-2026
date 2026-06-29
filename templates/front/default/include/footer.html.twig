@@ -1,123 +1,188 @@
 {% trans_default_domain 'front_default' %}
 
+{% import _self as macro %}
+
 {% set logo = logos.footer is defined and logos.footer ? logos.footer : (logos.logo is defined ? logos.logo : null) %}
 {% set zonePhones = website.infoZones.phones.footer is defined ? website.infoZones.phones.footer : [] %}
 {% set zoneEmails = website.infoZones.emails.footer is defined ? website.infoZones.emails.footer : [] %}
-{% set footerLinks = mainMenus.footer.arguments.tree.main is defined ? mainMenus.footer.arguments.tree.main : [] %}
 {% set legalsUrl = path('front_index', {url: 'mentions-legales'}) %}
 {% set cookiesUrl = path('front_index', {url: 'politique-cookies'}) %}
-{% set bookingUrl = path('front_index', {url: 'chambres-suites'}) %}
 {% set gdprActive = 'gdpr'|moduleActive(configuration) or (axeptioActive is defined and axeptioActive) %}
+{% set locale = app.request.locale %}
 
-<footer role="contentinfo" id="footer" class="footer position-relative bg-primary pt-5 pb-4">
-    <div class="container-fluid px-3 px-lg-5">
-        {# --------- Barre haute : socials (gauche) / logo (centre) / note (droite) --------- #}
-        <div class="row align-items-center mb-3 mb-lg-4 footer-head">
-            <div class="col-4">
-                {% if website.networks %}
-                    <nav class="socials-list d-inline-flex" aria-label="{{ "Navigation des liens sociaux"|trans|striptags }}">
-                        {% for name, infos in website.networks %}
-                            {% if infos.link and infos.dirname %}
-                                {% set label = name|striptags|capitalize~' - '~'nouvelle fenêtre'|trans|striptags %}
-                                <span role="button" class="{{ name }} p-0 d-inline-flex me-3 js-open-window" data-url="{{ infos.link }}" aria-label="{{ label }}">
-                                    <i class="icon-{{ name|lower }}" aria-hidden="true"></i>
-                                    <span class="visually-hidden">{{ label }}</span>
-                                </span>
-                            {% endif %}
-                        {% endfor %}
-                    </nav>
-                {% endif %}
-            </div>
-            <div class="col-4 text-center">
-                <a class="d-inline-block" aria-label="{{ companyName|striptags }}" href="{{ app.request.getSchemeAndHttpHost() }}" data-toggle="preloader">
-                    <img src="{{ asset('medias/footer-logo-white.png') }}" alt="{{ companyName|striptags }}" id="main-footer-logo" class="footer-logo" width="75" height="101">
-                </a>
-            </div>
-            <div class="col-4">
-                <div class="footer-rating d-flex align-items-center justify-content-end">
-                    <strong class="footer-rating-score me-2">4,7/5</strong>
-                    <span class="footer-rating-meta text-uppercase lh-1">
-                        <span class="d-block footer-rating-label">{{ "Excellent"|trans|raw }}</span>
-                        <span class="d-block footer-rating-count">{{ "1678 avis"|trans|raw }}</span>
-                    </span>
+{# Menus footer ADMINISTRABLES, indexés par slug (cf. MenuService keys footer menus de façon instable). #}
+{% set footerMenus = {} %}
+{% for code, menu in mainMenus %}
+    {% if menu.arguments.isFooter is defined and menu.arguments.isFooter %}
+        {% set footerMenus = footerMenus|merge({(menu.arguments.slug): menu.arguments}) %}
+    {% endif %}
+{% endfor %}
+
+{# Rend un groupe de footer : titre = nom du menu (administrable) + ses liens (niveau 1). #}
+{% macro footerGroup(group) %}
+    {% if group %}
+        {% set links = group.tree.main is defined ? group.tree.main : [] %}
+        <div class="footer-group mb-5">
+            <h2 class="footer-group-title text-uppercase mb-3">{{ group.entity.adminName|raw }}</h2>
+            {% if links %}
+                <ul class="reset footer-nav">
+                    {% for link in links %}
+                        {% if link.title and (link.online is not defined or link.online) %}
+                            <li class="mb-2">
+                                <a class="footer-link text-uppercase text-decoration-none" href="{{ link.link ? link.link : 'javascript:void(0)' }}"
+                                   {% if link.linkBlank %}target="_blank"{% else %}data-toggle="preloader"{% endif %}{% if link.linkExternal %} rel="noopener noreferrer"{% endif %}>
+                                    {{ link.title|unescape|raw }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endmacro %}
+
+<footer role="contentinfo" id="footer" class="footer position-relative bg-primary py-3">
+
+    {# --------- Barre haute : socials (gauche) / logo (centre) / note (droite) --------- #}
+    <div id="footer-top" class="footer-head pb-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    {% if website.networks %}
+                        <nav class="socials-list d-inline-flex gap-2" aria-label="{{ "Navigation des liens sociaux"|trans|striptags }}">
+                            {% for name, infos in website.networks %}
+                                {% if infos.link and infos.dirname %}
+                                    {% set label = name|striptags|capitalize~' - '~'nouvelle fenêtre'|trans|striptags %}
+                                    <span role="button" class="{{ name }} p-0 d-inline-flex js-open-window" data-url="{{ infos.link }}" aria-label="{{ label }}">
+                                        <i class="icon-{{ name|lower }}" aria-hidden="true"></i>
+                                        <span class="visually-hidden">{{ label }}</span>
+                                    </span>
+                                {% endif %}
+                            {% endfor %}
+                        </nav>
+                    {% endif %}
+                </div>
+                <div class="col-4 text-center">
+                    <a class="d-inline-block" aria-label="{{ companyName|striptags }}" href="{{ app.request.getSchemeAndHttpHost() }}" data-toggle="preloader">
+                        {{ asset('build/front/'~websiteTemplate~'/images/footer-logo-white.png', webpack)|file({}, {
+                            width: 75,
+                            height: 101,
+                            alt: companyName|striptags,
+                            id: "main-footer-logo",
+                            class: "footer-logo"
+                        }) }}
+                    </a>
+                </div>
+                <div class="col-4">
+                    <div class="footer-rating d-flex align-items-center justify-content-end">
+                        <strong class="footer-rating-score me-2">4,7/5</strong>
+                        <span class="footer-rating-meta text-uppercase lh-1">
+                            <span class="d-block footer-rating-label">{{ "Excellent"|trans|raw }}</span>
+                            <span class="d-block footer-rating-count">{{ "1678 avis"|trans|raw }}</span>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="container pt-5">
         <div class="row gx-5 gy-5">
 
-            {# --------- Colonne GAUCHE : menu (haut) + partenaires (bas) --------- #}
-            <div class="col-12 col-lg-7 d-flex flex-column">
-                {% if footerLinks %}
-                    <nav class="footer-nav text-center" aria-label="{{ "Liens utiles"|trans|striptags }}">
-                        <ul class="reset">
-                            {% for link in footerLinks %}
-                                {% if link.title and (link.online is not defined or link.online) %}
-                                    <li class="mb-3">
-                                        <a class="footer-link text-uppercase text-white text-decoration-none" href="{{ link.link ? link.link : 'javascript:void(0)' }}"
-                                           {% if link.linkBlank %}target="_blank"{% else %}data-toggle="preloader"{% endif %}{% if link.linkExternal %} rel="noopener noreferrer"{% endif %}>
-                                            {{ link.title|unescape|raw }}
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                        <a class="footer-reservation d-inline-block text-uppercase mt-3" href="{{ bookingUrl }}" data-toggle="preloader">{{ "Réservation"|trans|raw }}</a>
-                    </nav>
-                {% endif %}
+            {# --------- Colonne GAUCHE : 4 menus de groupe administrables, en 2 colonnes --------- #}
+            <div class="col-12 col-lg-7 footer-menus">
+                <div class="row gx-5">
+                    <div class="col-12 col-sm-6">
+                        {{ macro.footerGroup(footerMenus['footer-hotel'] is defined ? footerMenus['footer-hotel'] : null) }}
+                        {{ macro.footerGroup(footerMenus['footer-passerelles'] is defined ? footerMenus['footer-passerelles'] : null) }}
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        {{ macro.footerGroup(footerMenus['footer-utiles'] is defined ? footerMenus['footer-utiles'] : null) }}
+                        {{ macro.footerGroup(footerMenus['footer-actualites'] is defined ? footerMenus['footer-actualites'] : null) }}
+                    </div>
+                </div>
+            </div>
 
-                {# Partenaires : Forstyle (gauche) + Paris je t'aime (centre), sous le menu #}
-                <div class="row align-items-end gy-4 mt-auto pt-5 footer-partners">
-                    <div class="col-6 text-center text-lg-start">
+            {# --------- Colonne DROITE : photo de façade + partenaires --------- #}
+            <div class="col-12 col-lg-5 footer-right">
+                <div class="footer-media mb-4">
+                    {{ asset('build/front/'~websiteTemplate~'/images/facade-parister.jpg', webpack)|file({}, {
+                        width: 510,
+                        height: 406,
+                        alt: companyName|striptags,
+                        class: "w-100 object-fit-cover"
+                    }) }}
+                </div>
+                <div class="row align-items-end gy-4 mt-5 footer-partners">
+                    <div class="col-6 text-center">
                         <span class="d-block text-uppercase footer-partner-label mb-2">{{ "Un hôtel by"|trans|raw }}</span>
-                        <img src="{{ asset('medias/forstyle-logo-white.png') }}" alt="Forstyle Hotels Collection" class="footer-partner-logo" width="130" height="86">
+                        <a class="d-inline-block" href="https://www.forstyle-hotels.com/{{ locale }}" target="_blank" rel="noopener noreferrer" aria-label="{{ "Forstyle Hotels Collection"|trans|striptags }}">
+                            {{ asset('build/front/'~websiteTemplate~'/images/forstyle-logo-white.png', webpack)|file({}, {
+                                width: 130,
+                                height: 86,
+                                alt: "Forstyle Hotels Collection",
+                                class: "footer-partner-logo"
+                            }) }}
+                        </a>
                     </div>
                     <div class="col-6 text-center">
                         <span class="d-block text-uppercase footer-partner-label mb-2">{{ "Partenaire officiel 2026"|trans|raw }}</span>
-                        <img src="{{ asset('medias/paris-jetaime.png') }}" alt="Paris je t'aime" class="footer-partner-logo footer-partner-logo-paris" width="80" height="80">
+                        <a class="d-inline-block" href="https://parisjetaime.com/{{ locale }}" target="_blank" rel="noopener noreferrer" aria-label="{{ "Paris je t'aime"|trans|striptags }}">
+                            {{ asset('build/front/'~websiteTemplate~'/images/paris-jetaime.png', webpack)|file({}, {
+                                width: 80,
+                                height: 80,
+                                alt: "Paris je t'aime",
+                                class: "footer-partner-logo footer-partner-logo-paris"
+                            }) }}
+                        </a>
                     </div>
                 </div>
             </div>
-
-            {# --------- Colonne DROITE : photo + contact --------- #}
-            <div class="col-12 col-lg-5 d-flex flex-column">
-                <div class="footer-media mb-4">
-                    <img src="{{ asset('medias/facade-parister.jpg') }}" alt="{{ companyName|striptags }}" class="w-100 object-fit-cover" width="510" height="406">
-                </div>
-                {% for address in website.addresses %}
-                    {% set phones = address.phones is not empty ? address.phones : zonePhones %}
-                    {% set emails = address.emails is not empty ? address.emails : zoneEmails %}
-                    <address class="footer-contact text-uppercase text-center mb-0 mt-auto">
-                        {% if address.address %}{{ address.address|raw }}{% if address.zipCode or address.city %}, {% endif %}{% endif %}{% if address.zipCode %}{{ address.zipCode }} {% endif %}{% if address.city %}{{ address.city }}{% endif %}
-                        {% if phones is not empty %}<span class="d-block mt-2">{% for phone in phones %}{{ phone|phone(website, {icon: false, only_href: true}) }}{% endfor %}</span>{% endif %}
-                        {% if emails is not empty %}<span class="d-block">{% for email in emails %}{{ email.email|email(website, {icon: false, only_href: true}) }}{% endfor %}</span>{% endif %}
-                    </address>
-                {% endfor %}
-            </div>
-        </div>
-
-        {# --------- Barre légale --------- #}
-        <div class="row align-items-center gy-2 mt-4 pt-3 footer-legals">
-            <div class="col-12 col-lg-8 text-center text-lg-start">
-                <small class="text-uppercase">
-                    {{ "Copyright"|trans|raw }} {{ "now"|date('Y') }}
-                    <span class="footer-legals-sep mx-2">·</span>
-                    <a class="text-white" href="{{ legalsUrl }}" data-toggle="preloader">{{ "Mentions légales"|trans|raw }}</a>
-                    <span class="footer-legals-sep mx-2">·</span>
-                    {% if axeptioActive is defined and axeptioActive %}
-                        <a class="text-white" href="javascript:openAxeptioCookies()" rel="nofollow">{{ "Gestion des cookies"|trans|raw }}</a>
-                    {% elseif gdprActive %}
-                        <span class="open-gdpr-modal cursor text-white">{{ "Gestion des cookies"|trans|raw }}</span>
-                    {% else %}
-                        <a class="text-white" href="{{ cookiesUrl }}" data-toggle="preloader">{{ "Gestion des cookies"|trans|raw }}</a>
-                    {% endif %}
-                </small>
-            </div>
-            {% if not (anonymousTheme is defined and anonymousTheme) %}
-                <div class="col-12 col-lg-4 text-center text-lg-end">
-                    <a class="text-white text-uppercase footer-agency" href="{{ "https://www.felix-creation.fr"|trans }}" target="_blank" rel="noopener noreferrer">{{ "Agence Félix"|trans|raw }}</a>
-                </div>
-            {% endif %}
         </div>
     </div>
+
+    {# --------- Barre contact (pleine largeur, centrée) --------- #}
+    <div id="footer-contact" class="mt-5 pt-4 pb-2">
+        <div class="container">
+            {% for address in website.addresses %}
+                {% set phones = address.phones is not empty ? address.phones : zonePhones %}
+                {% set emails = address.emails is not empty ? address.emails : zoneEmails %}
+                <address class="footer-contact text-uppercase text-center mb-0">
+                    {% if address.address %}{{ address.address|raw }}{% if address.zipCode or address.city %}, {% endif %}{% endif %}{% if address.zipCode %}{{ address.zipCode }} {% endif %}{% if address.city %}{{ address.city }}{% endif %}
+                    {% if phones is not empty %}<span class="footer-contact-sep mx-2">|</span>{% for phone in phones %}{{ phone|phone(website, {icon: false, only_href: true}) }}{% endfor %}{% endif %}
+                    {% if emails is not empty %}<span class="footer-contact-sep mx-2">|</span>{% for email in emails %}{{ email.email|email(website, {icon: false, only_href: true}) }}{% endfor %}{% endif %}
+                </address>
+            {% endfor %}
+        </div>
+    </div>
+
+    {# --------- Barre légale --------- #}
+    <div id="footer-bottom" class="mt-3">
+        <div class="container">
+            <div class="row align-items-center gy-2 pt-3">
+                <div class="col-12 col-lg-8 text-center text-lg-start">
+                    <small class="text-uppercase">
+                        {{ "Copyright"|trans|raw }} {{ "now"|date('Y') }}
+                        <span class="footer-legals-sep mx-2">·</span>
+                        <a class="text-white" href="{{ legalsUrl }}" data-toggle="preloader">{{ "Mentions légales"|trans|raw }}</a>
+                        <span class="footer-legals-sep mx-2">·</span>
+                        {% if axeptioActive is defined and axeptioActive %}
+                            <a class="text-white" href="javascript:openAxeptioCookies()" rel="nofollow">{{ "Gestion des cookies"|trans|raw }}</a>
+                        {% elseif gdprActive %}
+                            <span class="open-gdpr-modal cursor text-white">{{ "Gestion des cookies"|trans|raw }}</span>
+                        {% else %}
+                            <a class="text-white" href="{{ cookiesUrl }}" data-toggle="preloader">{{ "Gestion des cookies"|trans|raw }}</a>
+                        {% endif %}
+                    </small>
+                </div>
+                {% if not (anonymousTheme is defined and anonymousTheme) %}
+                    <div class="col-12 col-lg-4 text-center text-lg-end">
+                        <a class="text-white text-uppercase footer-agency" href="{{ "https://www.felix-creation.fr"|trans }}" target="_blank" rel="noopener noreferrer">{{ "Agence Félix"|trans|raw }}</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
 </footer>

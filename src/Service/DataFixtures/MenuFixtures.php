@@ -25,7 +25,6 @@ class MenuFixtures
 {
     private string $locale = '';
     private array $pages = [];
-    private array $pagesParams = [];
     private ?User $user;
     private int $position = 1;
 
@@ -49,15 +48,29 @@ class MenuFixtures
         ]],
         ['title' => 'Utiles', 'children' => [
             ['ref' => 'gallery', 'title' => 'Galerie'],
-            ['title' => 'Visites virtuelles', 'link' => '#'],
-            ['title' => 'Carrière', 'link' => '#'],
-            ['title' => 'Forstyle hotels collection', 'link' => '#'],
+            ['ref' => 'virtual-tours', 'title' => 'Visites virtuelles'],
+            ['ref' => 'careers', 'title' => 'Carrière'],
+            // Lien externe Parister : la locale courante est suffixée à l'URL (cf. localeSuffix).
+            ['title' => 'Forstyle hotels collection', 'link' => 'https://www.forstyle-hotels.com/', 'localeSuffix' => true],
         ]],
         ['title' => 'Actualités', 'children' => [
             ['ref' => 'news', 'title' => 'La vie au Parister'],
             ['ref' => 'press', 'title' => 'Presse'],
-            ['title' => 'Blog', 'link' => '#'],
+            ['ref' => 'blog', 'title' => 'Blog'],
         ]],
+    ];
+
+    /**
+     * Slug du menu footer ADMINISTRABLE par groupe de la maquette (node 697:2482).
+     * Un groupe = un menu distinct, géré indépendamment côté admin.
+     *
+     * @var array<string, string>
+     */
+    private const FOOTER_GROUP_SLUGS = [
+        'Hôtel' => 'footer-hotel',
+        'Les passerelles' => 'footer-passerelles',
+        'Utiles' => 'footer-utiles',
+        'Actualités' => 'footer-actualites',
     ];
 
     /**
@@ -74,14 +87,99 @@ class MenuFixtures
     {
         $this->locale = $website->getConfiguration()->getLocale();
         $this->pages = $pages;
-        $this->pagesParams = $pagesParams;
         $this->user = $user;
 
         if ($websiteToDuplicate instanceof Website) {
             $this->addDbMenus($websiteToDuplicate, $website);
         } else {
             $this->addMenu($website, 'Principal', 'main');
-            $this->addMenu($website, 'Pied de page', 'footer');
+            $this->addFooterMenus($website);
+        }
+    }
+
+    /**
+     * Crée un menu footer ADMINISTRABLE distinct par groupe de la maquette
+     * (Hôtel, Les passerelles, Utiles, Actualités) : chaque colonne du pied de page
+     * se gère indépendamment côté admin (réordonner/ajouter/retirer/renommer).
+     */
+    private function addFooterMenus(Website $website): void
+    {
+        foreach (self::MAIN_GROUPS as $group) {
+            $slug = self::FOOTER_GROUP_SLUGS[$group['title']] ?? null;
+            if (null === $slug) {
+                continue;
+            }
+
+            $menu = new MenuEntities\Menu();
+            $menu->setAdminName($group['title']);
+            $menu->setSlug($slug);
+            $menu->setTemplate('footer');
+            $menu->setMain(false);
+            $menu->setFooter(true);
+            $menu->setWebsite($website);
+            $menu->setFixedOnScroll(false);
+            $menu->setAlignment('start');
+            $menu->setPosition($this->position);
+            $menu->setCreatedBy($this->user);
+
+            $this->entityManager->persist($menu);
+            $this->addFooterGroupLinks($menu, $group['children']);
+            ++$this->position;
+        }
+    }
+
+    /**
+     * Liens (plats, niveau 1) d'un menu footer de groupe : page CMS (targetPage) ou lien externe
+     * (avec suffixe de locale si demandé).
+     *
+     * @param array<int, array<string, string|bool>> $children
+     */
+    private function addFooterGroupLinks(MenuEntities\Menu $menu, array $children): void
+    {
+        $position = 1;
+
+        foreach ($children as $childData) {
+            $reference = $childData['ref'] ?? null;
+            /** @var Page|null $page */
+            $page = $reference ? ($this->pages[$reference] ?? null) : null;
+
+            // Page absente et aucun lien externe : rien à pointer, on saute.
+            if ($reference && !$page && empty($childData['link'])) {
+                continue;
+            }
+
+            $title = $childData['title'] ?? ($page ? $page->getAdminName() : '');
+
+            $link = new MenuEntities\Link();
+            $link->setAdminName($title);
+            $link->setMenu($menu);
+            $link->setLocale($this->locale);
+            $link->setLevel(1);
+            $link->setPosition($position);
+
+            $intl = new MenuEntities\LinkIntl();
+            if ($page) {
+                $intl->setTargetPage($page);
+            } elseif (!empty($childData['link'])) {
+                $url = $childData['link'];
+                if (!empty($childData['localeSuffix'])) {
+                    $url .= $this->locale;
+                }
+                $intl->setTargetLink($url);
+            }
+            $intl->setTitle($title);
+            $intl->setLocale($this->locale);
+            $intl->setLink($link);
+            $intl->setCreatedBy($this->user);
+            $intl->setWebsite($menu->getWebsite());
+
+            $link->setIntl($intl);
+            $link->setCreatedBy($this->user);
+
+            $this->entityManager->persist($link);
+            $this->entityManager->persist($intl);
+
+            ++$position;
         }
     }
 
@@ -154,39 +252,25 @@ class MenuFixtures
     }
 
     /**
-     * Add Menu.
+     * Add main menu (mega-menu overlay Parister).
      */
     private function addMenu(Website $website, string $adminName, string $slug): void
     {
-        $isMain = 'main' === $slug;
-        $isFooter = 'footer' === $slug;
-        // Nav principale = template "main" (mega-menu overlay Parister) ; footer = "footer".
-        $template = str_contains($slug, 'footer') ? 'footer' : $slug;
-
         $menu = new MenuEntities\Menu();
         $menu->setAdminName($adminName);
         $menu->setSlug($slug);
-        $menu->setTemplate($template);
-        $menu->setMain($isMain);
+        $menu->setTemplate($slug);
+        $menu->setMain(true);
         // Nav principale Parister : overlay ☰ permanent (hamburger à tous les breakpoints).
-        if ($isMain) {
-            $menu->setExpand('xxxl');
-        }
-        $menu->setFooter($isFooter);
+        $menu->setExpand('xxxl');
+        $menu->setFooter(false);
         $menu->setWebsite($website);
-        $menu->setFixedOnScroll($isMain);
+        $menu->setFixedOnScroll(true);
         $menu->setPosition($this->position);
         $menu->setCreatedBy($this->user);
-        if ($menu->isFooter()) {
-            $menu->setAlignment('center');
-        }
 
         $this->entityManager->persist($menu);
-        if ($isMain) {
-            $this->addMainGroups($menu);
-        } else {
-            $this->addLinks($menu);
-        }
+        $this->addMainGroups($menu);
         ++$this->position;
     }
 
@@ -261,46 +345,6 @@ class MenuFixtures
             }
 
             ++$position;
-        }
-    }
-
-    /**
-     * Add Link to menu.
-     */
-    private function addLinks(MenuEntities\Menu $menu): void
-    {
-        $position = 1;
-
-        foreach ($this->pagesParams as $key => $params) {
-            $params = (object) $params;
-            $pageMenus = $params->menus;
-
-            /** @var Page $page */
-            $page = $this->pages[$params->reference] ?? null;
-
-            if (in_array($menu->getSlug(), $pageMenus) && $page) {
-                $link = new MenuEntities\Link();
-                $link->setAdminName($page->getAdminName());
-                $link->setMenu($menu);
-                $link->setLocale($this->locale);
-                $link->setPosition($position);
-
-                $intl = new MenuEntities\LinkIntl();
-                $intl->setTargetPage($page);
-                $intl->setTitle($page->getAdminName());
-                $intl->setLocale($this->locale);
-                $intl->setLink($link);
-                $intl->setCreatedBy($this->user);
-                $intl->setWebsite($menu->getWebsite());
-
-                $link->setIntl($intl);
-                $link->setCreatedBy($this->user);
-
-                $this->entityManager->persist($link);
-                $this->entityManager->persist($intl);
-
-                ++$position;
-            }
         }
     }
 }

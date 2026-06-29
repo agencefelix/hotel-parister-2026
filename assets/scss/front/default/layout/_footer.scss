@@ -1,10 +1,13 @@
 @charset "UTF-8";
 
 /* -----------------------------------------------------------------
-    Module : Footer
-    Copyright : 2025
-    Author : Sébastien FOURNIER <fournier.sebastien@outlook.com>
------------------------------------------------------------------- */
+
+    Module: Footer
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
+
+------------------------------------------------------------------------------------------ */
 
 #footer {
 
@@ -13,16 +16,20 @@
     color: $light;
 
     strong, span, small, p, i, time,
-    .h1, .h2, .h3, .h4, .h5, .h6 { color: $light; }
+    .h1, .h2, .h3, .h4, .h5, .h6 {
+        color: $light;
+    }
 
     .text-white,
-    a.text-white { color: $light !important; }
+    a.text-white {
+        color: $light !important;
+    }
 
     .socials-list {
 
         i {
 
-            font-size: rem(20px);
+            font-size: rem(24px);
             color: $light;
             transition: color .3s ease-in-out;
 
@@ -34,31 +41,55 @@
     }
 
     /* Menu central */
-    .footer-nav {
+    // Filet maquette (Line 22) sous le bandeau du haut.
+    .footer-head {
+        border-bottom: 1px solid rgba($light, .25);
+    }
 
-        .footer-link {
-            font-size: rem(24px);
-            font-weight: 700;
-            letter-spacing: 0;
-            line-height: 1.5;
-            transition: color .2s ease-in-out;
-
-            &:hover { color: $secondary; }
-        }
-
-        .footer-reservation {
-            color: $light;
-            font-size: rem(24px);
-            font-weight: 700;
-            letter-spacing: 0;
-            text-decoration: none;
-            transition: color .2s ease-in-out;
-
-            &:hover { color: $secondary; }
+    // Filet vertical maquette entre les colonnes de menus et la photo de façade.
+    @include mediaQuery(min-lg) {
+        .footer-right {
+            border-left: 1px solid rgba($light, .25);
         }
     }
 
-    .footer-media img { object-fit: cover; }
+    /* Groupes de menus du footer (Hôtel, Utiles, Les passerelles, Actualités) */
+    .footer-group-title {
+        font-family: inherit;
+        font-size: rem(24px);
+        font-weight: 700;
+        letter-spacing: .04em;
+        line-height: 1.2;
+    }
+
+    .footer-nav {
+
+        .footer-link {
+            font-size: rem(14px);
+            font-weight: 400;
+            letter-spacing: .12em;
+            line-height: calc(20 / 14);
+            color: $light;
+            transition: color .2s ease-in-out;
+
+            &:hover {
+                color: $secondary;
+            }
+        }
+    }
+
+    .footer-media {
+
+        .img-loader-wrap,
+        .img-loader-wrap picture,
+        .img-loader-wrap picture img {
+            width: 100%;
+        }
+
+        img {
+            object-fit: cover;
+        }
+    }
 
     .footer-logo {
         width: auto;
@@ -72,7 +103,7 @@
         .footer-rating-score {
             font-size: rem(26px);
             font-weight: 700;
-            line-height: 1;
+            line-height: calc(31 / 26); // token lh31
         }
 
         .footer-rating-meta {
@@ -83,12 +114,14 @@
             font-size: rem(14px);
             font-weight: 600;
             letter-spacing: 0;
+            line-height: calc(17 / 14); // token lh17
         }
 
         .footer-rating-count {
             font-size: rem(14px);
             font-weight: 300;
             letter-spacing: 0;
+            line-height: calc(17 / 14); // token lh17
         }
     }
 
@@ -99,8 +132,33 @@
         letter-spacing: .4em;
         line-height: calc(20 / 12);
 
-        a { color: $light; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        a {
+            color: $light;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        // Anti-débordement mobile : l'email long (sans espace) doit pouvoir se couper.
+        .email-link-wrap,
+        .phone-link-wrap {
+            max-width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .email-link,
+        .phone-link,
+        .email {
+            min-width: 0;
+            white-space: normal;
+            overflow-wrap: anywhere;
+        }
+
+        @include mediaQuery(max-md) {
+            letter-spacing: .2em;
+        }
     }
 
     /* Partenaires */
@@ -110,11 +168,7 @@
             font-size: rem(12px);
             font-weight: 700;
             letter-spacing: .4em;
-        }
-
-        .footer-partner-name {
-            font-size: rem(16px);
-            letter-spacing: .15em;
+            line-height: calc(14 / 12); // token lh14
         }
 
         .footer-partner-logo {
@@ -129,62 +183,20 @@
     }
 
     /* Barre légale */
-    .footer-legals {
-        border-top: 1px solid rgba($light, .25);
-
-        small, a {
-            font-size: rem(12px);
-            font-weight: 700;
-            letter-spacing: .1em;
-        }
-
-        a { transition: color .2s ease-in-out; }
-        a:hover { color: $secondary; }
-
-        .open-gdpr-modal { cursor: pointer; }
-    }
-
     .footer-agency {
         font-size: rem(12px);
         font-weight: 700;
         letter-spacing: .1em;
         text-decoration: none;
 
-        &:hover { color: $secondary; }
+        &:hover {
+            color: $secondary;
+        }
     }
 
-    //.phone-link-wrap, .email-link-wrap {
-    //
-    //    .label, .wrap-icon-link i {
-    //        color: $primary !important;
-    //    }
-    //
-    //    @include mediaQuery(min-lg) {
-    //
-    //        .phone-link, .email-link {
-    //
-    //            &:before {
-    //                content: '';
-    //                position: absolute;
-    //                bottom: -2px;
-    //                left: 0;
-    //                width: 0;
-    //                height: 1px;
-    //                background-color: $primary;
-    //                transition: width .3s ease-in-out;
-    //            }
-    //
-    //            &:hover:before {
-    //                width: 100%;
-    //                transition: width .3s ease-in-out;
-    //            }
-    //        }
-    //    }
-    //}
-
-    .menu-container ul {
-        .link, .dashed {
-            font-size: rem(12px);
-        }
+    // Filets maquette (couleur custom → SCSS) ; espacements = utilities Bootstrap dans le template.
+    #footer-contact,
+    #footer-bottom {
+        border-top: 1px solid rgba($light, .25);
     }
 }

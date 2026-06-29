@@ -98,47 +98,53 @@ class ThumbnailFixtures
         $this->addConfig('Thumbnail 468 x Infinite', 468, null, 'Actualité mise en avant index', NewscastEntities\Newscast::class, 'index', 'first-newscast-index');
         $this->addConfig('Thumbnail 443 x 275', 443, 275, "Teaser d'actualités associées", NewscastEntities\Newscast::class, 'view', 'associated-newscast');
         if ($teaser instanceof NewscastEntities\Teaser) {
-            $this->addConfig('Thumbnail 664 x 492', 664, 492, "Teaser d'actualités accueil", NewscastEntities\Newscast::class, 'teaser', $teaser->getId());
+            // Cartes événements PORTRAIT (Figma 290×371) en 2× retina.
+            $this->addConfig('Thumbnail 580 x 742', 580, 742, "Teaser d'actualités accueil", NewscastEntities\Newscast::class, 'teaser', $teaser->getId(), 'desktop', true);
+            $this->addConfig('Thumbnail 520 x 665', 520, 665, "Teaser d'actualités accueil", NewscastEntities\Newscast::class, 'teaser', $teaser->getId(), 'tablet', true);
+            $this->addConfig('Thumbnail 600 x 768', 600, 768, "Teaser d'actualités accueil", NewscastEntities\Newscast::class, 'teaser', $teaser->getId(), 'mobile', true);
         }
         $this->addConfig('Thumbnail 456 x 300', 456, 300, 'Fiche actualité', NewscastEntities\Newscast::class, 'view');
         // Hero plein écran (100vh) : grands formats paysage/portrait, hauteur fixe pour le cover.
         if ($heroSlider instanceof Slider) {
-            $this->addConfig('Thumbnail 1920 x 1080', 1920, 1080, 'Hero accueil', Slider::class, 'view', $heroSlider->getId(), 'desktop', true);
+            $this->addConfig('Thumbnail 1920 x 920', 1920, 920, 'Hero accueil', Slider::class, 'view', $heroSlider->getId(), 'desktop', true);
             $this->addConfig('Thumbnail 1280 x 1200', 1280, 1200, 'Hero accueil', Slider::class, 'view', $heroSlider->getId(), 'tablet', true);
             $this->addConfig('Thumbnail 768 x 1024', 768, 1024, 'Hero accueil', Slider::class, 'view', $heroSlider->getId(), 'mobile', true);
         }
         // Bande parenthèse (image plein écran, overlay).
         if ($getawaySlider instanceof Slider) {
-            $this->addConfig('Thumbnail 1920 x 900', 1920, 900, 'Bande parenthèse accueil', Slider::class, 'view', $getawaySlider->getId(), 'desktop', true);
-            $this->addConfig('Thumbnail 1280 x 760', 1280, 760, 'Bande parenthèse accueil', Slider::class, 'view', $getawaySlider->getId(), 'tablet', true);
-            $this->addConfig('Thumbnail 768 x 620', 768, 620, 'Bande parenthèse accueil', Slider::class, 'view', $getawaySlider->getId(), 'mobile', true);
+            $this->addConfig('Thumbnail 1920 x 1107', 1920, 1107, 'Bande parenthèse accueil', Slider::class, 'view', $getawaySlider->getId(), 'desktop', true);
+            $this->addConfig('Thumbnail 1280 x 738', 1280, 738, 'Bande parenthèse accueil', Slider::class, 'view', $getawaySlider->getId(), 'tablet', true);
+            $this->addConfig('Thumbnail 768 x 443', 768, 443, 'Bande parenthèse accueil', Slider::class, 'view', $getawaySlider->getId(), 'mobile', true);
         }
         // Bande workspaces (image plein écran, overlay).
         if ($workspacesSlider instanceof Slider) {
-            $this->addConfig('Thumbnail 1920 x 900', 1920, 900, 'Bande workspaces accueil', Slider::class, 'view', $workspacesSlider->getId(), 'desktop', true);
-            $this->addConfig('Thumbnail 1280 x 760', 1280, 760, 'Bande workspaces accueil', Slider::class, 'view', $workspacesSlider->getId(), 'tablet', true);
-            $this->addConfig('Thumbnail 768 x 620', 768, 620, 'Bande workspaces accueil', Slider::class, 'view', $workspacesSlider->getId(), 'mobile', true);
+            $this->addConfig('Thumbnail 1920 x 920', 1920, 920, 'Bande workspaces accueil', Slider::class, 'view', $workspacesSlider->getId(), 'desktop', true);
+            $this->addConfig('Thumbnail 1280 x 1200', 1280, 1200, 'Bande workspaces accueil', Slider::class, 'view', $workspacesSlider->getId(), 'tablet', true);
+            $this->addConfig('Thumbnail 768 x 1024', 768, 1024, 'Bande workspaces accueil', Slider::class, 'view', $workspacesSlider->getId(), 'mobile', true);
         }
-        // Cartes univers (aspect 510/456 dans le SCSS).
+        // Cartes univers (aspect 510/456). Vignettes en 2× (retina) de la taille d'affichage.
         if ($universeSlider instanceof Slider) {
-            $this->addConfig('Thumbnail 510 x 456', 510, 456, 'Cartes univers accueil', Slider::class, 'view', $universeSlider->getId(), 'desktop', true);
-            $this->addConfig('Thumbnail 483 x 432', 483, 432, 'Cartes univers accueil', Slider::class, 'view', $universeSlider->getId(), 'tablet', true);
-            $this->addConfig('Thumbnail 456 x 408', 456, 408, 'Cartes univers accueil', Slider::class, 'view', $universeSlider->getId(), 'mobile', true);
+            $this->addConfig('Thumbnail 1020 x 912', 1020, 912, 'Cartes univers accueil', Slider::class, 'view', $universeSlider->getId(), 'desktop', true);
+            $this->addConfig('Thumbnail 966 x 864', 966, 864, 'Cartes univers accueil', Slider::class, 'view', $universeSlider->getId(), 'tablet', true);
+            $this->addConfig('Thumbnail 912 x 816', 912, 816, 'Cartes univers accueil', Slider::class, 'view', $universeSlider->getId(), 'mobile', true);
         }
-        // Cartes services spa (4 cartes portrait).
+        // Cartes services spa (4 cartes portrait). Vignettes en 2× (retina) de la taille d'affichage.
         if ($spaSlider instanceof Slider) {
-            $this->addConfig('Thumbnail 420 x 520', 420, 520, 'Cartes spa accueil', Slider::class, 'view', $spaSlider->getId(), 'desktop', true);
-            $this->addConfig('Thumbnail 380 x 470', 380, 470, 'Cartes spa accueil', Slider::class, 'view', $spaSlider->getId(), 'tablet', true);
-            $this->addConfig('Thumbnail 456 x 520', 456, 520, 'Cartes spa accueil', Slider::class, 'view', $spaSlider->getId(), 'mobile', true);
+            $this->addConfig('Thumbnail 840 x 1040', 840, 1040, 'Cartes spa accueil', Slider::class, 'view', $spaSlider->getId(), 'desktop', true);
+            $this->addConfig('Thumbnail 760 x 940', 760, 940, 'Cartes spa accueil', Slider::class, 'view', $spaSlider->getId(), 'tablet', true);
+            $this->addConfig('Thumbnail 912 x 1040', 912, 1040, 'Cartes spa accueil', Slider::class, 'view', $spaSlider->getId(), 'mobile', true);
         }
         $this->addConfig('Thumbnail 1920 x 300', 1920, 300, 'Block entête', LayoutEntities\Block::class, 'block', $headerTitle);
         $this->addConfig('Thumbnail 991 x 300', 991, 300, 'Block entête', LayoutEntities\Block::class, 'block', $headerTitle, 'tablet');
         $this->addConfig('Thumbnail 412 x 350', 412, 350, 'Block entête', LayoutEntities\Block::class, 'block', $headerTitle, 'mobile');
         $this->addConfig('Thumbnail 1920 x 650', 1920, 650, 'Block entête large', LayoutEntities\Block::class, 'block', $headerTitle, 'large');
-        $this->addConfig('Thumbnail 363 x 240', 363, 240, 'Teaser de produits', CatalogEntities\Product::class, 'teaser');
+        // Vignette = largeur visible de la carte 3:4 (mobile 1-up ≈ desktop ; tablet 2-up la plus petite).
+        $this->addConfig('Thumbnail 560 x 747', 560, 747, 'Teaser de produits', CatalogEntities\Product::class, 'teaser', null, 'desktop', true);
+        $this->addConfig('Thumbnail 480 x 640', 480, 640, 'Teaser de produits', CatalogEntities\Product::class, 'teaser', null, 'tablet', true);
+        $this->addConfig('Thumbnail 560 x 747', 560, 747, 'Teaser de produits', CatalogEntities\Product::class, 'teaser', null, 'mobile', true);
         $this->addConfig('Thumbnail 456 x 300', 456, 300, 'Liste des produits', CatalogEntities\Product::class, 'index');
-        $this->addConfig('Thumbnail 456 x 300', 456, 300, 'Fiche produit', CatalogEntities\Product::class, 'view');
-        $this->addConfig('Thumbnail 1920 x 500', 1920, 500, 'Teaser de produits carrousel', CatalogEntities\Product::class, 'teaser');
+        // Product-view dédié : galerie en demi-colonne (~660px) + cards « autres chambres » (~452px) → portrait retina.
+        $this->addConfig('Thumbnail 1320 x 1600', 1320, 1600, 'Fiche produit', CatalogEntities\Product::class, 'view');
         $this->addConfig('Thumbnail 443 x 275', 443, 275, 'Teaser de produits associés', CatalogEntities\Product::class, 'view', 'associated-catalogproduct');
         $this->addConfig('Infinite');
     }

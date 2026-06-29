@@ -5,8 +5,6 @@
 {% set logo = logos.footer is defined and logos.footer ? logos.footer : (logos.logo is defined ? logos.logo : null) %}
 {% set zonePhones = website.infoZones.phones.footer is defined ? website.infoZones.phones.footer : [] %}
 {% set zoneEmails = website.infoZones.emails.footer is defined ? website.infoZones.emails.footer : [] %}
-{% set legalsUrl = path('front_index', {url: 'mentions-legales'}) %}
-{% set cookiesUrl = path('front_index', {url: 'politique-cookies'}) %}
 {% set gdprActive = 'gdpr'|moduleActive(configuration) or (axeptioActive is defined and axeptioActive) %}
 {% set locale = app.request.locale %}
 
@@ -43,13 +41,12 @@
 {% endmacro %}
 
 {# Bloc partenaire (label + logo cliquable externe). #}
-{% macro partner(label, link, image, alt, webpack, websiteTemplate, width, height, extraClass) %}
+{% macro partner(label, link, image, alt, webpack, websiteTemplate, sizes, extraClass) %}
     <div class="footer-partner mt-auto pt-4">
         <span class="d-block text-uppercase footer-partner-label mb-2">{{ label|trans|raw }}</span>
         <a class="d-inline-block" href="{{ link }}" target="_blank" rel="noopener noreferrer" aria-label="{{ alt|trans|striptags }}">
             {{ asset('build/front/'~websiteTemplate~'/images/'~image, webpack)|file({}, {
-                width: width,
-                height: height,
+                screensSizes: sizes,
                 alt: alt|trans|striptags,
                 class: "footer-partner-logo"~(extraClass ? ' '~extraClass : '')
             }) }}
@@ -57,18 +54,21 @@
     </div>
 {% endmacro %}
 
-<footer role="contentinfo" id="footer" class="footer position-relative bg-primary py-3">
+<footer role="contentinfo" id="footer" class="footer position-relative bg-primary">
 
     {# --------- Barre haute : logo (centre) / note (droite) --------- #}
-    <div id="footer-top" class="footer-head pb-3">
-        <div class="container">
+    <div id="footer-top" class="footer-head py-3">
+        <div class="container-fluid px-lg-5">
             <div class="row align-items-center">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
                     <a class="d-inline-block" aria-label="{{ companyName|striptags }}" href="{{ app.request.getSchemeAndHttpHost() }}" data-toggle="preloader">
                         {{ asset('build/front/'~websiteTemplate~'/images/footer-logo-white.png', webpack)|file({}, {
-                            width: 75,
-                            height: 101,
+                            screensSizes: {
+                                mobile: {width: 56, height: 75},
+                                tablet: {width: 75, height: 101},
+                                desktop: {width: 75, height: 101}
+                            },
                             alt: companyName|striptags,
                             id: "main-footer-logo",
                             class: "footer-logo"
@@ -88,36 +88,39 @@
         </div>
     </div>
 
-    <div class="container pt-5">
+    <div class="container-fluid">
         <div class="row gx-5 gy-5">
 
             {# --------- GAUCHE : 4 menus de groupe administrables (2 colonnes) + partenaires en bas --------- #}
-            <div class="col-12 col-lg-7 footer-menus">
+            <div class="col-12 col-lg-7 py-lg-5 px-lg-5 footer-menus">
                 <div class="row gx-5 h-100">
                     <div class="col-12 col-sm-6 d-flex flex-column">
                         {{ macro.footerGroup(footerMenus['footer-hotel'] is defined ? footerMenus['footer-hotel'] : null) }}
                         {{ macro.footerGroup(footerMenus['footer-passerelles'] is defined ? footerMenus['footer-passerelles'] : null) }}
-                        {{ macro.partner("Partenaire officiel 2026", "https://parisjetaime.com/"~locale, "paris-jetaime.png", "Paris je t'aime", webpack, websiteTemplate, 80, 80, "footer-partner-logo-paris") }}
+                        {{ macro.partner("Partenaire officiel 2026", "https://parisjetaime.com/"~locale, "paris-jetaime.png", "Paris je t'aime", webpack, websiteTemplate, {mobile: {width: 66, height: 66}, tablet: {width: 80, height: 80}, desktop: {width: 80, height: 80}}, "footer-partner-logo-paris") }}
                     </div>
                     <div class="col-12 col-sm-6 d-flex flex-column">
                         {{ macro.footerGroup(footerMenus['footer-utiles'] is defined ? footerMenus['footer-utiles'] : null) }}
                         {{ macro.footerGroup(footerMenus['footer-actualites'] is defined ? footerMenus['footer-actualites'] : null) }}
-                        {{ macro.partner("Un hôtel by", "https://www.forstyle-hotels.com/"~locale, "forstyle-logo-white.png", "Forstyle Hotels Collection", webpack, websiteTemplate, 130, 86, null) }}
+                        {{ macro.partner("Un hôtel by", "https://www.forstyle-hotels.com/"~locale, "forstyle-logo-white.png", "Forstyle Hotels Collection", webpack, websiteTemplate, {mobile: {width: 110, height: 73}, tablet: {width: 130, height: 86}, desktop: {width: 130, height: 86}}, null) }}
                     </div>
                 </div>
             </div>
 
             {# --------- DROITE : photo de façade + contact + réseaux sociaux --------- #}
-            <div class="col-12 col-lg-5 footer-right d-flex flex-column">
-                <div class="footer-media mb-4">
+            <div class="col-12 col-lg-5 px-0 footer-right d-flex flex-column">
+                <div class="footer-media">
                     {{ asset('build/front/'~websiteTemplate~'/images/facade-parister.jpg', webpack)|file({}, {
-                        width: 510,
-                        height: 406,
+                        screensSizes: {
+                            mobile: {width: 540, height: 430},
+                            tablet: {width: 720, height: 573},
+                            desktop: {width: 510, height: 406}
+                        },
                         alt: companyName|striptags,
                         class: "w-100 object-fit-cover"
                     }) }}
                 </div>
-                <div class="footer-info mt-auto text-center">
+                <div class="footer-info py-5 text-center">
                     {% for address in website.addresses %}
                         {% set phones = address.phones is not empty ? address.phones : zonePhones %}
                         {% set emails = address.emails is not empty ? address.emails : zoneEmails %}
@@ -145,22 +148,29 @@
         </div>
     </div>
 
-    {# --------- Barre légale --------- #}
-    <div id="footer-bottom" class="mt-3">
-        <div class="container">
-            <div class="row align-items-center gy-2 pt-3">
+    {# --------- Barre légale (menu ADMINISTRABLE `footer-legal` ; seul le Copyright est en dur) --------- #}
+    {% set legalMenu = footerMenus['footer-legal'] is defined ? footerMenus['footer-legal'] : null %}
+    {% set legalLinks = legalMenu and legalMenu.tree.main is defined ? legalMenu.tree.main : [] %}
+    <div id="footer-bottom">
+        <div class="container-fluid px-lg-5">
+            <div class="row align-items-center gy-2 py-3">
                 <div class="col-12 col-lg-8 text-center text-lg-start">
                     <small class="text-uppercase">
                         {{ "Copyright"|trans|raw }} {{ "now"|date('Y') }}
-                        <span class="footer-legals-sep mx-2">·</span>
-                        <a class="text-white" href="{{ legalsUrl }}" data-toggle="preloader">{{ "Mentions légales"|trans|raw }}</a>
-                        <span class="footer-legals-sep mx-2">·</span>
+                        {% for link in legalLinks %}
+                            {% if link.title and (link.online is not defined or link.online) %}
+                                <span class="footer-legals-sep mx-2">·</span>
+                                <a class="text-white" href="{{ link.link ? link.link : 'javascript:void(0)' }}"
+                                   {% if link.linkBlank %}target="_blank"{% else %}data-toggle="preloader"{% endif %}{% if link.linkExternal %} rel="noopener noreferrer"{% endif %}>{{ link.title|unescape|raw }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {# « Gestion des cookies » = rouvre le consentement (JS) : élément spécial, conditionnel. #}
                         {% if axeptioActive is defined and axeptioActive %}
+                            <span class="footer-legals-sep mx-2">·</span>
                             <a class="text-white" href="javascript:openAxeptioCookies()" rel="nofollow">{{ "Gestion des cookies"|trans|raw }}</a>
                         {% elseif gdprActive %}
+                            <span class="footer-legals-sep mx-2">·</span>
                             <span class="open-gdpr-modal cursor text-white">{{ "Gestion des cookies"|trans|raw }}</span>
-                        {% else %}
-                            <a class="text-white" href="{{ cookiesUrl }}" data-toggle="preloader">{{ "Gestion des cookies"|trans|raw }}</a>
                         {% endif %}
                     </small>
                 </div>

@@ -74,6 +74,18 @@ class MenuFixtures
     ];
 
     /**
+     * Menu footer LÉGAL administrable (barre basse) = liens de pages.
+     * Le « Gestion des cookies » (réouvre le consentement) et le crédit agence restent
+     * des éléments SPÉCIAUX gérés par le template (non-pages, conditionnels) ; cf. règle cookies.
+     *
+     * @var array<int, array<string, string>>
+     */
+    private const FOOTER_LEGAL = [
+        ['ref' => 'legals', 'title' => 'Mentions légales'],
+        ['ref' => 'cookies', 'title' => 'Politique relative aux cookies'],
+    ];
+
+    /**
      * MenuFixtures constructor.
      */
     public function __construct(private readonly EntityManagerInterface $entityManager)
@@ -94,7 +106,30 @@ class MenuFixtures
         } else {
             $this->addMenu($website, 'Principal', 'main');
             $this->addFooterMenus($website);
+            $this->addFooterLegalMenu($website);
         }
+    }
+
+    /**
+     * Crée le menu footer LÉGAL administrable (barre basse) : mentions, politique cookies…
+     */
+    private function addFooterLegalMenu(Website $website): void
+    {
+        $menu = new MenuEntities\Menu();
+        $menu->setAdminName('Pied de page — légal');
+        $menu->setSlug('footer-legal');
+        $menu->setTemplate('footer');
+        $menu->setMain(false);
+        $menu->setFooter(true);
+        $menu->setWebsite($website);
+        $menu->setFixedOnScroll(false);
+        $menu->setAlignment('start');
+        $menu->setPosition($this->position);
+        $menu->setCreatedBy($this->user);
+
+        $this->entityManager->persist($menu);
+        $this->addFooterGroupLinks($menu, self::FOOTER_LEGAL);
+        ++$this->position;
     }
 
     /**

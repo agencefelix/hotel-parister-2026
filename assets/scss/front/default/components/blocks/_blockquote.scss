@@ -1,17 +1,15 @@
 @charset "UTF-8";
 
+/* -----------------------------------------------------------------
+
+    Module: Front vendor blockquote
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
+
+------------------------------------------------------------------------------------------ */
+
 @if ($enable-blockquote) {
-
-    /* -----------------------------------------------------------------
-
-        Copyright  : 2021
-        Created on : 2021-01-07, 4:55 PM
-        Author     : Sébastien FOURNIER <fournier.sebastien@outlook.com>
-
-        FRONT VENDOR BLOCKQUOTE :
-        =========================
-
-    ------------------------------------------------------------------ */
 
     blockquote {
         font-size: rem(17px);

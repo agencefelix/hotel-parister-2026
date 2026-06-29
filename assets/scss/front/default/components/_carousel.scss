@@ -2,19 +2,17 @@
 
 /* -----------------------------------------------------------------
 
-    Copyright  : 2021
-    Created on : 2021-06-9, 1:37 PM
-    Author     : Sébastien FOURNIER <fournier.sebastien@outlook.com>
-
-    FRONT CAROUSEL COMPONENTS :
-    ==========================
+    Module: Front carousel components
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
     1 ) Boostrap
         a - Core
     2 ) Boostrap two columns
     3 ) Splide
 
------------------------------------------------------------------- */
+------------------------------------------------------------------------------------------ */
 
 /*-----------------------------------
    1 ) Boostrap
@@ -440,7 +438,8 @@
     }
 
     .img-loader-wrap img {
-        border-radius: $border-radius-small;
+        // Parister : maquette en angles vifs (comme les cards) → pas de radius sur les images de carrousel.
+        border-radius: 0;
     }
 
     .btn-vertical {
@@ -521,3 +520,8 @@
 //        }
 //    }
 //}
+// ----- Parister (projet) : masquer les boutons pause/play des sliders -----
+.btn-arrow.btn-pause,
+.btn-arrow.btn-play {
+    display: none !important;
+}

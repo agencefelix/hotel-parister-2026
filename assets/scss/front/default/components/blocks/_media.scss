@@ -2,9 +2,10 @@
 
 /* -----------------------------------------------------------------
 
-    Module : Médias
-    Copyright : 2025
-    Author : Sébastien FOURNIER <fournier.sebastien@outlook.com>
+    Module: Media
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
     1 ) Variables
     2 ) Core
@@ -16,7 +17,7 @@
     8 ) Medias with secondary
     9 ) Medias with pictogram & secondary
 
------------------------------------------------------------------- */
+------------------------------------------------------------------------------------------ */
 
 /*----------------------------------------------
    1 ) Variables
@@ -53,11 +54,17 @@ body {
     z-index: 10;
 
     &.generating, &.generating .inner {
+
         width: 100% !important;
         height: 100% !important;
         background-size: cover !important;
         background-position: center !important;
         display: inline-block !important;
+
+        .img-loader {
+            max-width: initial !important;
+            max-height: initial !important;
+        }
     }
 
     .spinner-wrap {

@@ -2,18 +2,16 @@
 
 /* -----------------------------------------------------------------
 
-    Copyright  : 2020
-    Created on : 2020-12-15, 11:52 AM
-    Author     : Sébastien FOURNIER <fournier.sebastien@outlook.com>
-
-    TEMPLATE CATALOG :
-    =================
+    Module: Template catalog
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
     1 ) Modules
     2 ) Core import
     3 ) Core
 
------------------------------------------------------------------- */
+------------------------------------------------------------------------------------------ */
 
 /*--------------------------------------
    1 ) Modules
@@ -21,6 +19,7 @@
 
 $enable-breadcrumb: true;
 $enable-youtube: true;
+$enable-accordion: true; // fiche produit : caractéristiques en accordéons Bootstrap
 
 /*-----------------------------------
    2 ) Core import
@@ -31,3 +30,227 @@ $enable-youtube: true;
 /*-----------------------------------
    3 ) Core
 -----------------------------------*/
+/*-----------------------------------
+   Product view
+-----------------------------------*/
+
+// 1) Hero plein écran
+.product-hero {
+    position: relative;
+
+    .product-hero-media img {
+        width: 100%;
+        height: 100dvh;
+        object-fit: cover;
+        display: block;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba($black, .3);
+        pointer-events: none;
+    }
+
+    .product-hero-caption {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        color: $white;
+        padding: 0 rem(20px);
+    }
+
+    .product-hero-title {
+        font-weight: $font-weight-bold;
+        letter-spacing: .25em;
+        font-size: rem(40px);
+        line-height: 1;
+    }
+
+    .product-hero-subtitle {
+        font-family: $font-script;
+        font-weight: $font-weight-normal;
+        font-size: rem(72px);
+        line-height: 1;
+        margin-top: rem(-8px);
+    }
+
+    .product-hero-tagline {
+        left: 0;
+        bottom: rem(48px);
+        z-index: 2;
+        color: $white;
+        letter-spacing: .25em;
+        font-size: rem(13px);
+    }
+}
+
+// 2) Détails : galerie + infos
+.product-detail {
+
+    // Galerie : flèches latérales carrées translucides (Parister)
+    .product-gallery-col {
+        .splide__track .btn-vertical {
+            top: 50% !important;
+            width: rem(48px) !important;
+            height: rem(48px) !important;
+            background-color: rgba($white, .7) !important;
+            border: 0 !important;
+            border-radius: rem(4px) !important;
+            &.btn-prev { left: rem(12px) !important; }
+            &.btn-next { right: rem(12px) !important; }
+            i { color: $dark !important; }
+        }
+        img { width: 100%; object-fit: cover; }
+    }
+
+    .product-info-title {
+        font-weight: $font-weight-bold;
+        letter-spacing: .2em;
+        font-size: rem(24px);
+        line-height: 1;
+        color: $dark;
+    }
+
+    .product-info-subtitle {
+        font-family: $font-script;
+        font-size: rem(40px);
+        line-height: 1;
+        color: $primary;
+    }
+
+    .product-info-surface {
+        color: $primary;
+        letter-spacing: .15em;
+        font-size: rem(14px);
+        text-transform: uppercase;
+    }
+
+    .product-info-intro {
+        font-weight: $font-weight-light;
+        line-height: 1.6;
+    }
+
+    // Accordéons (Confort, Literie, Salle de bain, Technologie)
+    .product-accordion {
+        .accordion-item {
+            background: transparent;
+            border: 0;
+            border-top: 1px solid rgba($primary, .3);
+        }
+        .accordion-item:last-child { border-bottom: 1px solid rgba($primary, .3); }
+
+        .accordion-button {
+            background: transparent;
+            box-shadow: none;
+            color: $primary;
+            font-weight: $font-weight-bold;
+            letter-spacing: .15em;
+            font-size: rem(14px);
+            padding: rem(18px) 0;
+
+            &:not(.collapsed) { color: $primary; }
+            &:focus { box-shadow: none; }
+        }
+
+        .product-feature-list {
+            list-style: none;
+            margin: 0 0 rem(8px);
+            padding: 0;
+
+            li {
+                position: relative;
+                padding-left: rem(18px);
+                margin-bottom: rem(6px);
+                line-height: 1.5;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: rem(9px);
+                    width: rem(6px);
+                    height: rem(6px);
+                    background: $primary;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+}
+
+// 3) Les autres chambres
+.product-other-rooms {
+
+    .other-rooms-title {
+        font-weight: $font-weight-bold;
+        letter-spacing: .25em;
+        font-size: rem(24px);
+        color: $dark;
+    }
+
+    .other-rooms-script {
+        font-family: $font-script;
+        font-size: rem(56px);
+        line-height: 1;
+        color: $primary;
+        margin-top: rem(-10px);
+    }
+
+    // Flèches latérales carrées (cf. autres bandes)
+    .splide__track .btn-vertical {
+        top: 50% !important;
+        width: rem(48px) !important;
+        height: rem(48px) !important;
+        background-color: rgba($white, .7) !important;
+        border: 0 !important;
+        border-radius: rem(4px) !important;
+        &.btn-prev { left: rem(12px) !important; }
+        &.btn-next { right: rem(12px) !important; }
+        i { color: $dark !important; }
+    }
+}
+
+// Other-rooms : largeur de repli pré-init Splide (cards image-overlay sans texte en flux → sinon écrasées à 0).
+.slider-container-product-other-rooms {
+    .splide:not(.is-initialized) .splide__slide {
+        flex: 0 0 auto;
+        width: 100%;
+        @include mediaQuery(min-md) { width: 50%; }
+        @include mediaQuery(min-lg) { width: 33.333%; }
+    }
+    .splide__slide { padding: 0 rem(12px); }
+}
+
+// Parister : boutons CARRÉS (maquette sans border-radius).
+.btn,
+.btn-primary,
+.btn-outline-primary {
+    border-radius: 0 !important;
+}
+
+// --- Correctifs product-view (tailles d'images maîtrisées, sans dépendre du poids de la vignette) ---
+.product-hero .product-hero-media,
+.product-hero .product-hero-media picture,
+.product-hero .product-hero-media .img-loader-wrap { width: 100%; display: block; }
+.product-hero .product-hero-media img {
+    aspect-ratio: 16 / 7;     // hero large (maquette), pas 100dvh d'une source fine
+    height: auto;
+    max-height: 100dvh;
+    width: 100% !important;
+    object-fit: cover;
+}
+
+.product-detail {
+    // Galerie : portrait maîtrisé (la vignette peut être grande, on borne l'affichage).
+    .product-gallery-col .splide__slide img,
+    .product-gallery-col img {
+        aspect-ratio: 3 / 4;
+        max-height: 80vh;
+        width: 100%;
+        object-fit: cover;
+    }
+    // S'assurer que les colonnes restent côte à côte (l'image ne doit pas forcer la largeur).
+    .product-gallery-col, .product-info-col { min-width: 0; }
+}

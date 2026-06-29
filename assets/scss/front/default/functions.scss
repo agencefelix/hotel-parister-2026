@@ -1,3 +1,14 @@
+@charset "UTF-8";
+
+/* -----------------------------------------------------------------
+
+    Module: Functions
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
+
+------------------------------------------------------------------------------------------ */
+
 @function str-replace-svg($string, $search, $replace: "") {
     $index: str-index($string, $search);
     @if $index {

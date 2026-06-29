@@ -2,14 +2,12 @@
 
 /* -----------------------------------------------------------------
 
-    Copyright  : 2020
-    Created on : 2020-11-11, 6:37 PM
-    Author     : Sébastien FOURNIER <fournier.sebastien@outlook.com>
+    Module: Front buttons components
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
-    FRONT BUTTONS COMPONENTS :
-    =========================
-
------------------------------------------------------------------- */
+------------------------------------------------------------------------------------------ */
 
 .btn.btn-circle:not(.d-none) {
     display: inline-flex !important;
@@ -47,10 +45,12 @@
     box-sizing: border-box;
     border-width: $btn-border-width !important;
     border-style: solid;
-    font-size: 16px;
+    font-size: $btn-font-size;
+    letter-spacing: .2em; /* CTA charte : 0.2em (relevé Figma) */
+    text-transform: uppercase;
 
     span {
-        font-size: 16px;
+        font-size: $btn-font-size;
     }
 
     &:not(.btn-circle) {
@@ -58,7 +58,7 @@
         display: inline-block;
         border-radius: $btn-border-radius;
         line-height: 1rem;
-        font-weight: 600;
+        font-weight: $font-weight-bold; /* CTA charte : 700 (relevé Figma) */
         white-space: normal;
         min-width: 175px;
 

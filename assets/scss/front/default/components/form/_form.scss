@@ -1,14 +1,19 @@
 @charset "UTF-8";
 
+/* -----------------------------------------------------------------
+
+    Module: Form
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
+
+------------------------------------------------------------------------------------------ */
+
 //@import "tom-select";
 
 @if ($enable-form) {
 
-    /* -----------------------------------------------------------------
-        Module : Form
-        Copyright : 2025
-        Author : Sébastien FOURNIER <fournier.sebastien@outlook.com>
-    ------------------------------------------------------------------ */
+    
 
     /*! purgecss start ignore */
 
@@ -220,11 +225,21 @@
         color: $white !important;
     }
 
-    .form-check-input:checked[type="radio"],
+    // Parister : checkbox CARRÉE, fond primary + coche blanche à la sélection.
+    .form-check-input[type="checkbox"] {
+        border-radius: 0;
+    }
     .form-check-input:checked[type="checkbox"] {
-        background: url(../../../../../medias/images/front/default/checkbox-checked.svg) no-repeat;
-        background-size: cover;
-        border-color: transparent;
+        background-color: $primary;
+        border-color: $primary;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 70% 70%;
+    }
+    .form-check-input:checked[type="radio"] {
+        background-color: $primary;
+        border-color: $primary;
     }
 
     .file-group.as-btn {

@@ -1,17 +1,15 @@
-@if ($enable-pagination) {
-
 @charset "UTF-8";
 
-    /* -----------------------------------------------------------------
+/* -----------------------------------------------------------------
 
-        Copyright  : 2024
-        Created on : 2024-01-09, 2:08 PM
-        Author     : Sébastien FOURNIER <fournier.sebastien@outlook.com>
+    Module: Front pagination components
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
-        FRONT PAGINATION COMPONENTS :
-        =============================
+------------------------------------------------------------------------------------------ */
 
-    ------------------------------------------------------------------ */
+@if ($enable-pagination) {
 
     .pagination-counter {
 

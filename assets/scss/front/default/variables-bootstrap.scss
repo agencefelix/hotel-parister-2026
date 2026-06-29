@@ -1,9 +1,11 @@
-/* ------------------------------------------------------------------------------------------
+@charset "UTF-8";
 
-    Module : Bootstrap variables
-    Copyright : 2024
+/* -----------------------------------------------------------------
+
+    Module: Bootstrap variables
+    Copyright: 2026
     Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
-    Author : Sébastien FOURNIER <fournier.sebastien@outlook.com>
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
     1 ) Core
     2 ) Variables
@@ -304,7 +306,7 @@ $enable-z-3: false !default;
 $enable-row-cols: false !default;
 $enable-offset: false !default;
 $enable-gutter: false !default;
-$enable-gap: false !default;
+$enable-gap: true !default;
 $enable-row-gap: false !default;
 $enable-column-gap: false !default;
 

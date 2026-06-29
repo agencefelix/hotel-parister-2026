@@ -1,17 +1,28 @@
-@if ($enable-card) {
-
 @charset "UTF-8";
 
-    /* -----------------------------------------------------------------
+/* -----------------------------------------------------------------
 
-        Copyright  : 2021
-        Created on : 2021-08-13, 10:08 AM
-        Author     : Sébastien FOURNIER <fournier.sebastien@outlook.com>
+    Module: Front card block
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
-        FRONT CARD BLOCK :
-        ==================
+------------------------------------------------------------------------------------------ */
 
-    ------------------------------------------------------------------ */
+@if ($enable-card) {
+
+    // Charte sans border-radius sur les cards (angles vifs) → annule le radius hérité du thème.
+    .card,
+    .card .card-header,
+    .card .card-header picture,
+    .card .card-header picture img,
+    .card .card-header .img-loader-wrap,
+    .card .card-header .img-hover-buttons-wrap,
+    .card .card-footer,
+    .card .card-body {
+        border-radius: 0 !important;
+    }
+
 
     .card {
 
@@ -83,6 +94,137 @@
             a, a span {
                 font-size: 14px !important;
             }
+        }
+    }
+
+    // Carte "room"/overlay réutilisable (toute page). Scope #body-page (global) pour battre `#body-page span`.
+    #body-page {
+
+        .card-room {
+            overflow: hidden;
+            color: $beige;
+            text-decoration: none;
+        }
+
+        .card-room .img-loader-wrap {
+            z-index: 1;
+        }
+
+        .card-room-media {
+
+            height: 100% !important;
+
+            picture, .img-loader-wrap {
+                height: 100% !important;
+            }
+
+            img {
+                width: 100%;
+                height: 100% !important;
+                aspect-ratio: 3 / 4;
+                object-fit: cover;
+                display: block;
+            }
+        }
+
+        // Voile haut + bas pour lisibilité du texte clair sur la photo.
+        .card-room::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(180deg, rgba($black, .5) 0%, rgba($black, 0) 28%, rgba($black, 0) 60%, rgba($black, .65) 100%);
+            pointer-events: none;
+        }
+
+        // Titre overlay HAUT, centré.
+        .card-room-title {
+            position: absolute;
+            top: rem(28px);
+            left: rem(20px);
+            right: rem(20px);
+            z-index: 3;
+            text-align: center;
+            color: $beige;
+        }
+
+        // Kicker (1er mot) : 24 / 700 / lh24 / UPPER (token Figma).
+        .card-room-kicker {
+            font-size: rem(24px);
+            font-weight: $font-weight-bold;
+            letter-spacing: 0;
+            line-height: 1;
+            color: $beige;
+        }
+
+        // Script (reste du nom) : 54 / 400 / lh101 (token) ; marge négative = stacking serré maquette.
+        .card-room-script {
+            font-family: $font-script;
+            font-weight: $font-weight-normal;
+            font-size: rem(54px);
+            line-height: calc(101 / 54);
+            margin-top: rem(-12px);
+            color: $beige;
+        }
+
+        // « Découvrir » overlay BAS, centré + filet (maquette) : 14 / 700 / .2em / lh17 / UPPER.
+        .card-room-link {
+            position: absolute;
+            bottom: rem(28px);
+            left: rem(20px);
+            right: rem(20px);
+            z-index: 3;
+            text-align: center;
+            color: $beige;
+            font-size: rem(14px);
+            font-weight: $font-weight-bold;
+            letter-spacing: .2em;
+            line-height: calc(17 / 14);
+
+            // Filets maquette : un trait AU-DESSUS (::before) et un EN-DESSOUS (::after) du label.
+            &::before,
+            &::after {
+                content: "";
+                display: block;
+                width: rem(40px);
+                height: 1px;
+                background: $beige;
+                transition: width .3s ease; // Parister : hover sobre (filets qui s'étirent), cf. btn-outline
+            }
+
+            &::before {
+                margin: 0 auto rem(10px);
+            }
+
+            &::after {
+                margin: rem(10px) auto 0;
+            }
+        }
+
+        // Parister : hover minimal sur « Découvrir » (les filets s'étirent), façon btn-outline.
+        .card-room:hover .card-room-link::before,
+        .card-room:hover .card-room-link::after {
+            width: rem(72px);
+        }
+    }
+
+    // Card spa réutilisable : titre sans + sous-titre script. Scope #body-page : couleur du span
+    // sous-titre au-dessus du global `#body-page span`.
+    #body-page .card-spa-content {
+        .title {
+            font-size: rem(24px);
+            font-weight: $font-weight-bold;
+            line-height: 1;
+            color: $white;
+        }
+
+        .sub-title {
+            font-family: $font-script;
+            font-weight: $font-weight-normal;
+            text-transform: none;
+            font-size: rem(54px);
+            line-height: calc(101 / 54);
+            color: $light;
         }
     }
 }

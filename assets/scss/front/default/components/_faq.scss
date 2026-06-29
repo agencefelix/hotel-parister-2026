@@ -1,17 +1,15 @@
-@if ($enable-faq) {
-
 @charset "UTF-8";
 
-    /* -----------------------------------------------------------------
-    
-        Copyright  : 2022
-        Created on : 2022-01-15, 1:15 PM
-        Author     : Sébastien FOURNIER <contact@sebastien-fournier.com>
-    
-        FAQ :
-        ====
-    
-    ------------------------------------------------------------------ */
+/* -----------------------------------------------------------------
+
+    Module: Faq
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
+
+------------------------------------------------------------------------------------------ */
+
+@if ($enable-faq) {
 
     .faq-accordion {
 

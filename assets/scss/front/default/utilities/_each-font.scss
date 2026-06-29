@@ -2,14 +2,12 @@
 
 /* -----------------------------------------------------------------
 
-    Copyright  : 2022
-    Created on : 2022-01-19, 7:04 PM
-    Author     : Sébastien FOURNIER <fournier.sebastien@outlook.com>
+    Module: Front each font
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
-    FRONT EACH FONT :
-    =================
-
------------------------------------------------------------------- */
+------------------------------------------------------------------------------------------ */
 
 @each $code, $config in $theme-fonts {
     .ff-#{$code} {

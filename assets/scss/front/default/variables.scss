@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
-/* ------------------------------------------------------------------------------------------
+/* -----------------------------------------------------------------
 
-    Module : Variables
-    Copyright : 2024
+    Module: Variables
+    Copyright: 2026
     Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
-    Author : Sébastien FOURNIER <fournier.sebastien@outlook.com>
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
     1 ) App modules
         a - Gdpr
@@ -288,6 +288,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     'h2, h2 a, .h2, .h2 a': (
@@ -307,6 +310,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     'h3, h3 a, .h3, .h3 a': (
@@ -327,6 +333,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     'h4, h4 a, .h4, .h4 a': (
@@ -346,6 +355,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     'h5, h5 a, .h5, .h5 a': (
@@ -365,6 +377,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     'h6, h6 a, .h6, .h6 a': (
@@ -384,6 +399,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     '.sub-title': (
@@ -402,6 +420,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     'p': (
@@ -419,6 +440,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     '.body, p': (
@@ -436,6 +460,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     'a.link, a.link span, a.link svg, .open-gdpr-modal.link, .body a, .introduction a, a.phone-link, a.email-link': (
@@ -455,6 +482,9 @@ $elements: map-merge((
             'dark': $white,
             'black': $white,
             'white': $primary,
+            'teal':  $primary,
+            'beige':  $primary,
+            'navy':  $white,
         )
     ),
     'a:hover, a:hover .title, a:hover span, a.link:hover, a.link:hover span': (
@@ -474,6 +504,9 @@ $elements: map-merge((
             'dark': $white,
             'black': $white,
             'white': $primary,
+            'teal':  $primary,
+            'beige':  $primary,
+            'navy':  $white,
         )
     ),
     '.news-category-title': (
@@ -501,6 +534,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     'form .form-text': (
@@ -519,6 +555,9 @@ $elements: map-merge((
             'light': $info !important,
             'dark': $info !important,
             'white': $info !important,
+            'teal':  $info !important,
+            'beige':  $info !important,
+            'navy':  $info !important,
         )
     ),
     'svg-not-initial': (
@@ -534,6 +573,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     'img-copyright-svg': (
@@ -550,6 +592,9 @@ $elements: map-merge((
             'dark': $white,
             'black': $white,
             'white': $primary,
+            'teal':  $primary,
+            'beige':  $primary,
+            'navy':  $white,
         )
     ),
     'link-block': (
@@ -566,6 +611,9 @@ $elements: map-merge((
             'dark': $white,
             'black': $white,
             'white': $primary,
+            'teal':  $primary,
+            'beige':  $primary,
+            'navy':  $white,
         )
     ),
     'link-block-hover': (
@@ -581,6 +629,9 @@ $elements: map-merge((
             'light': $warning,
             'dark': $warning,
             'white': $warning,
+            'teal':  $warning,
+            'beige':  $warning,
+            'navy':  $warning,
         )
     ),
     'carousel-indicator': (
@@ -596,6 +647,9 @@ $elements: map-merge((
             'light': $primary,
             'dark': $white,
             'white': $primary,
+            'teal':  $primary,
+            'beige':  $primary,
+            'navy':  $white,
         )
     ),
     'information-container': (
@@ -611,6 +665,9 @@ $elements: map-merge((
             'light': $primary,
             'dark': $white,
             'white': $primary,
+            'teal':  $primary,
+            'beige':  $primary,
+            'navy':  $white,
         )
     ),
     'information-container-hover': (
@@ -626,6 +683,9 @@ $elements: map-merge((
             'light': $secondary,
             'dark': $white,
             'white': $secondary,
+            'teal':  $secondary,
+            'beige':  $secondary,
+            'navy':  $white,
         )
     ),
     'bullet': (
@@ -641,6 +701,9 @@ $elements: map-merge((
             'light': $primary,
             'dark': $white,
             'white': $primary,
+            'teal':  $primary,
+            'beige':  $primary,
+            'navy':  $white,
         )
     ),
     'form :not(.form-floating) .form-label span.label-wrap': (
@@ -656,6 +719,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     'form:not(.floating-form) .form-label, form .file-group .form-label, form .form-check-label': (
@@ -671,6 +737,9 @@ $elements: map-merge((
             'light': $body-color,
             'dark': $white,
             'white': $body-color,
+            'teal':  $body-color,
+            'beige':  $body-color,
+            'navy':  $white,
         )
     ),
     '.asterisk, .invalid-feedback, sup.asterisk': (
@@ -686,6 +755,9 @@ $elements: map-merge((
             'light': $danger !important,
             'dark': $danger !important,
             'white': $danger !important,
+            'teal':  $danger !important,
+            'beige':  $danger !important,
+            'navy':  $danger !important,
         )
     ),
     '.asterisk-group': (
@@ -701,6 +773,9 @@ $elements: map-merge((
             'light': $danger,
             'dark': $danger,
             'white': $danger,
+            'teal':  $danger,
+            'beige':  $danger,
+            'navy':  $danger,
         )
     )
 ), $elements);
@@ -869,7 +944,7 @@ $btn-border-radius: $border-radius;
 $btn-white-space: normal;
 $btn-font-weight: normal;
 $btn-line-height: inherit;
-$btn-font-size: $font-size-base;
+$btn-font-size: rem(14px); /* CTA charte Parister : 14px (relevé dev mode Figma) */
 $btn-font-size-md: $btn-font-size;
 $btn-font-size-xs: $btn-font-size;
 
@@ -1008,6 +1083,36 @@ $buttons: (
         'color-outline': $white,
         'color-outline-hover': $primary,
         'border-outline-hover': $primary
+    ),
+    'teal': (
+        'bg': $teal,
+        'color': $primary,
+        'bg-hover': $primary,
+        'color-hover': $teal,
+        'bg-outline': transparent,
+        'bg-outline-hover': $teal,
+        'color-outline': $primary,
+        'color-outline-hover': $primary
+    ),
+    'beige': (
+        'bg': $beige,
+        'color': $primary,
+        'bg-hover': $primary,
+        'color-hover': $beige,
+        'bg-outline': transparent,
+        'bg-outline-hover': $beige,
+        'color-outline': $primary,
+        'color-outline-hover': $primary
+    ),
+    'navy': (
+        'bg': $navy,
+        'color': $white,
+        'bg-hover': $white,
+        'color-hover': $navy,
+        'bg-outline': transparent,
+        'bg-outline-hover': $navy,
+        'color-outline': $navy,
+        'color-outline-hover': $white
     ),
 );
 

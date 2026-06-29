@@ -2,14 +2,12 @@
 
 /* -----------------------------------------------------------------
 
-    Copyright  : 2020
-    Created on : 2020-05-29, 1:00 PM
-    Author     : Sébastien FOURNIER <fournier.sebastien@outlook.com>
+    Module: Front elements layout
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
-    FRONT ELEMENTS LAYOUT :
-    =======================
-
------------------------------------------------------------------- */
+------------------------------------------------------------------------------------------ */
 
 .cursor {
     cursor: pointer !important;
@@ -224,6 +222,11 @@ sup {
 }
 
 #body-page {
+
+    // Clippe le scroll horizontal fantôme (peeks de carrousels, flèches en marge négative) au bord
+    // du viewport — le peek VISIBLE reste, seul le hors-écran est coupé. `clip` (et non `hidden`) ne
+    // crée pas de conteneur de scroll → ne casse ni `position:fixed` (nav) ni `position:sticky`.
+    overflow-x: clip;
 
     ul:not(.no-dots):not(.nav):not(.dropdown-menu):not(.reset):not(.splide__list):not(.splide__pagination):not(.pagination):not(.carousel-indicators):not(.navbar-nav) {
 
@@ -569,4 +572,15 @@ a {
     svg {
         width: initial;
     }
+}
+// #17 Parister : transitions de hover fluides sur tout ce qui est cliquable (additif).
+a,
+.btn,
+button:not(.btn-arrow),
+[role="button"],
+.cursor,
+.card-room,
+.card-spa,
+.card-universe {
+    transition: color .25s ease, background-color .25s ease, opacity .25s ease, transform .35s ease, border-color .25s ease, box-shadow .25s ease;
 }

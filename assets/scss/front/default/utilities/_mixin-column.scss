@@ -1,17 +1,17 @@
 @charset "UTF-8";
 
-@import "../../bootstrap/mixins/breakpoints";
-
 /* -----------------------------------------------------------------
 
-    Copyright  : 2024
-    Created on : 2019-08-15, 4:25 AM
-    Author     : Sébastien FOURNIER <fournier.sebastien@outlook.com>
+    Module: Mixin columns
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
-    MIXIN COLUMNS :
-    ==============
+------------------------------------------------------------------------------------------ */
 
------------------------------------------------------------------- */
+@import "../../bootstrap/mixins/breakpoints";
+
+
 
 @if $enable-card-columns {
 

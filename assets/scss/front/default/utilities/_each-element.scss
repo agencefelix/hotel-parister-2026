@@ -2,14 +2,12 @@
 
 /* -----------------------------------------------------------------
 
-    Copyright  : 2024
-    Created on : 2019-11-16, 7:23 AM
-    Author     : Sébastien FOURNIER <fournier.sebastien@outlook.com>
+    Module: Front each elements
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
-    FRONT EACH ELEMENTS :
-    =====================
-
------------------------------------------------------------------- */
+------------------------------------------------------------------------------------------ */
 
 @function explode($string, $delimiter) {
     $result: ();

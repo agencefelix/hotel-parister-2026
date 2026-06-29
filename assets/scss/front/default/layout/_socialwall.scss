@@ -1,11 +1,41 @@
 @charset "UTF-8";
 
 /* -----------------------------------------------------------------
-    Layout : Social wall (bande noire) — conforme maquette.
-    (Le CSS de la newsletter vit dans components/form/_newsletter.scss.)
------------------------------------------------------------------- */
+
+    Module: Socialwall
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
+
+------------------------------------------------------------------------------------------ */
 
 .socialwall {
+
+    position: relative;
+    overflow: hidden;
+
+    // Filigrane « parister » (script, or très clair) en fond — relevé Figma 630:1531 (528px).
+    &::before {
+        content: "parister";
+        position: absolute;
+        left: 50%;
+        top: 32%;
+        transform: translate(-50%, -50%);
+        font-family: $font-script;
+        font-weight: $font-weight-normal;
+        color: rgba($primary, .08);
+        line-height: 1;
+        pointer-events: none;
+        z-index: 0;
+        white-space: nowrap;
+        // Baseline ~ centre des tuiles (Figma 630:1531) — un peu plus haut que le centre de bande.
+
+        @include mediaQuery(min-lg) { font-size: rem(440px); }
+        @include mediaQuery(between-md-lg) { font-size: rem(300px); }
+        @include mediaQuery(max-md) { font-size: rem(180px); }
+    }
+
+    > .container-fluid { position: relative; z-index: 1; }
 
     .socialwall-grid {
         gap: 1rem;
@@ -39,11 +69,13 @@
         display: inline-block;
         color: $primary;
         text-decoration: none;
-        letter-spacing: .25em;
-        font-size: rem(13px);
+        letter-spacing: .2em;          // Figma 630:1531 : 14/700/2.8(.2em)/lh17 UPPER
+        font-size: rem(14px);
+        line-height: calc(17 / 14);
         font-weight: $font-weight-bold;
         transition: opacity .2s ease-in-out;
 
-        &:hover, &:focus { opacity: .7; }
+        // Lisible sur bg-light : texte or au hover (neutralise le blanc hérité de btn-outline-primary).
+        &:hover, &:focus { color: $primary; background-color: transparent; border-color: $primary; opacity: .7; }
     }
 }

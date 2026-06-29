@@ -1,3 +1,11 @@
+/**
+ * Custom
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 $(function () {
     "use strict";
     $(function () {
@@ -104,13 +112,13 @@ $(function () {
         $(this).closest('.card').find('[data-action="collapse"] i').toggleClass('ti-minus ti-plus');
         $(this).closest('.card').children('.card-body').collapse('toggle');
     });
-    // Toggle fullscreen
+    /** Toggle fullscreen */
     $('a[data-action="expand"]').on('click', function (e) {
         e.preventDefault();
         $(this).closest('.card').find('[data-action="expand"] i').toggleClass('mdi-arrow-expand mdi-arrow-compress');
         $(this).closest('.card').toggleClass('card-fullscreen');
     });
-    // Close Card
+    /** Close Card */
     $('a[data-action="close"]').on('click', function () {
         $(this).closest('.card').removeClass().slideUp('fast');
     });
@@ -179,7 +187,7 @@ $(function () {
     function setup() {
         var tmp = get('skin')
         if (tmp && $.inArray(tmp, mySkins)) changeSkin(tmp)
-        // Add the change skin listener
+        /** Add the change skin listener */
         $('[data-skin]').on('click', function (e) {
             if ($(this).hasClass('knob')) return
             e.preventDefault()
@@ -192,11 +200,11 @@ $(function () {
             $(this).addClass("working")
     })
 
-    // For Custom File Input
+    /** For Custom File Input */
     $('.custom-file-input').on('change',function(){
-        //get the file name
+        /** get the file name */
         var fileName = $(this).val();
-        //replace the "Choose a file" label
+        /** replace the "Choose a file" label */
         $(this).next('.custom-file-label').html(fileName);
     })
 });

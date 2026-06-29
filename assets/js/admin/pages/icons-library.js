@@ -1,6 +1,14 @@
 import '../../../scss/admin/pages/icons-library.scss';
 import route from "../../vendor/components/routing";
 
+/**
+ * Icons library
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 let body = $('body');
 
 /** To add Icon */

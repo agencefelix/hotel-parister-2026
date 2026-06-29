@@ -17,6 +17,15 @@ import '../../../vendor/plugins/i18n/jquery-ui-i18n.min';
 import '../../../../scss/admin/widgets/vectormap/google-vector-map.scss';
 import '../../../../scss/admin/widgets/vectormap/jquery-jvectormap-2.0.2.scss';
 import '../../../../scss/admin/pages/analytics.scss';
+
+/**
+ * Analytics
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 // import '../../plugins/morris/morris.min';
 
 $(function () {

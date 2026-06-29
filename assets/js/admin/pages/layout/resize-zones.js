@@ -1,6 +1,14 @@
 import route from "../../core/routing";
 
 /**
+ * Resize zones
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
  * Zones resize
  */
 export default function (Routing) {

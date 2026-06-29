@@ -3,6 +3,14 @@ import {tinymcePlugin} from "../plugins/tinymce";
 import select2 from "../../vendor/plugins/select2";
 import '../bootstrap/dist/tooltip';
 
+/**
+ * Medias tab
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 export default function (Routing, el) {
 
     document.querySelectorAll('.media-tab-content-loader.active').forEach(tab => {

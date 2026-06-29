@@ -1,6 +1,14 @@
 import route from "../../core/routing";
 
 /**
+ * Resize cols
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
  * Cols resize
  */
 export default function (Routing) {

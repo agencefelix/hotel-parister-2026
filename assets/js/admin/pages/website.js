@@ -1,5 +1,13 @@
 import '../../../scss/admin/pages/website.scss';
 
+/**
+ * Website
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 $('body').on('change', '.input-theme', function () {
     let inputs = $(this).closest('.themes-group').find('.input-theme');
     inputs.each(function () {

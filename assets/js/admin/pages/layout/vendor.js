@@ -9,6 +9,14 @@ import blocksStandardizeCol from './blocks-center-col'
 import editElement from "./edit-element"
 
 /**
+ * Vendor
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
  * Active layout plugins & scripts
  */
 export default function (Routing) {

@@ -1,4 +1,12 @@
 /**
+ * Alert
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
  * To display alert messages
  */
 export default function (message, type = 'info', element = null, removeOld = true) {

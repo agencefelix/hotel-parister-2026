@@ -1,6 +1,14 @@
 import route from "../../vendor/components/routing";
 import '../../../scss/admin/pages/translation.scss';
 
+/**
+ * Translation
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 const body = document.body;
 const extractButtons = body.querySelectorAll('.translation-extract-btn');
 const loader = body.querySelector('#main-preloader');

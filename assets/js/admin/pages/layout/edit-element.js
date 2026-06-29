@@ -7,6 +7,14 @@ import touchspin from "../../../vendor/plugins/touchspin";
 import dropify from "../../form/dropify";
 
 /**
+ * Edit element
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
  * On edit element btn click
  */
 export default function (Routing) {

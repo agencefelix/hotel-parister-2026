@@ -5,6 +5,14 @@ import '../../bootstrap/dist/tooltip';
 
 /**
  * Refresh layout
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
+ * Refresh layout
  */
 export default function (Routing, form, modal, event) {
 

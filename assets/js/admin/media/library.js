@@ -12,6 +12,14 @@ import '../media/cache-clear';
 import '../../../scss/admin/pages/library.scss';
 import '../../../scss/admin/lib/sweetalert.scss';
 
+/**
+ * Library
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 let body = $('body');
 
 let folderModal = $('#new-modal-folder');

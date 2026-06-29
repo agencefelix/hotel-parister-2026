@@ -1,6 +1,14 @@
 import setPositions from "./positions";
 
 /**
+ * Zones
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
  * Sortable activation : Zones order
  */
 export default function (Routing) {

@@ -1,5 +1,13 @@
 import '../../../../scss/admin/pages/google-analytics.scss';
 
+/**
+ * Google analytics
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 (function (w, d, s, g, js, fs) {
     g = w.gapi || (w.gapi = {});
     g.analytics = {

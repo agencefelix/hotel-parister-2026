@@ -2,6 +2,14 @@ import removeErrors from "../../vendor/components/remove-errors";
 
 import '../../../scss/admin/pages/menu.scss';
 
+/**
+ * Menu
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 $('body').on('click', '#link_save', function (e) {
 
     e.preventDefault();

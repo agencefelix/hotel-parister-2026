@@ -5,6 +5,14 @@ import '../../vendor/plugins/prism';
 import preview from './seo/preview';
 import search from './seo/search';
 
+/**
+ * Seo
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 $(function () {
 
     search();

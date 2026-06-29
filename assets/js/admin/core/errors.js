@@ -2,6 +2,14 @@ import '../bootstrap/dist/modal';
 import '../bootstrap/dist/alert';
 
 /**
+ * Errors
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
  * To display Errors messages
  */
 export default function (error = null, element = null) {

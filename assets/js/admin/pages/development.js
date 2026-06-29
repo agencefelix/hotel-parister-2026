@@ -1,5 +1,13 @@
 import '../../../scss/admin/pages/development.scss';
 
+/**
+ * Development
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 // import places from 'places.js';
 
 // let locale = $('html').attr('lang');

@@ -2,6 +2,14 @@ import route from "../../../../vendor/components/routing";
 import charts from "./charts";
 
 /**
+ * Refresh
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
  * Refresh page an generate cache
  */
 export default function (body) {

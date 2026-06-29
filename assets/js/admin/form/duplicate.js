@@ -2,6 +2,14 @@ import resetModal from "../../vendor/components/reset-modal";
 import select2 from '../../vendor/plugins/select2'
 
 /**
+ * Duplicate
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
  * Duplicate form
  */
 export default function () {

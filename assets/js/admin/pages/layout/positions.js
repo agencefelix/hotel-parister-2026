@@ -3,6 +3,14 @@ import route from "../../core/routing";
 import '../../bootstrap/dist/tooltip';
 
 /**
+ * Positions
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
  * Set positions
  */
 export default function (Routing, items, routeName, block = false) {

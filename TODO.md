@@ -1,0 +1,1 @@
+Unifier les css sur des choses communes. Regrouper les classes si le css est identique.

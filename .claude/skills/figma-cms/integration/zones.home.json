@@ -1,0 +1,16 @@
+{
+  "_doc": "Conteneurs de bande de la home, pour --zones de verify-layout.mjs. L'ordre Figma de chaque zone est déduit de la médiane(relY) de ses tokens texte ; l'ordre rendu vient du top du conteneur. Ordre dans ce fichier indifférent.",
+  "selectors": [
+    "#zone-home-hero",
+    "#zone-home-universe",
+    "#zone-home-getaway",
+    "#zone-home-rooms",
+    "#zone-home-rooms-products",
+    "#zone-home-restaurant",
+    "#zone-home-spa",
+    "#zone-home-spa-services",
+    "#zone-home-workspaces",
+    "#zone-home-art",
+    "#zone-home-events"
+  ]
+}

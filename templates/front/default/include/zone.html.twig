@@ -99,6 +99,7 @@
                         {% set innerColBackground = not col.backgroundFullSize and col.backgroundColor != (null and 'transparent') ? col.backgroundColor : null %}
                         {% set orientationPadding = innerColBackground ? 'horizontal' : null %}
                         {% set align = col.verticalAlign %}
+                        {% set alignBottom = col.endAlign %}
                         {% set grid = colsGrids[col.id] is defined ? colsGrids[col.id] : '12' %}
                         {% set colClasses = col|colClasses(zone, grid) %}
                         {% set colEffects = col|effectsAttrs %}
@@ -129,6 +130,8 @@
 
                             {% if align %}
                                 <div class="col-12 p-0 my-auto">
+                            {% elseif alignBottom %}
+                                <div class="col-12 p-0 mt-auto">
                             {% endif %}
 
                             {% if not col.backgroundFullHeight %}
@@ -220,7 +223,7 @@
                                 </div>
                             {% endif %}
 
-                            {% if align %}
+                            {% if align or alignBottom %}
                                 </div>
                             {% endif %}
 

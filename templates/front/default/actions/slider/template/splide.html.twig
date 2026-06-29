@@ -93,8 +93,17 @@
                     {% set display = (mediaType == 'video' and media.videoLink is defined and media.videoLink is not empty) or (media.media.filename is defined and media.media.filename) %}
                     {% if display %}
                         <li class="splide__slide">
-                            {% if slider.slug == 'home-universe' %}
+                            {% if slider.slug is defined and slider.slug == 'home-universe' %}
                                 {% include 'front/'~websiteTemplate~'/actions/slider/template/include/card-universe.html.twig' with {
+                                    media: media,
+                                    slider: slider,
+                                    websiteTemplate: websiteTemplate,
+                                    thumbConfiguration: thumbConfiguration,
+                                    fileSizes: fileSizes,
+                                    colSize: colSize is defined ? colSize : null
+                                } only %}
+                            {% elseif slider.slug is defined and slider.slug == 'home-spa-services' %}
+                                {% include 'front/'~websiteTemplate~'/actions/slider/template/include/card-spa.html.twig' with {
                                     media: media,
                                     slider: slider,
                                     websiteTemplate: websiteTemplate,

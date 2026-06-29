@@ -41,7 +41,7 @@
                         <span></span>
                         <span></span>
                     </span>
-                    <span class="label text-uppercase ms-2 fw-600 d-inline-block">{{ "Menu"|trans|raw }}</span>
+                    <span class="label text-uppercase ms-2 fw-bold d-inline-block">{{ "Menu"|trans|raw }}</span>
                 </button>
             </div>
 
@@ -49,27 +49,31 @@
             {% if logo %}
                 <{% if 'h1' == compagnyNameElement %}h1{% else %}strong{% endif %} class="d-none" aria-hidden="true">{{ companyName|striptags }}</{% if 'h1' == compagnyNameElement %}h1{% else %}strong{% endif %}>
                 <a class="navbar-brand p-0 m-0" aria-label="{{ companyName|striptags }}" href="{{ app.request.getSchemeAndHttpHost() }}" data-toggle="preloader">
-                    {{ asset(logo)|file({}, {
-                        screensSizes: {
-                            mobile: {width: 120, height: 52},
-                            tablet: {width: 138, height: 60},
-                            desktop: {width: 138, height: 60}
-                        },
-                        decor: false,
-                        title: companyName,
-                        class: 'force-size logo initial-color',
-                        only_html: false,
-                        lazyLoad: false,
-                        priority: 'high'
-                    }) }}
+                    <span class="brand-logo d-inline-flex">
+                        {{ asset(logo)|file({}, {
+                            screensSizes: {
+                                mobile: {width: 120, height: 52},
+                                tablet: {width: 138, height: 60},
+                                desktop: {width: 138, height: 60}
+                            },
+                            decor: false,
+                            title: companyName,
+                            class: 'force-size logo initial-color',
+                            only_html: false,
+                            lazyLoad: false,
+                            priority: 'high'
+                        }) }}
+                    </span>
+                    {# Au scroll (sticky), le logo devient le nom textuel (maquette). #}
+                    <span class="brand-name text-uppercase">{{ companyName|striptags }}</span>
                 </a>
             {% endif %}
 
             {# Droite : RÉSERVER · BONS CADEAUX (texte, conforme maquette) #}
             <div class="flex-fill d-flex align-items-center justify-content-end">
-                <a href="{{ bookingUrl }}" class="nav-bar-link text-uppercase fw-600" data-toggle="preloader">{{ "Réserver"|trans|raw }}</a>
+                <a href="{{ bookingUrl }}" class="nav-bar-link text-uppercase fw-bold" data-toggle="preloader">{{ "Réserver"|trans|raw }}</a>
                 <span class="nav-bar-sep mx-3" aria-hidden="true"></span>
-                <a href="{{ giftUrl }}" class="nav-bar-link text-uppercase fw-600 d-none d-sm-inline-block" data-toggle="preloader">{{ "Bons cadeaux"|trans|raw }}</a>
+                <a href="{{ giftUrl }}" class="nav-bar-link text-uppercase fw-bold d-none d-sm-inline-block" data-toggle="preloader">{{ "Bons cadeaux"|trans|raw }}</a>
             </div>
         </div>
     </header>
@@ -81,7 +85,7 @@
             {# --------- Barre haute (mode ouvert) --------- #}
             <div class="mega-topbar d-flex align-items-center px-3 px-lg-5 py-3">
                 <div class="flex-fill d-flex justify-content-start">
-                    <button class="nav-close bg-transparent border-0 p-0 d-inline-flex align-items-center text-uppercase fw-600"
+                    <button class="nav-close bg-transparent border-0 p-0 d-inline-flex align-items-center text-uppercase fw-bold"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#main-navigation-nav"
@@ -100,9 +104,9 @@
                     </a>
                 {% endif %}
                 <div class="flex-fill d-flex align-items-center justify-content-end">
-                    <a href="{{ bookingUrl }}" class="mega-topbar-link text-uppercase fw-600" data-toggle="preloader">{{ "Réserver"|trans|raw }}</a>
+                    <a href="{{ bookingUrl }}" class="mega-topbar-link text-uppercase fw-bold" data-toggle="preloader">{{ "Réserver"|trans|raw }}</a>
                     <span class="mega-topbar-sep mx-3 d-none d-lg-inline-block" aria-hidden="true"></span>
-                    <a href="{{ giftUrl }}" class="mega-topbar-link text-uppercase fw-600 d-none d-lg-inline-block" data-toggle="preloader">{{ "Bons cadeaux"|trans|raw }}</a>
+                    <a href="{{ giftUrl }}" class="mega-topbar-link text-uppercase fw-bold d-none d-lg-inline-block" data-toggle="preloader">{{ "Bons cadeaux"|trans|raw }}</a>
                 </div>
             </div>
 
@@ -121,7 +125,7 @@
                         {% for group in links %}
                             {% if group.online is not defined or group.online %}
                                 <div class="col-6 mega-col">
-                                    <span class="mega-col-title d-block text-uppercase fw-600 mb-3">{{ group.title|unescape|raw }}</span>
+                                    <span class="mega-col-title d-block text-uppercase fw-bold mb-3">{{ group.title|unescape|raw }}</span>
                                     {% if group.children %}
                                         <ul class="reset mega-col-list">
                                             {% for child in group.children %}
@@ -169,6 +173,7 @@
                             </li>
                         </ul>
 
+                        <div class="mega-aside-contact-wrap d-flex flex-column flex-grow-1 px-4 px-lg-5 pb-4">
                         {% if website.networks %}
                             <nav class="socials-list d-flex justify-content-center mt-4 mb-4" aria-label="{{ "Navigation des liens sociaux"|trans|striptags }}">
                                 {% for name, infos in website.networks %}
@@ -196,6 +201,7 @@
                                 {% endif %}
                             </address>
                         {% endfor %}
+                        </div>
                     </div>
                 </aside>
 

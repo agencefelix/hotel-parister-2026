@@ -236,6 +236,7 @@
             {% if not onlyBody %}
                 {% include 'front/'~websiteTemplate~'/include/footer.html.twig' with {
                     websiteTemplate: websiteTemplate,
+                    webpack: webpack,
                     configuration: configuration,
                     information: information,
                     website: website,

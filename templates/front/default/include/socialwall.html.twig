@@ -9,7 +9,7 @@
 {% endfor %}
 
 <section id="socialwall" class="socialwall bg-light py-5" aria-label="{{ "Mur social Instagram"|trans|striptags }}">
-    <div class="container-fluid px-3 px-lg-5">
+    <div class="container">
         <div class="socialwall-grid d-flex justify-content-between flex-wrap">
             {% for img in ['insta-1', 'insta-2', 'insta-3'] %}
                 <a class="socialwall-link" href="{{ instaUrl }}"{% if instaUrl != '#' %} target="_blank" rel="noopener noreferrer"{% endif %} aria-label="Instagram - {{ "nouvelle fenêtre"|trans|striptags }}">
@@ -18,7 +18,7 @@
             {% endfor %}
         </div>
         <div class="text-center mt-5">
-            <a class="socialwall-follow text-uppercase" href="{{ instaUrl }}"{% if instaUrl != '#' %} target="_blank" rel="noopener noreferrer"{% endif %}>
+            <a class="socialwall-follow btn btn-outline-primary text-uppercase" href="{{ instaUrl }}"{% if instaUrl != '#' %} target="_blank" rel="noopener noreferrer"{% endif %}>
                 {{ "Suivez-nous sur insta"|trans|raw }}
             </a>
         </div>

@@ -1,6 +1,5 @@
 {% trans_default_domain 'front_default' %}
 
-{% import 'front/'~websiteTemplate~'/include/macros/card.html.twig' as macroCard %}
 {% import 'core/webmaster-edit.html.twig' as macroWebmaster %}
 
 {% if microDataActive and microdataEntities is defined %}
@@ -61,19 +60,12 @@
                                         role: 'ROLE_CATALOG',
                                         path: path('admin_catalogproduct_edit', {website: website.id, catalogproduct: product.id})
                                     }) }}
-                                    {{ macroCard.standard({
-                                        entity: product,
-                                        titleForce: 3,
+                                    {# Uniformité des cartes : même carte que le teaser [catalog|teaser|slider] (card-room). #}
+                                    {% include 'front/'~websiteTemplate~'/actions/catalog/teaser/include/card-room.html.twig' with {
+                                        post: product,
                                         thumbConfiguration: thumbConfiguration,
-                                        thumbPlaceholder: true,
-                                        displayThumbnail: true,
-                                        showLink: true,
-                                        colSize: 4,
-                                        webmaster: {
-                                            title: "Éditer le produit"|trans([], 'front_webmaster'),
-                                            role: 'ROLE_CATALOG',
-                                            path: path('admin_catalogproduct_edit', {website: website.id, catalogproduct: product.id})
-                                        }}) }}
+                                        colSize: 4
+                                    } only %}
                                 </div>
                             {% endfor %}
                         </div>

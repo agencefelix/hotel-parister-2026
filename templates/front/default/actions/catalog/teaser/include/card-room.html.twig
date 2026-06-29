@@ -1,0 +1,37 @@
+{% trans_default_domain 'front_default' %}
+
+{#
+    Carte chambre dédiée du teaser « Chambres & Suites » (home).
+    Maquette : titre en overlay HAUT (1er mot en capitales + reste en script cursif),
+    image 3:4, lien « Découvrir » souligné en overlay BAS.
+    NB : le teaser passe `disabledLayout` → `intlCard` vaut null mais reste "defined" en Twig,
+    donc on lit le titre via `post.intl` explicitement (la macro standard prendrait intlCard=null).
+#}
+
+{% set intl = post.intl is defined ? post.intl : null %}
+{% set fullTitle = intl and intl.title is defined ? intl.title|trim : '' %}
+{% set parts = fullTitle ? fullTitle|split(' ', 2) : [] %}
+{% set kicker = parts[0] is defined ? parts[0] : '' %}
+{% set script = parts[1] is defined ? parts[1] : '' %}
+{% set media = post.mainMedia is defined and post.mainMedia ? post.mainMedia : (intl and intl.mainMedia is defined ? intl.mainMedia : null) %}
+{% set targetLink = post.url is defined and post.url ? post.url : (intl and intl.link is defined ? intl.link : null) %}
+
+<a href="{{ targetLink }}" class="card-room d-block position-relative h-100"{% if targetLink %} data-toggle="preloader"{% endif %} aria-label="{{ fullTitle|striptags }}">
+    {% if media %}
+        <div class="card-room-media">
+            {{ media|file(thumbConfiguration, {
+                disableLink: true,
+                notInBox: true,
+                colSize: colSize is defined ? colSize : 4,
+                parentEntity: post.entity is defined ? post.entity : null
+            }) }}
+        </div>
+    {% endif %}
+    {% if fullTitle %}
+        <span class="card-room-title">
+            <span class="card-room-kicker d-block text-uppercase">{{ kicker|raw }}</span>
+            {% if script %}<span class="card-room-script d-block">{{ script|lower|raw }}</span>{% endif %}
+        </span>
+    {% endif %}
+    <span class="card-room-link d-block text-uppercase">{{ "Découvrir"|trans }}</span>
+</a>

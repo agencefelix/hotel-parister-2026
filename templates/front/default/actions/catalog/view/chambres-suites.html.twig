@@ -1,0 +1,204 @@
+{% trans_default_domain 'front_default' %}
+
+{# =========================================================================
+   PRODUCT-VIEW dédié « chambres-suites » (maquette Parister) — NE PASSE PAS
+   par le layout de catégorie. Résolu via ProductModel::getTemplate (template
+   par slug de catalogue qui prime sur layout/default-product).
+   3 blocs : (1) hero plein écran, (2) galerie + détails/accordéons + CTA,
+   (3) « Les autres chambres » (slider de cards).
+========================================================================= #}
+
+{% set bookingUrl = entity.formPageUrl is defined and entity.formPageUrl ? entity.formPageUrl : path('front_index', {url: 'reservation'}) %}
+
+{# Features groupées depuis l'entité brute (le ViewModel du view n'expose pas byFeaturesIds).
+   adminName = label FR direct (Superficie, Équipements, Services inclus…). #}
+{% set featureGroups = {} %}
+{% set surfaceValue = null %}
+{% if entity.entity is defined and entity.entity.values is defined %}
+    {% for v in entity.entity.values %}
+        {% set fname = v.feature is defined and v.feature ? v.feature.adminName : null %}
+        {% set vlabel = v.value is defined and v.value ? v.value.adminName : null %}
+        {% if fname and vlabel %}
+            {% if fname == 'Superficie' %}
+                {% set surfaceValue = vlabel %}
+            {% else %}
+                {% set list = featureGroups[fname] is defined ? featureGroups[fname] : [] %}
+                {% if vlabel not in list %}
+                    {% set featureGroups = featureGroups|merge({(fname): (list|merge([vlabel]))}) %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% set heroMedia = entity.mainMediaInHeader and entity.headerMedia ? entity.headerMedia : (entity.medias is not empty ? entity.medias|first : null) %}
+{% set heroTagline = entity.intl.headerSubTitle is defined and entity.intl.headerSubTitle ? entity.intl.headerSubTitle : (entity.intl.introduction is defined ? entity.intl.introduction|striptags : null) %}
+
+{# ---------- 1) HERO plein écran : image + titre + script + accroche ---------- #}
+<section class="product-hero position-relative">
+    <div class="product-hero-media">
+        {% if heroMedia %}
+            {{ heroMedia|file({}, {
+                disableLink: true,
+                notInBox: true,
+                class: 'w-100',
+                lazyLoad: false,
+                priority: 'high',
+                screensSizes: {
+                    mobile: {width: 768, height: 620},
+                    tablet: {width: 1280, height: 580},
+                    desktop: {width: 1920, height: 840}
+                }
+            }) }}
+        {% endif %}
+    </div>
+    <div class="product-hero-caption position-absolute inset-0 d-flex flex-column align-items-center justify-content-center text-center">
+        {% if entity.intl.title %}
+            <h1 class="product-hero-title text-uppercase">{{ entity.intl.title|raw }}</h1>
+        {% endif %}
+        {% if entity.intl.subTitle %}
+            <span class="product-hero-subtitle d-block">{{ entity.intl.subTitle|raw }}</span>
+        {% endif %}
+    </div>
+    {% if heroTagline %}
+        <span class="product-hero-tagline position-absolute text-center text-uppercase w-100">{{ heroTagline }}</span>
+    {% endif %}
+</section>
+
+{# ---------- 2) DÉTAILS : galerie (gauche) + infos + accordéons + CTA (droite) ---------- #}
+<section id="product-view" class="product-detail py-5">
+    <div class="container">
+        <div class="row align-items-start g-5">
+
+            {# Galerie : slider d'images avec flèches latérales + compteur #}
+            <div class="col-lg-6 product-gallery-col">
+                {% if entity.medias is not empty %}
+                    {% include 'front/'~websiteTemplate~'/actions/slider/template/splide.html.twig' with {
+                        medias: entity.medias,
+                        thumbConfiguration: thumbConfigurationView,
+                        arrowsSide: 'side',
+                        arrowsColor: 'dark',
+                        arrowsAsBtn: true,
+                        fade: true,
+                        slider: {
+                            slug: 'product-gallery',
+                            effect: 'fade',
+                            thumbnails: false,
+                            pause: true,
+                            control: true,
+                            autoplay: false,
+                            indicators: false,
+                            progress: false,
+                            popup: false,
+                            offsetDesktop: 0,
+                            offsetMiniPC: 0,
+                            offsetTablet: 0,
+                            offsetMobile: 0,
+                            arrowAlignment: 'side-center',
+                            intervalDuration: 4000,
+                            itemsPerSlide: 1,
+                            itemsPerSlideMiniPC: 1,
+                            itemsPerSlideTablet: 1,
+                            itemsPerSlideMobile: 1
+                        }
+                    } %}
+                {% endif %}
+            </div>
+
+            {# Colonne droite : titre + surface + intro + accordéons + bouton réserver #}
+            <div class="col-lg-6 product-info-col">
+                <div class="product-info-head text-center">
+                    {% if entity.intl.title %}
+                        <h2 class="product-info-title text-uppercase mb-0">{{ entity.intl.title|raw }}</h2>
+                    {% endif %}
+                    {% if entity.intl.subTitle %}
+                        <span class="product-info-subtitle d-block">{{ entity.intl.subTitle|raw }}</span>
+                    {% endif %}
+                    {% if surfaceValue %}
+                        <span class="product-info-surface d-block mt-2">{{ surfaceValue|striptags }}</span>
+                    {% endif %}
+                </div>
+
+                {% if entity.intl.introduction %}
+                    <p class="product-info-intro mt-4">{{ entity.intl.introduction|raw|nl2br }}</p>
+                {% endif %}
+
+                {# Accordéons : un par feature (Capacité, Vue, Terrasse, Équipements, Services inclus…). #}
+                {% if featureGroups|length > 0 %}
+                    <div class="accordion product-accordion mt-4" id="product-features">
+                        {% set idx = 0 %}
+                        {% for fname, values in featureGroups %}
+                            {% set idx = idx + 1 %}
+                            {% set collapseId = 'feature-'~idx %}
+                            {% set isFirst = loop.first %}
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button text-uppercase{% if not isFirst %} collapsed{% endif %}" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#{{ collapseId }}"
+                                            aria-expanded="{{ isFirst ? 'true' : 'false' }}" aria-controls="{{ collapseId }}">
+                                        {{ fname|raw }}
+                                    </button>
+                                </h3>
+                                <div id="{{ collapseId }}" class="accordion-collapse collapse{% if isFirst %} show{% endif %}" data-bs-parent="#product-features">
+                                    <div class="accordion-body">
+                                        <ul class="reset product-feature-list">
+                                            {% for label in values %}
+                                                <li>{{ label|striptags }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% elseif entity.intl.body %}
+                    <div class="product-info-body mt-4">{{ entity.intl.body|raw }}</div>
+                {% endif %}
+
+                <div class="product-cta mt-5">
+                    <a href="{{ bookingUrl }}" class="btn btn-primary text-uppercase w-100" data-toggle="preloader">
+                        {{ "Réserver cette chambre"|trans }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ---------- 3) LES AUTRES CHAMBRES : slider de cards (card-room) ---------- #}
+{% set otherRooms = associatedEntities.list is defined ? associatedEntities.list : [] %}
+{% if otherRooms is not empty %}
+    <section id="product-other-rooms" class="product-other-rooms py-5 text-center">
+        <h2 class="other-rooms-title text-uppercase">{{ "Les autres chambres"|trans }}</h2>
+        <span class="other-rooms-script d-block mb-5">{{ "parister"|trans }}</span>
+        <div class="slider-container-product-other-rooms slider-container">
+            <div class="splide-container">
+                <div class="splide"
+                     data-lenght="{{ otherRooms|length }}"
+                     data-items="3" data-items-medium-pc="3" data-items-mini-pc="3"
+                     data-items-tablet="2" data-items-mobile="1"
+                     data-fade="0" data-scroll="1" data-pause="1" data-autoplay="0"
+                     data-arrows="{{ otherRooms|length > 3 ? 1 : 0 }}" data-dots="0"
+                     data-offset="0" data-gap="2rem" data-interval="4000">
+                    <div class="splide__track">
+                        {% if otherRooms|length > 1 %}
+                            <button class="btn-arrow btn-prev cursor btn-vertical btn-circle btn btn-dark" aria-label="{{ "Précédent"|trans }}" tabindex="-1"><i class="icon-chevron-left"></i></button>
+                        {% endif %}
+                        <ul class="splide__list">
+                            {% for post in otherRooms %}
+                                <li class="splide__slide">
+                                    {% include 'front/'~websiteTemplate~'/actions/catalog/teaser/include/card-room.html.twig' with {
+                                        post: post,
+                                        thumbConfiguration: thumbConfigurationView
+                                    } only %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        {% if otherRooms|length > 1 %}
+                            <button class="btn-arrow btn-next cursor btn-vertical btn-circle btn btn-dark" aria-label="{{ "Suivant"|trans }}" tabindex="-1"><i class="icon-chevron-right"></i></button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}

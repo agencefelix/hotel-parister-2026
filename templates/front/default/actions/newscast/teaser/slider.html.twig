@@ -6,7 +6,7 @@
 {% macro mediaRelation(entity, thumbConfiguration) %}
     {{ entity.mainMedia|file(thumbConfiguration, {
         btnLink: false,
-        targetLink: entity.intl.link is defined ? entity.intl.link : false,
+        targetLink: entity.url is defined and entity.url ? entity.url : (entity.intl.link is defined ? entity.intl.link : false),
         placeholder: false,
         popupGallery: false,
         fullPopup: false,

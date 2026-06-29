@@ -1,25 +1,27 @@
+@charset "UTF-8";
+
+/* -----------------------------------------------------------------
+
+    Module: Front module gdpr
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
+
+    1 ) Variables
+    2 ) Core
+    3 ) Modal
+    4 ) Placeholder
+    5 ) Responsive
+    6 ) Simplebar
+
+------------------------------------------------------------------------------------------ */
+
 //@import "~simplebar";
 
 @if ($enable-gdpr-cms or $enable-gdpr-axeptio) {
 
-@charset "UTF-8";
 
-    /* -----------------------------------------------------------------
-
-        Created on : 2019-08-13, 03:22 PM
-        Author     : Sébastien FOURNIER <fournier.sebastien@outlook.com>
-
-        FRONT MODULE GDPR :
-        ===========================
-
-        1 ) Variables
-        2 ) Core
-        3 ) Modal
-        4 ) Placeholder
-        5 ) Responsive
-        6 ) Simplebar
-
-    ------------------------------------------------------------------ */
+    
 
     /*! purgecss start ignore */
 

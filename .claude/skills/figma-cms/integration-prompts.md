@@ -534,6 +534,15 @@ le chantier n'est **pas** fait. Cibles :
    php bin/console doctrine:schema:update --force
    ```
    (puis `doctrine:fixtures:load` une fois les fixtures prêtes).
+   > ⚠️ **REGEN / rechargement des fixtures = drop schéma D'ABORD** (ne PAS lancer `fixtures:load` seul).
+   > Le purger DELETE ne respecte pas l'ordre des FK → échec récurrent `Integrity constraint violation 1451
+   > Cannot delete or update a parent row` (ex. `cms_module_*_teaser` → `cms_core_website`). Recharger ainsi :
+   > ```
+   > php bin/console doctrine:schema:drop --force --full-database
+   > php bin/console doctrine:schema:update --force --complete
+   > php bin/console doctrine:fixtures:load --no-interaction
+   > ```
+   > (purge sur base vide = aucune violation FK). `--no-interaction` car la commande demande confirmation.
 1. **Config** → `bin/data/config/default.yaml` (cf. section config + Nominatim ci-dessus).
 2. **Médias par défaut / logos / favicons / partage** → `DefaultMediasFixtures` + dossier
    `assets/medias/images/default/` : remplacer les fichiers par défaut du CMS (catégories
@@ -771,6 +780,49 @@ autre. Interdit de mettre du CSS **newsletter dans `_socialwall.scss`**, du foot
   · CSS par page → `templates/<page>.scss` · Composant réutilisable → `components/<composant>.scss`.
 - Le **nom du fichier doit refléter son contenu** : on doit pouvoir deviner où est un style sans chercher.
 - Si on trouve du CSS mal rangé, le **déplacer** dans son fichier propre (et non l'y laisser « parce que ça marche »).
+- **En-tête de fichier (convention projet)** : chaque fichier SCSS commence par `@charset "UTF-8";` puis
+  un **bloc commentaire d'en-tête** au format **`Label: valeur`**
+  (deux-points collé au label, un espace ensuite — PAS d'alignement type `Author     :`) : `Module: <Name>`
+  (rôle, anglais), `Copyright: <année courante>`, `Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)`,
+  `Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>`, puis un **plan numéroté** (`1 ) … / a - …`)
+  reflétant les sections du fichier quand il en a. **Au démarrage du projet**, faire le tour de **tous les
+  fichiers CSS/SCSS hors Bootstrap/vendor** : **mettre à jour l'année** si l'en-tête existe, l'**ajouter**
+  sinon, et **retirer toute ligne `Created on : …`** (pas de date de création). Ne pas copier-coller un
+  plan générique — l'adapter au fichier. **Exclure les PLUGINS/LIBS EXTERNES** (ex. animate.css, leaflet,
+  flatpickr, summernote, codemirror, choices, tom-select…) : **pas de header auteur** dessus (juger au
+  CONTENU, pas au dossier ; en cas de doute, exclure). Header auteur = SCSS propre du CMS/projet seulement.
+  Exclure aussi `/bootstrap/` et `/highlight/themes/`.
+- **Aération** : ligne vide après l'accolade ouvrante d'un bloc et **entre blocs de règles** distincts.
+- **CSS propre/sectionné MAIS jamais au détriment du mobile-first** : la mise en forme/sectionnement ne
+  doit pas pousser à un CSS desktop-first. Garder les **styles de base = mobile**, puis surcouches en
+  `mediaQuery(min-…)` (jamais l'inverse). Sectionner proprement ≠ réécrire en max-width.
+- **Media queries = TOUJOURS le mixin `mediaQuery(<bp>)`** du projet (`assets/scss/vendor/mixin/_media-queries.scss`),
+  jamais de `@media (...)` brut. Breakpoints dispo : `min-{xs..xxxl}`, `max-{xs..xxxl}`, `between-{a}-{b}`
+  (+ `ipad*`, `laptop*`). **S'il manque un breakpoint : l'AJOUTER dans ce fichier** (nouvelle branche
+  `@else if`), **sans JAMAIS modifier une branche existante** — c'est un mixin global, toute modif de
+  l'existant a des effets de bord sur tout le projet.
+
+### Commentaires JS = JSDoc `/** */`
+Les commentaires JS suivent le style **JSDoc** (`/** … */`), pas `//`. Header de fichier JSDoc avec
+`@copyright <année courante>`, `@author`, `@licence` :
+```
+/**
+ * <Name>
+ *
+ * @copyright <année courante>
+ * @author <Prénom NOM> <email JS du projet>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+```
+(⚠️ email/licence JS peuvent différer de la convention CSS : relever ceux en place dans le projet.)
+Convertir les `// commentaire descriptif` → `/** commentaire descriptif */`. **NE PAS convertir** le **code
+commenté/désactivé**, les **URLs**, les **directives** (`// eslint-…`). **Exclure les plugins/libs externes**
+(pas de header auteur dessus, juger au contenu). Au démarrage projet : tour de tous les JS du projet. Vérifier le build après.
+
+### Commentaires : CONCIS et explicites (tout langage)
+Commentaires CSS/SCSS/HTML/Twig/PHP/JS **courts** : une ligne qui dit le « pourquoi » non-évident, **jamais
+un pavé**. Pas de redite de ce que le code montre déjà, **pas de référence à la source du design** (« maquette
+X », « relevé Figma »). Titres de section/headers en **anglais**. Le détail va dans le message de commit.
 
 ### Emplacement des SCSS de templates de pages
 Les styles **par template de page** vivent dans `assets/scss/front/default/templates/`
@@ -864,6 +916,12 @@ Relever les valeurs dans `integration/figma-styles.md` puis les **reporter dans 
   `assets/scss/front/default/utilities/_mixin-button.scss` (mixin de génération) → ajuster les deux.
 - Préférer un `btn btn-<couleur>` / `btn btn-outline-<couleur>` (configuré via `$buttons`) à une classe
   `link` ad hoc ; ne styler en SCSS de page que les particularités (ex. filets en pseudo-éléments).
+- **États HOVER lisibles selon le FOND DU PARENT** : vérifier le **contraste de l'état hover** contre le
+  background réel du conteneur. Cas typique cassé : un `btn-outline-primary` dans un `bg-light` dont le
+  hover passe le **texte en blanc** sur un fond clair → illisible. Choisir une variante de bouton (clé
+  `$buttons` : `*-hover`/`bg-outline`/`color-outline`) **cohérente avec le fond** (sur fond clair, hover
+  qui assombrit ; sur fond foncé, hover qui éclaircit). Mesurer la couleur calculée au hover, ne pas
+  supposer que la variante par défaut convient à tous les fonds.
 
 ### Responsive : traiter un MAXIMUM de tailles d'écran
 Pour un responsive **parfait**, ne pas se limiter à desktop : **traiter le plus de breakpoints possible**
@@ -876,6 +934,33 @@ et ajuster tailles/espacements/overlays à chaque palier. Un rendu « iso » uni
 haut avec la fonction `mediaQuery()` du projet en bornes **`min-*`** (`min-md`, `min-lg`…). Éviter de
 partir du desktop pour redescendre (`max-*`) sauf exception ponctuelle justifiée. Les utilitaires
 Bootstrap sont déjà mobile first (`d-lg-flex`, `col-12 col-lg-6`…) : s'appuyer dessus en priorité.
+
+### Espacements & layout : utilities BOOTSTRAP d'abord, CSS custom en dernier recours
+Marges, paddings, flex, display, alignements, gaps… se font **avec les classes utilitaires Bootstrap
+dans le template**, PAS en CSS custom dans le SCSS. Écrire `margin-top: rem(16px)` / `padding: …` /
+`display: flex` dans un `.scss` quand une classe Bootstrap existe est un anti-pattern (duplication,
+moins maintenable, échappe à la grille du projet).
+- **Espacements** : `mt-*`, `mb-*`, `my-*`, `pt-*`, `px-*`, `gap-*`, `g-*`/`gx-*`/`gy-*` (gouttières de
+  `row`) — échelle 0–5 (+ responsive `mt-lg-4`…). Préférer ça à `margin`/`padding` en SCSS.
+- **Display / flex / grid** : `d-flex`, `d-none`, `d-lg-block`, `flex-column`, `align-items-*`,
+  `justify-content-*`, `flex-grow-1`, `mt-auto`, `order-*`, `text-center`/`text-lg-start`…
+- **Le SCSS custom ne garde que ce que Bootstrap NE couvre PAS** : couleurs de charte, filets/bordures
+  d'une couleur précise (ex. `border-top: 1px solid rgba($light,.25)`), tailles de police tokenisées,
+  `letter-spacing`, ratios, comportements fins. Tout le reste = utilities dans le HTML.
+- Réflexe : avant d'écrire une règle SCSS de positionnement/espacement, vérifier qu'une utility
+  Bootstrap ne fait pas déjà le travail. Si oui, la mettre **dans le template**.
+
+### Textes TRADUISIBLES — y compris les `aria-label` (et `alt`, `title`)
+Tout texte exposé à l'utilisateur **ou aux technologies d'assistance** doit passer par le système de
+traduction, **`aria-label` compris** — au même titre que les libellés visibles. Un `aria-label` (ou
+`alt`, `title`, `aria-description`…) écrit en dur fige le contenu dans une seule langue et casse
+l'accessibilité multilingue.
+- En Twig : `aria-label="{{ "Mon libellé"|trans|striptags }}"` (jamais `aria-label="Mon libellé"` en
+  dur). `|striptags` pour les attributs (pas de HTML dans un attribut).
+- Vaut pour **tous** les attributs textuels destinés à l'humain/AT : `aria-label`, `aria-description`,
+  `title`, `alt`, `placeholder`, `value` de boutons…
+- Les libellés dynamiques (nom de réseau social, titre de page) restent traduits/échappés via les
+  filtres du projet ; ne pas concaténer du texte en dur non traduit dans un `aria-label`.
 
 ### Mécanique d'intégration : où agir pour modifier un rendu
 Principe : un rendu se modifie en remontant la chaîne **BlockType → Action → template Twig → classes
@@ -912,6 +997,12 @@ définition et au bon ratio** (sinon image basse résolution étirée ou mal cad
 - **Dimensions = 2× la largeur d'AFFICHAGE rendue (retina)**, pas 1× : une carte affichée ~420px se
   sert en thumb **840**px (sinon floue sur écran 2×, surtout au rendu 1920). Les héros plein écran sont
   déjà servis larges (~1920). Garder le **ratio** de la maquette. Ex. carte 420×520 → **840×1040**.
+- **Zone plein écran (hero, bande image pleine largeur) → `ThumbConfiguration` desktop = `1920 × 920`.**
+  C'est la taille de référence à servir en desktop pour une image qui couvre tout le viewport : assez
+  large pour les grands écrans (≈1920) au bon ratio. Côté front, ne PAS laisser le `max-width`/`max-height`
+  inline du loader (issu de `mediasSize`, ex. 1600×900) brider l'image : la neutraliser en SCSS sur la
+  zone concernée (`max-width:none`/`max-height:none`, `width:100%`, `height:100dvh`) pour qu'elle couvre
+  réellement la fenêtre. Toujours déclarer aussi `tablet` + `mobile`.
 - `ThumbnailFixtures` est orchestré par `WebsiteFixtures` (locator `thumbnail`) : **régénérer la DB**
   après modification pour que les nouvelles `ThumbConfiguration` prennent effet.
 
@@ -985,7 +1076,51 @@ après l'activation des modules (newsletter, switcher de langues, nav, etc.).
 - **Template** `include/footer.html.twig` : reproduire la structure relevée de la maquette (souvent :
   barre haute socials / logo / note d'avis ; corps menu + média ; bandeau partenaires ; barre légale
   copyright + mentions + cookies + crédit agence). **Couleur du texte = relever le `fill`** (ex. fond
-  foncé → texte clair). Liens légaux via `path('front_index', {url: <code-url>})`.
+  foncé → texte clair).
+
+#### Liens & menus du footer = ADMINISTRABLES (jamais en dur)
+> ⚠️ **Ne pas câbler les liens du footer en `path('front_index', {url: …})` en dur** (légal, cookies,
+> réservation, colonnes de liens…). Tout ce qui est listé doit venir d'un **menu administrable**, comme
+> `mainMenus.footer.arguments.tree.main` — l'éditeur doit pouvoir réordonner/ajouter/retirer sans dev.
+- **Créer les menus manquants dans les fixtures** sans hésiter (menu `footer`, menu `footer-legal`…) et
+  les peupler ; le template itère l'arbre du menu, il ne code pas les entrées. Un lien en dur dans le
+  template = oubli à corriger.
+- ⚠️ **Un GROUPE de liens du footer = UN menu administrable distinct.** Quand la maquette montre plusieurs
+  **colonnes/groupes de liens** sous des intitulés (ex. « Hôtel », « Utiles », « Les passerelles »,
+  « Actualités »…), créer **un menu administrable par groupe** (`footer-hotel`, `footer-utiles`, …), pas un
+  seul menu fourre-tout ni des liens en dur. L'intitulé du groupe = nom/titre du menu ; ses entrées = les
+  liens du groupe. Le template itère **chaque menu** dans sa colonne. Ainsi l'éditeur gère chaque colonne
+  indépendamment (réordonner/ajouter/retirer/renommer) sans dev. **Créer aussi les pages cibles** des
+  entrées (déclarées dans `getPagesParams()`), et rattacher chaque entrée à sa page (`setTargetPage`) plutôt
+  qu'un lien en dur.
+- **Cookies (règle EXACTE)** :
+  - le lien **« Gestion des cookies »** (rouvre le panneau de consentement) ne s'affiche **QUE si**
+    `axeptioActive` (ou le gestionnaire de consentement actif) ;
+  - le lien **« Politique relative aux cookies »** (page de politique) est **TOUJOURS** présent dans le
+    menu, **même si `axeptioActive` est `false`**. Ne pas conditionner la page de politique à l'activation
+    du gestionnaire.
+
+#### Images statiques du footer (logos, photos décoratives) = `|file` depuis `assets/`
+> Tout asset d'habillage **non administrable** (logos partenaires, logo footer en dur, photo de bande…)
+> se rend via le filtre **`|file`**, pas via un `<img src="{{ asset('medias/…') }}">` brut.
+- **Emplacement source** : `assets/medias/images/front/default/` (pipeline Webpack `copyFiles`), pas
+  `public/medias/` (réservé aux médias uploadés).
+- **Référence** : `asset('build/front/'~websiteTemplate~'/images/<nom>', webpack)|file({}, {width, height, alt, class})`.
+  ⚠️ Si l'include utilise `only` (ex. `footer.html.twig`), **passer `webpack`** (et `websiteTemplate`)
+  dans le `with` de l'include — sinon `Variable "webpack" does not exist`.
+- **`|file` enveloppe l'`img` dans `.img-loader-wrap` (inline-flex)** : la **classe** passe sur l'`img`
+  (les sélecteurs `.mon-logo` continuent de matcher) mais l'**`id` n'est pas propagé**, et une image
+  **pleine largeur** (`w-100`) doit recevoir un correctif SCSS sur le wrapper
+  (`.conteneur .img-loader-wrap, … picture, … picture img { width: 100%; }`, cf. `.media-block`).
+- **Logos : privilégier le SVG** quand le visuel l'expose (vectoriel net, léger) ; ne retomber sur
+  PNG/JPG que si aucune source SVG n'est disponible.
+
+#### Le BON élément dans le BON bloc (ne pas déplacer un décor d'une bande à l'autre)
+> Un élément relevé sur une bande appartient à **cette** bande. Cas typique : un **filigrane / texte de
+> fond décoratif** (watermark script en `::before`) rattaché à la mauvaise bande voisine (ex. posé sur la
+> newsletter alors qu'il habille le socialwall). Vérifier le rattachement sur la maquette/screenshots
+> avant d'attacher un décor (`::before`, watermark, fond) à un conteneur, et ne pas le dupliquer sur la
+> bande voisine.
 
 ### ⚠️ Récupérer TOUT le contenu présent sur la PROD (FAQ, listings, etc.)
 Avant les fixtures, **inventorier le site de prod** et **recréer tout contenu réel existant** — pas

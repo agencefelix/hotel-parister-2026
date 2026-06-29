@@ -19,7 +19,11 @@
  * Vérifie : pour les TEXT — font-size/weight/letter-spacing/line-height/text-transform/color ;
  * pour les CONTENEURS auto-layout (FRAME à padding/gap non nul) — padding top/right/bottom/left
  * et `gap` (espacement entre enfants, mesuré géométriquement). Seuls les paddings ATTENDUS non nuls
- * sont vérifiés (un pad=0 Figma ≠ absence de padding CMS : gouttières Bootstrap). SCALE-AWARE : le
+ * sont vérifiés (un pad=0 Figma ≠ absence de padding CMS : gouttières Bootstrap).
+ * BORDER-RADIUS : pour les nœuds à `cornerRadius` (INCL. 0), confronte le radius rendu (max des 4 coins)
+ * à la maquette. Le 0 est décisif → attrape un border-radius hérité du thème (images arrondies à tort).
+ * Ancrage = texte contenu dans la bbox (cards overlay) ou --map ; si fill IMAGE, mesure l'IMG interne.
+ * Désactiver via --no-radius. SCALE-AWARE : le
  * px Figma attendu est snappé au niveau de l'échelle `$margins` le plus proche (le rendu CMS étant
  * quantifié) — évite les faux échecs sur une valeur Figma hors-échelle. `--no-scale` pour désactiver.
  *
@@ -30,6 +34,8 @@
  *   --tol-color <n>        tolérance couleur par canal 0-255 (défaut 10)
  *   --tol-box <n>          tolérance padding de conteneur en px (défaut 2)
  *   --no-box               désactive la vérification des paddings (TEXT uniquement)
+ *   --tol-radius <n>       tolérance border-radius en px (défaut 1)
+ *   --no-radius            désactive la vérification du border-radius
  *   --scss <chemin>        variables.scss pour l'échelle de marges (défaut assets/scss/front/default/variables.scss)
  *   --bp <clé>             breakpoint de réf de l'échelle (défaut "xxl" = desktop) — aligner avec --width
  *   --no-scale             compare le padding/gap au px Figma BRUT (désactive le snap sur l'échelle)
@@ -51,7 +57,7 @@ const args = process.argv.slice(2);
 const URL = args[0];
 const TOKENS_PATH = args[1];
 if (!URL || !TOKENS_PATH) {
-  console.error('Usage: node verify-styles.mjs <url> <figma-tokens.json> [--map m.json] [--tol-px 1] [--tol-lh 2] [--tol-color 10] [--tol-box 2] [--no-box] [--scss v.scss] [--bp xxl] [--no-scale] [--width 1440] [--strict-unmatched] [--only txt] [--out r.json]');
+  console.error('Usage: node verify-styles.mjs <url> <figma-tokens.json> [--map m.json] [--tol-px 1] [--tol-lh 2] [--tol-color 10] [--tol-box 2] [--no-box] [--tol-radius 1] [--no-radius] [--scss v.scss] [--bp xxl] [--no-scale] [--width 1440] [--strict-unmatched] [--only txt] [--out r.json]');
   process.exit(2);
 }
 const opt = (name, def) => {
@@ -65,6 +71,8 @@ const TOL_LH = parseFloat(opt('--tol-lh', '2'));
 const TOL_COLOR = parseInt(opt('--tol-color', '10'), 10);
 const TOL_BOX = parseFloat(opt('--tol-box', '2'));
 const NO_BOX = flag('--no-box');
+const TOL_RADIUS = parseFloat(opt('--tol-radius', '1'));
+const NO_RADIUS = flag('--no-radius');
 const SCALE_SCSS = opt('--scss', 'assets/scss/front/default/variables.scss');
 const SCALE_BP = opt('--bp', 'xxl');
 const NO_SCALE = flag('--no-scale');
@@ -133,6 +141,29 @@ if (!NO_BOX) {
 const boxTextFreq = new Map();
 for (const b of boxes) boxTextFreq.set(normKey(b.text), (boxTextFreq.get(normKey(b.text)) || 0) + 1);
 
+// Nœuds porteurs d'un cornerRadius (INCL. 0) → vérification du border-radius rendu. Ancrage comme les
+// conteneurs : par le texte géométriquement contenu (cards OVERLAY : le titre est SUR l'image → dans la
+// bbox du nœud) ou --map. Si le nœud a un fill IMAGE, la mesure cible l'IMG/PICTURE interne (le radius
+// hérité du thème se pose sur l'image). Le 0 maquette devient décisif : il fait échouer un radius parasite.
+let radii = [];
+if (!NO_RADIUS) {
+  for (const n of items) {
+    if (typeof n.cornerRadius !== 'number') continue;
+    if (typeof n.x !== 'number' || typeof n.w !== 'number') continue;
+    const isImage = Array.isArray(n.fills) && n.fills.some((fl) => fl && fl.type === 'IMAGE');
+    const inside = allTexts.filter((t) => {
+      const cx = t.x + (t.w || 0) / 2, cy = t.y + (t.h || 0) / 2;
+      return cx >= n.x && cx <= n.x + n.w && cy >= n.y && cy <= n.y + n.h;
+    }).sort((a, b) => a.y - b.y);
+    const text = inside.map((t) => t.characters).join(' ').replace(/\s+/g, ' ').trim();
+    // Sans --map, il faut une ancre texte fiable (≥3 car.) ; un nœud image nu sans texte → --map requis.
+    if (!selectorMap[n.id] && text.replace(/\s+/g, '').length < 3) continue;
+    radii.push({ id: n.id, name: (n.name || '').slice(0, 24), radius: n.cornerRadius, isImage, text, area: n.w * (n.h || 0) });
+  }
+}
+const radiusTextFreq = new Map();
+for (const r of radii) radiusTextFreq.set(normKey(r.text), (radiusTextFreq.get(normKey(r.text)) || 0) + 1);
+
 // Échelle de marges (optionnelle) : rend la gate « scale-aware ». Le rendu CMS est QUANTIFIÉ sur
 // l'échelle $margins (niveaux), donc on snappe le px Figma attendu au niveau le plus proche (par axe)
 // avant comparaison — sinon une valeur Figma hors-échelle (ex. 80→niveau 90) ferait un faux échec.
@@ -176,7 +207,7 @@ await page.evaluate(() => window.scrollTo(0, 0));
 await sleep(400);
 
 // Mesure dans le contexte de la page : apparie chaque token à un élément et relève ses computed styles.
-const result = await page.evaluate((tokens, boxes, selectorMap) => {
+const result = await page.evaluate((tokens, boxes, radii, selectorMap) => {
   const norm = (s) => (s || '').replace(/\s+/g, ' ').trim().toLowerCase();
   const rgbToHex = (rgb) => {
     const m = (rgb || '').match(/rgba?\(([^)]+)\)/);
@@ -260,8 +291,32 @@ const result = await page.evaluate((tokens, boxes, selectorMap) => {
     if (!el) { const c = byCompact.get(norm(bx.text).replace(/\s/g, '')); if (c && c.length) { el = c[0]; how = 'compact'; cands = c.length; } }
     return { id: bx.id, matched: !!el, how, cands, pad: el ? measurePad(el) : null, gap: el ? measureGap(el, bx.mode) : null };
   });
-  return { textRows, boxRows };
-}, tokens, boxes, selectorMap);
+  // Border-radius rendu : max des 4 coins (en px). Si le nœud porte un fill IMAGE, on cible l'IMG
+  // interne (le radius fautif se pose sur l'image, ex. thème `picture img { border-radius }`).
+  const measureRadius = (el, isImage) => {
+    let target = el;
+    if (isImage) { const img = el.querySelector('img') || (el.matches('img,picture') ? el : el.querySelector('picture')); if (img) target = img; }
+    const cs = getComputedStyle(target);
+    const corners = [cs.borderTopLeftRadius, cs.borderTopRightRadius, cs.borderBottomLeftRadius, cs.borderBottomRightRadius]
+      .map((v) => parseFloat(v) || 0);
+    return { radiusPx: Math.max(...corners), tag: target.tagName.toLowerCase() };
+  };
+  const radiusRows = radii.map((rx) => {
+    let el = null, how = null, cands = 0;
+    if (selectorMap[rx.id]) { el = document.querySelector(selectorMap[rx.id]); how = 'map'; cands = el ? 1 : 0; }
+    if (!el) {
+      // Pour un nœud image, ne garder que les candidats contenant RÉELLEMENT une image : élimine la
+      // fausse ambiguïté due à l'imbrication (le texte d'une card est partagé par <a> et ses descendants).
+      let list = byFull.get(norm(rx.text)) || [];
+      if (rx.isImage) { const w = list.filter((e) => e.querySelector('img,picture')); if (w.length) list = w; }
+      if (list.length) { el = list[0]; how = 'full-text'; cands = list.length; }
+    }
+    if (!el) { const c = byCompact.get(norm(rx.text).replace(/\s/g, '')); if (c && c.length) { el = c[0]; how = 'compact'; cands = c.length; } }
+    const m = el ? measureRadius(el, rx.isImage) : null;
+    return { id: rx.id, matched: !!el, how, cands, radiusPx: m ? m.radiusPx : null, tag: m ? m.tag : null };
+  });
+  return { textRows, boxRows, radiusRows };
+}, tokens, boxes, radii, selectorMap);
 
 await browser.close();
 const measured = result.textRows;
@@ -369,6 +424,26 @@ for (const r of result.boxRows) {
   boxRows.push({ id: r.id, name: bx.name, text: bx.text.slice(0, 40), matched: true, how: r.how, bucket: isAmbiguousBox ? 'ambiguous' : 'reliable', checks });
 }
 
+// ---- Comparaison border-radius (nœuds à cornerRadius, incl. 0) ----
+const radiusById = new Map(radii.map((r) => [r.id, r]));
+const radiusRows = [];
+let radiusFails = 0, radiusUnmatched = 0, radiusAmbig = 0, radiusAmbigFails = 0;
+for (const r of (result.radiusRows || [])) {
+  const rx = radiusById.get(r.id);
+  if (!r.matched) {
+    radiusUnmatched++;
+    radiusRows.push({ id: r.id, name: rx.name, text: rx.text.slice(0, 40), matched: false, bucket: 'content', checks: [] });
+    continue;
+  }
+  const isAmb = r.how !== 'map' && ((radiusTextFreq.get(normKey(rx.text)) || 1) > 1 || r.cands > 1);
+  const ok = near(rx.radius, r.radiusPx, TOL_RADIUS);
+  const onImg = r.tag === 'img' || r.tag === 'picture';
+  const check = { prop: 'border-radius', ok, exp: rx.radius + 'px', got: r.radiusPx + 'px' + (onImg ? ' (img)' : '') };
+  if (isAmb) { radiusAmbig++; if (!ok) radiusAmbigFails++; }
+  else if (!ok) radiusFails++;
+  radiusRows.push({ id: r.id, name: rx.name, text: rx.text.slice(0, 40), matched: true, how: r.how, bucket: isAmb ? 'ambiguous' : 'reliable', checks: [check] });
+}
+
 // ---- Rapport (3 buckets : STYLE fiable / CONTENU / AMBIGU) ----
 // On sépare ce qui est DÉCISIF (style des éléments fiables — texte unique, 1 seul match) de ce qui
 // vient d'un CONTENU différent (token non apparié = la copie du rendu ≠ maquette) et des doublons
@@ -399,6 +474,17 @@ if (reliableBoxes.length) {
   }
 }
 
+const reliableRadii = radiusRows.filter((r) => r.bucket === 'reliable');
+if (reliableRadii.length) {
+  console.log(`\n${C.dim}Border-radius (fiables) :${C.reset}`);
+  for (const row of reliableRadii) {
+    const bad = row.checks.filter((c) => !c.ok);
+    if (bad.length === 0) { console.log(`${C.green}✓${C.reset} [radius] «${row.text}»  ${C.dim}${row.how}${C.reset}`); continue; }
+    console.log(`${C.red}✗ [radius] «${row.text}»${C.reset}`);
+    for (const c of bad) console.log(`    ${C.red}${c.prop}${C.reset} : attendu ${c.exp}, rendu ${c.got}`);
+  }
+}
+
 console.log(`\n${C.cyan}── CONTENU (texte maquette absent du rendu) ──${C.reset}`);
 console.log(`${C.yellow}${unmatched}${C.reset} token(s) non apparié(s)${STRICT_UNMATCHED ? '' : ` ${C.dim}(n'échoue pas le gate sauf --strict-unmatched)${C.reset}`}`);
 if (contentRows.length) console.log(`${C.dim}   ex. ${contentRows.slice(0, 6).map((r) => '«' + r.text.slice(0, 26) + '»').join(', ')}${contentRows.length > 6 ? '…' : ''}${C.reset}`);
@@ -409,24 +495,24 @@ if (ambig || boxAmbig) {
 }
 
 console.log(`\n${C.dim}──────────${C.reset}`);
-console.log(`STYLE fiable : ${reliableRows.length - fails}/${reliableRows.length} conformes (${fails} écart${reliableBoxes.length ? `, paddings ${reliableBoxes.length - boxFails}/${reliableBoxes.length}` : ''})  |  CONTENU : ${unmatched} non appariés  |  AMBIGU : ${ambig + boxAmbig}`);
+console.log(`STYLE fiable : ${reliableRows.length - fails}/${reliableRows.length} conformes (${fails} écart${reliableBoxes.length ? `, paddings ${reliableBoxes.length - boxFails}/${reliableBoxes.length}` : ''}${reliableRadii.length ? `, radius ${reliableRadii.length - radiusFails}/${reliableRadii.length}` : ''})  |  CONTENU : ${unmatched} non appariés  |  AMBIGU : ${ambig + boxAmbig + radiusAmbig}`);
 
 if (OUT) {
   fs.writeFileSync(OUT, JSON.stringify({
     url: URL, width: WIDTH, total: rows.length,
-    style: { reliable: reliableRows.length, fails, boxReliable: reliableBoxes.length, boxFails },
-    content: { unmatched, boxUnmatched },
-    ambiguous: { texts: ambig, textFails: ambigFails, boxes: boxAmbig, boxFails: boxAmbigFails },
-    rows, boxes: boxRows,
+    style: { reliable: reliableRows.length, fails, boxReliable: reliableBoxes.length, boxFails, radiusReliable: reliableRadii.length, radiusFails },
+    content: { unmatched, boxUnmatched, radiusUnmatched },
+    ambiguous: { texts: ambig, textFails: ambigFails, boxes: boxAmbig, boxFails: boxAmbigFails, radii: radiusAmbig, radiusFails: radiusAmbigFails },
+    rows, boxes: boxRows, radii: radiusRows,
   }, null, 2));
   console.log(`Rapport : ${OUT}`);
 }
 
 // Le gate n'échoue QUE sur des écarts DÉCISIFS (éléments fiables). Les ambigus n'échouent jamais ;
 // le contenu non apparié n'échoue qu'avec --strict-unmatched.
-const failed = fails > 0 || boxFails > 0 || (STRICT_UNMATCHED && (unmatched > 0 || boxUnmatched > 0));
+const failed = fails > 0 || boxFails > 0 || radiusFails > 0 || (STRICT_UNMATCHED && (unmatched > 0 || boxUnmatched > 0));
 if (failed) {
-  console.log(`${C.red}GATE STYLES : ÉCHEC${C.reset} (style fiable : ${fails} texte(s), ${boxFails} padding(s)${STRICT_UNMATCHED ? ` ; contenu : ${unmatched + boxUnmatched} non appariés` : ''})`);
+  console.log(`${C.red}GATE STYLES : ÉCHEC${C.reset} (style fiable : ${fails} texte(s), ${boxFails} padding(s), ${radiusFails} radius${STRICT_UNMATCHED ? ` ; contenu : ${unmatched + boxUnmatched} non appariés` : ''})`);
   process.exit(1);
 }
 console.log(`${C.green}GATE STYLES : OK${C.reset}${unmatched ? ` ${C.dim}(${unmatched} non appariés ignorés — contenu)${C.reset}` : ''}`);

@@ -3,20 +3,20 @@
   "width": 1440,
   "total": 125,
   "style": {
-    "reliable": 41,
+    "reliable": 42,
     "fails": 0,
     "boxReliable": 0,
     "boxFails": 0
   },
   "content": {
-    "unmatched": 40,
+    "unmatched": 41,
     "boxUnmatched": 14
   },
   "ambiguous": {
-    "texts": 44,
-    "textFails": 39,
-    "boxes": 3,
-    "boxFails": 2
+    "texts": 42,
+    "textFails": 38,
+    "boxes": 1,
+    "boxFails": 1
   },
   "rows": [
     {
@@ -196,7 +196,7 @@
           "prop": "color",
           "ok": false,
           "exp": "#8fb3b1",
-          "got": "#ffffff"
+          "got": "#b48608"
         }
       ]
     },
@@ -205,13 +205,13 @@
       "text": "Les Passerelles",
       "matched": true,
       "how": "own-text",
-      "bucket": "ambiguous",
+      "bucket": "reliable",
       "checks": [
         {
           "prop": "font-size",
-          "ok": false,
+          "ok": true,
           "exp": "32px",
-          "got": "24px"
+          "got": "32px"
         },
         {
           "prop": "font-weight",
@@ -221,15 +221,15 @@
         },
         {
           "prop": "letter-spacing",
-          "ok": false,
+          "ok": true,
           "exp": "12.8px",
-          "got": "0px"
+          "got": "12.8px"
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "38px",
-          "got": "28.9999px"
+          "got": "38.4px"
         },
         {
           "prop": "text-transform",
@@ -239,9 +239,9 @@
         },
         {
           "prop": "color",
-          "ok": false,
+          "ok": true,
           "exp": "#00561b",
-          "got": "#b48608"
+          "got": "#00561b"
         }
       ]
     },
@@ -377,16 +377,9 @@
           "prop": "color",
           "ok": false,
           "exp": "#00561b",
-          "got": "#ffffff"
+          "got": "#b48608"
         }
       ]
-    },
-    {
-      "id": "I542:1626;30:882",
-      "text": "Morning Wellness Club Yoga avec Clarisse",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
     },
     {
       "id": "I542:1623;30:882",
@@ -411,6 +404,13 @@
     },
     {
       "id": "I542:1627;30:882",
+      "text": "Morning Wellness Club Yoga avec Clarisse",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "I542:1626;30:882",
       "text": "Morning Wellness Club Yoga avec Clarisse",
       "matched": false,
       "bucket": "content",
@@ -718,15 +718,15 @@
       "checks": [
         {
           "prop": "font-size",
-          "ok": false,
+          "ok": true,
           "exp": "54px",
-          "got": "24px"
+          "got": "54px"
         },
         {
           "prop": "font-weight",
-          "ok": false,
+          "ok": true,
           "exp": "400",
-          "got": "700"
+          "got": "400"
         },
         {
           "prop": "letter-spacing",
@@ -736,9 +736,9 @@
         },
         {
           "prop": "line-height",
-          "ok": false,
+          "ok": true,
           "exp": "101px",
-          "got": "24px"
+          "got": "101px"
         },
         {
           "prop": "color",
@@ -1049,15 +1049,15 @@
       "checks": [
         {
           "prop": "font-size",
-          "ok": true,
+          "ok": false,
           "exp": "24px",
-          "got": "24px"
+          "got": "54px"
         },
         {
           "prop": "font-weight",
-          "ok": true,
+          "ok": false,
           "exp": "700",
-          "got": "700"
+          "got": "400"
         },
         {
           "prop": "letter-spacing",
@@ -1067,15 +1067,15 @@
         },
         {
           "prop": "line-height",
-          "ok": true,
+          "ok": false,
           "exp": "24px",
-          "got": "24px"
+          "got": "101px"
         },
         {
           "prop": "text-transform",
-          "ok": true,
+          "ok": false,
           "exp": "uppercase",
-          "got": "uppercase"
+          "got": "none"
         },
         {
           "prop": "color",
@@ -1321,15 +1321,15 @@
       "checks": [
         {
           "prop": "font-size",
-          "ok": true,
+          "ok": false,
           "exp": "24px",
-          "got": "24px"
+          "got": "54px"
         },
         {
           "prop": "font-weight",
-          "ok": true,
+          "ok": false,
           "exp": "700",
-          "got": "700"
+          "got": "400"
         },
         {
           "prop": "letter-spacing",
@@ -1339,15 +1339,15 @@
         },
         {
           "prop": "line-height",
-          "ok": true,
+          "ok": false,
           "exp": "24px",
-          "got": "24px"
+          "got": "101px"
         },
         {
           "prop": "text-transform",
-          "ok": true,
+          "ok": false,
           "exp": "uppercase",
-          "got": "uppercase"
+          "got": "none"
         },
         {
           "prop": "color",
@@ -1368,13 +1368,13 @@
           "prop": "font-size",
           "ok": false,
           "exp": "54px",
-          "got": "16px"
+          "got": "128px"
         },
         {
           "prop": "font-weight",
-          "ok": false,
+          "ok": true,
           "exp": "400",
-          "got": "700"
+          "got": "400"
         },
         {
           "prop": "letter-spacing",
@@ -1386,13 +1386,13 @@
           "prop": "line-height",
           "ok": false,
           "exp": "101px",
-          "got": "24px"
+          "got": "134.4px"
         },
         {
           "prop": "color",
           "ok": false,
           "exp": "#f4f0f1",
-          "got": "#141414"
+          "got": "#ffffff"
         }
       ]
     },
@@ -2033,41 +2033,9 @@
     {
       "id": "I542:1646;91:159",
       "text": "Des espaces raffinés pour réunir, présen",
-      "matched": true,
-      "how": "own-text",
-      "bucket": "reliable",
-      "checks": [
-        {
-          "prop": "font-size",
-          "ok": true,
-          "exp": "16px",
-          "got": "16px"
-        },
-        {
-          "prop": "font-weight",
-          "ok": true,
-          "exp": "300",
-          "got": "300"
-        },
-        {
-          "prop": "letter-spacing",
-          "ok": true,
-          "exp": "0px",
-          "got": "0px"
-        },
-        {
-          "prop": "line-height",
-          "ok": true,
-          "exp": "20px",
-          "got": "20px"
-        },
-        {
-          "prop": "color",
-          "ok": true,
-          "exp": "#141414",
-          "got": "#141414"
-        }
-      ]
+      "matched": false,
+      "bucket": "content",
+      "checks": []
     },
     {
       "id": "I542:1646;91:160;15:380",
@@ -2117,60 +2085,29 @@
     {
       "id": "I542:1646;91:498",
       "text": "Louer",
-      "matched": true,
-      "how": "own-text",
-      "bucket": "reliable",
-      "checks": [
-        {
-          "prop": "font-size",
-          "ok": true,
-          "exp": "24px",
-          "got": "23px"
-        },
-        {
-          "prop": "font-weight",
-          "ok": true,
-          "exp": "700",
-          "got": "700"
-        },
-        {
-          "prop": "letter-spacing",
-          "ok": true,
-          "exp": "0px",
-          "got": "0px"
-        },
-        {
-          "prop": "line-height",
-          "ok": true,
-          "exp": "24px",
-          "got": "23px"
-        },
-        {
-          "prop": "text-transform",
-          "ok": true,
-          "exp": "uppercase",
-          "got": "uppercase"
-        },
-        {
-          "prop": "color",
-          "ok": true,
-          "exp": "#141414",
-          "got": "#141414"
-        }
-      ]
+      "matched": false,
+      "bucket": "content",
+      "checks": []
     },
     {
       "id": "I542:1646;91:499",
       "text": "une salle",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
+    },
+    {
+      "id": "542:1629",
+      "text": "parister",
       "matched": true,
       "how": "own-text",
-      "bucket": "reliable",
+      "bucket": "ambiguous",
       "checks": [
         {
           "prop": "font-size",
-          "ok": true,
-          "exp": "54px",
-          "got": "54px"
+          "ok": false,
+          "exp": "528.2483520507812px",
+          "got": "128px"
         },
         {
           "prop": "font-weight",
@@ -2186,138 +2123,15 @@
         },
         {
           "prop": "line-height",
-          "ok": true,
-          "exp": "101px",
-          "got": "101px"
-        },
-        {
-          "prop": "color",
-          "ok": true,
-          "exp": "#b48608",
-          "got": "#b48608"
-        }
-      ]
-    },
-    {
-      "id": "542:1650",
-      "text": "parister",
-      "matched": true,
-      "how": "own-text",
-      "bucket": "ambiguous",
-      "checks": [
-        {
-          "prop": "font-size",
-          "ok": false,
-          "exp": "528.2483520507812px",
-          "got": "16px"
-        },
-        {
-          "prop": "font-weight",
-          "ok": false,
-          "exp": "400",
-          "got": "700"
-        },
-        {
-          "prop": "letter-spacing",
-          "ok": true,
-          "exp": "0px",
-          "got": "0px"
-        },
-        {
-          "prop": "line-height",
           "ok": false,
           "exp": "400px",
-          "got": "24px"
-        },
-        {
-          "prop": "color",
-          "ok": false,
-          "exp": "#ffffff",
-          "got": "#141414"
-        }
-      ]
-    },
-    {
-      "id": "542:1651",
-      "text": "Intimiste, contemporain et chaleureux",
-      "matched": true,
-      "how": "own-text",
-      "bucket": "ambiguous",
-      "checks": [
-        {
-          "prop": "font-size",
-          "ok": false,
-          "exp": "16px",
-          "got": "30px"
-        },
-        {
-          "prop": "font-weight",
-          "ok": true,
-          "exp": "700",
-          "got": "700"
-        },
-        {
-          "prop": "letter-spacing",
-          "ok": false,
-          "exp": "6.4px",
-          "got": "12px"
-        },
-        {
-          "prop": "line-height",
-          "ok": false,
-          "exp": "19px",
-          "got": "30px"
-        },
-        {
-          "prop": "text-transform",
-          "ok": true,
-          "exp": "uppercase",
-          "got": "uppercase"
-        },
-        {
-          "prop": "color",
-          "ok": false,
-          "exp": "#f4f0f1",
-          "got": "#141414"
-        }
-      ]
-    },
-    {
-      "id": "542:1629",
-      "text": "parister",
-      "matched": true,
-      "how": "own-text",
-      "bucket": "ambiguous",
-      "checks": [
-        {
-          "prop": "font-size",
-          "ok": false,
-          "exp": "528.2483520507812px",
-          "got": "16px"
-        },
-        {
-          "prop": "font-weight",
-          "ok": false,
-          "exp": "400",
-          "got": "700"
-        },
-        {
-          "prop": "letter-spacing",
-          "ok": true,
-          "exp": "0px",
-          "got": "0px"
-        },
-        {
-          "prop": "line-height",
-          "ok": false,
-          "exp": "400px",
-          "got": "24px"
+          "got": "134.4px"
         },
         {
           "prop": "color",
           "ok": false,
           "exp": "#b48608",
-          "got": "#141414"
+          "got": "#ffffff"
         }
       ]
     },
@@ -2350,7 +2164,7 @@
           "prop": "line-height",
           "ok": true,
           "exp": "17px",
-          "got": "17.0001px"
+          "got": "16px"
         },
         {
           "prop": "text-transform",
@@ -2511,41 +2325,9 @@
     {
       "id": "542:1674",
       "text": "newsletter",
-      "matched": true,
-      "how": "own-text",
-      "bucket": "reliable",
-      "checks": [
-        {
-          "prop": "font-size",
-          "ok": true,
-          "exp": "96px",
-          "got": "96px"
-        },
-        {
-          "prop": "font-weight",
-          "ok": true,
-          "exp": "400",
-          "got": "400"
-        },
-        {
-          "prop": "letter-spacing",
-          "ok": true,
-          "exp": "0px",
-          "got": "0px"
-        },
-        {
-          "prop": "line-height",
-          "ok": true,
-          "exp": "101px",
-          "got": "101px"
-        },
-        {
-          "prop": "color",
-          "ok": true,
-          "exp": "#b48608",
-          "got": "#b48608"
-        }
-      ]
+      "matched": false,
+      "bucket": "content",
+      "checks": []
     },
     {
       "id": "542:1631",
@@ -3097,7 +2879,7 @@
       "text": "Blog",
       "matched": true,
       "how": "own-text",
-      "bucket": "ambiguous",
+      "bucket": "reliable",
       "checks": [
         {
           "prop": "font-size",
@@ -3107,15 +2889,15 @@
         },
         {
           "prop": "font-weight",
-          "ok": false,
+          "ok": true,
           "exp": "700",
-          "got": "400"
+          "got": "700"
         },
         {
           "prop": "letter-spacing",
           "ok": true,
           "exp": "2.8000000000000003px",
-          "got": "3.5px"
+          "got": "2.8px"
         },
         {
           "prop": "line-height",
@@ -3179,6 +2961,90 @@
           "ok": true,
           "exp": "#b48608",
           "got": "#b48608"
+        }
+      ]
+    },
+    {
+      "id": "542:1650",
+      "text": "parister",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "528.2483520507812px",
+          "got": "128px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "400px",
+          "got": "134.4px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#ffffff",
+          "got": "#ffffff"
+        }
+      ]
+    },
+    {
+      "id": "542:1651",
+      "text": "Intimiste, contemporain et chaleureux",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "ambiguous",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": false,
+          "exp": "16px",
+          "got": "30px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": false,
+          "exp": "6.4px",
+          "got": "12px"
+        },
+        {
+          "prop": "line-height",
+          "ok": false,
+          "exp": "19px",
+          "got": "30px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": false,
+          "exp": "#f4f0f1",
+          "got": "#141414"
         }
       ]
     },
@@ -3348,9 +3214,41 @@
     {
       "id": "I542:1784;410:4689",
       "text": "chauffée",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "54px",
+          "got": "54px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "101px",
+          "got": "101px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1784;410:4690",
@@ -3452,9 +3350,41 @@
     {
       "id": "I542:1785;410:4689",
       "text": "de sport",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "54px",
+          "got": "54px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "101px",
+          "got": "101px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1785;410:4690",
@@ -3556,9 +3486,41 @@
     {
       "id": "I542:1786;410:4689",
       "text": "de nage",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "54px",
+          "got": "54px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "400",
+          "got": "400"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "0px",
+          "got": "0px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "101px",
+          "got": "101px"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1786;410:4690",
@@ -3613,9 +3575,9 @@
         },
         {
           "prop": "color",
-          "ok": false,
+          "ok": true,
           "exp": "#141414",
-          "got": "#ffffff"
+          "got": "#141414"
         }
       ]
     },
@@ -3660,7 +3622,7 @@
           "prop": "color",
           "ok": false,
           "exp": "#141414",
-          "got": "#ffffff"
+          "got": "#b48608"
         }
       ]
     },
@@ -3705,9 +3667,16 @@
           "prop": "color",
           "ok": false,
           "exp": "#141414",
-          "got": "#ffffff"
+          "got": "#b48608"
         }
       ]
+    },
+    {
+      "id": "542:1800",
+      "text": "un boutique hôtel 5 étoiles au cœur de P",
+      "matched": false,
+      "bucket": "content",
+      "checks": []
     },
     {
       "id": "542:1796",
@@ -3720,13 +3689,13 @@
           "prop": "font-size",
           "ok": false,
           "exp": "133.2244873046875px",
-          "got": "16px"
+          "got": "128px"
         },
         {
           "prop": "font-weight",
-          "ok": false,
+          "ok": true,
           "exp": "400",
-          "got": "700"
+          "got": "400"
         },
         {
           "prop": "letter-spacing",
@@ -3738,13 +3707,13 @@
           "prop": "line-height",
           "ok": false,
           "exp": "101px",
-          "got": "24px"
+          "got": "134.4px"
         },
         {
           "prop": "color",
-          "ok": false,
+          "ok": true,
           "exp": "#ffffff",
-          "got": "#141414"
+          "got": "#ffffff"
         }
       ]
     },
@@ -3794,11 +3763,49 @@
       ]
     },
     {
-      "id": "542:1800",
-      "text": "un boutique hôtel 5 étoiles au cœur de P",
-      "matched": false,
-      "bucket": "content",
-      "checks": []
+      "id": "I542:1817;410:4672",
+      "text": "réservez un séjour",
+      "matched": true,
+      "how": "own-text",
+      "bucket": "reliable",
+      "checks": [
+        {
+          "prop": "font-size",
+          "ok": true,
+          "exp": "14px",
+          "got": "14px"
+        },
+        {
+          "prop": "font-weight",
+          "ok": true,
+          "exp": "700",
+          "got": "700"
+        },
+        {
+          "prop": "letter-spacing",
+          "ok": true,
+          "exp": "2.8000000000000003px",
+          "got": "2.8px"
+        },
+        {
+          "prop": "line-height",
+          "ok": true,
+          "exp": "17px",
+          "got": "16px"
+        },
+        {
+          "prop": "text-transform",
+          "ok": true,
+          "exp": "uppercase",
+          "got": "uppercase"
+        },
+        {
+          "prop": "color",
+          "ok": true,
+          "exp": "#f4f0f1",
+          "got": "#f4f0f1"
+        }
+      ]
     },
     {
       "id": "I542:1815;42:1986",
@@ -3839,9 +3846,9 @@
         },
         {
           "prop": "color",
-          "ok": true,
+          "ok": false,
           "exp": "#ffffff",
-          "got": "#ffffff"
+          "got": "#b48608"
         }
       ]
     },
@@ -3884,9 +3891,9 @@
         },
         {
           "prop": "color",
-          "ok": true,
+          "ok": false,
           "exp": "#ffffff",
-          "got": "#ffffff"
+          "got": "#b48608"
         }
       ]
     },
@@ -3929,54 +3936,9 @@
         },
         {
           "prop": "color",
-          "ok": true,
+          "ok": false,
           "exp": "#ffffff",
-          "got": "#ffffff"
-        }
-      ]
-    },
-    {
-      "id": "I542:1817;410:4672",
-      "text": "réservez un séjour",
-      "matched": true,
-      "how": "own-text",
-      "bucket": "reliable",
-      "checks": [
-        {
-          "prop": "font-size",
-          "ok": true,
-          "exp": "14px",
-          "got": "14px"
-        },
-        {
-          "prop": "font-weight",
-          "ok": true,
-          "exp": "700",
-          "got": "700"
-        },
-        {
-          "prop": "letter-spacing",
-          "ok": true,
-          "exp": "2.8000000000000003px",
-          "got": "2.8px"
-        },
-        {
-          "prop": "line-height",
-          "ok": true,
-          "exp": "17px",
-          "got": "16px"
-        },
-        {
-          "prop": "text-transform",
-          "ok": true,
-          "exp": "uppercase",
-          "got": "uppercase"
-        },
-        {
-          "prop": "color",
-          "ok": true,
-          "exp": "#f4f0f1",
-          "got": "#f4f0f1"
+          "got": "#141414"
         }
       ]
     }
@@ -4126,7 +4088,7 @@
     },
     {
       "id": "542:1782",
-      "name": "[section]",
+      "name": "group",
       "text": "les soins & massages La piscine chauffée",
       "matched": false,
       "bucket": "content",
@@ -4170,15 +4132,8 @@
       "text": "Menu",
       "matched": true,
       "how": "full-text",
-      "bucket": "ambiguous",
-      "checks": [
-        {
-          "prop": "gap",
-          "ok": true,
-          "exp": "10px (≈Figma 12)",
-          "got": "8px"
-        }
-      ]
+      "checks": [],
+      "skipped": true
     },
     {
       "id": "I542:1792;42:1670",
@@ -4186,15 +4141,8 @@
       "text": "Réserver Bons cadeaux",
       "matched": true,
       "how": "full-text",
-      "bucket": "ambiguous",
-      "checks": [
-        {
-          "prop": "gap",
-          "ok": false,
-          "exp": "10px (≈Figma 12)",
-          "got": "16px"
-        }
-      ]
+      "checks": [],
+      "skipped": true
     },
     {
       "id": "542:1817",

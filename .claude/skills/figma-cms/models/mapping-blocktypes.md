@@ -160,6 +160,35 @@ slider ou en index). Implémenté : `ConventionMapper::resolveTeaser()`.
 > `timeline-view`, `table-view`, `recruitment-index`, `search-result-view`,
 > `sitemap-view`, `information-view`, `menu-view`, `pages-navigation-view`…
 
+> **Page-VIEW d'un module (ex. `product-view`) — template DÉDIÉ sans layout de catégorie :**
+> `ProductModel::getTemplate()` choisit, dans l'ordre : `actions/catalog/view/{catalogSlug}.html.twig`
+> (s'il EXISTE → **prime sur tout**), sinon `layout.html.twig` (si `haveLayout`/zones) sinon
+> `default-product.html.twig`. Donc pour une maquette de fiche dédiée **qui ne doit PAS passer par le
+> layout de catégorie**, créer **`actions/catalog/view/{slug}.html.twig`** (ex. `chambres-suites.html.twig`).
+> Données dispo dans `entity` (ViewModel produit) : `intl` (title/subTitle/introduction/body/headerSubTitle),
+> `medias`, `mainMedia`, `category`, `values` (features : `values.byFeaturesIds[id]` + `values.featuresByIds[id]`
+> pour des accordéons), `mainFeature`, `products` (produits associés), `formPageUrl`.
+> ⚠️ **Includes `splide.html.twig` : passer un objet `slider` COMPLET** (au minimum `effect, thumbnails,
+> pause, control, autoplay, indicators, progress, popup, offsetDesktop/MiniPC/Tablet/Mobile, arrowAlignment,
+> intervalDuration, itemsPerSlide*`) — un champ manquant fait **planter en strict_variables (500)**.
+> ⚠️ Cards image-overlay (sans texte en flux) dans un slider → **largeur de slide pré-init** (cf. § cards).
+> ⚠️ **Features/accordéons en page-view dédiée** : le `ViewModel` produit du *view* n'expose PAS
+> `values.byFeaturesIds`/`byFeaturesSlugs` (seulement `values.defaults*`, souvent VIDES hors layout de
+> catégorie). Pour des accordéons de caractéristiques, lire l'**entité brute** `entity.entity.values`
+> (collection `FeatureValueProduct`) et grouper par `v.feature.adminName` / `v.value.adminName`
+> (le `adminName` = label FR direct ; `.intl` n'existe pas sur l'entité brute, c'est `.intls` par locale).
+> **Dédoublonner** (`{% if vlabel not in list %}`) : le modèle injecte les valeurs par défaut du catalogue
+> → doublons sinon. Sortir la « Superficie » en info inline (m²), le reste en accordéons.
+
+> **⚙️ ACTIVER LE CSS DES MODULES UTILISÉS PAR UN TEMPLATE (`$enable-<module>: true`) :** le SCSS du
+> projet n'inclut le CSS d'un module que si son **flag est à `true`** — chaque partial est gardé par
+> `@if ($enable-<module>)` (ex. `_card.scss` → `$enable-card`, `_modal.scss` → `$enable-modal`,
+> `_form.scss`/`_newsletter.scss`, etc.). Donc **dès qu'un template emploie un module, poser son flag
+> dans la section « Modules » EN TÊTE du SCSS de ce template** (avant les imports core). Sinon le markup
+> est rendu mais **sans styles** (composant « cassé »). Cas typique de la fiche produit avec accordéons :
+> ajouter `$enable-accordion: true;` en tête de `templates/catalog.scss`. Réflexe : pour chaque
+> module/atome qu'un template introduit, vérifier et activer son `$enable-…` correspondant.
+
 ### Texte des slides/cards (dry-run) → champs de fixtures
 
 Le parser extrait le **texte structuré** de chaque slide/card dans `ParsedBlock.media[]`
@@ -204,6 +233,26 @@ Mapper la variante de la convention sur `setTemplate()` et laisser faire :
 >   il faut naviguer) ; puces inutiles → `setIndicators(false)` (progress bar du template).
 > - **slider plein écran cinématique** (`main-home`/`banner`/`bootstrap` hero, auto-défilant) →
 >   `setControl(false)` + `setIndicators(false)` (la maquette n'en montre pas). Cf. playbook § Contrôles.
+>
+> **PIÈGE — `prePersist` écrase À CHAQUE persistance d'entité neuve** (`!$id`). Pour `splide` il
+> REPOSE `arrowAlignment='top-end'`, `itemsPerSlide=4/3/2/1`, `progress=true`, `control=true`. Donc
+> poser ces champs AVANT le `flush()` est SANS EFFET (écrasé). Pour les surcharger : les reposer
+> **APRÈS un premier `flush()`** (l'entité a un id → `prePersist` ne re-déclenche pas), puis re-flusher.
+> Vérifier ensuite la valeur réelle en base (`dbal:run-sql`), pas le code de la fixture.
+>
+> **Flèches latérales (overlay) — `arrowAlignment` contenant `'side'`** (ex. `'side-center'`) : la vue
+> splide rend des flèches `btn-vertical` en overlay (absolute, centrées verticalement, prev=bord gauche
+> / next=bord droit) au lieu des flèches groupées `top`/`bottom`. Valeur HORS des choix du form admin
+> (top/bottom only) mais supportée par le template (`'side' in arrowAlignment`) → à poser en fixture.
+> Styliser scopé à la bande : cercle/carré translucide + chevron sombre, et **recentrer sur l'image**
+> (`top` > 50% : le track englobe titre/script/texte AU-DESSUS de l'image, donc 50% tombe trop haut).
+>
+> **`progress=false`** dès que la maquette ne montre PAS de barre de progression (prePersist la force à
+> `true` pour splide). Idem `indicators`/`control` : la maquette fait foi, pas le défaut prePersist.
+>
+> **Cards croppées → compter les cards PLEINES visibles** : une bande montrant N cards entières + un
+> liseré de la (N+1)ᵉ ⇒ `itemsPerSlide=N` (le bout de card croppé = le « peek » qui signale le carrousel,
+> il ne compte pas comme une vue). Le `peek` se règle via l'offset, pas en gonflant `itemsPerSlide`.
 >
 > **Hauteur d'une bande full-bleed** = **aspect-ratio de la maquette** (`zone.figmaWidth / zone.figmaHeight`),
 > PAS une hauteur en `dvh`/px fixe : la bande garde sa proportion du laptop au 1920. Ex. Figma 1440×830 →
@@ -420,7 +469,91 @@ stacking si overlay) ; `alert` → `blocks/alert/…` (+ JS `#website-alert`).
   image + titre → `['image','title','index-link']` (sans `card-link`/`date`). Le ViewModel en dérive
   `showImage`/`showTitle`/`showDate`… lus par le template partagé (donc pas besoin de le modifier).
 - **Ratio image de carte** = vignette dédiée dans `ThumbnailFixtures` (action `teaser`, par id de teaser) :
-  portrait/paysage selon la maquette, en 2× retina.
+  portrait/paysage selon la maquette.
+  > ⚠️ **Méthode de calcul (ne pas inventer la taille)** : la vignette = la **taille d'affichage VISIBLE
+  > de la carte** (mesurée au rendu), **au ratio exact de la maquette** — **PAS la taille retina/2×** (le
+  > CMS génère lui-même le retina/srcset), et pas une valeur paysage/arbitraire. Une carte portrait 3:4
+  > affichée 560×747 (ex. 3 cartes visibles à 1920) ⇒ vignette **560×747** (`fixedHeight: true`). Décliner
+  > **par breakpoint** (desktop/tablet/mobile = 3/2/1 visibles dans le splide → largeurs différentes),
+  > chaque taille **mesurée** au breakpoint concerné (DoD), pas extrapolée. Un ratio paysage sur une carte
+  > portrait = vignette fausse (image déformée/recadrée), symptôme d'un calcul non basé sur le rendu réel.
+- **Image principale CLIQUABLE** (convention UX par défaut des cards) : l'image doit pointer vers la
+  cible de la card. Le rendu média (`|file(...)` → `image-config.html.twig`) enveloppe l'image dans
+  `<a href>` **ssi** `disableLink: false` ET un lien existe (`intl.link`/`targetLink`). Donc :
+  - card de **relation média** (`card-universe`/`card-spa`…) : passer **`disableLink: false`** (le lien
+    `media.intl.link` du « Découvrir » sert aussi à l'image) — ne PAS laisser `disableLink: true`.
+  - teaser **d'entité** (newscast/catalog) : `targetLink: entity.url` (la vraie destination de l'item),
+    avec repli `entity.intl.link`. (Certaines cards enveloppent déjà TOUTE la card dans `<a>`, ex.
+    `card-room` — dans ce cas l'image est déjà cliquable, ne rien ajouter.)
+- **Card ENTIÈREMENT cliquable (destination unique)** : une card qui est avant tout un visuel cliquable
+  (image + texte en overlay, **un seul** lien de destination — cards d'univers, de services, de chambres…)
+  doit envelopper **TOUTE la card dans un `<a>`** (toute la surface cliquable), avec :
+  - l'image en **`disableLink: true`** (sinon `<a>` imbriqué = HTML invalide),
+  - le CTA (« Découvrir ») rendu en **texte** (`<span>`), pas via l'include `blocks/link` (qui produit un
+    `<a>` imbriqué). Ex. `card-room`, `card-spa`. **À l'inverse**, une card avec **plusieurs liens
+    distincts** (titre→fiche, catégorie→liste, « lire »→article) garde un lien **par élément**, jamais
+    d'`<a>` englobant.
+- **Images STATIQUES (logos, décor) → filtre `|file` responsive, JAMAIS un `<img>` brut** : ne pas poser
+  `<img src="{{ asset('medias/x.png') }}" width=… height=…>`. Utiliser le filtre `|file` sur l'asset de
+  **build** (passé par Webpack Encore), avec `screensSizes` par breakpoint — il génère le `<picture>`/srcset
+  responsive et les bonnes dimensions :
+  ```twig
+  {{ asset('build/front/'~websiteTemplate~'/images/x.png', webpack)|file({}, {
+      screensSizes: {
+          mobile:  {width: 120, height: 52},
+          tablet:  {width: 138, height: 60},
+          desktop: {width: 138, height: 60}
+      },
+  }) }}
+  ```
+  (Pour les images d'ENTITÉ — produits/actus/médias — passer par la relation média `mainMedia` + sa
+  vignette `ThumbnailFixtures`, cf. plus haut ; ici c'est pour les visuels statiques du template.)
+- **`border-radius` : VÉRIFIER contre la maquette, ne pas hériter du thème** : le thème par défaut pose
+  des `border-radius` sur plusieurs éléments — **l'IMAGE** (`.card .card-header picture img`) **MAIS AUSSI
+  le conteneur `card-header` lui-même** (`.card .card-header`, `.img-loader-wrap`…), les boutons, inputs.
+  Beaucoup de maquettes sont en **angles vifs** (radius 0). **Traiter les DEUX** : si seul le radius de
+  l'image est annulé mais que le `card-header` garde le sien, l'angle arrondi reste visible. Relever le
+  radius RÉEL dans Figma et l'**adapter à la charte** (0 → angles vifs), via override projet — **pas** en
+  touchant la variable globale si d'autres éléments en ont besoin.
+  **La GATE `verify-styles` l'attrape désormais** : elle confronte le `border-radius` rendu au `cornerRadius`
+  Figma (capté même à 0) et échoue si l'image hérite d'un radius parasite (ancrage card overlay automatique,
+  sinon `--map` le nœud image ; `--no-radius`/`--tol-radius` pour ajuster).
+- **Texte en OVERLAY sur l'image → `z-index`** : un contenu `position:absolute` posé sur l'image (titre/
+  script/CTA superposés) passe DERRIÈRE le `<picture>`/loader sans `z-index`. Mettre `z-index` sur le
+  conteneur overlay (ex. `.card-spa-content { z-index: 2 }`). Symptôme : « pas de texte » alors que le
+  HTML serveur contient bien le texte (vérifier `getComputedStyle` / le HTML, pas seulement à l'œil).
+- **Centrage = utilitaires BOOTSTRAP, pas du CSS** : centrer via classes dans le template
+  (`text-center`, `d-flex flex-column align-items-center`, `p-4`…) plutôt que `text-align`/`align-items`
+  en SCSS. Réserver le SCSS aux choses sans utilitaire (position absolue, gradient, z-index, aspect-ratio).
+- **Card splide « 100 % image » (overlay sans texte en flux) → largeur de slide pré-init** : si la card
+  n'a AUCUN contenu en flux (image en `width:100%` + texte en overlay absolu), la slide flex s'écrase à
+  0 AVANT le mount Splide → Splide ne mesure rien et n'initialise pas (`.splide` sans `is-initialized`),
+  bande effondrée. Donner une largeur de repli aux slides non initialisées, par breakpoint :
+  `.splide:not(.is-initialized) .splide__slide { flex:0 0 auto; width:100% ; min-md:50% ; min-lg:33.333% }`.
+  (Les cards avec du texte en flux — ex. `card-universe` — n'ont pas ce souci : le texte donne la largeur.)
+- **Flèches latérales overlay** : splide → `arrowAlignment` contenant `'side'` (cf. § slider). Teaser
+  catalog/newscast (slider-multi) qui rend les flèches en `top` → overlay via CSS scopé (`.arrows-wrap`
+  absolute, `.btn-prev{left:0}`/`.btn-next{right:0}`, centré sur l'image), comme la bande events.
+
+**📑 UNE carte par type d'entité, partout — teaser, entités associées d'un *view*, index :** une entité
+(produit, actu…) doit s'afficher avec **la MÊME carte** quel que soit l'emplacement où elle apparaît :
+en **teaser** (home, bandes), en **entités associées** d'une page `[page|…-view]` (ex. produits liés
+d'une fiche, actus liées), et en **listing** `[page|…-index]`. Toutes les cartes produit sont identiques
+entre elles ; toutes les cartes actu sont identiques entre elles ; **produit et actu PEUVENT différer**
+(ce sont deux cartes distinctes, à ne pas confondre). Concrètement : une seule macro de carte par type
+d'entité (cf. 🃏 ci-dessous), réutilisée par `actions/catalog/{teaser,view,…}` et `actions/newscast/…`.
+- **Source de vérité = la carte de teaser** : c'est elle qui matche la maquette. Les cartes d'entités
+  associées d'un *view* et celles d'index doivent **réutiliser cette macro/ce template**, pas un rendu
+  ad hoc. Si la maquette ne contient pas de `[page|…-index]`, l'index hérite quand même du style teaser
+  (ne pas inventer un style d'index non maquetté).
+- **Symptôme à corriger** : sur `[page|product-view]` / `[page|newscast-view]`, les cartes des **entités
+  associées** sont « pétées » (cassées, sans média, hors style). **Cause n°1 (la plus fréquente) : le bloc
+  d'entités associées rend chaque item avec le TEMPLATE DE LA VUE de l'entité (réinclusion du *view*),
+  voire récursivement, au lieu du TEMPLATE DE CARTE.** Un *view* est une fiche plein écran, pas une carte :
+  réutilisé en liste il casse (et peut se réinclure lui-même). **Fix : router ce bloc vers la même MACRO
+  DE CARTE que le teaser** (`macros/card.html.twig`), jamais vers le template de vue. Causes secondaires :
+  rendu ad hoc différent du teaser ; relation média non flaggée `main` → `mainMedia` null (cf. ⚠️ piège
+  média). Garder partout les mêmes `fields`/vignette/ratio que le teaser.
 
 **🃏 Cartes des index & teasers (actus / produits) — MACROS DÉDIÉES :** les cartes vivent dans
 `templates/front/default/include/macros/card.html.twig` (macros `standard`, `eventCard`…), importées par

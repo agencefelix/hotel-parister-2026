@@ -81,7 +81,17 @@ def walk(n):
     if s: rec['strokes'] = s; rec['strokeWeight'] = n.get('strokeWeight')
     ef = effects(n.get('effects'))
     if ef: rec['effects'] = ef
-    if n.get('cornerRadius'): rec['cornerRadius'] = n['cornerRadius']
+    # cornerRadius : capté MÊME à 0, mais seulement sur un nœud qui PEINT (fill ou stroke) — c'est là
+    # qu'un radius est visible. Le 0 est décisif : il dit « angles vifs en maquette » et permet à la gate
+    # styles d'attraper un border-radius hérité du thème (ex. images arrondies à tort).
+    # Figma OMET cornerRadius sur un nœud non arrondi : pour un fill IMAGE, on défaut donc à 0 (les images
+    # sont vives sauf arrondi explicite) → la gate sait alors qu'un radius rendu non nul est une dérive.
+    cr = n.get('cornerRadius')
+    is_image_fill = any((isinstance(fl, dict) and fl.get('type') == 'IMAGE') for fl in (n.get('fills') or []))
+    if cr is not None and (f or s):
+        rec['cornerRadius'] = cr
+    elif cr is None and is_image_fill:
+        rec['cornerRadius'] = 0
     lm = n.get('layoutMode')
     if lm and lm != 'NONE':
         rec['layout'] = {'mode': lm, 'padTop': n.get('paddingTop', 0), 'padRight': n.get('paddingRight', 0),

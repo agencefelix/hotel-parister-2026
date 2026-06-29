@@ -47,6 +47,12 @@ const WIDTH = parseInt(opt('--width', '1440'), 10);
 const STRICT = flag('--strict-unmatched');
 const OUT = opt('--out', null);
 const MAP = opt('--map', null) ? JSON.parse(fs.readFileSync(opt('--map', null), 'utf8')) : {};
+// --zones : ancre l'ordre vertical sur les CONTENEURS de bande (#zone-*), pas sur les ancres texte.
+// Évite le faux « déplacé » des textes de même rangée (cards côte à côte, titres multi-lignes) : les
+// zones, elles, sont strictement empilées top→bottom. Format : { "selectors": ["#zone-a", ...] }
+// (ordre indifférent) — l'ordre Figma de chaque zone est DÉDUIT de la médiane(relY) de ses tokens texte.
+const ZONES = opt('--zones', null) ? JSON.parse(fs.readFileSync(opt('--zones', null), 'utf8')) : null;
+const ZONE_SELECTORS = ZONES ? (Array.isArray(ZONES) ? ZONES : (ZONES.selectors || [])) : [];
 const CHROME = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const normJs = (s) => (s || '').replace(/\s+/g, ' ').trim().toLowerCase();
@@ -84,7 +90,7 @@ await page.evaluate(async () => { await new Promise((r) => { let y = 0; const t 
 await page.evaluate(() => window.scrollTo(0, 0));
 await sleep(300);
 
-const measured = await page.evaluate((toks, MAP) => {
+const measured = await page.evaluate((toks, MAP, ZONE_SELECTORS) => {
   const norm = (s) => (s || '').replace(/\s+/g, ' ').trim().toLowerCase();
   const ownText = (el) => { let t = ''; for (const n of el.childNodes) if (n.nodeType === 3) t += n.textContent; return t; };
   // Exclut les CLONES de carrousel (Splide duplique les slides pour la boucle → faux doublons qui
@@ -99,17 +105,20 @@ const measured = await page.evaluate((toks, MAP) => {
   const renderedW = document.documentElement.clientWidth;
   const renderedH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
   const rectOf = (el) => { const r = el.getBoundingClientRect(); return { top: r.top + window.scrollY, left: r.left, w: r.width, h: r.height }; };
+  const zoneTop = (sel) => { const z = document.querySelector(sel); return z ? z.getBoundingClientRect().top + window.scrollY : null; };
   return {
     renderedW, renderedH,
+    zoneTops: Object.fromEntries(ZONE_SELECTORS.map((s) => [s, zoneTop(s)])),
     rows: toks.map((tk) => {
       let el = null, how = null, cands = 0;
       if (MAP[tk.id]) { el = document.querySelector(MAP[tk.id]); how = 'map'; cands = el ? 1 : 0; }
       if (!el) { const c = byOwn.get(norm(tk.text)); if (c && c.length) { el = c[0]; how = 'own'; cands = c.length; } }
       if (!el) { const c = byFull.get(norm(tk.text)); if (c && c.length) { el = c[c.length - 1]; how = 'full'; cands = c.length; } }
-      return { id: tk.id, matched: !!el, how, cands, rect: el ? rectOf(el) : null };
+      const zoneEl = el ? el.closest('[id^="zone-"]') : null;
+      return { id: tk.id, matched: !!el, how, cands, rect: el ? rectOf(el) : null, zone: zoneEl ? '#' + zoneEl.id : null };
     }),
   };
-}, toks, MAP);
+}, toks, MAP, ZONE_SELECTORS);
 await browser.close();
 
 const byId = new Map(toks.map((t) => [t.id, t]));
@@ -164,7 +173,39 @@ const renderedAsFigRanks = seqByRendered.map((r) => figRank.get(r.id));
 const lisLen = longestIncreasingSubsequence(renderedAsFigRanks);
 const displaced = anchors.length - lisLen; // nb minimal d'ancres à déplacer pour ré-ordonner
 const orderThreshold = Math.max(1, Math.floor(anchors.length * 0.1));
-log(`${C.dim}ordre vertical : ${displaced} ancre(s) déplacée(s) / ${anchors.length} ancres fiables (seuil ${orderThreshold})${C.reset}`);
+log(`${C.dim}ordre vertical (ancres texte) : ${displaced} déplacée(s) / ${anchors.length}${ZONE_SELECTORS.length ? ' — informatif (cf. ordre par zones)' : ` (seuil ${orderThreshold})`}${C.reset}`);
+
+// ── Ordre par ZONES (décisif si --zones) ──
+// Les conteneurs de bande sont strictement empilés : l'ordre rendu DOIT suivre l'ordre Figma.
+// Ordre Figma d'une zone = MÉDIANE des relY de ses tokens texte appariés. La médiane (et non le min)
+// résiste aux outliers : un token décoratif mal placé en hauteur dans son groupe Figma, ou un set de
+// tokens appariés qui varie selon la largeur, ne fait plus remonter artificiellement la zone (faux
+// « déplacé » mobile). La médiane reflète la position du gros du contenu de la bande.
+const median = (arr) => { const s = [...arr].sort((a, b) => a - b); const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+let zoneOrder = null;
+if (ZONE_SELECTORS.length) {
+  const figByZone = new Map(); // zone -> tous les relY de ses tokens appariés
+  for (const r of measured.rows) {
+    if (!r.matched || !r.zone) continue;
+    const relY = byId.get(r.id).relY;
+    if (!figByZone.has(r.zone)) figByZone.set(r.zone, []);
+    figByZone.get(r.zone).push(relY);
+  }
+  const zrows = ZONE_SELECTORS
+    .map((sel) => ({ sel, figmaRelY: figByZone.has(sel) ? median(figByZone.get(sel)) : undefined, renderedTop: measured.zoneTops[sel] }))
+    .filter((z) => typeof z.figmaRelY === 'number' && typeof z.renderedTop === 'number');
+  const za = [...zrows].sort((a, b) => a.figmaRelY - b.figmaRelY);
+  const zByRen = [...za].sort((a, b) => a.renderedTop - b.renderedTop);
+  const zRank = new Map(za.map((z, i) => [z.sel, i]));
+  const zDisp = za.length - longestIncreasingSubsequence(zByRen.map((z) => zRank.get(z.sel)));
+  const missing = ZONE_SELECTORS.filter((s) => !zrows.find((z) => z.sel === s));
+  zoneOrder = { displaced: zDisp, anchors: za.length, missing };
+  const col = zDisp > 0 ? C.red : C.green;
+  log(`${col}ordre par zones : ${zDisp} zone(s) déplacée(s) / ${za.length} zones${C.reset}${missing.length ? `${C.dim} (${missing.length} sans token : ${missing.join(', ')})${C.reset}` : ''}`);
+}
+// Métrique d'ordre décisive : zones si fournies (seuil 0, empilement strict), sinon ancres texte.
+const orderDecisive = zoneOrder ? zoneOrder.displaced : displaced;
+const orderDecisiveThr = zoneOrder ? 0 : orderThreshold;
 
 // ── CONTENU (texte maquette absent du rendu) ──
 log(`\n${C.cyan}── CONTENU (texte maquette absent du rendu) ──${C.reset}`);
@@ -179,11 +220,12 @@ if (ambiguous.length) {
 }
 
 log(`\n${C.dim}──────────${C.reset}`);
-log(`COMPOSITION : ${widthFails} écart(s) largeur/full-bleed, ${displaced} ancre(s) d'ordre déplacée(s)  |  CONTENU : ${content.length} non apparié(s)  |  AMBIGU : ${ambiguous.length}`);
+log(`COMPOSITION : ${widthFails} écart(s) largeur/full-bleed, ${orderDecisive} ${zoneOrder ? 'zone(s)' : 'ancre(s)'} d'ordre déplacée(s)${zoneOrder ? '' : ''}  |  CONTENU : ${content.length} non apparié(s)  |  AMBIGU : ${ambiguous.length}`);
 if (OUT) {
   fs.writeFileSync(OUT, JSON.stringify({
     url: URL, width: WIDTH, pageW, pageH, renderedW: measured.renderedW, renderedH: measured.renderedH,
-    composition: { widthFails, orderDisplaced: displaced, anchors: anchors.length, orderThreshold },
+    composition: { widthFails, orderDisplaced: orderDecisive, orderMode: zoneOrder ? 'zones' : 'text', orderThreshold: orderDecisiveThr,
+      textOrderDisplaced: displaced, textAnchors: anchors.length, zones: zoneOrder },
     content: { unmatched: content.length, items: content },
     ambiguous: { count: ambiguous.length },
     rows: measured.rows,
@@ -191,8 +233,8 @@ if (OUT) {
   console.log(`Rapport : ${OUT}`);
 }
 
-const failed = widthFails > 0 || displaced > orderThreshold || (STRICT && content.length > 0);
-if (failed) { log(`${C.red}GATE LAYOUT : ÉCHEC${C.reset} (composition : ${widthFails} largeur, ${displaced} ordre${STRICT ? ` ; contenu : ${content.length} non appariés` : ''})`); process.exit(1); }
+const failed = widthFails > 0 || orderDecisive > orderDecisiveThr || (STRICT && content.length > 0);
+if (failed) { log(`${C.red}GATE LAYOUT : ÉCHEC${C.reset} (composition : ${widthFails} largeur, ${orderDecisive} ordre${zoneOrder ? ' [zones]' : ''}${STRICT ? ` ; contenu : ${content.length} non appariés` : ''})`); process.exit(1); }
 log(`${C.green}GATE LAYOUT : OK${C.reset}${content.length ? ` ${C.dim}(${content.length} non appariés ignorés — contenu)${C.reset}` : ''}`);
 process.exit(0);
 

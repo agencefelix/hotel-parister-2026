@@ -1,5 +1,6 @@
 {
   "skill_name": "figma-cms",
+  "_note": "ids 0-3 = discipline de lancement (iteration-1, with-skill 100% / baseline 60%). ids 4-8 = méthodo d'intégration (iteration-3), la surface de risque actuelle. URLs live : home https://hotel-parister-2026.local ; fiche produit https://hotel-parister-2026.local/chambres-suites/fiche-produit/deluxe-room",
   "evals": [
     {
       "id": 0,
@@ -30,6 +31,46 @@
       "name": "parser-dryrun",
       "prompt": "Le fichier Figma est déjà configuré dans .env (FIGMA_FILE_KEY/FIGMA_TOKEN). Sans me poser de question et sans toucher à la base ni au build, fais UNIQUEMENT le dry-run de la page home : découvre le calque [page|…] de la home, lance figma:parse-page, et montre-moi l'arbre CMS produit (zones / colonnes / blocs).",
       "expected_output": "L'agent installe l'outillage depuis le skill si nécessaire (cp -r .claude/skills/figma-cms/tooling/src/. src/), exécute figma:parse-page sur la home découverte via [page|…], et produit un arbre CMS : un pages/home.json avec une liste de zones (1 [section] Figma = 1 zone), des colonnes (grille Bootstrap 12), des blocs portant chacun un champ cms, plus des captures de bandes et des médias exportés. Il n'écrit rien en base et ne lance pas de build.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 4,
+      "name": "gate-layout-zones",
+      "prompt": "La home du projet est rendue en local sur https://hotel-parister-2026.local. Vérifie que la composition est fidèle à la maquette Figma : ordre des bandes, éléments full-bleed (pleine largeur), largeurs relatives. Dis-moi si la mise en page est conforme.",
+      "expected_output": "L'agent utilise la GATE LAYOUT du skill : il lance verify-layout.mjs sur l'URL avec integration/figma-tokens.home.json ET --zones integration/zones.home.json (ancrage de l'ordre vertical sur les conteneurs de bande #zone-*), puis rapporte le verdict 'GATE LAYOUT : OK' ou 'ÉCHEC'. Il comprend que, avec --zones, l'ordre par zones est la métrique DÉCISIVE (seuil 0, bandes strictement empilées) tandis que l'ordre par ancres texte n'est qu'informatif (les cards de même rangée faisaient de faux 'déplacé'). Il ne se contente PAS d'une capture d'écran jugée à l'œil ni de code ad hoc.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 5,
+      "name": "splide-prepersist-trap",
+      "prompt": "Dans mes fixtures, j'ai posé arrowAlignment='side-center' et progress=false sur mon slider splide avant le flush, mais en base je retrouve arrowAlignment='top-end' et progress=true. Pourquoi ces valeurs sont-elles écrasées, et comment forcer les miennes ?",
+      "expected_output": "L'agent identifie le prePersist de l'entité slider : il réapplique les défauts (arrowAlignment='top-end', itemsPerSlide=4/3/2/1, progress=true, control=true) à CHAQUE persistance d'une entité NEUVE (!$id). Donc poser les champs avant le premier flush est sans effet. Solution : reposer les valeurs voulues APRÈS un premier flush() (l'entité a alors un id → prePersist ne re-déclenche pas), puis re-flush. Il recommande de vérifier la valeur réelle en base via dbal:run-sql, pas dans le code de la fixture.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 6,
+      "name": "product-view-dedicated-features",
+      "prompt": "Je dois intégrer une fiche chambre dédiée (maquette [page|product-view]) qui ne doit PAS passer par le layout de catégorie, et qui affiche les caractéristiques de la chambre en accordéons. Comment câbler ça dans le CMS sans modifier le moteur ?",
+      "expected_output": "L'agent indique de créer un template dédié actions/catalog/view/{catalogSlug}.html.twig (ex. chambres-suites.html.twig) qui prime sur layout.html.twig / default-product.html.twig (ProductModel::getTemplate). Pour les accordéons de caractéristiques : le ViewModel du *view* n'expose PAS values.byFeaturesIds/byFeaturesSlugs (souvent vides hors layout de catégorie) → lire l'entité brute entity.entity.values (collection FeatureValueProduct), grouper par feature.adminName / value.adminName, et dédoublonner (le modèle injecte les valeurs par défaut du catalogue). Si la fiche inclut splide.html.twig, passer un objet slider COMPLET (effect, thumbnails, pause, control, autoplay, indicators, progress, popup, offsets, arrowAlignment, intervalDuration, itemsPerSlide*) sinon erreur 500 strict_variables.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 7,
+      "name": "card-fully-clickable",
+      "prompt": "Mes cards d'univers (image de fond + titre en overlay + un lien 'Découvrir', une seule destination) : je veux que TOUTE la surface de la card soit cliquable, proprement. Comment je structure ça côté template ?",
+      "expected_output": "L'agent enveloppe TOUTE la card dans un seul <a> (toute la surface cliquable), met l'image en disableLink:true pour éviter un <a> imbriqué (HTML invalide), et rend le CTA 'Découvrir' en <span> (PAS via l'include blocks/link qui produirait un <a> imbriqué). Il note l'exception : une card à plusieurs liens distincts (titre→fiche, catégorie→liste, lire→article) garde un lien par élément, sans <a> englobant. Bonus : si du texte est en overlay absolu sur l'image, poser un z-index sur le conteneur overlay (sinon le texte passe derrière le <picture>).",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 8,
+      "name": "cards-uniform-associated",
+      "prompt": "Sur ma fiche produit https://hotel-parister-2026.local/chambres-suites/fiche-produit/deluxe-room, le bloc 'produits associés' affiche des cards cassées qui ne ressemblent pas du tout aux cards produit du teaser de la home. Comment faire pour qu'elles soient identiques aux cards de teaser ?",
+      "expected_output": "L'agent pose la règle d'uniformisation : une entité s'affiche avec la MÊME carte partout — teaser, entités associées d'un [page|…-view], et index [page|…-index]. Toutes les cards produit identiques entre elles, toutes les cards actu identiques entre elles, mais produit et actu peuvent différer. Fix concret : router le bloc 'produits associés' vers la MÊME macro de carte (macros/card.html.twig) que le teaser produit, avec les mêmes fields/vignette/ratio, plutôt qu'un rendu ad hoc. Il vérifie aussi que la relation média est flaggée setMain(true) (sinon mainMedia null → card no-media 'cassée'). La carte de teaser est la source de vérité (elle matche la maquette).",
       "files": [],
       "assertions": []
     }

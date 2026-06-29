@@ -4,15 +4,22 @@
   "pageW": 1440,
   "pageH": 11866,
   "renderedW": 1440,
-  "renderedH": 11552,
+  "renderedH": 10509,
   "composition": {
     "widthFails": 0,
-    "orderDisplaced": 4,
-    "anchors": 41,
-    "orderThreshold": 4
+    "orderDisplaced": 0,
+    "orderMode": "zones",
+    "orderThreshold": 0,
+    "textOrderDisplaced": 5,
+    "textAnchors": 42,
+    "zones": {
+      "displaced": 0,
+      "anchors": 11,
+      "missing": []
+    }
   },
   "content": {
-    "unmatched": 40,
+    "unmatched": 41,
     "items": [
       {
         "id": "542:1599",
@@ -103,8 +110,24 @@
         "label": "Un espace dédié au bien-êt"
       },
       {
+        "id": "I542:1646;91:159",
+        "label": "Des espaces raffinés pour "
+      },
+      {
+        "id": "I542:1646;91:498",
+        "label": "Louer"
+      },
+      {
+        "id": "I542:1646;91:499",
+        "label": "une salle"
+      },
+      {
         "id": "542:1672",
         "label": "J’accepte que la société P"
+      },
+      {
+        "id": "542:1674",
+        "label": "newsletter"
       },
       {
         "id": "542:1632",
@@ -143,24 +166,12 @@
         "label": "Intime et élégante"
       },
       {
-        "id": "I542:1784;410:4689",
-        "label": "chauffée"
-      },
-      {
         "id": "I542:1784;410:4690",
         "label": "Intime et élégante"
       },
       {
-        "id": "I542:1785;410:4689",
-        "label": "de sport"
-      },
-      {
         "id": "I542:1785;410:4690",
         "label": "Intime et élégante"
-      },
-      {
-        "id": "I542:1786;410:4689",
-        "label": "de nage"
       },
       {
         "id": "I542:1786;410:4690",
@@ -177,7 +188,7 @@
     ]
   },
   "ambiguous": {
-    "count": 44
+    "count": 42
   },
   "rows": [
     {
@@ -186,11 +197,12 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 2779.828125,
+        "top": 2507.890625,
         "left": 72,
         "w": 636,
         "h": 38.390625
-      }
+      },
+      "zone": "#zone-home-rooms"
     },
     {
       "id": "542:1598",
@@ -198,18 +210,20 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 2826.21875,
+        "top": 2554.28125,
         "left": 72,
         "w": 636,
         "h": 100.984375
-      }
+      },
+      "zone": "#zone-home-rooms"
     },
     {
       "id": "542:1599",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1779;410:4612",
@@ -217,42 +231,46 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 3084.625,
+        "top": 2812.6875,
         "left": 72,
         "w": 249.359375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-rooms"
     },
     {
       "id": "I542:1779;410:4614",
       "matched": true,
       "how": "own",
-      "cands": 4,
+      "cands": 3,
       "rect": {
-        "top": 83.5,
-        "left": 1113.0625,
-        "w": 96.46875,
-        "h": 17
-      }
+        "top": 14,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      },
+      "zone": null
     },
     {
       "id": "542:1614",
       "matched": true,
       "how": "own",
-      "cands": 2,
+      "cands": 1,
       "rect": {
-        "top": 10,
-        "left": 0,
-        "w": 0,
-        "h": 0
-      }
+        "top": 3691.328125,
+        "left": 72,
+        "w": 636,
+        "h": 38.390625
+      },
+      "zone": "#zone-home-restaurant"
     },
     {
       "id": "542:1615",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1616",
@@ -260,11 +278,12 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 3774.359375,
+        "top": 3737.71875,
         "left": 72,
         "w": 636,
         "h": 100.984375
-      }
+      },
+      "zone": "#zone-home-restaurant"
     },
     {
       "id": "I542:1617;410:4612",
@@ -272,58 +291,65 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 4010.375,
+        "top": 3973.734375,
         "left": 218.859375,
         "w": 99.125,
         "h": 34
-      }
+      },
+      "zone": "#zone-home-restaurant"
     },
     {
       "id": "I542:1617;410:4614",
       "matched": true,
       "how": "own",
-      "cands": 4,
+      "cands": 3,
       "rect": {
-        "top": 83.5,
-        "left": 1113.0625,
-        "w": 96.46875,
-        "h": 17
-      }
+        "top": 14,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      },
+      "zone": null
     },
     {
       "id": "I542:1623;30:882",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1624;30:882",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1625;30:882",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1627;30:882",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1626;30:882",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1628",
@@ -331,11 +357,12 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 8920.234375,
+        "top": 7807.015625,
         "left": 84,
         "w": 1344,
         "h": 24
-      }
+      },
+      "zone": "#zone-home-events"
     },
     {
       "id": "542:1637",
@@ -343,44 +370,49 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 7144.40625,
+        "top": 6443.296875,
         "left": 0,
         "w": 1440,
-        "h": 688
-      }
+        "h": 718
+      },
+      "zone": "#zone-home-workspaces"
     },
     {
       "id": "I542:1638;410:4612",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1638;410:4614",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1639",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1602;410:4686;410:4672",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1602;410:4688",
@@ -388,11 +420,12 @@
       "how": "own",
       "cands": 3,
       "rect": {
-        "top": 3596.328125,
+        "top": 3234.890625,
         "left": 92,
-        "w": 0,
+        "w": 323,
         "h": 24
-      }
+      },
+      "zone": "#zone-home-rooms-products"
     },
     {
       "id": "I542:1602;410:4689",
@@ -400,37 +433,41 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 3608.328125,
-        "left": 92,
-        "w": 0,
+        "top": 3246.890625,
+        "left": 455,
+        "w": 323,
         "h": 100.984375
-      }
+      },
+      "zone": "#zone-home-rooms-products"
     },
     {
       "id": "I542:1602;410:4690",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1603;410:4686;410:4672",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1603;410:4688",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1603;410:4689",
@@ -438,30 +475,33 @@
       "how": "own",
       "cands": 3,
       "rect": {
-        "top": 3596.328125,
-        "left": 92,
-        "w": 0,
-        "h": 24
-      }
+        "top": 3246.890625,
+        "left": 818,
+        "w": 323,
+        "h": 100.984375
+      },
+      "zone": "#zone-home-rooms-products"
     },
     {
       "id": "I542:1603;410:4690",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1604;410:4686;410:4672",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1604;410:4688",
@@ -469,11 +509,12 @@
       "how": "own",
       "cands": 2,
       "rect": {
-        "top": 3596.328125,
-        "left": 92,
-        "w": 0,
+        "top": 3234.890625,
+        "left": 818,
+        "w": 323,
         "h": 24
-      }
+      },
+      "zone": "#zone-home-rooms-products"
     },
     {
       "id": "I542:1604;410:4689",
@@ -481,30 +522,33 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 3608.328125,
-        "left": 92,
-        "w": 0,
-        "h": 201.96875
-      }
+        "top": 3246.890625,
+        "left": 1544,
+        "w": 323,
+        "h": 100.984375
+      },
+      "zone": "#zone-home-rooms-products"
     },
     {
       "id": "I542:1604;410:4690",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1605;410:4686;410:4672",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1605;410:4688",
@@ -512,37 +556,41 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 3608.328125,
-        "left": 92,
-        "w": 0,
+        "top": 3246.890625,
+        "left": 1907,
+        "w": 323,
         "h": 100.984375
-      }
+      },
+      "zone": "#zone-home-rooms-products"
     },
     {
       "id": "I542:1605;410:4689",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1605;410:4690",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1606;410:4686;410:4672",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1606;410:4688",
@@ -550,11 +598,12 @@
       "how": "own",
       "cands": 3,
       "rect": {
-        "top": 3596.328125,
-        "left": 92,
-        "w": 0,
-        "h": 24
-      }
+        "top": 3246.890625,
+        "left": 818,
+        "w": 323,
+        "h": 100.984375
+      },
+      "zone": "#zone-home-rooms-products"
     },
     {
       "id": "I542:1606;410:4689",
@@ -562,30 +611,33 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 3608.328125,
-        "left": 92,
-        "w": 0,
+        "top": 3246.890625,
+        "left": 2270,
+        "w": 323,
         "h": 100.984375
-      }
+      },
+      "zone": "#zone-home-rooms-products"
     },
     {
       "id": "I542:1606;410:4690",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1607;410:4686;410:4672",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1607;410:4688",
@@ -593,11 +645,12 @@
       "how": "own",
       "cands": 3,
       "rect": {
-        "top": 3596.328125,
+        "top": 3234.890625,
         "left": 92,
-        "w": 0,
+        "w": 323,
         "h": 24
-      }
+      },
+      "zone": "#zone-home-rooms-products"
     },
     {
       "id": "I542:1607;410:4689",
@@ -605,30 +658,33 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 3608.328125,
-        "left": 92,
-        "w": 0,
+        "top": 3246.890625,
+        "left": 1907,
+        "w": 323,
         "h": 100.984375
-      }
+      },
+      "zone": "#zone-home-rooms-products"
     },
     {
       "id": "I542:1607;410:4690",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1608;410:4686;410:4672",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1608;410:4688",
@@ -636,49 +692,54 @@
       "how": "own",
       "cands": 3,
       "rect": {
-        "top": 3596.328125,
-        "left": 92,
-        "w": 0,
-        "h": 24
-      }
+        "top": 3246.890625,
+        "left": 818,
+        "w": 323,
+        "h": 100.984375
+      },
+      "zone": "#zone-home-rooms-products"
     },
     {
       "id": "I542:1608;410:4689",
       "matched": true,
       "how": "own",
-      "cands": 6,
+      "cands": 5,
       "rect": {
-        "top": 10,
-        "left": 0,
-        "w": 0,
-        "h": 0
-      }
+        "top": 372.5625,
+        "left": 345.296875,
+        "w": 749.40625,
+        "h": 134.390625
+      },
+      "zone": "#zone-home-hero"
     },
     {
       "id": "I542:1608;410:4690",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1640",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1643;106:658",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1643;91:159",
@@ -688,21 +749,23 @@
       "rect": {
         "top": 1163.125,
         "left": 84,
-        "w": 327,
-        "h": 40
-      }
+        "w": 435,
+        "h": 20
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1643;91:160;15:380",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1643;91:498",
@@ -712,28 +775,31 @@
       "rect": {
         "top": 1043.140625,
         "left": 84,
-        "w": 327,
+        "w": 435,
         "h": 23
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1643;91:499",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1644;106:658",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1644;91:159",
@@ -742,22 +808,24 @@
       "cands": 2,
       "rect": {
         "top": 1163.125,
-        "left": 411,
-        "w": 327,
+        "left": 519,
+        "w": 435,
         "h": 40
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1644;91:160;15:380",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1644;91:498",
@@ -766,10 +834,11 @@
       "cands": 1,
       "rect": {
         "top": 1043.140625,
-        "left": 411,
-        "w": 327,
+        "left": 519,
+        "w": 435,
         "h": 23
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1644;91:499",
@@ -778,41 +847,45 @@
       "cands": 1,
       "rect": {
         "top": 1058.140625,
-        "left": 411,
-        "w": 327,
+        "left": 519,
+        "w": 435,
         "h": 100.984375
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1645;106:658",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1645;91:159",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1645;91:160;15:380",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1645;91:498",
@@ -821,10 +894,11 @@
       "cands": 1,
       "rect": {
         "top": 1043.140625,
-        "left": 738,
-        "w": 327,
+        "left": 954,
+        "w": 435,
         "h": 23
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1645;91:499",
@@ -833,82 +907,74 @@
       "cands": 1,
       "rect": {
         "top": 1058.140625,
-        "left": 738,
-        "w": 327,
+        "left": 954,
+        "w": 435,
         "h": 100.984375
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1646;106:658",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1646;91:159",
-      "matched": true,
-      "how": "own",
-      "cands": 1,
-      "rect": {
-        "top": 1163.125,
-        "left": 1065,
-        "w": 327,
-        "h": 40
-      }
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1646;91:160;15:380",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1646;91:498",
-      "matched": true,
-      "how": "own",
-      "cands": 1,
-      "rect": {
-        "top": 1043.140625,
-        "left": 1065,
-        "w": 327,
-        "h": 23
-      }
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1646;91:499",
-      "matched": true,
-      "how": "own",
-      "cands": 1,
-      "rect": {
-        "top": 1058.140625,
-        "left": 1065,
-        "w": 327,
-        "h": 100.984375
-      }
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1629",
       "matched": true,
       "how": "own",
-      "cands": 6,
+      "cands": 5,
       "rect": {
-        "top": 10,
-        "left": 0,
-        "w": 0,
-        "h": 0
-      }
+        "top": 372.5625,
+        "left": 345.296875,
+        "w": 749.40625,
+        "h": 134.390625
+      },
+      "zone": "#zone-home-hero"
     },
     {
       "id": "I542:1816;410:4672",
@@ -916,11 +982,12 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 10695.25,
+        "top": 9597.203125,
         "left": 607.125,
         "w": 225.75,
-        "h": 17
-      }
+        "h": 46.390625
+      },
+      "zone": null
     },
     {
       "id": "542:1665",
@@ -928,11 +995,12 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 9749.65625,
+        "top": 8674.015625,
         "left": 0,
         "w": 1440,
         "h": 38
-      }
+      },
+      "zone": null
     },
     {
       "id": "542:1667",
@@ -940,11 +1008,12 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 9925.953125,
+        "top": 8850.3125,
         "left": 1057.84375,
         "w": 84.15625,
         "h": 16
-      }
+      },
+      "zone": null
     },
     {
       "id": "542:1668",
@@ -952,30 +1021,28 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 9908.453125,
+        "top": 8832.8125,
         "left": 291,
         "w": 1,
         "h": 1
-      }
+      },
+      "zone": null
     },
     {
       "id": "542:1672",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1674",
-      "matched": true,
-      "how": "own",
-      "cands": 1,
-      "rect": {
-        "top": 9768.46875,
-        "left": 0,
-        "w": 1440,
-        "h": 100.984375
-      }
+      "matched": false,
+      "how": null,
+      "cands": 0,
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1631",
@@ -983,18 +1050,20 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 5817.09375,
+        "top": 5432.6875,
         "left": 72,
         "w": 636,
         "h": 38.390625
-      }
+      },
+      "zone": "#zone-home-spa"
     },
     {
       "id": "542:1632",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1633;410:4612",
@@ -1002,11 +1071,12 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 6121.890625,
+        "top": 5737.484375,
         "left": 72,
         "w": 173.890625,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-spa"
     },
     {
       "id": "I542:1633;410:4614",
@@ -1014,11 +1084,12 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 6121.890625,
+        "top": 5737.484375,
         "left": 301.890625,
         "w": 143.09375,
         "h": 34
-      }
+      },
+      "zone": "#zone-home-spa"
     },
     {
       "id": "542:1634",
@@ -1026,18 +1097,20 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 5863.484375,
+        "top": 5479.078125,
         "left": 72,
         "w": 636,
         "h": 100.984375
-      }
+      },
+      "zone": "#zone-home-spa"
     },
     {
       "id": "542:1692",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1707",
@@ -1045,11 +1118,12 @@
       "how": "own",
       "cands": 2,
       "rect": {
-        "top": 10,
+        "top": 14,
         "left": 0,
         "w": 0,
         "h": 0
-      }
+      },
+      "zone": null
     },
     {
       "id": "542:1740",
@@ -1057,18 +1131,20 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 11338.5625,
+        "top": 10295.90625,
         "left": 447,
         "w": 375,
         "h": 14
-      }
+      },
+      "zone": null
     },
     {
       "id": "542:1771",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1772",
@@ -1076,18 +1152,20 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 11473.5625,
+        "top": 10430.90625,
         "left": 1295.46875,
         "w": 96.53125,
         "h": 14
-      }
+      },
+      "zone": null
     },
     {
       "id": "542:1773",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1775",
@@ -1095,11 +1173,12 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 10835.75,
+        "top": 9764.09375,
         "left": 1245.125,
         "w": 61.890625,
         "h": 31
-      }
+      },
+      "zone": null
     },
     {
       "id": "542:1776",
@@ -1107,11 +1186,12 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 10834.25,
+        "top": 9762.59375,
         "left": 1315.015625,
         "w": 76.984375,
         "h": 17
-      }
+      },
+      "zone": null
     },
     {
       "id": "542:1777",
@@ -1119,18 +1199,20 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 10851.25,
+        "top": 9779.59375,
         "left": 1315.015625,
         "w": 76.984375,
         "h": 17
-      }
+      },
+      "zone": null
     },
     {
       "id": "542:1619",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1620",
@@ -1138,11 +1220,12 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 7996.4375,
+        "top": 7325.328125,
         "left": 732,
         "w": 636,
         "h": 100.984375
-      }
+      },
+      "zone": "#zone-home-art"
     },
     {
       "id": "I542:1780;410:4612",
@@ -1150,23 +1233,25 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 8254.84375,
+        "top": 7583.734375,
         "left": 732,
         "w": 276.484375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-art"
     },
     {
       "id": "I542:1780;410:4614",
       "matched": true,
       "how": "own",
-      "cands": 2,
+      "cands": 1,
       "rect": {
-        "top": 10,
-        "left": 0,
-        "w": 0,
-        "h": 0
-      }
+        "top": 7583.734375,
+        "left": 1064.484375,
+        "w": 49.625,
+        "h": 17
+      },
+      "zone": "#zone-home-art"
     },
     {
       "id": "542:1618",
@@ -1174,23 +1259,25 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 7950.046875,
+        "top": 7278.9375,
         "left": 732,
         "w": 636,
         "h": 38.390625
-      }
+      },
+      "zone": "#zone-home-art"
     },
     {
       "id": "542:1650",
       "matched": true,
       "how": "own",
-      "cands": 6,
+      "cands": 5,
       "rect": {
-        "top": 10,
-        "left": 0,
-        "w": 0,
-        "h": 0
-      }
+        "top": 372.5625,
+        "left": 345.296875,
+        "w": 749.40625,
+        "h": 134.390625
+      },
+      "zone": "#zone-home-hero"
     },
     {
       "id": "542:1651",
@@ -1198,63 +1285,70 @@
       "how": "own",
       "cands": 3,
       "rect": {
-        "top": 1935.4375,
-        "left": 762.421875,
-        "w": 585.5,
-        "h": 90
-      }
+        "top": 1854.5,
+        "left": 171.5625,
+        "w": 1096.859375,
+        "h": 30
+      },
+      "zone": "#zone-home-getaway"
     },
     {
       "id": "I542:1781;410:4672",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1783;410:4686;410:4672",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1783;410:4688",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1783;410:4689",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1783;410:4690",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1784;410:4686;410:4672",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1784;410:4688",
@@ -1262,37 +1356,46 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 6982.984375,
-        "left": 564,
+        "top": 5934.234375,
+        "left": 674.65625,
         "w": 126.625,
         "h": 24
-      }
+      },
+      "zone": "#zone-home-spa-services"
     },
     {
       "id": "I542:1784;410:4689",
-      "matched": false,
-      "how": null,
-      "cands": 0,
-      "rect": null
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 5982.234375,
+        "left": 662.78125,
+        "w": 150.390625,
+        "h": 100.984375
+      },
+      "zone": "#zone-home-spa-services"
     },
     {
       "id": "I542:1784;410:4690",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1785;410:4686;410:4672",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1785;410:4688",
@@ -1300,37 +1403,46 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 6982.984375,
-        "left": 1032,
-        "w": 118.609375,
+        "top": 5934.234375,
+        "left": 1146.5625,
+        "w": 102.796875,
         "h": 24
-      }
+      },
+      "zone": "#zone-home-spa-services"
     },
     {
       "id": "I542:1785;410:4689",
-      "matched": false,
-      "how": null,
-      "cands": 0,
-      "rect": null
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 5982.234375,
+        "left": 1126.515625,
+        "w": 142.890625,
+        "h": 100.984375
+      },
+      "zone": "#zone-home-spa-services"
     },
     {
       "id": "I542:1785;410:4690",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1786;410:4686;410:4672",
       "matched": true,
       "how": "own",
-      "cands": 15,
+      "cands": 14,
       "rect": {
-        "top": 1545.5,
-        "left": 194.03125,
+        "top": 1622.0625,
+        "left": 248.03125,
         "w": 106.9375,
         "h": 17
-      }
+      },
+      "zone": "#zone-home-universe"
     },
     {
       "id": "I542:1786;410:4688",
@@ -1338,87 +1450,101 @@
       "how": "own",
       "cands": 1,
       "rect": {
-        "top": 6982.984375,
-        "left": 1500,
+        "top": 5934.234375,
+        "left": 1586.828125,
         "w": 142.21875,
         "h": 24
-      }
+      },
+      "zone": "#zone-home-spa-services"
     },
     {
       "id": "I542:1786;410:4689",
-      "matched": false,
-      "how": null,
-      "cands": 0,
-      "rect": null
+      "matched": true,
+      "how": "own",
+      "cands": 1,
+      "rect": {
+        "top": 5982.234375,
+        "left": 1591.734375,
+        "w": 132.421875,
+        "h": 100.984375
+      },
+      "zone": "#zone-home-spa-services"
     },
     {
       "id": "I542:1786;410:4690",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1791",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "I542:1792;42:1669",
       "matched": true,
       "how": "own",
-      "cands": 2,
+      "cands": 1,
       "rect": {
-        "top": 83.5,
-        "left": 82,
-        "w": 55.234375,
-        "h": 17
-      }
+        "top": 14,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      },
+      "zone": null
     },
     {
       "id": "I542:1792;42:1671",
       "matched": true,
       "how": "own",
-      "cands": 4,
+      "cands": 3,
       "rect": {
-        "top": 83.5,
-        "left": 1113.0625,
-        "w": 96.46875,
-        "h": 17
-      }
+        "top": 14,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      },
+      "zone": null
     },
     {
       "id": "I542:1792;42:1678",
       "matched": true,
       "how": "own",
-      "cands": 3,
+      "cands": 2,
       "rect": {
-        "top": 83.5,
-        "left": 1242.53125,
-        "w": 149.46875,
-        "h": 17
-      }
+        "top": 14,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      },
+      "zone": null
     },
     {
       "id": "542:1800",
       "matched": false,
       "how": null,
       "cands": 0,
-      "rect": null
+      "rect": null,
+      "zone": null
     },
     {
       "id": "542:1796",
       "matched": true,
       "how": "own",
-      "cands": 6,
+      "cands": 5,
       "rect": {
-        "top": 10,
-        "left": 0,
-        "w": 0,
-        "h": 0
-      }
+        "top": 372.5625,
+        "left": 345.296875,
+        "w": 749.40625,
+        "h": 134.390625
+      },
+      "zone": "#zone-home-hero"
     },
     {
       "id": "542:1797",
@@ -1430,7 +1556,8 @@
         "left": 345.296875,
         "w": 749.40625,
         "h": 45.515625
-      }
+      },
+      "zone": "#zone-home-hero"
     },
     {
       "id": "I542:1817;410:4672",
@@ -1442,43 +1569,47 @@
         "left": 619.859375,
         "w": 200.28125,
         "h": 16
-      }
+      },
+      "zone": "#zone-home-hero"
     },
     {
       "id": "I542:1815;42:1986",
       "matched": true,
       "how": "own",
-      "cands": 4,
+      "cands": 3,
       "rect": {
-        "top": 83.5,
-        "left": 1113.0625,
-        "w": 96.46875,
-        "h": 17
-      }
+        "top": 14,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      },
+      "zone": null
     },
     {
       "id": "I542:1815;42:1993",
       "matched": true,
       "how": "own",
-      "cands": 3,
+      "cands": 2,
       "rect": {
-        "top": 83.5,
-        "left": 1242.53125,
-        "w": 149.46875,
-        "h": 17
-      }
+        "top": 14,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      },
+      "zone": null
     },
     {
       "id": "I542:1815;55:3077",
       "matched": true,
       "how": "own",
-      "cands": 2,
+      "cands": 1,
       "rect": {
-        "top": 83.5,
-        "left": 82,
-        "w": 55.234375,
-        "h": 17
-      }
+        "top": 14,
+        "left": 0,
+        "w": 0,
+        "h": 0
+      },
+      "zone": null
     }
   ]
 }

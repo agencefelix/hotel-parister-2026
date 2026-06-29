@@ -12,6 +12,12 @@
 2. **[ ] Référence maquette exportée** — image du node (Figma `/v1/images`) pour comparer.
 3. **[ ] Intégration** — appliquer EXACTEMENT ces valeurs (fixtures + SCSS). Pour un élément de **layout**,
    **réécrire le fichier proprement** (pas d'overrides empilés) ; **un composant = son fichier**.
+   - **[ ] Flags `$enable-<module>` (BLOQUANT si l'élément emploie un module/atome Bootstrap)** : le SCSS
+     du projet n'inclut le CSS d'un partial que si son flag est à `true` (`@if ($enable-<module>)`). Pour
+     CHAQUE module/atome introduit par le template (accordion, modal, card, breadcrumb, youtube, tab…),
+     **poser `$enable-<module>: true;` en TÊTE du SCSS du template** (section « Modules », avant les
+     imports core — sinon le `!default` à `false` gagne). Oubli = **markup rendu SANS styles** (composant
+     « cassé »), erreur silencieuse coûteuse. ⟶ artefact : la liste des flags posés pour cet élément.
 4. **[ ] Build** — `yarn build` (exit 0) ; regen si fixtures touchées.
 5. **[ ] Capture Chrome** — `tooling/capture.mjs` ; états **repos / scroll / hover / ouvert** via vraies
    interactions (`mouse.wheel`, `click`, `mouse.move`). ⟶ artefact : la/les PNG.
@@ -28,12 +34,19 @@
    Compléter par `getComputedStyle` manuel sur `::before`/`::after` (non couverts par le script).
 6bis. **[ ] GATE LAYOUT AUTOMATIQUE (BLOQUANT) — la COMPOSITION, pas le style :**
    ```
-   node .claude/skills/figma-cms/tooling/verify-layout.mjs <url> .claude/skills/figma-cms/integration/figma-tokens.<page>.json [--map zones.json] [--width 1440]
+   node .claude/skills/figma-cms/tooling/verify-layout.mjs <url> .claude/skills/figma-cms/integration/figma-tokens.<page>.json [--zones zones.<page>.json] [--map m.json] [--width 1440]
    ```
    Compare la **géométrie rendue** aux **bboxes Figma** : **full-bleed** (un élément pleine largeur en
    maquette DOIT l'être au rendu — capte « hero/bande boxé »), **largeur relative**, **ordre vertical**.
    Cibler les **bandes/images** via `--map` (`#zone-<customId>`…) pour un vrai contrôle de composition
    (l'ancrage par texte seul ne suffit pas). **La case n'est cochée que si `GATE LAYOUT : OK`.**
+   > **`--zones zones.<page>.json` (RECOMMANDÉ pour l'ordre) :** `{ "selectors": ["#zone-…", …] }`. L'ordre
+   > vertical est alors ancré sur les **conteneurs de bande** (strictement empilés) au lieu des ancres
+   > texte — l'ordre Figma de chaque zone est déduit de la `médiane(relY)` de ses tokens (anti-outlier :
+   > un token décoratif mal placé ne fait plus remonter la zone). Élimine le **faux
+   > « déplacé »** des textes de **même rangée** (cards côte à côte, titres multi-lignes, homonymes) qui
+   > polluait la métrique. Quand `--zones` est fourni : ordre par zones = **décisif (seuil 0)**, ordre par
+   > ancres texte = informatif. Sans `--zones` : ancres texte décisives (seuil 10 %).
    > ⚠️ **« Fait » exige les DEUX gates au vert** (styles ET layout) + la comparaison visuelle. La
    > fidélité des tokens NE prouve PAS que la mise en page est bonne (cf. cas home : tokens ~OK mais
    > composition fausse). Ne jamais annoncer « done » sur le seul GATE styles.

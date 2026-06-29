@@ -1,5 +1,13 @@
 import refresh from "./refresh";
 
+/**
+ * Search filters
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 export default function() {
 
     let body = $('body');

@@ -1,3 +1,11 @@
+/**
+ * Google tag manager
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 let scriptEl = document.getElementById('google-tag-manager-src');
 if (scriptEl) {
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

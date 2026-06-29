@@ -18,7 +18,7 @@ export default function (maps, autoCenterMap = null) {
         map.invalidateSize();
     }
 
-    // Geometry zones
+    /** Geometry zones */
     if (geometryZones) {
         Promise.all([
             fetch('/geo-json/geo-lite.json').then(res => res.json())
@@ -146,7 +146,7 @@ export default function (maps, autoCenterMap = null) {
                                 opacity: 0.9
                             }
                         }).addTo(map);
-                        // Zoom automatique sur le tracé
+                        /** Zoom automatique sur le tracé */
                         map.fitBounds(trackLayer.getBounds(), {
                             padding: [40, 40],
                             maxZoom: 14

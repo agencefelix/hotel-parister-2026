@@ -1,5 +1,13 @@
 import Cookies from 'js-cookie'
 
+/**
+ * Cart
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 let bubbleInfo = document.getElementById('cart-bubble-info')
 let cookiesName = 'cart_list'
 let cookiesCart = Cookies.get(cookiesName)

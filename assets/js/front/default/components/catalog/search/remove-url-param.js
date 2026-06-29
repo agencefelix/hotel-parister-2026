@@ -1,3 +1,11 @@
+/**
+ * Remove url param
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 export default function(parameter) {
     //     // let url = new URL(window.location.href);
     //     // let params = new URLSearchParams(url.search.slice(1));

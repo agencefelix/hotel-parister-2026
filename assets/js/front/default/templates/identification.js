@@ -1,3 +1,11 @@
+/**
+ * Identification
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 (function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) {

@@ -1,3 +1,11 @@
+/**
+ * Accessibility
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 /** Import CSS */
 
 import {scrollToEL} from "../functions"
@@ -26,12 +34,12 @@ export default function () {
         video.blur();
     });
 
-    // For the focus on Tab event
+    /** For the focus on Tab event */
     document.addEventListener('keydown', function (event) {
 
         if (event.key === 'Tab') {
 
-            // If focus is on <body>, redirect it to the first focusable element (skip-link fix)
+            /**  If focus is on <body>, redirect it to the first focusable element (skip-link fix) */
             if (document.activeElement === body && !body.classList.contains('active-for-tab')) {
                 const firstFocusable = document.querySelector(
                     'a.skip-link, a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
@@ -40,12 +48,12 @@ export default function () {
                     event.preventDefault();
                     firstFocusable.focus();
                     body.classList.add('active-for-tab')
-                    // Renvoie ver le premier skip link
+                    /** Renvoie ver le premier skip link */
                     return;
                 }
             }
 
-            // Highlight currently focused element
+            /**  Highlight currently focused element */
             setTimeout(() => {
 
                 const focusedLink = document.activeElement;
@@ -66,7 +74,7 @@ export default function () {
                     scrollToEL(document.querySelector('.focused-el'));
                 }
 
-                // To close submenu
+                /** To close submenu */
                 const inSubmenu = focusedLink.closest('.submenu-level-3');
                 if (!inSubmenu) {
                     document.querySelectorAll('.submenu-level-3.active').forEach((submenu) => {
@@ -74,7 +82,7 @@ export default function () {
                     });
                 }
 
-                // To close menu
+                /** To close menu */
                 const burgerBtn = document.querySelector('.navbar-toggler');
                 const asItemMenu = focusedLink.closest('.navbar-collapse') || focusedLink.classList.contains('navbar-toggler') || focusedLink.classList.contains('navbar-brand');
                 if (!asItemMenu && burgerBtn && !burgerBtn.classList.contains('collapsed')) {

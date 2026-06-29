@@ -2,6 +2,14 @@ import {lazyVideos} from "../../../vendor/components/lazy-videos";
 
 /**
  * Show more index
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
+ * Show more index
  */
 export default function (button) {
 

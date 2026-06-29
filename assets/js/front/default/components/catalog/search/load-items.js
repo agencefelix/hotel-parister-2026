@@ -1,5 +1,13 @@
 import masonry from "../../../../../../../../../assets/js/vendor/plugins/masonry";
 
+/**
+ * Load items
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 export default function(body, items, loader, val = null) {
 
     let term = val ? val.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*") : null;

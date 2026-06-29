@@ -2,6 +2,14 @@ import '../../../../scss/front/default/components/form/_search-fiters.scss';
 import scrollToEl from "../../../vendor/components/scroll-to";
 import {AjaxPagination} from "../functions";
 
+/**
+ * Entities filters
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 export default function (forms) {
 
     let resetForm = function (form) {

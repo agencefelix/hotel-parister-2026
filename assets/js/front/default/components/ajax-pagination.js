@@ -2,6 +2,14 @@ import {scrollToEL, isInViewport} from "../functions";
 
 /**
  * Ajax pagination
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
+/**
+ * Ajax pagination
  */
 export default function () {
 

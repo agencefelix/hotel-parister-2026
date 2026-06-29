@@ -1,3 +1,11 @@
+/**
+ * Remove empty blocks
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 /** To remove empty blocks */
 const inRemoveView = document.querySelector(".remove-unused-block");
 if (inRemoveView) {

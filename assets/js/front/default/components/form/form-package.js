@@ -172,7 +172,7 @@ export default function (scrollErrors = true) {
         }
     }
 
-    // To set aria-invalid accessibility
+    /** To set aria-invalid accessibility */
     const invalidFields = document.querySelectorAll('input, select, textarea');
     invalidFields.forEach(field => {
         field.removeAttribute('aria-invalid');
@@ -181,7 +181,7 @@ export default function (scrollErrors = true) {
         }
     });
 
-    // To include password checker
+    /** To include password checker */
     document.querySelectorAll('.password-checker').forEach((input) => {
         import('../../../../vendor/components/password-checker').then(({default: Checker}) => {
             new Checker(input);

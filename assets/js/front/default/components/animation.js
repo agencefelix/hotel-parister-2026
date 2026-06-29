@@ -1,3 +1,11 @@
+/**
+ * Animation
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 /** https://github.com/dev-florian/fullib-js */
 
 import Animation from "fullib-js/src/js/Basic/Animation";

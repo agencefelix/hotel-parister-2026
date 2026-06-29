@@ -2,6 +2,14 @@ import Tooltip from '../../../bootstrap/dist/tooltip';
 import {hideLoader, displayLoader} from '../loader';
 import {AjaxPagination} from '../../functions';
 
+/**
+ * Catalog
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 export default function () {
 
     const indexProducts = document.getElementById('index-products');
@@ -164,7 +172,7 @@ export default function () {
 
         displayLoader(indexProducts, false);
 
-        // Lock to prevent double requests
+        /** Lock to prevent double requests */
         if (form.classList.contains('is-post')) {
             return;
         }

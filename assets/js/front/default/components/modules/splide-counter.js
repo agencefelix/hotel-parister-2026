@@ -1,3 +1,11 @@
+/**
+ * Splide counter
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 export function Counter(Splide, Components) {
 
     const {track} = Components.Elements

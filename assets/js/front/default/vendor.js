@@ -1,7 +1,7 @@
 /**
  * On loaded
  *
- * @copyright 2024
+ * @copyright 2026
  * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
  * @licence under the MIT License (LICENSE.txt)
  */
@@ -21,9 +21,9 @@ const isDebug = html.dataset.debug ? parseInt(html.dataset.debug) === 1 : false;
 function adjustColumnsByMargin() {
     document.querySelectorAll(".layout-block, .layout-col").forEach(col => {
         let style = window.getComputedStyle(col);
-        // 1️⃣ Remove previously added max-width to reset to the original CSS
+        /** 1️⃣ Remove previously added max-width to reset to the original CSS */
         col.style.maxWidth = "";
-        // 2️⃣ Get the width defined in % from the original CSS
+        /** 2️⃣ Get the width defined in % from the original CSS */
         let widthValue = col.style.width || style.getPropertyValue("width");
         let widthPercent = widthValue.includes("%")
             ? parseFloat(widthValue)
@@ -34,7 +34,7 @@ function adjustColumnsByMargin() {
         // 4️⃣ Apply calculation ONLY if at least one margin is greater than 0
         if (marginRight > 0 || marginLeft > 0) {
             let parentWidth = col.parentElement.clientWidth || 1; // Get parent width in px
-            // 5️⃣ Convert margins from px to % of the parent width
+            /** 5️⃣ Convert margins from px to % of the parent width */
             let totalMarginPercent = ((marginRight + marginLeft) / parentWidth) * 100;
             // 6️⃣ Calculate the new adjusted width (always ≤ original width)
             let newWidthPercent = Math.max(0, widthPercent - totalMarginPercent);
@@ -44,7 +44,7 @@ function adjustColumnsByMargin() {
     });
 }
 
-// Prevent unnecessary recalculations on Y-axis resize
+/** Prevent unnecessary recalculations on Y-axis resize */
 let lastWindowWidth = window.innerWidth;
 
 function handleResize() {
@@ -55,7 +55,7 @@ function handleResize() {
     }
 }
 
-// Run at load and on X-axis resize only
+/** Run at load and on X-axis resize only */
 window.addEventListener("load", adjustColumnsByMargin);
 window.addEventListener("resize", handleResize);
 
@@ -196,14 +196,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Target all elements inside .body that have a style attribute
     document.querySelectorAll('.body [style]').forEach(el => {
-        // Extract the inline style as individual declarations
+        /** Extract the inline style as individual declarations */
         const declarations = el.getAttribute('style').split(';').filter(d => d.trim() !== '');
-        // Reconstruct the style with !important
+        /** Reconstruct the style with !important */
         const newStyle = declarations.map(decl => {
             const [prop, value] = decl.split(':');
             return `${prop.trim()}: ${value.trim()} !important`;
         }).join('; ');
-        // Replace the style attribute with the modified version
+        /** Replace the style attribute with the modified version */
         el.setAttribute('style', newStyle);
     });
 

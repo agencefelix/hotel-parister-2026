@@ -1,5 +1,13 @@
 import Utils from 'fullib-js/src/js/Utils/Utils';
 
+/**
+ * Search
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 export default function () {
 
     let utils = new Utils();
@@ -28,14 +36,14 @@ export default function () {
                 }, 1000);
             });
 
-            // Ferme le searchBox si on clique en dehors
+            /** Ferme le searchBox si on clique en dehors */
             document.addEventListener('click', (event) => {
                 if (searchBox && !searchBox.contains(event.target) && event.target !== searchInput) {
                     searchBox.classList.add('close');
                 }
             });
 
-            //OUVRE SI ON CLIQUE SUR LE INPUT
+            /** OUVRE SI ON CLIQUE SUR LE INPUT */
             searchInput.addEventListener('click', () => {
                 if (searchBox) {
                     searchBox.classList.remove('close');

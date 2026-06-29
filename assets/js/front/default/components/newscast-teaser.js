@@ -1,5 +1,13 @@
 import scrollToEl from "../../../vendor/components/scroll-to";
 
+/**
+ * Newscast teaser
+ *
+ * @copyright 2026
+ * @author Sébastien FOURNIER <contact@sebastien-fournier.com>
+ * @licence under the MIT License (LICENSE.txt)
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
 
     let screenWidth = window.screen.width;

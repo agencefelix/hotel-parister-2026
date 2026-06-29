@@ -412,7 +412,7 @@ export default function (sliders) {
                         slide.classList.remove('overflow-hidden');
                     }
 
-                    // Accessibility
+                    /** Accessibility */
                     slider.querySelectorAll('.btn-pause').forEach(function (psBtn) {
                         if (psBtn.classList.contains('btn-pause')) {
                             psBtn.onclick = function () {

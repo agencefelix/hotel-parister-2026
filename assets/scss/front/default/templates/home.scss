@@ -617,10 +617,19 @@ $enable-breadcrumb: false;
         }
     }
 
+    .btn-pause {
+        display: none !important;
+    }
+
     // Flèches overlay sur les bords, centrées sur l'image (maquette : prev gauche / next droite).
     .newscast-teaser { position: relative; }
 
     .newscast-teaser .arrows-wrap.as-btn {
+
+        &:before {
+            display: none !important;
+        }
+
         position: absolute;
         top: 40%;
         left: 0;

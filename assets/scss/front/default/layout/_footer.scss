@@ -161,8 +161,8 @@
         }
     }
 
-    /* Partenaires */
-    .footer-partners {
+    /* Partenaires (un bloc label + logo sous chaque colonne de menus) */
+    .footer-partner {
 
         .footer-partner-label {
             font-size: rem(12px);
@@ -194,8 +194,7 @@
         }
     }
 
-    // Filets maquette (couleur custom → SCSS) ; espacements = utilities Bootstrap dans le template.
-    #footer-contact,
+    // Filet légal maquette (couleur custom → SCSS) ; espacements = utilities Bootstrap dans le template.
     #footer-bottom {
         border-top: 1px solid rgba($light, .25);
     }

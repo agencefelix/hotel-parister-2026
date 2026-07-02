@@ -94,14 +94,29 @@ class LinkType extends AbstractType
         }
 
         $fields = self::CTA_TEXT ? ['targetLink' => 'col-md-8', 'targetPage' => 'col-md-4', 'placeholder' => 'col-md-4', 'targetLabel' => 'col-md-4', 'targetStyle' => 'col-md-4', 'introduction']
-            : ['targetLink' => 'col-md-12', 'targetPage' => 'col-md-4', 'targetLabel' => 'col-md-4', 'targetStyle' => 'col-md-4'];
+            : [
+                // Lien principal.
+                'targetLink' => 'col-md-12 add-title-primary',
+                'targetPage' => 'col-md-4',
+                'targetLabel' => 'col-md-4',
+                'targetStyle' => 'col-md-4',
+                'newTab' => 'col-md-4',
+                // Lien secondaire (facultatif).
+                'targetLinkSecondary' => 'col-md-12 add-title-secondary',
+                'targetPageSecondary' => 'col-md-4',
+                'targetLabelSecondary' => 'col-md-4',
+                'targetStyleSecondary' => 'col-md-4',
+                'newTabSecondary' => 'col-md-4',
+            ];
         $intls = new WidgetType\IntlsCollectionType($this->coreLocator);
         $intls->add($builder, [
             'website' => $options['website'],
             'fields' => $fields,
+            // Ordre des champs piloté explicitement (2 sections lien) : pas d'ajout auto du newTab en fin de form.
+            'target_config' => self::CTA_TEXT,
             'label_fields' => ['placeholder' => $this->translator->trans('Texte associé au lien de type CTA', [], 'admin')],
             'placeholder_fields' => ['placeholder' => $this->translator->trans('Saisissez votre texte', [], 'admin')],
-            'groups_fields' => ['newTab' => 'col-md-4'],
+            'groups_fields' => ['newTab' => 'col-md-4', 'newTabSecondary' => 'col-md-4'],
         ]);
 
         if ($this->isInternalUser) {

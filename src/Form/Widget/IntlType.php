@@ -316,6 +316,62 @@ class IntlType extends AbstractType
     }
 
     /**
+     * Secondary link fields (delegate to primary builders, distinct field names).
+     */
+    private function getTargetLinkSecondary(FormBuilderInterface $builder, string $field, ?string $groupClass = null): void
+    {
+        $this->getTargetLink($builder, $field, $groupClass);
+    }
+
+    private function getTargetPageSecondary(FormBuilderInterface $builder, string $field, ?string $groupClass = null): void
+    {
+        $this->getTargetPage($builder, $field, $groupClass);
+    }
+
+    private function getTargetLabelSecondary(FormBuilderInterface $builder, string $field, ?string $groupClass = null): void
+    {
+        $this->getTargetLabel($builder, $field, $groupClass);
+    }
+
+    private function getTargetStyleSecondary(FormBuilderInterface $builder, string $field, ?string $groupClass = null): void
+    {
+        $this->getTargetStyle($builder, $field, $groupClass);
+    }
+
+    /**
+     * Secondary new tab / external link toggles.
+     */
+    private function getNewTabSecondary(FormBuilderInterface $builder, string $field, ?string $groupClass = null): void
+    {
+        $groupClass = !empty($this->options['fields'][$field]) ? $this->options['fields'][$field] : 'col-12';
+        $groupClass = !empty($this->options['groups_fields'][$field]) ? $this->options['groups_fields'][$field] : $groupClass;
+
+        if (!in_array($field, $this->options['excludes_fields'])) {
+            $builder->add($field, Type\CheckboxType::class, [
+                'required' => in_array($field, $this->options['required_fields']),
+                'display' => 'button',
+                'color' => 'outline-info-darken',
+                'label' => $this->getAttribute($field, 'label'),
+                'attr' => ['group' => $groupClass, 'class' => 'w-100'],
+                'help' => $this->getAttribute($field, 'help'),
+            ]);
+        }
+
+        $externalGroupClass = !empty($this->options['groups_fields']['externalLinkSecondary']) ? $this->options['groups_fields']['externalLinkSecondary'] : $groupClass;
+
+        if (!in_array('externalLinkSecondary', $this->options['excludes_fields'])) {
+            $builder->add('externalLinkSecondary', Type\CheckboxType::class, [
+                'required' => false,
+                'display' => 'button',
+                'color' => 'outline-info-darken',
+                'label' => $this->translator->trans('Lien externe'),
+                'attr' => ['group' => $externalGroupClass, 'class' => 'w-100'],
+                'help' => $this->getAttribute('externalLinkSecondary', 'help'),
+            ]);
+        }
+    }
+
+    /**
      * Target Link fields.
      */
     private function getTargetFields(FormBuilderInterface $builder, ?string $groupClass = null): void
@@ -631,6 +687,10 @@ class IntlType extends AbstractType
         $translations['newTab'] = [
             'label' => $this->translator->trans('Ouvrir dans un nouvel onglet', [], 'admin'),
         ];
+        $translations['targetLinkSecondary'] = $translations['targetLink'];
+        $translations['targetPageSecondary'] = $translations['targetPage'];
+        $translations['targetLabelSecondary'] = $translations['targetLabel'];
+        $translations['newTabSecondary'] = $translations['newTab'];
         $translations['placeholder'] = [
             'label' => $this->translator->trans('Intitulé dans le champs', [], 'admin'),
             'placeholder' => $this->translator->trans('Saisissez un intitulé', [], 'admin'),

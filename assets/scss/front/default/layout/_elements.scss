@@ -579,8 +579,6 @@ a,
 button:not(.btn-arrow),
 [role="button"],
 .cursor,
-.card-room,
-.card-spa,
-.card-universe {
+.card-cover {
     transition: color .25s ease, background-color .25s ease, opacity .25s ease, transform .35s ease, border-color .25s ease, box-shadow .25s ease;
 }

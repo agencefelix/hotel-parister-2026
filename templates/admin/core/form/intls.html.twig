@@ -72,7 +72,7 @@
                         {% set attrGroup = field.vars.attr['data-group'] is defined and field.vars.attr['data-group'] ? field.vars.attr['data-group'] : attrGroup %}
                         {% if disableTitleLink is not defined and attrGroup and "add-title" in attrGroup and "target" in field.vars.name %}
                             <div class="col-12">
-                                <h4 class="card-subtitle mb-4">{{ 'fal link'|icon(null, 14, 'info-darken me-2') }}{{ "Lien"|trans }}</h4>
+                                <h4 class="card-subtitle mb-4">{{ 'fal link'|icon(null, 14, 'info-darken me-2') }}{% if "add-title-secondary" in attrGroup %}{{ "Lien secondaire"|trans }}{% elseif "add-title-primary" in attrGroup %}{{ "Lien principal"|trans }}{% else %}{{ "Lien"|trans }}{% endif %}</h4>
                             </div>
                         {% endif %}
 

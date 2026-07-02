@@ -92,3 +92,35 @@ body .btn.btn[class*="btn-outline-"] {
         }
     }
 }
+
+// Hover des boutons « 2 filets » selon le FOND parent : le fond reste transparent, donc texte
+// + filets doivent CONTRASTER avec le fond (ne pas virer vers la couleur de remplissage de l'état).
+.bg-light, .bg-white, .bg-beige {
+
+    .btn.btn[class*="btn-outline-"] {
+
+        &:hover, &:focus, &:active, &.active {
+            color: $primary !important;
+
+            * { color: $primary !important; }
+
+            &::before,
+            &::after { background: $primary !important; }
+        }
+    }
+}
+
+.bg-primary, .bg-secondary, .bg-dark, .bg-navy, .bg-teal, .bg-brown {
+
+    .btn.btn[class*="btn-outline-"] {
+
+        &:hover, &:focus, &:active, &.active {
+            color: $light !important;
+
+            * { color: $light !important; }
+
+            &::before,
+            &::after { background: $light !important; }
+        }
+    }
+}

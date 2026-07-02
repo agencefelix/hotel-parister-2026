@@ -793,6 +793,12 @@ autre. Interdit de mettre du CSS **newsletter dans `_socialwall.scss`**, du foot
   CONTENU, pas au dossier ; en cas de doute, exclure). Header auteur = SCSS propre du CMS/projet seulement.
   Exclure aussi `/bootstrap/` et `/highlight/themes/`.
 - **Aération** : ligne vide après l'accolade ouvrante d'un bloc et **entre blocs de règles** distincts.
+- ⚠️ **Commentaires COURTS et factuels — JAMAIS de prose explicative à rallonge.** Pas de comment qui
+  raconte la maquette, le pourquoi du design, l'historique, des références node Figma, ou des
+  raisonnements de spécificité sur plusieurs lignes. Un label court suffit (`// Filet sous le bandeau`,
+  `// token lh17`). **Bannir** les commentaires du type « La maquette utilise… », « relevé Figma… »,
+  « neutralise le cap inline (mediasSize → …) pour couvrir le viewport… ». Vaut pour TOUT le code (SCSS,
+  Twig, JS, PHP) : on ne documente pas la maquette dans le code.
 - **CSS propre/sectionné MAIS jamais au détriment du mobile-first** : la mise en forme/sectionnement ne
   doit pas pousser à un CSS desktop-first. Garder les **styles de base = mobile**, puis surcouches en
   `mediaQuery(min-…)` (jamais l'inverse). Sectionner proprement ≠ réécrire en max-width.
@@ -1234,13 +1240,25 @@ multi-images réduite à une seule image — ex. `home-restaurant` : 3 images pl
   (ne pas la régénérer/modifier) ; elle garde `popup` + `download` actifs sur ses `mediaRelation`
   (page de référence/QA kitchen-sink).
 
+### `alt` des images — JAMAIS vide, TOUJOURS descriptif (SEO)
+> ⚠️ **Aucun `alt` vide.** Toute image porte un `alt` qui **décrit son CONTENU réel** (ce qu'on voit),
+> pas un libellé générique. Vaut pour les images d'**assets** (`|file`) ET pour les **médias** (l'`alt`
+> vient de l'intl du média). **Regarder l'image** avant de nommer.
+- **Nom de fichier = contenu de l'image** (pas `insta-1`, `img-2`…) : `cocktail-bar.jpg`, `art-books.jpg`,
+  `easter-eggs.jpg`. On doit deviner le visuel au nom.
+- **`alt` = phrase descriptive** du sujet (ex. « Cocktail rouge sur une table en marbre au bar »), pas
+  « Instagram » ni le seul nom de société. Idéalement traduisible ([[#Textes-traduisibles]]).
+- **Médias en fixtures** : l'`alt` (intl du média) doit recevoir une **vraie description**, jamais `''`
+  ni du Faker. Vider le titre ne sert qu'à retirer la **figcaption** visible (≠ alt) — cf. ci-dessous.
+
 ### Légendes Faker sur les blocs média (figcaption + alt) — éradication
 - La **figcaption** (`.img-title`) et l'`alt` d'un bloc média viennent de l'intl Faker. La rendre
   vide ne suffit PAS : un filler Faker re-remplit les champs vides au flush (c'est pourquoi les blocs
   title/text gardent leur vrai contenu : non-vide = pas de re-fill).
 - **Solution fiable** : `$media->setTitlePosition(null)` dans le helper `mediaBlock` → la figcaption
   n'est rendue que si `titlePosition ∈ top/bottom/left/right` ; à `null` elle disparaît, quel que soit
-  le titre. (Le défaut de `Media` est `bottom-start`.)
+  le titre. ⚠️ Mais l'**`alt` doit rester une vraie description** (renseigner l'intl avec un texte
+  décrivant l'image, pas `''`) : figcaption masquée ≠ alt vide.
 - **Piège** : `BlockMediaRelation` n'a **pas** `getIntls()` (appel → fatal qui casse tout le load).
 - **Piège exit code** : `fixtures:load | tail -1 && echo OK` masque l'échec (exit = `tail`). Toujours
   rediriger vers un fichier et tester `$?`, sinon un load planté passe pour réussi (et le site tombe en 500).
@@ -1534,20 +1552,22 @@ webfonts de prod doit être sourcée (licence) ou mappée sur la plus proche.
 >   police projet → `system-ui`/`-apple-system` → `font-fallback`/`font-fallback-android` (métriques
 >   capsize anti-CLS) → générique (`sans-serif` / `cursive`). Ex. `$font-script: '<Script du projet>',
 >   '<Sans du projet>', cursive;`. Une police décorative (script) doit aussi retomber sur une cursive.
-> - **Précharger les polices ESSENTIELLES** (corps + titres above-the-fold) dans
->   `templates/front/<theme>/base.html.twig` via `<link rel="preload" as="font" type="font/woff2"
->   crossorigin nonce="{{ csp_nonce() }}">`. L'URL du preload doit **correspondre exactement** à l'`url()`
->   du `@font-face` (sinon double téléchargement) → pointer un **chemin stable** (Webpack `copyFiles`
->   sans hash) côté `@font-face` ET preload. Ne précharger que les graisses réellement critiques.
+> - **Anti-CLS = métriques de secours capsize + `font-display: swap`** (posé par le mixin), PAS un preload
+>   à chemin stable fait main. Ne PAS dupliquer une police via `copyFiles` juste pour la précharger : ça
+>   diverge de la convention mixin (Webpack hashe l'`url()`) et duplique le fichier. Le fallback capsize
+>   suffit à tenir le CLS.
 
 **Récupérer les polices du projet** (depuis le CSS de prod : règles `@font-face` / `font-family`,
 ou à défaut les styles de texte Figma) et **les intégrer EN LOCAL** (jamais de CDN externe) :
-- **Fichiers de police** (woff2/woff…) → `assets/lib/fonts/`.
-- **Déclarations `@font-face`** → `assets/scss/front/default/fonts.scss`, en **`url()` RELATIVE** vers
-  `assets/lib/fonts/…` (ex. `url('../../../lib/fonts/<famille>/x.woff2')`). ⚠️ **Ne PAS utiliser
-  d'`url()` absolue `/build/…`** : `css-loader` la
-  traite comme un module à résoudre et **casse le build** (« Module not found »). Le chemin relatif
-  laisse Webpack émettre/hasher la police automatiquement (woff2 suffit, support universel).
+- **UN dossier PAR police** → `assets/lib/fonts/<Nomdelapolice>/` (le nom du dossier = la font-family,
+  ex. `Museosans/`, `Augustscript/`). Les fichiers woff2/ttf y vont.
+- **UN fichier SCSS PAR police** → `assets/lib/fonts/<nom>.scss`, déclaré **via le MIXIN `font-face`**
+  (`assets/scss/vendor/mixin/_fonts.scss`) — **JAMAIS de `@font-face` écrit à la main**. Format (cf.
+  `google-roboto.scss`) : un map `$fonts` (clé = **nom de fichier** sans extension, valeur =
+  `('weight': …, 'style': …)`) puis `@include font-face("<Famille>", $fonts, <fallback>, woff2);`.
+  Importer chaque fichier dans `fonts.scss` (`@import "../../../lib/fonts/<nom>";`). ⚠️ Le **nom passé au
+  mixin = nom du dossier = `font-family`** (aligner les piles `$font-*` de `variables.scss`). Le mixin gère
+  l'`url()` relative ; Webpack émet/hashe la police. Pas d'`url()` absolue `/build/…` (casse le build).
 - **Ajuster les variables SCSS** → `assets/scss/front/default/variables.scss` :
   - **couleurs** : reporter le mapping validé (primary/secondary/light/dark…), aligné sur `config.json`/`default.yaml`, et **alimenter le map `$theme-colors`** (ajouter les couleurs de sections projet, ex. `navy`/`teal`, + les ajouter à `$default-bootstrap-colors` pour générer `bg-*`/`text-*`) ;
   - **polices** : variables de familles (`$font-…`) pointant sur les polices intégrées.
@@ -1564,11 +1584,8 @@ ou à défaut les styles de texte Figma) et **les intégrer EN LOCAL** (jamais d
   métriques de la police ; `createFontStack([police, arial])` et `([police, roboto])` →
   les `@font-face` de secours avec `size-adjust`/`*-override` à reporter dans `variables.scss`.
   Garder `local('Arial')` (desktop) / `local('Roboto')` (android) comme repli système.
-- **Précharger les graisses critiques** (above-the-fold) dans `templates/front/default/base.html.twig`
-  (`<link rel="preload" as="font" type="font/woff2" crossorigin>` + `nonce` CSP). Pour que le preload
-  soit efficace, l'URL doit **correspondre exactement** à celle du `@font-face` : copier les polices
-  vers un **chemin stable** (Webpack `copyFiles` → `fonts/…`, sans hash) et y pointer `@font-face` + preload.
-  Limiter les graisses/styles aux besoins réels.
+- **CLS** : tenu par les métriques de secours capsize + `font-display: swap` (mixin). Ne pas fabriquer
+  de chemin stable / preload manuel (cf. règle ci-dessus) — ça contredit la convention mixin.
 
 ## Cas particulier : nav & footer (intégrés une seule fois)
 

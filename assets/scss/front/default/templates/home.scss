@@ -62,14 +62,12 @@ $enable-breadcrumb: false;
 
     .carousel-item {
 
-        // Le wrapper d'image porte z-index:10 (loader) : on le ramène sous le voile/légende.
         .img-loader-wrap {
 
             z-index: 1;
             width: 100%;
 
-            // Hero plein écran : neutralise le max-width/height inline (mediasSize → 1600x900)
-            // pour laisser l'image couvrir le viewport (vignettes gérées en 1920x920).
+            // Neutralise le cap inline du loader (plein écran).
             .img-loader {
                 max-width: none !important;
                 max-height: none !important;
@@ -88,6 +86,7 @@ $enable-breadcrumb: false;
             height: 100dvh;
             object-fit: cover;
         }
+
         // Voile maquette : noir plat à 20% (token Figma #000 / 0.2), pas un gradient sombre.
         &::after {
             content: "";
@@ -161,18 +160,21 @@ $enable-breadcrumb: false;
         letter-spacing: .2em;
         font-size: rem(14px) !important;
         font-weight: $font-weight-bold !important;
-        color: $beige !important;          // token Figma #f4f0f1 (écru, pas blanc pur)
+        color: $beige !important; // token Figma #f4f0f1 (écru, pas blanc pur)
         padding-top: rem(16px);
         padding-bottom: rem(16px);
 
         // Le libellé est un <span> enfant (couleur blanche propre) → forcer l'écru aussi.
-        span, .initial { color: $beige !important; }
+        span, .initial {
+            color: $beige !important;
+        }
     }
 
     // Kicker = écru #f4f0f1 (token) ; script « Parister » = blanc.
     .caption-title {
         color: $beige !important;
     }
+
     .introduction {
         color: $white !important;
     }
@@ -184,9 +186,13 @@ $enable-breadcrumb: false;
 
 // Kicker hero : #id pour battre ".carousel-inner .carousel-caption .caption-title" (0,3,0 → 30px).
 #zone-home-hero .caption-title {
-    line-height: calc(46 / 38.4);   // token lh46 @ 38.4px (la règle globale imposait lh30)
-    @include mediaQuery(min-lg) { font-size: rem(38px); }
-    @include mediaQuery(max-md) { font-size: rem(24px); }
+    line-height: calc(46 / 38.4); // token lh46 @ 38.4px (la règle globale imposait lh30)
+    @include mediaQuery(min-lg) {
+        font-size: rem(38px);
+    }
+    @include mediaQuery(max-md) {
+        font-size: rem(24px);
+    }
 }
 
 /*-----------------------------------
@@ -210,8 +216,7 @@ $enable-breadcrumb: false;
             z-index: 1;
             width: 100%;
 
-            // Bande pleine largeur : neutralise le max-width/height inline du loader (mediasSize)
-            // pour couvrir toute la largeur ; le ratio est porté par l'`img` (1440/830).
+            // Neutralise le cap inline du loader (pleine largeur).
             .img-loader {
                 max-width: none !important;
                 max-height: none !important;
@@ -311,8 +316,7 @@ $enable-breadcrumb: false;
             z-index: 1;
             width: 100%;
 
-            // Plein écran : neutralise le max-width/height inline du loader (mediasSize → ex. 1600x900)
-            // pour couvrir le viewport (vignettes gérées en 1920x920).
+            // Neutralise le cap inline du loader (plein écran).
             .img-loader {
                 max-width: none !important;
                 max-height: none !important;
@@ -328,7 +332,7 @@ $enable-breadcrumb: false;
 
         img {
             width: 100%;
-            height: 100dvh;          // plein écran (80dvh était trop court)
+            height: 100dvh; // plein écran (80dvh était trop court)
             object-fit: cover;
         }
 
@@ -394,7 +398,9 @@ $enable-breadcrumb: false;
     .caption-title,
     .introduction,
     .link, .link span,
-    .mega-forstyle, .mega-forstyle * { color: $white; }
+    .mega-forstyle, .mega-forstyle * {
+        color: $white;
+    }
 }
 
 
@@ -413,30 +419,29 @@ $enable-breadcrumb: false;
         align-items: center;
         color: $white;
 
-        // Groupes de ~6 tirets verticaux blancs aux extrémités (maquette section 2).
+        // Groupes de 5 tirets verticaux blancs rapprochés aux extrémités (maquette section 2).
         &::before,
         &::after {
+
             content: "";
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: rem(64px);
-            height: rem(12px);
-            background-image: repeating-linear-gradient(to right, transparentize($white, .25) 0, transparentize($white, .25) 1px, transparent 1px, transparent 11px);
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            width: rem(25px);
+            background-image: repeating-linear-gradient(to right, transparentize($white, .25) 0, transparentize($white, .25) 1px, transparent 1px, transparent 6px);
 
-            @include mediaQuery(max-md) { display: none; }
+            @include mediaQuery(max-md) {
+                display: none;
+            }
         }
 
-        &::before { left: rem(40px); }
-        &::after { right: rem(40px); }
-
-        .icon {
-            display: none !important;
+        &::before {
+            left: rem(40px);
         }
 
-        .message {
-            padding-top: rem(11px) !important;
-            padding-bottom: rem(11px) !important;
+        &::after {
+            right: rem(40px);
         }
 
         .inner {
@@ -454,10 +459,9 @@ $enable-breadcrumb: false;
 
 // ===== Système typographique (relevé en dev mode Figma) =====
 
-// Scripts cursifs (poids 400) : sous-titres de bande, accents hero/univers.
+// Scripts cursifs (poids 400) : sous-titres de bande, accent hero.
 .sub-title,
-.carousel-home-hero .introduction,
-.slider-container-home-universe .introduction {
+.carousel-home-hero .introduction {
     font-family: $font-script;
     font-weight: $font-weight-normal;
     text-transform: none;
@@ -476,13 +480,13 @@ $enable-breadcrumb: false;
 }
 
 // Sous-titre script de bande : 96px / lh101 (Figma — ratio 1.05, stacking serré conforme).
+// La police script pose le glyphe en bas d'une boîte de ligne haute : on remonte d'un
+// demi-cadratin (proportionnel à la taille) pour absorber ce leading et coller au titre.
 .layout-block-type-title .sub-title {
     font-size: rem(96px);
     line-height: calc(101 / 96);
-    margin-top: rem(2px);
+    margin-top: -.5em;
 }
-
-// Cartes du slider spa : style réutilisable .card-spa dans components/blocks/_card.scss.
 
 // Texte courant : 16px / 400 (Figma).
 .layout-block-type-text .body,
@@ -523,19 +527,41 @@ $enable-breadcrumb: false;
 }
 
 // Chambres : fond navy → texte & accents TEAL.
-#zone-home-rooms { @include section-text-color($teal); }
+#zone-home-rooms {
+    @include section-text-color($teal);
+}
+
 // Spa : fond teal → texte NAVY.
-#zone-home-spa { @include section-text-color($navy); }
+#zone-home-spa {
+    @include section-text-color($navy);
+}
+
 // Passerelles (restaurant) : fond clair → texte VERT signature.
-#zone-home-restaurant { @include section-text-color($success); }
+#zone-home-restaurant {
+    @include section-text-color($success);
+}
+
 // Art & rencontres : fond clair → texte OR.
-#zone-home-art { @include section-text-color($primary); }
+#zone-home-art {
+    @include section-text-color($primary);
+}
 
 // Couleur des CTA (2 ids pour battre la règle générique bg-light → or).
-#body-page #zone-home-rooms { @include section-link-color($teal); }
-#body-page #zone-home-spa { @include section-link-color($navy); }
-#body-page #zone-home-restaurant { @include section-link-color($success); }
-#body-page #zone-home-art { @include section-link-color($primary); }
+#body-page #zone-home-rooms {
+    @include section-link-color($teal);
+}
+
+#body-page #zone-home-spa {
+    @include section-link-color($navy);
+}
+
+#body-page #zone-home-restaurant {
+    @include section-link-color($success);
+}
+
+#body-page #zone-home-art {
+    @include section-link-color($primary);
+}
 
 // Centrage vertical du texte face à l'image : porté par l'entité Col (setVerticalAlign) — pas de CSS.
 
@@ -552,13 +578,28 @@ $enable-breadcrumb: false;
         display: block;
     }
 }
+
 #zone-home-rooms .media-block img,
-#zone-home-art .media-block img { aspect-ratio: 617 / 744; }
-#zone-home-spa .media-block img { aspect-ratio: 552 / 641; }
+#zone-home-art .media-block img {
+    aspect-ratio: 617 / 744;
+}
+
+#zone-home-spa .media-block img {
+    aspect-ratio: 552 / 641;
+}
+
 // Grille restaurant 2×2 : plat (haut-droite), cocktail (bas-gauche), dessert (bas-droite).
-#zone-home-restaurant .layout-col:nth-child(2) .media-block img { aspect-ratio: 617 / 744; }
-#zone-home-restaurant .layout-col:nth-child(3) .media-block img { aspect-ratio: 510 / 737; }
-#zone-home-restaurant .layout-col:nth-child(4) .media-block img { aspect-ratio: 510 / 436; }
+#zone-home-restaurant .layout-col:nth-child(2) .media-block img {
+    aspect-ratio: 617 / 744;
+}
+
+#zone-home-restaurant .layout-col:nth-child(3) .media-block img {
+    aspect-ratio: 510 / 737;
+}
+
+#zone-home-restaurant .layout-col:nth-child(4) .media-block img {
+    aspect-ratio: 510 / 436;
+}
 
 // Les 2 CTA texte des bandes intro sont alignés EN LIGNE (maquette), espacés.
 #body-page #zone-home-rooms,
@@ -576,9 +617,6 @@ $enable-breadcrumb: false;
         margin-left: rem(32px);
     }
 }
-// Script sous-titre des cartes univers = OR (Figma). #body-page (2 ids) pour battre la règle
-// générique "#body-page … p { color }" qui le repassait en sombre.
-#body-page .slider-container-home-universe .introduction { color: $primary; }
 
 // Événements (teaser) : titre OR, 24px / ls0 / lh24 (token maquette, vs échelle globale 32px/.4em).
 #zone-home-events .layout-block-type-title .title {
@@ -588,318 +626,11 @@ $enable-breadcrumb: false;
     line-height: 1;
 }
 
-// Cartes actualités (teaser newscast) — maquette : titre 14/700 UPPER, ls 2.8px, OR.
-// Lien « En savoir » en capitales OR. (scopé home events, n'impacte pas les autres pages)
-#zone-home-events {
-
-    .newscast-teaser .card {
-
-        .title,
-        .title-link {
-            text-transform: uppercase;
-            font-size: rem(14px);
-            // !important nécessaire : surcharge l'utilitaire .fw-600 (lui-même !important).
-            font-weight: $font-weight-bold !important;
-            letter-spacing: .2em;
-            line-height: 1.4;
-            color: $primary;
-        }
-
-        .title-link { text-decoration: none; }
-
-        // Lien « En savoir » : capitales, or.
-        .card-footer .link,
-        .card-footer .link span {
-            text-transform: uppercase;
-            letter-spacing: .14em;
-            font-size: rem(12px);
-            color: $primary;
-        }
-    }
-
-    .btn-pause {
-        display: none !important;
-    }
-
-    // Flèches overlay sur les bords, centrées sur l'image (maquette : prev gauche / next droite).
-    .newscast-teaser { position: relative; }
-
-    .newscast-teaser .arrows-wrap.as-btn {
-
-        &:before {
-            display: none !important;
-        }
-
-        position: absolute;
-        top: 40%;
-        left: 0;
-        right: 0;
-        transform: translateY(-50%);
-        margin: 0 !important;
-        z-index: 5;
-        pointer-events: none;
-
-        .btn-arrow {
-            position: absolute;
-            top: 0;
-            margin: 0 !important;
-            pointer-events: auto;
-            // maquette : carré arrondi blanc translucide (pas rond or), chevron sombre.
-            width: rem(64px);
-            height: rem(64px);
-            background-color: rgba($white, .5) !important;
-            border: 0 !important;
-            border-radius: rem(4px) !important;
-
-            i { color: $dark !important; }
-        }
-
-        .btn-prev { left: rem(20px); }
-        .btn-next { right: rem(20px); }
-        .btn-pause, .btn-play { display: none; } // pas de pause dans la maquette
-    }
-}
-
-// Chambres (section 6, catalog teaser slider-multi) : flèches en overlay LATÉRAL centré sur les cards
-// (maquette), au lieu du groupe en haut-droite. Cercle translucide + chevron sombre, comme univers.
-#zone-home-rooms-products {
-
-    .splide__track { position: relative; }
-
-    .arrows-wrap.as-btn {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        transform: translateY(-50%);
-        margin: 0 !important;
-        z-index: 5;
-        pointer-events: none;
-
-        .btn-arrow {
-            position: absolute;
-            top: 0;
-            margin: 0 !important;
-            pointer-events: auto;
-            display: flex !important;     // annule le d-lg-none appliqué par défaut sur desktop
-            width: rem(48px);
-            height: rem(48px);
-            background-color: rgba($white, .6) !important;
-            border: 0 !important;
-            border-radius: rem(4px) !important;   // Parister : flèches carrées (pas rond)
-
-            i { color: $dark !important; }
-        }
-
-        .btn-prev { left: rem(20px); }
-        .btn-next { right: rem(20px); }
-        .btn-pause, .btn-play { display: none !important; }
-    }
-}
-
-// Cartes teaser d'univers (slider splide) - card dédiée (card-universe.html.twig).
-// Maquette : titre + sous-titre script AU-DESSUS de l'image, centrés.
-.slider-container-home-universe {
-
-    .card-universe {
-        display: flex;
-        flex-direction: column;
-    }
-
-    // Titre de carte : 24px / 700 / ls 0 / UPPER / #141414 (Figma).
-    .title {
-        order: 1;
-        text-transform: uppercase;
-        font-weight: $font-weight-bold;
-        letter-spacing: 0;
-        font-size: rem(24px);
-        line-height: 1;
-        color: $dark;
-        margin-bottom: rem(4px);
-    }
-
-    // Sous-titre script (à l'hôtel / au restaurant / au spa) : 54px / 400 / lh101 / or (Figma).
-    .introduction {
-        order: 2;
-        font-family: $font-script;
-        font-weight: $font-weight-normal;
-        color: $primary;
-        text-transform: none;
-        font-size: rem(54px);
-        line-height: calc(101 / 54);
-        margin: rem(-12px) 0 rem(4px);   // compense la grande boîte lh101 → stacking serré maquette
-    }
-
-    // Maquette : descriptif AU-DESSUS de l'image (order 3), image ensuite (order 4).
-    .body {
-        order: 3;
-        font-size: rem(14px);
-        line-height: 1.5;
-        margin: 0 0 rem(20px);
-    }
-
-    .card-universe-media {
-        order: 4;
-
-        img {
-            width: 100%;
-            aspect-ratio: 510 / 456;
-            object-fit: cover;
-        }
-    }
-
-    .slider-link, .link {
-        order: 5;
-        letter-spacing: .2em;          // Figma : CTA carte = 14/700/2.8(.2em) UPPER (comme tous les « Découvrir »)
-        font-size: rem(14px);
-        margin-top: rem(14px);
-    }
-
-    // Flèches latérales (overlay) : cercle translucide pâle + chevron sombre fin (maquette),
-    // aux bords de la bande, recentrées sur l'image (titre+script+texte au-dessus décalent le milieu du track).
-    // !important : surcharge .btn-vertical / .btn-circle / .btn-primary du composant carousel (eux-mêmes !important).
-    .splide__track .btn-vertical {
-        top: 56% !important;
-        width: rem(48px) !important;
-        height: rem(48px) !important;
-        background-color: rgba($white, .6) !important;
-        border: 0 !important;
-        border-radius: rem(4px) !important;   // Parister : flèches carrées (pas rond)
-
-        &.btn-prev { left: rem(20px) !important; }
-        &.btn-next { right: rem(20px) !important; }
-
-        i { color: $dark !important; }
-    }
-}
-
-// Descriptif carte univers : 16px / 300 / lh20 (token). #body-page pour battre la règle
-// générique "#body-page p" (id) qui le repassait en 400 / lh24.
-#body-page .slider-container-home-universe .body,
-#body-page .slider-container-home-universe .body p {
-    font-size: rem(16px);
-    font-weight: $font-weight-light;
-    line-height: rem(20px);
-}
-
-// Cartes du slider services Spa (splide) — titre + script EN OVERLAY sur l'image, Découvrir en bas (Figma).
-.slider-container-home-spa-services {
-
-    // Avant init Splide, les slides (cards 100% image en overlay) n'ont aucune largeur intrinsèque
-    // (contrairement à l'univers qui a du texte en flux) → la liste flex les écrase à 0 et Splide
-    // n'arrive pas à les mesurer. On donne une largeur de repli par breakpoint (Splide la surcharge au mount).
-    .splide:not(.is-initialized) .splide__slide {
-        flex: 0 0 auto;
-        width: 100%;
-        @include mediaQuery(min-md) { width: 50%; }
-        @include mediaQuery(min-lg) { width: 33.333%; }
-    }
-
-    .card-spa {
-        position: relative;
-    }
-
-    .card-spa-media,
-    .card-spa-media img {
-        height: 100%;
-    }
-
-    // Média sous le contenu (z-index bas + contexte d'empilement explicite).
-    .card-spa-media {
-        position: relative;
-        z-index: 1;
-    }
-
-    .card-spa-media img {
-        display: block;
-        width: 100%;
-        aspect-ratio: 840 / 1040;
-        object-fit: cover;
-    }
-
-    // Overlay sur toute l'image (flex/centrage/padding = utilitaires Bootstrap dans le template).
-    // z-index élevé : passe AU-DESSUS de l'image/loader (picture lazy crée son propre contexte).
-    .card-spa-content {
-        position: absolute;
-        inset: 0;
-        z-index: 10;
-        background: linear-gradient(180deg, rgba($black, .45) 0%, transparent 35%, transparent 65%, rgba($black, .55) 100%);
-    }
-
-    // Titre carte : 24px / 700 / lh24 (token). !important pour battre l'utilitaire .fw-600.
-    .title {
-        text-transform: uppercase;
-        font-weight: $font-weight-bold !important;
-        letter-spacing: 0;
-        font-size: rem(24px) !important;
-        line-height: 1;
-        color: $white;
-    }
-
-    // Script overlay : 54px / 400. line-height resserré (la grande boîte lh1.87 décalait le script
-    // trop bas, « chauffée » passait sous « La piscine »).
-    .sub-title {
-        font-family: $font-script;
-        font-weight: $font-weight-normal;
-        text-transform: none;
-        letter-spacing: 0;
-        font-size: rem(54px);
-        line-height: 1;
-        margin: 0;
-        color: $light;
-    }
-
-    // Découvrir : poussé en bas de l'overlay, BLANC + filets haut/bas (maquette Parister).
-    .slider-link {
-        margin-top: auto !important;
-        color: $white !important;
-
-        &::before,
-        &::after {
-            content: "";
-            display: block;
-            width: rem(40px);
-            height: 1px;
-            margin: rem(10px) auto 0;
-            background: $white;
-        }
-
-        &::before { margin: 0 auto rem(10px); }
-    }
-
-    // Flèches latérales overlay : carré translucide + chevron sombre, centré sur l'image (Parister = flèches carrées).
-    // !important : surcharge .btn-vertical / .btn-circle / .btn-primary du composant carousel.
-    .splide__track .btn-vertical {
-        top: 50% !important;
-        width: rem(48px) !important;
-        height: rem(48px) !important;
-        background-color: rgba($white, .6) !important;
-        border: 0 !important;
-        border-radius: rem(4px) !important;   // Parister : flèches carrées (pas rond)
-
-        &.btn-prev { left: rem(20px) !important; }
-        &.btn-next { right: rem(20px) !important; }
-
-        i { color: $dark !important; }
-    }
-}
-
 // Bande spa : respiration sous les cards (maquette).
-#zone-home-spa-services { padding-bottom: rem(96px); }
-
-// Hover : léger zoom de l'image cliquable des cards (Parister).
-.card-universe-media,
-.card-spa-media,
-#zone-home-rooms-products .card-room-media,
-#zone-home-events .card-header {
-    overflow: hidden;
-
-    img { transition: transform .6s ease; }
+#zone-home-spa-services {
+    padding-bottom: rem(96px);
 }
-.card-universe-media:hover img,
-.card-spa:hover .card-spa-media img,
-#zone-home-rooms-products .card-room:hover .card-room-media img,
-#zone-home-events .splide__slide:hover .card-header img { transform: scale(1.06); }
 
-// Cartes chambres (catalog-teaser) : composant RÉUTILISABLE déplacé dans
-// components/blocks/_card.scss (.card-room*) — utilisable sur toute page, plus de scope d'id de zone.
+// Flèches overlay latérales des sliders card-cover (catalog-teaser) : composant RÉUTILISABLE dans
+// components/_carousel.scss (.catalog-teaser). Teaser actus dans components/_news-teaser.scss.
+// Hover zoom + style de carte : components/blocks/_card.scss (.card-cover*). Plus aucun scope home.

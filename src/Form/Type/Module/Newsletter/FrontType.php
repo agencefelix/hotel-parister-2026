@@ -54,14 +54,14 @@ class FrontType extends AbstractType
             'label' => false,
             'attr' => [
                 'placeholder' => $this->translator->trans('Votre e-mail', [], 'front_form'),
-                'class' => 'text-center text-md-center text-lg-start newsletter-form-email',
+                'class' => 'text-center text-md-center text-lg-start newsletter-form-email pb-0',
                 'autocomplete' => 'off',
             ],
             'constraints' => $constraints,
         ]);
 
         $builder->add('consent', Type\CheckboxType::class, [
-            'label' => $this->translator->trans("J'accepte que mes données soient utilisées pour me recontacter dans le cadre de cette demande.", [], 'front_form'),
+            'label' => $this->translator->trans("J'accepte que la société Parister exploite les informations collectées dans ce formulaire dans le cadre de ma demande de contact et de la relation commerciale qui pourrait en découler", [], 'front_form'),
             'required' => true,
             'constraints' => [
                 new Assert\IsTrue(message: $this->translator->trans('Vous devez accepter cette condition.', [], 'front_form')),

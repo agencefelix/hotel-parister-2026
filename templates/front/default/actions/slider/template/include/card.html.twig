@@ -1,0 +1,59 @@
+{% trans_default_domain 'front_default' %}
+
+{#
+    Carte de slider standardisée (style catalog-teaser / card-cover).
+    Image plein cadre, titre en surimpression (1er mot capitales + reste en script,
+    ou titre + sous-titre script), intro/corps si présents, lien « Découvrir » en bas.
+    Utilisée par TOUS les sliders splide hors teaser actus. Styles : components/blocks/_card.scss
+    (carte, réutilisable en grille) + components/_carousel.scss (spécifique slider).
+#}
+
+{% set intl = media.intl is defined ? media.intl : null %}
+{% set fullTitle = intl and intl.title is defined ? intl.title|trim : '' %}
+{% set subTitle = intl and intl.subTitle is defined and intl.subTitle ? intl.subTitle|trim : '' %}
+{# Un sous-titre explicite tient lieu de script ; sinon on scinde le titre (1er mot / reste). #}
+{% set parts = not subTitle and fullTitle ? fullTitle|split(' ', 2) : [] %}
+{% set kicker = subTitle ? fullTitle : (parts[0] is defined ? parts[0] : fullTitle) %}
+{% set script = subTitle ? subTitle : (parts[1] is defined ? parts[1] : '') %}
+{% set targetLink = intl and intl.link is defined ? intl.link : null %}
+{% set label = intl and intl.linkLabel is defined and intl.linkLabel ? intl.linkLabel : 'Découvrir'|trans %}
+{% set tag = targetLink ? 'a' : 'div' %}
+{% set extraClass = class is defined and class ? ' '~class : '' %}
+{% set screensSizes = screensSizes is defined ? screensSizes : {
+    mobile: {width: 48, height: 64},
+    tablet: {width: 54, height: 72},
+    desktop: {width: 600, height: 470}
+} %}
+
+<{{ tag }} class="card-cover d-block position-relative h-100{{ extraClass }}"
+    {%- if targetLink %} href="{{ targetLink }}" data-toggle="preloader"
+        {%- if intl.linkBlank is defined and intl.linkBlank %} target="_blank"{% endif %}
+        {%- if intl.linkExternal is defined and intl.linkExternal %} rel="noopener noreferrer"{% endif %}
+    {%- endif %} aria-label="{{ fullTitle|striptags }}">
+    <div class="card-cover-media">
+        {{ media|file(thumbConfiguration, {
+            class: '',
+            disableLink: true,
+            notInBox: true,
+            screensSizes: thumbConfiguration is empty ? screensSizes : {},
+            maxWidth: fileSizes.width is defined ? fileSizes.width : null,
+            maxHeight: fileSizes.height is defined ? fileSizes.height : null,
+            popupGallery: false,
+            fullPopup: false,
+            colSize: colSize is defined ? colSize : null
+        }) }}
+    </div>
+    {% if fullTitle %}
+        <span class="card-cover-title">
+            <span class="card-cover-kicker d-block text-uppercase">{{ kicker|raw }}</span>
+            {% if script %}<span class="card-cover-script d-block">{{ subTitle ? script|raw : script|lower|raw }}</span>{% endif %}
+        </span>
+    {% endif %}
+    {% if intl and ((intl.introduction is defined and intl.introduction) or (intl.body is defined and intl.body)) %}
+        <div class="card-cover-text">
+            {% if intl.introduction is defined and intl.introduction %}<p class="introduction mb-0">{{ intl.introduction|raw|nl2br }}</p>{% endif %}
+            {% if intl.body is defined and intl.body %}<div class="body">{{ intl.body|raw }}</div>{% endif %}
+        </div>
+    {% endif %}
+    <span class="card-cover-link d-block text-uppercase">{{ label }}</span>
+</{{ tag }}>

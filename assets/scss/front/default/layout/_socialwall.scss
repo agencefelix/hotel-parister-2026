@@ -13,6 +13,8 @@
 
     position: relative;
     overflow: hidden;
+    padding-top: rem(72px);
+    padding-bottom: rem(120px);
 
     // Filigrane « parister » (script, or très clair) en fond — relevé Figma 630:1531 (528px).
     &::before {
@@ -30,7 +32,7 @@
         white-space: nowrap;
         // Baseline ~ centre des tuiles (Figma 630:1531) — un peu plus haut que le centre de bande.
 
-        @include mediaQuery(min-lg) { font-size: rem(440px); }
+        @include mediaQuery(min-lg) { font-size: rem(740px); }
         @include mediaQuery(between-md-lg) { font-size: rem(300px); }
         @include mediaQuery(max-md) { font-size: rem(180px); }
     }
@@ -38,14 +40,20 @@
     > .container-fluid { position: relative; z-index: 1; }
 
     .socialwall-grid {
-        gap: 1rem;
+        gap: 0;
     }
 
     .socialwall-link {
-        flex: 0 0 30%;
-        max-width: 30%;
+        flex: 0 0 22.6%;
+        max-width: 22.6%;
         overflow: hidden;
         display: block;
+
+        .img-loader-wrap,
+        .img-loader-wrap picture,
+        .img-loader-wrap picture img {
+            width: 100%;
+        }
 
         img {
             display: block;

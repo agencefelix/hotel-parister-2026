@@ -156,18 +156,10 @@ class ConfigurationManager
         $this->setManifest($configuration);
 
         foreach (self::ADD_CUSTOM_DEFAULT_MEDIAS as $category) {
-            $existing = false;
-            foreach ($defaultLocalesMedias as $defaultLocaleMedia) {
-                if ($defaultLocaleMedia->getCategorySlug() === $category) {
-                    $existing = true;
-                }
-            }
-            if (!$existing) {
-                foreach ($configuration->getAllLocales() as $locale) {
+            foreach ($configuration->getAllLocales() as $locale) {
+                if (!$this->hasMediaRelation($configuration, $category, $locale)) {
                     $this->addMedia($locale, $configuration, null, $category);
-                    $this->entityManager->persist($configuration);
-                    $this->entityManager->flush();
-                    $this->entityManager->refresh($configuration);
+                    $flush = true;
                 }
             }
         }
@@ -297,6 +289,20 @@ class ConfigurationManager
         }
 
         return $medias;
+    }
+
+    /**
+     * Check if a media relation already exists for a category and locale.
+     */
+    private function hasMediaRelation(Configuration $configuration, string $category, string $locale): bool
+    {
+        foreach ($configuration->getMediaRelations() as $mediaRelation) {
+            if ($mediaRelation->getCategorySlug() === $category && $mediaRelation->getLocale() === $locale) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

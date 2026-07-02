@@ -16,15 +16,12 @@
         </div>
         {{ removeSession('alert_error') }}
     {% endif %}
-    <section id="exception-block"{% if displaySitemap %} class="mb-5"{% endif %}>
-        <div id="errorStatus">
-            <div class="errorStatus">
-                <div class="errorStatus-code"></div>
-                {% include 'bundles/TwigBundle/Exception/messages.html.twig' %}
-                <a href="{{ path('front_index') }}" class="btn btn-outline-white d-inline-flex mt-4 back-to-home">
-                    {{ "Retourner sur la page d'accueil"|trans|raw }}
-                </a>
-            </div>
+    <section id="exception-block" class="bg-primary{% if displaySitemap %} mb-5{% endif %}">
+        <div class="exception-inner text-center">
+            {% include 'bundles/TwigBundle/Exception/messages.html.twig' %}
+            <a href="{{ path('front_index') }}" class="btn btn-outline-white text-uppercase d-inline-flex mt-5 back-to-home">
+                {{ "Retourner sur la page d'accueil"|trans|raw }}
+            </a>
         </div>
     </section>
     {% if displaySitemap %}

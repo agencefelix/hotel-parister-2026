@@ -11,8 +11,6 @@
 
 #footer {
 
-    // Texte footer = crème maquette (#f4f0f1), pas blanc pur.
-    // L'ID #footer (1,x,1) bat la règle thème ".bg-primary strong/span/small" (0,3,1) → pas de !important.
     color: $light;
 
     strong, span, small, p, i, time,
@@ -31,22 +29,18 @@
 
             font-size: rem(24px);
             color: $light;
-            transition: color .3s ease-in-out;
+            transition: opacity .3s ease-in-out;
 
             &:hover {
-                color: $secondary;
-                transition: color .3s ease-in-out;
+                opacity: .6;
             }
         }
     }
 
-    /* Menu central */
-    // Filet maquette (Line 22) sous le bandeau du haut.
     .footer-head {
         border-bottom: 1px solid rgba($light, .25);
     }
 
-    // Filet vertical maquette entre les colonnes de menus et la photo de façade.
     @include mediaQuery(min-lg) {
         .footer-right {
             border-left: 1px solid rgba($light, .25);
@@ -70,10 +64,10 @@
             letter-spacing: .12em;
             line-height: calc(20 / 14);
             color: $light;
-            transition: color .2s ease-in-out;
+            transition: opacity .2s ease-in-out;
 
             &:hover {
-                color: $secondary;
+                opacity: .6;
             }
         }
     }
@@ -135,13 +129,13 @@
         a {
             color: $light;
             text-decoration: none;
+            transition: opacity .2s ease-in-out;
         }
 
         a:hover {
-            text-decoration: underline;
+            opacity: .6;
         }
 
-        // Anti-débordement mobile : l'email long (sans espace) doit pouvoir se couper.
         .email-link-wrap,
         .phone-link-wrap {
             max-width: 100%;
@@ -173,7 +167,6 @@
 
         .footer-partner-logo {
             width: auto;
-            height: rem(58px);
             max-width: 100%;
         }
 
@@ -188,14 +181,28 @@
         font-weight: 700;
         letter-spacing: .1em;
         text-decoration: none;
+        opacity: .5;
+        transition: opacity .2s ease-in-out;
 
         &:hover {
-            color: $secondary;
+            opacity: 1;
         }
     }
 
-    // Filet légal maquette (couleur custom → SCSS) ; espacements = utilities Bootstrap dans le template.
     #footer-bottom {
+
         border-top: 1px solid rgba($light, .25);
+
+        * {
+            font-size: 12px;
+        }
+
+        a {
+            transition: opacity .2s ease-in-out;
+        }
+
+        a:hover {
+            opacity: .6;
+        }
     }
 }

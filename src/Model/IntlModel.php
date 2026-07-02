@@ -60,6 +60,16 @@ final class IntlModel extends BaseModel
         public readonly ?bool $linkProtocol = null,
         public readonly ?bool $linkIsEmail = null,
         public readonly ?bool $linkIsPhone = null,
+        public readonly ?string $linkSecondary = null,
+        public readonly ?bool $linkSecondaryOnline = null,
+        public readonly ?Page $linkSecondaryTargetPage = null,
+        public readonly ?bool $linkSecondaryExternal = null,
+        public readonly ?bool $linkSecondaryBlank = null,
+        public readonly ?string $linkSecondaryStyle = null,
+        public readonly ?bool $linkSecondaryAsButton = null,
+        public readonly ?string $linkSecondaryLabel = null,
+        public readonly ?bool $linkSecondaryIsEmail = null,
+        public readonly ?bool $linkSecondaryIsPhone = null,
         public readonly ?string $slug = null,
     ) {
     }
@@ -91,6 +101,7 @@ final class IntlModel extends BaseModel
         $intro = self::getContent('introduction', $intl);
         $body = self::getContent('body', $intl);
         $link = self::intlLink($intl);
+        $linkSecondary = self::intlLink($intl, 'Secondary');
 
         self::$cache['response'][get_class($entity)][$entity->getId()][$locale] = new self(
             intl: $intl,
@@ -129,6 +140,16 @@ final class IntlModel extends BaseModel
             linkProtocol: $link->linkProtocol,
             linkIsEmail: $link->linkIsEmail,
             linkIsPhone: $link->linkIsPhone,
+            linkSecondary: $linkSecondary->linkPath,
+            linkSecondaryOnline: $linkSecondary->linkOnline,
+            linkSecondaryTargetPage: $linkSecondary->linkTargetPage,
+            linkSecondaryExternal: $linkSecondary->linkExternal,
+            linkSecondaryBlank: $linkSecondary->linkBlank,
+            linkSecondaryStyle: $linkSecondary->linkStyle,
+            linkSecondaryAsButton: $linkSecondary->linkAsButton,
+            linkSecondaryLabel: $linkSecondary->linkLabel,
+            linkSecondaryIsEmail: $linkSecondary->linkIsEmail,
+            linkSecondaryIsPhone: $linkSecondary->linkIsPhone,
             slug: self::getContent('slug', $intl),
         );
 
@@ -251,19 +272,29 @@ final class IntlModel extends BaseModel
      *
      * @throws NonUniqueResultException|MappingException
      */
-    private static function intlLink(mixed $intl = null): object
+    private static function intlLink(mixed $intl = null, string $suffix = ''): object
     {
         $href = null;
+        $hasScheme = false;
         $targetDomain = null;
-        $targetPage = self::getContent('targetPage', $intl);
-        $targetLink = self::getContent('targetLink', $intl);
-        $targetStyle = self::getContent('targetStyle', $intl);
+        $targetPage = self::getContent('targetPage'.$suffix, $intl);
+        $targetLink = self::getContent('targetLink'.$suffix, $intl);
+        $targetStyle = self::getContent('targetStyle'.$suffix, $intl);
+        $externalFlag = (bool) self::getContent('externalLink'.$suffix, $intl, true);
+        $newTabFlag = (bool) self::getContent('newTab'.$suffix, $intl, true);
         $infill = $targetPage && $targetPage->isInFill();
         $isOnline = true;
 
         if ($targetLink) {
             $href = $targetLink;
-            if (!str_contains($href, 'https') && !str_starts_with($href, '/')) {
+            // Ne pas transformer en chemin interne les liens déjà « absolus » :
+            // schéma explicite (mailto:, tel:, http(s):…) ou e-mail nu — sinon
+            // « contact@x.fr » devient « mailto:/contact@x.fr » et « mailto:… » est cassé.
+            $hasScheme = (bool) preg_match('#^[a-z][a-z0-9+.\-]*:#i', $href);
+            if (!$hasScheme
+                && !filter_var($href, FILTER_VALIDATE_EMAIL)
+                && !str_contains($href, 'https')
+                && !str_starts_with($href, '/')) {
                 $href = '/'.$targetLink;
             }
         } elseif ($targetPage) {
@@ -298,9 +329,9 @@ final class IntlModel extends BaseModel
         $haveProtocol = $href && str_contains($href, 'http');
         $currentAnchor = $href && str_contains($href, '#') && !str_contains(trim($href, '/'), '/') ? self::$coreLocator->request()->getUri().$href : false;
         $href = !$haveProtocol && $targetDomain && $href ? ltrim(str_replace($targetDomain, '', $href), '/') : $href;
-        $href = $href && !$isPhone && !$isEmail && !str_contains($href, self::$coreLocator->schemeAndHttpHost()) && !str_contains($href, 'http') ? self::$coreLocator->schemeAndHttpHost().$href : $href;
+        $href = $href && !$isPhone && !$isEmail && !$hasScheme && !str_contains($href, self::$coreLocator->schemeAndHttpHost()) && !str_contains($href, 'http') ? self::$coreLocator->schemeAndHttpHost().$href : $href;
         $style = $targetStyle && str_contains($targetStyle, 'btn') ? 'btn '.$targetStyle : $targetStyle;
-        $label = self::getContent('targetLabel', $intl);
+        $label = self::getContent('targetLabel'.$suffix, $intl);
         $matches = $href ? explode('?', $href) : [];
         $matchesAnchor = $href ? explode('#', $href) : [];
         $path = $isOnline && '/' === $href ? self::$coreLocator->request()->getSchemeAndHttpHost() : ($isOnline ? $href : null);
@@ -312,13 +343,13 @@ final class IntlModel extends BaseModel
             'linkPath' => $path,
             'linkTargetPage' => $targetPage,
             'linkTargetPageInfill' => $targetPage ? $targetPage->isInfill() : false,
-            'linkExternal' => $external || ($path && $intl->isExternalLink()) || ($intl && $intl->isExternalLink()) || ($request && $request->getHost() && $href && !preg_match('/'.$request->getHost().'/', $href)),
-            'linkBlank' => $external || ($intl && $intl->isNewTab()),
+            'linkExternal' => $external || $externalFlag || ($request && $request->getHost() && $href && !preg_match('/'.$request->getHost().'/', $href)),
+            'linkBlank' => $external || $newTabFlag,
             'linkWithoutParams' => !empty($matches[0]) ? $matches[0] : null,
             'linkParams' => !empty($matches[0]) ? $matches[0] : null,
             'linkStyle' => $style ?: 'link',
             'linkLabel' => $label,
-            'linkContent' => self::getContent('placeholder', $intl),
+            'linkContent' => self::getContent('placeholder'.$suffix, $intl),
             'linkProtocol' => $haveProtocol,
             'linkIsEmail' => $isEmail,
             'linkIsPhone' => $isPhone,

@@ -3,6 +3,7 @@
 {% import 'core/webmaster-edit.html.twig' as macroWebmaster %}
 
 {% set logo = logos.logo is defined and logos.logo ? logos.logo : null %}
+{% set secondaryLogo = logos['logo-secondary'] is defined and logos['logo-secondary'] and 'placeholder' not in logos['logo-secondary'] ? logos['logo-secondary'] : logo %}
 {% set companyName = informationIntl.title is defined and informationIntl.title ? informationIntl.title : "Parister"|trans|raw %}
 {% set links = tree.main is defined ? tree.main : [] %}
 {% set compagnyNameElement = (seo.titleH1 is defined and not seo.titleH1 or seo.titleH1 is not defined) ? 'h1' : 'strong' %}
@@ -52,9 +53,9 @@
                     <span class="brand-logo d-inline-flex">
                         {{ asset(logo)|file({}, {
                             screensSizes: {
-                                mobile: {width: 120, height: 52},
-                                tablet: {width: 138, height: 60},
-                                desktop: {width: 138, height: 60}
+                                mobile: {width: 71, height: 96},
+                                tablet: {width: 82, height: 111},
+                                desktop: {width: 91, height: 123}
                             },
                             decor: false,
                             title: companyName,
@@ -95,11 +96,20 @@
                         <span class="d-lg-none">{{ "Fermer"|trans|raw }}</span>
                     </button>
                 </div>
-                {% if logo %}
-                    <a class="navbar-brand p-0 m-0" aria-label="{{ companyName|striptags }}" href="{{ app.request.getSchemeAndHttpHost() }}" data-toggle="preloader">
-                        {{ asset(logo)|file({}, {
-                            screensSizes: {mobile: {width: 110, height: 48}, tablet: {width: 130, height: 56}, desktop: {width: 130, height: 56}},
-                            decor: false, title: companyName, class: 'force-size logo initial-color', only_html: false, lazyLoad: false, priority: 'high'
+                {% if secondaryLogo %}
+                    <a class="navbar-brand p-0 ms-lg-4 mt-0 mb-0 me-0" aria-label="{{ companyName|striptags }}" href="{{ app.request.getSchemeAndHttpHost() }}" data-toggle="preloader">
+                        {{ asset(secondaryLogo)|file({}, {
+                            screensSizes: {
+                                mobile: {width: 48, height: 64},
+                                tablet: {width: 54, height: 72},
+                                desktop: {width: 60, height: 80}
+                            },
+                            decor: false,
+                            title: companyName,
+                            class: 'force-size logo initial-color',
+                            only_html: false,
+                            lazyLoad: false,
+                            priority: 'high'
                         }) }}
                     </a>
                 {% endif %}
@@ -157,17 +167,17 @@
                     <div class="mega-aside-body d-flex flex-column flex-grow-1">
                         <ul class="reset mega-cta-list">
                             <li>
-                                <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase" href="{{ giftUrl }}" data-toggle="preloader">
+                                <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase px-3 px-lg-4" href="{{ giftUrl }}" data-toggle="preloader">
                                     <span>{{ "Bons cadeaux"|trans|raw }}</span><i class="icon-arrow-right" aria-hidden="true"></i>
                                 </a>
                             </li>
                             <li>
-                                <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase" href="{{ wellnessUrl }}" data-toggle="preloader">
+                                <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase px-3 px-lg-4" href="{{ wellnessUrl }}" data-toggle="preloader">
                                     <span>{{ "Offres bien-être"|trans|raw }}</span><i class="icon-arrow-right" aria-hidden="true"></i>
                                 </a>
                             </li>
                             <li>
-                                <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase" href="{{ bookingUrl }}" data-toggle="preloader">
+                                <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase px-3 px-lg-4" href="{{ bookingUrl }}" data-toggle="preloader">
                                     <span>{{ "Réservation"|trans|raw }}</span><i class="icon-arrow-right" aria-hidden="true"></i>
                                 </a>
                             </li>

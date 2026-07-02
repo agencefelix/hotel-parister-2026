@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+/* -----------------------------------------------------------------
+
+    Module: Font Museosans
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
+
+------------------------------------------------------------------------------------------ */
+
+@import "../../scss/vendor/mixin/fonts";
+
+$fonts: (
+    'museosans-300': ('weight': 300, 'style': normal),
+    'museosans-500': ('weight': 400 500, 'style': normal),
+    'museosans-700': ('weight': 600 700, 'style': normal),
+    'museosans-900': ('weight': 800 900, 'style': normal),
+);
+
+@include font-face("Museosans", $fonts, sans-serif, woff2);

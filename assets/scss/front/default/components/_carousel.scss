@@ -450,11 +450,24 @@
         z-index: 300 !important;
 
         &.btn-prev {
-            left: 1rem !important;
+            left: rem(20px) !important;
         }
 
         &.btn-next {
-            right: 1rem !important;
+            right: rem(20px) !important;
+        }
+
+        // Parister : flèches carrées translucides, chevron sombre (surcharge .btn-circle/.btn-primary).
+        &.btn-circle {
+            width: rem(48px) !important;
+            height: rem(48px) !important;
+            background-color: rgba($white, .6) !important;
+            border: 0 !important;
+            border-radius: rem(4px) !important;
+        }
+
+        i {
+            color: $dark !important;
         }
     }
 
@@ -492,6 +505,72 @@
 
         .slider-progress-bar {
             background: transparentize($white, .3) !important;
+        }
+    }
+}
+
+/*-----------------------------------
+   4 ) Cartes de slider standardisées (style catalog-teaser / card-cover)
+-----------------------------------*/
+
+// En slider, l'image garde sa taille configurée (pas de recadrage 3/4 imposé comme en grille catalogue).
+// #body-page requis pour battre `#body-page .card-cover-media img` (id).
+#body-page .slider-container .splide .card-cover-media img,
+#body-page .catalog-teaser.splide .card-cover-media img {
+    height: auto !important;
+    aspect-ratio: auto;
+}
+
+// Flèches de contrôle en overlay latéral centré sur les cards (Parister : carré translucide,
+// chevron sombre). Communes à TOUS les sliders card-cover hors actus : sliders génériques
+// (.slider-container) + catalog-teaser. Dé-scopé de #zone-home-rooms-products → réutilisable partout.
+// (.newscast-teaser, hors .slider-container et .catalog-teaser, garde ses propres flèches.)
+.slider-container .splide,
+.catalog-teaser {
+
+    .splide__track {
+        position: relative;
+    }
+
+    .arrows-wrap.as-btn {
+
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        margin: 0 !important;
+        z-index: 5;
+        pointer-events: none;
+
+        .btn-arrow {
+
+            position: absolute;
+            top: 0;
+            margin: 0 !important;
+            pointer-events: auto;
+            display: flex !important; // annule le d-lg-none par défaut sur desktop
+            width: rem(48px);
+            height: rem(48px);
+            background-color: rgba($white, .6) !important;
+            border: 0 !important;
+            border-radius: rem(4px) !important;
+
+            i {
+                color: $dark !important;
+            }
+        }
+
+        .btn-prev {
+            left: rem(20px);
+        }
+
+        .btn-next {
+            right: rem(20px);
+        }
+
+        .btn-pause, .btn-play {
+            display: none !important;
         }
     }
 }

@@ -8,12 +8,25 @@
     {% endif %}
 {% endfor %}
 
-<section id="socialwall" class="socialwall bg-light py-5" aria-label="{{ "Mur social Instagram"|trans|striptags }}">
+<section id="socialwall" class="socialwall bg-light" aria-label="{{ "Mur social Instagram"|trans|striptags }}">
     <div class="container">
         <div class="socialwall-grid d-flex justify-content-between flex-wrap">
-            {% for img in ['insta-1', 'insta-2', 'insta-3'] %}
+            {% set instaImages = [
+                {file: 'cocktail-bar', alt: 'Cocktail rouge sur une table en marbre au bar du Parister'},
+                {file: 'art-books', alt: "Pile de livres d'art Paris, Man Ray et Bauhaus dans le salon du Parister"},
+                {file: 'easter-eggs', alt: 'Œufs de Pâques dorés décorés nichés dans le lierre'}
+            ] %}
+            {% for img in instaImages %}
                 <a class="socialwall-link" href="{{ instaUrl }}"{% if instaUrl != '#' %} target="_blank" rel="noopener noreferrer"{% endif %} aria-label="Instagram - {{ "nouvelle fenêtre"|trans|striptags }}">
-                    <img src="{{ asset('medias/'~img~'.jpg') }}" alt="" class="w-100 object-fit-cover" loading="lazy" width="290" height="371">
+                    {{ asset('build/front/'~websiteTemplate~'/images/'~img.file~'.jpg', webpack)|file({}, {
+                        screensSizes: {
+                            mobile: {width: 360, height: 460},
+                            tablet: {width: 320, height: 409},
+                            desktop: {width: 320, height: 409}
+                        },
+                        alt: img.alt,
+                        class: 'w-100 object-fit-cover'
+                    }) }}
                 </a>
             {% endfor %}
         </div>

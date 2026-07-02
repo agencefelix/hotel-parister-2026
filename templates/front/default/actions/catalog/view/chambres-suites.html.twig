@@ -164,7 +164,7 @@
     </div>
 </section>
 
-{# ---------- 3) LES AUTRES CHAMBRES : slider de cards (card-room) ---------- #}
+{# ---------- 3) LES AUTRES CHAMBRES : slider de cards (card-cover) ---------- #}
 {% set otherRooms = associatedEntities.list is defined ? associatedEntities.list : [] %}
 {% if otherRooms is not empty %}
     <section id="product-other-rooms" class="product-other-rooms py-5 text-center">
@@ -186,7 +186,7 @@
                         <ul class="splide__list">
                             {% for post in otherRooms %}
                                 <li class="splide__slide">
-                                    {% include 'front/'~websiteTemplate~'/actions/catalog/teaser/include/card-room.html.twig' with {
+                                    {% include 'front/'~websiteTemplate~'/actions/catalog/teaser/include/card-cover.html.twig' with {
                                         post: post,
                                         thumbConfiguration: thumbConfigurationView
                                     } only %}

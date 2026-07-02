@@ -124,22 +124,19 @@
         }
     }
 
-    // Script : 96px / 400 / lh101 / or (token Figma) ; léger chevauchement sur le kicker.
     .newsletter-title {
         font-family: $font-script;
         font-weight: $font-weight-normal;
         color: $primary;
         font-size: rem(96px);
         line-height: calc(101 / 96);
-        margin-top: -.2em;
+        margin-top: -2.75rem;
 
         @include mediaQuery(max-md) {
             font-size: rem(56px);
         }
     }
 
-    // Label a11y du champ e-mail (visually-hidden, clippé) : même traitement typo que le
-    // placeholder visuel (token 542:1668 : 14/700/lh17/UPPER/#b48608). Aucun impact visuel.
     label[for="front_newsletter_email"] {
         font-size: rem(14px);
         font-weight: $font-weight-bold;
@@ -151,7 +148,6 @@
 
     .newsletter-fields-wrap {
         border-bottom: 1px solid rgba($primary, .5);
-        padding-bottom: .5rem;
     }
 
     // Forcé : bat le form global `input.form-control {...!important}` (sinon champ boxé gris).
@@ -162,30 +158,27 @@
         border: 0 !important;
         border-radius: 0;
         color: $primary !important;
-        letter-spacing: 0;             // Figma 542:1664 : "votre e-mail" 14/700/ls0 UPPER
+        letter-spacing: 0;
         text-transform: uppercase;
         font-size: rem(14px);
         font-weight: $font-weight-bold;
         padding: .5rem 0 !important;
         box-shadow: none !important;
 
-        // Token Figma 542:1668 : 14px / 700 / lh17 / UPPER / #b48608 plein (la règle générique
-        // imposait 12px ; couleur .7 → ramenée à pleine opacité).
-        &::placeholder { color: $primary; text-transform: uppercase; font-weight: $font-weight-bold; font-size: rem(14px); line-height: calc(17 / 14); opacity: 1; }
+        &::placeholder { color: $primary; text-transform: uppercase; font-weight: $font-weight-bold; font-size: rem(14px); line-height: calc(17 / 14); opacity: .4; }
         &:focus { outline: none; box-shadow: none; }
     }
 
     .newsletter-sep {
         display: inline-block;
         width: 1px;
-        align-self: stretch;
-        min-height: 24px;
+        height: 17px;
         background-color: rgba($primary, .5);
         margin: 0 1.5rem;
     }
 
-    // ENVOYER : 14px / 700 / 0.2em / UPPER / OR (token Figma) — forcé (sinon hérite du navy).
     .newsletter-submit {
+        width: 160px;
         background: transparent !important;
         border: 0;
         color: $primary !important;
@@ -193,7 +186,7 @@
         text-transform: uppercase;
         letter-spacing: .2em;
         font-size: rem(14px);
-        line-height: calc(17 / 14);    // token lh17 (héritait 20px du bloc générique)
+        line-height: calc(17 / 14);
         white-space: nowrap;
         transition: opacity .2s ease;
 
@@ -206,27 +199,37 @@
         gap: .75rem;
     }
 
+    // Case + texte en flex (le thème Symfony imbrique un .form-check qui flotte la case).
+    .newsletter-consent .form-check {
+        display: flex;
+        align-items: flex-start;
+        gap: .85rem;
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+
     .newsletter-consent-check {
         width: 16px;
         height: 16px;
-        margin-top: 2px;
-        border-radius: 0;          // carré (coche blanche sur fond primary à la sélection, cf. _form.scss)
+        margin: 2px 0 0;
+        float: none;
+        flex-shrink: 0;
+        border-radius: 0;
     }
 
-    .newsletter-consent-text {
-        color: $primary;
-        font-size: rem(13px);
-        line-height: 1.5;
+    .newsletter-consent .form-check-label,
+    .newsletter-consent .form-check-label .label-wrap {
+        color: $primary !important;
+        font-size: rem(13px) !important;
+        line-height: 1.25 !important;
         text-align: left;
     }
 
-    // Des règles génériques (ex. #content-page span) repassent les textes en sombre. On est déjà imbriqué
-    // dans `.newsletter-form-container` ; on force l'or avec !important (le wrapper home est #content-page,
-    // PAS #body-page — un scope #body-page ne matcherait jamais ici).
+    // Forcé en or : bat les règles génériques (#content-page span) qui repassent le texte en sombre.
     .newsletter-kicker,
     .newsletter-title,
     .newsletter-intro, .newsletter-intro p,
-    .newsletter-consent-text,
+    .newsletter-consent .form-check-label, .newsletter-consent .label-wrap,
     .newsletter-submit-label,
     .newsletter-email .form-control, .newsletter-email input { color: $primary !important; }
 }

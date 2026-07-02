@@ -23,6 +23,18 @@
 {% set linkIsPhone = linkIsPhone is defined ? linkIsPhone : (intl.linkIsPhone is defined ? intl.linkIsPhone : false) %}
 {% set linkAsButton = linkAsButton is defined ? linkAsButton : 'btn' in linkStyle %}
 
+{# Lien secondaire (facultatif) #}
+{% set linkSecondary = linkSecondary is defined ? linkSecondary : (intl.linkSecondary is defined ? intl.linkSecondary : null) %}
+{% set uriInfosSecondary = intl.linkSecondary is defined ? intl.linkSecondary|uriInfos : null %}
+{% set samePageSecondary = uriInfosSecondary and uriInfosSecondary.samePage %}
+{% set linkStyleSecondary = intl.linkSecondaryStyle is defined and intl.linkSecondaryStyle ? intl.linkSecondaryStyle : 'link' %}
+{% set linkBlankSecondary = intl.linkSecondaryBlank is defined ? intl.linkSecondaryBlank : false %}
+{% set linkExternalSecondary = intl.linkSecondaryExternal is defined ? intl.linkSecondaryExternal : false %}
+{% set linkLabelSecondary = intl.linkSecondaryLabel is defined and intl.linkSecondaryLabel ? intl.linkSecondaryLabel : 'En savoir +'|trans %}
+{% set linkIsEmailSecondary = intl.linkSecondaryIsEmail is defined ? intl.linkSecondaryIsEmail : false %}
+{% set linkIsPhoneSecondary = intl.linkSecondaryIsPhone is defined ? intl.linkSecondaryIsPhone : false %}
+{% set linkAsButtonSecondary = 'btn' in linkStyleSecondary %}
+
 {% macro icon(iconCustom, iconCustomSize, iconCustomColor, iconCustomWidth, iconCustomHeight, iconCustomPosition) %}
     {% set class = iconCustomPosition == 'start' ? 'me-3' : '' %}
     {% if 'icon-' in iconCustom %}
@@ -45,8 +57,9 @@
     </a>
 {% endmacro %}
 
-{% if link %}
+{% if link or linkSecondary %}
     <div class="link-block {% if style %} {{ style }}{% endif %}">
+        {% if link %}
         {% if linkIsEmail is defined and linkIsEmail %}
             <div class="{{ style }}">
                 {{ link|email(website, {only_href: true}) }}
@@ -80,6 +93,22 @@
         {% else %}
             {{ macro.link(uriInfos, link, linkStyle, linkLabel, linkBlank, linkExternal, linkAsButton, trackClass, samePage) }}
         {% endif %}
+        {% endif %}
+
+        {% if linkSecondary %}
+            {% if linkIsEmailSecondary %}
+                <div class="{{ style }}">
+                    {{ linkSecondary|email(website, {only_href: true}) }}
+                </div>
+            {% elseif linkIsPhoneSecondary %}
+                <div class="{{ style }}">
+                    {{ linkSecondary|phone(website, {only_href: true}) }}
+                </div>
+            {% else %}
+                {{ macro.link(uriInfosSecondary, linkSecondary, linkStyleSecondary, linkLabelSecondary, linkBlankSecondary, linkExternalSecondary, linkAsButtonSecondary, trackClass, samePageSecondary) }}
+            {% endif %}
+        {% endif %}
+
         {% if script is defined and script %}
             {{ script|raw }}
         {% endif %}

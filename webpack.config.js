@@ -192,16 +192,6 @@ Encore.setOutputPath('public/build/front/default')
         from: './assets/medias/movies',
         to: 'movies/[path][name].[hash:8].[ext]'
     })
-    // Polices vers un chemin STABLE (sans hash) pour que le preload de base.html.twig
-    // corresponde exactement aux url() des @font-face.
-    .copyFiles({
-        from: './assets/lib/fonts/parister',
-        to: 'fonts/parister/[path][name].[ext]'
-    })
-    // css-loader ne doit PAS tenter de résoudre les url() absolues /build des polices stables.
-    .configureCssLoader((options) => {
-        options.url = { filter: (url) => !url.includes('/fonts/parister/') };
-    })
     .configureBabel(function (babelConfig) {
         babelConfig.presets.push('@babel/preset-flow');
     }, {})

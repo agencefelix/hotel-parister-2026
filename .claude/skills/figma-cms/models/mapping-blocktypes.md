@@ -484,13 +484,13 @@ stacking si overlay) ; `alert` → `blocks/alert/…` (+ JS `#website-alert`).
     `media.intl.link` du « Découvrir » sert aussi à l'image) — ne PAS laisser `disableLink: true`.
   - teaser **d'entité** (newscast/catalog) : `targetLink: entity.url` (la vraie destination de l'item),
     avec repli `entity.intl.link`. (Certaines cards enveloppent déjà TOUTE la card dans `<a>`, ex.
-    `card-room` — dans ce cas l'image est déjà cliquable, ne rien ajouter.)
+    `card-cover` — dans ce cas l'image est déjà cliquable, ne rien ajouter.)
 - **Card ENTIÈREMENT cliquable (destination unique)** : une card qui est avant tout un visuel cliquable
   (image + texte en overlay, **un seul** lien de destination — cards d'univers, de services, de chambres…)
   doit envelopper **TOUTE la card dans un `<a>`** (toute la surface cliquable), avec :
   - l'image en **`disableLink: true`** (sinon `<a>` imbriqué = HTML invalide),
   - le CTA (« Découvrir ») rendu en **texte** (`<span>`), pas via l'include `blocks/link` (qui produit un
-    `<a>` imbriqué). Ex. `card-room`, `card-spa`. **À l'inverse**, une card avec **plusieurs liens
+    `<a>` imbriqué). Ex. `card-cover` (carte standardisée : sliders + teasers). **À l'inverse**, une card avec **plusieurs liens
     distincts** (titre→fiche, catégorie→liste, « lire »→article) garde un lien **par élément**, jamais
     d'`<a>` englobant.
 - **Images STATIQUES (logos, décor) → filtre `|file` responsive, JAMAIS un `<img>` brut** : ne pas poser

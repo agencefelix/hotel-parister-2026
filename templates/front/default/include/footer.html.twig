@@ -97,12 +97,12 @@
                     <div class="col-12 col-sm-6 d-flex flex-column">
                         {{ macro.footerGroup(footerMenus['footer-hotel'] is defined ? footerMenus['footer-hotel'] : null) }}
                         {{ macro.footerGroup(footerMenus['footer-passerelles'] is defined ? footerMenus['footer-passerelles'] : null) }}
-                        {{ macro.partner("Partenaire officiel 2026", "https://parisjetaime.com/"~locale, "paris-jetaime.png", "Paris je t'aime", webpack, websiteTemplate, {mobile: {width: 66, height: 66}, tablet: {width: 80, height: 80}, desktop: {width: 80, height: 80}}, "footer-partner-logo-paris") }}
+                        {{ macro.partner("Partenaire<br> officiel 2026", "https://parisjetaime.com/"~locale, "paris-jetaime.png", "Paris je t'aime", webpack, websiteTemplate, {mobile: {width: 66, height: 66}, tablet: {width: 80, height: 80}, desktop: {width: 80, height: 80}}, "footer-partner-logo-paris") }}
                     </div>
                     <div class="col-12 col-sm-6 d-flex flex-column">
                         {{ macro.footerGroup(footerMenus['footer-utiles'] is defined ? footerMenus['footer-utiles'] : null) }}
                         {{ macro.footerGroup(footerMenus['footer-actualites'] is defined ? footerMenus['footer-actualites'] : null) }}
-                        {{ macro.partner("Un hôtel by", "https://www.forstyle-hotels.com/"~locale, "forstyle-logo-white.png", "Forstyle Hotels Collection", webpack, websiteTemplate, {mobile: {width: 110, height: 73}, tablet: {width: 130, height: 86}, desktop: {width: 130, height: 86}}, null) }}
+                        {{ macro.partner("Un hôtel<br> by", "https://www.forstyle-hotels.com/"~locale, "forstyle-logo-white.png", "Forstyle Hotels Collection", webpack, websiteTemplate, {mobile: {width: 110, height: 73}, tablet: {width: 130, height: 86}, desktop: {width: 130, height: 86}}, null) }}
                     </div>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                         screensSizes: {
                             mobile: {width: 540, height: 430},
                             tablet: {width: 720, height: 573},
-                            desktop: {width: 510, height: 406}
+                            desktop: {width: 799, height: 400}
                         },
                         alt: companyName|striptags,
                         class: "w-100 object-fit-cover"
@@ -154,25 +154,20 @@
     <div id="footer-bottom">
         <div class="container-fluid px-lg-5">
             <div class="row align-items-center gy-2 py-3">
-                <div class="col-12 col-lg-8 text-center text-lg-start">
-                    <small class="text-uppercase">
-                        {{ "Copyright"|trans|raw }} {{ "now"|date('Y') }}
-                        {% for link in legalLinks %}
-                            {% if link.title and (link.online is not defined or link.online) %}
-                                <span class="footer-legals-sep mx-2">·</span>
-                                <a class="text-white" href="{{ link.link ? link.link : 'javascript:void(0)' }}"
-                                   {% if link.linkBlank %}target="_blank"{% else %}data-toggle="preloader"{% endif %}{% if link.linkExternal %} rel="noopener noreferrer"{% endif %}>{{ link.title|unescape|raw }}</a>
-                            {% endif %}
-                        {% endfor %}
-                        {# « Gestion des cookies » = rouvre le consentement (JS) : élément spécial, conditionnel. #}
-                        {% if axeptioActive is defined and axeptioActive %}
-                            <span class="footer-legals-sep mx-2">·</span>
-                            <a class="text-white" href="javascript:openAxeptioCookies()" rel="nofollow">{{ "Gestion des cookies"|trans|raw }}</a>
-                        {% elseif gdprActive %}
-                            <span class="footer-legals-sep mx-2">·</span>
-                            <span class="open-gdpr-modal cursor text-white">{{ "Gestion des cookies"|trans|raw }}</span>
+                <div class="col-12 col-lg-8 text-center text-lg-start text-uppercase fw-700 d-lg-flex gap-3">
+                    <span class="">{{ "Copyright"|trans|raw }} {{ "now"|date('Y') }}</span>
+                    {% for link in legalLinks %}
+                        {% if link.title and (link.online is not defined or link.online) %}
+                            <a class="text-white" href="{{ link.link ? link.link : 'javascript:void(0)' }}"
+                               {% if link.linkBlank %}target="_blank"{% else %}data-toggle="preloader"{% endif %}{% if link.linkExternal %} rel="noopener noreferrer"{% endif %}>{{ link.title|unescape|raw }}</a>
                         {% endif %}
-                    </small>
+                    {% endfor %}
+                    {# « Gestion des cookies » = rouvre le consentement (JS) : élément spécial, conditionnel. #}
+                    {% if axeptioActive is defined and axeptioActive %}
+                        <a class="text-white" href="javascript:openAxeptioCookies()" rel="nofollow">{{ "Gestion des cookies"|trans|raw }}</a>
+                    {% elseif gdprActive %}
+                        <span class="open-gdpr-modal cursor text-white">{{ "Gestion des cookies"|trans|raw }}</span>
+                    {% endif %}
                 </div>
                 {% if not (anonymousTheme is defined and anonymousTheme) %}
                     <div class="col-12 col-lg-4 text-center text-lg-end">

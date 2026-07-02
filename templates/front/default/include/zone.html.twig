@@ -112,6 +112,7 @@
                         {% set bgColorHexaInnerZone = col.hexadecimalCode and not col.backgroundColor and not col.backgroundFullSize ? col.hexadecimalCode : false %}
                         {% set colSpaces = colMargins~colPaddings %}
                         {% set colAlignment = col.elementsAlignment|replace({'justify-content': 'justify-content-lg'}) %}
+                        {% set colAlignment = 'justify-content' in colAlignment and not align and 'end' not in colAlignment ? colAlignment~' flex-column' : colAlignment %}
                         {% set alignEnd = 'justify-content' in colAlignment and 'end' in colAlignment %}
 
                         {% set isColMedia = false %}

@@ -76,12 +76,8 @@
         top: 0;
     }
 
-    // #14 : à l'ouverture, le mega démarre au MÊME Y que la nav fermée (sous l'alerte) → pas de saut
-    // de la barre (burger/logo/CTA restent en place). Au scroll (alerte masquée), top:0.
-    body:has(#zone-home-alert):not(.menu-as-scroll) #main-navigation-nav.mega-menu {
-        height: calc(100dvh - #{rem(46px)});
-        max-height: calc(100dvh - #{rem(46px)});
-    }
+    // Mega-menu = overlay plein écran (fixed inset:0 / 100dvh) : pas de compensation d'alerte
+    // (l'élément #zone-home-alert peut être présent sans bandeau visible → décalage parasite).
 
     // === Nav — corrections (rigueur) ===
     // 1) Barre fermée ≤ 10dvh : réduire paddings + logo.
@@ -89,9 +85,18 @@
         padding-top: rem(12px) !important;
         padding-bottom: rem(12px) !important;
     }
+    // Logo portrait (91×123) : contrainte par la hauteur, largeur libre (sinon force-size déforme).
     #main-navigation .navbar-brand img,
     #main-navigation .navbar-brand svg {
-        max-height: rem(48px) !important;
+        max-height: rem(64px) !important;
+        width: auto !important;
+    }
+    // Desktop, haut de page (non sticky) : logo à sa taille maquette 123px (au scroll → nom textuel).
+    @include mediaQuery(min-lg) {
+        #main-navigation:not(.as-scroll) .navbar-brand img,
+        #main-navigation:not(.as-scroll) .navbar-brand svg {
+            max-height: rem(123px) !important;
+        }
     }
     // 2) Burger BLANC au top, NAVY au scroll (bat `#main-navigation .nav-burger … span`).
     #main-navigation:not(.as-scroll) .nav-burger .nav-toggler-icon span {
@@ -213,7 +218,7 @@
 
             .nav-bar-sep {
                 background-color: transparent;
-                background-image: repeating-linear-gradient(to right, transparentize($white, .3) 0, transparentize($white, .3) 1px, transparent 1px, transparent 10px);
+                background-image: repeating-linear-gradient(to right, transparentize($white, .3) 0, transparentize($white, .3) 1px, transparent 1px, transparent 4px);
             }
 
             // Logo BLANC au top (overlay sur le hero) — filtre sur l'asset de marque.
@@ -239,7 +244,7 @@
 
             .nav-bar-sep {
                 background-color: transparent;
-                background-image: repeating-linear-gradient(to right, transparentize($dark, .55) 0, transparentize($dark, .55) 1px, transparent 1px, transparent 10px);
+                background-image: repeating-linear-gradient(to right, transparentize($dark, .55) 0, transparentize($dark, .55) 1px, transparent 1px, transparent 4px);
             }
         }
 
@@ -516,13 +521,13 @@
     &:hover, &:focus { color: $primary; }
 }
 
-// Séparateur = 5 petits tirets VERTICAUX (maquette).
+// Séparateur = 5 traits VERTICAUX espacés de 4px (maquette SVG 17×18).
 .nav-bar-sep {
     display: inline-block;
-    width: rem(41px);
+    width: rem(17px);
     height: rem(18px);
     background-color: transparent;
-    background-image: repeating-linear-gradient(to right, rgba($dark, .45) 0, rgba($dark, .45) 1px, transparent 1px, transparent 10px);
+    background-image: repeating-linear-gradient(to right, rgba($dark, .45) 0, rgba($dark, .45) 1px, transparent 1px, transparent 4px);
 }
 
 /* =========================================================
@@ -586,10 +591,10 @@
 
 .mega-topbar-sep {
     display: inline-block;
-    width: rem(41px);
+    width: rem(17px);
     height: rem(18px);
     background-color: transparent;
-    background-image: repeating-linear-gradient(to right, rgba($primary, .5) 0, rgba($primary, .5) 1px, transparent 1px, transparent 10px);
+    background-image: repeating-linear-gradient(to right, rgba($primary, .5) 0, rgba($primary, .5) 1px, transparent 1px, transparent 4px);
 }
 
 /* Panneaux */
@@ -728,11 +733,12 @@
 .mega-cta {
     color: $primary;
     text-decoration: none;
-    font-size: rem(14px);              // Figma 386:1793 : 14/700/2.8(.2em)/lh17 UPPER
+    font-size: rem(14px);
     font-weight: $font-weight-bold;
     letter-spacing: .2em;
     line-height: calc(17 / 14);
-    padding: 1.1rem 0;
+    padding-top: 1.3rem;
+    padding-bottom: 1.3rem;
     border-bottom: 1px solid rgba($primary, .3);
     transition: opacity .2s ease;
 

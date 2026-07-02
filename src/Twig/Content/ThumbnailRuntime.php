@@ -157,7 +157,7 @@ class ThumbnailRuntime implements RuntimeExtensionInterface
             $options['loaderSvgSrc'] = !empty($thumbnails['lazyFileSvg']) ? $thumbnails['lazyFileSvg'] : (is_string($src) ? $src : 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
             $options['entity'] = $src;
             $options['thumbs'] = $thumbnails['thumbs'] ?? null;
-            $options['alt'] = $thumbnails['infos']['alt'] ?? null;
+            $options['alt'] = !empty($options['alt']) ? $options['alt'] : ($thumbnails['infos']['alt'] ?? null);
             $options['title'] = $thumbnails['infos']['title'] ?? null;
             $options['width'] = $thumbnails['infos']['width'] ?? null;
             $options['height'] = $thumbnails['infos']['height'] ?? null;

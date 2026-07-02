@@ -183,7 +183,7 @@ $container-fluid-side-limit: 'xl';
 /** @tool: To adjust font https://screenspan.net/fallback */
 /** @doc: To find font adjust https://support.envoke.com/en/articles/5760547-fallback-font-rules */
 
-/* Métriques recalculées pour Museo Sans via capsize (@capsizecss) — anti-CLS. */
+/* Métriques fallback (capsize) — anti-CLS. */
 @if not $enable-medias-queries {
     @font-face {
         font-family: font-fallback;
@@ -205,10 +205,10 @@ $container-fluid-side-limit: 'xl';
     }
 }
 
-$font-primary: 'Museo Sans', system-ui, -apple-system, font-fallback, font-fallback-android, sans-serif !default;
-$font-light: 'Museo Sans', system-ui, -apple-system, font-fallback, font-fallback-android, sans-serif !default;
-$font-secondary: 'Museo Sans', system-ui, -apple-system, font-fallback, font-fallback-android, sans-serif !default;
-$font-script: 'Parister Script', 'Museo Sans', cursive !default;
+$font-primary: 'Museosans', system-ui, -apple-system, font-fallback, font-fallback-android, sans-serif !default;
+$font-light: 'Museosans', system-ui, -apple-system, font-fallback, font-fallback-android, sans-serif !default;
+$font-secondary: 'Museosans', system-ui, -apple-system, font-fallback, font-fallback-android, sans-serif !default;
+$font-script: 'Augustscript', 'Museosans', cursive !default;
 $font-title: $font-primary !default;
 $theme-fonts: (
     'primary': ('font-family': $font-primary, 'line-height': 1),
@@ -406,23 +406,24 @@ $elements: map-merge((
     ),
     '.sub-title': (
         'properties': (
-            'color': $body-color,
+            'color': $primary,
             'font-weight': 500,
         ),
         'colors-in-backgrounds': (
             'primary': $white,
             'secondary': $white,
-            'success': $body-color,
+            'success': $white,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
             'danger-light': $body-color,
-            'light': $body-color,
-            'dark': $white,
-            'white': $body-color,
-            'teal':  $body-color,
-            'beige':  $body-color,
+            'light': $primary,
+            'dark': $primary,
+            'white': $primary,
+            'teal':  $white,
+            'beige':  $primary,
             'navy':  $white,
+            'brown':  $white,
         )
     ),
     'p': (
@@ -519,7 +520,7 @@ $elements: map-merge((
             'font-size': ('xs': $font-size-small, 'sm': $font-size-small, 'md': $font-size-small, 'lg': $font-size-small, 'xl': $font-size-small),
         ),
     ),
-    'span, small, time, figcaption, strong, i, .caption-title': (
+    'span, small, time, figcaption, strong:not(.sub-title), i, .caption-title': (
         'properties': (
             'color': $body-color,
         ),

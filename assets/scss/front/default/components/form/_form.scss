@@ -225,9 +225,13 @@
         color: $white !important;
     }
 
-    // Parister : checkbox CARRÉE, fond primary + coche blanche à la sélection.
+    // Checkbox carrée, fond primary même non cochée + coche blanche à la sélection.
+    // !important : bat `input[type=checkbox] { border-radius: 50% !important }` ci-dessus.
     .form-check-input[type="checkbox"] {
-        border-radius: 0;
+        border-radius: 0 !important;
+        background-color: $primary;
+        border-color: $primary;
+        background-image: none;
     }
     .form-check-input:checked[type="checkbox"] {
         background-color: $primary;
@@ -240,6 +244,17 @@
     .form-check-input:checked[type="radio"] {
         background-color: $primary;
         border-color: $primary;
+    }
+
+    // Sur fond primary : case claire + coche primary pour rester visible.
+    .bg-primary .form-check-input[type="checkbox"] {
+        background-color: $light;
+        border-color: $light;
+    }
+    .bg-primary .form-check-input:checked[type="checkbox"] {
+        background-color: $light;
+        border-color: $light;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23b48608' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
     }
 
     .file-group.as-btn {

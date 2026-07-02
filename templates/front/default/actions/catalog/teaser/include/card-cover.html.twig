@@ -16,9 +16,9 @@
 {% set media = post.mainMedia is defined and post.mainMedia ? post.mainMedia : (intl and intl.mainMedia is defined ? intl.mainMedia : null) %}
 {% set targetLink = post.url is defined and post.url ? post.url : (intl and intl.link is defined ? intl.link : null) %}
 
-<a href="{{ targetLink }}" class="card-room d-block position-relative h-100"{% if targetLink %} data-toggle="preloader"{% endif %} aria-label="{{ fullTitle|striptags }}">
+<a href="{{ targetLink }}" class="card-cover d-block position-relative h-100"{% if targetLink %} data-toggle="preloader"{% endif %} aria-label="{{ fullTitle|striptags }}">
     {% if media %}
-        <div class="card-room-media">
+        <div class="card-cover-media">
             {{ media|file(thumbConfiguration, {
                 disableLink: true,
                 notInBox: true,
@@ -28,10 +28,10 @@
         </div>
     {% endif %}
     {% if fullTitle %}
-        <span class="card-room-title">
-            <span class="card-room-kicker d-block text-uppercase">{{ kicker|raw }}</span>
-            {% if script %}<span class="card-room-script d-block">{{ script|lower|raw }}</span>{% endif %}
+        <span class="card-cover-title">
+            <span class="card-cover-kicker d-block text-uppercase">{{ kicker|raw }}</span>
+            {% if script %}<span class="card-cover-script d-block">{{ script|lower|raw }}</span>{% endif %}
         </span>
     {% endif %}
-    <span class="card-room-link d-block text-uppercase">{{ "Découvrir"|trans }}</span>
+    <span class="card-cover-link d-block text-uppercase">{{ "Découvrir"|trans }}</span>
 </a>

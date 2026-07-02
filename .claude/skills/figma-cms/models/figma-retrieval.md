@@ -51,7 +51,7 @@ curl -s "$URL" -o image.png
 
 ## 6) Médias par catégorie (où poser les fichiers)
 - **Médias de bandes / home** : `.claude/skills/figma-cms/integration/media/home/<nom>.jpg` (importés par `PageFixtures::importMedia`).
-- **Logos / photos de marque réutilisées (footer, mega-menu)** : `public/medias/<nom>.png|jpg` (référencés en `asset('medias/...')`).
+- **Images STATIQUES du front (logos, photos de marque/décor : footer, mega-menu…)** : `assets/medias/images/front/default/<nom>.png|jpg` (pipeline Webpack `copyFiles`), référencées via le build + `|file` : `asset('build/front/'~websiteTemplate~'/images/<nom>', webpack)|file({}, {screensSizes, alt, class})`. **JAMAIS `public/medias/`** (réservé aux médias uploadés/CMS) ni `asset('medias/...')` brut. `placeholder.jpg` reste l'unique exception (fallback CMS).
 - **Images produits** : `media/home/room-N.jpg` (rattachées par `CatalogFixtures::generateMediaRelation`).
 - **Images actus** : `media/news/news-<slug>.jpg` (rattachées par `NewscastFixtures::generateMediaRelation`).
 

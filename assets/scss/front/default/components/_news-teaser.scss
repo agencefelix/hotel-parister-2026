@@ -16,9 +16,109 @@
    1 ) Default
 -----------------------------------*/
 
+// Cartes actualités (teaser newscast) — maquette : titre 14/700 UPPER ls .2em OR, lien capitales OR.
+// Dé-scopé de #zone-home-events (home) → réutilisable sur toute page. #body-page : spécificité id
+// pour battre les règles globales de titres/liens.
+#body-page .newscast-teaser {
+
+    position: relative;
+
+    .card {
+
+        .title,
+        .title-link {
+            text-transform: uppercase;
+            font-size: rem(14px);
+            // !important nécessaire : surcharge l'utilitaire .fw-600 (lui-même !important).
+            font-weight: $font-weight-bold !important;
+            letter-spacing: .2em;
+            line-height: 1.4;
+            color: $primary;
+        }
+
+        .title-link {
+            text-decoration: none;
+        }
+
+        // Lien « En savoir » : capitales, or.
+        .card-footer .link,
+        .card-footer .link span {
+            text-transform: uppercase;
+            letter-spacing: .14em;
+            font-size: rem(12px);
+            color: $primary;
+        }
+    }
+
+    // Hover : léger zoom de l'image cliquable.
+    .card-header {
+
+        overflow: hidden;
+
+        img {
+            transition: transform .6s ease;
+        }
+    }
+
+    .splide__slide:hover .card-header img {
+        transform: scale(1.06);
+    }
+}
+
 /*-----------------------------------
    2 ) Slider
 -----------------------------------*/
+
+// Flèches overlay sur les bords, centrées sur l'image (maquette : prev gauche / next droite).
+.newscast-teaser {
+
+    .btn-pause,
+    .btn-play {
+        display: none !important;
+    }
+
+    .arrows-wrap.as-btn {
+
+        &:before {
+            display: none !important;
+        }
+
+        position: absolute;
+        top: 40%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        margin: 0 !important;
+        z-index: 5;
+        pointer-events: none;
+
+        .btn-arrow {
+
+            position: absolute;
+            top: 0;
+            margin: 0 !important;
+            pointer-events: auto;
+            // maquette : carré arrondi blanc translucide (pas rond or), chevron sombre.
+            width: rem(64px);
+            height: rem(64px);
+            background-color: rgba($white, .5) !important;
+            border: 0 !important;
+            border-radius: rem(4px) !important;
+
+            i {
+                color: $dark !important;
+            }
+        }
+
+        .btn-prev {
+            left: rem(20px);
+        }
+
+        .btn-next {
+            right: rem(20px);
+        }
+    }
+}
 
 #teaser-news-container-main {
 

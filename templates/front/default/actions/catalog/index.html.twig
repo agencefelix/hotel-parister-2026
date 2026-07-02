@@ -60,8 +60,8 @@
                                         role: 'ROLE_CATALOG',
                                         path: path('admin_catalogproduct_edit', {website: website.id, catalogproduct: product.id})
                                     }) }}
-                                    {# Uniformité des cartes : même carte que le teaser [catalog|teaser|slider] (card-room). #}
-                                    {% include 'front/'~websiteTemplate~'/actions/catalog/teaser/include/card-room.html.twig' with {
+                                    {# Uniformité des cartes : même carte que le teaser [catalog|teaser|slider] (card-cover). #}
+                                    {% include 'front/'~websiteTemplate~'/actions/catalog/teaser/include/card-cover.html.twig' with {
                                         post: product,
                                         thumbConfiguration: thumbConfiguration,
                                         colSize: 4

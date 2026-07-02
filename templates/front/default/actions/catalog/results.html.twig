@@ -6,8 +6,8 @@
 <div id="results" class="results row row-container m-0 listing-{{ listing.slug }}" data-page="{{ pageNum }}" data-max="{{ maxPage }}">
     {% for product in products %}
         <div class="col-md-6 col-lg-4 item mb-5 position-relative">
-            {# Uniformité des cartes : même carte que le teaser [catalog|teaser|slider] (card-room). #}
-            {% include 'front/'~websiteTemplate~'/actions/catalog/teaser/include/card-room.html.twig' with {
+            {# Uniformité des cartes : même carte que le teaser [catalog|teaser|slider] (card-cover). #}
+            {% include 'front/'~websiteTemplate~'/actions/catalog/teaser/include/card-cover.html.twig' with {
                 post: product,
                 thumbConfiguration: thumbConfiguration,
                 colSize: 4

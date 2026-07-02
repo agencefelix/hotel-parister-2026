@@ -1,12 +1,30 @@
 {% trans_default_domain 'front_default' %}
 
-{% set websiteTemplate = websiteTemplate is defined and websiteTemplate ? websiteTemplate : website.configuration.template %}
-<div class="alert-block w-100">
-    {% include 'front/'~websiteTemplate~'/include/alert.html.twig' with {
-        alert: color is defined ? color : block.backgroundColorType,
-        customIcon: block.icon,
-        alertClass: 'mb-0',
-        alignment: alignment is defined ? alignment : null,
-        message: intl.introduction is defined ? intl.introduction : null,
-    } only %}
-</div>
+{% set icons = {
+    success: 'far check-circle',
+    info: 'fas info',
+    warning: 'fas exclamation',
+    danger: 'far exclamation-triangle',
+    error_form: 'far exclamation-triangle',
+    error: 'far exclamation-triangle',
+    undefined: 'fas info',
+} %}
+
+{% set message = intl.introduction is defined ? intl.introduction : null %}
+{% set alignment = alignment is defined and alignment ? alignment : "text-center" %}
+{% set alert = color is defined ? color : block.backgroundColorType %}
+{% set asCustomIcon = block.icon is defined and block.icon %}
+{% set icon = asCustomIcon ? customIcon : (icons[alert] is defined ? icons[alert] : false) %}
+
+{% if message %}
+    <div class="alert-block w-100">
+        <div class="alert alert-{{ alert }} d-flex p-0 {{ alignment }}">
+            {% if icon %}
+                <div class="icon d-flex align-items-center justify-content-center position-relative initial">{{ icon|icon(25, 25) }}</div>
+            {% endif %}
+            <div class="message d-inline-flex align-items-center flex-shrink-1 px-4 py-3 initial">
+                <div class="inner">{{ message|unescape|raw }}</div>
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -276,6 +276,38 @@
 
 /*! purgecss start ignore */
 
+// Pré-init (le CSS Splide arrive avec le JS lazy) : slides en ligne, pas de saut de page.
+.splide:not(.is-initialized) {
+
+    .splide__track {
+        overflow: hidden;
+    }
+
+    .splide__list {
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .splide__slide {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    @include mediaQuery(min-md) {
+        &[data-items="2"] .splide__slide { width: 50%; }
+        &[data-items="3"] .splide__slide { width: 33.333%; }
+        &[data-items="4"] .splide__slide { width: 25%; }
+    }
+
+    @include mediaQuery(max-md) {
+        &[data-items-mobile="2"] .splide__slide { width: 50%; }
+        &[data-items-mobile="3"] .splide__slide { width: 33.333%; }
+    }
+}
+
 @include mediaQuery(max-md) {
 
     .splide.not-mobile {

@@ -40,8 +40,6 @@ class NewscastTeaserManager
      */
     public function preUpdate(Teaser $teaser, Website $website, array $interface = [], ?Form $form = null, ?UserFront $userFront = null): void
     {
-        $teaser->setItemsPerSlide(4);
-
         $asEventCategory = false;
         foreach ($teaser->getCategories() as $category) {
             if ($category->isAsEvents()) {

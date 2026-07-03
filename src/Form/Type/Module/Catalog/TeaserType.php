@@ -114,6 +114,14 @@ class TeaserType extends AbstractType
                     'label' => $this->translator->trans('Afficher uniquement les produits mis en avant', [], 'admin'),
                     'attr' => ['group' => 'col-md-4', 'class' => 'w-100', 'data-config' => true],
                 ]);
+
+                $builder->add('progress', Type\CheckboxType::class, [
+                    'required' => false,
+                    'display' => 'button',
+                    'color' => 'outline-info-darken',
+                    'label' => $this->translator->trans('Barre de progression', [], 'admin'),
+                    'attr' => ['group' => 'col-md-3', 'class' => 'w-100', 'data-config' => true],
+                ]);
             }
 
             $builder->add('catalogs', EntityType::class, [

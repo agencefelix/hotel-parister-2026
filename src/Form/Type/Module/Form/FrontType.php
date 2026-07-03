@@ -482,6 +482,7 @@ class FrontType extends AbstractType
         if (!in_array($fieldType, $excludes)) {
             if (Type\EmailType::class === $fieldType) {
                 $this->options['constraints'][] = new Assert\Email();
+                $this->options['constraints'][] = new Validator\EmailDomain();
             } elseif (Type\UrlType::class === $fieldType) {
                 $this->options['constraints'][] = new Assert\Url();
             }
@@ -646,7 +647,7 @@ class FrontType extends AbstractType
                     $valueModel = ViewModel::fromEntity($value, $this->coreLocator);
                     if ($value->getValues()->isEmpty()) {
                         $asEmail = 'form-emails' === $blockType && filter_var($valueModel->intl->body, FILTER_VALIDATE_EMAIL);
-                        $value = $asEmail ? $key.'-email-'.$valueModel->intl->body : $valueModel->intl->body;
+                        $value = $asEmail ? $key.'-email-'.$valueModel->intl->body : ($valueModel->intl->body ?: $valueModel->intl->introduction);
                         $this->options['choices'][$valueModel->intl->introduction] = $value;
                     } else {
                         foreach ($value->getValues() as $subKey => $subValue) {

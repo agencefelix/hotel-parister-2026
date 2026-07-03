@@ -8,12 +8,10 @@ use App\Entity\Layout\Block;
 use App\Entity\Layout\BlockIntl;
 use App\Entity\Layout\FieldConfiguration;
 use App\Entity\Module\Form;
-use App\Message\SendEmail;
 use App\Model\Core\WebsiteModel;
 use App\Model\EntityModel;
 use App\Service\Content\RecaptchaService;
 use App\Service\Core\MailerService;
-use App\Service\Core\MessengerWorkerService;
 use App\Service\Core\Urlizer;
 use App\Service\Interface\CoreLocatorInterface;
 use App\Twig\Translation\IntlRuntime;
@@ -30,8 +28,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Messenger\Exception\ExceptionInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * FormManager.
@@ -42,8 +38,6 @@ use Symfony\Component\Messenger\MessageBusInterface;
  */
 class FormManager
 {
-    private const bool MESSENGER = true;
-
     private Session $session;
     private array $fields = [];
     private string $sender = '';
@@ -58,8 +52,6 @@ class FormManager
      * FormManager constructor.
      */
     public function __construct(
-        private readonly MessengerWorkerService $messengerWorkerService,
-        private readonly MessageBusInterface $bus,
         private readonly CoreLocatorInterface $coreLocator,
         private readonly RecaptchaService $recaptcha,
         private readonly MailerService $mailer,
@@ -546,7 +538,7 @@ class FormManager
     /**
      * Send email.
      *
-     * @throws ExceptionInterface|Exception
+     * @throws Exception
      */
     private function sendEmail(WebsiteModel $website, Form\StepForm|Form\Form $form, mixed $intl): void
     {
@@ -565,32 +557,28 @@ class FormManager
         }
 
         if ($receivers) {
-            $mailer = self::MESSENGER ? new SendEmail() : $this->mailer;
-            $mailer->setLocale($this->coreLocator->locale());
-            $mailer->setSubject($intl->subject);
-            $mailer->setTo($receivers);
-            $mailer->setName($website->companyName);
-            $mailer->setFrom($form->getConfiguration()->getSendingEmail());
-            $mailer->setReplyTo($this->sender);
-            $mailer->setWebsite($website);
+            $this->mailer->setLocale($this->coreLocator->locale());
+            $this->mailer->setSubject($intl->subject);
+            $this->mailer->setTo($receivers);
+            if ($website->companyName) {
+                $this->mailer->setName($website->companyName);
+            }
+            $this->mailer->setFrom($form->getConfiguration()->getSendingEmail());
+            $this->mailer->setReplyTo($this->sender);
+            $this->mailer->setWebsite($website);
             if ($intl->webmasterEmail) {
-                $mailer->setTemplate('front/'.$frontTemplate.'/actions/form/email/default-confirmation.html.twig');
-                $mailer->setArguments(['message' => $this->setMessage($website, $intl->webmasterEmail)]);
+                $this->mailer->setTemplate('front/'.$frontTemplate.'/actions/form/email/default-confirmation.html.twig');
+                $this->mailer->setArguments(['message' => $this->setMessage($website, $intl->webmasterEmail)]);
             } else {
-                $mailer->setTemplate($templateEmail);
-                $mailer->setArguments(['fields' => $this->fields, 'classname' => get_class($form), 'entityId' => $form->getId()]);
+                $this->mailer->setTemplate($templateEmail);
+                $this->mailer->setArguments(['fields' => $this->fields, 'classname' => get_class($form), 'entityId' => $form->getId()]);
             }
             if ($form->getConfiguration()->isAttachmentsInMail()) {
-                $mailer->setAttachments($this->attachments);
+                $this->mailer->setAttachments($this->attachments);
             }
-            if (self::MESSENGER) {
-                $this->bus->dispatch($mailer);
-                $this->messengerWorkerService->workerInBackground();
-            } else {
-                $rsp = $mailer->send();
-                if (!$rsp->success) {
-                    $this->error = $rsp->message;
-                }
+            $rsp = $this->mailer->send();
+            if (!$rsp->success) {
+                $this->error = $rsp->message;
             }
         }
     }
@@ -598,33 +586,27 @@ class FormManager
     /**
      * To send email confirmation.
      *
-     * @throws ExceptionInterface|Exception
+     * @throws Exception
      */
     private function sendConfirm(WebsiteModel $website, Form\StepForm|Form\Form $form, mixed $intl): void
     {
         if (strlen(strip_tags($intl->confirmation)) > 0) {
-            $mailer = self::MESSENGER ? new SendEmail() : $this->mailer;
             $filesystem = new Filesystem();
             $frontTemplate = $website->configuration->template;
             $templateEmailDirname = $this->coreLocator->projectDir().'/templates/front/'.$frontTemplate.'/actions/form/email/'.$form->getSlug().'-confirmation.html.twig';
             $templateEmail = $filesystem->exists($templateEmailDirname)
                 ? 'front/'.$frontTemplate.'/actions/form/email/'.$form->getSlug().'-confirmation.html.twig'
                 : 'front/'.$frontTemplate.'/actions/form/email/default-confirmation.html.twig';
-            $mailer->setLocale($this->coreLocator->locale());
-            $mailer->setSubject($intl->confirmationSubject);
-            $mailer->setTo([$this->sender]);
-            $mailer->setName($website->companyName);
-            $mailer->setFrom($form->getConfiguration()->getSendingEmail());
-            $mailer->setReplyTo($form->getConfiguration()->getSendingEmail());
-            $mailer->setTemplate($templateEmail);
-            $mailer->setArguments(['message' => $this->setMessage($website, $intl->confirmation)]);
-            $mailer->setWebsite($website);
-            if (self::MESSENGER) {
-                $this->bus->dispatch($mailer);
-                $this->messengerWorkerService->workerInBackground();
-            } else {
-                $mailer->send();
-            }
+            $this->mailer->setLocale($this->coreLocator->locale());
+            $this->mailer->setSubject($intl->confirmationSubject);
+            $this->mailer->setTo([$this->sender]);
+            $this->mailer->setName($website->companyName);
+            $this->mailer->setFrom($form->getConfiguration()->getSendingEmail());
+            $this->mailer->setReplyTo($form->getConfiguration()->getSendingEmail());
+            $this->mailer->setTemplate($templateEmail);
+            $this->mailer->setArguments(['message' => $this->setMessage($website, $intl->confirmation)]);
+            $this->mailer->setWebsite($website);
+            $this->mailer->send();
         }
     }
 

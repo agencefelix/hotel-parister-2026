@@ -1,0 +1,7 @@
+framework:
+    rate_limiter:
+        # Front form posts (contact, newsletter...): per-IP limit checked in RecaptchaService
+        front_form:
+            policy: 'sliding_window'
+            limit: 10
+            interval: '1 minute'

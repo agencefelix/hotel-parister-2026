@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\Widget;
 
+use App\Service\Content\CryptService;
 use App\Service\Interface\CoreLocatorInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type;
@@ -57,6 +58,17 @@ class RecaptchaType extends AbstractType
                     'autocomplete' => 'off',
                 ],
             ]);
+
+            /** Time-trap: encrypted render timestamp, checked by RecaptchaService (min fill time) */
+            $website = $this->coreLocator->website();
+            if ($website) {
+                $cryptService = new CryptService();
+                $builder->add('field_ho_time', Type\HiddenType::class, [
+                    'mapped' => false,
+                    'data' => $cryptService->execute($website, (string) time()),
+                    'attr' => ['autocomplete' => 'off'],
+                ]);
+            }
         }
     }
 }

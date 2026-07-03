@@ -34,7 +34,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Attribute\Cache;
-use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
@@ -49,7 +48,7 @@ class FormController extends FrontController
     /**
      * View Form.
      *
-     * @throws NonUniqueResultException|\Exception|InvalidArgumentException|ExceptionInterface|ORMException
+     * @throws NonUniqueResultException|\Exception|InvalidArgumentException|ORMException
      */
     #[Route([
         'fr' => '/front/form/view-fr/{url}/{filter}/{_locale}',
@@ -158,7 +157,7 @@ class FormController extends FrontController
     /**
      * View Form.
      *
-     * @throws NonUniqueResultException|\Exception|InvalidArgumentException|ExceptionInterface
+     * @throws NonUniqueResultException|\Exception|InvalidArgumentException
      */
     #[Route('/front/form/steps/view/{url}/{filter}', name: 'front_formstep_view', options: ['isMainRequest' => false], methods: 'GET|POST', schemes: '%protocol%')]
     public function step(
@@ -290,7 +289,7 @@ class FormController extends FrontController
     /**
      * Get render view.
      *
-     * @throws \Exception|InvalidArgumentException|ExceptionInterface
+     * @throws \Exception|InvalidArgumentException
      */
     private function getRender(FormInterface $form, FormManager $formManager, array $arguments): RedirectResponse|JsonResponse|bool|string|Response|null
     {

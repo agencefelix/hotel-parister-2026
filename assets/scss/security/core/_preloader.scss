@@ -37,7 +37,7 @@
 .fountainG {
     position: absolute;
     top: 0;
-    background-color: $primary;
+    background-color: $white;
     width: 28px;
     height: 28px;
     animation-name: bounce_fountainG;
@@ -107,7 +107,7 @@
 
     #main-preloader {
 
-        background-color: $theme-color;
+        background-color: $bg-body;
 
         img {
             min-height: 100px;

@@ -29,13 +29,18 @@ $xxxl: 1600px;
    2 ) Colors
 -----------------------------------*/
 
-$bg-body: #24252e;
-$primary: #24252e;
+/* Palette Parister (reprise de front/default/variables.scss) */
+$gold: #b48608;   /* or signature */
+$brown: #402624;  /* brun profond */
+$beige: #f4f0f1;  /* rosé/écru des fonds neutres */
+
+$bg-body: $brown;
+$primary: $gold;
 $info: $primary;
-$danger: #7f1200;
-$danger-color: #7f1200;
-$link-color: $primary;
-$success: #5D7808;
+$danger: #a82835;
+$danger-color: #a82835;
+$link-color: $brown;
+$success: #00561b;
 $ribbon-danger-bookmark: $primary;
 $ribbon-danger-color: #fff;
 $preloader-bg: $primary;

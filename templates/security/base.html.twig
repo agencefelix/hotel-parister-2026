@@ -12,10 +12,11 @@
 {% set companyName = isCustomPath and information.title is defined and information.title ? information.title : "Agence Félix CMS"|trans|striptags %}
 {#{% set faviconPath = isCustomPath and logos['favicon'] is defined and logos['favicon'] ? asset(logos['favicon']) : asset('build/security/images/favicon.ico', 'security') %}#}
 {% set faviconPath = asset('build/security/images/favicon.ico', 'security') %}
+{# Fallbacks Parister (logo or + façade de l'hôtel), la config admin (logos security-*) reste prioritaire. #}
 {% set logoPath = isCustomPath and logos['security-logo'] is defined and logos['security-logo'] and 'placeholder' not in logos['security-logo'] ? asset(logos['security-logo'])
-    : (not adminTheme ? asset('build/security/images/security.svg', 'security') : asset('build/security/images/felix-logo.svg', 'security')) %}
+    : asset('build/security/images/parister-logo.svg', 'security') %}
 {% set bgPath = logos['security-bg'] is defined and logos['security-bg'] and 'placeholder' not in logos['security-bg'] ? asset(logos['security-bg'])
-    : (adminTheme ? asset('build/security/images/background-security.jpg', 'security') : asset('build/security/images/login-register.jpg', 'security')) %}
+    : asset('build/security/images/parister-bg.jpg', 'security') %}
 {% set bgImgStyle = bgPath|file({}, {style: true, maxWidth: 1520, maxHeight: 919, placeholder: true }) %}
 
 <html lang="{{ app.request.locale }}"
@@ -60,7 +61,7 @@
         <section id="wrapper" class="login-register login-sidebar">
             <div id="bg-container" data-style="{{ bgImgStyle }}"></div>
             <aside class="login-box row">
-                <header id="content" class="col-12 p-3 p-sm-4 my-auto bg-white">
+                <header id="content" class="col-12 p-3 p-sm-4 my-auto">
                     <a href="{{ app.request.getSchemeAndHttpHost() }}" class="header w-100 d-inline-block text-center mb-5 mt-5 mt-md-0">
                         {{ logoPath|file({}, {id: 'logo', maxHeight: 130}) }}
                     </a>

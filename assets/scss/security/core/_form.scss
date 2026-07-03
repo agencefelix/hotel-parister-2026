@@ -12,8 +12,9 @@
 input.material:-webkit-autofill,
 input.material:-webkit-autofill:hover,
 input.material:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 1000px white inset !important;
-    box-shadow: 0 0 0 1000px white inset !important;
+    /* Aligné sur le fond beige Parister de la login-box */
+    -webkit-box-shadow: 0 0 0 1000px $beige inset !important;
+    box-shadow: 0 0 0 1000px $beige inset !important;
 }
 
 html body form .form-field-none {

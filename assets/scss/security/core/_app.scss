@@ -82,7 +82,7 @@ a {
         left: 0;
         bottom: 0;
         width: calc(100% - 400px);
-        background-color: transparentize($primary, .5);
+        background-color: transparentize($brown, .5); /* voile brun Parister (comme les card-cover) */
     }
 
     .btn {
@@ -90,11 +90,28 @@ a {
         border-radius: 0;
     }
 
+    /* Texte blanc sur les boutons pleins or (Bootstrap calcule du noir sur #b48608) */
+    .btn-primary,
+    .btn-info {
+
+        &, &:hover, &:focus, &:active {
+            color: $white !important;
+        }
+    }
+
+    .btn-outline-primary,
+    .btn-outline-info {
+
+        &:hover, &:focus, &:active {
+            color: $white !important;
+        }
+    }
+
     .login-box {
 
         width: 400px;
         margin: 0 auto;
-        background-color: $white;
+        background-color: $beige;
         min-height: 100%;
         position: absolute;
         right: 0;
@@ -139,7 +156,7 @@ a {
 
 #contact-info {
 
-    background-color: transparentize($bg-body, .8) !important;
+    background-color: transparentize($primary, .8) !important;
 
     ul li {
         line-height: 18px;

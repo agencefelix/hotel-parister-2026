@@ -16,9 +16,7 @@
    1 ) Default
 -----------------------------------*/
 
-// Cartes actualités (teaser newscast) — maquette : titre 14/700 UPPER ls .2em OR, lien capitales OR.
-// Dé-scopé de #zone-home-events (home) → réutilisable sur toute page. #body-page : spécificité id
-// pour battre les règles globales de titres/liens.
+// Cartes actualités — #body-page pour battre les règles globales de titres/liens.
 #body-page .newscast-teaser {
 
     position: relative;
@@ -60,6 +58,17 @@
         }
     }
 
+    // Image à la taille de la vignette (annule le width:100% de blocks/_card.scss).
+    .card .card-header {
+
+        picture,
+        picture img,
+        .img-loader-wrap {
+            width: auto;
+            max-width: 100%;
+        }
+    }
+
     .splide__slide:hover .card-header img {
         transform: scale(1.06);
     }
@@ -69,12 +78,27 @@
    2 ) Slider
 -----------------------------------*/
 
+.newscast-teaser-title {
+    font-size: rem(24px);
+    line-height: rem(24px);
+}
+
 // Flèches overlay sur les bords, centrées sur l'image (maquette : prev gauche / next droite).
 .newscast-teaser {
 
-    .btn-pause,
-    .btn-play {
+    // Spécificité (0,4,0) : bat le display !important de .btn.btn-circle.
+    .arrows-wrap .btn-arrow.btn-pause,
+    .arrows-wrap .btn-arrow.btn-play {
         display: none !important;
+    }
+
+    .card {
+
+        max-width: 290px !important;
+
+        * {
+            text-align: center !important;
+        }
     }
 
     .arrows-wrap.as-btn {
@@ -98,12 +122,18 @@
             top: 0;
             margin: 0 !important;
             pointer-events: auto;
-            // maquette : carré arrondi blanc translucide (pas rond or), chevron sombre.
-            width: rem(64px);
-            height: rem(64px);
+            width: rem(48px) !important;
+            height: rem(48px) !important;
+            flex: 0 0 rem(48px) !important;
             background-color: rgba($white, .5) !important;
             border: 0 !important;
             border-radius: rem(4px) !important;
+
+            @include mediaQuery(min-lg) {
+                width: rem(80px) !important;
+                height: rem(80px) !important;
+                flex: 0 0 rem(80px) !important;
+            }
 
             i {
                 color: $dark !important;
@@ -111,11 +141,11 @@
         }
 
         .btn-prev {
-            left: rem(20px);
+            left: 0;
         }
 
         .btn-next {
-            right: rem(20px);
+            right: rem(75px);
         }
     }
 }

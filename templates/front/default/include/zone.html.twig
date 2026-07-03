@@ -112,8 +112,6 @@
                         {% set bgColorHexaInnerZone = col.hexadecimalCode and not col.backgroundColor and not col.backgroundFullSize ? col.hexadecimalCode : false %}
                         {% set colSpaces = colMargins~colPaddings %}
                         {% set colAlignment = col.elementsAlignment|replace({'justify-content': 'justify-content-lg'}) %}
-                        {% set colAlignment = 'justify-content' in colAlignment and not align and 'end' not in colAlignment ? colAlignment~' flex-column' : colAlignment %}
-                        {% set alignEnd = 'justify-content' in colAlignment and 'end' in colAlignment %}
 
                         {% set isColMedia = false %}
                         {% if blocks|length == 1 %}
@@ -124,7 +122,7 @@
                             {% endfor %}
                         {% endif %}
 
-                        <div id="layout-col-{{ colId }}" class="layout-col {{ colClasses }} {{ colSpaces }}{% if isColMedia %} media-col{% endif %}{% if colAlignment %} {{ colAlignment }}{% endif %}"
+                        <div id="layout-col-{{ colId }}" class="layout-col {{ colClasses }} {{ colSpaces }}{% if isColMedia %} media-col{% endif %}"
                              data-position="{{ col.position }}"
                             {% if colEffects %} {{ colEffects|raw }}{% endif %}
                             {% if bgColorHexa %} style="background: {{ bgColorHexa }};" data-hexadecimal="{{ bgColorHexa }}"{% endif %}>
@@ -139,11 +137,11 @@
                                 <div class="{{ paddings(col) }}{% if col.backgroundColor %} {{ col.backgroundColor }}{% endif %}">
                             {% endif %}
 
-                                <div class="{% if not innerColBackground and not bgColorHexaInnerZone %}row{% if interfaceName != 'form' %} m-0{% endif %}{% if blocks|length == 1 and blocks|first.backgroundFullHeight %} h-100{% endif %}{% else %}h-100{% endif %}{% if colAlignment %} {{ colAlignment }}{% endif %}{% if alignEnd %} w-100{% endif %}">
+                                <div class="{% if not innerColBackground and not bgColorHexaInnerZone %}row{% if interfaceName != 'form' %} m-0{% endif %}{% if blocks|length == 1 and blocks|first.backgroundFullHeight %} h-100{% endif %}{% else %}h-100{% endif %}{% if colAlignment and not innerColBackground and not bgColorHexaInnerZone %} {{ colAlignment }}{% endif %}">
 
                                     {% if innerColBackground or bgColorHexaInnerZone %}
                                         {% set colPaddings = paddings(col, 'vertical') %}
-                                        <div class="h-100 px-0{% if blocks|length >= 2 %} row m-0{% endif %} {{ colPaddings }}{% if innerColBackground %} {{ innerColBackground }}{% endif %}{% if col.elementsAlignment %} {{ col.elementsAlignment }}{% endif %}"
+                                        <div class="h-100 px-0{% if blocks|length >= 2 %} row m-0{% endif %} {{ colPaddings }}{% if innerColBackground %} {{ innerColBackground }}{% endif %}{% if colAlignment %} {{ colAlignment }}{% endif %}"
                                              {% if bgColorHexaInnerZone %} style="background: {{ bgColorHexaInnerZone }};" data-hexadecimal="{{ bgColorHexaInnerZone }}"{% endif %}>
                                     {% endif %}
 

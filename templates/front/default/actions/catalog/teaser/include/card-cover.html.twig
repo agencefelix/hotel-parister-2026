@@ -1,13 +1,5 @@
 {% trans_default_domain 'front_default' %}
 
-{#
-    Carte chambre dédiée du teaser « Chambres & Suites » (home).
-    Maquette : titre en overlay HAUT (1er mot en capitales + reste en script cursif),
-    image 3:4, lien « Découvrir » souligné en overlay BAS.
-    NB : le teaser passe `disabledLayout` → `intlCard` vaut null mais reste "defined" en Twig,
-    donc on lit le titre via `post.intl` explicitement (la macro standard prendrait intlCard=null).
-#}
-
 {% set intl = post.intl is defined ? post.intl : null %}
 {% set fullTitle = intl and intl.title is defined ? intl.title|trim : '' %}
 {% set parts = fullTitle ? fullTitle|split(' ', 2) : [] %}
@@ -15,11 +7,18 @@
 {% set script = parts[1] is defined ? parts[1] : '' %}
 {% set media = post.mainMedia is defined and post.mainMedia ? post.mainMedia : (intl and intl.mainMedia is defined ? intl.mainMedia : null) %}
 {% set targetLink = post.url is defined and post.url ? post.url : (intl and intl.link is defined ? intl.link : null) %}
+{% set extraClass = class is defined and class ? ' '~class : '' %}
+{% set screensSizes = screensSizes is defined ? screensSizes : {
+    mobile: {width: 470, height: 600},
+    tablet: {width: 470, height: 600},
+    desktop: {width: 470, height: 600}
+} %}
 
-<a href="{{ targetLink }}" class="card-cover d-block position-relative h-100"{% if targetLink %} data-toggle="preloader"{% endif %} aria-label="{{ fullTitle|striptags }}">
+<a href="{{ targetLink }}" class="card-cover d-block position-relative h-100{{ extraClass }}"{% if targetLink %} data-toggle="preloader"{% endif %} aria-label="{{ fullTitle|striptags }}">
     {% if media %}
         <div class="card-cover-media">
             {{ media|file(thumbConfiguration, {
+                screensSizes: thumbConfiguration is empty ? screensSizes : {},
                 disableLink: true,
                 notInBox: true,
                 colSize: colSize is defined ? colSize : 4,
@@ -33,5 +32,7 @@
             {% if script %}<span class="card-cover-script d-block">{{ script|lower|raw }}</span>{% endif %}
         </span>
     {% endif %}
-    <span class="card-cover-link d-block text-uppercase">{{ "Découvrir"|trans }}</span>
+    <span class="card-cover-link d-block text-uppercase d-flex align-items-center justify-content-center">
+        <span class="card-cover-label text-white">{{ "Découvrir"|trans }}</span>
+    </span>
 </a>

@@ -78,44 +78,9 @@
     }
 
     @include mediaQuery(min-lg) {
-
         &:not(.btn-circle) {
             padding: $btn-padding;
             font-size: $btn-font-size;
-        }
-
-        @media (prefers-reduced-motion: no-preference) {
-
-            // Remplissage ::before (fond animé) — EXCLU pour les boutons OUTLINE,
-            // qui utilisent ::before/::after pour leurs 2 filets (cf. vendor-*.scss).
-            &:not(.btn-gradient):not([class*="btn-outline-"]) {
-
-                &:before {
-                    position: absolute;
-                    content: "";
-                    background: $white;
-                    transition-duration: .3s;
-                    z-index: -1;
-                    top: 0;
-                    right: auto;
-                    bottom: auto;
-                    left: 0;
-                    width: 0;
-                    height: 100%;
-                    opacity: 1;
-                    border-radius: $btn-border-radius;
-                }
-
-                &:hover,
-                &:focus,
-                &:active,
-                &.active {
-                    &:before {
-                        width: 100%;
-                        opacity: 1;
-                    }
-                }
-            }
         }
     }
 }

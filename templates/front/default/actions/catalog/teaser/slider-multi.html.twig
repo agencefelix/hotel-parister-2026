@@ -40,23 +40,27 @@
         }) }}
         {% if teaserIntl.title %}
             {% set titleForce = teaserIntl.titleForce ? teaserIntl.titleForce : 2 %}
-            <h{{ titleForce }} class="title mb-4">{{ teaserIntl.title|raw }}</h{{ titleForce }}>
+            <h{{ titleForce }} class="title text-uppercase mb-4">{{ teaserIntl.title|raw }}</h{{ titleForce }}>
         {% endif %}
         {% set autoplay = 0 %}
         <div id="catalog-teaser-{{ teaser.slug }}" class="catalog-teaser splide mt-5 length-{{ entities|length }}"
              data-items="{{ teaser.itemsPerSlide }}"
              data-lenght="{{ entities|length }}"
-             data-items-medium-pc="3"
-             data-items-mini-pc="3"
-             data-items-tablet="2"
-             data-items-mobile="1"
+             data-items-medium-pc="{{ teaser.itemsPerSlide }}"
+             data-items-mini-pc="{{ teaser.itemsPerSlide }}"
+             data-items-tablet="{{ teaser.itemsPerSlide }}"
+             data-items-mobile="{{ teaser.itemsPerSlide - 1 }}"
              data-fade="loop"
              data-scroll="1"
              data-pause="1"
              data-autoplay="{{ autoplay }}"
              data-arrows="1"
              data-dots="0"
-             data-gap="2rem"
+             data-offset="250"
+             data-offset-medium-pc="50"
+             data-offset-mini-pc="50"
+             data-offset-tablet="50"
+             data-offset-mobile="50"
              data-counter="0"
              data-interval="2500">
             <div class="splide__track">
@@ -69,7 +73,8 @@
                                 {# Carte chambre dédiée (titre overlay + script + « Découvrir ») — maquette home. #}
                                 {% include 'front/'~websiteTemplate~'/actions/catalog/teaser/include/card-cover.html.twig' with {
                                     post: post,
-                                    thumbConfiguration: thumbConfiguration
+                                    thumbConfiguration: thumbConfiguration,
+                                    class: teaser.itemsPerSlide > 1 ? 'me-4 me-md-5' : null
                                 } only %}
                             {% else %}
                                 {{ macroCard.standard({
@@ -92,7 +97,7 @@
                     {% endfor %}
                 </ul>
             </div>
-            {% if entities|length >= teaser.itemsPerSlide %}
+            {% if entities|length >= teaser.itemsPerSlide and teaser.progress %}
                 <div class="row">
                     <div class="col-11 col-md-9">
                         <div class="slider-progress-container d-flex justify-content-start align-items-center w-100 mt-5">

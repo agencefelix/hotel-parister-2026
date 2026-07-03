@@ -97,13 +97,12 @@
         }
     }
 
-    // Carte "cover" : image plein cadre + overlay (titre haut, lien bas), réutilisable sur toute page
-    // (sliders + grilles catalogue). Scope #body-page (global) pour battre `#body-page span`.
+    // Carte "cover" (image + overlay) — #body-page pour battre `#body-page span`.
     #body-page {
 
         .card-cover {
             overflow: hidden;
-            color: $beige;
+            color: $light;
             text-decoration: none;
         }
 
@@ -134,13 +133,13 @@
             transform: scale(1.06);
         }
 
-        // Voile haut + bas pour lisibilité du texte clair sur la photo.
+        // Voile plat pour lisibilité du texte clair sur la photo (token Figma Brun #402624 / 0.6).
         .card-cover::after {
             content: "";
             position: absolute;
             inset: 0;
             z-index: 2;
-            background: linear-gradient(180deg, rgba($black, .5) 0%, rgba($black, 0) 28%, rgba($black, 0) 60%, rgba($black, .65) 100%);
+            background: rgba($brown, .6);
             pointer-events: none;
         }
 
@@ -152,7 +151,7 @@
             right: rem(20px);
             z-index: 3;
             text-align: center;
-            color: $beige;
+            color: $light;
         }
 
         // Kicker (1er mot) : 24 / 700 / lh24 / UPPER (token Figma).
@@ -161,57 +160,61 @@
             font-weight: $font-weight-bold;
             letter-spacing: 0;
             line-height: 1;
-            color: $beige;
+            color: $light;
         }
 
-        // Script (reste du nom) : 54 / 400 / lh101 (token) ; marge négative = stacking serré maquette.
+        // Script : 54 / 400 ; lh1 absorbe le leading énorme de la police script.
         .card-cover-script {
             font-family: $font-script;
             font-weight: $font-weight-normal;
             font-size: rem(54px);
-            line-height: calc(101 / 54);
-            margin-top: rem(-12px);
-            color: $beige;
+            line-height: 1;
+            margin-top: -1.5rem;
+            color: $light;
         }
 
         // « Découvrir » overlay BAS, centré + filet (maquette) : 14 / 700 / .2em / lh17 / UPPER.
         .card-cover-link {
+
             position: absolute;
             bottom: rem(28px);
             left: rem(20px);
             right: rem(20px);
             z-index: 3;
             text-align: center;
-            color: $beige;
+            color: $light;
             font-size: rem(14px);
             font-weight: $font-weight-bold;
             letter-spacing: .2em;
             line-height: calc(17 / 14);
 
-            // Filets maquette : un trait AU-DESSUS (::before) et un EN-DESSOUS (::after) du label.
-            &::before,
-            &::after {
-                content: "";
-                display: block;
-                width: rem(40px);
-                height: 1px;
-                background: $beige;
-                transition: width .3s ease; // Parister : hover sobre (filets qui s'étirent), cf. btn-outline
-            }
+            .card-cover-label {
 
-            &::before {
-                margin: 0 auto rem(10px);
-            }
+                // Filets maquette : un trait AU-DESSUS (::before) et un EN-DESSOUS (::after) du label.
+                &::before,
+                &::after {
+                    content: "";
+                    display: block;
+                    width: rem(59px);
+                    height: 1px;
+                    background: $light;
+                    transition: width .3s ease; // Parister : hover sobre (filets qui s'étirent), cf. btn-outline
+                }
 
-            &::after {
-                margin: rem(10px) auto 0;
+                &::before {
+                    margin: 0 auto rem(16px);
+                }
+
+                &::after {
+                    margin: rem(16px) auto 0;
+                }
             }
         }
 
         // Parister : hover minimal sur « Découvrir » (les filets s'étirent), façon btn-outline.
-        .card-cover:hover .card-cover-link::before,
-        .card-cover:hover .card-cover-link::after {
-            width: rem(72px);
+        .card-cover:hover .card-cover-link .card-cover-label::before,
+        .card-cover:hover .card-cover-link .card-cover-label::after {
+            width: 100%;
         }
 
         // Intro/corps optionnels en surimpression, centrés entre le titre (haut) et le lien (bas).
@@ -223,7 +226,7 @@
             z-index: 3;
             transform: translateY(-50%);
             text-align: center;
-            color: $beige;
+            color: $light;
 
             .introduction {
                 font-size: rem(16px);

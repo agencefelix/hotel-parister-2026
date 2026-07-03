@@ -28,7 +28,8 @@ export default function (sliders) {
 
             if (!slider.classList.contains('thumbnails-slider')) {
 
-                let screenWidth = window.screen.width;
+                // Viewport (pas le moniteur) : sinon data-offset desktop jamais appliqué sur écran ≤ 1399px.
+                let screenWidth = window.innerWidth;
 
                 let isMobile = screenWidth <= 767;
                 let isTablet = screenWidth > 767 && screenWidth <= 991;
@@ -159,7 +160,7 @@ export default function (sliders) {
                         let perPageScreen;
                         if (window.innerWidth >= 1400) {
                             perPageScreen = perPage;
-                        } else if (window.innerWidth >= 1200 && window.innerWidth < 1300) {
+                        } else if (window.innerWidth >= 1200 && window.innerWidth < 1400) {
                             perPageScreen = perPageMediumPc;
                         } else if (window.innerWidth >= 992 && window.innerWidth < 1200) {
                             perPageScreen = perPageMiniPc;

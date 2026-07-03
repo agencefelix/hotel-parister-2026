@@ -450,11 +450,11 @@
         z-index: 300 !important;
 
         &.btn-prev {
-            left: rem(20px) !important;
+            left: 0 !important;
         }
 
         &.btn-next {
-            right: rem(20px) !important;
+            right: rem(75px) !important;
         }
 
         // Parister : flèches carrées translucides, chevron sombre (surcharge .btn-circle/.btn-primary).
@@ -513,18 +513,27 @@
    4 ) Cartes de slider standardisées (style catalog-teaser / card-cover)
 -----------------------------------*/
 
-// En slider, l'image garde sa taille configurée (pas de recadrage 3/4 imposé comme en grille catalogue).
-// #body-page requis pour battre `#body-page .card-cover-media img` (id).
-#body-page .slider-container .splide .card-cover-media img,
-#body-page .catalog-teaser.splide .card-cover-media img {
+// Carte à la taille de la vignette (pas étirée au slide), overlay calé sur l'image.
+#body-page .splide .card-cover {
+    width: fit-content;
+    max-width: 100%;
+}
+
+#body-page .splide .card-cover-media,
+#body-page .splide .card-cover-media picture,
+#body-page .splide .card-cover-media .img-loader-wrap {
+    height: auto !important;
+    width: auto;
+}
+
+#body-page .splide .card-cover-media img {
+    width: auto;
+    max-width: 100%;
     height: auto !important;
     aspect-ratio: auto;
 }
 
-// Flèches de contrôle en overlay latéral centré sur les cards (Parister : carré translucide,
-// chevron sombre). Communes à TOUS les sliders card-cover hors actus : sliders génériques
-// (.slider-container) + catalog-teaser. Dé-scopé de #zone-home-rooms-products → réutilisable partout.
-// (.newscast-teaser, hors .slider-container et .catalog-teaser, garde ses propres flèches.)
+// Flèches carrées translucides en overlay (sliders card-cover hors actus).
 .slider-container .splide,
 .catalog-teaser {
 
@@ -550,11 +559,19 @@
             margin: 0 !important;
             pointer-events: auto;
             display: flex !important; // annule le d-lg-none par défaut sur desktop
-            width: rem(48px);
-            height: rem(48px);
+            // !important requis : .btn.btn-circle (_button.scss) force 45px en !important.
+            width: rem(48px) !important;
+            height: rem(48px) !important;
+            flex: 0 0 rem(48px) !important;
             background-color: rgba($white, .6) !important;
             border: 0 !important;
             border-radius: rem(4px) !important;
+
+            @include mediaQuery(min-lg) {
+                width: rem(80px) !important;
+                height: rem(80px) !important;
+                flex: 0 0 rem(80px) !important;
+            }
 
             i {
                 color: $dark !important;
@@ -562,11 +579,11 @@
         }
 
         .btn-prev {
-            left: rem(20px);
+            left: 0;
         }
 
         .btn-next {
-            right: rem(20px);
+            right: rem(75px);
         }
 
         .btn-pause, .btn-play {

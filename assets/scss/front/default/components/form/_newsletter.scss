@@ -130,7 +130,7 @@
         color: $primary;
         font-size: rem(96px);
         line-height: calc(101 / 96);
-        margin-top: -2.75rem;
+        margin-top: -.5em;
 
         @include mediaQuery(max-md) {
             font-size: rem(56px);

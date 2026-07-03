@@ -1,13 +1,5 @@
 {% trans_default_domain 'front_default' %}
 
-{#
-    Carte de slider standardisée (style catalog-teaser / card-cover).
-    Image plein cadre, titre en surimpression (1er mot capitales + reste en script,
-    ou titre + sous-titre script), intro/corps si présents, lien « Découvrir » en bas.
-    Utilisée par TOUS les sliders splide hors teaser actus. Styles : components/blocks/_card.scss
-    (carte, réutilisable en grille) + components/_carousel.scss (spécifique slider).
-#}
-
 {% set intl = media.intl is defined ? media.intl : null %}
 {% set fullTitle = intl and intl.title is defined ? intl.title|trim : '' %}
 {% set subTitle = intl and intl.subTitle is defined and intl.subTitle ? intl.subTitle|trim : '' %}
@@ -20,9 +12,9 @@
 {% set tag = targetLink ? 'a' : 'div' %}
 {% set extraClass = class is defined and class ? ' '~class : '' %}
 {% set screensSizes = screensSizes is defined ? screensSizes : {
-    mobile: {width: 48, height: 64},
-    tablet: {width: 54, height: 72},
-    desktop: {width: 600, height: 470}
+    mobile: {width: 470, height: 600},
+    tablet: {width: 470, height: 600},
+    desktop: {width: 470, height: 600}
 } %}
 
 <{{ tag }} class="card-cover d-block position-relative h-100{{ extraClass }}"
@@ -55,5 +47,9 @@
             {% if intl.body is defined and intl.body %}<div class="body">{{ intl.body|raw }}</div>{% endif %}
         </div>
     {% endif %}
-    <span class="card-cover-link d-block text-uppercase">{{ label }}</span>
+    {% if targetLink %}
+        <span class="card-cover-link d-block text-uppercase d-flex align-items-center justify-content-center">
+            <span class="card-cover-label text-white">{{ label }}</span>
+        </span>
+    {% endif %}
 </{{ tag }}>

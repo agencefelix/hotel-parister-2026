@@ -225,8 +225,7 @@
         color: $white !important;
     }
 
-    // Checkbox carrée, fond primary même non cochée + coche blanche à la sélection.
-    // !important : bat `input[type=checkbox] { border-radius: 50% !important }` ci-dessus.
+    // Checkbox carrée primary ; !important : bat le border-radius 50% ci-dessus.
     .form-check-input[type="checkbox"] {
         border-radius: 0 !important;
         background-color: $primary;

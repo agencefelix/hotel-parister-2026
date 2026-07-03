@@ -223,9 +223,7 @@ sup {
 
 #body-page {
 
-    // Clippe le scroll horizontal fantôme (peeks de carrousels, flèches en marge négative) au bord
-    // du viewport — le peek VISIBLE reste, seul le hors-écran est coupé. `clip` (et non `hidden`) ne
-    // crée pas de conteneur de scroll → ne casse ni `position:fixed` (nav) ni `position:sticky`.
+    // clip (pas hidden) : coupe le débord horizontal sans casser fixed/sticky.
     overflow-x: clip;
 
     ul:not(.no-dots):not(.nav):not(.dropdown-menu):not(.reset):not(.splide__list):not(.splide__pagination):not(.pagination):not(.carousel-indicators):not(.navbar-nav) {

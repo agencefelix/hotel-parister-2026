@@ -93,8 +93,7 @@ body .btn.btn[class*="btn-outline-"] {
     }
 }
 
-// Hover des boutons « 2 filets » selon le FOND parent : le fond reste transparent, donc texte
-// + filets doivent CONTRASTER avec le fond (ne pas virer vers la couleur de remplissage de l'état).
+// Hover outline « 2 filets » : texte + filets contrastés selon le fond parent.
 .bg-light, .bg-white, .bg-beige {
 
     .btn.btn[class*="btn-outline-"] {

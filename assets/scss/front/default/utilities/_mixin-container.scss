@@ -78,6 +78,12 @@
     padding-right: 0 !important;
     overflow: hidden;
 
+    @include mediaQuery(min-lg) {
+        .layout-block {
+            padding-left: 0 !important;
+        }
+    }
+
     > .row-container {
 
         margin-right: 0 !important;

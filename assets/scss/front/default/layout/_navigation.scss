@@ -76,8 +76,7 @@
         top: 0;
     }
 
-    // Mega-menu = overlay plein écran (fixed inset:0 / 100dvh) : pas de compensation d'alerte
-    // (l'élément #zone-home-alert peut être présent sans bandeau visible → décalage parasite).
+    // Mega-menu plein écran : pas de compensation d'alerte.
 
     // === Nav — corrections (rigueur) ===
     // 1) Barre fermée ≤ 10dvh : réduire paddings + logo.
@@ -130,8 +129,7 @@
     #main-navigation .nav-burger .nav-toggler-icon span:nth-child(2) {
         width: 100% !important;
     }
-    // 4) Mega-topbar (menu ouvert) : groupes latéraux de largeurs ÉGALES → logo centré, items alignés
-    //    comme la barre fermée (et non tous poussés à droite).
+    // 4) Mega-topbar : groupes latéraux égaux → logo centré.
     .mega-topbar > .flex-fill {
         flex: 1 1 0;
         min-width: 0;
@@ -537,7 +535,7 @@
     position: fixed;
     inset: 0;
     z-index: 1040;
-    background-color: $beige;
+    background-color: $light;
     color: $primary;
     // Le menu ne dépasse JAMAIS la fenêtre : il scrolle à l'intérieur.
     max-height: 100dvh;
@@ -715,8 +713,7 @@
     object-fit: cover;
 }
 
-// Le padding est désormais porté par .mega-aside-contact-wrap (socials + adresse) ; les CTA restent
-// pleine largeur (filets bord à bord, maquette).
+// Padding porté par .mega-aside-contact-wrap ; CTA pleine largeur.
 .mega-aside-body {
     padding: 0;
 }
@@ -825,9 +822,7 @@
     // Grille 2 colonnes (col-6 dans le template) — espacement vertical entre rangées.
     .mega-cols { row-gap: rem(40px) !important; }
 
-    // Agencement maquette : rangée 1 = HÔTEL | UTILES, rangée 2 = LES PASSERELLES | ACTUALITÉS.
-    // L'ordre du menu CMS est [HÔTEL, LES PASSERELLES, UTILES, ACTUALITÉS] → on intervertit
-    // visuellement les positions 2 et 3 (flex order, mobile uniquement, desktop inchangé).
+    // Mobile : intervertit les colonnes 2 et 3 (ordre maquette).
     .mega-cols > :nth-child(1) { order: 1; }
     .mega-cols > :nth-child(2) { order: 3; }
     .mega-cols > :nth-child(3) { order: 2; }

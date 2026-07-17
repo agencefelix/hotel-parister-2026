@@ -16,6 +16,16 @@
     padding-top: rem(72px);
     padding-bottom: rem(120px);
 
+    > .container {
+        position: relative;
+    }
+
+    // Mobile (maquette 928:1133) : bande resserrée, filigrane sur le haut des tuiles.
+    @include mediaQuery(max-md) {
+        padding-top: rem(60px);
+        padding-bottom: rem(64px);
+    }
+
     // Filigrane « parister » (script, or très clair) en fond — relevé Figma 630:1531 (528px).
     &::before {
         content: "parister";
@@ -32,12 +42,26 @@
         white-space: nowrap;
         // Baseline ~ centre des tuiles (Figma 630:1531) — un peu plus haut que le centre de bande.
 
-        @include mediaQuery(min-lg) { font-size: rem(740px); }
-        @include mediaQuery(between-md-lg) { font-size: rem(300px); }
-        @include mediaQuery(max-md) { font-size: rem(180px); }
+        @include mediaQuery(min-lg) {
+            font-size: rem(740px);
+        }
+
+        @include mediaQuery(between-md-lg) {
+            font-size: rem(300px);
+        }
+
+        // Mobile : filigrane visible (20% comme Figma 928:1133), centré sur le haut des tuiles (full-bleed).
+        @include mediaQuery(max-md) {
+            top: rem(20px);
+            font-size: rem(125px);
+            color: rgba($primary, .2);
+        }
     }
 
-    > .container-fluid { position: relative; z-index: 1; }
+    > .container-fluid {
+        position: relative;
+        z-index: 1;
+    }
 
     .socialwall-grid {
         gap: 0;
@@ -64,12 +88,14 @@
             transition: transform .4s ease;
         }
 
-        &:hover img { transform: scale(1.05); }
+        &:hover img {
+            transform: scale(1.05);
+        }
 
+        // Mobile (maquette 928:1133) : 3 tuiles en rangée (105/364 ≈ 28.8%), pas d'empilement.
         @include mediaQuery(max-md) {
-            flex: 0 0 100%;
-            max-width: 100%;
-            margin-bottom: 1rem;
+            flex: 0 0 28.8%;
+            max-width: 28.8%;
         }
     }
 
@@ -77,13 +103,18 @@
         display: inline-block;
         color: $primary;
         text-decoration: none;
-        letter-spacing: .2em;          // Figma 630:1531 : 14/700/2.8(.2em)/lh17 UPPER
+        letter-spacing: .2em; // Figma 630:1531 : 14/700/2.8(.2em)/lh17 UPPER
         font-size: rem(14px);
         line-height: calc(17 / 14);
         font-weight: $font-weight-bold;
         transition: opacity .2s ease-in-out;
 
         // Lisible sur bg-light : texte or au hover (neutralise le blanc hérité de btn-outline-primary).
-        &:hover, &:focus { color: $primary; background-color: transparent; border-color: $primary; opacity: .7; }
+        &:hover, &:focus {
+            color: $primary;
+            background-color: transparent;
+            border-color: $primary;
+            opacity: .7;
+        }
     }
 }

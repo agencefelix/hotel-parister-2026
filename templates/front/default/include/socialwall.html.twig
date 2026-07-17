@@ -20,7 +20,7 @@
                 <a class="socialwall-link" href="{{ instaUrl }}"{% if instaUrl != '#' %} target="_blank" rel="noopener noreferrer"{% endif %} aria-label="Instagram - {{ "nouvelle fenêtre"|trans|striptags }}">
                     {{ asset('build/front/'~websiteTemplate~'/images/'~img.file~'.jpg', webpack)|file({}, {
                         screensSizes: {
-                            mobile: {width: 360, height: 460},
+                            mobile: {width: 220, height: 281},
                             tablet: {width: 320, height: 409},
                             desktop: {width: 320, height: 409}
                         },

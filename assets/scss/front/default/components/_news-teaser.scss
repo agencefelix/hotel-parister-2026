@@ -148,6 +148,12 @@
             right: rem(75px);
         }
     }
+
+    // Mobile : pas de flèches (maquette 928:1137), navigation au swipe (drag Splide actif).
+    @include mediaQuery(max-md) {
+
+        .arrows-wrap { display: none !important; }
+    }
 }
 
 #teaser-news-container-main {

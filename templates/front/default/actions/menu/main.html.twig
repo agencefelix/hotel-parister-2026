@@ -27,9 +27,8 @@
 
     {# ===================== BARRE FERMÉE ===================== #}
     <header id="main-navigation" class="navbar py-3 py-lg-4">
-        <div class="container-fluid px-3 px-lg-5 d-flex align-items-center">
-            {# Gauche : ouvre le mega-menu #}
-            <div class="flex-fill d-flex justify-content-start">
+        <div class="container-fluid px-3 px-lg-5 d-flex align-items-start align-items-lg-center">
+            <div class="flex-fill d-flex justify-content-start mt-2 pt-1 mt-lg-0 pt-lg-0">
                 <button class="navbar-toggler nav-burger bg-transparent border-0 p-0 d-inline-flex align-items-center"
                         type="button"
                         data-bs-toggle="collapse"
@@ -45,8 +44,6 @@
                     <span class="label text-uppercase ms-2 fw-bold d-inline-block">{{ "Menu"|trans|raw }}</span>
                 </button>
             </div>
-
-            {# Centre : logo #}
             {% if logo %}
                 <{% if 'h1' == compagnyNameElement %}h1{% else %}strong{% endif %} class="d-none" aria-hidden="true">{{ companyName|striptags }}</{% if 'h1' == compagnyNameElement %}h1{% else %}strong{% endif %}>
                 <a class="navbar-brand p-0 m-0" aria-label="{{ companyName|striptags }}" href="{{ app.request.getSchemeAndHttpHost() }}" data-toggle="preloader">
@@ -69,11 +66,9 @@
                     <span class="brand-name text-uppercase">{{ companyName|striptags }}</span>
                 </a>
             {% endif %}
-
-            {# Droite : RÉSERVER · BONS CADEAUX (texte, conforme maquette) #}
-            <div class="flex-fill d-flex align-items-center justify-content-end">
+            <div class="flex-fill d-flex align-items-center justify-content-end mt-2 pt-1 mt-lg-0 pt-lg-0">
                 <a href="{{ bookingUrl }}" class="nav-bar-link text-uppercase fw-bold" data-toggle="preloader">{{ "Réserver"|trans|raw }}</a>
-                <span class="nav-bar-sep mx-3" aria-hidden="true"></span>
+                <span class="nav-bar-sep mx-3 d-none d-sm-inline-block" aria-hidden="true"></span>
                 <a href="{{ giftUrl }}" class="nav-bar-link text-uppercase fw-bold d-none d-sm-inline-block" data-toggle="preloader">{{ "Bons cadeaux"|trans|raw }}</a>
             </div>
         </div>
@@ -84,8 +79,8 @@
         <div class="mega-menu-inner d-flex flex-column">
 
             {# --------- Barre haute (mode ouvert) --------- #}
-            <div class="mega-topbar d-flex align-items-center px-3 px-lg-5 py-3">
-                <div class="flex-fill d-flex justify-content-start">
+            <div class="mega-topbar d-flex align-items-start align-items-lg-center px-3 px-lg-5 py-3">
+                <div class="flex-fill d-flex justify-content-start mt-2 pt-1 mt-lg-0 pt-lg-0">
                     <button class="nav-close bg-transparent border-0 p-0 d-inline-flex align-items-center text-uppercase fw-bold"
                             type="button"
                             data-bs-toggle="collapse"
@@ -93,7 +88,7 @@
                             aria-label="{{ "Fermer le menu"|trans|striptags }}">
                         <span class="nav-close-icon me-2" aria-hidden="true">&#10005;</span>
                         <span class="d-none d-lg-inline">{{ "Menu"|trans|raw }}</span>
-                        <span class="d-lg-none">{{ "Fermer"|trans|raw }}</span>
+                        <span class="d-lg-none text-primary">{{ "Fermer"|trans|raw }}</span>
                     </button>
                 </div>
                 {% if secondaryLogo %}
@@ -113,7 +108,7 @@
                         }) }}
                     </a>
                 {% endif %}
-                <div class="flex-fill d-flex align-items-center justify-content-end">
+                <div class="flex-fill d-flex align-items-center justify-content-end mt-2 pt-1 mt-lg-0 pt-lg-0">
                     <a href="{{ bookingUrl }}" class="mega-topbar-link text-uppercase fw-bold" data-toggle="preloader">{{ "Réserver"|trans|raw }}</a>
                     <span class="mega-topbar-sep mx-3 d-none d-lg-inline-block" aria-hidden="true"></span>
                     <a href="{{ giftUrl }}" class="mega-topbar-link text-uppercase fw-bold d-none d-lg-inline-block" data-toggle="preloader">{{ "Bons cadeaux"|trans|raw }}</a>
@@ -168,22 +163,22 @@
                         <ul class="reset mega-cta-list">
                             <li>
                                 <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase px-3 px-lg-4" href="{{ giftUrl }}" data-toggle="preloader">
-                                    <span>{{ "Bons cadeaux"|trans|raw }}</span><i class="icon-arrow-right" aria-hidden="true"></i>
+                                    <span>{{ "Bons cadeaux"|trans|raw }}</span>{{ include('front/'~websiteTemplate~'/actions/menu/include/cta-arrow.html.twig') }}
                                 </a>
                             </li>
                             <li>
                                 <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase px-3 px-lg-4" href="{{ wellnessUrl }}" data-toggle="preloader">
-                                    <span>{{ "Offres bien-être"|trans|raw }}</span><i class="icon-arrow-right" aria-hidden="true"></i>
+                                    <span>{{ "Offres bien-être"|trans|raw }}</span>{{ include('front/'~websiteTemplate~'/actions/menu/include/cta-arrow.html.twig') }}
                                 </a>
                             </li>
                             <li>
                                 <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase px-3 px-lg-4" href="{{ bookingUrl }}" data-toggle="preloader">
-                                    <span>{{ "Réservation"|trans|raw }}</span><i class="icon-arrow-right" aria-hidden="true"></i>
+                                    <span>{{ "Réservation"|trans|raw }}</span>{{ include('front/'~websiteTemplate~'/actions/menu/include/cta-arrow.html.twig') }}
                                 </a>
                             </li>
                         </ul>
 
-                        <div class="mega-aside-contact-wrap d-flex flex-column flex-grow-1 px-4 px-lg-5 pb-4">
+                        <div class="mega-aside-contact-wrap d-flex flex-column flex-grow-1 px-4 px-lg-5 pb-4 pt-3 pt-lg-0">
                         {% if website.networks %}
                             <nav class="socials-list d-flex justify-content-center mt-4 mb-4" aria-label="{{ "Navigation des liens sociaux"|trans|striptags }}">
                                 {% for name, infos in website.networks %}
@@ -204,7 +199,7 @@
                             <address class="mega-contact text-center mt-auto mb-0">
                                 <span class="d-block text-uppercase">{% if address.address %}{{ address.address|raw }}{% if address.zipCode or address.city %}, {% endif %}{% endif %}{% if address.zipCode %}{{ address.zipCode }} {% endif %}{% if address.city %}{{ address.city }}{% endif %}</span>
                                 {% if phones is not empty %}
-                                    <span class="d-block mt-2">{% for phone in phones %}{{ phone|phone(website, {icon: false, only_href: true}) }}{% endfor %}</span>
+                                    <span class="d-block mt-lg-2">{% for phone in phones %}{{ phone|phone(website, {icon: false, only_href: true}) }}{% endfor %}</span>
                                 {% endif %}
                                 {% if emails is not empty %}
                                     <span class="d-block text-uppercase">{% for email in emails %}{{ email.email|email(website, {icon: false, only_href: true}) }}{% endfor %}</span>

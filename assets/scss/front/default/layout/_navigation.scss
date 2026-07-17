@@ -114,8 +114,12 @@
         filter: brightness(0); // logo #141414 au scroll (cohérent avec le texte, relevé Figma)
     }
     // Marque : symbole au top, NOM textuel « Parister » au scroll (maquette).
-    .navbar-brand .brand-name { display: none; }
-    #main-navigation.as-scroll .navbar-brand .brand-logo { display: none !important; }
+    .navbar-brand .brand-name {
+        display: none;
+    }
+    #main-navigation.as-scroll .navbar-brand .brand-logo {
+        display: none !important;
+    }
     #main-navigation.as-scroll .navbar-brand .brand-name {
         display: inline-block;
         color: $dark;
@@ -124,6 +128,25 @@
         letter-spacing: .3em;
         font-size: rem(22px);
         line-height: 1;
+    }
+
+    // Mobile (< sm) : garder le symbole, jamais le nom textuel (même au scroll).
+    @include mediaQuery(max-sm) {
+
+        .navbar-brand .brand-name,
+        #main-navigation.as-scroll .navbar-brand .brand-name {
+            display: none !important;
+        }
+
+        #main-navigation.as-scroll .navbar-brand .brand-logo {
+            display: inline-flex !important;
+        }
+
+        // Au scroll : symbole réduit (nav compacte).
+        #main-navigation.as-scroll .navbar-brand img,
+        #main-navigation.as-scroll .navbar-brand svg {
+            max-height: rem(44px) !important;
+        }
     }
     // 3) Tous les traits du burger pleine largeur (pas de span rétréci).
     #main-navigation .nav-burger .nav-toggler-icon span:nth-child(2) {
@@ -440,6 +463,11 @@
 
         font-size: 0;
 
+        @include mediaQuery(max-lg) {
+            padding-left: .75rem;
+            padding-right: .75rem;
+        }
+
         a {
 
             font-size: $font-size-base;
@@ -478,7 +506,7 @@
     cursor: pointer;
 
     .label {
-        font-size: rem(14px);          // Figma 42:1745 : 14/700/3.5(.25em)/lh17 UPPER
+        font-size: rem(14px); // Figma 42:1745 : 14/700/3.5(.25em)/lh17 UPPER
         font-weight: $font-weight-bold;
         letter-spacing: .25em;
         line-height: calc(17 / 14);
@@ -499,9 +527,18 @@
             background: $dark;
             left: 0;
 
-            &:nth-child(1) { top: 0; }
-            &:nth-child(2) { top: 7px; width: 65%; }
-            &:nth-child(3) { top: 14px; }
+            &:nth-child(1) {
+                top: 0;
+            }
+
+            &:nth-child(2) {
+                top: 7px;
+                width: 65%;
+            }
+
+            &:nth-child(3) {
+                top: 14px;
+            }
         }
     }
 }
@@ -510,13 +547,15 @@
 .nav-bar-link {
     color: $dark;
     text-decoration: none;
-    font-size: rem(14px);              // Figma 42:1745 : 14/700/3.5(.25em)/lh17 UPPER
+    font-size: rem(14px); // Figma 42:1745 : 14/700/3.5(.25em)/lh17 UPPER
     font-weight: $font-weight-bold;
     letter-spacing: .25em;
     line-height: calc(17 / 14);
     transition: color .2s ease-in-out;
 
-    &:hover, &:focus { color: $primary; }
+    &:hover, &:focus {
+        color: $primary;
+    }
 }
 
 // Séparateur = 5 traits VERTICAUX espacés de 4px (maquette SVG 17×18).
@@ -564,27 +603,35 @@
 
 .nav-close {
     color: $primary;
-    letter-spacing: .25em;          // Figma 386:1793 : 14/700/3.5/lh17 UPPER
+    letter-spacing: .25em; // Figma 386:1793 : 14/700/3.5/lh17 UPPER
     font-size: rem(14px);
     font-weight: $font-weight-bold;
     line-height: calc(17 / 14);
     cursor: pointer;
 
-    .nav-close-icon { font-size: rem(18px); line-height: 1; }
+    .nav-close-icon {
+        font-size: rem(18px);
+        line-height: 1;
+    }
 
-    &:hover { opacity: .7; }
+    &:hover {
+        opacity: .7;
+    }
 }
 
 .mega-topbar-link {
     color: $primary;
     text-decoration: none;
-    font-size: rem(14px);           // Figma 386:1793 : 14/700/3.5(.25em)/lh17 UPPER
+    font-size: rem(14px); // Figma 386:1793 : 14/700/3.5(.25em)/lh17 UPPER
     font-weight: $font-weight-bold;
     letter-spacing: .25em;
     line-height: calc(17 / 14);
     transition: opacity .2s ease;
 
-    &:hover, &:focus { color: $primary; opacity: .7; }
+    &:hover, &:focus {
+        color: $primary;
+        opacity: .7;
+    }
 }
 
 .mega-topbar-sep {
@@ -597,8 +644,13 @@
 
 /* Panneaux */
 .mega-panel-nav {
+
     flex: 1 1 auto;
-    padding: 2rem 1.5rem;
+    padding: 2rem .75rem;
+
+    @include mediaQuery(between-md-lg) {
+        padding: 2rem 1.5rem;
+    }
 
     @include mediaQuery(min-lg) {
         padding: 3rem 4rem 2.5rem;
@@ -621,15 +673,20 @@
     justify-content: flex-start !important;
     gap: 1.25rem;
 
-    li { margin: 0; }
+    li {
+        margin: 0;
+    }
+
     // Langue active en TÊTE (Figma : Français, English, Español, 中文) — le composant la rend en dernier.
-    li.active-locale { order: -1; }
+    li.active-locale {
+        order: -1;
+    }
 
     a {
         margin: 0 !important;
         // Langues INACTIVES = or estompé (et non gris #adadad du composant switcher).
         color: rgba($primary, .5) !important;
-        font-size: rem(16px);          // Figma 386:1793 : 16/700/ls0/lh19 UPPER
+        font-size: rem(16px); // Figma 386:1793 : 16/700/ls0/lh19 UPPER
         letter-spacing: 0;
         line-height: calc(19 / 16);
         font-weight: $font-weight-bold;
@@ -637,8 +694,14 @@
         transition: opacity .2s ease, color .2s ease;
     }
 
-    li.active-locale > a, a.active-locale { color: $primary !important; font-weight: $font-weight-bold; }
-    li:not(.active-locale) > a:hover { color: $primary !important; }
+    li.active-locale > a, a.active-locale {
+        color: $primary !important;
+        font-weight: $font-weight-bold;
+    }
+
+    li:not(.active-locale) > a:hover {
+        color: $primary !important;
+    }
 }
 
 /* Grille des colonnes de menu — CSS grid pour piloter le flux :
@@ -650,7 +713,11 @@
     margin: 0;
     gap: rem(8px) rem(32px);
 
-    > .mega-col { width: auto; max-width: none; padding: 0; }
+    > .mega-col {
+        width: auto;
+        max-width: none;
+        padding: 0;
+    }
 
     @include mediaQuery(min-lg) {
         grid-template-rows: auto auto;
@@ -661,13 +728,18 @@
 
 /* Colonnes de liens - or */
 .mega-col-title {
+
     color: $primary !important;
-    font-size: rem(24px);              // Figma 386:1793 : 24/700/ls0/lh29 UPPER
+    font-size: rem(21px);
     font-weight: $font-weight-bold !important;
     letter-spacing: 0;
     line-height: calc(29 / 24);
     text-transform: uppercase;
     margin-bottom: rem(16px);
+
+    @include mediaQuery(min-md) {
+        font-size: rem(24px);
+    }
 }
 
 .mega-col-list {
@@ -677,14 +749,17 @@
 .mega-link {
     color: $primary;
     text-decoration: none;
-    font-weight: $font-weight-normal;   // Figma 386:1793 : 14/400/3.5(.25em)/lh17 UPPER
+    font-weight: $font-weight-normal; // Figma 386:1793 : 14/400/3.5(.25em)/lh17 UPPER
     text-transform: uppercase;
     font-size: rem(14px);
     line-height: calc(17 / 14);
     letter-spacing: .25em;
     transition: opacity .2s ease;
 
-    &:hover, &.active { color: $primary; opacity: .65; }
+    &:hover, &.active {
+        color: $primary;
+        opacity: .65;
+    }
 }
 
 /* Logo Forstyle (image réelle, centré) */
@@ -692,7 +767,7 @@
 
     .mega-forstyle-label {
         color: $primary;
-        font-size: rem(12px);          // Figma 386:1793 : 12/700/4.8(.4em)/lh14 UPPER
+        font-size: rem(12px); // Figma 386:1793 : 12/700/4.8(.4em)/lh14 UPPER
         font-weight: $font-weight-bold;
         letter-spacing: .4em;
         line-height: calc(14 / 12);
@@ -739,17 +814,26 @@
     border-bottom: 1px solid rgba($primary, .3);
     transition: opacity .2s ease;
 
-    i {
+    i,
+    .mega-cta-arrow {
         color: $primary;
         font-size: rem(15px);
         transition: transform .2s ease;
+    }
+
+    // Flèche SVG (maquette 501:4020) : ne pas rétrécir, alignée au texte.
+    .mega-cta-arrow {
+        flex: 0 0 auto;
     }
 
     &:hover, &:focus {
         color: $primary;
         opacity: .7;
 
-        i { transform: translateX(4px); }
+        i,
+        .mega-cta-arrow {
+            transform: translateX(4px);
+        }
     }
 }
 
@@ -763,31 +847,53 @@
         transition: opacity .2s ease;
     }
 
-    span:hover i { opacity: .7; }
+    span:hover i {
+        opacity: .7;
+    }
 }
 
 .mega-contact {
+
     color: $primary;
-    font-size: rem(12px);              // Figma 386:1793 : 12/700/1.2(.1em) UPPER
+    font-size: rem(12px); // Figma 386:1793 : 12/700/1.2(.1em) UPPER
     font-weight: $font-weight-bold;
     letter-spacing: .1em;
     text-transform: uppercase;
     line-height: 1.9;
 
     // Les <span> bruts sont remis en #141414/16px par le reboot thème → on force or/12px.
-    span { color: $primary; font-size: rem(12px); }
-    a { color: $primary; text-decoration: none; }
-    a:hover { opacity: .7; }
+    span {
+        color: $primary;
+        font-size: rem(12px);
+
+        &.label {
+            display: none !important;
+        }
+    }
+
+    a {
+        color: $primary;
+        text-decoration: none;
+    }
+
+    a:hover {
+        opacity: .7;
+    }
 }
 
 /* ----- Parister : ajustements mega-menu à l'ouverture ----- */
 // Spans des CTA en or (le reboot thème les repasse en sombre).
-.mega-cta span { color: $primary; }
+.mega-cta span {
+    color: $primary;
+}
 
 // Réseaux sociaux moins espacés (espacement par défaut trop large).
 .mega-panel-aside .socials-list {
     gap: 0;
-    span { margin: 0 rem(6px); }
+
+    span {
+        margin: 0 rem(6px);
+    }
 }
 
 // Forstyle : logo + label centrés verticalement dans le bloc.
@@ -800,11 +906,22 @@
 
 // Burger + label « Menu » en or à l'ouverture, idem bouton de fermeture du mega-topbar.
 .nav-burger[aria-expanded="true"] {
-    .nav-toggler-icon span { background-color: $primary !important; }
-    .label { color: $primary; }
+    .nav-toggler-icon span {
+        background-color: $primary !important;
+    }
+
+    .label {
+        color: $primary;
+    }
 }
-.mega-topbar .nav-close { color: $primary; }
-.mega-topbar .nav-close .nav-close-icon { color: $primary; }
+
+.mega-topbar .nav-close {
+    color: $primary;
+}
+
+.mega-topbar .nav-close .nav-close-icon {
+    color: $primary;
+}
 
 /* =========================================================
    Mega-menu — version MOBILE (relevé Figma 501:3911, base 412px)
@@ -816,30 +933,47 @@
 
     // Barre haute (ouvert) : fond blanc maquette.
     .mega-topbar {
-        background-color: $white;
         border-bottom: 1px solid rgba($primary, .25);
     }
     // Grille 2 colonnes (col-6 dans le template) — espacement vertical entre rangées.
-    .mega-cols { row-gap: rem(40px) !important; }
+    .mega-cols {
+        row-gap: rem(40px) !important;
+    }
 
     // Mobile : intervertit les colonnes 2 et 3 (ordre maquette).
-    .mega-cols > :nth-child(1) { order: 1; }
-    .mega-cols > :nth-child(2) { order: 3; }
-    .mega-cols > :nth-child(3) { order: 2; }
-    .mega-cols > :nth-child(4) { order: 4; }
+    .mega-cols > :nth-child(1) {
+        order: 1;
+    }
+    .mega-cols > :nth-child(2) {
+        order: 3;
+    }
+    .mega-cols > :nth-child(3) {
+        order: 2;
+    }
+    .mega-cols > :nth-child(4) {
+        order: 4;
+    }
 
     // Titres de groupe : marge basse réduite en mobile (taille/ls = base 24/0).
-    .mega-col-title { margin-bottom: rem(12px); }
+    .mega-col-title {
+        margin-bottom: rem(12px);
+    }
 
     // Pas d'image façade en mobile.
-    .mega-aside-media { display: none; }
+    .mega-aside-media {
+        display: none;
+    }
 
-    .mega-aside-body { padding: rem(8px) rem(24px) rem(24px); }
+    .mega-aside-body {
+        padding: rem(8px) rem(0) rem(24px);
+    }
 
     // CTA : taille/poids/ls = base (14/700/.2em). Rien à surcharger en mobile.
 
     // Réseaux sociaux centrés.
-    .mega-panel-aside .socials-list { gap: rem(12px); margin-top: rem(24px); }
+    .mega-panel-aside .socials-list {
+        gap: 0;
+    }
 
     // Adresse mobile : ls 4.8px (.4em) — diffère du desktop (.1em). Graisse/uppercase = base.
     .mega-contact {

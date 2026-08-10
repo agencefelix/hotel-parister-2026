@@ -33,7 +33,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class SecurityPolicySubscriber implements EventSubscriberInterface
 {
     private const bool CSP_DISABLED_FOR_DEV = true;
-    private const bool CSP_DISABLED = false;
+    private const bool CSP_DISABLED = true;
     private const bool XSS_DENIED = true;
     private const string XSS_PATTERN = '/(<\s*script|on\w+\s*=|javascript:|<svg|<img|<iframe|<object|data:text\/html)/i';
 
@@ -377,6 +377,7 @@ class SecurityPolicySubscriber implements EventSubscriberInterface
             'https://www.google-analytics.com',
             'https://www.youtube.com',
             'https://static.axept.io',
+            'https://websdk.d-edge.com',
             'https://cdn.matomo.cloud',
             'https://*.clarity.ms',
             $matomo,
@@ -401,6 +402,9 @@ class SecurityPolicySubscriber implements EventSubscriberInterface
             'https://*.clarity.ms',
             'https://*.axept.io',
             'https://axeptio.imgix.net',
+            'https://websdk.d-edge.com',
+            'https://*.d-edge.com',
+            'https://*.secure-hotel-booking.com',
             'https://www.youtube.com',
             'https://www.google.com',
         ];
@@ -416,6 +420,7 @@ class SecurityPolicySubscriber implements EventSubscriberInterface
             'https://www.youtube.com',
             'https://fonts.googleapis.com',
             'https://static.axept.io',
+            'https://websdk.d-edge.com',
             'https://*.clarity.ms',
             $matomo,
             "'report-sample'",
@@ -427,6 +432,7 @@ class SecurityPolicySubscriber implements EventSubscriberInterface
             "'unsafe-hashes'",   // permet d'autoriser des attributs style="" via hash
             'https://fonts.googleapis.com',
             'https://*.typekit.net',
+            'https://websdk.d-edge.com',
             "'report-sample'",
         ];
         $styleSrcElem = $styleSrc;
@@ -443,6 +449,7 @@ class SecurityPolicySubscriber implements EventSubscriberInterface
             $matomo,
             'https://cdn.matomo.cloud',
             'https://favicons.axept.io',
+            'https://websdk.d-edge.com',
             'https://*.basemaps.cartocdn.com',
             'https://www.google-analytics.com',
             'https://www.googletagmanager.com',
@@ -455,6 +462,7 @@ class SecurityPolicySubscriber implements EventSubscriberInterface
             'https://fonts.gstatic.com',
             'https://fonts.googleapis.com',
             'https://use.typekit.net',
+            'https://websdk.d-edge.com',
             "'report-sample'",
         ];
 

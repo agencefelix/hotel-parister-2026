@@ -1,0 +1,145 @@
+{% trans_default_domain 'front_default' %}
+
+{%- set locale = app.request.locale~'_'~app.request.locale|upper -%}
+{%- if 'zh' == app.request.locale -%}
+    {%- set locale = 'zh_CN' -%}
+{%- endif -%}
+
+{%- set gdprActive = moduleActive('gdpr', website.configuration) -%}
+{%- set axeptioActive = (website.api.custom.axeptioId is defined and website.api.custom.axeptioId)
+    or (website.api.custom.axeptioExternal is defined and website.api.custom.axeptioExternal) -%}
+{%- set cookiesList = cookies() -%}
+{# Consenti, ou aucun système de consentement actif (ni module RGPD ni Axeptio) : affichage direct #}
+{%- set accept = (cookiesList.dedge is defined and cookiesList.dedge) or (not gdprActive and not axeptioActive) -%}
+
+{% set prototype %}
+    <link rel="stylesheet" href="https://websdk.d-edge.com/widgets/app.css">
+    <div id="fb-widget-1" class="fb-widget" data-fbConfig="0">
+        <div id="dedge-spinner" class="text-center py-5">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">{{ "Chargement"|trans }}</span>
+            </div>
+        </div>
+    </div>
+{% endset %}
+
+{% set prototypePlaceholder %}
+    {% include 'gdpr/services/booking-prototype-placeholder.html.twig' %}
+{% endset %}
+
+{# Mécanique GDPR standard (cf. vidéos YouTube) : axeptio.js permute prototype / placeholder au consentement #}
+<div class="booking-block gdpr-booking-wrap w-100"
+     data-code="dedge"
+     data-axeptio-consent="dedge"
+     data-prototype="{{ prototype|e('html_attr') }}"
+     data-prototype-placeholder="{{ prototypePlaceholder|e('html_attr') }}">
+    {% if accept %}
+        {{ prototype|raw }}
+    {% else %}
+        {{ prototypePlaceholder|raw }}
+    {% endif %}
+</div>
+
+<script class="fb-widget-config" data-fbConfig="0" type="application/json" nonce="{{ csp_nonce() }}">
+    {
+        "params": [
+            {
+                "calendar": {
+                    "firstDayOfWeek": 1,
+                    "nbMonths2display": 2,
+                    "title": "Hôtel Parister",
+                    "showBestPrice": true,
+                    "showLastRoom": true,
+                    "showLastRoomThreshold": 3,
+                    "showMinStayDepartureDates": true,
+                    "hideControls": false,
+                    "showChildrenAges": false,
+                    "themeDark": false,
+                    "layoutNum": 1,
+                    "roomRateFiltering": 0,
+                    "rateFilter": [],
+                    "roomFilter": [],
+                    "useLoyalty": false,
+                    "loyalty": "",
+                    "loyaltyParams": {},
+                    "useRedirectUrlFromApi": true,
+                    "daysLookAhead": 365
+                },
+                "currency": "EUR",
+                "locale": "{{ locale }}",
+                "maxAdults": 4,
+                "maxChildren": 2,
+                "mainColor": "#b48608",
+                "themeDark": false,
+                "openFrontInNewTab": true,
+                "property": "2CZR-19058",
+                "title": "Hôtel Parister",
+                "childrenMaxAge": 12,
+                "fbWidget": "Calendar"
+            }
+        ],
+        "commonParams": {
+            "redirectUrl": "https://www.secure-hotel-booking.com",
+            "showPropertiesList": true,
+            "demoMode": false,
+            "frontUrl": "https://www.secure-hotel-booking.com"
+        },
+        "_authCode": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJib29raW5nRW5naW5lUmVmZXJlbmNlIjoiMkNaUiIsImhvdGVsSWQiOiIxOTA1OCIsImdyb3VwSWQiOiI4ODQiLCJyZWZlcmVuY2VSYXRlQ29kZSI6IkJBUkJFIiwiZGlzcGxheU5hbWUiOiJIb3RlbC1QYXJpc3Rlci1QaXNjaW5lLVNwYSIsIm5iZiI6MTc0NTgzNTYzNSwiZXhwIjoyNTM0MDIzMDA4MDAsImlhdCI6MTc0NTgzNTYzNSwiaXNzIjoiQXZhaWxwcm8gQVBJIE1hbmFnZXIiLCJhdWQiOiJkLWVkZ2UifQ.7h96wknaqluPMxDpLPj4WoPmg8RF11bsR4bMhtDLxMLB43B4wdvlV3mMn9aWcmh2i--hx5bIMLQivxgl7c-MWQ",
+        "propertyIndex": 0,
+        "version": "1.35.0",
+        "baseHost": "https://websdk.d-edge.com"
+    }
+</script>
+
+<div data-custom-script="https://websdk.d-edge.com/widgets/app.js" data-requires-vendor-consent="dedge"></div>
+
+<script nonce="{{ csp_nonce() }}">
+    (function () {
+        var wrap = document.querySelector('.booking-block[data-code="dedge"]');
+        var holder = document.querySelector('[data-requires-vendor-consent="dedge"]');
+        var accept = {{ accept ? 'true' : 'false' }};
+
+        function loadWidget() {
+            if (!holder || holder.classList.contains('loaded')) {
+                return;
+            }
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = holder.getAttribute('data-custom-script');
+            document.head.appendChild(script);
+            holder.classList.add('loaded');
+        }
+
+        function hideSpinner() {
+            var spinner = document.getElementById('dedge-spinner');
+            if (spinner) {
+                spinner.classList.add('d-none');
+            }
+        }
+
+        /* Consentement déjà acquis (cookie) ou RGPD inactif : widget rendu côté serveur, SDK à charger. */
+        if (accept) {
+            loadWidget();
+        }
+
+        window.addEventListener('fbWidgetReady', hideSpinner);
+
+        /* Permutation placeholder → widget (Axeptio ou système interne) : charger le SDK,
+           puis masquer le spinner dès que le calendrier est injecté. */
+        if (wrap) {
+            new MutationObserver(function () {
+                var widget = wrap.querySelector('.fb-widget');
+                if (!widget) {
+                    return;
+                }
+                loadWidget();
+                for (var i = 0; i < widget.children.length; i++) {
+                    if (widget.children[i].id !== 'dedge-spinner') {
+                        hideSpinner();
+                        return;
+                    }
+                }
+            }).observe(wrap, {childList: true, subtree: true});
+        }
+    })();
+</script>

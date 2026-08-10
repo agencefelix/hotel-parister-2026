@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+/* -----------------------------------------------------------------
+
+    Module: Front booking block (widget D-Edge)
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
+
+------------------------------------------------------------------------------------------ */
+
+/* Alignement charte du widget D-Edge (/reservation). Le widget rend en DOM local
+   stylé par app.css (classes .fbw-*, styles Vue scopés) : le préfixe .booking-block
+   donne l'avantage de spécificité sur les égalités. */
+.booking-block {
+
+    /* Typo charte : app.css force Open Sans/Helvetica. */
+    .fb-widget,
+    .fbw-qs-container {
+
+        font-family: $font-primary;
+
+        button,
+        input,
+        select {
+            font-family: $font-primary;
+        }
+    }
+
+    /* CTA recherche façon bouton charte. */
+    .fbw-qs--search-btn {
+        text-transform: uppercase;
+        letter-spacing: .2em;
+        font-weight: $font-weight-bold;
+    }
+
+    /* Noms des mois du calendrier : titrage charte. */
+    .fbw-calendar--month-name {
+        font-family: $font-title;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        color: $secondary;
+    }
+
+    /* Écran de consentement + chargement : accents charte. */
+    .spinner-border {
+        color: $primary;
+    }
+}

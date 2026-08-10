@@ -45,6 +45,9 @@ if (clientId || gtmInjection) {
         if (code === 'youtube' && wrap.querySelector('.embed-youtube') && active) {
             return false;
         }
+        if (code === 'dedge' && wrap.querySelector('.fb-widget') && active) {
+            return false;
+        }
         return true;
     };
 

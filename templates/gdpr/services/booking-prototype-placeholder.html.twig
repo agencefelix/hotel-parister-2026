@@ -1,0 +1,9 @@
+{% trans_default_domain 'gdpr' %}
+
+{% extends "gdpr/services/base-placeholder.html.twig" %}
+
+{% set service = 'booking' %}
+{% set code = 'dedge' %}
+{% set image = asset('build/gdpr/images/dedge-gdpr.svg', 'gdpr') %}
+{% set image_title = 'D-Edge' %}
+{% set message = 'Pour afficher le calendrier de réservation vous devez activer les cookies.'|trans|raw %}

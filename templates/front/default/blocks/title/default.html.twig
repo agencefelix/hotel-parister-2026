@@ -8,6 +8,7 @@
     {% set icon = icon is defined ? icon : null %}
     {% set iconBackground = iconBackground is defined ? iconBackground : null %}
     {% set style = style is defined ? style : false %}
+    {% set colorSecondary = colorSecondary is defined ? colorSecondary : false %}
     {% set anim = blockTransitions|transitionsAttributes({
         title: animActive ? ('block-title-title-h'~titleForce) : null,
         subtitle: animActive ? 'block-title-subtitle' : null
@@ -17,7 +18,7 @@
     {% endif %}
     <div class="title-block w-100{% if blockClasses %} {{ blockClasses }}{% endif %}">
         {% if intl.subTitlePosition is defined and intl.subTitlePosition == 'top' and intl.subTitle %}
-            <strong class="sub-title sub-title-h{{ titleForce }} mb-3 d-inline-block w-100{% if anim.subtitle.class %} {{ anim.subtitle.class|raw }}{% endif %}"
+            <strong class="sub-title sub-title-h{{ titleForce }} mb-3 d-inline-block w-100{% if colorSecondary %} {{ colorSecondary }}{% endif %}{% if anim.subtitle.class %} {{ anim.subtitle.class|raw }}{% endif %}"
                 {% if anim.subtitle.attr %} {{ anim.subtitle.attr|raw }}{% endif %}>
                 {{ intl.subTitle|unescape|raw }}
             </strong>
@@ -49,7 +50,7 @@
             </div>
         {% endif %}
         {% if intl.subTitlePosition is defined and intl.subTitlePosition == 'bottom' and intl.subTitle %}
-            <strong class="sub-title sub-title-h{{ titleForce }} d-inline-block w-100{% if anim.subtitle.class %} {{ anim.subtitle.class|raw }}{% endif %}"
+            <strong class="sub-title sub-title-h{{ titleForce }} d-inline-block w-100{% if colorSecondary %} {{ colorSecondary }}{% endif %}{% if anim.subtitle.class %} {{ anim.subtitle.class|raw }}{% endif %}"
                 {% if anim.subtitle.attr %} {{ anim.subtitle.attr|raw }}{% endif %}>
                 {{ intl.subTitle|unescape|raw }}
             </strong>

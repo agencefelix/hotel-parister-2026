@@ -45,6 +45,12 @@ class TitleType extends AbstractType
         ]);
 
         $builder->add('color', WidgetType\AppColorType::class, [
+            'label' => $this->coreLocator->translator()->trans('Couleur du titre', [], 'admin'),
+            'attr' => ['class' => 'select-icons', 'group' => 'col-md-3'],
+        ]);
+
+        $builder->add('colorSecondary', WidgetType\AppColorType::class, [
+            'label' => $this->coreLocator->translator()->trans('Couleur du sous-titre', [], 'admin'),
             'attr' => ['class' => 'select-icons', 'group' => 'col-md-3'],
         ]);
 

@@ -11,50 +11,38 @@
 
 @if ($enable-title-header) {
 
-    $height-large-xs: 350px;
-    $height-large-md: 400px;
-    $height-large-lg: calc(50dvh - 85px);
-
-    $height-xs: 300px;
-    $height-md: 350px;
-    $height-lg: 300px;
+    $height-xs: 550px;
+    $height-md: 700px;
+    $height-lg: 920px;
 
     .title-header-block {
 
         overflow: hidden;
 
-        &.as-large {
-
-            @include mediaQuery(max-md) {
-                min-height: $height-large-xs;
-            }
-
-            @include mediaQuery(between-md-lg) {
-                min-height: $height-large-md;
-            }
-
-            @include mediaQuery(min-lg) {
-                min-height: $height-large-lg;
-            }
+        @include mediaQuery(max-md) {
+            min-height: $height-xs;
         }
 
-        &:not(.as-large) {
-
-            @include mediaQuery(max-md) {
-                min-height: $height-xs;
-            }
-
-            @include mediaQuery(between-md-lg) {
-                min-height: $height-md;
-            }
-
-            @include mediaQuery(min-lg) {
-                min-height: $height-lg;
-            }
+        @include mediaQuery(between-md-lg) {
+            min-height: $height-md;
         }
-        
+
+        @include mediaQuery(min-lg) {
+            min-height: $height-lg;
+        }
+
+        /* Voile de lisibilité sur l'image (Figma : noir 30 %). */
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            background: rgba($black, .3);
+            pointer-events: none;
+        }
+
         .media-content {
-            
+
             top: 0;
             left: 0;
             bottom: 0;
@@ -79,23 +67,87 @@
                 max-height: initial !important;
             }
         }
-        
+
         .title-content {
             z-index: 100;
+            text-align: center;
         }
 
-        &:after {
-            content: '';
-            position: absolute;
-            top: 0;
+        /* Titre (Figma : Museo 700 / 38px / ls .4em / lh 46). */
+        .title {
+
+            color: $light;
+            text-transform: uppercase;
+            font-weight: $font-weight-bold;
+            letter-spacing: .4em;
+            font-size: rem(38px);
+            line-height: calc(46 / 38);
+
+            @include mediaQuery(max-md) {
+                font-size: rem(26px);
+            }
+        }
+
+        /* Sous-titre script (Figma : August Script 133px / lh 101), chevauche le titre. */
+        .sub-title {
+
+            font-family: $font-script;
+            color: $light;
+            text-transform: none;
+            letter-spacing: 0;
+            line-height: .76;
+            font-weight: 400;
+            @include rfs(133px);
+
+            @include mediaQuery(min-md) {
+                margin-top: -1rem;
+            }
+
+            @include mediaQuery(max-md) {
+                margin-top: -.5rem;
+            }
+        }
+
+        /* Fil d'Ariane (absent maquette, conservé) : centré sous le titre. */
+        .breadcrumb {
+            justify-content: center;
+        }
+
+        /* Bandeau baseline (Figma : bande 69px, filet top 1px, motifs de 5 traits verticaux à 40px des bords). */
+        .baseline-bar {
+
             left: 0;
             bottom: 0;
-            z-index: 50;
-            width: 100%;
-            background-repeat: repeat-x !important;
-            background-size: 1px 80% !important;
-            background-position: bottom !important;
-            background: url("data:image/svg+xml;charset=utf-8,%3Csvg width='auto' height='100%25' preserveAspectRatio='none' version='1.1' viewBox='0 0 17.5 658' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cstyle%3E .st0 { fill: url(%23shadow-y); } %3C/style%3E%3ClinearGradient id='shadow-y' x1='-320.2' y1='330.7' x2='337.8' y2='330.7' gradientTransform='translate(0 659.7) scale(1 -1)' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23#{str-slice(#{$primary}, 2)}'/%3E%3Cstop offset='1' stop-color='%23#{str-slice(#{$primary}, 2)}' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='transparent'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg%3E%3Crect class='st0' x='-320.2' y='320.2' width='658' height='17.5' transform='translate(-320.3 337.7) rotate(-90)'/%3E%3C/g%3E%3C/svg%3E");
+            height: 69px;
+            z-index: 100;
+            border-top: 1px solid $light;
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 21px;
+                background: repeating-linear-gradient(90deg, $light 0, $light 1px, transparent 1px, transparent 5px);
+            }
+
+            &::before {
+                left: 40px;
+            }
+
+            &::after {
+                right: 40px;
+            }
+
+            .baseline {
+                color: $light;
+                font-weight: $font-weight-bold;
+                font-size: rem(14px);
+                letter-spacing: .4em;
+                line-height: 1.2;
+                padding: 0 4rem;
+            }
         }
     }
 
@@ -108,7 +160,7 @@
             min-height: 80dvh;
         }
 
-        // dégradé sombre (lisibilité) au lieu du dégradé or
+        // dégradé sombre (lisibilité) au lieu du voile plat
         &:after {
             background: linear-gradient(to bottom, rgba($dark, .25) 0%, rgba($dark, 0) 28%, rgba($dark, 0) 55%, rgba($dark, .55) 100%) !important;
         }
@@ -131,6 +183,8 @@
             letter-spacing: .15em;
             font-size: rem(13px);
             margin-top: 1.25rem;
+            font-family: $font-primary;
+            line-height: 1.2;
         }
     }
 }

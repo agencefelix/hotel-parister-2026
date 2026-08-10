@@ -144,6 +144,8 @@
         }
 
         // Titre overlay HAUT, centré.
+        // Titre : kicker = texte hors <span> (24 / 700 / lh1 / UPPER, token Figma).
+        // Script = le <span> enregistré dans le titre en DB (voir card-cover / card).
         .card-cover-title {
             position: absolute;
             top: rem(28px);
@@ -152,25 +154,23 @@
             z-index: 3;
             text-align: center;
             color: $light;
-        }
-
-        // Kicker (1er mot) : 24 / 700 / lh24 / UPPER (token Figma).
-        .card-cover-kicker {
             font-size: rem(24px);
             font-weight: $font-weight-bold;
             letter-spacing: 0;
             line-height: 1;
-            color: $light;
-        }
 
-        // Script : 54 / 400 ; lh1 absorbe le leading énorme de la police script.
-        .card-cover-script {
-            font-family: $font-script;
-            font-weight: $font-weight-normal;
-            font-size: rem(54px);
-            line-height: 1;
-            margin-top: -1.5rem;
-            color: $light;
+            // Script : 54 / 400 ; lh1 absorbe le leading énorme de la police script.
+            span {
+                display: block;
+                font-family: $font-script;
+                font-weight: $font-weight-normal;
+                text-transform: none; // annule le UPPER hérité du kicker
+                letter-spacing: 0;
+                font-size: rem(54px);
+                line-height: 1;
+                margin-top: -1.5rem;
+                color: $light;
+            }
         }
 
         // « Découvrir » overlay BAS, centré + filet (maquette) : 14 / 700 / .2em / lh17 / UPPER.

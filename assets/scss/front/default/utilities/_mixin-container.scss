@@ -76,7 +76,10 @@
     @include make-container-fluid-right();
 
     padding-right: 0 !important;
-    overflow: hidden;
+
+    &:not(.no-overflow) {
+        overflow: hidden;
+    }
 
     @include mediaQuery(min-lg) {
         .layout-block {

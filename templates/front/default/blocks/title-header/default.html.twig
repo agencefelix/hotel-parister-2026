@@ -9,7 +9,6 @@
         title: animActive ? 'block-title-header-title' : null,
         subtitle: animActive? 'block-title-header-subtitle' : null
     }) %}
-    {% set large = block.large is defined ? block.large : false %}
     {% set backgroundColor = block.col.zone.backgroundColor is defined and block.col.zone.backgroundColor ? block.col.zone.backgroundColor
         : (backgroundColor is defined and backgroundColor ? backgroundColor : false) %}
     {% set isIndex = isIndex is defined and isIndex %}
@@ -26,9 +25,9 @@
     {% set mediaPath = mediaPath is defined ? mediaPath : null %}
     {% set titleForce = titleForce is defined and titleForce ? titleForce : (intl.titleForce is defined and intl.titleForce ? intl.titleForce : 1) %}
     {% set displayBreadcrumb = (isIndexPage and configuration.breadcrumb and not isIndex) or (forceBreadcrumb is defined and forceBreadcrumb) %}
+    {% set baseline = baseline is defined ? baseline : (intl.introduction is defined ? intl.introduction : null) %}
     {% set styleClass = styleClass is defined and styleClass ? styleClass : '' %}
-    {% set styleClass = large and styleClass ? styleClass~' align-items-start as-large' : (large ? 'align-items-start as-large' : 'align-items-end') %}
-    <div class="title-header-block w-100 pt-5 pb-5 position-relative d-flex{% if large %} as-large{% endif %}{% if backgroundColor %} {{ backgroundColor }}{% endif %}{% if styleClass %} {{ styleClass }}{% endif %}">
+    <div class="title-header-block w-100 pt-5 pb-5 position-relative d-flex align-items-center{% if backgroundColor %} {{ backgroundColor }}{% endif %}{% if styleClass %} {{ styleClass }}{% endif %}">
         {% if mediaPath or displayMedia %}
             <div class="media-content position-absolute">
                 {% if mediaPath %}
@@ -66,7 +65,7 @@
                     {% if subTitle %}
                         <div class="w-100{% if anim.subtitle.class %} {{ anim.subtitle.class|raw }}{% endif %}"
                             {% if anim.subtitle.attr %} {{ anim.subtitle.attr|raw }}{% endif %}>
-                            <strong class="sub-title text-white d-inline-block fw-300 w-100 sub-title-h{{ titleForce }}">{{ subTitle|raw }}</strong>
+                            <strong class="sub-title d-inline-block w-100">{{ subTitle|raw }}</strong>
                         </div>
                     {% endif %}
                 </div>
@@ -79,6 +78,7 @@
                         background: 'transparent',
                         paddingLeft: 'ps-0',
                         paddingRight: 'pe-0',
+                        class: 'justify-content-center',
                         breadcrumbs: breadcrumbs
                     } only %}
                 {% endif %}
@@ -88,6 +88,11 @@
                 {% endif %}
             </div>
         </div>
+        {% if baseline %}
+            <div class="baseline-bar position-absolute w-100 d-flex align-items-center justify-content-center">
+                <span class="baseline text-center text-uppercase">{{ baseline|striptags|raw }}</span>
+            </div>
+        {% endif %}
     </div>
     {% if isIndexPage %}
         {% include 'front/'~websiteTemplate~'/include/sub-navigation.html.twig' with {page: page, website: website} only %}

@@ -48,6 +48,28 @@ body {
         outline: none !important;
     }
 
+    h2 sup {
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 250;
+        line-height: 24px;
+        top: -0.75em;
+    }
+
+    @include mediaQuery(max-md) {
+
+        .layout-block-type-title {
+
+            h2.title {
+                font-size: 22px !important;
+            }
+
+            .sub-title {
+                font-size: 60px !important;
+            }
+        }
+    }
+
     @include mediaQuery(max-lg) {
         h2 {
             br {

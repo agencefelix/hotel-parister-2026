@@ -8,7 +8,7 @@
     Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
     1 ) Modules
-    2 ) Core import
+    2 ) Core
     3 ) Main carousel
 
 ------------------------------------------------------------------------------------------ */
@@ -23,7 +23,7 @@ $enable-title-header: false;
 $enable-breadcrumb: false;
 
 /*-----------------------------------
-   2 ) Core import
+   2 ) Core
 -----------------------------------*/
 
 @import "../vendor";
@@ -98,6 +98,19 @@ $enable-breadcrumb: false;
         }
     }
 
+    @include mediaQuery(max-lg) {
+        .link-block {
+            margin-top: 5rem;
+        }
+    }
+
+    @include mediaQuery(min-lg) {
+        .link-block {
+            position: absolute;
+            bottom: 4rem;
+        }
+    }
+
     .carousel-caption {
         position: absolute;
         inset: 0;
@@ -130,6 +143,7 @@ $enable-breadcrumb: false;
 
     // "Parister" en cursive décorative (≈133px token) — CHEVAUCHE le titre du dessus.
     .introduction {
+
         font-family: $font-script;
         text-transform: none;
         letter-spacing: 0;
@@ -140,9 +154,10 @@ $enable-breadcrumb: false;
             font-size: rem(128px);
             margin-top: rem(-10px) !important;
         }
+
         @include mediaQuery(max-md) {
             font-size: rem(72px);
-            margin-top: rem(-6px) !important;
+            margin-top: rem(-20px) !important;
         }
     }
 
@@ -189,7 +204,7 @@ $enable-breadcrumb: false;
         font-size: rem(38px);
     }
     @include mediaQuery(max-md) {
-        font-size: rem(24px);
+        font-size: rem(32px);
     }
 }
 
@@ -253,7 +268,7 @@ $enable-breadcrumb: false;
     .caption-title {
         text-transform: uppercase;
         letter-spacing: .25em;
-        font-weight: $font-weight-normal;
+        font-weight: 700;
         font-size: rem(15px);
     }
 
@@ -404,6 +419,10 @@ $enable-breadcrumb: false;
     line-height: calc(17 / 14);
 }
 
+#zone-home-rooms-products .products-slider-multi-teaser-container h2 {
+    padding-top: 1rem !important;
+}
+
 #zone-home-rooms .media-block img,
 #zone-home-art .media-block img {
     aspect-ratio: 617 / 744;
@@ -437,6 +456,24 @@ $enable-breadcrumb: false;
 // Bande spa : respiration sous les cards (maquette).
 #zone-home-spa-services {
     padding-bottom: rem(96px);
+}
+
+@include mediaQuery(max-lg) {
+
+    #zone-home-universe {
+
+        .container-fluid-right, .row-container {
+            padding-right: calc(var(--bs-gutter-x) * .25) !important;
+            padding-left: calc(var(--bs-gutter-x) * .25) !important;
+        }
+
+        .row-container .media-col {
+            margin-left: initial;
+            flex: initial;
+            width: 100%;
+            max-width: initial;
+        }
+    }
 }
 
 // Sliders card-cover : styles dans components (_carousel, _news-teaser, _card).

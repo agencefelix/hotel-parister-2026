@@ -139,6 +139,20 @@ class ContentConfigType
     }
 
     /**
+     * Secondary color field.
+     */
+    private function getColorSecondary(FormBuilderInterface $builder, string $field): void
+    {
+        $builder->add('colorSecondary', AppColorType::class, [
+            'label' => !empty($this->options['labels'][$field]) ? $this->options['labels'][$field] : $this->translator->trans('Couleur secondaire', [], 'admin'),
+            'attr' => [
+                'group' => !empty($this->options['fields'][$field]) ? $this->options['fields'][$field] : 'col-md-2',
+                'class' => 'select-icons',
+            ],
+        ]);
+    }
+
+    /**
      * Font italic field.
      */
     private function getItalic(FormBuilderInterface $builder, string $field): void

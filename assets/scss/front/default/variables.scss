@@ -115,7 +115,7 @@ $body-bg: $light !default;
 $body-color: $dark !default;
 $bullet-list-color: $primary !default;
 
-$default-bootstrap-colors: 'primary', 'secondary', 'success', 'info', 'warning', 'danger', 'light', 'dark', 'white', 'navy', 'teal', 'brown', 'beige';
+$default-bootstrap-colors: 'primary', 'secondary', 'success', 'info', 'warning', 'danger', 'light', 'dark', 'white', 'navy', 'teal', 'brown', 'beige', 'green';
 $btn-colors: 'primary', 'secondary';
 $hover-colors: 'primary', 'secondary';
 $theme-colors: (
@@ -123,6 +123,7 @@ $theme-colors: (
     'secondary': $secondary,
     'navy': $secondary, /* alias : classes -navy conservées (zones en base), même valeur que secondary */
     'teal': $info, /* alias : classes -teal conservées (couleurs CMS actives), même valeur que info */
+    'green': $success, /* alias : couleur CMS green (#00561b), même valeur que success */
     'brown': $brown,
     'beige': $light, /* alias : classes -beige conservées, même valeur que light */
     'success': $success,
@@ -278,6 +279,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → texte teal (relevé Figma) */
             'success': $body-color,
+            'green': $body-color,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
@@ -300,6 +302,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → texte teal (relevé Figma) */
             'success': $body-color,
+            'green': $body-color,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
@@ -323,6 +326,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → texte teal (relevé Figma) */
             'success': $body-color,
+            'green': $body-color,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
@@ -345,6 +349,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → texte teal (relevé Figma) */
             'success': $body-color,
+            'green': $body-color,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
@@ -367,6 +372,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → texte teal (relevé Figma) */
             'success': $body-color,
+            'green': $body-color,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
@@ -389,6 +395,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → texte teal (relevé Figma) */
             'success': $body-color,
+            'green': $body-color,
             'info': $white,
             'warning': $body-color,
             'danger': $body-color,
@@ -410,6 +417,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → sous-titre teal (relevé Figma) */
             'success': $white,
+            'green': $white,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
@@ -431,6 +439,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → texte teal (relevé Figma) */
             'success': $body-color,
+            'green': $body-color,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
@@ -451,6 +460,7 @@ $elements: map-merge((
             'primary': $body-color,
             'secondary': $info, /* bande navy → texte teal (relevé Figma) */
             'success': $body-color,
+            'green': $body-color,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
@@ -472,6 +482,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → liens teal (relevé Figma) */
             'success': $primary,
+            'green': $primary,
             'info': $primary,
             'warning': $primary,
             'danger': $primary,
@@ -494,6 +505,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → liens teal (relevé Figma) */
             'success': $primary,
+            'green': $primary,
             'info': $primary,
             'warning': $primary,
             'danger': $primary,
@@ -525,6 +537,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → texte teal (relevé Figma) */
             'success': $body-color,
+            'green': $body-color,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
@@ -546,6 +559,7 @@ $elements: map-merge((
             'primary-darken': $info !important,
             'secondary': $info !important,
             'success': $info !important,
+            'green': $info !important,
             'info': $white !important,
             'warning': $info !important,
             'danger': $info !important,
@@ -564,6 +578,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → texte teal (relevé Figma) */
             'success': $body-color,
+            'green': $body-color,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
@@ -582,6 +597,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → CTA teal (relevé Figma) */
             'success': $primary,
+            'green': $primary,
             'info': $primary,
             'warning': $primary,
             'danger': $primary,
@@ -601,6 +617,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → CTA teal (relevé Figma) */
             'success': $primary,
+            'green': $primary,
             'info': $primary,
             'warning': $primary,
             'danger': $primary,
@@ -620,6 +637,7 @@ $elements: map-merge((
             'primary': $warning,
             'secondary': $warning,
             'success': $warning,
+            'green': $warning,
             'info': $white,
             'warning': $warning,
             'danger': $warning,
@@ -638,6 +656,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $white,
             'success': $primary,
+            'green': $primary,
             'info': $primary,
             'warning': $primary,
             'danger': $primary,
@@ -656,6 +675,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $white,
             'success': $primary,
+            'green': $primary,
             'info': $white,
             'warning': $primary,
             'danger': $white,
@@ -674,6 +694,7 @@ $elements: map-merge((
             'primary': $secondary,
             'secondary': $white,
             'success': $white,
+            'green': $white,
             'info': $secondary,
             'warning': $white,
             'danger': $white,
@@ -692,6 +713,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $white,
             'success': $primary,
+            'green': $primary,
             'info': $white,
             'warning': $primary,
             'danger': $white,
@@ -710,6 +732,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → texte teal (relevé Figma) */
             'success': $body-color,
+            'green': $body-color,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
@@ -728,6 +751,7 @@ $elements: map-merge((
             'primary': $white,
             'secondary': $info, /* bande navy → texte teal (relevé Figma) */
             'success': $body-color,
+            'green': $body-color,
             'info': $white,
             'warning': $body-color,
             'danger': $white,
@@ -746,6 +770,7 @@ $elements: map-merge((
             'primary': $danger !important,
             'secondary': $danger !important,
             'success': $danger !important,
+            'green': $danger !important,
             'info': $danger !important,
             'warning': $danger !important,
             'danger': $white !important,
@@ -764,6 +789,7 @@ $elements: map-merge((
             'primary': $danger,
             'secondary': $danger,
             'success': $danger,
+            'green': $danger,
             'info': $danger,
             'warning': $danger,
             'danger': $white,
@@ -998,6 +1024,16 @@ $buttons: (
         'color-outline': $success,
         'color-outline-hover': $white
     ),
+    'green': (
+        'bg': $success,
+        'color': $white,
+        'bg-hover': $white,
+        'color-hover': $success,
+        'bg-outline': transparent,
+        'bg-outline-hover': $success,
+        'color-outline': $success,
+        'color-outline-hover': $white
+    ),
     'info': (
         'bg': $info,
         'color': $white,
@@ -1057,7 +1093,7 @@ $buttons: (
         'bg-outline': transparent,
         'bg-outline-hover': $dark,
         'color-outline': $dark,
-        'color-outline-hover': $white
+        'color-outline-hover': $dark
     ),
     'black': (
         'bg': $black,
@@ -1084,13 +1120,13 @@ $buttons: (
     ),
     'teal': (
         'bg': $info,
-        'color': $primary,
-        'bg-hover': $primary,
-        'color-hover': $info,
+        'color': $white,
+        'bg-hover': $info,
+        'color-hover': $white,
         'bg-outline': transparent,
-        'bg-outline-hover': $info,
-        'color-outline': $primary,
-        'color-outline-hover': $primary
+        'bg-outline-hover': transparent,
+        'color-outline': $info,
+        'color-outline-hover': $info
     ),
     'beige': (
         'bg': $light,
@@ -1171,6 +1207,7 @@ $alert-colors: map-merge((
     'primary': ('bg': $white, 'color': $primary, 'border': $primary, 'color-icon': $white, 'bg-icon': $primary, 'font-size': $font-size-base),
     'secondary': ('bg': $white, 'color': $secondary, 'border': $secondary, 'color-icon': $white, 'bg-icon': $secondary, 'font-size': $font-size-base),
     'success': ('bg': $white, 'color': $success, 'border': $success, 'color-icon': $white, 'bg-icon': $success, 'font-size': $font-size-base),
+    'green': ('bg': $white, 'color': $success, 'border': $success, 'color-icon': $white, 'bg-icon': $success, 'font-size': $font-size-base),
     'info': ('bg': $white, 'color': $info, 'border': $info, 'color-icon': $white, 'bg-icon': $info, 'font-size': $font-size-base),
     'warning': ('bg': $white, 'color': $warning, 'border': $warning, 'color-icon': $white, 'bg-icon': $warning, 'font-size': $font-size-base),
     'danger': ('bg': $white, 'color': $danger, 'border': $danger, 'color-icon': $white, 'bg-icon': $danger, 'font-size': $font-size-base),

@@ -34,6 +34,7 @@ final class BlockModel extends Model\BaseModel
         public readonly ?string $customTemplate = null,
         public readonly ?string $style = null,
         public readonly ?string $color = null,
+        public readonly ?string $colorSecondary = null,
         public readonly ?string $fontSize = null,
         public readonly ?string $fontWeight = null,
         public readonly ?string $fontWeightSecondary = null,
@@ -69,6 +70,7 @@ final class BlockModel extends Model\BaseModel
         $intl = $getIntl ? Model\IntlModel::fromEntity($block, $coreLocator, false) : null;
         $intl = self::intlForm($slug, $intl);
         $color = self::getContent('color', $block);
+        $colorSecondary = self::getContent('colorSecondary', $block);
         $fontSize = self::getContent('fontSize', $block);
         $fontWeight = self::getContent('fontWeight', $block);
         $fontWeightSecondary = self::getContent('fontWeightSecondary', $block);
@@ -94,6 +96,7 @@ final class BlockModel extends Model\BaseModel
             customTemplate: self::getContent('customTemplate', $block),
             style: self::styleClass($block),
             color: $color ? 'text-'.$color : null,
+            colorSecondary: $colorSecondary ? 'text-'.$colorSecondary : null,
             fontSize: $fontSize ? 'fz-'.$fontSize : null,
             fontWeight: $fontWeight ? 'fw-'.$fontWeight : null,
             fontWeightSecondary: $fontWeightSecondary ? 'fw-'.$fontWeightSecondary : null,

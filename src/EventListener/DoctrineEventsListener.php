@@ -150,7 +150,7 @@ class DoctrineEventsListener
     {
         $entity = $args->getObject();
         $allowed = $this->inAdmin && $this->request instanceof Request;
-        if ($allowed && $this->inAdmin && !$this->disabledCache($entity) || $this->request->isMethod('delete')) {
+        if (($allowed && !$this->disabledCache($entity)) || ($this->request instanceof Request && $this->request->isMethod('delete'))) {
             $this->coreLocator->cacheService()->clearCaches($entity);
             $this->logger($entity, 'postRemove');
         }

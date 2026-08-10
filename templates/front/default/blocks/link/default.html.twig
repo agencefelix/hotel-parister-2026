@@ -35,6 +35,12 @@
 {% set linkIsPhoneSecondary = intl.linkSecondaryIsPhone is defined ? intl.linkSecondaryIsPhone : false %}
 {% set linkAsButtonSecondary = 'btn' in linkStyleSecondary %}
 
+{# Liens doubles outline : filets communs + séparateur vertical (hover directionnel) #}
+{% set duoOutline = link and linkSecondary
+    and 'btn-outline' in linkStyle and 'btn-outline' in linkStyleSecondary
+    and not linkIsEmail and not linkIsPhone
+    and not linkIsEmailSecondary and not linkIsPhoneSecondary %}
+
 {% macro icon(iconCustom, iconCustomSize, iconCustomColor, iconCustomWidth, iconCustomHeight, iconCustomPosition) %}
     {% set class = iconCustomPosition == 'start' ? 'me-3' : '' %}
     {% if 'icon-' in iconCustom %}
@@ -58,7 +64,7 @@
 {% endmacro %}
 
 {% if link or linkSecondary %}
-    <div class="link-block {% if style %} {{ style }}{% endif %}">
+    <div class="link-block{% if duoOutline %} link-duo-outline{% endif %}{% if style %} {{ style }}{% endif %}">
         {% if link %}
         {% if linkIsEmail is defined and linkIsEmail %}
             <div class="{{ style }}">
@@ -105,6 +111,7 @@
                     {{ linkSecondary|phone(website, {only_href: true}) }}
                 </div>
             {% else %}
+                {% if duoOutline %}<span class="link-duo-separator" aria-hidden="true"></span>{% endif %}
                 {{ macro.link(uriInfosSecondary, linkSecondary, linkStyleSecondary, linkLabelSecondary, linkBlankSecondary, linkExternalSecondary, linkAsButtonSecondary, trackClass, samePageSecondary) }}
             {% endif %}
         {% endif %}

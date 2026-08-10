@@ -37,6 +37,8 @@ function safeList() {
         /overflow-initial/, /parallax-window/, /full-screen/, /mobile-first/, /full-size/, /aos/, /lax/, /as-newscast-teaser/, /animation/, /aspect-ratio/, /large-file-container/, /fa-spin/, /shadow-box/, /shadow-left/, /shadow-right/,
         // Nav lateral (overlay ☰ permanent) : classes ajoutées dynamiquement en Twig, à préserver.
         /not-expanded/, /main-submenu/, /submenu/, /socials-list/, /nav-cta/, /nav-toggler/,
+        // Widget D-Edge (classes injectées à l'exécution par le SDK).
+        /fbw-/,
     ];
     return {
         standard: patterns

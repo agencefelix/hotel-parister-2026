@@ -61,6 +61,9 @@ class Block extends BaseConfiguration
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $color = null;
 
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $colorSecondary = null;
+
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $italic = false;
 
@@ -310,6 +313,18 @@ class Block extends BaseConfiguration
     public function setColor(?string $color): static
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getColorSecondary(): ?string
+    {
+        return $this->colorSecondary;
+    }
+
+    public function setColorSecondary(?string $colorSecondary): static
+    {
+        $this->colorSecondary = $colorSecondary;
 
         return $this;
     }

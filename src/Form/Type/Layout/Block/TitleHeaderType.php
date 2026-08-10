@@ -69,7 +69,7 @@ class TitleHeaderType extends AbstractType
         $intls = new WidgetType\IntlsCollectionType($this->coreLocator);
         $intls->add($builder, [
             'website' => $options['website'],
-            'fields' => ['title' => 'col-md-5', 'subTitle' => 'col-md-5', 'body'],
+            'fields' => ['title' => 'col-md-5', 'subTitle' => 'col-md-5', 'introduction'],
             'fields_data' => ['titleForce' => 1],
             'title_force' => true,
         ]);

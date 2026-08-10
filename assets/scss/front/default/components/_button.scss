@@ -45,12 +45,21 @@
     box-sizing: border-box;
     border-width: $btn-border-width !important;
     border-style: solid;
-    font-size: $btn-font-size;
+    font-size: .75rem;
     letter-spacing: .2em; /* CTA charte : 0.2em (relevé Figma) */
     text-transform: uppercase;
 
-    span {
+    @include mediaQuery(min-md) {
         font-size: $btn-font-size;
+    }
+
+    span {
+
+        font-size: .75rem;
+
+        @include mediaQuery(min-md) {
+            font-size: $btn-font-size;
+        }
     }
 
     &:not(.btn-circle) {
@@ -146,3 +155,87 @@
 }
 /* Le style OUTLINE « 2 filets » est défini APRÈS le @each du mixin
    (cf. vendor-desktop.scss / vendor-mobile.scss) pour gagner l'ordre de cascade. */
+
+/* Liens doubles OUTLINE (.link-block avec 2 boutons outline) = une seule paire de filets
+   haut+bas portée par le wrapper (transitions croisées fluides au changement de bouton)
+   + séparateur vertical. Les filets des boutons sont désactivés. Au hover, les filets
+   s'étirent uniquement du côté du bouton survolé (inset 40px → 0). */
+.link-block.link-duo-outline {
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 22px;
+    padding: 24px 0;
+
+    @include mediaQuery(max-lg) {
+        gap: 16px;
+        padding: 20px 0;
+    }
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        left: 40px;
+        right: 40px;
+        height: 1px;
+        background: currentColor;
+        transition: left .35s ease, right .35s ease;
+        pointer-events: none;
+    }
+
+    &::before { top: 0; }
+    &::after { bottom: 0; }
+
+    /* Pas de virgule dans :is() : node-sass (LibSass) mange les listes internes. */
+    &:has(.btn[class*="btn-outline-"]:first-of-type:hover),
+    &:has(.btn[class*="btn-outline-"]:first-of-type:focus-visible) {
+        &::before,
+        &::after { left: 0; }
+    }
+
+    &:has(.btn[class*="btn-outline-"]:last-of-type:hover),
+    &:has(.btn[class*="btn-outline-"]:last-of-type:focus-visible) {
+        &::before,
+        &::after { right: 0; }
+    }
+
+    .btn {
+        min-width: initial !important;
+    }
+
+    .btn[class*="btn-outline-"] {
+        position: static;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        &::before,
+        &::after {
+            content: none;
+        }
+    }
+
+    /* Noir par défaut (boutons de couleurs différentes) ; couleur commune sinon (cf. @each). */
+    .link-duo-separator {
+        width: 1px;
+        height: 1em;
+        background: $black;
+        pointer-events: none;
+    }
+}
+
+/* Deux boutons outline de MÊME couleur : filets + séparateur à la couleur outline du bouton
+   (insensible aux règles de contraste par fond qui ciblent les pseudos des boutons). */
+@each $suffix, $config in $buttons {
+    @if map-has-key($config, 'color-outline') {
+        .link-block.link-duo-outline:has(.btn-outline-#{$suffix}:first-of-type):has(.btn-outline-#{$suffix}:last-of-type) {
+
+            &::before,
+            &::after,
+            .link-duo-separator {
+                background: map-get($config, 'color-outline');
+            }
+        }
+    }
+}

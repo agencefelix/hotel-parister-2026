@@ -21,7 +21,7 @@
             </p>
         {% endif %}
         {% if intl.body %}
-            <div class="body{% if anim.text.class is defined and anim.text.class %} {{ anim.text.class|raw }}{% endif %}{% if fontWeight %} {{ fontWeight }}{% endif %}"
+            <div class="body{% if anim.text.class is defined and anim.text.class %} {{ anim.text.class|raw }}{% endif %}{% if fontWeight %} {{ fontWeight }}{% endif %}{% if colorSecondary is defined and colorSecondary %} {{ colorSecondary }}{% endif %}"
                     {% if anim.text.attr is defined and anim.text.attr %} {{ anim.text.attr|raw }}{% endif %}>
                 {{ intl.body|raw }}
             </div>

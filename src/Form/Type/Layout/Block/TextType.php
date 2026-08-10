@@ -49,6 +49,7 @@ class TextType extends AbstractType
             'fields' => [
                 'fontWeight' => 'col-md-3',
                 'color' => 'col-md-3',
+                'colorSecondary' => 'col-md-3',
                 'fontSize' => 'col-md-3',
                 'fontWeightSecondary' => 'col-md-3',
                 'italic',
@@ -57,6 +58,7 @@ class TextType extends AbstractType
             'labels' => [
                 'fontWeight' => $this->translator->trans('Gras du contenu', [], 'admin'),
                 'color' => $this->translator->trans("Couleur de l'introduction", [], 'admin'),
+                'colorSecondary' => $this->translator->trans('Couleur de la description', [], 'admin'),
                 'fontSize' => $this->translator->trans("Taille de la police de l'introduction", [], 'admin'),
                 'fontWeightSecondary' => $this->translator->trans("Gras de l'introduction", [], 'admin'),
                 'italic' => $this->translator->trans("Introduction en italique", [], 'admin'),

@@ -62,7 +62,7 @@ export default function () {
             new OnSubmit(form);
         }).catch(error => console.error(error.message));
 
-        let icon = form.querySelector('.newsletter-submit').querySelector('svg');
+        let icon = form.querySelector('.newsletter-submit svg');
         let iconSpinner = form.querySelector('.spinner-border');
         let containerId = form.closest('.newsletter-form-container').getAttribute('id');
 
@@ -71,8 +71,12 @@ export default function () {
             import('../../../../vendor/components/remove-errors').then(({default: removeErrors}) => {
                 new removeErrors();
             }).catch(error => console.error(error.message));
-            iconSpinner.classList.remove('d-none');
-            icon.classList.add('d-none');
+            if (iconSpinner) {
+                iconSpinner.classList.remove('d-none');
+            }
+            if (icon) {
+                icon.classList.add('d-none');
+            }
         }
 
         let xHttp = new XMLHttpRequest();

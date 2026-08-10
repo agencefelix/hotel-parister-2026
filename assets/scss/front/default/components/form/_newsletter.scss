@@ -15,8 +15,6 @@
     $placeholder-font-weight: $placeholder-font-weight;
     $placeholder-font-size: $placeholder-font-size;
 
-    
-
     .newsletter-form-container {
 
         .form-control {
@@ -89,12 +87,13 @@
             }
 
             &:hover *, &:active *, &:focus * {
-                color: $white !important;
-                fill: $white !important;
+                color: $primary !important;
+                fill: $primary !important;
             }
         }
     }
 }
+
 /* ===================== NEWSLETTER — bande maquette (claire, or) =====================
    Mise en forme relevée de la maquette (déplacée depuis layout/_socialwall.scss). */
 .newsletter-form-container {
@@ -103,7 +102,10 @@
     overflow: hidden;
     // Filigrane « parister » : il appartient à la bande [socialwall] (cf. layout/_socialwall.scss), pas ici.
 
-    > * { position: relative; z-index: 1; }
+    > * {
+        position: relative;
+        z-index: 1;
+    }
 
     .newsletter-heading {
         margin-bottom: 2.5rem;
@@ -111,6 +113,7 @@
 
     // Kicker : 32px / 700 / 0.4em / lh38 / UPPER / or (token Figma).
     .newsletter-kicker {
+
         color: $primary;
         font-size: rem(32px);
         font-weight: $font-weight-bold;
@@ -153,6 +156,7 @@
     // Forcé : bat le form global `input.form-control {...!important}` (sinon champ boxé gris).
     .newsletter-email .form-control,
     .newsletter-email input {
+
         width: 100%;
         background: transparent !important;
         border: 0 !important;
@@ -165,8 +169,19 @@
         padding: .5rem 0 !important;
         box-shadow: none !important;
 
-        &::placeholder { color: $primary; text-transform: uppercase; font-weight: $font-weight-bold; font-size: rem(14px); line-height: calc(17 / 14); opacity: .4; }
-        &:focus { outline: none; box-shadow: none; }
+        &::placeholder {
+            color: $primary;
+            text-transform: uppercase;
+            font-weight: $font-weight-bold;
+            font-size: rem(14px);
+            line-height: calc(17 / 14);
+            opacity: .4;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
     }
 
     .newsletter-sep {
@@ -190,9 +205,17 @@
         white-space: nowrap;
         transition: opacity .2s ease;
 
-        * { color: $primary !important; }
-        .newsletter-submit-label { line-height: calc(17 / 14); }
-        &:hover, &:focus { opacity: .7; }
+        * {
+            color: $primary !important;
+        }
+
+        .newsletter-submit-label {
+            line-height: calc(17 / 14);
+        }
+
+        &:hover, &:focus {
+            opacity: .7;
+        }
     }
 
     .newsletter-consent {
@@ -231,5 +254,7 @@
     .newsletter-intro, .newsletter-intro p,
     .newsletter-consent .form-check-label, .newsletter-consent .label-wrap,
     .newsletter-submit-label,
-    .newsletter-email .form-control, .newsletter-email input { color: $primary !important; }
+    .newsletter-email .form-control, .newsletter-email input {
+        color: $primary !important;
+    }
 }

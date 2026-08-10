@@ -13,7 +13,7 @@
 
     color: $light;
 
-    strong, span, small, p, i, time,
+    strong, span, small, p, i, time, address,
     .h1, .h2, .h3, .h4, .h5, .h6 {
         color: $light;
     }
@@ -21,6 +21,129 @@
     .text-white,
     a.text-white {
         color: $light !important;
+    }
+
+    /* Grilles footer : 4 colonnes alignées sur desktop, 2 colonnes en dessous.
+       Les deux rangées (menus / marques-note-contact) partagent la même grille
+       pour que les colonnes du bas s'alignent sur celles des menus. */
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: rem(32px);
+        row-gap: rem(40px);
+
+        @include mediaQuery(min-lg) {
+            grid-template-columns: repeat(4, 1fr);
+            row-gap: 0;
+        }
+    }
+
+    // Rangée basse : contenu aligné en bas de cellule (logos/note/contact).
+    .footer-info-grid {
+        align-items: end;
+    }
+
+    .footer-group-title {
+        font-family: inherit;
+        font-size: rem(20px);
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .footer-nav {
+
+        .footer-link {
+
+            font-size: rem(12px);
+            font-weight: 400;
+            letter-spacing: .25em;
+            line-height: calc(14 / 12);
+            color: $light;
+            transition: opacity .2s ease-in-out;
+            display: inline-block;
+
+            &:hover {
+                opacity: .6;
+            }
+        }
+    }
+
+    /* Marques du bas de colonne gauche : partenaire (Paris) + « un hôtel by » (Forstyle) */
+    .footer-brand {
+
+        .footer-brand-label {
+            font-size: rem(10px);
+            font-weight: 700;
+            letter-spacing: .4em;
+            line-height: calc(14 / 10);
+        }
+
+        .footer-brand-logo {
+            width: auto;
+            max-width: 100%;
+        }
+
+        .footer-brand-logo-paris {
+            height: rem(70px);
+        }
+
+        .footer-brand-logo-forstyle {
+            height: rem(77px);
+        }
+    }
+
+    /* Note d'avis (colonne 3 de la rangée basse) */
+    .footer-rating {
+
+        .footer-rating-score {
+            font-size: rem(20px);
+            font-weight: 700;
+            line-height: calc(24 / 20);
+        }
+
+        .footer-rating-label {
+            font-size: rem(12px);
+            font-weight: 600;
+            line-height: calc(14 / 12);
+        }
+
+        .footer-rating-count {
+            font-size: rem(12px);
+            font-weight: 300;
+            line-height: calc(14 / 12);
+        }
+    }
+
+    .footer-contact {
+        font-size: rem(12px);
+        font-weight: 700;
+        letter-spacing: .2em;
+        line-height: calc(20 / 12);
+        margin-bottom: rem(16px);
+
+        a {
+            color: $light;
+            text-decoration: none;
+            transition: opacity .2s ease-in-out;
+        }
+
+        a:hover {
+            opacity: .6;
+        }
+
+        .email-link,
+        .phone-link,
+        .email,
+        .number {
+            min-width: 0;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            font-size: rem(12px);
+        }
+
+        .label {
+            display: none;
+        }
     }
 
     .socials-list {
@@ -37,148 +160,8 @@
         }
     }
 
-    .footer-head {
-        border-bottom: 1px solid rgba($light, .25);
-    }
-
-    @include mediaQuery(min-lg) {
-        .footer-right {
-            border-left: 1px solid rgba($light, .25);
-        }
-    }
-
-    /* Groupes de menus du footer (Hôtel, Utiles, Les passerelles, Actualités) */
-    .footer-group-title {
-        font-family: inherit;
-        font-size: rem(24px);
-        font-weight: 700;
-        letter-spacing: .04em;
-        line-height: 1.2;
-    }
-
-    .footer-nav {
-
-        .footer-link {
-            font-size: rem(14px);
-            font-weight: 400;
-            letter-spacing: .12em;
-            line-height: calc(20 / 14);
-            color: $light;
-            transition: opacity .2s ease-in-out;
-
-            &:hover {
-                opacity: .6;
-            }
-        }
-    }
-
-    .footer-media {
-
-        .img-loader-wrap,
-        .img-loader-wrap picture,
-        .img-loader-wrap picture img {
-            width: 100%;
-        }
-
-        img {
-            object-fit: cover;
-        }
-    }
-
-    .footer-logo {
-        width: auto;
-        height: rem(80px);
-        max-width: 100%;
-    }
-
-    /* Note d'avis */
-    .footer-rating {
-
-        .footer-rating-score {
-            font-size: rem(26px);
-            font-weight: 700;
-            line-height: calc(31 / 26); // token lh31
-        }
-
-        .footer-rating-meta {
-            text-align: left;
-        }
-
-        .footer-rating-label {
-            font-size: rem(14px);
-            font-weight: 600;
-            letter-spacing: 0;
-            line-height: calc(17 / 14); // token lh17
-        }
-
-        .footer-rating-count {
-            font-size: rem(14px);
-            font-weight: 300;
-            letter-spacing: 0;
-            line-height: calc(17 / 14); // token lh17
-        }
-    }
-
-    /* Contact */
-    .footer-contact {
-        font-size: rem(12px);
-        font-weight: 700;
-        letter-spacing: .4em;
-        line-height: calc(20 / 12);
-
-        a {
-            color: $light;
-            text-decoration: none;
-            transition: opacity .2s ease-in-out;
-        }
-
-        a:hover {
-            opacity: .6;
-        }
-
-        .email-link-wrap,
-        .phone-link-wrap {
-            max-width: 100%;
-            flex-wrap: wrap;
-        }
-
-        .email-link,
-        .phone-link,
-        .email {
-            min-width: 0;
-            white-space: normal;
-            overflow-wrap: anywhere;
-        }
-
-        @include mediaQuery(max-md) {
-            letter-spacing: .2em;
-        }
-    }
-
-    /* Partenaires (un bloc label + logo sous chaque colonne de menus) */
-    .footer-partner {
-
-        .footer-partner-label {
-            font-size: rem(12px);
-            font-weight: 700;
-            letter-spacing: .4em;
-            line-height: calc(14 / 12); // token lh14
-        }
-
-        .footer-partner-logo {
-            width: auto;
-            max-width: 100%;
-        }
-
-        .footer-partner-logo-paris {
-            height: rem(66px);
-        }
-    }
-
     /* Barre légale */
     .footer-agency {
-        font-size: rem(12px);
-        font-weight: 700;
         letter-spacing: .1em;
         text-decoration: none;
         opacity: .5;
@@ -194,7 +177,8 @@
         border-top: 1px solid rgba($light, .25);
 
         * {
-            font-size: 12px;
+            font-size: rem(12px);
+            letter-spacing: .1em;
         }
 
         a {
@@ -203,6 +187,20 @@
 
         a:hover {
             opacity: .6;
+        }
+    }
+
+    // Mobile : bande basse empilée et centrée.
+    @include mediaQuery(max-md) {
+
+        .footer-rating,
+        .footer-right {
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+
+        .socials-list {
+            justify-content: center;
         }
     }
 }

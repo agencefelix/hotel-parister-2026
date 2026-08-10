@@ -2,13 +2,12 @@
 
 {% import _self as macro %}
 
-{% set logo = logos.footer is defined and logos.footer ? logos.footer : (logos.logo is defined ? logos.logo : null) %}
 {% set zonePhones = website.infoZones.phones.footer is defined ? website.infoZones.phones.footer : [] %}
 {% set zoneEmails = website.infoZones.emails.footer is defined ? website.infoZones.emails.footer : [] %}
 {% set gdprActive = 'gdpr'|moduleActive(configuration) or (axeptioActive is defined and axeptioActive) %}
 {% set locale = app.request.locale %}
 
-{# Menus footer ADMINISTRABLES, indexés par slug (cf. MenuService keys footer menus de façon instable). #}
+{# Menus footer ADMINISTRABLES, indexés par slug (les clés de MenuService collisionnent sur « footer »). #}
 {% set footerMenus = {} %}
 {% for code, menu in mainMenus %}
     {% if menu.arguments.isFooter is defined and menu.arguments.isFooter %}
@@ -20,14 +19,14 @@
 {% macro footerGroup(group) %}
     {% if group %}
         {% set links = group.tree.main is defined ? group.tree.main : [] %}
-        <div class="footer-group mb-5">
-            <h2 class="footer-group-title text-uppercase mb-3">{{ group.entity.adminName|raw }}</h2>
+        <div class="footer-group">
+            <h2 class="footer-group-title mb-3">{{ group.entity.adminName|raw }}</h2>
             {% if links %}
                 <ul class="reset footer-nav">
                     {% for link in links %}
                         {% if link.title and (link.online is not defined or link.online) %}
                             <li class="mb-2">
-                                <a class="footer-link text-uppercase text-decoration-none" href="{{ link.link ? link.link : 'javascript:void(0)' }}"
+                                <a class="footer-link text-decoration-none" href="{{ link.link ? link.link : 'javascript:void(0)' }}"
                                    {% if link.linkBlank %}target="_blank"{% else %}data-toggle="preloader"{% endif %}{% if link.linkExternal %} rel="noopener noreferrer"{% endif %}>
                                     {{ link.title|unescape|raw }}
                                 </a>
@@ -40,122 +39,84 @@
     {% endif %}
 {% endmacro %}
 
-{# Bloc partenaire (label + logo cliquable externe). #}
-{% macro partner(label, link, image, alt, webpack, websiteTemplate, sizes, extraClass) %}
-    <div class="footer-partner mt-auto pt-4">
-        <span class="d-block text-uppercase footer-partner-label mb-2">{{ label|trans|raw }}</span>
+{# Bloc marque (label court + logo cliquable). #}
+{% macro brand(label, link, image, alt, webpack, websiteTemplate, sizes, extraClass) %}
+    <div class="footer-brand text-center text-lg-start">
+        <span class="d-block footer-brand-label mb-3">{{ label|trans|raw }}</span>
         <a class="d-inline-block" href="{{ link }}" target="_blank" rel="noopener noreferrer" aria-label="{{ alt|trans|striptags }}">
             {{ asset('build/front/'~websiteTemplate~'/images/'~image, webpack)|file({}, {
                 screensSizes: sizes,
                 alt: alt|trans|striptags,
-                class: "footer-partner-logo"~(extraClass ? ' '~extraClass : '')
+                class: "footer-brand-logo"~(extraClass ? ' '~extraClass : '')
             }) }}
         </a>
     </div>
 {% endmacro %}
 
-<footer role="contentinfo" id="footer" class="footer position-relative bg-primary">
+<footer role="contentinfo" id="footer" class="footer position-relative bg-primary text-uppercase">
 
-    {# --------- Barre haute : logo (centre) / note (droite) --------- #}
-    <div id="footer-top" class="footer-head py-3">
-        <div class="container-fluid px-lg-5">
-            <div class="row align-items-center">
-                <div class="col-4"></div>
-                <div class="col-4 text-center">
-                    <a class="d-inline-block" aria-label="{{ companyName|striptags }}" href="{{ app.request.getSchemeAndHttpHost() }}" data-toggle="preloader">
-                        {{ asset('build/front/'~websiteTemplate~'/images/footer-logo-white.png', webpack)|file({}, {
-                            screensSizes: {
-                                mobile: {width: 56, height: 75},
-                                tablet: {width: 75, height: 101},
-                                desktop: {width: 75, height: 101}
-                            },
-                            alt: companyName|striptags,
-                            id: "main-footer-logo",
-                            class: "footer-logo"
-                        }) }}
-                    </a>
-                </div>
-                <div class="col-4">
-                    <div class="footer-rating d-flex align-items-center justify-content-end">
-                        <strong class="footer-rating-score me-2">4,7/5</strong>
-                        <span class="footer-rating-meta text-uppercase lh-1">
-                            <span class="d-block footer-rating-label">{{ "Excellent"|trans|raw }}</span>
-                            <span class="d-block footer-rating-count">{{ "1678 avis"|trans|raw }}</span>
-                        </span>
-                    </div>
-                </div>
+    <div class="container py-5">
+
+        {# --------- Rangée 1 : 4 menus administrables côte à côte (desktop), 2 colonnes en dessous --------- #}
+        <div class="footer-grid footer-menus-grid mb-5 pb-lg-4">
+            {{ macro.footerGroup(footerMenus['footer-hotel'] is defined ? footerMenus['footer-hotel'] : null) }}
+            {{ macro.footerGroup(footerMenus['footer-utiles'] is defined ? footerMenus['footer-utiles'] : null) }}
+            {{ macro.footerGroup(footerMenus['footer-passerelles'] is defined ? footerMenus['footer-passerelles'] : null) }}
+            {{ macro.footerGroup(footerMenus['footer-actualites'] is defined ? footerMenus['footer-actualites'] : null) }}
+        </div>
+
+        {# --------- Rangée 2 : marques / note / contact, ALIGNÉES sur les colonnes de menus --------- #}
+        <div class="footer-grid footer-info-grid">
+
+            {# Colonne 1 : partenaire officiel (Paris je t'aime) #}
+            {{ macro.brand("Partenaire<br>officiel 2026", "https://parisjetaime.com/"~locale, "paris-jetaime.png", "Paris je t'aime", webpack, websiteTemplate, {mobile: {width: 70, height: 70}, tablet: {width: 70, height: 70}, desktop: {width: 70, height: 70}}, "footer-brand-logo-paris") }}
+
+            {# Colonne 2 : un hôtel by (Forstyle) #}
+            {{ macro.brand("Un hôtel by", "https://www.forstyle-hotels.com/"~locale, "forstyle-logo-white.png", "Forstyle Hotels Collection", webpack, websiteTemplate, {mobile: {width: 128, height: 77}, tablet: {width: 128, height: 77}, desktop: {width: 128, height: 77}}, "footer-brand-logo-forstyle") }}
+
+            {# Colonne 3 : note d'avis #}
+            <div class="footer-rating">
+                <span class="footer-rating-score d-block">4,7/5</span>
+                <span class="footer-rating-label d-block">{{ "Excellent"|trans|raw }}</span>
+                <span class="footer-rating-count d-block">{{ "1678 avis"|trans|raw }}</span>
+            </div>
+
+            {# Colonne 4 : contact + réseaux sociaux #}
+            <div class="footer-right text-center">
+                {% for address in website.addresses %}
+                    {% set phones = address.phones is not empty ? address.phones : zonePhones %}
+                    {% set emails = address.emails is not empty ? address.emails : zoneEmails %}
+                    <address class="footer-contact mb-3">
+                        {% if address.address %}{{ address.address|raw }}{% if address.zipCode or address.city %}, {% endif %}{% endif %}{% if address.zipCode %}{{ address.zipCode }} {% endif %}{% if address.city %}{{ address.city }}{% endif %}
+                        {% if phones is not empty %}<span class="d-block">{% for phone in phones %}{{ phone|phone(website, {icon: false, only_href: true}) }}{% endfor %}</span>{% endif %}
+                        {% if emails is not empty %}<span class="d-block">{% for email in emails %}{{ email.email|email(website, {icon: false, only_href: true}) }}{% endfor %}</span>{% endif %}
+                    </address>
+                {% endfor %}
+                {% if website.networks %}
+                    <nav class="socials-list d-inline-flex gap-3 mt-2" aria-label="{{ "Navigation des liens sociaux"|trans|striptags }}">
+                        {% for name, infos in website.networks %}
+                            {% if infos.link and infos.dirname %}
+                                {% set label = name|striptags|capitalize~' - '~'nouvelle fenêtre'|trans|striptags %}
+                                <span role="button" class="{{ name }} p-0 d-inline-flex js-open-window" data-url="{{ infos.link }}" aria-label="{{ label }}">
+                                    <i class="icon-{{ name|lower }}" aria-hidden="true"></i>
+                                    <span class="visually-hidden">{{ label }}</span>
+                                </span>
+                            {% endif %}
+                        {% endfor %}
+                    </nav>
+                {% endif %}
             </div>
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="row gx-5 gy-5">
-
-            {# --------- GAUCHE : 4 menus de groupe administrables (2 colonnes) + partenaires en bas --------- #}
-            <div class="col-12 col-lg-7 py-lg-5 px-lg-5 footer-menus">
-                <div class="row gx-5 h-100">
-                    <div class="col-12 col-sm-6 d-flex flex-column">
-                        {{ macro.footerGroup(footerMenus['footer-hotel'] is defined ? footerMenus['footer-hotel'] : null) }}
-                        {{ macro.footerGroup(footerMenus['footer-passerelles'] is defined ? footerMenus['footer-passerelles'] : null) }}
-                        {{ macro.partner("Partenaire<br> officiel 2026", "https://parisjetaime.com/"~locale, "paris-jetaime.png", "Paris je t'aime", webpack, websiteTemplate, {mobile: {width: 66, height: 66}, tablet: {width: 80, height: 80}, desktop: {width: 80, height: 80}}, "footer-partner-logo-paris") }}
-                    </div>
-                    <div class="col-12 col-sm-6 d-flex flex-column">
-                        {{ macro.footerGroup(footerMenus['footer-utiles'] is defined ? footerMenus['footer-utiles'] : null) }}
-                        {{ macro.footerGroup(footerMenus['footer-actualites'] is defined ? footerMenus['footer-actualites'] : null) }}
-                        {{ macro.partner("Un hôtel<br> by", "https://www.forstyle-hotels.com/"~locale, "forstyle-logo-white.png", "Forstyle Hotels Collection", webpack, websiteTemplate, {mobile: {width: 110, height: 73}, tablet: {width: 130, height: 86}, desktop: {width: 130, height: 86}}, null) }}
-                    </div>
-                </div>
-            </div>
-
-            {# --------- DROITE : photo de façade + contact + réseaux sociaux --------- #}
-            <div class="col-12 col-lg-5 px-0 footer-right d-flex flex-column">
-                <div class="footer-media">
-                    {{ asset('build/front/'~websiteTemplate~'/images/facade-parister.jpg', webpack)|file({}, {
-                        screensSizes: {
-                            mobile: {width: 540, height: 430},
-                            tablet: {width: 720, height: 573},
-                            desktop: {width: 799, height: 400}
-                        },
-                        alt: companyName|striptags,
-                        class: "w-100 object-fit-cover"
-                    }) }}
-                </div>
-                <div class="footer-info py-5 text-center">
-                    {% for address in website.addresses %}
-                        {% set phones = address.phones is not empty ? address.phones : zonePhones %}
-                        {% set emails = address.emails is not empty ? address.emails : zoneEmails %}
-                        <address class="footer-contact text-uppercase mb-3">
-                            {% if address.address %}{{ address.address|raw }}{% if address.zipCode or address.city %}, {% endif %}{% endif %}{% if address.zipCode %}{{ address.zipCode }} {% endif %}{% if address.city %}{{ address.city }}{% endif %}
-                            {% if phones is not empty %}<span class="d-block mt-2">{% for phone in phones %}{{ phone|phone(website, {icon: false, only_href: true}) }}{% endfor %}</span>{% endif %}
-                            {% if emails is not empty %}<span class="d-block">{% for email in emails %}{{ email.email|email(website, {icon: false, only_href: true}) }}{% endfor %}</span>{% endif %}
-                        </address>
-                    {% endfor %}
-                    {% if website.networks %}
-                        <nav class="socials-list d-inline-flex gap-2 justify-content-center mt-3" aria-label="{{ "Navigation des liens sociaux"|trans|striptags }}">
-                            {% for name, infos in website.networks %}
-                                {% if infos.link and infos.dirname %}
-                                    {% set label = name|striptags|capitalize~' - '~'nouvelle fenêtre'|trans|striptags %}
-                                    <span role="button" class="{{ name }} p-0 d-inline-flex js-open-window" data-url="{{ infos.link }}" aria-label="{{ label }}">
-                                        <i class="icon-{{ name|lower }}" aria-hidden="true"></i>
-                                        <span class="visually-hidden">{{ label }}</span>
-                                    </span>
-                                {% endif %}
-                            {% endfor %}
-                        </nav>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {# --------- Barre légale (menu ADMINISTRABLE `footer-legal` ; seul le Copyright est en dur) --------- #}
+    {# --------- Barre légale (menu ADMINISTRABLE `footer-legal` ; Copyright + Gestion des cookies en dur) --------- #}
     {% set legalMenu = footerMenus['footer-legal'] is defined ? footerMenus['footer-legal'] : null %}
     {% set legalLinks = legalMenu and legalMenu.tree.main is defined ? legalMenu.tree.main : [] %}
     <div id="footer-bottom">
-        <div class="container-fluid px-lg-5">
-            <div class="row align-items-center gy-2 py-3">
-                <div class="col-12 col-lg-8 text-center text-lg-start text-uppercase fw-700 d-lg-flex gap-3">
-                    <span class="">{{ "Copyright"|trans|raw }} {{ "now"|date('Y') }}</span>
+        <div class="container">
+            <div class="row align-items-center py-3">
+                <div class="col-12 col-lg-8 text-center text-lg-start fw-700 d-lg-flex gap-3">
+                    <span>{{ "Copyright"|trans|raw }} {{ "now"|date('Y') }}</span>
                     {% for link in legalLinks %}
                         {% if link.title and (link.online is not defined or link.online) %}
                             <a class="text-white" href="{{ link.link ? link.link : 'javascript:void(0)' }}"
@@ -171,7 +132,7 @@
                 </div>
                 {% if not (anonymousTheme is defined and anonymousTheme) %}
                     <div class="col-12 col-lg-4 text-center text-lg-end">
-                        <a class="text-white text-uppercase footer-agency" href="{{ "https://www.felix-creation.fr"|trans }}" target="_blank" rel="noopener noreferrer">{{ "Agence Félix"|trans|raw }}</a>
+                        <a class="text-white footer-agency" href="{{ "https://www.felix-creation.fr"|trans }}" target="_blank" rel="noopener noreferrer">{{ "Agence Félix"|trans|raw }}</a>
                     </div>
                 {% endif %}
             </div>

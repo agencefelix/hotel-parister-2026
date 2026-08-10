@@ -61,8 +61,9 @@ class MenuFixtures
     ];
 
     /**
-     * Slug du menu footer ADMINISTRABLE par groupe de la maquette (node 697:2482).
+     * Slug du menu footer ADMINISTRABLE par groupe de la maquette (node 1013:1897).
      * Un groupe = un menu distinct, géré indépendamment côté admin.
+     * Footer = grille 2×2 : Hôtel / Utiles (haut), Les passerelles / Actualités (bas).
      *
      * @var array<string, string>
      */

@@ -126,6 +126,15 @@ export default function () {
                 pause: pause, /** hover or false */
             });
 
+            /** Counter "current / total" (ex. galerie fiche produit) */
+            const counter = document.querySelector('[data-carousel-counter="' + carousel.id + '"]');
+            const counterCurrent = counter ? counter.querySelector('[data-carousel-current]') : null;
+            if (counterCurrent) {
+                carousel.addEventListener('slid.bs.carousel', function (e) {
+                    counterCurrent.textContent = (e.to + 1).toString();
+                });
+            }
+
             /**
              * Prevent <a> navigation when clicking anywhere inside .carousel-indicators.
              * This carousel is often wrapped inside a parent link, so clicks bubble up and navigate.

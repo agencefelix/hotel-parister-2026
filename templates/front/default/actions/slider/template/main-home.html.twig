@@ -100,7 +100,7 @@
                                     {% if mediaBody %}
                                         <div class="body{% if mediaTitle or mediaIntro %} mt-3{% endif %}">{{ mediaBody|unescape|raw|nl2br }}</div>
                                     {% endif %}
-                                    <div class="mt-4">
+                                    <div class="mt-4 d-flex justify-content-center">
                                         {% include 'front/'~websiteTemplate~'/blocks/link/default.html.twig' with {intl: intlMedia} only %}
                                     </div>
                                 </div>

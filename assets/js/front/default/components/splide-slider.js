@@ -17,8 +17,9 @@ export default function (sliders) {
             slider.querySelectorAll('.splide__slide').forEach(function (slide) {
                 slide.querySelectorAll('picture').forEach(function (picture) {
                     const hoverCard = picture.closest('.hover-card');
-                    if (!hoverCard) {
-                        picture.style.width = picture.clientWidth + 'px';
+                    const width = picture.clientWidth;
+                    if (!hoverCard && width > 0) {
+                        picture.style.width = width + 'px';
                     }
                 });
             });
@@ -230,6 +231,13 @@ export default function (sliders) {
                                 slide.remove();
                             }
                         });
+                    });
+
+                    /** Images lazysizes : re-scan après mount/move (le translate Splide échappe à la détection lazysizes). */
+                    splide.on('mounted moved', function () {
+                        import(/* webpackPreload: true */ 'lazysizes').then(({default: lazySizes}) => {
+                            lazySizes.loader.checkElems();
+                        }).catch(() => {});
                     });
 
                     splide.on('ready', function () {

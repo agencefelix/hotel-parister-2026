@@ -34,90 +34,163 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
    Product view
 -----------------------------------*/
 
-// 1) Hero plein écran
-.product-hero {
-    position: relative;
+// 1) Entête : bloc title-header de base (fiche produit). Le titre porte un <span>
+// (2ᵉ partie) rendu en script, sous le kicker (1re partie), cf. commande d'enrichissement.
 
-    .product-hero-media img {
-        width: 100%;
-        height: 100dvh;
-        object-fit: cover;
-        display: block;
+// La photo produit est portrait ; l'entête est une large bande. Ancrage descendu
+// (scopé fiche produit) pour révéler le lit plutôt que le mur/plafond (défaut 50%).
+.title-header-block.product-header .media-content img {
+    object-position: 50% 65%;
+}
+
+.title-header-block.product-header .title span {
+    display: block;
+    font-family: $font-script;
+    font-weight: $font-weight-normal;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: .76;
+    color: $light; // script clair sur l'image (le span hérite sinon du dark global)
+    @include rfs(133px);
+
+    @include mediaQuery(min-md) {
+        margin-top: rem(-16px);
     }
-
-    &::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba($black, .3);
-        pointer-events: none;
-    }
-
-    .product-hero-caption {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-        color: $white;
-        padding: 0 rem(20px);
-    }
-
-    .product-hero-title {
-        font-weight: $font-weight-bold;
-        letter-spacing: .25em;
-        font-size: rem(40px);
-        line-height: 1;
-    }
-
-    .product-hero-subtitle {
-        font-family: $font-script;
-        font-weight: $font-weight-normal;
-        font-size: rem(72px);
-        line-height: 1;
+    @include mediaQuery(max-md) {
         margin-top: rem(-8px);
-    }
-
-    .product-hero-tagline {
-        left: 0;
-        bottom: rem(48px);
-        z-index: 2;
-        color: $white;
-        letter-spacing: .25em;
-        font-size: rem(13px);
     }
 }
 
 // 2) Détails : galerie + infos
 .product-detail {
 
-    // Galerie : flèches latérales carrées translucides (Parister)
-    .product-gallery-col {
-        .splide__track .btn-vertical {
-            top: 50% !important;
-            width: rem(48px) !important;
-            height: rem(48px) !important;
-            background-color: rgba($white, .7) !important;
-            border: 0 !important;
-            border-radius: rem(4px) !important;
-            &.btn-prev { left: rem(12px) !important; }
-            &.btn-next { right: rem(12px) !important; }
-            i { color: $dark !important; }
+    border-bottom: 1px solid $dark;
+
+    // Grille maquette : galerie 690 / gap 80 / infos 590 (base 1360).
+    // Sous lg, les colonnes s'empilent (comportement col-lg-*).
+    @include mediaQuery(min-lg) {
+
+        //.product-gallery-col {
+        //    flex: 0 0 auto;
+        //    width: 50.735%; // 690 / 1360
+        //}
+
+        // Colonne infos séparée par un filet vertical, décalée du gap maquette.
+        .product-info-col {
+            //flex: 0 0 auto;
+            //width: 43.382%; // 590 / 1360
+            //margin-left: 5.882%; // gap 80 / 1360
+            padding-left: rem(40px);
+            border-left: 1px solid $dark;
         }
-        img { width: 100%; object-fit: cover; }
     }
 
+    // Galerie : carousel Bootstrap (fade) + flèches latérales carrées translucides (Parister)
+    .product-gallery-col {
+
+        .carousel {
+            position: relative;
+        }
+
+        .carousel-item {
+
+            // Neutralise le z-index: 10 global du loader (sinon l'image masque voile + flèches).
+            .img-loader-wrap {
+                position: relative;
+                z-index: 1;
+            }
+
+            img {
+                width: 100%;
+                aspect-ratio: 690 / 648; // token maquette (screenSizes desktop 690×648)
+                object-fit: cover;
+            }
+
+            // Voile maquette #000 / 0.2, comme les entêtes .carousel-home-hero.
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: 2;
+                background: rgba($black, .2);
+                pointer-events: none;
+            }
+        }
+
+        // Flèches latérales : carré arrondi 80×80 translucide + ombre douce, débordant à mi-bord (token maquette).
+        .product-gallery-arrow {
+            top: 50%;
+            bottom: auto;
+            transform: translateY(-50%);
+            z-index: 3;
+            width: rem(80px);
+            height: rem(80px);
+            background-color: rgba($white, .9);
+            border: 0;
+            border-radius: rem(12px);
+            box-shadow: 0 rem(10px) rem(30px) rgba($black, .12);
+            opacity: 1;
+
+            &.carousel-control-prev {
+                left: rem(-40px);
+            }
+
+            &.carousel-control-next {
+                right: rem(-40px);
+            }
+
+            i {
+                color: $secondary;
+                font-size: rem(18px);
+            }
+
+            // chevron bleu marine (token maquette)
+        }
+    }
+
+    .row.border-bottom {
+        border-bottom: 1px solid $dark;
+    }
+
+    .btn-booking-wrap {
+
+        .btn {
+            padding: 1.5rem 2rem 1.4rem 2rem !important;
+        }
+
+        @include mediaQuery(min-lg) {
+            bottom: -1px;
+        }
+    }
+
+    // Compteur galerie « 1 / 4 » (token maquette : 14px / 700 / .2em / UPPER / #141414).
+    .product-gallery-counter {
+        font-weight: $font-weight-bold;
+        letter-spacing: .2em;
+        font-size: rem(14px);
+        text-transform: uppercase;
+        color: $dark;
+    }
+
+    // Titre infos : kicker (1er mot, dark) + span script « supérieure » (or), cf. <span> dans intl.title.
     .product-info-title {
         font-weight: $font-weight-bold;
         letter-spacing: .2em;
         font-size: rem(24px);
         line-height: 1;
         color: $dark;
-    }
 
-    .product-info-subtitle {
-        font-family: $font-script;
-        font-size: rem(40px);
-        line-height: 1;
-        color: $primary;
+        span {
+            display: block;
+            font-family: $font-script;
+            font-weight: $font-weight-normal;
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: rem(40px);
+            line-height: 1;
+            color: $primary;
+            margin-top: rem(-6px);
+        }
     }
 
     .product-info-surface {
@@ -125,6 +198,20 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
         letter-spacing: .15em;
         font-size: rem(14px);
         text-transform: uppercase;
+    }
+
+    // Filet séparateur (entre l'intro et les accordéons) - #141414 comme la maquette.
+    // Un SEUL filet ici ; pas de filet entre les items d'accordéon (cf. maquette).
+    .product-info-divider {
+        border: 0;
+        border-top: 1px solid $dark;
+        opacity: 1;
+        margin: rem(24px) 0;
+
+        // Bord-à-bord : s'étend jusqu'au filet vertical (annule le padding gauche colonne).
+        @include mediaQuery(min-lg) {
+            margin-left: rem(-40px);
+        }
     }
 
     .product-info-intro {
@@ -137,21 +224,45 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
         .accordion-item {
             background: transparent;
             border: 0;
-            border-top: 1px solid rgba($primary, .3);
         }
-        .accordion-item:last-child { border-bottom: 1px solid rgba($primary, .3); }
 
         .accordion-button {
+
+            display: flex;
+            align-items: center;
             background: transparent;
             box-shadow: none;
-            color: $primary;
             font-weight: $font-weight-bold;
             letter-spacing: .15em;
             font-size: rem(14px);
             padding: rem(18px) 0;
+            color: $primary !important;
 
-            &:not(.collapsed) { color: $primary; }
-            &:focus { box-shadow: none; }
+            span {
+                color: $primary !important;
+            }
+
+            &:focus {
+                box-shadow: none;
+            }
+
+            // Flèche ↑/↓ (or) au lieu du chevron Bootstrap.
+            &::after {
+                display: none;
+            }
+
+            // Flèche bas SVG (node 516-2270) : trait doré épais, tourne vers le haut à l'ouverture.
+            .accordion-icon {
+                flex: 0 0 auto;
+                width: rem(20px);
+                height: rem(20px);
+                color: $primary;
+                transition: transform .2s ease;
+            }
+
+            &:not(.collapsed) .accordion-icon {
+                transform: rotate(180deg);
+            }
         }
 
         .product-feature-list {
@@ -178,49 +289,35 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
             }
         }
     }
+
+    // CTA « Réserver cette chambre » : bouton plus haut (aération verticale).
+    .product-cta .btn {
+        padding-top: rem(16px);
+        padding-bottom: rem(16px);
+    }
 }
 
-// 3) Les autres chambres
+// 3) Les autres chambres — titre + script dorés, superposés/serrés (token Figma #B48608 = $primary).
 .product-other-rooms {
 
+    // Titre : Museo Sans 700 / 32px / .4em / UPPER / or (relevé Figma node 516-2332).
     .other-rooms-title {
         font-weight: $font-weight-bold;
-        letter-spacing: .25em;
-        font-size: rem(24px);
-        color: $dark;
+        letter-spacing: .4em;
+        font-size: rem(32px);
+        line-height: calc(38.4 / 32);
+        color: $primary;
     }
 
+    // Script « parister » : August 96px / or, remonté pour que le « t » chevauche le titre.
+    // Marge en em (relative à la taille du script) pour un chevauchement proportionnel en rfs.
     .other-rooms-script {
         font-family: $font-script;
-        font-size: rem(56px);
         line-height: 1;
         color: $primary;
-        margin-top: rem(-10px);
+        margin-top: -0.69em; // ≈ -66px à 96px : le « t » chevauche légèrement le titre
+        @include rfs(96px);
     }
-
-    // Flèches latérales carrées (cf. autres bandes)
-    .splide__track .btn-vertical {
-        top: 50% !important;
-        width: rem(48px) !important;
-        height: rem(48px) !important;
-        background-color: rgba($white, .7) !important;
-        border: 0 !important;
-        border-radius: rem(4px) !important;
-        &.btn-prev { left: rem(12px) !important; }
-        &.btn-next { right: rem(12px) !important; }
-        i { color: $dark !important; }
-    }
-}
-
-// Other-rooms : largeur de repli pré-init Splide (cards image-overlay sans texte en flux → sinon écrasées à 0).
-.slider-container-product-other-rooms {
-    .splide:not(.is-initialized) .splide__slide {
-        flex: 0 0 auto;
-        width: 100%;
-        @include mediaQuery(min-md) { width: 50%; }
-        @include mediaQuery(min-lg) { width: 33.333%; }
-    }
-    .splide__slide { padding: 0 rem(12px); }
 }
 
 // Parister : boutons CARRÉS (maquette sans border-radius).
@@ -230,27 +327,15 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
     border-radius: 0 !important;
 }
 
-// --- Correctifs product-view (tailles d'images maîtrisées, sans dépendre du poids de la vignette) ---
-.product-hero .product-hero-media,
-.product-hero .product-hero-media picture,
-.product-hero .product-hero-media .img-loader-wrap { width: 100%; display: block; }
-.product-hero .product-hero-media img {
-    aspect-ratio: 16 / 7;     // hero large (maquette), pas 100dvh d'une source fine
-    height: auto;
-    max-height: 100dvh;
-    width: 100% !important;
-    object-fit: cover;
-}
-
+// --- Correctifs product-view (tailles d'images maîtrisées) ---
 .product-detail {
-    // Galerie : portrait maîtrisé (la vignette peut être grande, on borne l'affichage).
-    .product-gallery-col .splide__slide img,
-    .product-gallery-col img {
-        aspect-ratio: 3 / 4;
+    // Galerie : borne l'affichage (la vignette source peut être grande) ; ratio 690/648 défini plus haut.
+    .product-gallery-col .carousel-item img {
         max-height: 80vh;
-        width: 100%;
-        object-fit: cover;
     }
+
     // S'assurer que les colonnes restent côte à côte (l'image ne doit pas forcer la largeur).
-    .product-gallery-col, .product-info-col { min-width: 0; }
+    .product-gallery-col, .product-info-col {
+        min-width: 0;
+    }
 }

@@ -111,7 +111,7 @@
                                     slider: slider,
                                     websiteTemplate: websiteTemplate,
                                     thumbConfiguration: thumbConfiguration,
-                                    fileSizes: fileSizes,
+                                    fileSizes: fileSizes is defined ? fileSizes : null,
                                     colSize: colSize is defined ? colSize : null,
                                     class: slider.itemsPerSlide > 1 ? 'me-4 me-md-5' : null
                                 } only %}

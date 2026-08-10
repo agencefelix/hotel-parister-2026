@@ -31,133 +31,141 @@
     {% endfor %}
 {% endif %}
 {% set heroMedia = entity.mainMediaInHeader and entity.headerMedia ? entity.headerMedia : (entity.medias is not empty ? entity.medias|first : null) %}
-{% set heroTagline = entity.intl.headerSubTitle is defined and entity.intl.headerSubTitle ? entity.intl.headerSubTitle : (entity.intl.introduction is defined ? entity.intl.introduction|striptags : null) %}
 
-{# ---------- 1) HERO plein écran : image + titre + script + accroche ---------- #}
-<section class="product-hero position-relative">
-    <div class="product-hero-media">
-        {% if heroMedia %}
-            {{ heroMedia|file({}, {
-                disableLink: true,
-                notInBox: true,
-                class: 'w-100',
-                lazyLoad: false,
-                priority: 'high',
-                screensSizes: {
-                    mobile: {width: 768, height: 620},
-                    tablet: {width: 1280, height: 580},
-                    desktop: {width: 1920, height: 840}
-                }
-            }) }}
-        {% endif %}
-    </div>
-    <div class="product-hero-caption position-absolute inset-0 d-flex flex-column align-items-center justify-content-center text-center">
-        {% if entity.intl.title %}
-            <h1 class="product-hero-title text-uppercase">{{ entity.intl.title|raw }}</h1>
-        {% endif %}
-        {% if entity.intl.subTitle %}
-            <span class="product-hero-subtitle d-block">{{ entity.intl.subTitle|raw }}</span>
-        {% endif %}
-    </div>
-    {% if heroTagline %}
-        <span class="product-hero-tagline position-absolute text-center text-uppercase w-100">{{ heroTagline }}</span>
-    {% endif %}
-</section>
+{# ---------- 1) ENTÊTE : bloc title-header de base (titre kicker + script via <span> dans intl.title, baseline encadrée) ---------- #}
+{% if entity.intl.title %}
+    {% include 'front/'~websiteTemplate~'/blocks/title-header/default.html.twig' with {
+        styleClass: 'product-header text-center',
+        block: entity,
+        customMedia: heroMedia,
+        page: page is defined ? page : null,
+        pageTitle: entity.intl.title,
+        isIndex: true,
+        titleForce: 1,
+        baseline: entity.intl.placeholder is defined and entity.intl.placeholder ? entity.intl.placeholder : entity.intl.introduction,
+        template: websiteTemplate,
+        thumbConfiguration: {}
+    } %}
+{% endif %}
 
 {# ---------- 2) DÉTAILS : galerie (gauche) + infos + accordéons + CTA (droite) ---------- #}
-<section id="product-view" class="product-detail py-5">
-    <div class="container">
-        <div class="row align-items-start g-5">
+<section id="product-view" class="product-detail">
+    <div class="container-fluid-right no-overflow">
+        <div class="row align-items-start g-0">
 
-            {# Galerie : slider d'images avec flèches latérales + compteur #}
-            <div class="col-lg-6 product-gallery-col">
+            {# Galerie : carousel Bootstrap (fade) + flèches latérales + compteur « 1 / N » #}
+            <div class="col-lg-5 product-gallery-col pt-5 px-lg-5">
                 {% if entity.medias is not empty %}
-                    {% include 'front/'~websiteTemplate~'/actions/slider/template/splide.html.twig' with {
-                        medias: entity.medias,
-                        thumbConfiguration: thumbConfigurationView,
-                        arrowsSide: 'side',
-                        arrowsColor: 'dark',
-                        arrowsAsBtn: true,
-                        fade: true,
-                        slider: {
-                            slug: 'product-gallery',
-                            effect: 'fade',
-                            thumbnails: false,
-                            pause: true,
-                            control: true,
-                            autoplay: false,
-                            indicators: false,
-                            progress: false,
-                            popup: false,
-                            offsetDesktop: 0,
-                            offsetMiniPC: 0,
-                            offsetTablet: 0,
-                            offsetMobile: 0,
-                            arrowAlignment: 'side-center',
-                            intervalDuration: 4000,
-                            itemsPerSlide: 1,
-                            itemsPerSlideMiniPC: 1,
-                            itemsPerSlideTablet: 1,
-                            itemsPerSlideMobile: 1
-                        }
-                    } %}
+                    {% set galleryId = 'carousel-product-gallery' %}
+                    <div id="{{ galleryId }}"
+                         class="product-gallery-carousel carousel slide carousel-fade mx-4"
+                         data-bs-interval="0"
+                         data-bs-autoplay="0"
+                         data-bs-pause="0"
+                         data-component="carousel-bootstrap">
+                        <div class="carousel-inner">
+                            {% for media in entity.medias %}
+                                {% if media.media.filename is defined and media.media.filename %}
+                                    <div class="carousel-item{% if loop.first %} active{% endif %}">
+                                        {{ media|file({}, {
+                                            disableLink: true,
+                                            notInBox: true,
+                                            class: 'w-100',
+                                            lazyLoad: not loop.first,
+                                            priority: loop.first ? 'high' : 'low',
+                                            screensSizes: {
+                                                mobile: {width: 768, height: 720},
+                                                tablet: {width: 690, height: 648},
+                                                desktop: {width: 690, height: 648}
+                                            }
+                                        }) }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% if entity.medias|length > 1 %}
+                            <button class="carousel-control-prev product-gallery-arrow" type="button" data-bs-target="#{{ galleryId }}" data-bs-slide="prev" aria-label="{{ "Précédent"|trans }}">
+                                <i class="icon-chevron-left"></i>
+                            </button>
+                            <button class="carousel-control-next product-gallery-arrow" type="button" data-bs-target="#{{ galleryId }}" data-bs-slide="next" aria-label="{{ "Suivant"|trans }}">
+                                <i class="icon-chevron-right"></i>
+                            </button>
+                        {% endif %}
+                    </div>
+                    {% if entity.medias|length > 1 %}
+                        <div class="product-gallery-counter text-center mt-3" data-carousel-counter="{{ galleryId }}" aria-hidden="true">
+                            <span data-carousel-current>1</span> / <span data-carousel-total>{{ entity.medias|length }}</span>
+                        </div>
+                    {% endif %}
                 {% endif %}
             </div>
 
             {# Colonne droite : titre + surface + intro + accordéons + bouton réserver #}
-            <div class="col-lg-6 product-info-col">
-                <div class="product-info-head text-center">
-                    {% if entity.intl.title %}
-                        <h2 class="product-info-title text-uppercase mb-0">{{ entity.intl.title|raw }}</h2>
-                    {% endif %}
-                    {% if entity.intl.subTitle %}
-                        <span class="product-info-subtitle d-block">{{ entity.intl.subTitle|raw }}</span>
-                    {% endif %}
-                    {% if surfaceValue %}
-                        <span class="product-info-surface d-block mt-2">{{ surfaceValue|striptags }}</span>
-                    {% endif %}
+            <div class="col-lg-7 product-info-col pt-5 px-0">
+
+                <div class="row border-bottom m-0 pb-5">
+                    <div class="col-lg-8 px-3 px-lg-5">
+                        <div class="product-info-head">
+                            {% if entity.intl.title %}
+                                <strong class="product-info-title text-center text-uppercase d-block mb-0">{{ entity.intl.title|raw }}</strong>
+                            {% endif %}
+                            {% if surfaceValue %}
+                                <span class="product-info-surface text-center d-block mt-0 pb-0">{{ surfaceValue|striptags }}</span>
+                            {% endif %}
+                            {% if entity.intl.introduction %}
+                                <p class="product-info-intro mt-5 mb-0">{{ entity.intl.introduction|raw|nl2br }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
 
-                {% if entity.intl.introduction %}
-                    <p class="product-info-intro mt-4">{{ entity.intl.introduction|raw|nl2br }}</p>
-                {% endif %}
-
                 {# Accordéons : un par feature (Capacité, Vue, Terrasse, Équipements, Services inclus…). #}
-                {% if featureGroups|length > 0 %}
-                    <div class="accordion product-accordion mt-4" id="product-features">
-                        {% set idx = 0 %}
-                        {% for fname, values in featureGroups %}
-                            {% set idx = idx + 1 %}
-                            {% set collapseId = 'feature-'~idx %}
-                            {% set isFirst = loop.first %}
-                            <div class="accordion-item">
-                                <h3 class="accordion-header">
-                                    <button class="accordion-button text-uppercase{% if not isFirst %} collapsed{% endif %}" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#{{ collapseId }}"
-                                            aria-expanded="{{ isFirst ? 'true' : 'false' }}" aria-controls="{{ collapseId }}">
-                                        {{ fname|raw }}
-                                    </button>
-                                </h3>
-                                <div id="{{ collapseId }}" class="accordion-collapse collapse{% if isFirst %} show{% endif %}" data-bs-parent="#product-features">
-                                    <div class="accordion-body">
-                                        <ul class="reset product-feature-list">
-                                            {% for label in values %}
-                                                <li>{{ label|striptags }}</li>
-                                            {% endfor %}
-                                        </ul>
+                <div class="row m-0">
+                    <div class="col-lg-8 px-3 px-lg-5">
+                        {% if featureGroups|length > 0 %}
+                            <div class="accordion product-accordion mt-4" id="product-features">
+                                {% set idx = 0 %}
+                                {% for fname, values in featureGroups %}
+                                    {% set idx = idx + 1 %}
+                                    {% set collapseId = 'feature-'~idx %}
+                                    {% set isFirst = loop.first %}
+                                    <div class="accordion-item">
+                                        <h3 class="accordion-header">
+                                            <button class="accordion-button text-uppercase{% if not isFirst %} collapsed{% endif %}" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#{{ collapseId }}"
+                                                    aria-expanded="{{ isFirst ? 'true' : 'false' }}" aria-controls="{{ collapseId }}">
+                                                <span class="accordion-label">{{ fname|raw }}</span>
+                                                {# Flèche bas maquette (node 516-2270) : SVG inline, couleur via currentColor, tourne à l'ouverture. #}
+                                                <svg class="accordion-icon ms-auto" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                                    <path d="M12 4L12 20M4 12L12 20L20 12" stroke="currentColor" stroke-width="4"/>
+                                                </svg>
+                                            </button>
+                                        </h3>
+                                        <div id="{{ collapseId }}" class="accordion-collapse collapse{% if isFirst %} show{% endif %}" data-bs-parent="#product-features">
+                                            <div class="accordion-body">
+                                                <ul class="reset product-feature-list">
+                                                    {% for label in values %}
+                                                        <li>{{ label|striptags }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                {% endfor %}
                             </div>
-                        {% endfor %}
+                        {% elseif entity.intl.body %}
+                            <div class="product-info-body mt-4">{{ entity.intl.body|raw }}</div>
+                        {% endif %}
                     </div>
-                {% elseif entity.intl.body %}
-                    <div class="product-info-body mt-4">{{ entity.intl.body|raw }}</div>
-                {% endif %}
-
-                <div class="product-cta mt-5">
-                    <a href="{{ bookingUrl }}" class="btn btn-primary text-uppercase w-100" data-toggle="preloader">
-                        {{ "Réserver cette chambre"|trans }}
-                    </a>
+                </div>
+                <div class="row mx-0 btn-booking-wrap position-relative">
+                    <div class="col-12 px-0">
+                        <div class="product-cta mt-5">
+                            <a href="{{ bookingUrl }}" class="btn btn-primary btn-booking text-uppercase w-100" data-toggle="preloader">
+                                {{ "Réserver cette chambre"|trans }}
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -167,38 +175,52 @@
 {# ---------- 3) LES AUTRES CHAMBRES : slider de cards (card-cover) ---------- #}
 {% set otherRooms = associatedEntities.list is defined ? associatedEntities.list : [] %}
 {% if otherRooms is not empty %}
-    <section id="product-other-rooms" class="product-other-rooms py-5 text-center">
-        <h2 class="other-rooms-title text-uppercase">{{ "Les autres chambres"|trans }}</h2>
+    <section id="product-other-rooms" class="product-other-rooms py-5 mt-5 text-center">
+        <h2 class="other-rooms-title text-uppercase mt-lg-5">{{ "Les autres chambres"|trans }}</h2>
         <span class="other-rooms-script d-block mb-5">{{ "parister"|trans }}</span>
-        <div class="slider-container-product-other-rooms slider-container">
-            <div class="splide-container">
-                <div class="splide"
-                     data-lenght="{{ otherRooms|length }}"
-                     data-items="3" data-items-medium-pc="3" data-items-mini-pc="3"
-                     data-items-tablet="2" data-items-mobile="1"
-                     data-fade="0" data-scroll="1" data-pause="1" data-autoplay="0"
-                     data-arrows="{{ otherRooms|length > 3 ? 1 : 0 }}" data-dots="0"
-                     data-offset="0" data-gap="2rem" data-interval="4000">
-                    <div class="splide__track">
-                        {% if otherRooms|length > 1 %}
-                            <button class="btn-arrow btn-prev cursor btn-vertical btn-circle btn btn-dark" aria-label="{{ "Précédent"|trans }}" tabindex="-1"><i class="icon-chevron-left"></i></button>
-                        {% endif %}
-                        <ul class="splide__list">
-                            {% for post in otherRooms %}
-                                <li class="splide__slide">
-                                    {% include 'front/'~websiteTemplate~'/actions/catalog/teaser/include/card-cover.html.twig' with {
-                                        post: post,
-                                        thumbConfiguration: thumbConfigurationView
-                                    } only %}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        {% if otherRooms|length > 1 %}
-                            <button class="btn-arrow btn-next cursor btn-vertical btn-circle btn btn-dark" aria-label="{{ "Suivant"|trans }}" tabindex="-1"><i class="icon-chevron-right"></i></button>
-                        {% endif %}
-                    </div>
+        {# Slider identique au teaser « chambres » de la home (.products-slider-multi-teaser-container). #}
+        {% import 'front/'~websiteTemplate~'/actions/catalog/teaser/slider-multi.html.twig' as macroTeaser %}
+        {% set teaserItemsPerSlide = 2 %}
+        {% set autoplay = 0 %}
+        <div class="container-fluid-right">
+        <div class="products-slider-multi-teaser-container position-relative">
+            <div id="catalog-teaser-other-rooms" class="catalog-teaser splide mt-5 length-{{ otherRooms|length }}"
+                 data-items="{{ teaserItemsPerSlide }}"
+                 data-lenght="{{ otherRooms|length }}"
+                 data-items-medium-pc="{{ teaserItemsPerSlide }}"
+                 data-items-mini-pc="{{ teaserItemsPerSlide }}"
+                 data-items-tablet="{{ teaserItemsPerSlide }}"
+                 data-items-mobile="{{ teaserItemsPerSlide - 1 }}"
+                 data-fade="loop"
+                 data-scroll="1"
+                 data-pause="1"
+                 data-autoplay="{{ autoplay }}"
+                 data-arrows="1"
+                 data-dots="0"
+                 data-offset="250"
+                 data-offset-medium-pc="50"
+                 data-offset-mini-pc="50"
+                 data-offset-tablet="50"
+                 data-offset-mobile="50"
+                 data-counter="0"
+                 data-interval="2500">
+                <div class="splide__track">
+                    {% set arrowsClass = otherRooms|length >= teaserItemsPerSlide ? ' d-lg-none' : '' %}
+                    {{ macroTeaser.arrows(website(), autoplay, 'end', 'primary'~arrowsClass, true, 'top') }}
+                    <ul class="splide__list{% if otherRooms|length < teaserItemsPerSlide %} d-lg-flex justify-content-lg-center{% endif %}">
+                        {% for post in otherRooms %}
+                            <li class="splide__slide{% if otherRooms|length == 1 %} ms-3{% endif %}">
+                                {% include 'front/'~websiteTemplate~'/actions/catalog/teaser/include/card-cover.html.twig' with {
+                                    post: post,
+                                    thumbConfiguration: {},
+                                    class: teaserItemsPerSlide > 1 ? 'me-4 me-md-5' : null
+                                } only %}
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 {% endif %}

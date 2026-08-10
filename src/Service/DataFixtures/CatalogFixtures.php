@@ -23,6 +23,12 @@ use Symfony\Component\Finder\Finder;
  *
  * Catalog Fixtures management
  *
+ * IMPORTANT (fiche produit chambres-suites) : ces fixtures génèrent des titres SANS
+ * <span> et une seule image par chambre. La vue produit dédiée attend un titre à span
+ * (kicker + script) et une galerie de 4 médias. Après tout `doctrine:fixtures:load`,
+ * relancer la commande idempotente `php bin/console app:catalog:enrich-products`
+ * (cf. App\Command\Catalog\ProductEnrichCommand) pour restaurer cet enrichissement.
+ *
  * @author Sébastien FOURNIER <fournier.sebastien@outlook.com>
  */
 #[Autoconfigure(tags: [
@@ -37,14 +43,11 @@ class CatalogFixtures
      */
     private const array FEATURES = [
         'Superficie' => ['17 m²', '20 m²', '22 m²', '28 m²', '30 m²', '40 m²', '52 m²'],
-        'Capacité' => ['1 à 2 personnes', '2 à 3 personnes', '3 à 4 personnes'],
-        'Vue' => ['Sur cour', 'Sur rue calme', 'Sur les toits de Paris'],
-        'Terrasse' => ['Avec terrasse privative', 'Sans terrasse'],
-        'Équipements' => ['Wi-Fi gratuit', 'Climatisation', 'Minibar', 'Coffre-fort', 'TV écran plat', 'Machine à café', 'Peignoirs & chaussons', 'Sèche-cheveux'],
-        'Services inclus' => ['Accès hammam', 'Accès salle de sport', 'Accès piscine', 'Petit-déjeuner', 'Room service 24h/24'],
+        'Confort' => ['Isolation phonique', 'Climatisation', 'Minibar', 'Machine Nespresso', 'Coffre-fort avec prise intégrée'],
+        'Literie' => ['Literie king size', 'Linge de lit haut de gamme', "Choix d'oreillers"],
+        'Salle de bain' => ["Douche à l'italienne", 'Peignoirs & chaussons', 'Sèche-cheveux', "Produits d'accueil"],
+        'Technologie' => ['Wi-Fi gratuit', 'TV écran plat', 'Enceinte Marshall (Bluetooth)'],
     ];
-    /** Équipements communs à toutes les chambres. */
-    private const array COMMON_EQUIPMENTS = ['Wi-Fi gratuit', 'Climatisation', 'Minibar', 'Coffre-fort', 'TV écran plat', 'Machine à café', 'Peignoirs & chaussons', 'Sèche-cheveux'];
 
     /** Nom du catalogue selon le CONTEXTE du projet (ici : un hôtel → les chambres). */
     private const string CATALOG_NAME = 'Chambres & Suites';
@@ -59,11 +62,10 @@ class CatalogFixtures
     /** Slugs anglais des features (la convention impose des slugs EN). */
     private const array FEATURE_SLUGS = [
         'Superficie' => 'surface',
-        'Capacité' => 'capacity',
-        'Vue' => 'view',
-        'Terrasse' => 'terrace',
-        'Équipements' => 'equipment',
-        'Services inclus' => 'included-services',
+        'Confort' => 'comfort',
+        'Literie' => 'bedding',
+        'Salle de bain' => 'bathroom',
+        'Technologie' => 'technology',
     ];
 
     /** Chambres & suites réelles du Parister (source : prod hotelparister.com/chambres-suites). Slugs EN. */
@@ -210,13 +212,14 @@ class CatalogFixtures
      */
     private function roomFeatureValues(array $room): array
     {
+        // Superficie propre à la chambre ; les 4 catégories maquette (Confort/Literie/
+        // Salle de bain/Technologie) sont communes à toutes les chambres.
         return [
             'Superficie' => [$room['surface']],
-            'Capacité' => [$room['capacite']],
-            'Vue' => [$room['vue']],
-            'Terrasse' => [$room['terrasse'] ? 'Avec terrasse privative' : 'Sans terrasse'],
-            'Équipements' => self::COMMON_EQUIPMENTS,
-            'Services inclus' => $room['services'],
+            'Confort' => self::FEATURES['Confort'],
+            'Literie' => self::FEATURES['Literie'],
+            'Salle de bain' => self::FEATURES['Salle de bain'],
+            'Technologie' => self::FEATURES['Technologie'],
         ];
     }
 

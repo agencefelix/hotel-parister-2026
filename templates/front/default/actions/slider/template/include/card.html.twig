@@ -3,10 +3,9 @@
 {% set intl = media.intl is defined ? media.intl : null %}
 {% set fullTitle = intl and intl.title is defined ? intl.title|trim : '' %}
 {% set subTitle = intl and intl.subTitle is defined and intl.subTitle ? intl.subTitle|trim : '' %}
-{# Un sous-titre explicite tient lieu de script ; sinon on scinde le titre (1er mot / reste). #}
-{% set parts = not subTitle and fullTitle ? fullTitle|split(' ', 2) : [] %}
-{% set kicker = subTitle ? fullTitle : (parts[0] is defined ? parts[0] : fullTitle) %}
-{% set script = subTitle ? subTitle : (parts[1] is defined ? parts[1] : '') %}
+{# Script = le <span> enregistré dans le titre en DB (stylé via CSS). Un subTitle explicite,
+   s'il existe, tient lieu de script (enrobé d'un <span> pour un rendu identique). #}
+{% set titleHtml = subTitle ? fullTitle ~ '<span>' ~ subTitle ~ '</span>' : fullTitle %}
 {% set targetLink = intl and intl.link is defined ? intl.link : null %}
 {% set label = intl and intl.linkLabel is defined and intl.linkLabel ? intl.linkLabel : 'Découvrir'|trans %}
 {% set tag = targetLink ? 'a' : 'div' %}
@@ -36,10 +35,7 @@
         }) }}
     </div>
     {% if fullTitle %}
-        <span class="card-cover-title">
-            <span class="card-cover-kicker d-block text-uppercase">{{ kicker|raw }}</span>
-            {% if script %}<span class="card-cover-script d-block">{{ subTitle ? script|raw : script|lower|raw }}</span>{% endif %}
-        </span>
+        <span class="card-cover-title d-block text-uppercase">{{ titleHtml|raw }}</span>
     {% endif %}
     {% if intl and ((intl.introduction is defined and intl.introduction) or (intl.body is defined and intl.body)) %}
         <div class="card-cover-text">

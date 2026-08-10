@@ -297,14 +297,24 @@
     }
 
     @include mediaQuery(min-md) {
-        &[data-items="2"] .splide__slide { width: 50%; }
-        &[data-items="3"] .splide__slide { width: 33.333%; }
-        &[data-items="4"] .splide__slide { width: 25%; }
+        &[data-items="2"] .splide__slide {
+            width: 50%;
+        }
+        &[data-items="3"] .splide__slide {
+            width: 33.333%;
+        }
+        &[data-items="4"] .splide__slide {
+            width: 25%;
+        }
     }
 
     @include mediaQuery(max-md) {
-        &[data-items-mobile="2"] .splide__slide { width: 50%; }
-        &[data-items-mobile="3"] .splide__slide { width: 33.333%; }
+        &[data-items-mobile="2"] .splide__slide {
+            width: 50%;
+        }
+        &[data-items-mobile="3"] .splide__slide {
+            width: 33.333%;
+        }
     }
 }
 
@@ -363,6 +373,17 @@
                 transform: scale(1.03);
             }
         }
+    }
+}
+
+@include mediaQuery(max-lg) {
+
+    .slider-container .splide {
+        padding-left: .25rem;
+    }
+
+    .products-slider-multi-teaser-container {
+        padding-left: .25rem;
     }
 }
 
@@ -590,7 +611,7 @@
             top: 0;
             margin: 0 !important;
             pointer-events: auto;
-            display: flex !important; // annule le d-lg-none par défaut sur desktop
+            display: none !important; // annule le d-lg-none par défaut sur desktop
             // !important requis : .btn.btn-circle (_button.scss) force 45px en !important.
             width: rem(48px) !important;
             height: rem(48px) !important;
@@ -603,6 +624,7 @@
                 width: rem(80px) !important;
                 height: rem(80px) !important;
                 flex: 0 0 rem(80px) !important;
+                display: flex !important; // annule le d-lg-none par défaut sur desktop
             }
 
             i {

@@ -303,15 +303,15 @@ class LayoutRuntime implements RuntimeExtensionInterface
 
         $class .= $this->getValue($col, 'verticalAlign') ? ' d-flex' : '';
 
-        if (str_contains($class, '-flex')) {
-            $class .= ' row';
-            if (!str_contains($class, 'ms-')) {
-                $class .= ' ms-0';
-            }
-            if (!str_contains($class, 'me-')) {
-                $class .= ' me-0';
-            }
-        }
+//        if (str_contains($class, '-flex')) {
+//            $class .= ' row';
+//            if (!str_contains($class, 'ms-')) {
+//                $class .= ' ms-0';
+//            }
+//            if (!str_contains($class, 'me-')) {
+//                $class .= ' me-0';
+//            }
+//        }
 
         return preg_replace('/\s+/', ' ', trim($class));
     }

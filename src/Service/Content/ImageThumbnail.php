@@ -390,6 +390,7 @@ class ImageThumbnail implements ImageThumbnailInterface
                     $height = (int) ceil(($newThumb->getHeight() * $originalWidth) / $newThumb->getWidth());
                     $newThumb->setHeight($height);
                     $newThumb->setWidth($originalWidth);
+                    $width = $originalWidth; // sync la largeur clampée, sinon cropInfos re-réduit la hauteur
                 }
                 $thumbConfiguration = $newThumb;
             }

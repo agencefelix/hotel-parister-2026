@@ -101,7 +101,7 @@
             </div>
 
             {# Colonne droite : titre + surface + intro + accordéons + bouton réserver #}
-            <div class="col-lg-7 product-info-col pt-5 px-0">
+            <div class="col-lg-7 product-info-col pt-4 pt-lg-5 px-0">
 
                 <div class="row border-bottom m-0 pb-5">
                     <div class="col-lg-8 px-3 px-lg-5">
@@ -142,8 +142,8 @@
                                             </button>
                                         </h3>
                                         <div id="{{ collapseId }}" class="accordion-collapse collapse{% if isFirst %} show{% endif %}" data-bs-parent="#product-features">
-                                            <div class="accordion-body">
-                                                <ul class="reset product-feature-list">
+                                            <div class="accordion-body px-0 px-md-4 pt-0 pt-md-4">
+                                                <ul class="ms-0 product-feature-list">
                                                     {% for label in values %}
                                                         <li>{{ label|striptags }}</li>
                                                     {% endfor %}
@@ -175,7 +175,7 @@
 {# ---------- 3) LES AUTRES CHAMBRES : slider de cards (card-cover) ---------- #}
 {% set otherRooms = associatedEntities.list is defined ? associatedEntities.list : [] %}
 {% if otherRooms is not empty %}
-    <section id="product-other-rooms" class="product-other-rooms py-5 mt-5 text-center">
+    <section id="product-other-rooms" class="product-other-rooms py-5 mt-lg-5 text-center">
         <h2 class="other-rooms-title text-uppercase mt-lg-5">{{ "Les autres chambres"|trans }}</h2>
         <span class="other-rooms-script d-block mb-5">{{ "parister"|trans }}</span>
         {# Slider identique au teaser « chambres » de la home (.products-slider-multi-teaser-container). #}

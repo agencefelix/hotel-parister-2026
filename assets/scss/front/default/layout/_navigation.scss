@@ -986,4 +986,8 @@
         padding: rem(32px) 0 rem(40px);
         text-align: center;
     }
+
+    #main-navigation.as-scroll {
+        box-shadow: 0 8px 8px -6px transparentize($black, .8);
+    }
 }

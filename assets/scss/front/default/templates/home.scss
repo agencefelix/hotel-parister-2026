@@ -343,13 +343,8 @@ $enable-breadcrumb: false;
             position: absolute;
             top: 0;
             bottom: 0;
-            height: 100%;
             width: rem(25px);
             background-image: repeating-linear-gradient(to right, transparentize($white, .25) 0, transparentize($white, .25) 1px, transparent 1px, transparent 6px);
-
-            @include mediaQuery(max-md) {
-                display: none;
-            }
         }
 
         &::before {
@@ -358,6 +353,26 @@ $enable-breadcrumb: false;
 
         &::after {
             right: rem(40px);
+        }
+
+        @include mediaQuery(max-md) {
+
+            &::before {
+                left: rem(16px);
+            }
+
+            &::after {
+                right: rem(16px);
+            }
+        }
+
+        // Réserve les gouttières des tirets : le texte ne passe jamais dessous.
+        .message {
+            margin-inline: rem(80px);
+
+            @include mediaQuery(max-md) {
+                margin-inline: rem(52px);
+            }
         }
 
         .inner {
@@ -423,27 +438,27 @@ $enable-breadcrumb: false;
     padding-top: 1rem !important;
 }
 
-#zone-home-rooms .media-block img,
-#zone-home-art .media-block img {
-    aspect-ratio: 617 / 744;
-}
+//#zone-home-rooms .media-block img,
+//#zone-home-art .media-block img {
+//    aspect-ratio: 617 / 744;
+//}
+//
+//#zone-home-spa .media-block img {
+//    aspect-ratio: 552 / 641;
+//}
 
-#zone-home-spa .media-block img {
-    aspect-ratio: 552 / 641;
-}
-
-// Grille restaurant 2×2 : plat (haut-droite), cocktail (bas-gauche), dessert (bas-droite).
-#zone-home-restaurant .layout-col:nth-child(2) .media-block img {
-    aspect-ratio: 617 / 744;
-}
-
-#zone-home-restaurant .layout-col:nth-child(3) .media-block img {
-    aspect-ratio: 510 / 737;
-}
-
-#zone-home-restaurant .layout-col:nth-child(4) .media-block img {
-    aspect-ratio: 510 / 436;
-}
+//// Grille restaurant 2×2 : plat (haut-droite), cocktail (bas-gauche), dessert (bas-droite).
+//#zone-home-restaurant .layout-col:nth-child(2) .media-block img {
+//    aspect-ratio: 617 / 744;
+//}
+//
+//#zone-home-restaurant .layout-col:nth-child(3) .media-block img {
+//    aspect-ratio: 510 / 737;
+//}
+//
+//#zone-home-restaurant .layout-col:nth-child(4) .media-block img {
+//    aspect-ratio: 510 / 436;
+//}
 
 // Événements (teaser) : titre OR, 24px / ls0 / lh24 (token maquette, vs échelle globale 32px/.4em).
 #zone-home-events .layout-block-type-title .title {

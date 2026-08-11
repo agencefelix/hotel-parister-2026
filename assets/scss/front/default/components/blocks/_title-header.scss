@@ -118,9 +118,10 @@
 
             left: 0;
             bottom: 0;
-            height: 69px;
+            min-height: 69px; // grandit si le texte passe sur plusieurs lignes (mobile)
             z-index: 100;
             border-top: 1px solid $light;
+            padding-block: rem(12px); // aération verticale : le texte ne colle plus aux bords
 
             &::before,
             &::after {
@@ -140,13 +141,30 @@
                 right: 40px;
             }
 
+            @include mediaQuery(max-md) {
+
+                &::before {
+                    left: rem(16px);
+                }
+
+                &::after {
+                    right: rem(16px);
+                }
+            }
+
             .baseline {
                 color: $light;
                 font-weight: $font-weight-bold;
                 font-size: rem(14px);
                 letter-spacing: .4em;
                 line-height: 1.2;
-                padding: 0 4rem;
+                padding-inline: rem(80px); // dégage la zone des traits, jamais de texte dessous
+
+                @include mediaQuery(max-md) {
+                    font-size: rem(12px);
+                    letter-spacing: .25em;
+                    padding-inline: rem(48px);
+                }
             }
         }
     }

@@ -119,24 +119,47 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
 
         // Flèches latérales : carré arrondi 80×80 translucide + ombre douce, débordant à mi-bord (token maquette).
         .product-gallery-arrow {
+
             top: 50%;
             bottom: auto;
             transform: translateY(-50%);
             z-index: 3;
-            width: rem(80px);
-            height: rem(80px);
             background-color: rgba($white, .9);
             border: 0;
             border-radius: rem(12px);
             box-shadow: 0 rem(10px) rem(30px) rgba($black, .12);
             opacity: 1;
 
+            @include mediaQuery(max-md) {
+                width: rem(60px);
+                height: rem(60px);
+            }
+
+            @include mediaQuery(min-md) {
+                width: rem(80px);
+                height: rem(80px);
+            }
+
             &.carousel-control-prev {
-                left: rem(-40px);
+
+                @include mediaQuery(max-md) {
+                    left: rem(-30px);
+                }
+
+                @include mediaQuery(min-md) {
+                    left: rem(-40px);
+                }
             }
 
             &.carousel-control-next {
-                right: rem(-40px);
+
+                @include mediaQuery(max-md) {
+                    right: rem(-30px);
+                }
+
+                @include mediaQuery(min-md) {
+                    right: rem(-40px);
+                }
             }
 
             i {
@@ -294,6 +317,12 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
     .product-cta .btn {
         padding-top: rem(16px);
         padding-bottom: rem(16px);
+    }
+
+    @include mediaQuery(max-md) {
+        .container-fluid-right {
+            padding-right: 0.75rem !important;
+        }
     }
 }
 

@@ -46,7 +46,7 @@
     .footer-group-title {
         font-family: inherit;
         font-size: rem(20px);
-        font-weight: 700;
+        font-weight: $font-weight-black;
         line-height: 1.2;
     }
 
@@ -174,7 +174,13 @@
 
     #footer-bottom {
 
-        border-top: 1px solid rgba($light, .25);
+        border-top: 1px solid $light; // filet blanc plein (il était à 25% d'opacité, donc grisé)
+
+        // Barre plus haute : le `py-3` du template ne suffisait pas.
+        .row {
+            padding-top: rem(28px) !important;
+            padding-bottom: rem(28px) !important;
+        }
 
         * {
             font-size: rem(12px);

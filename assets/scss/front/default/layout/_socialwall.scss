@@ -31,16 +31,18 @@
         content: "parister";
         position: absolute;
         left: 50%;
-        top: 32%;
-        transform: translate(-50%, -50%);
+        top: 50%;
+        // La police script porte de grands jambages : le centre de la boîte n'est pas le
+        // centre visuel. Le décalage de -.289em (mesuré sur les métriques d'encre) recentre
+        // le tracé dans la lame, et suit la taille de police à chaque palier.
+        transform: translate(-50%, -50%) translateY(-.289em);
         font-family: $font-script;
         font-weight: $font-weight-normal;
-        color: rgba($primary, .08);
+        color: rgba($primary, .05);
         line-height: 1;
         pointer-events: none;
         z-index: 0;
         white-space: nowrap;
-        // Baseline ~ centre des tuiles (Figma 630:1531) — un peu plus haut que le centre de bande.
 
         @include mediaQuery(min-lg) {
             font-size: rem(740px);
@@ -53,6 +55,7 @@
         // Mobile : filigrane visible (20% comme Figma 928:1133), centré sur le haut des tuiles (full-bleed).
         @include mediaQuery(max-md) {
             top: rem(20px);
+            transform: translate(-50%, -50%); // calage maquette mobile : pas de recentrage d'encre
             font-size: rem(125px);
             color: rgba($primary, .2);
         }
@@ -106,7 +109,7 @@
         letter-spacing: .2em; // Figma 630:1531 : 14/700/2.8(.2em)/lh17 UPPER
         font-size: rem(14px);
         line-height: calc(17 / 14);
-        font-weight: $font-weight-bold;
+        font-weight: $font-weight-black;
         transition: opacity .2s ease-in-out;
 
         // Lisible sur bg-light : texte or au hover (neutralise le blanc hérité de btn-outline-primary).

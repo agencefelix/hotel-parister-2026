@@ -123,7 +123,6 @@
                                {% if link.linkBlank %}target="_blank"{% else %}data-toggle="preloader"{% endif %}{% if link.linkExternal %} rel="noopener noreferrer"{% endif %}>{{ link.title|unescape|raw }}</a>
                         {% endif %}
                     {% endfor %}
-                    {# « Gestion des cookies » = rouvre le consentement (JS) : élément spécial, conditionnel. #}
                     {% if axeptioActive is defined and axeptioActive %}
                         <a class="text-white" href="javascript:openAxeptioCookies()" rel="nofollow">{{ "Gestion des cookies"|trans|raw }}</a>
                     {% elseif gdprActive %}

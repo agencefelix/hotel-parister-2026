@@ -20,6 +20,7 @@
     {% include 'front/'~websiteTemplate~'/blocks/title-header/default.html.twig' with {
         titleForce: 1,
         pageTitle: 'Merci !'|trans,
+        styleClass: 'title-header-compact',
         template: websiteTemplate,
         thumbConfiguration: thumbConfigurationHeader } %}
     <div id="form-thanks-container-{{ slug }}" class="form-thanks-container pt-5 pb-5 text-center bg-light d-flex align-items-center">

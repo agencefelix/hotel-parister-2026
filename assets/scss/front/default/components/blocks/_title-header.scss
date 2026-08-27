@@ -15,6 +15,27 @@
     $height-md: 700px;
     $height-lg: 920px;
 
+    // Variante compacte : sur une page de confirmation, l'entete ne doit pas occuper tout
+    // l'ecran, le message de remerciement reste visible en partie sans avoir a defiler.
+    // La barre de navigation est fixe et transparente au-dessus : sans cette reserve haute,
+    // le titre passe sous le logo. `!important` : l'utilitaire `pt-5` du bloc l'est aussi.
+    .title-header-block.title-header-compact {
+
+        @include mediaQuery(max-lg) {
+            min-height: rem(240px);
+            padding-top: rem(120px) !important;
+        }
+
+        @include mediaQuery(between-md-lg) {
+            min-height: rem(260px);
+        }
+
+        @include mediaQuery(min-lg) {
+            min-height: rem(320px);
+            padding-top: rem(188px) !important;
+        }
+    }
+
     .title-header-block {
 
         overflow: hidden;
@@ -141,14 +162,15 @@
                 right: 40px;
             }
 
+            // Mobile : filets collés aux bords de l'écran, comme la bande d'alerte de l'accueil.
             @include mediaQuery(max-md) {
 
                 &::before {
-                    left: rem(16px);
+                    left: 0;
                 }
 
                 &::after {
-                    right: rem(16px);
+                    right: 0;
                 }
             }
 

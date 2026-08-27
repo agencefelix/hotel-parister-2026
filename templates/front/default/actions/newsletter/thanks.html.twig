@@ -15,6 +15,12 @@
 {% endblock %}
 
 {% block body %}
+    {% include 'front/'~websiteTemplate~'/blocks/title-header/default.html.twig' with {
+        titleForce: 1,
+        pageTitle: 'Merci !'|trans,
+        styleClass: 'title-header-compact',
+        template: websiteTemplate,
+        thumbConfiguration: thumbConfigurationHeader } %}
     <div id="newsletter-thanks-container" class="newsletter-thanks-container pt-5 pb-5 text-center bg-light d-flex align-items-center">
         <div class="row w-100">
             <div class="col-md-6 col-xl-4 mx-auto mt-5 mb-5 d-flex align-items-center">

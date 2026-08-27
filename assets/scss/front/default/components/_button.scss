@@ -67,7 +67,7 @@
         display: inline-block;
         border-radius: $btn-border-radius;
         line-height: 1rem;
-        font-weight: $font-weight-bold; /* CTA charte : 700 (relevé Figma) */
+        font-weight: $font-weight-black; /* recette 7 : libellés épaissis (était 700, token Figma) */
         white-space: normal;
         min-width: 175px;
 

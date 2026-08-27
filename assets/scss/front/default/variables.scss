@@ -221,6 +221,7 @@ $font-weight-light: 300 !default; /* .font-weight-lighter */
 $font-weight-normal: 400 !default; /* .font-weight-normal */
 $font-weight-bold: 700 !default; /* .font-weight-bold */
 $font-weight-bolder: bolder !default; /* .font-weight-bolder */
+$font-weight-black: 900 !default; /* Museo Sans Black - titres et libellés de bouton (recette 6 & 7) */
 
 /*-- d - Fonts sizes --*/
 
@@ -272,7 +273,7 @@ $elements: map-merge((
     'h1, h1 a, .h1, .h1 a': (
         'properties': (
             'color': $white,
-            'font-weight': 600,
+            'font-weight': $font-weight-black,
             'font-family': $font-title,
         ),
         'colors-in-backgrounds': (
@@ -295,7 +296,7 @@ $elements: map-merge((
     'h2, h2 a, .h2, .h2 a': (
         'properties': (
             'color': $body-color,
-            'font-weight': 700,
+            'font-weight': $font-weight-black,
             'font-family': $font-title,
         ),
         'colors-in-backgrounds': (

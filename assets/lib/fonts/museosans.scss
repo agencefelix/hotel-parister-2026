@@ -7,17 +7,19 @@
     Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
     Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
 
+    Auto-hébergée : le kit Typekit exposait la famille "museo-sans",
+    alors que tout le projet référence "Museosans" ($font-primary).
+    La police n'était donc jamais appliquée.
+
 ------------------------------------------------------------------------------------------ */
 
-@import url("https://use.typekit.net/qsb3npk.css");
+@import "../../scss/vendor/mixin/fonts";
 
-//@import "../../scss/vendor/mixin/fonts";
-//
-//$fonts: (
-//    'museosans-300': ('weight': 300, 'style': normal),
-//    'museosans-500': ('weight': 400 500, 'style': normal),
-//    'museosans-700': ('weight': 600 700, 'style': normal),
-//    'museosans-900': ('weight': 800 900, 'style': normal),
-//);
-//
-//@include font-face("Museosans", $fonts, sans-serif, woff2);
+$fonts: (
+    'museosans-300': ('weight': 100 300, 'style': normal),
+    'museosans-500': ('weight': 400 500, 'style': normal),
+    'museosans-700': ('weight': 600 700, 'style': normal),
+    'museosans-900': ('weight': 800 900, 'style': normal),
+);
+
+@include font-face("Museosans", $fonts, sans-serif, woff2);

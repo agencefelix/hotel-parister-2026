@@ -21,3 +21,9 @@
     }) }}
     {% include template %}
 </div>
+{# Widget Experience Hotel : masqué, alimenté puis soumis par JS après l'enregistrement CMS.
+   Volontairement hors de `.newsletter-form-container` : ce conteneur est remplacé à chaque
+   envoi AJAX, et un <script> réinjecté via innerHTML ne serait jamais réexécuté. #}
+<div id="newsletter-widget-{{ campaign.slug }}" class="newsletter-widget" aria-hidden="true">
+    <script data-xp-widget-newsletter-464 src="https://widgets.experience-hotel.com/front/widget/widget-newsletter/bootstrap.js?widget_id=464"></script>
+</div>

@@ -35,6 +35,12 @@ class Email extends BaseInterface
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $email = null;
 
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $firstname = null;
+
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $lastname = null;
+
     #[ORM\Column(type: Types::STRING, length: 10)]
     private ?string $locale = null;
 
@@ -85,6 +91,30 @@ class Email extends BaseInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(?string $firstname): static
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(?string $lastname): static
+    {
+        $this->lastname = $lastname;
 
         return $this;
     }

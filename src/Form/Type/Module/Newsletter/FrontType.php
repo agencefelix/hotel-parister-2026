@@ -63,6 +63,34 @@ class FrontType extends AbstractType
             'constraints' => $constraints,
         ]);
 
+        // Champs repris du widget Experience Hotel (firstname / lastname) : masqués tant que
+        // l'e-mail n'est pas saisi, obligatoires dès que le formulaire est soumis.
+        $builder->add('firstname', Type\TextType::class, [
+            'label' => false,
+            'required' => true,
+            'attr' => [
+                'placeholder' => $this->translator->trans('Votre prénom', [], 'front_form'),
+                'class' => 'text-center text-lg-start newsletter-form-identity pb-0',
+                'autocomplete' => 'given-name',
+            ],
+            'constraints' => [
+                new Assert\NotBlank(message: $this->translator->trans('Vous devez renseigner votre prénom.', [], 'front_form')),
+            ],
+        ]);
+
+        $builder->add('lastname', Type\TextType::class, [
+            'label' => false,
+            'required' => true,
+            'attr' => [
+                'placeholder' => $this->translator->trans('Votre nom', [], 'front_form'),
+                'class' => 'text-center text-lg-start newsletter-form-identity pb-0',
+                'autocomplete' => 'family-name',
+            ],
+            'constraints' => [
+                new Assert\NotBlank(message: $this->translator->trans('Vous devez renseigner votre nom.', [], 'front_form')),
+            ],
+        ]);
+
         $builder->add('consent', Type\CheckboxType::class, [
             'label' => $this->translator->trans("J'accepte que la société Parister exploite les informations collectées dans ce formulaire dans le cadre de ma demande de contact et de la relation commerciale qui pourrait en découler", [], 'front_form'),
             'required' => true,

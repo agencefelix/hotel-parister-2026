@@ -186,12 +186,20 @@ App\Entity\Module\Newsletter\Email:
         email:
             fr: 'Email'
             en: 'Email'
+        firstname:
+            fr: 'Prénom'
+            en: 'Firstname'
+        lastname:
+            fr: 'Nom'
+            en: 'Lastname'
         locale:
             fr: 'Langue'
             en: 'Language'
-    exports: ['email']
+    exports: ['email', 'firstname', 'lastname']
     columns:
         - email
+        - firstname
+        - lastname
         - locale
 
 #####################################

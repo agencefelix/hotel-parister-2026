@@ -1,6 +1,8 @@
 add: 'Ajouter un email'
 adminName: Email
 email: Email
+firstname: Prénom
+lastname: Nom
 locale: Langue
 plural: Emails
 singular: Email

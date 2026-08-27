@@ -116,7 +116,7 @@
 
         color: $primary;
         font-size: rem(32px);
-        font-weight: $font-weight-bold;
+        font-weight: $font-weight-black;
         letter-spacing: .4em;
         text-transform: uppercase;
         line-height: calc(38 / 32);
@@ -153,9 +153,23 @@
         border-bottom: 1px solid rgba($primary, .5);
     }
 
+    // Prénom / nom : révélés à la saisie de l'e-mail, même filet que le champ e-mail.
+    .newsletter-identity {
+
+        &.d-none {
+            display: none !important;
+        }
+    }
+
+    .newsletter-identity-field {
+        border-bottom: 1px solid rgba($primary, .5);
+    }
+
     // Forcé : bat le form global `input.form-control {...!important}` (sinon champ boxé gris).
     .newsletter-email .form-control,
-    .newsletter-email input {
+    .newsletter-email input,
+    .newsletter-identity-field .form-control,
+    .newsletter-identity-field input {
 
         width: 100%;
         background: transparent !important;
@@ -197,7 +211,7 @@
         background: transparent !important;
         border: 0;
         color: $primary !important;
-        font-weight: $font-weight-bold;
+        font-weight: $font-weight-black;
         text-transform: uppercase;
         letter-spacing: .2em;
         font-size: rem(14px);
@@ -218,8 +232,11 @@
         }
     }
 
+    // Le conteneur porte lui-même `.form-check` (thème Symfony) : sans ce reset, le retrait
+    // Bootstrap de 1.5em décalait la case de 24px par rapport au champ e-mail.
     .newsletter-consent {
         gap: .75rem;
+        padding-left: 0;
     }
 
     // Case + texte en flex (le thème Symfony imbrique un .form-check qui flotte la case).
@@ -257,4 +274,16 @@
     .newsletter-email .form-control, .newsletter-email input {
         color: $primary !important;
     }
+}
+
+// Widget Experience Hotel : rempli et soumis par JS, jamais montré à l'internaute.
+// Déporté hors écran plutôt que masqué : il garde une boîte réelle et reste rendu, donc son JS
+// continue de fonctionner — `display: none` ou un clip l'empêcheraient de s'initialiser.
+// Règle à la racine : le widget est volontairement hors de `.newsletter-form-container`,
+// ce conteneur étant remplacé à chaque envoi AJAX.
+.newsletter-widget {
+    position: absolute;
+    top: 0;
+    left: rem(-9999px);
+    width: rem(400px);
 }

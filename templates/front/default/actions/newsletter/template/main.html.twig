@@ -17,7 +17,7 @@
             {% include 'front/'~websiteTemplate~'/include/recaptcha-fields.html.twig' with {entity: campaign} %}
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-12 col-lg-10 col-xl-8">
+                    <div class="col-12 col-lg-10 col-xl-7 col-xxl-6">
                         <label class="visually-hidden" for="front_newsletter_email">{{ "Votre e-mail"|trans }}</label>
                         <div id="newsletter-fields" class="newsletter-fields-wrap d-flex align-items-center pb-0">
                             <div class="newsletter-email flex-grow-1">{{ form_widget(form.email) }}</div>
@@ -28,6 +28,19 @@
                             </button>
                         </div>
                         {{ form_errors(form.email) }}
+                        {# Prenom / nom : reveles a la saisie de l'e-mail, alimentent le widget au submit. #}
+                        <div id="newsletter-identity" class="newsletter-identity row mt-3 d-none" hidden>
+                            <div class="col-12 col-md-6">
+                                <label class="visually-hidden" for="{{ form.firstname.vars.id }}">{{ "Votre prénom"|trans }}</label>
+                                <div class="newsletter-identity-field">{{ form_widget(form.firstname) }}</div>
+                                {{ form_errors(form.firstname) }}
+                            </div>
+                            <div class="col-12 col-md-6 mt-3 mt-md-0">
+                                <label class="visually-hidden" for="{{ form.lastname.vars.id }}">{{ "Votre nom"|trans }}</label>
+                                <div class="newsletter-identity-field">{{ form_widget(form.lastname) }}</div>
+                                {{ form_errors(form.lastname) }}
+                            </div>
+                        </div>
                         {% for type, flashes in app.session.flashbag.all %}
                             {% for flash in flashes %}
                                 <span class="{% if 'error' in type %}invalid{% else %}valid{% endif %}-feedback d-block">

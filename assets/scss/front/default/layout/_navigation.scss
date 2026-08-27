@@ -124,7 +124,7 @@
         display: inline-block;
         color: $dark;
         font-family: $font-title;
-        font-weight: $font-weight-bold;
+        font-weight: $font-weight-light;
         letter-spacing: .3em;
         font-size: rem(22px);
         line-height: 1;
@@ -165,16 +165,18 @@
         background-color: $light;
     }
 
-    // Mega-menu ouvert : TOUT le contenu DOIT tenir dans 100dvh (aucun scroll) en lg+.
+    // Mega-menu ouvert : le contenu tient dans 100dvh en lg+ ; sur une fenetre trop
+    // courte il scrolle plutot que d'etre coupe (aucun bloc ne doit disparaitre).
     @include mediaQuery(min-lg) {
         #main-navigation-nav.mega-menu {
-            height: 100dvh;
+            min-height: 100dvh;
             max-height: 100dvh;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
         // Inner = colonne pleine hauteur : topbar (auto) + corps (prend le reste).
         .mega-menu-inner {
-            height: 100dvh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
         }
@@ -209,11 +211,12 @@
         .mega-col-list li {
             margin-bottom: rem(4px) !important;
         }
-        // Forstyle : épinglé en bas à gauche du panneau nav (hors flux row).
+        // Forstyle : épinglé en bas du panneau nav (hors flux row), centré sur sa largeur.
         .mega-forstyle {
             position: absolute;
-            left: rem(64px);
+            right: 40%; // largeur du panneau droit (.mega-panel-aside)
             bottom: rem(20px);
+            left: 0;
             margin: 0;
             padding: 0;
         }
@@ -507,7 +510,7 @@
 
     .label {
         font-size: rem(14px); // Figma 42:1745 : 14/700/3.5(.25em)/lh17 UPPER
-        font-weight: $font-weight-bold;
+        font-weight: $font-weight-black;
         letter-spacing: .25em;
         line-height: calc(17 / 14);
         color: $dark;
@@ -545,13 +548,22 @@
 
 /* Liens de la barre fermée (RÉSERVER · BONS CADEAUX) - texte, conforme maquette */
 .nav-bar-link {
+
     color: $dark;
     text-decoration: none;
     font-size: rem(14px); // Figma 42:1745 : 14/700/3.5(.25em)/lh17 UPPER
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-black;
     letter-spacing: .25em;
     line-height: calc(17 / 14);
+    // Un libellé ne doit jamais se couper en deux lignes dans la barre.
+    white-space: nowrap;
     transition: color .2s ease-in-out;
+
+    // Tablette : au scroll le logo devient le nom textuel (150px) et ne laisse plus assez
+    // de place aux deux liens — interlettrage resserré pour les garder sur une ligne.
+    @include mediaQuery(between-md-lg) {
+        letter-spacing: .15em;
+    }
 
     &:hover, &:focus {
         color: $primary;
@@ -560,11 +572,18 @@
 
 // Séparateur = 5 traits VERTICAUX espacés de 4px (maquette SVG 17×18).
 .nav-bar-sep {
+
+    // Marges réduites en tablette (l'utilitaire `mx-3` est trop large à cette largeur).
+    @include mediaQuery(between-md-lg) {
+        margin-right: rem(8px) !important;
+        margin-left: rem(8px) !important;
+    }
+
     display: inline-block;
     width: rem(17px);
     height: rem(18px);
     background-color: transparent;
-    background-image: repeating-linear-gradient(to right, rgba($dark, .45) 0, rgba($dark, .45) 1px, transparent 1px, transparent 4px);
+    background-image: repeating-linear-gradient(to right, transparentize($dark, .55) 0, transparentize($dark, .55) 1px, transparent 1px, transparent 4px);
 }
 
 /* =========================================================
@@ -594,7 +613,7 @@
 
 /* Barre haute (mode ouvert) - or */
 .mega-topbar {
-    border-bottom: 1px solid rgba($primary, .25);
+    border-bottom: 1px solid transparentize($primary, .75);
 
     .navbar-brand {
         margin: 0 auto;
@@ -605,13 +624,31 @@
     color: $primary;
     letter-spacing: .25em; // Figma 386:1793 : 14/700/3.5/lh17 UPPER
     font-size: rem(14px);
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-black;
     line-height: calc(17 / 14);
     cursor: pointer;
 
     .nav-close-icon {
         font-size: rem(18px);
         line-height: 1;
+    }
+
+    // Les utilitaires `d-none`/`d-lg-inline` ne cohabitent pas ici (`d-lg-inline` n'est pas
+    // compilé dans le build front) : la bascule desktop/mobile se fait en SCSS.
+    .nav-close-label {
+        display: none;
+
+        @include mediaQuery(min-lg) {
+            display: inline;
+        }
+    }
+
+    .nav-close-label-mobile {
+        display: inline;
+
+        @include mediaQuery(min-lg) {
+            display: none;
+        }
     }
 
     &:hover {
@@ -623,7 +660,7 @@
     color: $primary;
     text-decoration: none;
     font-size: rem(14px); // Figma 386:1793 : 14/700/3.5(.25em)/lh17 UPPER
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-black;
     letter-spacing: .25em;
     line-height: calc(17 / 14);
     transition: opacity .2s ease;
@@ -639,7 +676,7 @@
     width: rem(17px);
     height: rem(18px);
     background-color: transparent;
-    background-image: repeating-linear-gradient(to right, rgba($primary, .5) 0, rgba($primary, .5) 1px, transparent 1px, transparent 4px);
+    background-image: repeating-linear-gradient(to right, transparentize($primary, .5) 0, transparentize($primary, .5) 1px, transparent 1px, transparent 4px);
 }
 
 /* Panneaux */
@@ -653,7 +690,9 @@
     }
 
     @include mediaQuery(min-lg) {
-        padding: 3rem 4rem 2.5rem;
+        // Le padding bas reserve la place du bloc Forstyle (absolu, hors flux) :
+        // sans lui, les colonnes de liens passent dessous sur les fenetres courtes.
+        padding: 3rem 4rem rem(176px);
     }
 }
 
@@ -662,8 +701,13 @@
     @include mediaQuery(min-lg) {
         flex: 0 0 40%;
         max-width: 40%;
-        border-left: 1px solid rgba($primary, .25);
+        border-left: 1px solid transparentize($primary, .4);
     }
+}
+
+/* Respiration sous le choix de langue (le `mb-4` du template était trop court). */
+.mega-lang-wrap {
+    margin-bottom: rem(48px) !important;
 }
 
 /* Switch langue (inline, toutes lettres, or) */
@@ -685,7 +729,7 @@
     a {
         margin: 0 !important;
         // Langues INACTIVES = or estompé (et non gris #adadad du composant switcher).
-        color: rgba($primary, .5) !important;
+        color: transparentize($primary, .5) !important;
         font-size: rem(16px); // Figma 386:1793 : 16/700/ls0/lh19 UPPER
         letter-spacing: 0;
         line-height: calc(19 / 16);
@@ -711,19 +755,23 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 0;
-    gap: rem(8px) rem(32px);
-
-    > .mega-col {
-        width: auto;
-        max-width: none;
-        padding: 0;
-    }
+    gap: rem(32px) rem(32px);
 
     @include mediaQuery(min-lg) {
         grid-template-rows: auto auto;
         grid-auto-flow: column;
+        row-gap: rem(48px);
         column-gap: rem(48px);
     }
+}
+
+// Le retrait de gouttière vient de `.row > :not(.layout-col):not(.ps-sm)…`, dont la
+// spécificité (0,8,0) bat `.mega-cols.row > .mega-col`. L'ID reprend la main sans
+// `!important` et réaligne les colonnes sur le switcher de langue.
+#main-navigation-nav .mega-cols.row > .mega-col {
+    width: auto;
+    max-width: none;
+    padding: 0;
 }
 
 /* Colonnes de liens - or */
@@ -731,7 +779,7 @@
 
     color: $primary !important;
     font-size: rem(21px);
-    font-weight: $font-weight-bold !important;
+    font-weight: $font-weight-black !important;
     letter-spacing: 0;
     line-height: calc(29 / 24);
     text-transform: uppercase;
@@ -775,7 +823,7 @@
 
     .mega-forstyle-logo {
         width: auto;
-        height: rem(70px);
+        height: rem(110px);
         max-width: 100%;
     }
 }
@@ -788,7 +836,7 @@
     object-fit: cover;
 }
 
-// Padding porté par .mega-aside-contact-wrap ; CTA pleine largeur.
+// Padding porté par .mega-aside-socials-wrap ; CTA pleine largeur.
 .mega-aside-body {
     padding: 0;
 }
@@ -798,7 +846,7 @@
     list-style: none;
 
     li:first-child .mega-cta {
-        border-top: 1px solid rgba($primary, .3);
+        border-top: 1px solid transparentize($primary, .4);
     }
 }
 
@@ -806,12 +854,12 @@
     color: $primary;
     text-decoration: none;
     font-size: rem(14px);
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-black;
     letter-spacing: .2em;
     line-height: calc(17 / 14);
     padding-top: 1.3rem;
     padding-bottom: 1.3rem;
-    border-bottom: 1px solid rgba($primary, .3);
+    border-bottom: 1px solid transparentize($primary, .4);
     transition: opacity .2s ease;
 
     i,
@@ -848,35 +896,6 @@
     }
 
     span:hover i {
-        opacity: .7;
-    }
-}
-
-.mega-contact {
-
-    color: $primary;
-    font-size: rem(12px); // Figma 386:1793 : 12/700/1.2(.1em) UPPER
-    font-weight: $font-weight-bold;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    line-height: 1.9;
-
-    // Les <span> bruts sont remis en #141414/16px par le reboot thème → on force or/12px.
-    span {
-        color: $primary;
-        font-size: rem(12px);
-
-        &.label {
-            display: none !important;
-        }
-    }
-
-    a {
-        color: $primary;
-        text-decoration: none;
-    }
-
-    a:hover {
         opacity: .7;
     }
 }
@@ -933,7 +952,7 @@
 
     // Barre haute (ouvert) : fond blanc maquette.
     .mega-topbar {
-        border-bottom: 1px solid rgba($primary, .25);
+        border-bottom: 1px solid transparentize($primary, .75);
     }
     // Grille 2 colonnes (col-6 dans le template) — espacement vertical entre rangées.
     .mega-cols {
@@ -973,12 +992,6 @@
     // Réseaux sociaux centrés.
     .mega-panel-aside .socials-list {
         gap: 0;
-    }
-
-    // Adresse mobile : ls 4.8px (.4em) — diffère du desktop (.1em). Graisse/uppercase = base.
-    .mega-contact {
-        letter-spacing: .4em;
-        line-height: calc(20 / 12);
     }
 
     // Forstyle : dernier bloc, centré, marge haute.

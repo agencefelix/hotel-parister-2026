@@ -10,11 +10,10 @@
 {% if seo.card is defined and seo.card %}
     {% set compagnyNameElement = 'strong' %}
 {% endif %}
-{% set bookingUrl = path('front_index', {url: 'chambres-suites'}) %}
+{# Le CTA de réservation pointe vers le moteur (`/reservation`), comme « Réserver cette chambre ». #}
+{% set bookingUrl = path('front_index', {url: 'reservation'}) %}
 {% set giftUrl = path('front_index', {url: 'bons-cadeaux'}) %}
 {% set wellnessUrl = path('front_index', {url: 'sport-bien-etre'}) %}
-{% set zonePhones = website.infoZones.phones.footer is defined ? website.infoZones.phones.footer : [] %}
-{% set zoneEmails = website.infoZones.emails.footer is defined ? website.infoZones.emails.footer : [] %}
 
 <div id="menu-container-{{ slug }}" class="menu-container w-100 as-sticky always-sticky {{ dropdownClass }}"
      data-expand="{{ expand }}"
@@ -68,8 +67,9 @@
             {% endif %}
             <div class="flex-fill d-flex align-items-center justify-content-end mt-2 pt-1 mt-lg-0 pt-lg-0">
                 <a href="{{ bookingUrl }}" class="nav-bar-link text-uppercase fw-bold" data-toggle="preloader">{{ "Réserver"|trans|raw }}</a>
-                <span class="nav-bar-sep mx-3 d-none d-sm-inline-block" aria-hidden="true"></span>
-                <a href="{{ giftUrl }}" class="nav-bar-link text-uppercase fw-bold d-none d-sm-inline-block" data-toggle="preloader">{{ "Bons cadeaux"|trans|raw }}</a>
+                {# Sous md le nom textuel de marque (au scroll) ne laisse pas la place aux deux liens. #}
+                <span class="nav-bar-sep mx-3 d-none d-md-inline-block" aria-hidden="true"></span>
+                <a href="{{ giftUrl }}" class="nav-bar-link text-uppercase fw-bold d-none d-md-inline-block" data-toggle="preloader">{{ "Bons cadeaux"|trans|raw }}</a>
             </div>
         </div>
     </header>
@@ -87,8 +87,8 @@
                             data-bs-target="#main-navigation-nav"
                             aria-label="{{ "Fermer le menu"|trans|striptags }}">
                         <span class="nav-close-icon me-2" aria-hidden="true">&#10005;</span>
-                        <span class="d-none d-lg-inline">{{ "Menu"|trans|raw }}</span>
-                        <span class="d-lg-none text-primary">{{ "Fermer"|trans|raw }}</span>
+                        <span class="nav-close-label text-primary">{{ "Menu"|trans|raw }}</span>
+                        <span class="nav-close-label-mobile text-primary">{{ "Fermer"|trans|raw }}</span>
                     </button>
                 </div>
                 {% if secondaryLogo %}
@@ -153,7 +153,7 @@
                     </nav>
                 </div>
 
-                {# --------- Panneau droit : média + CTA + contact --------- #}
+                {# --------- Panneau droit : média + CTA + réseaux sociaux --------- #}
                 <aside class="mega-panel mega-panel-aside p-0 d-flex flex-column">
                     <div class="mega-aside-media">
                         <img src="{{ asset('medias/facade-parister.jpg') }}" alt="{{ companyName|striptags }}" class="w-100 object-fit-cover" loading="lazy" width="640" height="450">
@@ -178,7 +178,7 @@
                             </li>
                         </ul>
 
-                        <div class="mega-aside-contact-wrap d-flex flex-column flex-grow-1 px-4 px-lg-5 pb-4 pt-3 pt-lg-0">
+                        <div class="mega-aside-socials-wrap d-flex flex-column flex-grow-1 px-4 px-lg-5 pb-4 pt-3 pt-lg-0">
                         {% if website.networks %}
                             <nav class="socials-list d-flex justify-content-center mt-4 mb-4" aria-label="{{ "Navigation des liens sociaux"|trans|striptags }}">
                                 {% for name, infos in website.networks %}
@@ -192,20 +192,6 @@
                                 {% endfor %}
                             </nav>
                         {% endif %}
-
-                        {% for address in website.addresses %}
-                            {% set phones = address.phones is not empty ? address.phones : zonePhones %}
-                            {% set emails = address.emails is not empty ? address.emails : zoneEmails %}
-                            <address class="mega-contact text-center mt-auto mb-0">
-                                <span class="d-block text-uppercase">{% if address.address %}{{ address.address|raw }}{% if address.zipCode or address.city %}, {% endif %}{% endif %}{% if address.zipCode %}{{ address.zipCode }} {% endif %}{% if address.city %}{{ address.city }}{% endif %}</span>
-                                {% if phones is not empty %}
-                                    <span class="d-block mt-lg-2">{% for phone in phones %}{{ phone|phone(website, {icon: false, only_href: true}) }}{% endfor %}</span>
-                                {% endif %}
-                                {% if emails is not empty %}
-                                    <span class="d-block text-uppercase">{% for email in emails %}{{ email.email|email(website, {icon: false, only_href: true}) }}{% endfor %}</span>
-                                {% endif %}
-                            </address>
-                        {% endfor %}
                         </div>
                     </div>
                 </aside>

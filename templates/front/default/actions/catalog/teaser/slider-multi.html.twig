@@ -70,7 +70,7 @@
                     {% for post in entities %}
                         <li class="splide__slide{% if entities|length == 1 %} ms-3{% endif %}">
                             {% if teaser.slug == 'main' %}
-                                {# Carte chambre dédiée (titre overlay + script + « Découvrir ») — maquette home. #}
+                                {# Carte chambre dédiée (titre overlay + script + « Découvrir ») - maquette home. #}
                                 {% include 'front/'~websiteTemplate~'/actions/catalog/teaser/include/card-cover.html.twig' with {
                                     post: post,
                                     thumbConfiguration: thumbConfiguration,

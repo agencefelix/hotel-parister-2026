@@ -4,6 +4,16 @@
 
 {% set arrows = slider.control is defined and slider.control and medias|length > 1 %}
 
+{# Captions identiques sur tous les slides -> rendu une seule fois (SEO + lecteur d'écran). #}
+{% set captionSignatures = [] %}
+{% for media in medias %}
+    {% set signature = (media.intl.title|default(''))~'#'~(media.intl.introduction|default(''))~'#'~(media.intl.body|default(''))~'#'~(media.intl.linkLabel|default('')) %}
+    {% if signature not in captionSignatures %}
+        {% set captionSignatures = captionSignatures|merge([signature]) %}
+    {% endif %}
+{% endfor %}
+{% set sharedCaption = medias|length > 1 and captionSignatures|length == 1 %}
+
 {% macro arrows(slider, sliderSlug, side, color, asBtn, position) %}
     {% set website = slider.website is defined ? slider.website : website() %}
     {% set configuration = website.configuration is defined ? website.configuration : false %}
@@ -82,14 +92,15 @@
                             colSize: colSize,
                             lazyLoad: not isFirstZone or (isFirstZone and not loop.first),
                             priority: not isFirstZone or (isFirstZone and not loop.first) ? 'low': 'high',
-                            class: mediaClass }) }}
+                            class: mediaClass
+                        }) }}
                     {% endif %}
-                    {% if haveContent or displayIndicators or displayArrows %}
+                    {% if (haveContent and not sharedCaption) or displayIndicators or displayArrows %}
                         <div class="carousel-caption text-center bg-transparent border-0 p-0">
                             {% if arrows and 'top' in slider.arrowAlignment %}
                                 {{ macro.arrows(slider, sliderSlug, arrowsSide, arrowsColor, arrowsAsBtn, 'top') }}
                             {% endif %}
-                            {% if haveContent %}
+                            {% if haveContent and not sharedCaption %}
                                 <div class="content flex-shrink-0">
                                     {% if mediaTitle %}
                                         <h{{ mediaTitleForce }} class="caption-title mt-3 mb-0">{{ mediaTitle|unescape|raw }}</h{{ mediaTitleForce }}>
@@ -100,7 +111,7 @@
                                     {% if mediaBody %}
                                         <div class="body{% if mediaTitle or mediaIntro %} mt-3{% endif %}">{{ mediaBody|unescape|raw|nl2br }}</div>
                                     {% endif %}
-                                    <div class="mt-4 d-flex justify-content-center">
+                                    <div class="caption-link mt-4 d-flex justify-content-center">
                                         {% include 'front/'~websiteTemplate~'/blocks/link/default.html.twig' with {intl: intlMedia} only %}
                                     </div>
                                 </div>
@@ -115,6 +126,26 @@
             {% endif %}
         {% endfor %}
     </div>
+    {% if sharedCaption %}
+        {% set sharedMedia = medias|first.intl %}
+        {% set sharedTitleForce = sharedMedia.titleForce|default(2) ?: 2 %}
+        <div class="carousel-caption shared-caption text-center bg-transparent border-0 p-0">
+            <div class="content flex-shrink-0">
+                {% if sharedMedia.title is defined and sharedMedia.title|striptags|length > 0 %}
+                    <h{{ sharedTitleForce }} class="caption-title mt-3 mb-0">{{ sharedMedia.title|unescape|raw }}</h{{ sharedTitleForce }}>
+                {% endif %}
+                {% if sharedMedia.introduction is defined and sharedMedia.introduction|striptags|length > 0 %}
+                    <p class="introduction text-bold mt-3">{{ sharedMedia.introduction|unescape|raw|nl2br }}</p>
+                {% endif %}
+                {% if sharedMedia.body is defined and sharedMedia.body|striptags|length > 0 %}
+                    <div class="body mt-3">{{ sharedMedia.body|unescape|raw|nl2br }}</div>
+                {% endif %}
+                <div class="caption-link mt-4 d-flex justify-content-center">
+                    {% include 'front/'~websiteTemplate~'/blocks/link/default.html.twig' with {intl: sharedMedia} only %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
     {% if displayIndicators %}
         <ul class="carousel-indicators reset position-relative ms-0 me-0 mb-0 mt-4 justify-content-start">
             {% set isFirst = true %}

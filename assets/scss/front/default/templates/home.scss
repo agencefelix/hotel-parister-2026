@@ -98,19 +98,6 @@ $enable-breadcrumb: false;
         }
     }
 
-    @include mediaQuery(max-lg) {
-        .link-block {
-            margin-top: 5rem;
-        }
-    }
-
-    @include mediaQuery(min-lg) {
-        .link-block {
-            position: absolute;
-            bottom: 4rem;
-        }
-    }
-
     .carousel-caption {
         position: absolute;
         inset: 0;
@@ -129,13 +116,13 @@ $enable-breadcrumb: false;
     .caption-title {
         text-transform: uppercase;
         letter-spacing: .4em;
-        font-weight: $font-weight-bold;
+        font-weight: $font-weight-black;
         line-height: calc(46 / 38.4);
 
         @include mediaQuery(min-lg) {
             font-size: rem(38px);
         }
-        @include mediaQuery(max-md) {
+        @include mediaQuery(max-lg) {
             font-size: rem(24px);
             letter-spacing: .3em;
         }
@@ -150,13 +137,15 @@ $enable-breadcrumb: false;
         line-height: 1;
 
         // Neutralise le `mt-3` du template (1rem !important) et impose le chevauchement.
+        // `max-lg` (et non `max-md`) : sinon la plage 768-991px ne recevait aucune taille
+        // et le mot retombait à 16px.
         @include mediaQuery(min-lg) {
             font-size: rem(128px);
             margin-top: rem(-10px) !important;
         }
 
-        @include mediaQuery(max-md) {
-            font-size: rem(72px);
+        @include mediaQuery(max-lg) {
+            font-size: unquote("min(19vw, #{rem(72px)})");
             margin-top: rem(-20px) !important;
         }
     }
@@ -172,7 +161,7 @@ $enable-breadcrumb: false;
         text-transform: uppercase;
         letter-spacing: .2em;
         font-size: rem(14px) !important;
-        font-weight: $font-weight-bold !important;
+        font-weight: $font-weight-black !important;
         color: $light !important; // token Figma #f4f0f1 (écru, pas blanc pur)
         padding-top: rem(16px);
         padding-bottom: rem(16px);
@@ -194,6 +183,29 @@ $enable-breadcrumb: false;
 
     .carousel-control-prev, .carousel-control-next {
         z-index: 3;
+    }
+}
+
+/*-----------------------------------
+   4quater ) Bandes pleine largeur : CTA ancré en bas du visuel
+-----------------------------------*/
+
+// Le CTA était centré avec le titre : il descend au pied de l'image (maquette).
+.carousel-home-hero,
+.carousel-home-getaway,
+.carousel-home-workspaces {
+
+    .carousel-caption .caption-link {
+
+        position: absolute;
+        right: 0;
+        bottom: rem(64px);
+        left: 0;
+        margin-top: 0 !important; // neutralise le `mt-4` du template (utilitaire Bootstrap !important)
+
+        @include mediaQuery(max-lg) {
+            bottom: rem(40px);
+        }
     }
 }
 
@@ -268,7 +280,7 @@ $enable-breadcrumb: false;
     .caption-title {
         text-transform: uppercase;
         letter-spacing: .25em;
-        font-weight: 700;
+        font-weight: $font-weight-black;
         font-size: rem(15px);
     }
 
@@ -289,11 +301,25 @@ $enable-breadcrumb: false;
         white-space: nowrap;
         z-index: -1;
 
-        @include mediaQuery(min-lg) {
-            font-size: rem(416px);
-        }
+        // Taille fluide : le mot le plus long tient toujours dans l'écran (le plus large
+        // mesuré fait 3.45x la taille de police), et retombe sur les 416px de la maquette
+        // à sa largeur de référence (1600px). Une valeur fixe débordait de xs à xxl.
+        font-size: unquote("min(26vw, #{rem(416px)})");
+    }
+
+    // Titre de bande : l'échelle de 15px de la maquette est illisible en mobile.
+    .caption-title {
+
         @include mediaQuery(max-md) {
-            font-size: rem(170px);
+            font-size: rem(20px);
+            letter-spacing: .2em;
+        }
+
+        // xs : le mot le plus long touchait les bords à 20px / .2em.
+        @include mediaQuery(max-sm) {
+            font-size: rem(18px);
+            line-height: rem(30px);
+            letter-spacing: rem(7.2px);
         }
     }
 }
@@ -326,6 +352,13 @@ $enable-breadcrumb: false;
 
 #zone-home-alert {
 
+    @include mediaQuery(max-md) {
+       .zone-container {
+           padding-right: .25rem !important;
+           padding-left: .25rem !important;
+       }
+    }
+
     .alert {
         position: relative;
         background: transparent;
@@ -355,14 +388,15 @@ $enable-breadcrumb: false;
             right: rem(40px);
         }
 
+        // Mobile : filets collés aux bords de l'écran (maquette).
         @include mediaQuery(max-md) {
 
             &::before {
-                left: rem(16px);
+                left: 0;
             }
 
             &::after {
-                right: rem(16px);
+                right: 0;
             }
         }
 
@@ -371,13 +405,13 @@ $enable-breadcrumb: false;
             margin-inline: rem(80px);
 
             @include mediaQuery(max-md) {
-                margin-inline: rem(52px);
+                margin-inline: rem(36px);
             }
         }
 
         .inner {
             font-size: rem(13px);
-            letter-spacing: .08em;
+            letter-spacing: .2em; // aligné sur l'échelle des kickers capitales du projet (.2em / .25em / .4em)
             text-transform: uppercase;
             color: $white;
         }
@@ -400,10 +434,10 @@ $enable-breadcrumb: false;
     line-height: 1.05;
 }
 
-// Titre d'intro de bande : 32 / 700 / .4em / UPPER (Figma).
+// Titre d'intro de bande : 32 / .4em / UPPER (Figma), graisse épaissie (recette 6).
 .layout-block-type-title .title {
     text-transform: uppercase;
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-black;
     letter-spacing: .4em;
     font-size: rem(32px);
     line-height: 1.2;
@@ -428,7 +462,7 @@ $enable-breadcrumb: false;
 .layout-zone .layout-block-type-link a:not(.btn),
 .slider-link {
     text-transform: uppercase;
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-black;
     letter-spacing: .2em;
     font-size: rem(14px);
     line-height: calc(17 / 14);
@@ -460,6 +494,29 @@ $enable-breadcrumb: false;
 //    aspect-ratio: 510 / 436;
 //}
 
+// Bande « Les Passerelles » : le grand visuel de droite reste épinglé pendant que la colonne
+// de texte défile, puis repart (principe de la maquette Figma 410:4832).
+// La piste est créée en débordant la colonne : la hauteur de la ligne ne bouge pas, donc rien
+// n'est décalé en dessous. La course est plus courte que les 410px de la maquette pour garder
+// une respiration franche avec la photo suivante de la colonne droite en fin de collage.
+#zone-home-restaurant {
+
+    @include mediaQuery(min-lg) {
+
+        .layout-col:nth-child(2) > .row {
+            height: calc(100% + #{rem(300px)}) !important;
+        }
+
+        // Le conteneur porte `h-100` : il doit reprendre la hauteur du visuel pour laisser
+        // les 410px de course, sinon il remplit la piste et ne colle jamais.
+        .layout-col:nth-child(2) .layout-block-content {
+            height: auto !important;
+            position: sticky;
+            top: rem(120px);
+        }
+    }
+}
+
 // Événements (teaser) : titre OR, 24px / ls0 / lh24 (token maquette, vs échelle globale 32px/.4em).
 #zone-home-events .layout-block-type-title .title {
     color: $primary;
@@ -488,6 +545,26 @@ $enable-breadcrumb: false;
             width: 100%;
             max-width: initial;
         }
+    }
+}
+
+/*-----------------------------------
+   6 ) Respirations mobile
+-----------------------------------*/
+
+// Les paliers `pt-lg`/`pb-lg` sont trop serrés en mobile sur ces bandes.
+// Sélecteur d'ID (1,0,0) : reprend la main sur l'utilitaire sans `!important`.
+@include mediaQuery(max-md) {
+
+    // Marge sous le carrousel des chambres.
+    #zone-home-rooms-products {
+        padding-bottom: rem(80px);
+    }
+
+    // Marge au-dessus des titres « Votre parenthèse parisienne ».
+    #zone-home-universe,
+    #zone-home-rooms {
+        padding-top: rem(80px);
     }
 }
 

@@ -1,7 +1,7 @@
 {% trans_default_domain 'front_default' %}
 
 {# =========================================================================
-   PRODUCT-VIEW dédié « chambres-suites » (maquette Parister) — NE PASSE PAS
+   PRODUCT-VIEW dédié « chambres-suites » (maquette Parister) - NE PASSE PAS
    par le layout de catégorie. Résolu via ProductModel::getTemplate (template
    par slug de catalogue qui prime sur layout/default-product).
    3 blocs : (1) hero plein écran, (2) galerie + détails/accordéons + CTA,
@@ -54,11 +54,12 @@
         <div class="row align-items-start g-0">
 
             {# Galerie : carousel Bootstrap (fade) + flèches latérales + compteur « 1 / N » #}
-            <div class="col-lg-5 product-gallery-col pt-5 px-lg-5">
+            {# ps-lg-4 seul : la reserve a droite est portee par le SCSS (place des fleches). #}
+            <div class="col-lg-6 product-gallery-col pt-5 ps-lg-4">
                 {% if entity.medias is not empty %}
                     {% set galleryId = 'carousel-product-gallery' %}
                     <div id="{{ galleryId }}"
-                         class="product-gallery-carousel carousel slide carousel-fade mx-4"
+                         class="product-gallery-carousel carousel slide carousel-fade"
                          data-bs-interval="0"
                          data-bs-autoplay="0"
                          data-bs-pause="0"
@@ -75,8 +76,8 @@
                                             priority: loop.first ? 'high' : 'low',
                                             screensSizes: {
                                                 mobile: {width: 768, height: 720},
-                                                tablet: {width: 690, height: 648},
-                                                desktop: {width: 690, height: 648}
+                                                tablet: {width: 780, height: 733},
+                                                desktop: {width: 1040, height: 976}
                                             }
                                         }) }}
                                     </div>
@@ -101,16 +102,16 @@
             </div>
 
             {# Colonne droite : titre + surface + intro + accordéons + bouton réserver #}
-            <div class="col-lg-7 product-info-col pt-4 pt-lg-5 px-0">
+            <div class="col-lg-6 product-info-col pt-4 pt-lg-5 px-0">
 
                 <div class="row border-bottom m-0 pb-5">
-                    <div class="col-lg-8 px-3 px-lg-5">
+                    <div class="col-12 px-3 px-lg-5">
                         <div class="product-info-head">
                             {% if entity.intl.title %}
                                 <strong class="product-info-title text-center text-uppercase d-block mb-0">{{ entity.intl.title|raw }}</strong>
                             {% endif %}
                             {% if surfaceValue %}
-                                <span class="product-info-surface text-center d-block mt-0 pb-0">{{ surfaceValue|striptags }}</span>
+                                <span class="product-info-surface text-center d-block mt-0 pb-0 fw-700">{{ surfaceValue|striptags }}</span>
                             {% endif %}
                             {% if entity.intl.introduction %}
                                 <p class="product-info-intro mt-5 mb-0">{{ entity.intl.introduction|raw|nl2br }}</p>
@@ -121,7 +122,7 @@
 
                 {# Accordéons : un par feature (Capacité, Vue, Terrasse, Équipements, Services inclus…). #}
                 <div class="row m-0">
-                    <div class="col-lg-8 px-3 px-lg-5">
+                    <div class="col-12 px-3 px-lg-5">
                         {% if featureGroups|length > 0 %}
                             <div class="accordion product-accordion mt-4" id="product-features">
                                 {% set idx = 0 %}

@@ -75,6 +75,13 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
         //    width: 50.735%; // 690 / 1360
         //}
 
+        // Les flèches débordent de 40px hors de l'image : sans cette réserve à droite,
+        // la flèche « suivant » mord sur le filet et la colonne d'infos. Réserve portée par
+        // le carrousel : le padding de colonne est battu par `.row > :not(...)` (0,8,0).
+        .product-gallery-carousel {
+            margin-right: rem(64px);
+        }
+
         // Colonne infos séparée par un filet vertical, décalée du gap maquette.
         .product-info-col {
             //flex: 0 0 auto;
@@ -90,6 +97,35 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
 
         .carousel {
             position: relative;
+        }
+
+        // Sous lg les colonnes s'empilent : le visuel prend toute la largeur et les flèches,
+        // qui débordent de part et d'autre, sortaient de l'écran. On resserre le carrousel de
+        // leur débord (30px en mobile, 40px en tablette) plus 10px d'air.
+        @include mediaQuery(max-md) {
+
+            .product-gallery-carousel {
+                margin-inline: rem(28px);
+            }
+        }
+
+        // Marges dissymétriques : à ce palier la colonne n'a plus de padding à droite
+        // (conteneur `container-fluid-right`), il faut donc 12px de plus de ce côté.
+        @include mediaQuery(between-md-lg) {
+
+            .product-gallery-carousel {
+                margin-left: rem(38px);
+                margin-right: rem(50px);
+            }
+        }
+
+        // Petits écrans desktop : la colonne est collée au bord gauche, la flèche « précédent »
+        // y était rognée. À partir de xl le conteneur reprend une marge suffisante.
+        @include mediaQuery(between-lg-xl) {
+
+            .product-gallery-carousel {
+                margin-left: rem(56px);
+            }
         }
 
         .carousel-item {
@@ -197,7 +233,7 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
 
     // Titre infos : kicker (1er mot, dark) + span script « supérieure » (or), cf. <span> dans intl.title.
     .product-info-title {
-        font-weight: $font-weight-bold;
+        font-weight: $font-weight-black;
         letter-spacing: .2em;
         font-size: rem(24px);
         line-height: 1;
@@ -220,6 +256,7 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
         color: $primary;
         letter-spacing: .15em;
         font-size: rem(14px);
+        font-weight: $font-weight-bold;
         text-transform: uppercase;
     }
 
@@ -255,7 +292,7 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
             align-items: center;
             background: transparent;
             box-shadow: none;
-            font-weight: $font-weight-bold;
+            font-weight: $font-weight-black;
             letter-spacing: .15em;
             font-size: rem(14px);
             padding: rem(18px) 0;
@@ -331,7 +368,7 @@ $enable-accordion: true; // fiche produit : caractéristiques en accordéons Boo
 
     // Titre : Museo Sans 700 / 32px / .4em / UPPER / or (relevé Figma node 516-2332).
     .other-rooms-title {
-        font-weight: $font-weight-bold;
+        font-weight: $font-weight-black;
         letter-spacing: .4em;
         font-size: rem(32px);
         line-height: calc(38.4 / 32);

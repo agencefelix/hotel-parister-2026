@@ -98,8 +98,9 @@ class ThumbnailFixtures
         $this->addConfig('Thumbnail 468 x Infinite', 468, null, 'Actualité mise en avant index', NewscastEntities\Newscast::class, 'index', 'first-newscast-index');
         $this->addConfig('Thumbnail 443 x 275', 443, 275, "Teaser d'actualités associées", NewscastEntities\Newscast::class, 'view', 'associated-newscast');
         if ($teaser instanceof NewscastEntities\Teaser) {
-            // Cartes événements PORTRAIT (Figma 290×371) en 2× retina.
-            $this->addConfig('Thumbnail 580 x 742', 580, 742, "Teaser d'actualités accueil", NewscastEntities\Newscast::class, 'teaser', $teaser->getId(), 'desktop', true);
+            // Cartes événements PORTRAIT, ratio maquette 290/371. Largeur portée à 402px :
+            // le carrousel laisse moins de marge à droite (4e carte franchement coupée).
+            $this->addConfig('Thumbnail 402 x 515', 402, 515, "Teaser d'actualités accueil", NewscastEntities\Newscast::class, 'teaser', $teaser->getId(), 'desktop', true);
             $this->addConfig('Thumbnail 520 x 665', 520, 665, "Teaser d'actualités accueil", NewscastEntities\Newscast::class, 'teaser', $teaser->getId(), 'tablet', true);
             $this->addConfig('Thumbnail 600 x 768', 600, 768, "Teaser d'actualités accueil", NewscastEntities\Newscast::class, 'teaser', $teaser->getId(), 'mobile', true);
         }

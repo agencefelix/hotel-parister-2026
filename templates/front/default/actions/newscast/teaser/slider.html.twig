@@ -3,16 +3,21 @@
 {% import _self as macro %}
 {% import 'core/webmaster-edit.html.twig' as macroWebmaster %}
 
-{% macro mediaRelation(entity, thumbConfiguration) %}
-    {# Pas de w-100 : image à la taille de la vignette, pas étirée au slide. #}
-    {{ entity.mainMedia|file(thumbConfiguration, {
+{% macro mediaRelation(entity) %}
+    {# Format verrouillé en CSS (ratio 290/371) : vignettes demandées à la taille d'affichage
+       de la carte par palier — 340px en desktop et mobile, 290px en tablette. #}
+    {{ entity.mainMedia|file({}, {
         btnLink: false,
         targetLink: entity.url is defined and entity.url ? entity.url : (entity.intl.link is defined ? entity.intl.link : false),
-        placeholder: false,
         popupGallery: false,
         fullPopup: false,
         placeholder: true,
-        lazyLoad: true
+        lazyLoad: true,
+        screensSizes: {
+            mobile: {width: 340, height: 435},
+            tablet: {width: 290, height: 371},
+            desktop: {width: 340, height: 435}
+        }
     }) }}
 {% endmacro %}
 
@@ -82,12 +87,12 @@
     {% endif %}
 {% endmacro %}
 
-{% macro single(websiteTemplate, autoplay, teaser, entity, loopIndex, entities, thumbConfiguration) %}
+{% macro single(websiteTemplate, autoplay, teaser, entity, loopIndex, entities) %}
     <li class="splide__slide col-12 p-0{% if loopIndex > teaser.itemsPerSlide %} d-none{% endif %}">
         <div class="card bg-light d-inline-block border-0 h-100 w-100">
             {% if entity.showImage %}
                 <div class="card-header bg-transparent p-0 border-0 text-center">
-                    {{ macro.mediaRelation(entity, thumbConfiguration) }}
+                    {{ macro.mediaRelation(entity) }}
                 </div>
             {% endif %}
             <div class="card-body bg-white px-4 border-0 pt-4">
@@ -109,7 +114,7 @@
     </li>
 {% endmacro %}
 
-{% macro multi(websiteTemplate, autoplay, promoteFirst, colSizeFirst, teaser, entity, loopIndex, entities, thumbConfiguration, arrows = false) %}
+{% macro multi(websiteTemplate, autoplay, promoteFirst, colSizeFirst, teaser, entity, loopIndex, entities, arrows = false) %}
     {% set isMobile = isMobile() %}
     {% set isFirst = loopIndex == 1 %}
     {% set colSizeNext = promoteFirst ? (100 - colSizeFirst) / (teaser.itemsPerSlide - 1) : null %}
@@ -129,7 +134,7 @@
         <div class="card bg-transparent d-inline-block border-0 w-100">
             {% if entity.showImage %}
                 <div class="card-header bg-transparent p-0 border-0">
-                    {{ macro.mediaRelation(entity, thumbConfiguration) }}
+                    {{ macro.mediaRelation(entity) }}
                 </div>
             {% endif %}
             <div class="card-body bg-transparent p-0 border-0 pt-4">
@@ -154,7 +159,7 @@
 
 {% if entities|length > 0 %}
     {% if 'teaser-title' in teaser.fields and intl.title %}
-        <h{{ intl.titleForce }} class="title newscast-teaser-title text-uppercase fw-700 text-primary mb-5">{{ intl.title|raw }}</h{{ intl.titleForce }}>
+        <h{{ intl.titleForce }} class="title newscast-teaser-title text-uppercase fw-900 text-primary mb-5">{{ intl.title|raw }}</h{{ intl.titleForce }}>
     {% endif %}
     <div class="listing-entities-container">
         {{ macroWebmaster.box({
@@ -195,7 +200,9 @@
              data-autoplay="{{ autoplay }}"
              data-arrows="1"
              data-dots="0"
-             data-offset="250"
+             {# Marge reservee a droite : elle regle a la fois la largeur des slides
+                ((piste - offset) / 3) et la part visible de la 4e carte. #}
+             data-offset="50"
              data-offset-medium-pc="50"
              data-offset-mini-pc="50"
              data-offset-tablet="50"
@@ -211,9 +218,9 @@
                 <ul class="splide__list{% if not asMulti %} w-100{% endif %}">
                     {% for entity in entities %}
                         {% if asMulti %}
-                            {{ macro.multi(websiteTemplate, autoplay, promoteFirst, colSizeFirst, teaser, entity, loop.index, entities, thumbConfiguration) }}
+                            {{ macro.multi(websiteTemplate, autoplay, promoteFirst, colSizeFirst, teaser, entity, loop.index, entities) }}
                         {% else %}
-                            {{ macro.single(websiteTemplate, autoplay, teaser, entity, loop.index, entities, thumbConfiguration) }}
+                            {{ macro.single(websiteTemplate, autoplay, teaser, entity, loop.index, entities) }}
                         {% endif %}
                     {% endfor %}
                 </ul>

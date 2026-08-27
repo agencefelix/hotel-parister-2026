@@ -28,7 +28,7 @@
             text-transform: uppercase;
             font-size: rem(14px);
             // !important nécessaire : surcharge l'utilitaire .fw-600 (lui-même !important).
-            font-weight: $font-weight-bold !important;
+            font-weight: $font-weight-black !important;
             letter-spacing: .2em;
             line-height: 1.4;
             color: $primary;
@@ -58,14 +58,21 @@
         }
     }
 
-    // Image à la taille de la vignette (annule le width:100% de blocks/_card.scss).
+    // Format verrouillé : la vignette occupe toute la largeur de carte et garde le ratio
+    // maquette. Un visuel mal dimensionné est recadré au lieu de décaler le titre.
     .card .card-header {
 
         picture,
-        picture img,
         .img-loader-wrap {
-            width: auto;
+            width: 100%;
             max-width: 100%;
+        }
+
+        picture img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 290 / 371;
+            object-fit: cover;
         }
     }
 
@@ -81,6 +88,7 @@
 .newscast-teaser-title {
     font-size: rem(24px);
     line-height: rem(24px);
+    font-weight: $font-weight-black; // recette 6 : titres épaissis
 }
 
 // Flèches overlay sur les bords, centrées sur l'image (maquette : prev gauche / next droite).
@@ -94,7 +102,11 @@
 
     .card {
 
-        max-width: 290px !important;
+        // La carte est bornée, le slide reste plus large (marge de 250px réservée à droite) :
+        // 3 cartes entières et la 4e coupée. La part visible de la 4e vaut cette marge, donc
+        // plus la carte est large, plus la coupe est franche. Ratio maquette 290/371 conservé.
+        max-width: rem(340px) !important;
+        width: 100%;
 
         * {
             text-align: center !important;

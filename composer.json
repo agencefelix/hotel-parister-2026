@@ -98,10 +98,12 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "php bin/console fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "php bin/console fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json"
         ]
     },
     "conflict": {

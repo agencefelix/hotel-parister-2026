@@ -84,3 +84,7 @@ blackfire.msi
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###
+
+# Espace de travail playwright-cli (recettage)
+.playwright/
+.playwright-cli/

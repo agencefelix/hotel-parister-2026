@@ -5,6 +5,14 @@ declare(strict_types=1);
 namespace App\EventListener;
 
 use App\Entity\Api\Api;
+use App\Entity\Api\Custom;
+use App\Entity\Api\CustomIntl;
+use App\Entity\Api\Facebook;
+use App\Entity\Api\FacebookIntl;
+use App\Entity\Api\Google;
+use App\Entity\Api\GoogleIntl;
+use App\Entity\Api\Instagram;
+use App\Entity\Api\InstagramIntl;
 use App\Entity\Core\Configuration;
 use App\Entity\Core\Website;
 use App\Entity\Information\Information;
@@ -288,8 +296,19 @@ class DoctrineEventsListener
     {
         $filesystem = new Filesystem();
         $entityClassname = str_replace('Proxies\__CG__\\', '', get_class($entity));
+        // Les sous-entités d'Api portent les valeurs réellement lues par le front
+        // (Axeptio, Analytics, Tag Manager…) : sans elles, une modification en
+        // back-office restait invisible tant que le cache n'était pas purgé à la main.
         $entitiesCache = [
             Api::class => ['apimodel'],
+            Custom::class => ['apimodel'],
+            CustomIntl::class => ['apimodel'],
+            Facebook::class => ['apimodel'],
+            FacebookIntl::class => ['apimodel'],
+            Google::class => ['apimodel'],
+            GoogleIntl::class => ['apimodel'],
+            Instagram::class => ['apimodel'],
+            InstagramIntl::class => ['apimodel'],
             SeoConfiguration::class => ['apimodel'],
             Website::class => ['apimodel', 'domains'],
             Configuration::class => ['pages'],

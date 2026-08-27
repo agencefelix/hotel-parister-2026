@@ -100,7 +100,7 @@ class LocaleService
     public function getLocalesWebsites(?WebsiteModel $website = null): array
     {
         $protocol = $_ENV['APP_PROTOCOL'].'://';
-        $localesWebsites = [];
+        $candidates = [];
         $dirname = $this->coreLocator->cacheDir().'/domains.cache.json';
         $filesystem = new Filesystem();
 
@@ -110,9 +110,7 @@ class LocaleService
             $configurationDomains = isset($jsonDomains[$configurationId]) ? (array) $jsonDomains[$configurationId] : [];
             foreach ($configurationDomains as $locale => $domains) {
                 foreach ($domains as $domain) {
-                    if ($domain->asDefault) {
-                        $localesWebsites[$locale] = $protocol.$domain->name;
-                    }
+                    $candidates[$locale][] = ['name' => $domain->name, 'asDefault' => (bool) $domain->asDefault];
                 }
             }
         } elseif ($website instanceof WebsiteModel) {
@@ -122,13 +120,65 @@ class LocaleService
             }
             $domainsDb = $this->entityManager->getRepository(Domain::class)->findByConfiguration($configuration->entity);
             foreach ($domainsDb as $domain) {
-                if ($domain->isAsDefault()) {
-                    $localesWebsites[$domain->getLocale()] = $protocol.$domain->getName();
-                }
+                $candidates[$domain->getLocale()][] = ['name' => $domain->getName(), 'asDefault' => $domain->isAsDefault()];
+            }
+        }
+
+        $localesWebsites = [];
+        foreach ($candidates as $locale => $domains) {
+            $best = $this->closestDomain($domains);
+            if ($best) {
+                $localesWebsites[$locale] = $protocol.$best;
             }
         }
 
         return $localesWebsites;
+    }
+
+    /**
+     * Pick the domain that belongs to the current environment.
+     *
+     * A locale can declare several domains (production, preprod, local). Falling back on
+     * the "default" flag alone sent visitors of one environment to another one — typically
+     * a `.local` host exposed in the language switcher. The domain sharing the longest
+     * suffix with the host currently being browsed wins; the default flag only breaks ties.
+     *
+     * @param array<int, array{name: string, asDefault: bool}> $domains
+     */
+    private function closestDomain(array $domains): ?string
+    {
+        $host = $this->request?->getHost() ?? '';
+        $best = null;
+        $bestScore = -1;
+
+        foreach ($domains as $domain) {
+            $score = $this->commonSuffixLength($host, (string) $domain['name']) * 2 + (int) $domain['asDefault'];
+            if ($score > $bestScore) {
+                $bestScore = $score;
+                $best = $domain['name'];
+            }
+        }
+
+        return $best;
+    }
+
+    /**
+     * Number of trailing dot separated labels shared by two hosts.
+     */
+    private function commonSuffixLength(string $host, string $domain): int
+    {
+        $hostLabels = array_reverse(explode('.', strtolower($host)));
+        $domainLabels = array_reverse(explode('.', strtolower($domain)));
+        $length = 0;
+
+        foreach ($hostLabels as $index => $label) {
+            if (!isset($domainLabels[$index]) || $domainLabels[$index] !== $label) {
+                break;
+            }
+            ++$length;
+        }
+
+        return $length;
     }
 
     /**

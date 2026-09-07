@@ -14,9 +14,13 @@ require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 /** To set under maintenance status */
 const UNDER_MAINTENANCE = false;
 const MAINTENANCE_ALLOWED_IPS = [];
+const MAINTENANCE_TRUSTED_PROXIES = [];
+
 if (UNDER_MAINTENANCE) {
-    $_ENV['UNDER_MAINTENANCE'] = UNDER_MAINTENANCE;
-    $_ENV['MAINTENANCE_ALLOWED_IPS'] = MAINTENANCE_ALLOWED_IPS;
+    require_once __DIR__.'/maintenance/maintenance.php';
+    if (!Maintenance\Gate::isAllowedIp(MAINTENANCE_ALLOWED_IPS, MAINTENANCE_TRUSTED_PROXIES)) {
+        Maintenance\Gate::render();
+    }
 }
 
 (new Dotenv())->bootEnv(dirname(__DIR__).'/.env');

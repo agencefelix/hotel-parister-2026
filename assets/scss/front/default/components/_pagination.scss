@@ -98,4 +98,13 @@
             }
         }
     }
+
+    // Cible tactile : 24 px minimum (WCAG 2.5.8), sans changer l'aspect des chiffres.
+    .page-link {
+        min-width: rem(24px);
+        min-height: rem(24px);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 }

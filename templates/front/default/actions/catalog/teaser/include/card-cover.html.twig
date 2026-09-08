@@ -11,7 +11,7 @@
     desktop: {width: 470, height: 600}
 } %}
 
-<a href="{{ targetLink }}" class="card-cover d-block position-relative h-100{{ extraClass }}"{% if targetLink %} data-toggle="preloader"{% endif %} aria-label="{{ fullTitle|striptags }}">
+<a href="{{ targetLink }}" class="card-cover d-block position-relative h-100{{ extraClass }}"{% if targetLink %} data-toggle="preloader"{% endif %}>
     {% if media %}
         <div class="card-cover-media">
             {{ media|file(thumbConfiguration, {

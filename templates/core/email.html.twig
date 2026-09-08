@@ -16,7 +16,7 @@
     <a href="{{ mailto }}"{% if not only_href %} data-mailto="{{ email|encrypt(website) }}"{% endif %}
        class="email-link position-relative d-inline-flex align-items-center{% if not only_href %} loading{% else %} only-href{% endif %}{{ btnClasses }}"
        data-id="{{ website.id }}"
-       aria-label="{{ "E-mail"|trans|striptags }}"
+{% if not only_href %} aria-label="{{ "E-mail"|trans|striptags }}"{% endif %}
        data-toggle="tooltip"
        title="{{ "Envoyer un email"|trans|raw }}">
         {% if asBtn and labelHTML %}

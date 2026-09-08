@@ -131,7 +131,7 @@
                                     {% set collapseId = 'feature-'~idx %}
                                     {% set isFirst = loop.first %}
                                     <div class="accordion-item">
-                                        <h3 class="accordion-header">
+                                        <h2 class="accordion-header">
                                             <button class="accordion-button text-uppercase{% if not isFirst %} collapsed{% endif %}" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#{{ collapseId }}"
                                                     aria-expanded="{{ isFirst ? 'true' : 'false' }}" aria-controls="{{ collapseId }}">
@@ -141,7 +141,7 @@
                                                     <path d="M12 4L12 20M4 12L12 20L20 12" stroke="currentColor" stroke-width="4"/>
                                                 </svg>
                                             </button>
-                                        </h3>
+                                        </h2>
                                         <div id="{{ collapseId }}" class="accordion-collapse collapse{% if isFirst %} show{% endif %}" data-bs-parent="#product-features">
                                             <div class="accordion-body px-0 px-md-4 pt-0 pt-md-4">
                                                 <ul class="ms-0 product-feature-list">

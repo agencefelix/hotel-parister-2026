@@ -48,7 +48,7 @@
                             <div class="spinner-border text-{{ spinnerColor }}" role="status"></div>
                         </div>
                     {% endif %}
-                    <div class="inner position-relative overflow-hidden{% if radius %} {{ radiusClass }}{% endif %}" style="background-image: url({{ absolute_url(asset(loaderSrc)) }});">
+                    <div class="inner position-relative overflow-hidden{% if radius %} {{ radiusClass }}{% endif %}"{% if loaderSrc %} style="background-image: url({{ absolute_url(asset(loaderSrc)) }});"{% endif %}>
                         <img src="{{ loaderSvgSrc }}" alt="SVG Loader" class="img-fluid force-size{% if class %} {{ class }}{% endif %}" width="{{ width }}">
                     </div>
                 </div>

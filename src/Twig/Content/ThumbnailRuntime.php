@@ -153,7 +153,9 @@ class ThumbnailRuntime implements RuntimeExtensionInterface
             $options['loaderFilename'] = $filename;
             $options['lazyFiles'] = $options['onlyLazy'] = !$generateThumbs;
             $thumbnails = !isset($options['beforeRender']) && ($generateThumbs || $options['lazyFiles']) ? $this->imageThumbnail->execute($media, $thumbs, $options) : [];
-            $options['loaderSrc'] = $options['dataSource'] = !empty($thumbnails['dataSource']) ? $thumbnails['dataSource'] : $src;
+            // dataSource est un chemin : $src peut etre une entite (relation sans vignette generee).
+            $dataSource = !empty($thumbnails['dataSource']) ? $thumbnails['dataSource'] : $src;
+            $options['loaderSrc'] = $options['dataSource'] = is_string($dataSource) ? $dataSource : null;
             $options['loaderSvgSrc'] = !empty($thumbnails['lazyFileSvg']) ? $thumbnails['lazyFileSvg'] : (is_string($src) ? $src : 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
             $options['entity'] = $src;
             $options['thumbs'] = $thumbnails['thumbs'] ?? null;

@@ -70,7 +70,7 @@
                 {% else %}
                     {% if not lastEntity %}
                         <div class="col-12 pt-4 pb-3 pt-md-5 pb-md-4">
-                            {% include 'front/'~websiteTemplate~'/include/alert.html.twig' with {alert: 'info', message: "Aucune publication pour le moment."|trans} only %}
+                            {% include 'front/'~websiteTemplate~'/include/alert.html.twig' with {alert: 'primary', message: "Aucune publication pour le moment."|trans} only %}
                         </div>
                     {% endif %}
                 {% endfor %}

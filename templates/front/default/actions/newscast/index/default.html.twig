@@ -38,23 +38,27 @@
             {% for entity in entities %}
                 {% if not lastEntity or entity.id != lastEntity.id %}
                     {% set entityEvent = entity.pastDate ? true : asEvent %}
-                    <div class="col-md-6 col-xl-4 mb-5 item">
+                    <div class="col-md-6 col-lg-4 col-xl-3 mb-5 item">
                         {% if entityEvent %}
                             {{ macroCard.eventCard(entity) }}
                         {% else %}
                             {{ macroCard.standard({
                                 card: 'article',
+                                class: 'news-card',
                                 entity: entity,
                                 thumbConfiguration: thumbConfiguration,
                                 thumbPlaceholder: true,
                                 displayThumbnail: asListing ? listing.displayThumbnail : null,
-                                formatDate: asListing ? listing.formatDate : 'dd/MM/Y',
-                                betweenDates: entity.asEvent,
-                                showDate: asListing and not hideDate or not asListing and not entity.category.hideDate,
-                                showCategory: asListing and displayCategory or not asListing and entity.category.displayCategory,
-                                showLink: true,
-                                linkStyle: 'btn btn-primary',
-                                colSize: 4,
+                                mediaWidth: 340,
+                                mediaHeight: 435,
+                                titleForce: 3,
+                                disabledSubTitle: true,
+                                disabledIntro: true,
+                                disabledBody: true,
+                                showDate: false,
+                                showCategory: false,
+                                showLink: false,
+                                colSize: 3,
                                 webmaster: {
                                     title: "Éditer l'actualité"|trans([], 'front_webmaster'),
                                     role: 'ROLE_NEWSCAST',
@@ -66,7 +70,7 @@
             {% else %}
                 {% if not lastEntity %}
                     <div class="col-12 pt-4 pb-3 pt-md-5 pb-md-4 d-flex">
-                        {% include 'front/'~websiteTemplate~'/include/alert.html.twig' with {alert: 'info', display: 'star', alertClass: 'mx-auto', message: "Aucune publication pour le moment."|trans} only %}
+                        {% include 'front/'~websiteTemplate~'/include/alert.html.twig' with {alert: 'primary', alertClass: 'mx-auto', message: "Aucune publication pour le moment."|trans} only %}
                     </div>
                 {% endif %}
             {% endfor %}
@@ -94,6 +98,17 @@
             </div>
         {% endif %}
 
+    </div>
+
+{% elseif entities is defined and not lastEntity %}
+
+    {# Index encore vide : on affiche le message plutôt qu'une zone blanche. #}
+    <div class="news-index-container container position-relative pt-4 pb-3 pt-md-5 pb-md-4">
+        <div class="row">
+            <div class="col-12 d-flex">
+                {% include 'front/'~websiteTemplate~'/include/alert.html.twig' with {alert: 'primary', alertClass: 'mx-auto', message: "Aucune publication pour le moment."|trans} only %}
+            </div>
+        </div>
     </div>
 
 {% endif %}

@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+/* -----------------------------------------------------------------
+
+    Module: Front news card
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
+
+    Carte d'actualité, partagée par l'index, le teaser et les entités associées
+    (macros/card.html.twig). Référence unique : la carte du teaser « Derniers
+    événements » de l'accueil — visuel au format 290/371 et titre en capitales or.
+
+------------------------------------------------------------------------------------------ */
+
+.news-card {
+
+    // Vignette : format verrouillé, recadrage plutôt que décalage du titre.
+    .card-header {
+
+        overflow: hidden;
+
+        picture,
+        .img-loader-wrap {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 290 / 371;
+            object-fit: cover;
+            transition: transform .6s ease;
+        }
+    }
+
+    &:hover .card-header img {
+        transform: scale(1.06);
+    }
+
+    .card-body {
+        padding-top: rem(24px);
+        text-align: center;
+    }
+
+    // Titre : capitales or, échelle du teaser de l'accueil.
+    .title,
+    .title-link {
+
+        text-transform: uppercase;
+        font-size: rem(14px);
+        // !important nécessaire : surcharge l'utilitaire .fw-600 (lui-même !important).
+        font-weight: $font-weight-black !important;
+        letter-spacing: .2em;
+        line-height: 1.4;
+        color: $primary;
+        margin-bottom: 0;
+    }
+
+    .card-body > a,
+    .title-link {
+        text-decoration: none;
+    }
+}

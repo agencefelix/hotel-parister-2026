@@ -2,6 +2,7 @@
 
 {% import _self as macro %}
 {% import 'core/webmaster-edit.html.twig' as macroWebmaster %}
+{% import 'front/'~websiteTemplate~'/include/macros/card.html.twig' as macroCard %}
 
 {% macro mediaRelation(entity) %}
     {# Format verrouillé en CSS (ratio 290/371) : vignettes demandées à la taille d'affichage
@@ -89,27 +90,31 @@
 
 {% macro single(websiteTemplate, autoplay, teaser, entity, loopIndex, entities) %}
     <li class="splide__slide col-12 p-0{% if loopIndex > teaser.itemsPerSlide %} d-none{% endif %}">
-        <div class="card bg-light d-inline-block border-0 h-100 w-100">
-            {% if entity.showImage %}
-                <div class="card-header bg-transparent p-0 border-0 text-center">
-                    {{ macro.mediaRelation(entity) }}
-                </div>
-            {% endif %}
-            <div class="card-body bg-white px-4 border-0 pt-4">
-                {{ macro.body(entity) }}
-            </div>
-            <div class="card-footer bg-white px-4 border-0 pt-0 pb-4">
-                <div class="row">
-                    <div class="col-md-6 d-flex align-items-center">
-                        {% if entity.showLinkCard %}
-                            {{ macro.showLink(websiteTemplate, entity) }}
-                        {% endif %}
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-md-end align-items-center">
-                        {{ macro.arrows(entity, autoplay, 'end', 'primary', true, 'bottom') }}
-                    </div>
-                </div>
-            </div>
+{% set cardArgs = {
+            card: 'article',
+            class: 'news-card',
+            entity: entity,
+            intl: entity.intl,
+            media: entity.mainMedia,
+            websiteTemplate: websiteTemplate,
+            thumbPlaceholder: true,
+            mediaWidth: 340,
+            mediaHeight: 435,
+            titleForce: 3,
+            truncate: 150,
+            showDate: entity.showDate,
+            showCategory: entity.showCategory,
+            formatDate: entity.category.formatDate is defined ? entity.category.formatDate : 'dd MMM Y',
+            disabledSubTitle: not entity.showSubTitle,
+            disabledIntro: not entity.showIntro,
+            disabledBody: not entity.showBody,
+            showLink: entity.showLinkCard,
+            linkStyle: 'btn btn-outline-dark',
+        } %}
+        {# Carte mutualisée avec l'index : macros/card.html.twig. #}
+        {{ macroCard.standard(cardArgs) }}
+        <div class="d-flex justify-content-end">
+            {{ macro.arrows(entity, autoplay, 'end', 'primary', true, 'bottom') }}
         </div>
     </li>
 {% endmacro %}
@@ -131,25 +136,33 @@
             role: 'ROLE_NEWSCAST',
             path: path('admin_newscast_edit', {website: teaser.website.id, newscast: entity.id})
         }) }}
-        <div class="card bg-transparent d-inline-block border-0 w-100">
-            {% if entity.showImage %}
-                <div class="card-header bg-transparent p-0 border-0">
-                    {{ macro.mediaRelation(entity) }}
-                </div>
-            {% endif %}
-            <div class="card-body bg-transparent p-0 border-0 pt-4">
-                {{ macro.body(entity) }}
-            </div>
-            {% if entity.showLinkCard %}
-                <div class="card-footer bg-transparent p-0 border-0 pt-3">
-                    {{ macro.showLink(websiteTemplate, entity) }}
-                    {% set arrowsClasses = loopIndex != 2 ? 'mt-4 mt-md-5 d-md-none' : 'mt-4 mt-md-5' %}
-                    {% if arrows %}
-                        {{ macro.arrows(entity, autoplay, 'end', 'primary ', true, 'bottom', arrowsClasses) }}
-                    {% endif %}
-                </div>
-            {% endif %}
-        </div>
+{% set cardArgs = {
+            card: 'article',
+            class: 'news-card',
+            entity: entity,
+            intl: entity.intl,
+            media: entity.mainMedia,
+            websiteTemplate: websiteTemplate,
+            thumbPlaceholder: true,
+            mediaWidth: 340,
+            mediaHeight: 435,
+            titleForce: 3,
+            truncate: 150,
+            showDate: entity.showDate,
+            showCategory: entity.showCategory,
+            formatDate: entity.category.formatDate is defined ? entity.category.formatDate : 'dd MMM Y',
+            disabledSubTitle: not entity.showSubTitle,
+            disabledIntro: not entity.showIntro,
+            disabledBody: not entity.showBody,
+            showLink: entity.showLinkCard,
+            linkStyle: 'btn btn-outline-dark',
+        } %}
+        {# Carte mutualisée avec l'index : macros/card.html.twig. #}
+        {{ macroCard.standard(cardArgs) }}
+        {% if entity.showLinkCard and arrows %}
+            {% set arrowsClasses = loopIndex != 2 ? 'mt-4 mt-md-5 d-md-none' : 'mt-4 mt-md-5' %}
+            {{ macro.arrows(entity, autoplay, 'end', 'primary ', true, 'bottom', arrowsClasses) }}
+        {% endif %}
     </li>
 {% endmacro %}
 

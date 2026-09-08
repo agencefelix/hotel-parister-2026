@@ -35,4 +35,21 @@ class CustomizedController extends FrontController
             'block' => $block,
         ]);
     }
+
+    /**
+     * Bons cadeaux : widget Bonkdo.
+     *
+     * @throws \Exception
+     */
+    public function gifts(?Block $block = null): Response
+    {
+        $website = $this->getWebsite();
+        $websiteTemplate = $website->configuration->template;
+
+        return $this->render('front/'.$websiteTemplate.'/actions/customized/gifts.html.twig', [
+            'websiteTemplate' => $websiteTemplate,
+            'website' => $website,
+            'block' => $block,
+        ]);
+    }
 }

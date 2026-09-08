@@ -1,1 +1,25 @@
-<iframe style="width: 100%; border: 0" src="https://hotelparister.bonkdo.com?embed=true&hide_main_title_description=false&hide_footer=false&hide_whychooseus=false&hide_create_money_pot=false&hide_group_payment=false&hide_shared_gifts_header=false&hide_whole_shared_gifts=false&hide_giftcards=false&hide_vouchers=false"></iframe><script src="https://hotelparister.bonkdo.com/static/js/iframeResizer.min.js"></script><script>iFrameResize()</script>
+{% trans_default_domain 'front_default' %}
+
+{# Widget Bonkdo. La boutique existe en français et en anglais : /fr et /en. #}
+{% set giftsLocale = app.request.locale in ['en'] ? 'en' : 'fr' %}
+{% set giftsParams = 'embed=true'
+    ~ '&hide_main_title_description=false'
+    ~ '&hide_footer=false'
+    ~ '&hide_whychooseus=false'
+    ~ '&hide_create_money_pot=false'
+    ~ '&hide_group_payment=false'
+    ~ '&hide_shared_gifts_header=false'
+    ~ '&hide_whole_shared_gifts=false'
+    ~ '&hide_giftcards=false'
+    ~ '&hide_vouchers=false'
+    ~ '&locale='~giftsLocale
+%}
+
+{# min-height : la boutique est redimensionnee par iframeResizer apres chargement,
+   la reservation limite le decalage de mise en page. #}
+<iframe src="https://hotelparister.bonkdo.com/{{ giftsLocale }}/?{{ giftsParams }}"
+        title="{{ "Boutique de bons cadeaux"|trans }}"
+        loading="lazy"
+        style="width: 100%; min-height: 80vh; border: 0"></iframe>
+<script src="https://hotelparister.bonkdo.com/static/js/iframeResizer.min.js"></script>
+<script>iFrameResize()</script>

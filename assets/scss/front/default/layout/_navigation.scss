@@ -807,6 +807,7 @@
     &:hover, &.active {
         color: $primary;
         opacity: .65;
+        text-decoration: underline;
     }
 }
 

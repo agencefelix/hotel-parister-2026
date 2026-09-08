@@ -18,10 +18,17 @@
             {% for media in medias %}
                 <div class="grid-item col-sm-6 col-md-6 col-lg-{{ colSize }} pb-4 text-center">
                     <div class="media-wrap overflow-hidden">
+                        {# Vignette calee sur la largeur reelle d'une colonne : la mosaique
+                           recevait le gabarit desktop sur tous les ecrans. #}
                         {{ media|file(thumbConfiguration, {
                             popupGallery: popup and not media.hideHover,
                             maxWidth: mediaWidth,
                             maxHeight: mediaHeight,
+                            screensSizes: {
+                                mobile: {width: 400},
+                                tablet: {width: 400},
+                                desktop: {width: 480}
+                            },
                             class: imgClass,
                             activeLazy: true,
                             colSize: colSize }) }}

@@ -29,11 +29,14 @@
 
     <div class="gdpr-activation-placeholder placeholder-{{ service }} text-center card mb-0 mx-auto">
         <div class="card-header bg-primary">
+            {# Dimensions intrinseques par service : sans elles le navigateur ne peut pas
+               reserver la place du logo (decalage de mise en page). #}
             {% set sizes = {
                 youtube: {width: 43, height: 30},
                 'apps-elfsight': {width: 35, height: 35},
+                dedge: {width: 70, height: 30},
             } %}
-            {% set width = sizes[code].width is defined ? sizes[code].width : 'auto' %}
+            {% set width = sizes[code].width is defined ? sizes[code].width : null %}
             {% set height = sizes[code].height is defined ? sizes[code].height : 30 %}
             <div class="img-wrap bg-white d-inline-flex align-items-center justify-content-center position-relative">
                 <img data-src="{{ image }}"
@@ -41,7 +44,7 @@
                      data-toggle="tooltip"
                      alt="{{ image_title|striptags }}"
                      title="{{ image_title|striptags }}"
-                     width="{{ width }}" height="{{ height }}"
+                     {% if width %}width="{{ width }}" {% endif %}height="{{ height }}"
                      class="lazy-load img-fluid" />
             </div>
         </div>

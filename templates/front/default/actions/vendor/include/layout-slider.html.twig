@@ -2,7 +2,7 @@
 
 {% if entity.medias|length > 0 %}
     {% if 'thumbnails' == slideType %}
-        {% include 'front/'~websiteTemplate~'/actions/slider/template/splide.html.twig' with {
+        {% include 'front/'~websiteTemplate~'/actions/slider/template/bootstrap.html.twig' with {
             medias: entity.medias,
             thumbConfiguration: thumbConfigurationView,
             arrowsSide: 'side',

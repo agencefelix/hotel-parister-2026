@@ -18,7 +18,7 @@ export default function (maps, autoCenterMap = null) {
         map.invalidateSize();
     }
 
-    /** Geometry zones */
+    // Geometry zones
     if (geometryZones) {
         Promise.all([
             fetch('/geo-json/geo-lite.json').then(res => res.json())
@@ -64,11 +64,17 @@ export default function (maps, autoCenterMap = null) {
 
         mapBox.classList.add('initialized');
 
+        const API_KEY = 'cb1_2rwu_1_5d3a6bd1f67ad4545309ad04';
+        const DEFAULT_LAYER = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+
         let allMarkers = [];
         let mapContainer = mapBox.closest('.map-container');
         let loader = mapContainer.querySelector('.loader');
         let mapBoxId = mapBox.getAttribute('id');
-        let layerUrl = mapBox.dataset.layer ? mapBox.dataset.layer : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+        let layerUrl = mapBox.dataset.layer || DEFAULT_LAYER;
+        if (layerUrl.indexOf('cartocdn.com') !== -1 && layerUrl.indexOf('key=') === -1) {
+            layerUrl += (layerUrl.indexOf('?') === -1 ? '?' : '&') + 'key=' + API_KEY;
+        }
         let data = mapBox.querySelector('.data-map');
         let isMultiple = mapBox.dataset.multiple;
         let haveClusters = parseInt(data.dataset.markerClusters) === 1;
@@ -146,7 +152,7 @@ export default function (maps, autoCenterMap = null) {
                                 opacity: 0.9
                             }
                         }).addTo(map);
-                        /** Zoom automatique sur le tracé */
+                        // Zoom automatique sur le tracé
                         map.fitBounds(trackLayer.getBounds(), {
                             padding: [40, 40],
                             maxZoom: 14

@@ -10,10 +10,11 @@
 {% if seo.card is defined and seo.card %}
     {% set compagnyNameElement = 'strong' %}
 {% endif %}
+{% set currentLocale = app.request.locale in ['en'] ? 'en' : 'fr' %}
 {# Le CTA de réservation pointe vers le moteur (`/reservation`), comme « Réserver cette chambre ». #}
-{% set bookingUrl = path('front_index', {url: 'reservation'}) %}
-{% set giftUrl = path('front_index', {url: 'bons-cadeaux'}) %}
-{% set wellnessUrl = path('front_index', {url: 'sport-bien-etre'}) %}
+{% set bookingUrl = path('front_index', {url: mainPages['reservation'].code is defined ? mainPages['reservation'].code : null}) %}
+{% set giftUrl = path('front_index', {url: mainPages['gift-cards'].code is defined ? mainPages['gift-cards'].code : null}) %}
+{% set wellnessUrl = path('front_index', {url: mainPages['gift-cards'].code is defined ? mainPages['gift-cards'].code : null}) %}
 
 <div id="menu-container-{{ slug }}" class="menu-container w-100 as-sticky always-sticky {{ dropdownClass }}"
      data-expand="{{ expand }}"
@@ -67,9 +68,10 @@
             {% endif %}
             <div class="flex-fill d-flex align-items-center justify-content-end mt-2 pt-1 mt-lg-0 pt-lg-0">
                 <a href="{{ bookingUrl }}" class="nav-bar-link text-uppercase fw-bold" data-toggle="preloader">{{ "Réserver"|trans|raw }}</a>
-                {# Sous md le nom textuel de marque (au scroll) ne laisse pas la place aux deux liens. #}
-                <span class="nav-bar-sep mx-3 d-none d-md-inline-block" aria-hidden="true"></span>
-                <a href="{{ giftUrl }}" class="nav-bar-link text-uppercase fw-bold d-none d-md-inline-block" data-toggle="preloader">{{ "Bons cadeaux"|trans|raw }}</a>
+                {% if currentLocale == 'fr' %}
+                    <span class="nav-bar-sep mx-3 d-none d-md-inline-block" aria-hidden="true"></span>
+                    <a href="{{ giftUrl }}" class="nav-bar-link text-uppercase fw-bold d-none d-md-inline-block" data-toggle="preloader">{{ "Bons cadeaux"|trans|raw }}</a>
+                {% endif %}
             </div>
         </div>
     </header>
@@ -110,8 +112,10 @@
                 {% endif %}
                 <div class="flex-fill d-flex align-items-center justify-content-end mt-2 pt-1 mt-lg-0 pt-lg-0">
                     <a href="{{ bookingUrl }}" class="mega-topbar-link text-uppercase fw-bold" data-toggle="preloader">{{ "Réserver"|trans|raw }}</a>
-                    <span class="mega-topbar-sep mx-3 d-none d-lg-inline-block" aria-hidden="true"></span>
-                    <a href="{{ giftUrl }}" class="mega-topbar-link text-uppercase fw-bold d-none d-lg-inline-block" data-toggle="preloader">{{ "Bons cadeaux"|trans|raw }}</a>
+                    {% if currentLocale == 'fr' %}
+                        <span class="mega-topbar-sep mx-3 d-none d-lg-inline-block" aria-hidden="true"></span>
+                        <a href="{{ giftUrl }}" class="mega-topbar-link text-uppercase fw-bold d-none d-lg-inline-block" data-toggle="preloader">{{ "Bons cadeaux"|trans|raw }}</a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -161,16 +165,18 @@
 
                     <div class="mega-aside-body d-flex flex-column flex-grow-1">
                         <ul class="reset mega-cta-list">
-                            <li>
-                                <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase px-3 px-lg-4" href="{{ giftUrl }}" data-toggle="preloader">
-                                    <span>{{ "Bons cadeaux"|trans|raw }}</span>{{ include('front/'~websiteTemplate~'/actions/menu/include/cta-arrow.html.twig') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase px-3 px-lg-4" href="{{ wellnessUrl }}" data-toggle="preloader">
-                                    <span>{{ "Offres bien-être"|trans|raw }}</span>{{ include('front/'~websiteTemplate~'/actions/menu/include/cta-arrow.html.twig') }}
-                                </a>
-                            </li>
+                            {% if currentLocale == 'fr' %}
+                                <li>
+                                    <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase px-3 px-lg-4" href="{{ giftUrl }}" data-toggle="preloader">
+                                        <span>{{ "Bons cadeaux"|trans|raw }}</span>{{ include('front/'~websiteTemplate~'/actions/menu/include/cta-arrow.html.twig') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase px-3 px-lg-4" href="{{ wellnessUrl }}" data-toggle="preloader">
+                                        <span>{{ "Offres bien-être"|trans|raw }}</span>{{ include('front/'~websiteTemplate~'/actions/menu/include/cta-arrow.html.twig') }}
+                                    </a>
+                                </li>
+                            {% endif %}
                             <li>
                                 <a class="mega-cta d-flex align-items-center justify-content-between text-uppercase px-3 px-lg-4" href="{{ bookingUrl }}" data-toggle="preloader">
                                     <span>{{ "Réservation"|trans|raw }}</span>{{ include('front/'~websiteTemplate~'/actions/menu/include/cta-arrow.html.twig') }}

@@ -31,7 +31,10 @@ class ResetPasswordController extends AdminController
      *
      * @throws \Exception
      */
-    #[Route('/request', name: 'security_password_request', methods: 'GET|POST')]
+    #[Route([
+        'fr' => '/request',
+        'en' => '/request',
+    ], name: 'security_password_request', methods: 'GET|POST')]
     public function request(Request $request, BaseAuthenticator $baseAuthenticator, ResetPasswordManager $manager)
     {
         $website = $this->getWebsite();
@@ -59,7 +62,10 @@ class ResetPasswordController extends AdminController
      *
      * @throws \Exception
      */
-    #[Route('/confirm/{token}', name: 'security_password_confirm', methods: 'GET|POST')]
+    #[Route([
+        'fr' => '/confirm/{token}',
+        'en' => '/confirm/{token}',
+    ], name: 'security_password_confirm', methods: 'GET|POST')]
     public function confirm(
         Request $request,
         string $token,

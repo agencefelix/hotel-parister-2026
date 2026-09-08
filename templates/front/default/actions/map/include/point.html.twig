@@ -5,7 +5,7 @@
     {% set category = category is defined ? category : null %}
     {% set markerWidth = category ? category.markerWidth : 30 %}
     {% set markerHeight = category ? category.markerHeight : 30 %}
-    {% set marker = marker ? marker : 'uploads/'~website.uploadDirname~'/marker-green.svg' %}
+    {% set marker = marker ? marker : 'uploads/'~website.uploadDirname~'/marker-yellow.svg' %}
     {% set linkAsBtn = 'btn' in point.intl.linkStyle %}
     {% set haveAddress = address.name|striptags|length > 0 %}
     {% set havePhones = point.entity.phones|length > 0 %}

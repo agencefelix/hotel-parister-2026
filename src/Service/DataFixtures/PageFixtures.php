@@ -967,7 +967,7 @@ class PageFixtures
 
             $point = new MapEntity\Point();
             $point->setAdminName('Point principal');
-            $point->setMarker('/uploads/'.$this->website->getUploadDirname().'/marker-blue.svg');
+            $point->setMarker('/uploads/'.$this->website->getUploadDirname().'/marker-yellow.svg');
             $point->setAddress($address);
 
             $map->addPoint($point);

@@ -104,7 +104,9 @@ class BreadcrumbRuntime implements RuntimeExtensionInterface
             $breadcrumbs = $this->setBreadcrumbVars($breadcrumbs);
         }
 
-        return count($breadcrumbs) > 1 || (self::DISPLAY_HOME && count($breadcrumbs) >= 1) ? $breadcrumbs : [];
+        $breadcrumbs = count($breadcrumbs) > 1 || (self::DISPLAY_HOME && count($breadcrumbs) >= 1) ? $breadcrumbs : [];
+
+        return self::DISPLAY_HOME && count($breadcrumbs) > 1 ? $breadcrumbs : [];
     }
 
     /**

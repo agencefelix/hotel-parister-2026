@@ -53,9 +53,9 @@
             <div class="card-header bg-transparent border-0 p-0">
                 {% set haveSize = mediaWidth > 0 and mediaHeight > 0 %}
                 {% if thumbConfiguration and not haveSize %}
-                    {{ media|file(thumbConfiguration, {parentEntity: entity, targetLink: targetLink, isInBox: isInBox, placeholder: thumbPlaceholder, class: mediaClass}) }}
+                    {{ media|file(thumbConfiguration, {parentEntity: entity, targetLink: targetLink, linkTitle: title, isInBox: isInBox, placeholder: thumbPlaceholder, class: mediaClass}) }}
                 {% else %}
-                    {{ media|file(thumbConfiguration, {maxWidth: mediaWidth, maxHeight: mediaHeight, colSize: colSize, zoneFullSize: fullSize, parentEntity: entity, targetLink: targetLink, isInBox: isInBox, placeholder: thumbPlaceholder, class: mediaClass}) }}
+                    {{ media|file(thumbConfiguration, {maxWidth: mediaWidth, maxHeight: mediaHeight, colSize: colSize, zoneFullSize: fullSize, parentEntity: entity, targetLink: targetLink, linkTitle: title, isInBox: isInBox, placeholder: thumbPlaceholder, class: mediaClass}) }}
                 {% endif %}
             </div>
         {% endif %}

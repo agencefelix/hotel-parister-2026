@@ -261,6 +261,8 @@ class ThumbnailRuntime implements RuntimeExtensionInterface
         $this->arguments['block'] = !empty($options['block']) ? $options['block'] : $this->arguments['parentEntity'];
         $this->arguments['lazyLoad'] = $options['lazyLoad'] ?? true;
         $this->arguments['targetLink'] = !empty($options['targetLink']) ? $options['targetLink'] : null;
+        /* Titre de la cible, pour le nom accessible du bouton de survol */
+        $this->arguments['linkTitle'] = !empty($options['linkTitle']) ? $options['linkTitle'] : null;
         $this->arguments['targetBlank'] = $options['targetBlank'] ?? false;
         $this->arguments['fullPopup'] = $options['fullPopup'] = $options['fullPopup'] ?? true;
         $this->arguments['displayPage'] = $options['displayPage'] ?? true;

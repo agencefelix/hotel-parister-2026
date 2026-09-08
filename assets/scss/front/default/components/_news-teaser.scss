@@ -148,7 +148,17 @@
             }
 
             i {
+                transition: color .3s ease-in-out !important;
                 color: $dark !important;
+            }
+
+            @include mediaQuery(min-lg) {
+                &:hover {
+                    i {
+                        transition: color .3s ease-in-out !important;
+                        color: $primary !important;
+                    }
+                }
             }
         }
 

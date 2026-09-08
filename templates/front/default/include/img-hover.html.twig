@@ -17,6 +17,11 @@
 {% set asPopup = popup or popupGallery %}
 {% set title = intl.title is defined and intl.title ? intl.title : (media.media.filename is defined and media.media.filename ? media.media.filename : null) %}
 {% set author = desktop.attr.author is defined ? desktop.attr.author : (media.media.copyright is defined ? media.media.copyright : null) %}
+{# Nom accessible du bouton de survol : le libellé seul (« En savoir plus ») ne dit pas où le lien mène #}
+{% set linkTitle = linkTitle is defined and linkTitle ? linkTitle
+    : (parentEntity.intl.title is defined and parentEntity.intl.title ? parentEntity.intl.title
+    : (intl.title is defined and intl.title ? intl.title : null)) %}
+{% set linkTitle = linkTitle ? linkTitle|htmlEntities : null %}
 
 {% set targetLink = targetLink is defined and targetLink ? targetLink : (imageLinkUrl is defined ? imageLinkUrl : null) %}
 {% set externalLink = intlEntity.externalLink is defined and intlEntity.externalLink ? intlEntity.externalLink : (mediaRelation.intl.externalLink is defined ? mediaRelation.intl.externalLink : false) %}
@@ -85,7 +90,7 @@
                     <div class="wrap d-inline-flex align-items-center justify-content-center px-2">
                         <div class="d-inline-flex flex-column">
                             <i class="icon-plus-circle text-white"></i>
-                            <strong class="label fw-500 text-white mt-2">{{ targetLabel|raw }}</strong>
+                            <strong class="label fw-500 text-white mt-2">{{ targetLabel|raw }}{% if linkTitle %}<span class="visually-hidden">: {{ linkTitle }}</span>{% endif %}</strong>
                         </div>
                     </div>
                 </{{ element }}>

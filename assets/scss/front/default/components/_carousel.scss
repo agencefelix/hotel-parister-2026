@@ -575,14 +575,19 @@
 #body-page .splide .card-cover-media,
 #body-page .splide .card-cover-media picture,
 #body-page .splide .card-cover-media .img-loader-wrap {
-    height: auto !important;
+
+    height: 100% !important;
     width: auto;
 }
 
+// La vignette demandee (470x600) n'est pas toujours atteinte : une source trop petite rend
+// un 464x593 et laissait 7px de voile sous l'image. L'image remplit donc la hauteur de carte.
 #body-page .splide .card-cover-media img {
+
     width: auto;
     max-width: 100%;
-    height: auto !important;
+    height: 100% !important;
+    object-fit: cover;
     aspect-ratio: auto;
 }
 

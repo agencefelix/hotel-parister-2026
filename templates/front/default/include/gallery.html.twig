@@ -17,7 +17,7 @@
              data-masonry='{"percentPosition": true }' data-component="masonry">
             {% for media in medias %}
                 <div class="grid-item col-sm-6 col-md-6 col-lg-{{ colSize }} pb-4 text-center">
-                    <div class="media-wrap radius overflow-hidden">
+                    <div class="media-wrap overflow-hidden">
                         {{ media|file(thumbConfiguration, {
                             popupGallery: popup and not media.hideHover,
                             maxWidth: mediaWidth,

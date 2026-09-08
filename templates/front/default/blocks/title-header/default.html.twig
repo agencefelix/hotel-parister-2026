@@ -36,6 +36,8 @@
                     {{ displayMedia|file(thumbConfiguration, {lazyLoad: false}) }}
                 {% endif %}
             </div>
+            {# Voile de lisibilité : couvre tout l'entête, sous les contenus. #}
+            <span class="header-overlay position-absolute" aria-hidden="true"></span>
         {% endif %}
         <div class="title-content position-relative w-100 px-2">
             <div class="container">

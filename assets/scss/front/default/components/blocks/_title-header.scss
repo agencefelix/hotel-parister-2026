@@ -52,13 +52,10 @@
             min-height: $height-lg;
         }
 
-        /* Voile de lisibilité sur l'image (Figma : noir 30 %). */
-        &::after {
-            content: '';
-            position: absolute;
+        .header-overlay {
             inset: 0;
             z-index: 50;
-            background: rgba($black, .3);
+            background: rgba($black, .5);
             pointer-events: none;
         }
 
@@ -201,8 +198,8 @@
         }
 
         // dégradé sombre (lisibilité) au lieu du voile plat
-        &:after {
-            background: linear-gradient(to bottom, rgba($dark, .25) 0%, rgba($dark, 0) 28%, rgba($dark, 0) 55%, rgba($dark, .55) 100%) !important;
+        .header-overlay {
+            background: linear-gradient(to bottom, rgba($dark, .25) 0%, rgba($dark, 0) 28%, rgba($dark, 0) 55%, rgba($dark, .55) 100%);
         }
 
         .title {

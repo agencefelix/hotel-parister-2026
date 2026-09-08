@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+/* -----------------------------------------------------------------
+
+    Module: Mixin gallery arrow
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
+
+    Flèches de galerie : carré arrondi translucide débordant à mi-bord du visuel,
+    chevron marine. Partagé par la fiche produit et les carrousels de page.
+
+------------------------------------------------------------------------------------------ */
+
+@mixin galleryArrow($overflow: true) {
+
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    // Au-dessus du wrapper de loader d'image, qui monte à 10 et masquerait les flèches.
+    z-index: 500;
+    background-color: rgba($white, .9);
+    border: 0;
+    border-radius: rem(12px);
+    box-shadow: 0 rem(10px) rem(30px) rgba($black, .12);
+    opacity: 1;
+
+    @include mediaQuery(max-md) {
+        width: rem(60px);
+        height: rem(60px);
+    }
+
+    @include mediaQuery(min-md) {
+        width: rem(80px);
+        height: rem(80px);
+    }
+
+    &.carousel-control-prev {
+
+        @include mediaQuery(max-md) {
+            left: if($overflow, rem(-30px), rem(10px));
+        }
+
+        @include mediaQuery(min-md) {
+            left: if($overflow, rem(-40px), rem(16px));
+        }
+    }
+
+    &.carousel-control-next {
+
+        @include mediaQuery(max-md) {
+            right: if($overflow, rem(-30px), rem(10px));
+        }
+
+        @include mediaQuery(min-md) {
+            right: if($overflow, rem(-40px), rem(16px));
+        }
+    }
+
+    i {
+        color: $secondary;
+        font-size: rem(18px);
+    }
+}

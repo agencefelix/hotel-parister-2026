@@ -277,11 +277,14 @@ $enable-breadcrumb: false;
         padding: 0 rem(20px);
     }
 
+    // Échelle alignée sur `.carousel-inner .carousel-caption .caption-title` (30 / lh30) :
+    // les deux bandes portaient le même kicker à deux tailles différentes.
     .caption-title {
         text-transform: uppercase;
         letter-spacing: .25em;
         font-weight: $font-weight-black;
-        font-size: rem(15px);
+        font-size: rem(30px);
+        line-height: rem(30px);
     }
 
     // Filigrane script très large, centré derrière le contenu (Figma 416px, lh316).
@@ -422,50 +425,14 @@ $enable-breadcrumb: false;
    5 ) Sous-titres cursifs + contraste sections
 -----------------------------------*/
 
-// ===== Système typographique (relevé en dev mode Figma) =====
-
-// Scripts cursifs (poids 400) : sous-titres de bande, accent hero.
-.sub-title,
+// Le système typographique des blocs éditoriaux est global : layout/_editorial.scss.
+// Ici uniquement l'accent hero, propre à la home.
 .carousel-home-hero .introduction {
     font-family: $font-script;
     font-weight: $font-weight-normal;
     text-transform: none;
     letter-spacing: 0;
     line-height: 1.05;
-}
-
-// Titre d'intro de bande : 32 / .4em / UPPER (Figma), graisse épaissie (recette 6).
-.layout-block-type-title .title {
-    text-transform: uppercase;
-    font-weight: $font-weight-black;
-    letter-spacing: .4em;
-    font-size: rem(32px);
-    line-height: 1.2;
-}
-
-// Sous-titre script : 96 / lh101 ; -.5em absorbe le leading de la police script.
-.layout-block-type-title .sub-title {
-    font-size: rem(96px);
-    line-height: calc(101 / 96);
-    margin-top: -.5em;
-}
-
-// Texte courant : 16px / 400 (Figma).
-.layout-block-type-text .body,
-.layout-block-type-text p {
-    font-weight: $font-weight-normal;
-    font-size: rem(16px);
-    line-height: 1.4;
-}
-
-// CTA texte (non-bouton) : 14px / 700 / 0.2em / lh17 / UPPER (Figma).
-.layout-zone .layout-block-type-link a:not(.btn),
-.slider-link {
-    text-transform: uppercase;
-    font-weight: $font-weight-black;
-    letter-spacing: .2em;
-    font-size: rem(14px);
-    line-height: calc(17 / 14);
 }
 
 #zone-home-rooms-products .products-slider-multi-teaser-container h2 {

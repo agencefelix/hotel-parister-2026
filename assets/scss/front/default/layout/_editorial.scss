@@ -1,0 +1,210 @@
+@charset "UTF-8";
+
+/* -----------------------------------------------------------------
+
+    Module: Front editorial
+    Copyright: 2026
+    Licensed under MIT (https://github.com/Sebastien74/MIT-LICENSE/blob/main/LICENSE.md)
+    Author: Sébastien FOURNIER <fournier.sebastien@outlook.com>
+
+    1 ) Système typographique des blocs éditoriaux (global)
+    2 ) Mécaniques propres aux pages CMS
+
+------------------------------------------------------------------------------------------ */
+
+/*-----------------------------------
+   1 ) Système typographique des blocs éditoriaux
+-----------------------------------*/
+
+// Relevé en dev mode Figma. Global : la home et les pages CMS partagent la même échelle.
+
+// Sous-titres cursifs (poids 400).
+.sub-title {
+
+    font-family: $font-script;
+    font-weight: $font-weight-normal;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.05;
+}
+
+// Titre d'intro de bande : 32 / .4em / UPPER, graisse épaissie.
+.layout-block-type-title .title {
+
+    text-transform: uppercase;
+    font-weight: $font-weight-black;
+    letter-spacing: .4em;
+    font-size: rem(32px);
+    line-height: 1.2;
+}
+
+// Sous-titre script : 96px. La police a de très longs jambages (glyphes ~1,7em), si bien
+// qu'un interligne de 1,05em écartait démesurément un sous-titre passé sur deux lignes.
+// L'interligne est resserré et la marge négative recalculée d'autant — (1.0521 - .72) / 2 —
+// pour que la première ligne reste exactement là où elle était sur le titre.
+.layout-block-type-title .sub-title {
+
+    font-size: rem(96px);
+    line-height: .72;
+    margin-top: -.334em;
+}
+
+// Texte courant : 16px / 400.
+.layout-block-type-text .body,
+.layout-block-type-text p {
+
+    font-weight: $font-weight-normal;
+    font-size: rem(16px);
+    line-height: 1.4;
+}
+
+// Chapô des blocs texte : capitales espacées, au-dessus du corps de texte.
+.layout-block-type-text .introduction {
+
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    font-size: rem(14px);
+    line-height: calc(17 / 14);
+}
+
+// CTA texte (non-bouton) : 14px / 700 / 0.2em / lh17 / UPPER.
+.layout-zone .layout-block-type-link a:not(.btn),
+.slider-link {
+
+    text-transform: uppercase;
+    font-weight: $font-weight-black;
+    letter-spacing: .2em;
+    font-size: rem(14px);
+    line-height: calc(17 / 14);
+}
+
+/*-----------------------------------
+   2 ) Mécaniques propres aux pages CMS
+-----------------------------------*/
+
+// Confiné à `#content-cms` : la home a ses propres bandes plein écran, dont les légendes
+// sont des calques positionnés que ces règles casseraient.
+
+#content-cms {
+
+    // Titre de vignette : l'échelle globale des titres est en interligne 1, beaucoup trop
+    // serré dès que le libellé passe sur deux lignes.
+    .card-block .title {
+        line-height: 1.25;
+    }
+
+    // Vignette de visite : le corps de carte ne doit pas s'étirer, sinon le lien est
+    // repoussé au bas de la rangée, très loin de son titre.
+    // Le CMS préfixe les classes personnalisées de bloc par `block-`.
+    .block-card-tour {
+
+        .card-body {
+            flex: 0 0 auto;
+        }
+
+        // Même écriture que les autres liens texte de la charte.
+        .card-footer a:not(.btn) {
+            text-transform: uppercase;
+            font-weight: $font-weight-black;
+            letter-spacing: .2em;
+            font-size: rem(14px);
+            line-height: calc(17 / 14);
+        }
+    }
+
+    // Fichier à consulter présenté comme un bouton : ni pictogramme d'extension ni
+    // poids du fichier, seul le libellé porte l'information.
+    .layout-zone .layout-block-type-media .file {
+
+        // override forcé : `.info` porte l'utilitaire `.d-inline-block` en !important.
+        i, svg, .info {
+            display: none !important;
+        }
+    }
+
+    // Carrousels : mêmes flèches que la galerie de fiche produit, posées sur le visuel,
+    // sans commande de lecture. Le module les rend sous l'image, dans la légende.
+    .layout-zone .layout-block-type-core-action .carousel {
+
+        // Réserve la course des flèches, qui débordent de mi-bord : sans cette
+        // gouttière elles sortiraient de la colonne.
+        @include mediaQuery(max-md) {
+            margin-inline: rem(30px);
+        }
+
+        @include mediaQuery(min-md) {
+            margin-inline: rem(40px);
+        }
+
+        // override forcé : la légende porte l'utilitaire `.position-relative` en
+        // !important et servirait de référence aux flèches, alors qu'elle est de
+        // hauteur nulle sous le visuel. En static, elles se calent sur l'image.
+        .carousel-caption {
+            position: static !important;
+        }
+
+        // Les flèches débordent à mi-bord du visuel : la piste ne doit pas les rogner
+        // (transition en fondu, rien ne translate).
+        .carousel-inner {
+            overflow: visible;
+        }
+
+        .controls {
+            margin-top: 0 !important; // override forcé : le module impose l'utilitaire mt-4
+        }
+
+        // override forcé : `.btn.btn-circle:not(.d-none)` impose son display en !important.
+        .carousel-control-pause,
+        .carousel-control-play {
+            display: none !important;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+
+            // override forcé : le module pose l'utilitaire `.position-relative` en !important.
+            position: absolute !important;
+            @include galleryArrow();
+
+            // override forcé : `.btn.btn-circle` verrouille display, forme et gabarit
+            // 45px en !important ; il faut relâcher aussi la base flex et le ratio.
+            display: flex !important;
+            border-radius: rem(12px) !important;
+            aspect-ratio: auto !important;
+
+            @include mediaQuery(max-md) {
+                flex: 0 0 rem(60px) !important;
+                width: rem(60px) !important;
+                height: rem(60px) !important;
+            }
+
+            @include mediaQuery(min-md) {
+                flex: 0 0 rem(80px) !important;
+                width: rem(80px) !important;
+                height: rem(80px) !important;
+            }
+
+            // override forcé : `.btn.btn-circle i` impose 1rem, et l'état survolé du
+            // bouton repasse son libellé en blanc — le chevron deviendrait invisible.
+            i,
+            &:hover i,
+            &:focus i,
+            &:focus-visible i,
+            &:active i {
+                color: $secondary !important;
+                font-size: rem(18px) !important;
+            }
+        }
+    }
+
+    // Grille de galerie : le contenu du wrapper de loader est en `inline-block`, sa
+    // ligne réserve la place du jambage et laissait un liseré de fond sous chaque
+    // visuel du conteneur `overflow-hidden`.
+    .masonry-wrap .media-wrap .img-loader-wrap {
+
+        // override forcé : l'état `.generating` impose `display: inline-block !important`
+        // pendant la génération des vignettes, et c'est là que le liseré apparaît.
+        display: flex !important;
+        width: 100%;
+    }
+}

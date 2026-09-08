@@ -39,6 +39,11 @@ function safeList() {
         /not-expanded/, /main-submenu/, /submenu/, /socials-list/, /nav-cta/, /nav-toggler/,
         // Widget D-Edge (classes injectées à l'exécution par le SDK).
         /fbw-/,
+        // Conteneur de template : l'id est composé en Twig (`content-{{ templateName }}`),
+        // PurgeCSS ne peut pas le voir dans les sources.
+        /content-/,
+        // Voile d'entête : classe posée en Twig, invisible pour l'analyse statique.
+        /header-overlay/,
     ];
     return {
         standard: patterns

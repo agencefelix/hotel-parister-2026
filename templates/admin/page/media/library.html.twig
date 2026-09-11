@@ -71,6 +71,12 @@
                             {{ 'fad folders'|icon(17, 14, 'dark me-2') }}{{ "Ranger les médias"|trans|raw }}
                         </span>
                     {% endif %}
+                    <a href="{{ path('admin_folder_zip_library', {website: websiteId}) }}"
+                       class="btn btn-outline-dark standard me-2"
+                       data-bs-toggle="tooltip"
+                       title="{{ "Télécharger toute la bibliothèque au format ZIP"|trans|striptags }}">
+                        {{ 'fal file-archive'|icon(17, 14, 'dark me-2') }}{{ "Télécharger la bibliothèque"|trans }}
+                    </a>
                     <button class="btn btn-success standard"
                             data-bs-toggle="collapse"
                             href="#collapseFormMedias"

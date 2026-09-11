@@ -40,10 +40,18 @@ class WebsiteRepository extends ServiceEntityRepository
     /**
      * Get WebsiteModel.
      *
+     * L'identifiant peut manquer : une sous-requête (forward de la prévisualisation)
+     * ne porte plus les paramètres de route du parent. On retombe alors sur le site
+     * du host courant plutôt que de lever une TypeError.
+     *
      * @throws MappingException|NonUniqueResultException|InvalidArgumentException|\ReflectionException
      */
-    public function findObject(int $id): ?WebsiteModel
+    public function findObject(?int $id): ?WebsiteModel
     {
+        if (!$id) {
+            return $this->findOneByHost();
+        }
+
         $website = $this->defaultJoin($this->createQueryBuilder('w'))
             ->andWhere('w.id = :id')
             ->setParameter('id', $id)

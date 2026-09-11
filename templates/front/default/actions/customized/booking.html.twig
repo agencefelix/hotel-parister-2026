@@ -12,12 +12,15 @@
 {# Consenti, ou aucun système de consentement actif (ni module RGPD ni Axeptio) : affichage direct #}
 {%- set accept = (cookiesList.dedge is defined and cookiesList.dedge) or (not gdprActive and not axeptioActive) -%}
 
+{# Racine unique obligatoire : axeptio.js ne reinjecte que le firstElementChild du prototype. #}
 {% set prototype %}
-    <link rel="stylesheet" href="https://websdk.d-edge.com/widgets/app.css">
-    <div id="fb-widget-1" class="fb-widget" data-fbConfig="0">
-        <div id="dedge-spinner" class="text-center py-5">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">{{ "Chargement"|trans }}</span>
+    <div class="booking-widget">
+        <link rel="stylesheet" href="https://websdk.d-edge.com/widgets/app.css">
+        <div id="fb-widget-1" class="fb-widget" data-fbConfig="0">
+            <div id="dedge-spinner" class="text-center py-5">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">{{ "Chargement"|trans }}</span>
+                </div>
             </div>
         </div>
     </div>

@@ -52,7 +52,7 @@ class Configuration
     private bool $uniqueContact = false;
 
     #[ORM\Column(type: Types::BOOLEAN)]
-    private bool $recaptcha = false;
+    private bool $recaptcha = true;
 
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $calendarsActive = false;

@@ -10,9 +10,11 @@ use App\Service\Development\FileUrlizerService;
 use App\Twig\Core\AppRuntime;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -139,19 +141,23 @@ class ToolController extends AdminController
 
         if ($form->isSubmitted() && !empty($form->getData()['files'])) {
             $files = $form->getData()['files'];
-            $zipName = $fileUrlizer->execute($files);
-
-            $response = new Response(file_get_contents($zipName));
-            $response->headers->set('Content-Type', 'application/zip');
-            $response->headers->set('Content-Disposition', 'attachment;filename="'.$zipName.'"');
-            $response->headers->set('Content-length', filesize($zipName));
-
-            @unlink($zipName);
+            $zipPath = $fileUrlizer->execute($files);
 
             $tmpDirname = $projectDir.'/public/uploads/tmp/rename/';
             $tmpDirname = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $tmpDirname);
             $filesystem = new Filesystem();
             $filesystem->remove($tmpDirname);
+
+            if (!$zipPath) {
+                $this->addFlash('error', 'Aucun fichier à renommer.');
+
+                return $this->redirectToRoute('admin_file_rename_tool');
+            }
+
+            $response = new BinaryFileResponse($zipPath);
+            $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, basename($zipPath));
+            $response->headers->set('Content-Type', 'application/zip');
+            $response->deleteFileAfterSend();
 
             return $response;
         }

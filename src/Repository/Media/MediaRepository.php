@@ -69,6 +69,30 @@ class MediaRepository extends ServiceEntityRepository
     }
 
     /**
+     * Find every filename of the library, with its Folder name.
+     *
+     * Projection volontaire : l'archive n'a besoin que du nom de fichier et du dossier,
+     * hydrater les entités sur toute la bibliothèque serait inutilement coûteux.
+     *
+     * @return array<array{filename: string, folder: string|null}>
+     */
+    public function findFilenamesForArchive(Website $website): array
+    {
+        return $this->createQueryBuilder('m')
+            ->select('m.filename AS filename', 'f.adminName AS folder')
+            ->leftJoin('m.folder', 'f')
+            ->andWhere('m.screen IN (:screens)')
+            ->andWhere('m.website = :website')
+            ->andWhere('m.filename IS NOT NULL')
+            ->setParameter('website', $website)
+            ->setParameter('screens', ['desktop', 'mp4', 'webm', 'vtt'])
+            ->orderBy('f.adminName', 'ASC')
+            ->addOrderBy('m.filename', 'ASC')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    /**
      * Find by WebsiteModel and Folder.
      *
      * @return array<Media>

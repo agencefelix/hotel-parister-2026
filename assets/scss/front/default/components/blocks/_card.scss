@@ -27,6 +27,11 @@
     .card {
 
         .card-header {
+
+            .img-hover-buttons-wrap.only-one .inner {
+                opacity: 0;
+            }
+
             picture, picture img, .img-hover-buttons-wrap, .img-loader-wrap {
                 border-top-left-radius: $border-radius-small;
                 border-top-right-radius: $border-radius-small;

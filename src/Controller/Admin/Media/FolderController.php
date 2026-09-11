@@ -14,14 +14,18 @@ use App\Form\Type\Media\SelectFolderType;
 use App\Repository\Media\FolderRepository;
 use App\Repository\Media\MediaRepository;
 use App\Service\Core\Uploader;
+use App\Service\Core\Urlizer;
 use App\Service\Development\FileUrlizerService;
 use App\Service\Interface\AdminLocatorInterface;
 use App\Service\Interface\CoreLocatorInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -142,44 +146,95 @@ class FolderController extends AdminController
         Uploader $uploader,
         FileUrlizerService $fileUrlizerService,
         string $projectDir,
-        Folder $folder)
+        Folder $folder): Response
     {
         $medias = $mediaRepository->findBy(['folder' => $folder]);
         $websiteDirname = $projectDir.'/public/uploads/'.$folder->getWebsite()->getUploadDirname().'/';
         $websiteDirname = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $websiteDirname);
-        $zipName = Urlizer::urlize($folder->getAdminName()).'.zip';
-        $tmpDirname = $projectDir.'/public/uploads/tmp/medias-zip/';
+        $zipName = Urlizer::urlize($folder->getAdminName()) ?: 'medias';
+        $tmpDirname = $projectDir.'/public/uploads/tmp/medias-zip/'.$folder->getId().'/';
         $tmpDirname = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $tmpDirname);
+        $filesystem = new Filesystem();
         $session = new Session();
 
-        if ($medias) {
-            foreach ($medias as $media) {
-                $fileDirname = $websiteDirname.$media->getFilename();
-                $uploader->pathToUploadedFile($fileDirname, true, $tmpDirname);
-            }
-            $zip = $fileUrlizerService->zip($tmpDirname, $zipName);
-            if ($zip) {
-                $response = new Response(file_get_contents($zip));
-                $response->headers->set('Content-Type', 'application/zip');
-                $response->headers->set('Content-Disposition', 'attachment;filename="'.$zip.'"');
-                $response->headers->set('Content-length', strval(filesize($zip)));
-                @unlink($zipName);
-                $filesystem = new Filesystem();
-                if ($filesystem->exists($tmpDirname)) {
-                    $filesystem->remove($tmpDirname);
-                }
+        if (!$medias) {
+            $session->getFlashBag()->add('info', $this->coreLocator->translator()->trans('Aucun fichier trouvé !!', [], 'admin'));
 
-                return $response;
-            } else {
-                $session->getFlashBag()->add('info', $this->coreLocator->translator()->trans('Une erreur est survenue !!', [], 'admin'));
-
-                return $this->redirect($request->headers->get('referer'));
-            }
+            return $this->redirectToReferer($request);
         }
 
-        $session->getFlashBag()->add('info', $this->coreLocator->translator()->trans('Aucun fichier trouvé !!', [], 'admin'));
+        $filesystem->remove($tmpDirname);
 
-        return $this->redirect($request->headers->get('referer'));
+        foreach ($medias as $media) {
+            $uploader->pathToUploadedFile($websiteDirname.$media->getFilename(), true, $tmpDirname);
+        }
+
+        $zip = $fileUrlizerService->zip($tmpDirname, $zipName.'.zip');
+        $filesystem->remove($tmpDirname);
+
+        if (!$zip) {
+            $session->getFlashBag()->add('info', $this->coreLocator->translator()->trans('Une erreur est survenue !!', [], 'admin'));
+
+            return $this->redirectToReferer($request);
+        }
+
+        $response = new BinaryFileResponse($zip);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $zipName.'.zip');
+        $response->headers->set('Content-Type', 'application/zip');
+        $response->deleteFileAfterSend();
+
+        return $response;
+    }
+
+    /**
+     * Zip the whole medias library.
+     */
+    #[Route('/zip-library', name: 'admin_folder_zip_library', methods: 'GET')]
+    public function zipLibrary(
+        Request $request,
+        MediaRepository $mediaRepository,
+        FileUrlizerService $fileUrlizerService,
+        string $projectDir): Response
+    {
+        $website = $this->coreLocator->website();
+        $websiteDirname = $projectDir.'/public/uploads/'.$website->entity->getUploadDirname().'/';
+        $websiteDirname = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $websiteDirname);
+        $zipName = 'bibliotheque-medias-'.(Urlizer::urlize($website->entity->getUploadDirname()) ?: (string) $website->id);
+        $session = new Session();
+
+        $entries = [];
+        foreach ($mediaRepository->findFilenamesForArchive($website->entity) as $media) {
+            $folder = Urlizer::urlize($media['folder']);
+            $entryName = $folder ? $folder.'/'.$media['filename'] : $media['filename'];
+            $entries[$entryName] = $websiteDirname.$media['filename'];
+        }
+
+        $zip = $fileUrlizerService->zipEntries($entries, $zipName.'.zip');
+
+        if (!$zip) {
+            $session->getFlashBag()->add('info', $this->coreLocator->translator()->trans('Aucun fichier trouvé !!', [], 'admin'));
+
+            return $this->redirectToReferer($request);
+        }
+
+        $response = new BinaryFileResponse($zip);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $zipName.'.zip');
+        $response->headers->set('Content-Type', 'application/zip');
+        $response->deleteFileAfterSend();
+
+        return $response;
+    }
+
+    /**
+     * Back to the calling page, or to the medias library when the referer is unknown.
+     */
+    private function redirectToReferer(Request $request): RedirectResponse
+    {
+        $referer = $request->headers->get('referer');
+
+        return $referer
+            ? $this->redirect($referer)
+            : $this->redirectToRoute('admin_medias_library', ['website' => $this->coreLocator->website()->id]);
     }
 
     /**

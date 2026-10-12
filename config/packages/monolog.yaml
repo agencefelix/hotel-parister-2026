@@ -106,25 +106,9 @@ when@prod:
                 handler: grouped_critical
             grouped_critical:
                 type: group
-                members: [streamed_critical, buffered_critical]
+                members: [streamed_critical]
             streamed_critical:
                 type: rotating_file
                 max_files: 3
                 path: '%kernel.logs_dir%/%kernel.environment%.critical.log'
                 level: info
-
-            #####################################
-            #           Mailer                  #
-            #####################################
-
-            buffered_critical:
-                type: deduplication
-                handler: symfony_mailer_critical
-            symfony_mailer_critical:
-                type: symfony_mailer
-                from_email: 'dev@agence-felix.fr'
-                to_email: ['dev@agence-felix.fr']
-                subject: 'An Error Occurred! %%message%%'
-                level: critical
-                formatter:  monolog.formatter.html
-                content_type: text/html

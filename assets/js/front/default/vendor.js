@@ -294,10 +294,6 @@ document.addEventListener('DOMContentLoaded', function () {
     import('./components/accessibility').then(({default: Accessibility}) => {
         new Accessibility();
     }).catch(error => console.error(error.message));
-
-    import('../../vendor/components/log-errors').then(({default: Log}) => {
-        new Log();
-    }).catch(error => console.error(error.message));
 });
 
 if (isDebug) {

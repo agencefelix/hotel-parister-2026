@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## 2.36.2
+
+- Fix the autocomplete search query throwing an exception on PostgreSQL because of
+  the `ESCAPE '\'` clause introduced in 2.36; a backslash-free LIKE escape character is now used.
+
+## 2.36
+
+- Escape LIKE wildcards (`%` and `_`) in the autocomplete search query so user
+  input can no longer alter the matching behavior of the generated SQL query.
+- Fix XSS vulnerability where data returned from AJAX endpoints was rendered without HTML escaping.
+  Values from the `text` field of AJAX responses are now escaped by default.
+
+    **Possible BC break**: if your endpoint legitimately returns HTML in the `text` field (e.g., for rich content), opt in via the `options_as_html` option:
+
+    ```diff
+     #[AsEntityAutocompleteField]
+     class IngredientAutocompleteType extends AbstractType
+     {
+         public function configureOptions(OptionsResolver $resolver): void
+         {
+             $resolver->setDefaults([
+                 'class' => Ingredient::class,
+    +            'options_as_html' => true,
+             ]);
+         }
+     }
+    ```
+
 ## 2.35
 
 - Add `reset_on_focus` option to clear and reload options when the autocomplete field regains focus

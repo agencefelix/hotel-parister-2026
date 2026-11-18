@@ -191,12 +191,22 @@ class Cell implements Stringable
     public function getFormattedValue(): string
     {
         $currentCalendar = SharedDate::getExcelCalendar();
-        SharedDate::setExcelCalendar($this->getWorksheet()->getParent()?->getExcelCalendar());
-        $formattedValue = (string) NumberFormat::toFormattedString(
-            $this->getCalculatedValueString(),
-            (string) $this->getStyle()->getNumberFormat()->getFormatCode(true)
+        SharedDate::setExcelCalendar(
+            $this->getWorksheet()
+                ->getParent()
+                ?->getExcelCalendar()
         );
-        SharedDate::setExcelCalendar($currentCalendar);
+
+        try {
+            $formattedValue = NumberFormat::toFormattedString(
+                $this->getCalculatedValueString(),
+                (string) $this->getStyle()
+                    ->getNumberFormat()
+                    ->getFormatCode(true)
+            );
+        } finally {
+            SharedDate::setExcelCalendar($currentCalendar);
+        }
 
         return $formattedValue;
     }
@@ -356,24 +366,28 @@ class Cell implements Stringable
 
         $this->updateInCollection();
         $cellCoordinate = $this->getCoordinate();
-        self::updateIfCellIsTableHeader($this->getParent()?->getParent(), $this, $oldValue, $value);
-        $worksheet = $this->getWorksheet();
+        $cellCollection = $this->getParent();
+        self::updateIfCellIsTableHeader($cellCollection?->getParent(), $this, $oldValue, $value);
+        // Updating structured references may access other cells, which detaches this one
+        //    from the collection, so retrieve it again to ensure that it is still attached.
+        $cell = $cellCollection?->get($cellCoordinate) ?? $this;
+        $worksheet = $cell->getWorksheet();
         $spreadsheet = $worksheet->getParent();
         if (isset($spreadsheet) && $spreadsheet->getIndex($worksheet, true) >= 0) {
-            $originalSelected = $worksheet->getSelectedCells();
-            $activeSheetIndex = $spreadsheet->getActiveSheetIndex();
-            $style = $this->getStyle();
-            $oldQuotePrefix = $style->getQuotePrefix();
+            // Avoid Worksheet::getStyle() (selection + validation) unless quotePrefix must change.
+            $oldQuotePrefix = $spreadsheet->getCellXfByIndex($cell->getXfIndex())->getQuotePrefix();
             if ($oldQuotePrefix !== $quotePrefix) {
-                $style->setQuotePrefix($quotePrefix);
-            }
-            $worksheet->setSelectedCells($originalSelected);
-            if ($activeSheetIndex >= 0) {
-                $spreadsheet->setActiveSheetIndex($activeSheetIndex);
+                $originalSelected = $worksheet->getSelectedCells();
+                $activeSheetIndex = $spreadsheet->getActiveSheetIndex();
+                $cell->getStyle()->setQuotePrefix($quotePrefix);
+                $worksheet->setSelectedCells($originalSelected);
+                if ($activeSheetIndex >= 0) {
+                    $spreadsheet->setActiveSheetIndex($activeSheetIndex);
+                }
             }
         }
 
-        return $this->getParent()?->get($cellCoordinate) ?? $this;
+        return $cellCollection?->get($cellCoordinate) ?? $cell;
     }
 
     public const CALCULATE_DATE_TIME_ASIS = 0;
@@ -496,7 +510,7 @@ class Cell implements Stringable
                     foreach ($result as $resultRow) {
                         if (is_array($resultRow)) {
                             $newColumn = $column;
-                            foreach ($resultRow as $resultValue) {
+                            foreach ($resultRow as $resultValue) { //* @phpstan-ignore foreach.valueOverwritten (Php syntax demands 'as')
                                 if ($row !== $newRow || $column !== $newColumn) {
                                     $maxCoordinate = $newColumn . $newRow;
                                     if ($thisworksheet->getCell($newColumn . $newRow)->getValue() !== null) {
@@ -507,7 +521,6 @@ class Cell implements Stringable
                                         }
                                     }
                                 }
-                                /** @var string $newColumn */
                                 StringHelper::stringIncrement($newColumn);
                             }
                             ++$newRow;
@@ -1011,6 +1024,19 @@ class Cell implements Stringable
     }
 
     /**
+     * Set the XF index without triggering updateInCollection().
+     *
+     * This is intended for use by readers that will immediately follow with
+     * setValueExplicit(), avoiding a redundant cache write.
+     *
+     * @internal
+     */
+    public function setXfIndexNoUpdate(int $indexValue): void
+    {
+        $this->xfIndex = $indexValue;
+    }
+
+    /**
      * Set the formula attributes.
      *
      * @param null|array<string, string> $attributes
@@ -1070,5 +1096,97 @@ class Cell implements Stringable
         $hidden = $this->getStyle()->getProtection()->getHidden();
 
         return $hidden !== Protection::PROTECTION_UNPROTECTED;
+    }
+
+    /**
+     * Return cell $right positions to the right of this one.
+     */
+    public function cursorRight(int $right = 1): self
+    {
+        $row = $this->getRow();
+        $col = $this->getColumn();
+        $colIndex = Coordinate::columnIndexFromString($col);
+        $newCol = max(
+            1,
+            min($colIndex + $right, AddressRange::MAX_COLUMN_INT)
+        );
+        $newColStr = Coordinate::stringFromColumnIndex($newCol);
+
+        return $this->getWorksheet()->getCell("$newColStr$row");
+    }
+
+    /**
+     * Return cell $left positions to the left of this one.
+     */
+    public function cursorLeft(int $left = 1): self
+    {
+        return $this->cursorRight(-$left);
+    }
+
+    /**
+     * Return cell $down positions below this one.
+     */
+    public function cursorDown(int $down = 1): self
+    {
+        $row = $this->getRow();
+        $col = $this->getColumn();
+        $newRow = max(
+            1,
+            min($row + $down, AddressRange::MAX_ROW)
+        );
+
+        return $this->getWorksheet()->getCell("$col$newRow");
+    }
+
+    /**
+     * Return cell $up positions above this one.
+     */
+    public function cursorUp(int $up = 1): self
+    {
+        return $this->cursorDown(-$up);
+    }
+
+    /**
+     * Return cell at row $row in current column.
+     */
+    public function cursorRow(int $row = 1): self
+    {
+        $col = $this->getColumn();
+        $newRow = max(
+            1,
+            min($row, AddressRange::MAX_ROW)
+        );
+
+        return $this->getWorksheet()->getCell("$col$newRow");
+    }
+
+    /**
+     * Return cell at column $column in current row.
+     */
+    public function cursorColumn(string $column = 'A'): self
+    {
+        $row = $this->getRow();
+        $colIndex = Coordinate::columnIndexFromString($column);
+        $newCol = max(
+            1,
+            min($colIndex, AddressRange::MAX_COLUMN_INT)
+        );
+        $newColStr = Coordinate::stringFromColumnIndex($newCol);
+
+        return $this->getWorksheet()->getCell("$newColStr$row");
+    }
+
+    /**
+     * Return cell adjusted for Xls limits if applicable.
+     */
+    public function cursorXlsLimits(): self
+    {
+        $row = min($this->getRow(), AddressRange::MAX_ROW_XLS);
+        $column = $this->getColumn();
+        $colIndex = Coordinate::columnIndexFromString($column);
+        $newCol = min($colIndex, AddressRange::MAX_COLUMN_INT_XLS);
+        $newColStr = Coordinate::stringFromColumnIndex($newCol);
+
+        return $this->getWorksheet()->getCell("$newColStr$row");
     }
 }
